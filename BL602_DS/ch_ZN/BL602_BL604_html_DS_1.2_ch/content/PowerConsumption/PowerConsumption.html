@@ -1,0 +1,347 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>6. 功耗 &mdash; BL602/604 数据手册  文档</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="搜索" href="../../search.html" />
+    <link rel="next" title="7. 电气特性" href="../Electricalcharacteristics/Electricalcharacteristics.html" />
+    <link rel="prev" title="5. 射频特性" href="../RFCharacteristic/RFCharacteristic.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> BL602/604 数据手册
+          
+
+          
+            
+            <img src="../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview/overview.html">1. 概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Functional/Functional.html">2. 功能描述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PindefinitionQFN32/PindefinitionQFN32.html">3. 管脚定义QFN32</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PindefinitionQFN40/PindefinitionQFN40.html">4. 管脚定义QFN40</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RFCharacteristic/RFCharacteristic.html">5. 射频特性</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">6. 功耗</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Electricalcharacteristics/Electricalcharacteristics.html">7. 电气特性</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Referencedesign/Referencedesign.html">8. 参考设计</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PackagingQFN32/PackagingQFN32.html">9. 封装信息QFN32</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PackagingQFN40/PackagingQFN40.html">10. 封装信息QFN40</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TopMarkingDefinition/TopMarkingDefinition.html">11. 标志定义</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OrderingInformation/OrderingInformation.html">12. 订购信息</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../version/version.html">13. 版本信息</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">BL602/604 数据手册</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>6. 功耗</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>6. 功耗<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<p>每个电源模式的功耗，如下表所示：</p>
+<table border="1" class="docutils" id="id2">
+<caption><span class="caption-text">电源模式&amp;整个芯片的电流</span><a class="headerlink" href="#id2" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="16%" />
+<col width="21%" />
+<col width="23%" />
+<col width="13%" />
+<col width="9%" />
+<col width="9%" />
+<col width="8%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td colspan="2" rowspan="2">模式</td>
+<td rowspan="2">备注</td>
+<td colspan="4">Performance &#64;25 ℃</td>
+</tr>
+<tr class="row-even"><td>最小值</td>
+<td>典型值</td>
+<td>最大值</td>
+<td>单位</td>
+</tr>
+<tr class="row-odd"><td rowspan="4">RX</td>
+<td>11b</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>35</td>
+<td>&#160;</td>
+<td rowspan="13">mA</td>
+</tr>
+<tr class="row-even"><td>11g</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>39</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>11n</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>39</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>BLE 1Mbps</td>
+<td>Duty 60%</td>
+<td>&#160;</td>
+<td>31</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td rowspan="7">TX</td>
+<td rowspan="2"><p class="first">11b - 11Mbps</p>
+<p class="last">&#64;21dBm</p>
+</td>
+<td>Duty 50%</td>
+<td>&#160;</td>
+<td>190</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>Duty 99%</td>
+<td>&#160;</td>
+<td>310</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><p class="first">11g - 54Mbps</p>
+<p class="last">&#64;18dBm</p>
+</td>
+<td>Duty 50%</td>
+<td>&#160;</td>
+<td>145</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>Duty 99%</td>
+<td>&#160;</td>
+<td>230</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><p class="first">11n - MCS7</p>
+<p class="last">&#64;17dBm</p>
+</td>
+<td>Duty 50%</td>
+<td>&#160;</td>
+<td>130</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>Duty 99%</td>
+<td>&#160;</td>
+<td>215</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>BLE 1Mbps &#64;15dBm</td>
+<td>Duty 86%</td>
+<td>&#160;</td>
+<td>133</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td rowspan="2">MCU</td>
+<td>Run</td>
+<td>Freq&#64; 192MHz</td>
+<td>&#160;</td>
+<td>22</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>Standby</td>
+<td>Freq&#64;&lt;10MHz</td>
+<td>&#160;</td>
+<td>2</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>Sleep</td>
+<td>PDS7</td>
+<td>Fast recover</td>
+<td>&#160;</td>
+<td>12</td>
+<td>&#160;</td>
+<td rowspan="3">uA</td>
+</tr>
+<tr class="row-odd"><td>Hibernate</td>
+<td>HBN</td>
+<td>RTC or GPIO wakeup</td>
+<td>&#160;</td>
+<td>0.5</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>Shut-down</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>0.1</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Electricalcharacteristics/Electricalcharacteristics.html" class="btn btn-neutral float-right" title="7. 电气特性" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../RFCharacteristic/RFCharacteristic.html" class="btn btn-neutral float-left" title="5. 射频特性" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

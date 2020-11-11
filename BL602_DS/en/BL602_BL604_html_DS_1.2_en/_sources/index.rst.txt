@@ -1,0 +1,23 @@
+.. BL606_BL608_Datasheet_cn documentation master file, created by
+   sphinx-quickstart on Mon Jun 17 15:46:33 2019.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+BL602/604 Datasheet 
+=======================================
+
+.. toctree::
+   :maxdepth: 2
+   :numbered:
+
+   content/overview/overview
+   content/Functional/Functional
+   content/PindefinitionQFN32/PindefinitionQFN32
+   content/PindefinitionQFN40/PindefinitionQFN40
+   content/Electricalcharacteristics/Electricalcharacteristics
+   content/Referencedesign/Referencedesign
+   content/PackagingQFN32/PackagingQFN32
+   content/PackagingQFN40/PackagingQFN40
+   content/TopMarkingDefinition/TopMarkingDefinition
+   content/OrderingInformation/OrderingInformation
+   content/version/version

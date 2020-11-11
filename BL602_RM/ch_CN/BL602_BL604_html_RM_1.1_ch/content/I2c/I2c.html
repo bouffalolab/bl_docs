@@ -1,0 +1,1953 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>11. I2C &mdash; BL602/604 参考手册  文档</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="搜索" href="../../search.html" />
+    <link rel="next" title="12. PWM" href="../Pwm/Pwm.html" />
+    <link rel="prev" title="10. UART" href="../Uart/Uart.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> BL602/604 参考手册
+          
+
+          
+            
+            <img src="../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../SystemAndMemoryOverview/SystemAndMemoryOverview.html">1. 系统和存储器概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ResetAndClock/ResetAndClock.html">2. 复位和时钟</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Glb/Glb.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Adc/Adc.html">4. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DAC/DAC.html">5. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Dma/Dma.html">6. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L1c/L1c.html">7. L1C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../IR/IR.html">8. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Spi/Spi.html">9. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Uart/Uart.html">10. UART</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">11. I2C</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">11.1. 简介</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">11.2. 主要特征</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">11.3. 功能描述</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">11.3.1. 起始和停止条件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">11.3.2. 数据传输格式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">11.3.3. 仲裁</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">11.4. I2C时钟设定</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">11.5. I2C配置流程</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id9">11.5.1. 配置项</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">11.5.2. 读写标志位</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">11.5.3. 从设备地址</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">11.5.4. 从设备寄存器地址</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id13">11.5.5. 从设备寄存器地址长度</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id14">11.5.6. 数据</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id15">11.5.7. 数据长度</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id16">11.5.8. 使能信号</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#fifo">11.6. FIFO管理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dma">11.7. 搭配使用DMA</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id17">11.7.1. DMA发送流程</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id18">11.7.2. DMA接收流程</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id19">11.8. 中断</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id20">11.9. 寄存器描述</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#i2c-config">11.9.1. i2c_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#i2c-int-sts">11.9.2. i2c_int_sts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#i2c-sub-addr">11.9.3. i2c_sub_addr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#i2c-bus-busy">11.9.4. i2c_bus_busy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#i2c-prd-start">11.9.5. i2c_prd_start</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#i2c-prd-stop">11.9.6. i2c_prd_stop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#i2c-prd-data">11.9.7. i2c_prd_data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#i2c-fifo-config-0">11.9.8. i2c_fifo_config_0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#i2c-fifo-config-1">11.9.9. i2c_fifo_config_1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#i2c-fifo-wdata">11.9.10. i2c_fifo_wdata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#i2c-fifo-rdata">11.9.11. i2c_fifo_rdata</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Pwm/Pwm.html">12. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Timer/Timer.html">13. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../version/version.html">14. 版本信息</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">BL602/604 参考手册</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>11. I2C</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="i2c">
+<h1>11. I2C<a class="headerlink" href="#i2c" title="永久链接至标题">¶</a></h1>
+<div class="section" id="id1">
+<h2>11.1. 简介<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<p>I2C (Inter-Intergrated Circuit)是一种串行通讯总线，使用多主从架构，用来连接低速外围装置。
+每个器件都有一个唯一的地址识别，并且都可以作为一个发送器或接收器。每个连接到总线的器件都可以通过唯一的地址和一直存在的主、从机关系用软件设置地址，主机可以作为主机发送器或主机接收器。
+如果有两个或多个主机同时初始化，数据传输可以通过冲突检测和仲裁防止数据被破坏。
+BL602包含一个I2C控制器主机，可灵活配置slaveAddr、subAddr以及传输数据，方便与从设备通信，提供2个word深度的fifo，提供中断功能，可搭配DMA使用提高效率，可灵活调整时钟频率。</p>
+</div>
+<div class="section" id="id2">
+<h2>11.2. 主要特征<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li>支持主机模式</li>
+<li>支持多主机模式和仲裁功能</li>
+<li>时钟频率可灵活调整</li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h2>11.3. 功能描述<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<p>引脚列表：</p>
+<table border="1" class="docutils" id="id21">
+<caption><span class="caption-text">I2C引脚</span><a class="headerlink" href="#id21" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="21%" />
+<col width="23%" />
+<col width="56%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>名称</td>
+<td>类型</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>I2Cx_SCL</td>
+<td>输入/输出</td>
+<td>I2C串行时钟信号</td>
+</tr>
+<tr class="row-odd"><td>I2Cx_SDA</td>
+<td>输入/输出</td>
+<td>I2C串行数据信号</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="id4">
+<h3>11.3.1. 起始和停止条件<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h3>
+<p>所有传输都由起始条件(START condition)开始，以停止条件(STOP condition)结束。
+起始条件和停止条件一般都由主机产生，总线在起始条件后被认为处于总线忙的状态，在停止条件后的某段时间内被认为处于空闲状态。</p>
+<p>起始条件:SCL为高电平时SDA产生一高至低的电平转换；</p>
+<p>停止条件:SCL为高电平时SDA产生一低至高的电平转换。</p>
+<p>波形示意图如下：</p>
+<div class="figure align-center" id="id22">
+<img alt="../../_images/stop_start.png" src="../../_images/stop_start.png" />
+<p class="caption"><span class="caption-text">I2C起始和停止条件</span></p>
+</div>
+</div>
+<div class="section" id="id5">
+<h3>11.3.2. 数据传输格式<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
+<p>传输的第一个8位为寻址字节，包括7位从机地址和1位方向位。数据由主机发送或接收是由主机所送出的第1个字节的第8位控制，
+若为0表示数据由主机发送；为1则表示数据由主机接收，紧接着从机发出应答位(ACK)，在数据传输完成后，主机发出停止信号，波形图如下：</p>
+<div class="figure align-center" id="id23">
+<img alt="../../_images/master_tx_rx.png" src="../../_images/master_tx_rx.png" />
+<p class="caption"><span class="caption-text">I2C数据传输格式</span></p>
+</div>
+<p><strong>主发送和从接收的时序</strong></p>
+<div class="figure align-center" id="id24">
+<img alt="../../_images/master_tx_slave_rx.png" src="../../_images/master_tx_slave_rx.png" />
+<p class="caption"><span class="caption-text">主发送和从接收的时序</span></p>
+</div>
+<p><strong>主接收和从发送的时序</strong></p>
+<div class="figure align-center" id="id25">
+<img alt="../../_images/master_rx_slave_tx.png" src="../../_images/master_rx_slave_tx.png" />
+<p class="caption"><span class="caption-text">主接收和从发送的时序</span></p>
+</div>
+</div>
+<div class="section" id="id6">
+<h3>11.3.3. 仲裁<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
+<p>当I2C总线存在多个主机时，可能会发生多个主机同时启动传输的情况，此时必须要依靠仲裁机制来决定哪个主机有权利完成接下来的数据传输，其余主机则须放弃对总线的控制，等到总线再次空出来后才能再次启动传输。</p>
+<p>在传输过程中，所有主机都需要在SCL为高电平时检查SDA是否与自己所想送出的资料相符，当SDA电平与预期不同时，表示有别的主机也在同时进行传输，而发现SDA电平不同的主机则失去此次仲裁，由其他主机完成数据传输。</p>
+<p>两主机同时传输数据并启动仲裁机制的波形示意图如下：</p>
+<div class="figure align-center" id="id26">
+<img alt="../../_images/tx_rx_together.png" src="../../_images/tx_rx_together.png" />
+<p class="caption"><span class="caption-text">同时传输数据波形示意图</span></p>
+</div>
+</div>
+</div>
+<div class="section" id="id7">
+<h2>11.4. I2C时钟设定<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h2>
+<p>I2C的时钟是由bclk(bus clock)而来，可以在bclk时钟的基础上做分频处理。
+寄存器 I2C_PRD_DATA 可以对数据段的时钟做分频处理。i2c模块将数据发送分为4个阶段，每个阶段在寄存器中用单独一个字节来控制，每个阶段的采样个数是可以设置的，4个采样数共同决定了i2c clock的分频系数。
+比如现在bclk是32M，寄存器 I2C_PRD_DATA 在不做配置默认情况下的值是0x15151515，那么I2C的时钟频率为 32M/((15 + 1) * 4) = 500K。
+同理，寄存器 I2C_PRD_START 和 I2C_PRD_STOP 也会分别对起始位和停止位的时钟做分频处理。</p>
+</div>
+<div class="section" id="id8">
+<h2>11.5. I2C配置流程<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id9">
+<h3>11.5.1. 配置项<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li>读写标志位</li>
+<li>从设备地址</li>
+<li>从设备寄存器地址</li>
+<li>从设备寄存器地址长度</li>
+<li>数据(发送时，配置发送的数据；接收时，存储接收到的数据)</li>
+<li>数据长度</li>
+<li>使能信号</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="id10">
+<h3>11.5.2. 读写标志位<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h3>
+<p>I2C支持发送和接收两种工作状态，寄存器 PKTDIR 表示发送或者接收状态，设置为0时，表示发送状态，设置为1时，表示接收状态。</p>
+</div>
+<div class="section" id="id11">
+<h3>11.5.3. 从设备地址<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h3>
+<p>每个对接I2C的从设备，都会有唯一设别地址，通常该地址是7位长度，将从设备地址写入寄存器 SLVADDR,I2C在将从设备地址发送出去之前，会自动左移1位，并在最低位补上发送接收方向位。</p>
+</div>
+<div class="section" id="id12">
+<h3>11.5.4. 从设备寄存器地址<a class="headerlink" href="#id12" title="永久链接至标题">¶</a></h3>
+<p>从设备寄存器地址表示I2C需要对从设备某个寄存器做读写操作的寄存器地址。将从设备寄存器地址写入寄存器 I2C_SUB_ADDR，同时需要将寄存器 SAEN 置1。
+如果将寄存器 SAEN 置0，那么I2C主机发送时会跳过从设备寄存器地址段。</p>
+</div>
+<div class="section" id="id13">
+<h3>11.5.5. 从设备寄存器地址长度<a class="headerlink" href="#id13" title="永久链接至标题">¶</a></h3>
+<p>将从设备寄存器地址长度减1再写入寄存器 SABC。</p>
+</div>
+<div class="section" id="id14">
+<h3>11.5.6. 数据<a class="headerlink" href="#id14" title="永久链接至标题">¶</a></h3>
+<p>数据部分表示需要发送到从设备的数据，或者需要从从设备接收到的数据。
+当I2C发送数据时，需要将数据依次以word为单位写入I2C FIFO，发送数据写FIFO的寄存器地址 I2C_FIFO_WDATA。
+当I2C接收数据时，需要依次以word为单位从I2C FIFO中将数据读出来，接收数据读FIFO的寄存器地址 I2C_FIFO_RDATA。</p>
+</div>
+<div class="section" id="id15">
+<h3>11.5.7. 数据长度<a class="headerlink" href="#id15" title="永久链接至标题">¶</a></h3>
+<p>将数据长度减1再写入寄存器 PKTLEN。</p>
+</div>
+<div class="section" id="id16">
+<h3>11.5.8. 使能信号<a class="headerlink" href="#id16" title="永久链接至标题">¶</a></h3>
+<p>将以上几项配置完成后，再将使能信号寄存器 MEN 写1，就自动启动I2C发送流程了。</p>
+<p>当读写标志位配置为0时，I2C发送数据，主机发送流程：</p>
+<ol class="arabic simple">
+<li>起始位</li>
+<li>(从设备地址左移1位 + 0) + ACK</li>
+<li>从设备寄存器地址 + ACK</li>
+<li>1字节数据 + ACK</li>
+<li>1字节数据 + ACK</li>
+<li>停止位</li>
+</ol>
+<p>当读写标志位配置为1时，I2C接收数据，主机发送流程：</p>
+<ol class="arabic simple">
+<li>起始位</li>
+<li>(从设备地址左移1位 + 0) + ACK</li>
+<li>从设备寄存器地址 + ACK</li>
+<li>起始位</li>
+<li>(从设备地址左移1位 + 1) + ACK</li>
+<li>1字节数据 + ACK</li>
+<li>1字节数据 + ACK</li>
+<li>停止位</li>
+</ol>
+</div>
+</div>
+<div class="section" id="fifo">
+<h2>11.6. FIFO管理<a class="headerlink" href="#fifo" title="永久链接至标题">¶</a></h2>
+<p>I2C FIFO深度为2个word，I2C发送和接收可分为RX FIFO和TX FIFO。
+寄存器 RFICNT 表示RX FIFO中有多少数据(单位word)需要读取。
+寄存器 TFICNT 表示TX FIFO中剩余多少空间(单位Word)可供写入。</p>
+<p>I2C FIFO状态：</p>
+<blockquote>
+<div><ul class="simple">
+<li>RX FIFO underflow: 当RX FIFO中的数据被读取完毕或者为空时，继续从RX FIFO中读取数据，寄存器 RFIU 会被置位；</li>
+<li>RX FIFO overflow: 当I2C接收数据直到RX FIFO的2个word被填满后，在没有读取RX FIFO的情况下，I2C再次接收到数据，寄存器 RFIO 会被置位；</li>
+<li>TX FIFO underflow: 当向TX FIFO中填入的数据大小不满足配置的I2C数据长度 PKTLEN，并且已经没有新数据继续填入TX FIFO中时，寄存器 TFIU 会被置位；</li>
+<li>TX FIFO overflow: 当TX FIFO的2个word被填满后，在TX FIFO中的数据没有发出去之前，再次向TX FIFO中填入数据，寄存器 TFIO 会被置位。</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="dma">
+<h2>11.7. 搭配使用DMA<a class="headerlink" href="#dma" title="永久链接至标题">¶</a></h2>
+<p>I2C可以使用DMA进行数据的发送和接收。将 DTEN 置1，则开启DMA发送模式，为I2C分配好通道后，DMA会将数据从存储区传输到 I2C_FIFO_WDATA 寄存器中。
+将 DREN 置1,则开启DMA接收模式，为I2C分配好通道后，DMA会将 I2C_FIFO_RDATA 寄存器中的数据传输到存储区中。
+I2C模块搭配使用DMA时，数据部分将由DMA自动完成搬运，不需要CPU再将数据写入I2C TX FIFO或者从I2C RX FIFO中读取数据。</p>
+<div class="section" id="id17">
+<h3>11.7.1. DMA发送流程<a class="headerlink" href="#id17" title="永久链接至标题">¶</a></h3>
+<ol class="arabic simple">
+<li>配置读写标志位为0</li>
+<li>配置从设备地址</li>
+<li>配置从设备寄存器地址</li>
+<li>配置从设备寄存器地址长度</li>
+<li>数据长度</li>
+<li>使能信号寄存器置1</li>
+<li>配置DMA transfer size</li>
+<li>配置DMA源地址transfer width</li>
+<li>配置DMA目的地址transfer width(需要注意I2C搭配DMA使用时，目的地址transfer width需要设置为32bits，以word对齐使用)</li>
+<li>配置DMA源地址为存储发送数据的内存地址</li>
+<li>配置DMA目的地址为I2C TX FIFO地址，I2C_FIFO_WDATA</li>
+<li>使能DMA</li>
+</ol>
+</div>
+<div class="section" id="id18">
+<h3>11.7.2. DMA接收流程<a class="headerlink" href="#id18" title="永久链接至标题">¶</a></h3>
+<ol class="arabic simple">
+<li>配置读写标志位为1</li>
+<li>配置从设备地址</li>
+<li>配置从设备寄存器地址</li>
+<li>配置从设备寄存器地址长度</li>
+<li>数据长度</li>
+<li>使能信号寄存器置1</li>
+<li>配置DMA transfer size</li>
+<li>配置DMA源地址transfer width(需要注意I2C搭配DMA使用时，源地址transfer width需要设置为32bits，以word对齐使用)</li>
+<li>配置DMA目的地址transfer width</li>
+<li>配置DMA源地址为I2C RX FIFO地址，I2C_FIFO_RDATA</li>
+<li>配置DMA目的地址为存储接收数据的内存地址</li>
+<li>使能DMA</li>
+</ol>
+</div>
+</div>
+<div class="section" id="id19">
+<h2>11.8. 中断<a class="headerlink" href="#id19" title="永久链接至标题">¶</a></h2>
+<p>I2C包括如下几种中断：</p>
+<blockquote>
+<div><ul class="simple">
+<li>I2C_TRANS_END_INT: I2C传输结束中断</li>
+<li>I2C_TX_FIFO_READY_INT: 当I2C TX FIFO有空闲空间可用于填充时，触发中断</li>
+<li>I2C_RX_FIFO_READY_INT: 当I2C RX FIFO接收到数据时，触发中断</li>
+<li>I2C_NACK_RECV_INT: 当I2C模块检测到NACK状态，触发中断</li>
+<li>I2C_ARB_LOST_INT: I2C仲裁丢失中断</li>
+<li>I2C_FIFO_ERR_INT: I2C FIFO ERROR中断</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="id20">
+<h2>11.9. 寄存器描述<a class="headerlink" href="#id20" title="永久链接至标题">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="39%" />
+<col width="61%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>名称</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#i2c-config">i2c_config</a></td>
+<td>I2C configuration register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#i2c-int-sts">i2c_int_sts</a></td>
+<td>I2C interrupt status</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#i2c-sub-addr">i2c_sub_addr</a></td>
+<td>I2C sub-address configuration</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#i2c-bus-busy">i2c_bus_busy</a></td>
+<td>I2C bus busy control register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#i2c-prd-start">i2c_prd_start</a></td>
+<td>I2C length of start phase</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#i2c-prd-stop">i2c_prd_stop</a></td>
+<td>I2C length of stop phase</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#i2c-prd-data">i2c_prd_data</a></td>
+<td>I2C length of data phase</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#i2c-fifo-config-0">i2c_fifo_config_0</a></td>
+<td>I2C FIFO configuration register0</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#i2c-fifo-config-1">i2c_fifo_config_1</a></td>
+<td>I2C FIFO configuration register1</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#i2c-fifo-wdata">i2c_fifo_wdata</a></td>
+<td>I2C FIFO write data</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#i2c-fifo-rdata">i2c_fifo_rdata</a></td>
+<td>I2C FIFO read data</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="i2c-config">
+<h3>11.9.1. i2c_config<a class="headerlink" href="#i2c-config" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000a300</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="4">DEGCNT</td>
+<td colspan="4">RSVD</td>
+<td colspan="8">PKTLEN</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td>RSVD</td>
+<td colspan="7">SLVADDR</td>
+<td>RSVD</td>
+<td colspan="2">SABC</td>
+<td>SAEN</td>
+<td>SCLSEN</td>
+<td>DEGEN</td>
+<td>PKTDIR</td>
+<td>MEN</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="7%" />
+<col width="5%" />
+<col width="9%" />
+<col width="72%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:28</td>
+<td>DEGCNT</td>
+<td>R/W</td>
+<td>4'D0</td>
+<td>De-glitch function cycle count</td>
+</tr>
+<tr class="row-odd"><td>27:24</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>23:16</td>
+<td>PKTLEN</td>
+<td>R/W</td>
+<td>8'D0</td>
+<td>Packet length (unit: byte)</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>14:8</td>
+<td>SLVADDR</td>
+<td>R/W</td>
+<td>7'D0</td>
+<td>Slave address for I2C transaction (target address)</td>
+</tr>
+<tr class="row-odd"><td>7</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td rowspan="2">6:5</td>
+<td rowspan="2">SABC</td>
+<td rowspan="2">R/W</td>
+<td rowspan="2">2'D0</td>
+<td rowspan="2"><p class="first">Sub-address field byte count</p>
+<p class="last">2'd0: 1-byte, 2'd1: 2-byte, 2'd2: 3-byte, 2'd3: 4-byte</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td>4</td>
+<td>SAEN</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>Enable signal of I2C sub-address field</td>
+</tr>
+<tr class="row-odd"><td rowspan="2">3</td>
+<td rowspan="2">SCLSEN</td>
+<td rowspan="2">R/W</td>
+<td rowspan="2">1'B1</td>
+<td rowspan="2"><p class="first">Enable signal of I2C SCL synchronization, should be enabled to support Multi-Master and Clock-Stretching</p>
+<p class="last">(Normally should not be turned-off)</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td>2</td>
+<td>DEGEN</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>Enable signal of I2C input de-glitch function (for all input pins)</td>
+</tr>
+<tr class="row-even"><td rowspan="2">1</td>
+<td rowspan="2">PKTDIR</td>
+<td rowspan="2">R/W</td>
+<td rowspan="2">1'B1</td>
+<td rowspan="2"><p class="first">Transfer direction of the packet</p>
+<p class="last">1'b0: Write; 1'b1: Read</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="2">0</td>
+<td rowspan="2">MEN</td>
+<td rowspan="2">R/W</td>
+<td rowspan="2">1'B0</td>
+<td rowspan="2"><p class="first">Enable signal of I2C Master function</p>
+<p class="last">Asserting this bit will trigger the transaction, and should be de-asserted after finish</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="i2c-int-sts">
+<h3>11.9.2. i2c_int_sts<a class="headerlink" href="#i2c-int-sts" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000a304</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="2">RSVD</td>
+<td>FEREN</td>
+<td>ARBEN</td>
+<td>NAKEN</td>
+<td>RXFEN</td>
+<td>TXFEN</td>
+<td>ENDEN</td>
+<td colspan="3">RSVD</td>
+<td>ARBCLR</td>
+<td>NAKCLR</td>
+<td colspan="2">RSVD</td>
+<td>ENDCLR</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="2">RSVD</td>
+<td>FERMASK</td>
+<td>ARBMASK</td>
+<td>NAKMASK</td>
+<td>RXFMASK</td>
+<td>TXFMASK</td>
+<td>ENDMASK</td>
+<td colspan="2">RSVD</td>
+<td>FERINT</td>
+<td>ARBINT</td>
+<td>NAKINT</td>
+<td>RXFINT</td>
+<td>TXFINT</td>
+<td>ENDINT</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="7%" />
+<col width="6%" />
+<col width="9%" />
+<col width="70%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:30</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>29</td>
+<td>FEREN</td>
+<td>R/W</td>
+<td>1'B1</td>
+<td>Interrupt enable of i2c_fer_int</td>
+</tr>
+<tr class="row-even"><td>28</td>
+<td>ARBEN</td>
+<td>R/W</td>
+<td>1'B1</td>
+<td>Interrupt enable of i2c_arb_int</td>
+</tr>
+<tr class="row-odd"><td>27</td>
+<td>NAKEN</td>
+<td>R/W</td>
+<td>1'B1</td>
+<td>Interrupt enable of i2c_nak_int</td>
+</tr>
+<tr class="row-even"><td>26</td>
+<td>RXFEN</td>
+<td>R/W</td>
+<td>1'B1</td>
+<td>Interrupt enable of i2c_rxf_int</td>
+</tr>
+<tr class="row-odd"><td>25</td>
+<td>TXFEN</td>
+<td>R/W</td>
+<td>1'B1</td>
+<td>Interrupt enable of i2c_txf_int</td>
+</tr>
+<tr class="row-even"><td>24</td>
+<td>ENDEN</td>
+<td>R/W</td>
+<td>1'B1</td>
+<td>Interrupt enable of i2c_end_int</td>
+</tr>
+<tr class="row-odd"><td>23:21</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>20</td>
+<td>ARBCLR</td>
+<td>W1C</td>
+<td>1'B0</td>
+<td>Interrupt clear of i2c_arb_int</td>
+</tr>
+<tr class="row-odd"><td>19</td>
+<td>NAKCLR</td>
+<td>W1C</td>
+<td>1'B0</td>
+<td>Interrupt clear of i2c_nak_int</td>
+</tr>
+<tr class="row-even"><td>18:17</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>16</td>
+<td>ENDCLR</td>
+<td>W1C</td>
+<td>1'B0</td>
+<td>Interrupt clear of i2c_end_int</td>
+</tr>
+<tr class="row-even"><td>15:14</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>13</td>
+<td>FERMASK</td>
+<td>R/W</td>
+<td>1'B1</td>
+<td>Interrupt mask of i2c_fer_int</td>
+</tr>
+<tr class="row-even"><td>12</td>
+<td>ARBMASK</td>
+<td>R/W</td>
+<td>1'B1</td>
+<td>Interrupt mask of i2c_arb_int</td>
+</tr>
+<tr class="row-odd"><td>11</td>
+<td>NAKMASK</td>
+<td>R/W</td>
+<td>1'B1</td>
+<td>Interrupt mask of i2c_nak_int</td>
+</tr>
+<tr class="row-even"><td>10</td>
+<td>RXFMASK</td>
+<td>R/W</td>
+<td>1'B1</td>
+<td>Interrupt mask of i2c_rxf_int</td>
+</tr>
+<tr class="row-odd"><td>9</td>
+<td>TXFMASK</td>
+<td>R/W</td>
+<td>1'B1</td>
+<td>Interrupt mask of i2c_txf_int</td>
+</tr>
+<tr class="row-even"><td>8</td>
+<td>ENDMASK</td>
+<td>R/W</td>
+<td>1'B1</td>
+<td>Interrupt mask of i2c_end_int</td>
+</tr>
+<tr class="row-odd"><td>7:6</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>5</td>
+<td>FERINT</td>
+<td>R</td>
+<td>1'B0</td>
+<td>I2C TX/RX FIFO error interrupt, auto-cleared when FIFO overflow/underflow error flag is cleared</td>
+</tr>
+<tr class="row-odd"><td>4</td>
+<td>ARBINT</td>
+<td>R</td>
+<td>1'B0</td>
+<td>I2C arbitration lost interrupt</td>
+</tr>
+<tr class="row-even"><td>3</td>
+<td>NAKINT</td>
+<td>R</td>
+<td>1'B0</td>
+<td>I2C NACK-received interrupt</td>
+</tr>
+<tr class="row-odd"><td>2</td>
+<td>RXFINT</td>
+<td>R</td>
+<td>1'B0</td>
+<td>I2C RX FIFO ready (rx_fifo_cnt &gt; rx_fifo_th) interrupt, auto-cleared when data is popped</td>
+</tr>
+<tr class="row-even"><td>1</td>
+<td>TXFINT</td>
+<td>R</td>
+<td>1'B0</td>
+<td>I2C TX FIFO ready (tx_fifo_cnt &gt; tx_fifo_th) interrupt, auto-cleared when data is pushed</td>
+</tr>
+<tr class="row-odd"><td>0</td>
+<td>ENDINT</td>
+<td>R</td>
+<td>1'B0</td>
+<td>I2C transfer end interrupt</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="i2c-sub-addr">
+<h3>11.9.3. i2c_sub_addr<a class="headerlink" href="#i2c-sub-addr" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000a308</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="8">SUBAB3</td>
+<td colspan="8">SUBAB2</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="8">SUBAB1</td>
+<td colspan="8">SUBAB0</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="9%" />
+<col width="7%" />
+<col width="12%" />
+<col width="63%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:24</td>
+<td>SUBAB3</td>
+<td>R/W</td>
+<td>8'D0</td>
+<td>I2C sub-address field - byte[3]</td>
+</tr>
+<tr class="row-odd"><td>23:16</td>
+<td>SUBAB2</td>
+<td>R/W</td>
+<td>8'D0</td>
+<td>I2C sub-address field - byte[2]</td>
+</tr>
+<tr class="row-even"><td>15:8</td>
+<td>SUBAB1</td>
+<td>R/W</td>
+<td>8'D0</td>
+<td>I2C sub-address field - byte[1]</td>
+</tr>
+<tr class="row-odd"><td>7:0</td>
+<td>SUBAB0</td>
+<td>R/W</td>
+<td>8'D0</td>
+<td>I2C sub-address field - byte[0] (sub-address starts from this byte)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="i2c-bus-busy">
+<h3>11.9.4. i2c_bus_busy<a class="headerlink" href="#i2c-bus-busy" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000a30c</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="14">RSVD</td>
+<td>BUSYCLR</td>
+<td>BUSY</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="8%" />
+<col width="7%" />
+<col width="11%" />
+<col width="66%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:2</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>BUSYCLR</td>
+<td>W1C</td>
+<td>1'B0</td>
+<td>Clear signal of bus_busy status, not for normal usage (in case I2C bus hangs)</td>
+</tr>
+<tr class="row-even"><td>0</td>
+<td>BUSY</td>
+<td>R</td>
+<td>1'B0</td>
+<td>Indicator of I2C bus busy</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="i2c-prd-start">
+<h3>11.9.5. i2c_prd_start<a class="headerlink" href="#i2c-prd-start" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000a310</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="8">PRDSPH3</td>
+<td colspan="8">PRDSPH2</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="8">PRDSPH1</td>
+<td colspan="8">PRDSPH0</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="13%" />
+<col width="11%" />
+<col width="17%" />
+<col width="46%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:24</td>
+<td>PRDSPH3</td>
+<td>R/W</td>
+<td>8'D15</td>
+<td>Length of START condition phase 3</td>
+</tr>
+<tr class="row-odd"><td>23:16</td>
+<td>PRDSPH2</td>
+<td>R/W</td>
+<td>8'D15</td>
+<td>Length of START condition phase 2</td>
+</tr>
+<tr class="row-even"><td>15:8</td>
+<td>PRDSPH1</td>
+<td>R/W</td>
+<td>8'D15</td>
+<td>Length of START condition phase 1</td>
+</tr>
+<tr class="row-odd"><td>7:0</td>
+<td>PRDSPH0</td>
+<td>R/W</td>
+<td>8'D15</td>
+<td>Length of START condition phase 0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="i2c-prd-stop">
+<h3>11.9.6. i2c_prd_stop<a class="headerlink" href="#i2c-prd-stop" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000a314</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="8">PRDPPH3</td>
+<td colspan="8">PRDPPH2</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="8">PRDPPH1</td>
+<td colspan="8">PRDPPH0</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="13%" />
+<col width="11%" />
+<col width="17%" />
+<col width="45%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:24</td>
+<td>PRDPPH3</td>
+<td>R/W</td>
+<td>8'D15</td>
+<td>Length of STOP condition phase 3</td>
+</tr>
+<tr class="row-odd"><td>23:16</td>
+<td>PRDPPH2</td>
+<td>R/W</td>
+<td>8'D15</td>
+<td>Length of STOP condition phase 2</td>
+</tr>
+<tr class="row-even"><td>15:8</td>
+<td>PRDPPH1</td>
+<td>R/W</td>
+<td>8'D15</td>
+<td>Length of STOP condition phase 1</td>
+</tr>
+<tr class="row-odd"><td>7:0</td>
+<td>PRDPPH0</td>
+<td>R/W</td>
+<td>8'D15</td>
+<td>Length of STOP condition phase 0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="i2c-prd-data">
+<h3>11.9.7. i2c_prd_data<a class="headerlink" href="#i2c-prd-data" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000a318</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="8">PRDDPH3</td>
+<td colspan="8">PRDDPH2</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="8">PRDDPH1</td>
+<td colspan="8">PRDDPH0</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="5%" />
+<col width="8%" />
+<col width="74%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:24</td>
+<td>PRDDPH3</td>
+<td>R/W</td>
+<td>8'D15</td>
+<td>Length of DATA phase 3</td>
+</tr>
+<tr class="row-odd"><td>23:16</td>
+<td>PRDDPH2</td>
+<td>R/W</td>
+<td>8'D15</td>
+<td>Length of DATA phase 2</td>
+</tr>
+<tr class="row-even"><td rowspan="2">15:8</td>
+<td rowspan="2">PRDDPH1</td>
+<td rowspan="2">R/W</td>
+<td rowspan="2">8'D15</td>
+<td rowspan="2"><p class="first">Length of DATA phase 1</p>
+<p class="last">Note: This value should not be set to 8'd0, adjust source clock rate instead if higher I2C clock rate is required</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td>7:0</td>
+<td>PRDDPH0</td>
+<td>R/W</td>
+<td>8'D15</td>
+<td>Length of DATA phase 0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="i2c-fifo-config-0">
+<h3>11.9.8. i2c_fifo_config_0<a class="headerlink" href="#i2c-fifo-config-0" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000a380</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="8">RSVD</td>
+<td>RFIU</td>
+<td>RFIO</td>
+<td>TFIU</td>
+<td>TFIO</td>
+<td>RFICLR</td>
+<td>TFICLR</td>
+<td>DREN</td>
+<td>DTEN</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="10%" />
+<col width="8%" />
+<col width="13%" />
+<col width="59%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:8</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>7</td>
+<td>RFIU</td>
+<td>R</td>
+<td>1'B0</td>
+<td>Underflow flag of RX FIFO, can be cleared by rx_fifo_clr</td>
+</tr>
+<tr class="row-even"><td>6</td>
+<td>RFIO</td>
+<td>R</td>
+<td>1'B0</td>
+<td>Overflow flag of RX FIFO, can be cleared by rx_fifo_clr</td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>TFIU</td>
+<td>R</td>
+<td>1'B0</td>
+<td>Underflow flag of TX FIFO, can be cleared by tx_fifo_clr</td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>TFIO</td>
+<td>R</td>
+<td>1'B0</td>
+<td>Overflow flag of TX FIFO, can be cleared by tx_fifo_clr</td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>RFICLR</td>
+<td>W1C</td>
+<td>1'B0</td>
+<td>Clear signal of RX FIFO</td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>TFICLR</td>
+<td>W1C</td>
+<td>1'B0</td>
+<td>Clear signal of TX FIFO</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>DREN</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>Enable signal of dma_rx_req/ack interface</td>
+</tr>
+<tr class="row-even"><td>0</td>
+<td>DTEN</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>Enable signal of dma_tx_req/ack interface</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="i2c-fifo-config-1">
+<h3>11.9.9. i2c_fifo_config_1<a class="headerlink" href="#i2c-fifo-config-1" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000a384</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="7">RSVD</td>
+<td>RFITH</td>
+<td colspan="7">RSVD</td>
+<td>TFITH</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="6">RSVD</td>
+<td colspan="2">RFICNT</td>
+<td colspan="6">RSVD</td>
+<td colspan="2">TFICNT</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="8%" />
+<col width="6%" />
+<col width="10%" />
+<col width="69%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:25</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>24</td>
+<td>RFITH</td>
+<td>R/W</td>
+<td>1'D0</td>
+<td>RX FIFO threshold, dma_rx_req will not be asserted if tx_fifo_cnt is less than this value</td>
+</tr>
+<tr class="row-even"><td>23:17</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>16</td>
+<td>TFITH</td>
+<td>R/W</td>
+<td>1'D0</td>
+<td>TX FIFO threshold, dma_tx_req will not be asserted if tx_fifo_cnt is less than this value</td>
+</tr>
+<tr class="row-even"><td>15:10</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>9:8</td>
+<td>RFICNT</td>
+<td>R</td>
+<td>2'D0</td>
+<td>RX FIFO available count</td>
+</tr>
+<tr class="row-even"><td>7:2</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>1:0</td>
+<td>TFICNT</td>
+<td>R</td>
+<td>2'D2</td>
+<td>TX FIFO available count</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="i2c-fifo-wdata">
+<h3>11.9.10. i2c_fifo_wdata<a class="headerlink" href="#i2c-fifo-wdata" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000a388</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">FIWD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">FIWD</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="16%" />
+<col width="13%" />
+<col width="21%" />
+<col width="34%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:0</td>
+<td>FIWD</td>
+<td>W</td>
+<td>X</td>
+<td>I2C FIFO write data</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="i2c-fifo-rdata">
+<h3>11.9.11. i2c_fifo_rdata<a class="headerlink" href="#i2c-fifo-rdata" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000a38c</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">FIRD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">FIRD</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="16%" />
+<col width="13%" />
+<col width="21%" />
+<col width="33%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:0</td>
+<td>FIRD</td>
+<td>R</td>
+<td>32'H0</td>
+<td>I2C FIFO read data</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Pwm/Pwm.html" class="btn btn-neutral float-right" title="12. PWM" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../Uart/Uart.html" class="btn btn-neutral float-left" title="10. UART" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

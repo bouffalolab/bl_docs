@@ -1,0 +1,326 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>1. Overview &mdash; BL602/604 Datasheet  文档</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="搜索" href="../../search.html" />
+    <link rel="next" title="2. Functional Description" href="../Functional/Functional.html" />
+    <link rel="prev" title="BL602/604 Datasheet" href="../../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> BL602/604 Datasheet
+          
+
+          
+            
+            <img src="../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#wireless">1.1. Wireless</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mcu-subsystem">1.2. MCU Subsystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#memory">1.3. Memory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#security">1.4. Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#peripheral">1.5. Peripheral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#power-management">1.6. Power Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#clock">1.7. Clock</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Functional/Functional.html">2. Functional Description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PindefinitionQFN32/PindefinitionQFN32.html">3. Pin Definition (QFN32)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PindefinitionQFN40/PindefinitionQFN40.html">4. Pin Definition (QFN40)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Electricalcharacteristics/Electricalcharacteristics.html">5. Electrical Specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Referencedesign/Referencedesign.html">6. Reference Design (simplified)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PackagingQFN32/PackagingQFN32.html">7. Package Information(QFN32)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PackagingQFN40/PackagingQFN40.html">8. Package Information(QFN40)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TopMarkingDefinition/TopMarkingDefinition.html">9. Top Marking Definition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OrderingInformation/OrderingInformation.html">10. Ordering Information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../version/version.html">11. Revision history</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">BL602/604 Datasheet</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>1. Overview</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="overview">
+<h1>1. Overview<a class="headerlink" href="#overview" title="永久链接至标题">¶</a></h1>
+<p>BL602/BL604 is Wi-Fi + BLE combo chipset for ultra-low-cost and low-power application.</p>
+<p>Wireless subsystem contains 2.4G radio, Wi-Fi 802.11b/g/n and BLE 5.0 baseband/MAC designs. Microcontroller subsystem contains a low-power 32-bit RISC CPU, high-speed cache and memories. Power Management Unit controls low-power modes. Moreover, variety of security features are supported.</p>
+<p>Peripheral interfaces include SDIO, SPI, UART, I2C, IR remote, PWM, ADC, DAC, PIR, and GPIOs.</p>
+<div class="figure align-center" id="id1">
+<img alt="../../_images/Functionalblockdiagram.png" src="../../_images/Functionalblockdiagram.png" />
+<p class="caption"><span class="caption-text">Block Diagram</span></p>
+</div>
+<div class="section" id="wireless">
+<h2>1.1. Wireless<a class="headerlink" href="#wireless" title="永久链接至标题">¶</a></h2>
+<ul>
+<li><p class="first">2.4 GHz RF transceiver</p>
+</li>
+<li><p class="first">Wi-Fi 802.11b/g/n</p>
+</li>
+<li><p class="first">Bluetooth® Low Energy 5.0</p>
+<p>BLE 5.0 Channel Selection#2 is supported</p>
+<p>2M PHY / Coded PHY / ADV extension is not supported</p>
+</li>
+<li><p class="first">Wi-Fi 20MHz bandwidth</p>
+</li>
+<li><p class="first">Wi-Fi Security WPS / WEP / WPA / WPA2 Personal / WPA2 Enterprise / WPA3</p>
+</li>
+<li><p class="first">STA，SoftAP，STA+SoftAP and sniffer modes</p>
+</li>
+<li><p class="first">Multi-cloud connectivity</p>
+</li>
+<li><p class="first">Wi-Fi fast connection with BLE assistance</p>
+</li>
+<li><p class="first">Wi-Fi and BLE coexistence</p>
+</li>
+<li><p class="first">Integrated balun, PA/LNA</p>
+</li>
+</ul>
+</div>
+<div class="section" id="mcu-subsystem">
+<h2>1.2. MCU Subsystem<a class="headerlink" href="#mcu-subsystem" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li>32-bit RISC CPU with FPU (floating point unit)</li>
+<li>Level-1 cache</li>
+<li>One RTC timer update to one year</li>
+<li>Two 32-bit general purpose timers</li>
+<li>Four DMA channels</li>
+<li>DFS (dynamic frequency scaling) from 1MHz to 192MHz</li>
+<li>JTAG development support</li>
+<li>XIP QSPI Flash with hardware encryption support</li>
+</ul>
+</div>
+<div class="section" id="memory">
+<h2>1.3. Memory<a class="headerlink" href="#memory" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li>276KB RAM</li>
+<li>128KB ROM</li>
+<li>1Kb eFuse</li>
+<li>Embedded Flash (Optional)</li>
+</ul>
+</div>
+<div class="section" id="security">
+<h2>1.4. Security<a class="headerlink" href="#security" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li>Secure boot</li>
+<li>Secure debug ports</li>
+<li>QSPI Flash On-The-Fly AES Decryption (OTFAD) - AES-128, CTR mode</li>
+<li>AES 128/192/256 bits</li>
+<li>SHA-1/224/256</li>
+<li>TRNG (True Random Number Generator)</li>
+<li>PKA (Public Key Accelerator)</li>
+</ul>
+</div>
+<div class="section" id="peripheral">
+<h2>1.5. Peripheral<a class="headerlink" href="#peripheral" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li>One SDIO 2.0 slave</li>
+<li>One SPI master/slave</li>
+<li>Two UART</li>
+<li>One I2C master/slave</li>
+<li>Five PWM channels</li>
+<li>10-bit general DAC</li>
+<li>12-bit general ADC</li>
+<li>Two general analog comparators (ACOMP)</li>
+<li>PIR (Passive Infra-Red) detection</li>
+<li>IR remote</li>
+<li>16 or 23 GPIOs</li>
+</ul>
+</div>
+<div class="section" id="power-management">
+<h2>1.6. Power Management<a class="headerlink" href="#power-management" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li>Off</li>
+<li>Hibernate (flexible modes)</li>
+<li>Power Down Sleep (flexible modes)</li>
+<li>Active</li>
+</ul>
+</div>
+<div class="section" id="clock">
+<h2>1.7. Clock<a class="headerlink" href="#clock" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li>Support XTAL 24/32/38.4/40MHz</li>
+<li>Internal RC 32kHz oscillator</li>
+<li>Internal RC 32MHz oscillator</li>
+<li>Internal System PLL</li>
+<li>XTAL 32kHz</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Functional/Functional.html" class="btn btn-neutral float-right" title="2. Functional Description" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../../index.html" class="btn btn-neutral float-left" title="BL602/604 Datasheet" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

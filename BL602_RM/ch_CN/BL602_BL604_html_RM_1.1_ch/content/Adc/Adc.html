@@ -1,0 +1,2815 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>4. ADC &mdash; BL602/604 参考手册  文档</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="搜索" href="../../search.html" />
+    <link rel="next" title="5. DAC" href="../DAC/DAC.html" />
+    <link rel="prev" title="3. GLB" href="../Glb/Glb.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> BL602/604 参考手册
+          
+
+          
+            
+            <img src="../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../SystemAndMemoryOverview/SystemAndMemoryOverview.html">1. 系统和存储器概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ResetAndClock/ResetAndClock.html">2. 复位和时钟</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Glb/Glb.html">3. GLB</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">4. ADC</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">4.1. 简介</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">4.2. 主要特点</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">4.3. 功能描述</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">4.3.1. ADC 引脚和内部信号</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">4.3.2. ADC通道</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">4.3.3. ADC时钟</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">4.3.4. ADC转换模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">4.3.5. ADC结果</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">4.3.6. ADC中断</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adc-fifo">4.3.7. ADC FIFO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">4.3.8. ADC设置流程</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vbat">4.3.9. VBAT测量</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tsen">4.3.10. TSEN测量</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id11">4.4. 寄存器描述</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#gpadc-config">4.4.1. gpadc_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpadc-dma-rdata">4.4.2. gpadc_dma_rdata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpadc-reg-cmd">4.4.3. gpadc_reg_cmd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpadc-reg-config1">4.4.4. gpadc_reg_config1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpadc-reg-config2">4.4.5. gpadc_reg_config2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpadc-reg-scn-pos1">4.4.6. gpadc_reg_scn_pos1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpadc-reg-scn-pos2">4.4.7. gpadc_reg_scn_pos2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpadc-reg-scn-neg1">4.4.8. gpadc_reg_scn_neg1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpadc-reg-scn-neg2">4.4.9. gpadc_reg_scn_neg2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpadc-reg-status">4.4.10. gpadc_reg_status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpadc-reg-isr">4.4.11. gpadc_reg_isr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpadc-reg-result">4.4.12. gpadc_reg_result</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpadc-reg-raw-result">4.4.13. gpadc_reg_raw_result</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpadc-reg-define">4.4.14. gpadc_reg_define</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../DAC/DAC.html">5. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Dma/Dma.html">6. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L1c/L1c.html">7. L1C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../IR/IR.html">8. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Spi/Spi.html">9. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Uart/Uart.html">10. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../I2c/I2c.html">11. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Pwm/Pwm.html">12. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Timer/Timer.html">13. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../version/version.html">14. 版本信息</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">BL602/604 参考手册</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>4. ADC</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="adc">
+<h1>4. ADC<a class="headerlink" href="#adc" title="永久链接至标题">¶</a></h1>
+<div class="section" id="id1">
+<h2>4.1. 简介<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<p>芯片内置一个12bits的逐次逼近式模拟数字转换器(ADC）,支持12路外部模拟输入和若干内部模拟信号选择。
+ADC可以工作在单次转换和多通道扫描两种模式下，转换结果为12/14/16bits左对齐模式。ADC拥有深度
+为32的FIFO，支持多种中断，支持DMA操作。ADC除了用于普通模拟信号测量外，还可以用于测量供电电压，
+此外ADC还可以通过测量内/外部二极管电压用于温度检测。</p>
+</div>
+<div class="section" id="id2">
+<h2>4.2. 主要特点<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<ul>
+<li><p class="first">高性能</p>
+<blockquote>
+<div><ul class="simple">
+<li>可以选择12-bit, 14-bit, 16-bit转换结果输出</li>
+<li>ADC转换时间最快0.5us（12-bit转换结果)</li>
+<li>支持1.8V,3.3V可选参考电压</li>
+<li>支持DMA将转换结果搬运到内存</li>
+<li>支持单通道转换和多通道扫描两种模式</li>
+<li>支持单端与差分两种输入模式</li>
+<li>支持抖动补偿</li>
+<li>支持用户自行设定转换结果偏移值</li>
+<li>扫描模式时钟最大支持1M，非扫描模式是2M</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">模拟通道数</p>
+<blockquote>
+<div><ul class="simple">
+<li>12路外部模拟通道</li>
+<li>2路DAC内部通道</li>
+<li>1路VBAT/2通道</li>
+<li>1路TSEN通道</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h2>4.3. 功能描述<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<p>ADC模块基本框图如图所示。</p>
+<div class="figure align-center" id="id12">
+<img alt="../../_images/ADC_Basic_Struct.png" src="../../_images/ADC_Basic_Struct.png" />
+<p class="caption"><span class="caption-text">ADC基本框图</span></p>
+</div>
+<p>ADC模块包含五大部分，分别为前端输入通道选择器，程控放大器，ADC采样模块，数据处理模块以及FIFO。
+输入通道选择器用于选择需要采样的通道，既包含外部模拟信号，也包含内部模拟信号，程控放大器用于对
+输入信号做进一步处理，可以根据输入信号的特点，比如直流，交流，进行设定，以便得到更准确的转换值。
+ADC采样模块是最主要的功能模块，实现通过逐次比较的方式，得到模拟信号到数字信号的转换。转换的结果
+为12bit，数据处理模块负责将转换的结果进一步处理，包括添加通道信息等。最后得到的数据会推送到最后端
+的FIFO中。</p>
+<div class="section" id="id4">
+<h3>4.3.1. ADC 引脚和内部信号<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h3>
+<table border="1" class="docutils" id="id13">
+<caption><span class="caption-text">ADC内部信号</span><a class="headerlink" href="#id13" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="15%" />
+<col width="25%" />
+<col width="60%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">内部信号</th>
+<th class="head">信号类型</th>
+<th class="head">信号描述</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>VBAT/2</td>
+<td>Input</td>
+<td>从电源引脚分压过来的电压信号</td>
+</tr>
+<tr class="row-odd"><td>TSEN</td>
+<td>Input</td>
+<td>内部温度传感器输出电压</td>
+</tr>
+<tr class="row-even"><td>VREF</td>
+<td>Input</td>
+<td>内部模拟模块参考电压</td>
+</tr>
+<tr class="row-odd"><td>DACOUTA</td>
+<td>Input</td>
+<td>DAC模块输出</td>
+</tr>
+<tr class="row-even"><td>DACOUTB</td>
+<td>Input</td>
+<td>DAC模块输出</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils" id="id14">
+<caption><span class="caption-text">ADC外部引脚</span><a class="headerlink" href="#id14" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="15%" />
+<col width="25%" />
+<col width="60%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">外部引脚</th>
+<th class="head">信号类型</th>
+<th class="head">信号描述</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>VDDA</td>
+<td>Input</td>
+<td>模拟模块供电电压正极</td>
+</tr>
+<tr class="row-odd"><td>VSSA</td>
+<td>Input</td>
+<td>模拟模块供电地</td>
+</tr>
+<tr class="row-even"><td>ADC_CHX</td>
+<td>Input</td>
+<td>模拟输入引脚，总共12路</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id5">
+<h3>4.3.2. ADC通道<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
+<p>ADC采样的可以选择的通道包括外部模拟引脚的输入信号和芯片内部可选信号，具体包括：</p>
+<ul class="simple">
+<li>ADC CH0</li>
+<li>ADC CH1</li>
+<li>ADC CH2</li>
+<li>ADC CH3</li>
+<li>ADC CH4</li>
+<li>ADC CH5</li>
+<li>ADC CH6</li>
+<li>ADC CH7</li>
+<li>ADC CH8</li>
+<li>ADC CH9</li>
+<li>ADC CH10</li>
+<li>ADC CH11</li>
+<li>DAC OUTA</li>
+<li>DAC OUTB</li>
+<li>VBAT/2</li>
+<li>TSEN</li>
+<li>VREF</li>
+<li>GND</li>
+</ul>
+<p>需要注意的是，如果选择VBAT/2或TSEN作为输入待采信号，需要把gpadc_vbat_en或gpadc_ts_en置位。
+ADC模块可以支持单端输入或者差分输入，如果是单端输入模式，负极输入通道需要选择GND。</p>
+</div>
+<div class="section" id="id6">
+<h3>4.3.3. ADC时钟<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
+<p>ADC模块的工作时钟来源如下图所示。</p>
+<div class="figure align-center" id="id15">
+<img alt="../../_images/ADC_Clock.png" src="../../_images/ADC_Clock.png" />
+<p class="caption"><span class="caption-text">ADC时钟</span></p>
+</div>
+<p>ADC的时钟源可以选择来自PLL的96M，XTAL或者内部RC32M，时钟源的选择在GLB模块中设定，同时GLB模块也提供了
+时钟分频，默认情况下，ADC的时钟源是96M，时钟分频是2，到达ADC模块的时钟是32M。
+在ADC模块内部，提供了一个时钟分频，默认16分频，故ADC模块内部的时钟默认是2M。用户可以根据实际采样需求，
+自行调整ADC的时钟源和各个分频系数。
+gpadc_32m_clk_div分频寄存器宽度为6bits，最大分频为64，分频公式为fout=fsource/(gpadc_32m_clk_div+1)。
+gpadc_clk_div_ratio分频寄存器位于ADC模块内部，宽度为3bits,其分频值定义如下：</p>
+<ul class="simple">
+<li>3'b000: div=1</li>
+<li>3'b001: div=4</li>
+<li>3'b010: div=8</li>
+<li>3'b011: div=12</li>
+<li>3'b100: div=16</li>
+<li>3'b101: div=20</li>
+<li>3'b110: div=24</li>
+<li>3'b111: div=32</li>
+</ul>
+</div>
+<div class="section" id="id7">
+<h3>4.3.4. ADC转换模式<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h3>
+<p>ADC支持单通道转换和扫描转换两种模式，在单通道转换模式下，用户需要通过gpadc_pos_sel选择正极输入通道，
+通过gpadc_neg_sel选择负极输入通道，同时把gpadc_cont_conv_en控制位设置为0，表示单通道转换，
+然后设置gpadc_conv_start控制位启动转换即可。</p>
+<p>在扫描转换模式下，gpadc_cont_conv_en控制位需要设置为1，ADC根据gpadc_scan_length控制位设定的转换通道个数，
+依次按照gpadc_reg_scn_posX(X=1，2）和gpadc_reg_scn_negX(X=1，2）寄存器组所设定的通道顺序，逐个进行转换，
+转换的结果会自动推入ADC的FIFO。gpadc_reg_scn_posX(X=1，2）和gpadc_reg_scn_negX(X=1，2）寄存器组所设定的
+通道可以相同，这也就意味着用户可以实现对一个通道进行多次采样转换。</p>
+<p>ADC的转换结果一般都是放入FIFO中。用户需要根据实际转换通道数，设定FIFO接收数据阈值中断，
+通过FIFO的阈值中断，作为ADC转换完成中断。</p>
+</div>
+<div class="section" id="id8">
+<h3>4.3.5. ADC结果<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h3>
+<p>gpadc_raw_data寄存器存放了ADC的原始结果，在单端模式下，数据有效位是12bits，无符号位，在差分模式下，最高位为符号位，
+剩下11bits代表转换的结果。</p>
+<p>gpadc_data_out寄存器存放了ADC的结果，这个结果里包含了ADC结果，符号位和通道信息，数据格式如下：</p>
+<table border="1" class="docutils" id="id16">
+<caption><span class="caption-text">ADC转换结果含义</span><a class="headerlink" href="#id16" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="12%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">BitS</th>
+<th class="head">25</th>
+<th class="head">24</th>
+<th class="head">23</th>
+<th class="head">22</th>
+<th class="head">21</th>
+<th class="head">20</th>
+<th class="head">19</th>
+<th class="head">18</th>
+<th class="head">17</th>
+<th class="head">16</th>
+<th class="head">15</th>
+<th class="head">14</th>
+<th class="head">13</th>
+<th class="head">12</th>
+<th class="head">11</th>
+<th class="head">10</th>
+<th class="head">9</th>
+<th class="head">8</th>
+<th class="head">7</th>
+<th class="head">6</th>
+<th class="head">5</th>
+<th class="head">4</th>
+<th class="head">3</th>
+<th class="head">2</th>
+<th class="head">1</th>
+<th class="head">0</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>含义</td>
+<td colspan="5">正极通道号</td>
+<td colspan="5">负极通道号</td>
+<td colspan="16">转换结果</td>
+</tr>
+</tbody>
+</table>
+<p>转换结果的bit21-bit25是正极通道号，bit16-bit20是负极通道号，bit0-bit15是转换的数值。</p>
+<p>gpadc_res_sel控制位可以设定转换结果的位数为12位，14位，和16位，其中14位和16位是多次采样提高精度得到的结果，
+其可以设置的值如下：</p>
+<ul class="simple">
+<li>3'b000    12bit 2MS/s, OSR=1</li>
+<li>3'b001    14bit 125kS/s, OSR=16</li>
+<li>3'b010    14bit 31.25kS/s, OSR=64</li>
+<li>3'b011    16bit 15.625KS/s, OSR=128</li>
+<li>3'b100    16bit 7.8125KS/s, OSR=256</li>
+</ul>
+<p>ADC转换结果为左对齐模式，当选择12位时，转换结果的bit15-bit4有效，当选择14位时，转换结果的bit15-bit2有效，当选择16位时，转换结果的Bit15-Bit0有效。
+同样，在差分模式下，最高为是符号为，也就是，当选择14位时，bit15是符号位，bit14-bit2是转换结果，bit14是MSB,
+在单端模式下，没有符号位，也就是，当选择12位时，bit15-bit4是转换结果，bit15是MSB。</p>
+<p>在实际使用中，ADC的结果一般都是放入FIFO，这在多通道扫描模式下尤为重要，所以用户一般都是从ADC FIFO获取转换结果，
+ADC FIFO的数据格式gpadc_data_out寄存器中数据格式相同。</p>
+</div>
+<div class="section" id="id9">
+<h3>4.3.6. ADC中断<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h3>
+<p>ADC模块在正极采样超量程和负极采样超量程时可以产生中断，可以通过gpadc_pos_satur_mask，gpadc_neg_satur_mask屏蔽各自中断，
+当中断产生时，可以通过gpadc_pos_satur，和gpadc_neg_satur寄存器查询中断状态，同时可以通过gpadc_pos_satur_clr和gpadc_neg_satur_clr清除中断。该功能可以用来判断输入电压是否异常。</p>
+</div>
+<div class="section" id="adc-fifo">
+<h3>4.3.7. ADC FIFO<a class="headerlink" href="#adc-fifo" title="永久链接至标题">¶</a></h3>
+<p>ADC模块拥有深度为32的FIFO，数据宽度为26bits，当ADC完成转换后，会自动将结果推入到FIFO。ADC的FIFO有如下状态和中断管理功能：</p>
+<ul class="simple">
+<li>FIFO满状态</li>
+<li>FIFO非空状态</li>
+<li>FIFO Overrun中断</li>
+<li>FIFO Underrun中断</li>
+</ul>
+<p>当中断产生时，可以通过对应的clear位将中断标志清除掉。</p>
+<p>利用ADC的FIFO用户可以实现三种模式获取数据：查询模式，中断模式，DMA模式</p>
+<p><strong>查询模式</strong></p>
+<p>CPU轮询gpadc_rdy位，当该控制位置位时，说明FIFO中存在有效数据，CPU可以根据gpadc_fifo_data_count获知
+FIFO数据个数并从FIFO读出这些数据。</p>
+<p><strong>中断模式</strong></p>
+<p>CPU设置gpadc_rdy_mask为0，ADC就会在FIFO有数据推入的时候产生中断，用户可在中断函数中，根据gpadc_fifo_data_count获知
+FIFO数据个数并从FIFO读出这些数据，然后设置gpadc_rdy_clr清除中断。</p>
+<p><strong>DMA模式</strong></p>
+<p>用户设定gpadc_dma_en控制位，可以配合DMA完成转换数据到内存的搬运，在使用DMA模式时，通过gpadc_fifo_thl设置ADC FIFO发送
+DMA请求的数据个数阈值，DMA在收到请求时，会自动根据用户设定的参数，从FIFO搬运指定个数的结果到对应的内存。</p>
+</div>
+<div class="section" id="id10">
+<h3>4.3.8. ADC设置流程<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h3>
+<p><strong>设置ADC时钟</strong></p>
+<p>根据ADC转换速度需求，确定ADC的工作时钟，设定GLB模块的ADC时钟源和分频，结合gpadc_clk_div_ratio，确定最终ADC模块的工作时钟频率。</p>
+<p><strong>根据使用的通道设置GPIO</strong></p>
+<p>根据使用的模拟引脚，确定使用的通道号，初始化对应的GPIO为模拟功能，需要注意的是，在设定GPIO为模拟输入的时候，不要设置GPIO的上拉
+或者下拉，需要设置为浮空输入。</p>
+<p><strong>设定要转换的通道</strong></p>
+<p>根据使用的模拟通道和转换模式，设定对应的通道寄存器，对于单通道转换，在gpadc_pos_sel和gpadc_neg_sel寄存器中设置转换的通道信息。
+对于多通道扫描模式，根据要扫描通道数目和扫描顺序，设定gpadc_scan_length,gpadc_reg_scn_posX和gpadc_reg_scn_negX。</p>
+<p><strong>设定数据读取方式</strong></p>
+<p>根据ADC FIFO介绍的读取数据方式，选择使用的模式，设置对应的寄存器。如果使用DMA，同样需要配置DMA的一个通道，配合ADC FIFO完成数据的搬运。</p>
+<p><strong>启动转换</strong></p>
+<p>最后设置gpadc_res_sel选择数据转换结果的精度，最后设置gpadc_global_en=1，gpadc_conv_start=1就可以启动ADC开始转换。
+当转换完成，需要再次转换时，需要将gpadc_conv_start设置为0，再设置为1，以便再次触发转换。</p>
+</div>
+<div class="section" id="vbat">
+<h3>4.3.9. VBAT测量<a class="headerlink" href="#vbat" title="永久链接至标题">¶</a></h3>
+<p>这里的VBAT/2测量的是芯片VDD33的电压，而不是外部的比如锂电池的电压，如果需要测量锂电池等供电源头的电压，
+可以将电压分压，然后输入ADC的GPIO模拟通道，测量VDD33的电压可以减少GPIO的使用。</p>
+<p>ADC模块测量的VBAT/2电压是经过分压的，实际输入到ADC模块的电压是VDD33的一半，即VBAT/2=VDD33/2。由于电压经过分压，
+为了得到较高的精确度，建议ADC的参考电压选择1.8V，采用单端模式，正极输入电压选择VBAT/2，负极输入电压选择GND，
+同时将Gpadc_vbat_en设置为1，启动转换后，将对应的转换结果乘以2就可以得到VDD33电压。</p>
+</div>
+<div class="section" id="tsen">
+<h3>4.3.10. TSEN测量<a class="headerlink" href="#tsen" title="永久链接至标题">¶</a></h3>
+<p>ADC可以测量内部二极管或者外部二极管电压值，而二极管的压差和温度有关，所以通过测量二极管的电压，可以计算得到环境温度，
+我们称之为Temperature Sensor，简称TSEN。</p>
+<p>TSEN的测试原理是通过一个二极管上面测量两次不同大小的电流产生的电压差ΔV 随着温度的变化拟合的曲线，无论外部或者内部二极管的测量，
+最终输出的值和温度有关，都可以表示成Δ(ADC_out)=7.753T+X，当我们知道了电压值，也就知道了温度T。这里的X是一个偏移值，可以作为标准值，
+在实际使用前，我们需要确定X。芯片厂商会在芯片出厂前，在标准温度下，例如室温25度，测量Δ(ADC_out)，从而得到X。
+在用户使用的时候，只要根据公式T=[Δ(ADC_out)-X]/7.753，就可以得到温度T。</p>
+<p>在使用TSEN时，建议把ADC设置成16bits模式，通过多次采样以减少误差，参考电压选择1.8V以提高精度，设置gpadc_ts_en为1以便启动TSEN功能，
+如果选择内部二极管，gpadc_tsext_sel=0，如果选择外部二极管，gpadc_tsext_sel=1，根据实际情况选择正向输入通道，如果是内部二极管，
+选择TSEN通道，如果是外部，选择对应的模拟GPIO通道，负极输入端选择GND。在上述设定完毕后，设置gpadc_tsvbe_low=0，启动测量，
+得到测量结果V0,再设置gpadc_tsvbe_low=1，启动测量，得到测量结果V1,Δ(ADC_out)=V1-V0，根据公式T=[Δ(ADC_out)-X]/7.753，得到温度T。</p>
+</div>
+</div>
+<div class="section" id="id11">
+<h2>4.4. 寄存器描述<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="45%" />
+<col width="55%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>名称</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#gpadc-config">gpadc_config</a></td>
+<td>GPADC configuration</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#gpadc-dma-rdata">gpadc_dma_rdata</a></td>
+<td>GPADC DMA read data</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#gpadc-reg-cmd">gpadc_reg_cmd</a></td>
+<td>GPADC configuration register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#gpadc-reg-config1">gpadc_reg_config1</a></td>
+<td>GPADC configuration register1</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#gpadc-reg-config2">gpadc_reg_config2</a></td>
+<td>GPADC configuration register2</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#gpadc-reg-scn-pos1">gpadc_reg_scn_pos1</a></td>
+<td>GPADC converation sequence 1</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#gpadc-reg-scn-pos2">gpadc_reg_scn_pos2</a></td>
+<td>GPADC converation sequence 2</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#gpadc-reg-scn-neg1">gpadc_reg_scn_neg1</a></td>
+<td>GPADC converation sequence 3</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#gpadc-reg-scn-neg2">gpadc_reg_scn_neg2</a></td>
+<td>GPADC converation sequence 4</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#gpadc-reg-status">gpadc_reg_status</a></td>
+<td>GPADC status register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#gpadc-reg-isr">gpadc_reg_isr</a></td>
+<td>GPADC status flag register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#gpadc-reg-result">gpadc_reg_result</a></td>
+<td>GPADC result register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#gpadc-reg-raw-result">gpadc_reg_raw_result</a></td>
+<td>GPADC raw result register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#gpadc-reg-define">gpadc_reg_define</a></td>
+<td>GPADC define register</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="gpadc-config">
+<h3>4.4.1. gpadc_config<a class="headerlink" href="#gpadc-config" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x40002000</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="8">RSVD</td>
+<td colspan="2">FIFOTHL</td>
+<td colspan="6">FIFODACN</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td>RSVD</td>
+<td>FURM</td>
+<td>FORM</td>
+<td>RDYM</td>
+<td>RSVD</td>
+<td>URCL</td>
+<td>ORCL</td>
+<td>RDYCLR</td>
+<td>RSVD</td>
+<td>FIFOUR</td>
+<td>FIFOOR</td>
+<td>RDY</td>
+<td>FIFOFULL</td>
+<td>FIFONE</td>
+<td>FIFOCLR</td>
+<td>DMAEN</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="13%" />
+<col width="10%" />
+<col width="16%" />
+<col width="48%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:24</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td rowspan="5">23:22</td>
+<td rowspan="5">FIFOTHL</td>
+<td rowspan="5">R/W</td>
+<td rowspan="5">2'D0</td>
+<td rowspan="5"><p class="first">fifo threshold</p>
+<p>2'b00: 1 data</p>
+<p>2'b01: 4 data</p>
+<p>2'b10: 8 data</p>
+<p class="last">2'b11: 16 data</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td>21:16</td>
+<td>FIFODACN</td>
+<td>R</td>
+<td>6'D0</td>
+<td>fifo data number</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>14</td>
+<td>FURM</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>write 1 mask</td>
+</tr>
+<tr class="row-odd"><td>13</td>
+<td>FORM</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>write 1 mask</td>
+</tr>
+<tr class="row-even"><td>12</td>
+<td>RDYM</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>write 1 mask</td>
+</tr>
+<tr class="row-odd"><td>11</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>10</td>
+<td>URCL</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>Write 1 to clear flag</td>
+</tr>
+<tr class="row-odd"><td>9</td>
+<td>ORCL</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>Write 1 to clear flag</td>
+</tr>
+<tr class="row-even"><td>8</td>
+<td>RDYCLR</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>Write 1 to clear flag</td>
+</tr>
+<tr class="row-odd"><td>7</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>6</td>
+<td>FIFOUR</td>
+<td>R</td>
+<td>1'B0</td>
+<td>FIFO underrun interrupt flag</td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>FIFOOR</td>
+<td>R</td>
+<td>1'B0</td>
+<td>FIFO overrun interrupt flag</td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>RDY</td>
+<td>R</td>
+<td>1'B0</td>
+<td>Conversion data ready interrupt flag</td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>FIFOFULL</td>
+<td>R</td>
+<td>1'B0</td>
+<td>FIFO full flag</td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>FIFONE</td>
+<td>R</td>
+<td>1'B0</td>
+<td>FIFO not empty flag</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>FIFOCLR</td>
+<td>W1C</td>
+<td>1'B0</td>
+<td>FIFO clear signal</td>
+</tr>
+<tr class="row-even"><td>0</td>
+<td>DMAEN</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>GPADC DMA enbale</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gpadc-dma-rdata">
+<h3>4.4.2. gpadc_dma_rdata<a class="headerlink" href="#gpadc-dma-rdata" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x40002004</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="6">RSVD</td>
+<td colspan="10">DMARDA</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">DMARDA</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="11%" />
+<col width="9%" />
+<col width="14%" />
+<col width="55%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:26</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>25:0</td>
+<td>DMARDA</td>
+<td>R</td>
+<td>26'D0</td>
+<td>GPADC finial conversion result stored in the FIFO</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gpadc-reg-cmd">
+<h3>4.4.3. gpadc_reg_cmd<a class="headerlink" href="#gpadc-reg-cmd" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000f90c</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td>RSVD</td>
+<td>STEN</td>
+<td colspan="2">SENSEL</td>
+<td>CSPU</td>
+<td colspan="3">RSVD</td>
+<td>MBEN</td>
+<td colspan="2">MPG</td>
+<td>M1D</td>
+<td>M2D</td>
+<td>DWEN</td>
+<td>RSVD</td>
+<td>BMB</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td>MPEN</td>
+<td>MBIEN</td>
+<td>NG</td>
+<td colspan="5">POSSEL</td>
+<td colspan="5">NEGSEL</td>
+<td>SRST</td>
+<td>CSTA</td>
+<td>GEN</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="10%" />
+<col width="8%" />
+<col width="13%" />
+<col width="59%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>30</td>
+<td>STEN</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>enable sensor dc test mux</td>
+</tr>
+<tr class="row-even"><td rowspan="5">29:28</td>
+<td rowspan="5">SENSEL</td>
+<td rowspan="5">R/W</td>
+<td rowspan="5">2'H0</td>
+<td rowspan="5"><p class="first">selected output current channel and measurement channel</p>
+<p>2'h0: 1st channel</p>
+<p>2'h1: 2nd channel</p>
+<p>2'h2: 3rd channel</p>
+<p class="last">2'h3: 4th channel</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3">27</td>
+<td rowspan="3">CSPU</td>
+<td rowspan="3">R/W</td>
+<td rowspan="3">1'B0</td>
+<td rowspan="3"><p class="first">enable chip sensor test</p>
+<p>1'b0: disable</p>
+<p class="last">1'b1: enable</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td>26:24</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td rowspan="3">23</td>
+<td rowspan="3">MBEN</td>
+<td rowspan="3">R/W</td>
+<td rowspan="3">1'B0</td>
+<td rowspan="3"><p class="first">micboost 32db enable</p>
+<p>1'b0: 16dB</p>
+<p class="last">1'b1: 32dB</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="5">22:21</td>
+<td rowspan="5">MPG</td>
+<td rowspan="5">R/W</td>
+<td rowspan="5">2'H0</td>
+<td rowspan="5"><p class="first">mic_pga2_gain</p>
+<p>2'h0: 0dB</p>
+<p>2'h1: 6dB</p>
+<p>2'h2: -6dB</p>
+<p class="last">2'h3: 12dB</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3">20</td>
+<td rowspan="3">M1D</td>
+<td rowspan="3">R/W</td>
+<td rowspan="3">1'B0</td>
+<td rowspan="3"><p class="first">mic1 diff enable</p>
+<p>1'b0: single</p>
+<p class="last">1'b1: diff</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3">19</td>
+<td rowspan="3">M2D</td>
+<td rowspan="3">R/W</td>
+<td rowspan="3">1'B0</td>
+<td rowspan="3"><p class="first">mic2 diff enable</p>
+<p>1'b0: single</p>
+<p class="last">1'b1: diff</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3">18</td>
+<td rowspan="3">DWEN</td>
+<td rowspan="3">R/W</td>
+<td rowspan="3">1'B0</td>
+<td rowspan="3"><p class="first">dwa enable</p>
+<p>1'b0: dwa disable</p>
+<p class="last">1'b1: dwa enable</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td>17</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td rowspan="3">16</td>
+<td rowspan="3">BMB</td>
+<td rowspan="3">R/W</td>
+<td rowspan="3">1'B0</td>
+<td rowspan="3"><p class="first">micboost amp bypass</p>
+<p>1'b0: not bypass</p>
+<p class="last">1'b1: bypass</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3">15</td>
+<td rowspan="3">MPEN</td>
+<td rowspan="3">R/W</td>
+<td rowspan="3">1'B0</td>
+<td rowspan="3"><p class="first">micpga enable</p>
+<p>1'b0: micpga disable</p>
+<p class="last">1'b1: miapga enable</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3">14</td>
+<td rowspan="3">MBIEN</td>
+<td rowspan="3">R/W</td>
+<td rowspan="3">1'B0</td>
+<td rowspan="3"><p class="first">enable micbias</p>
+<p>1'b0: micbias power down</p>
+<p class="last">1'b1: miabias power on</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3">13</td>
+<td rowspan="3">NG</td>
+<td rowspan="3">R/W</td>
+<td rowspan="3">1'B0</td>
+<td rowspan="3"><p class="first">set negative input of adc to ground</p>
+<p>1'b0: disable</p>
+<p class="last">1'b1: enable</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="16">12:8</td>
+<td rowspan="16">POSSEL</td>
+<td rowspan="16">R/W</td>
+<td rowspan="16">5'HF</td>
+<td rowspan="16"><p class="first">select adc positive input in none-scan mode</p>
+<p>4'b0000 gpio0</p>
+<p>4'b0001 gpio1</p>
+<p>4'b0010 gpio2</p>
+<p>4'b0011 gpio3</p>
+<p>4'b0100 gpio4</p>
+<p>4'b0101 gpio5</p>
+<p>4'b0110 gpio6</p>
+<p>4'b0111 gpio7</p>
+<p>4'b1000 daca</p>
+<p>4'b1001 dacb</p>
+<p>4'b1010 vbat</p>
+<p>4'b1011 tsen</p>
+<p>4'b1100 vref</p>
+<p>4'b1101 gnd</p>
+<p class="last">4'b1111 disable</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="16">7:3</td>
+<td rowspan="16">NEGSEL</td>
+<td rowspan="16">R/W</td>
+<td rowspan="16">5'HF</td>
+<td rowspan="16"><p class="first">select adc negative input in none-scan mode</p>
+<p>4'b0000 gpio0</p>
+<p>4'b0001 gpio1</p>
+<p>4'b0010 gpio2</p>
+<p>4'b0011 gpio3</p>
+<p>4'b0100 gpio4</p>
+<p>4'b0101 gpio5</p>
+<p>4'b0110 gpio6</p>
+<p>4'b0111 gpio7</p>
+<p>4'b1000 daca</p>
+<p>4'b1001 dacb</p>
+<p>4'b1010 vbat</p>
+<p>4'b1011 tsen</p>
+<p>4'b1100 vref</p>
+<p>4'b1101 gnd</p>
+<p class="last">4'b1111 disable</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td>2</td>
+<td>SRST</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>user reset the whole block 1'h0: not reset  1'h1: reset</td>
+</tr>
+<tr class="row-even"><td>1</td>
+<td>CSTA</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>1'h0: stop converation  1'h1: start converation</td>
+</tr>
+<tr class="row-odd"><td>0</td>
+<td>GEN</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>1'h0: disable ADC  1'h1: enable ADC</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gpadc-reg-config1">
+<h3>4.4.4. gpadc_reg_config1<a class="headerlink" href="#gpadc-reg-config1" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000f910</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td>RSVD</td>
+<td colspan="2">V18SEL</td>
+<td colspan="2">V11SEL</td>
+<td>DTEN</td>
+<td>SCEN</td>
+<td colspan="4">SCLEN</td>
+<td colspan="3">CDRD</td>
+<td>CAIV</td>
+<td>RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="11">RSVD</td>
+<td colspan="3">RSSEL</td>
+<td>CTCV</td>
+<td>OCEN</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="5%" />
+<col width="8%" />
+<col width="73%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>30:29</td>
+<td>V18SEL</td>
+<td>R/W</td>
+<td>2'H0</td>
+<td>internal vdd18 select</td>
+</tr>
+<tr class="row-even"><td>28:27</td>
+<td>V11SEL</td>
+<td>R/W</td>
+<td>2'H0</td>
+<td>internal vdd11 select</td>
+</tr>
+<tr class="row-odd"><td>26</td>
+<td>DTEN</td>
+<td>R/W</td>
+<td>1'H0</td>
+<td>Dither compensation enable</td>
+</tr>
+<tr class="row-even"><td>25</td>
+<td>SCEN</td>
+<td>R/W</td>
+<td>1'H0</td>
+<td>select scan mode enable: 0: select  gpadc_pos/neg_sel;1: select  : select gpadc_scan_pos_x and gpadc_scan_neg_x</td>
+</tr>
+<tr class="row-odd"><td rowspan="13">24:21</td>
+<td rowspan="13">SCLEN</td>
+<td rowspan="13">R/W</td>
+<td rowspan="13">4'H0</td>
+<td rowspan="13"><p class="first">select scan mode length</p>
+<p>4'b0000 : select gpadc_scan_pos_0 and gpadc_scan_neg_0</p>
+<p>4'b0001 : select gpadc_scan_pos_1 and gpadc_scan_neg_1</p>
+<p>4'b0010 : select gpadc_scan_pos_2 and gpadc_scan_neg_2</p>
+<p>4'b0011 : select gpadc_scan_pos_3 and gpadc_scan_neg_3</p>
+<p>4'b0100 : select gpadc_scan_pos_4 and gpadc_scan_neg_4</p>
+<p>4'b0101 : select gpadc_scan_pos_5 and gpadc_scan_neg_5</p>
+<p>4'b0110 : select gpadc_scan_pos_6 and gpadc_scan_neg_6</p>
+<p>4'b0111 : select gpadc_scan_pos_7 and gpadc_scan_neg_7</p>
+<p>4'b1000 : select gpadc_scan_pos_8 and gpadc_scan_neg_8</p>
+<p>4'b1001 : select gpadc_scan_pos_9 and gpadc_scan_neg_9</p>
+<p>4'b1010 : select gpadc_scan_pos_10 and gpadc_scan_neg_10</p>
+<p class="last">4'b1011 : select gpadc_scan_pos_11 and gpadc_scan_neg_11</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="9">20:18</td>
+<td rowspan="9">CDRD</td>
+<td rowspan="9">R/W</td>
+<td rowspan="9">3'H3</td>
+<td rowspan="9"><p class="first">analog 32M clock division ratio</p>
+<p>3'b000: div=1</p>
+<p>3'b001: div=4</p>
+<p>3'b010: div=8</p>
+<p>3'b011: div=12</p>
+<p>3'b100: div=16</p>
+<p>3'b101: div=20</p>
+<p>3'b110: div=24</p>
+<p class="last">3'b111: div=32</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td>17</td>
+<td>CAIV</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>analog clock 2M inverted</td>
+</tr>
+<tr class="row-even"><td>16:5</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td rowspan="6">4:2</td>
+<td rowspan="6">RSSEL</td>
+<td rowspan="6">R/W</td>
+<td rowspan="6">3'H0</td>
+<td rowspan="6"><p class="first">adc resolution/over-sample rate select</p>
+<p>3'b000    12bit 2MS/s, OSR=1</p>
+<p>3'b001    14bit 125kS/s, OSR=16</p>
+<p>3'b010    14bit 31.25kS/s, OSR=64</p>
+<p>3'b011    16bit 15.625KS/s, OSR=128 (voice mode16KS/s)</p>
+<p class="last">3'b100    16bit 7.8125KS/s, OSR=256 (voice mode 8KS/s)</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="2">1</td>
+<td rowspan="2">CTCV</td>
+<td rowspan="2">R/W</td>
+<td rowspan="2">1'B1</td>
+<td rowspan="2"><p class="first">To enable continuous conversion</p>
+<p class="last">1'h0: one shot conversion  1'h1: continuous conversion</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td>0</td>
+<td>OCEN</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>offset calibration enable</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gpadc-reg-config2">
+<h3>4.4.5. gpadc_reg_config2<a class="headerlink" href="#gpadc-reg-config2" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000f914</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td>TDCR</td>
+<td colspan="3">DLYSEL</td>
+<td colspan="3">PGA1GAIN</td>
+<td colspan="3">PGA2GAIN</td>
+<td colspan="3">TESTSEL</td>
+<td>ATEN</td>
+<td>BSEL</td>
+<td>CHOPMODE</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td>CHOPMODE</td>
+<td>PCEN</td>
+<td>PEN</td>
+<td colspan="4">POCAL</td>
+<td colspan="2">PVCM</td>
+<td>TSEN</td>
+<td>DDM</td>
+<td>VBEN</td>
+<td>VRFS</td>
+<td>DIFM</td>
+<td colspan="2">RSVD</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="9%" />
+<col width="7%" />
+<col width="12%" />
+<col width="62%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31</td>
+<td>TDCR</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>tsen diode current</td>
+</tr>
+<tr class="row-odd"><td>30:28</td>
+<td>DLYSEL</td>
+<td>R/W</td>
+<td>3'H0</td>
+<td>adc conversion speed</td>
+</tr>
+<tr class="row-even"><td rowspan="8">27:25</td>
+<td rowspan="8">PGA1GAIN</td>
+<td rowspan="8">R/W</td>
+<td rowspan="8">3'H0</td>
+<td rowspan="8"><p class="first">3'h0: disable</p>
+<p>3'h1: gain=1</p>
+<p>3'h2: gain=2</p>
+<p>3'h3: gain=4</p>
+<p>3'h4: gain=8</p>
+<p>3'h5: gain=16</p>
+<p>3'h6: gain=32</p>
+<p class="last">3'h7: gain=32</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="8">24:22</td>
+<td rowspan="8">PGA2GAIN</td>
+<td rowspan="8">R/W</td>
+<td rowspan="8">3'H0</td>
+<td rowspan="8"><p class="first">3'h0: disable</p>
+<p>3'h1: gain=1</p>
+<p>3'h2: gain=2</p>
+<p>3'h3: gain=4</p>
+<p>3'h4: gain=8</p>
+<p>3'h5: gain=16</p>
+<p>3'h6: gain=32</p>
+<p class="last">3'h7: gain=32</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td>21:19</td>
+<td>TESTSEL</td>
+<td>R/W</td>
+<td>3'H0</td>
+<td>select test point 0~7</td>
+</tr>
+<tr class="row-odd"><td>18</td>
+<td>ATEN</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>Analog test enable.</td>
+</tr>
+<tr class="row-even"><td rowspan="3">17</td>
+<td rowspan="3">BSEL</td>
+<td rowspan="3">R/W</td>
+<td rowspan="3">1'B0</td>
+<td rowspan="3"><p class="first">adc analog portion low power mode select</p>
+<p>1'h0: Full biasing current</p>
+<p class="last">1'h1: Half biasing current</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="4">16:15</td>
+<td rowspan="4">CHOPMODE</td>
+<td rowspan="4">R/W</td>
+<td rowspan="4">2'H3</td>
+<td rowspan="4"><p class="first">2'b11    all  off</p>
+<p>2'b11    Vref AZ on</p>
+<p>2'b11    Vref AZ and PGA chop on</p>
+<p class="last">2'b11    Vref AZ and PGA chop+RPC on</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td>14</td>
+<td>PCEN</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>enable pga input vcm bias</td>
+</tr>
+<tr class="row-even"><td>13</td>
+<td>PEN</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>1'h0: disable PGA 1'h1 enable PGA</td>
+</tr>
+<tr class="row-odd"><td>12:9</td>
+<td>POCAL</td>
+<td>R/W</td>
+<td>4'H8</td>
+<td>pga offset calibration</td>
+</tr>
+<tr class="row-even"><td rowspan="5">8:7</td>
+<td rowspan="5">PVCM</td>
+<td rowspan="5">R/W</td>
+<td rowspan="5">2'H2</td>
+<td rowspan="5"><p class="first">Audio PGA output common mode control</p>
+<p>2'b00: cm=1V</p>
+<p>2'b11: cm=1.2V</p>
+<p>2'b11: cm=1.4V</p>
+<p class="last">2'b11: cm=1.6V</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td>6</td>
+<td>TSEN</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>1'h0: disable temperature sensor 1'h1: enable temperature sensor</td>
+</tr>
+<tr class="row-even"><td>5</td>
+<td>DDM</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>1'h0: internal diode mode  1'h1: external diode mode</td>
+</tr>
+<tr class="row-odd"><td>4</td>
+<td>VBEN</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>1'h0: disable VBAT sensor 1'h1 enable VBAT sensor</td>
+</tr>
+<tr class="row-even"><td rowspan="3">3</td>
+<td rowspan="3">VRFS</td>
+<td rowspan="3">R/W</td>
+<td rowspan="3">1'B0</td>
+<td rowspan="3"><p class="first">ADC reference select</p>
+<p>1'h0 3.3V</p>
+<p class="last">1'h1 1.8V</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td>2</td>
+<td>DIFM</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>1'h0 single-ended 1'h1 differential</td>
+</tr>
+<tr class="row-even"><td>1:0</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gpadc-reg-scn-pos1">
+<h3>4.4.6. gpadc_reg_scn_pos1<a class="headerlink" href="#gpadc-reg-scn-pos1" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000f918</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="2">RSVD</td>
+<td colspan="5">SCANP5</td>
+<td colspan="5">SCANP4</td>
+<td colspan="4">SCAN3</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td>SCAN3</td>
+<td colspan="5">SCANP2</td>
+<td colspan="5">SCANP1</td>
+<td colspan="5">SCANP0</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="11%" />
+<col width="9%" />
+<col width="14%" />
+<col width="55%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:30</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>29:25</td>
+<td>SCANP5</td>
+<td>R/W</td>
+<td>5'HF</td>
+<td>definition is the same as adc_reg_cmd.adc_pos_sel</td>
+</tr>
+<tr class="row-even"><td>24:20</td>
+<td>SCANP4</td>
+<td>R/W</td>
+<td>5'HF</td>
+<td>definition is the same as adc_reg_cmd.adc_pos_sel</td>
+</tr>
+<tr class="row-odd"><td>19:15</td>
+<td>SCAN3</td>
+<td>R/W</td>
+<td>5'HF</td>
+<td>definition is the same as adc_reg_cmd.adc_pos_sel</td>
+</tr>
+<tr class="row-even"><td>14:10</td>
+<td>SCANP2</td>
+<td>R/W</td>
+<td>5'HF</td>
+<td>definition is the same as adc_reg_cmd.adc_pos_sel</td>
+</tr>
+<tr class="row-odd"><td>9:5</td>
+<td>SCANP1</td>
+<td>R/W</td>
+<td>5'HF</td>
+<td>definition is the same as adc_reg_cmd.adc_pos_sel</td>
+</tr>
+<tr class="row-even"><td>4:0</td>
+<td>SCANP0</td>
+<td>R/W</td>
+<td>5'HF</td>
+<td>definition is the same as adc_reg_cmd.adc_pos_sel</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gpadc-reg-scn-pos2">
+<h3>4.4.7. gpadc_reg_scn_pos2<a class="headerlink" href="#gpadc-reg-scn-pos2" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000f91c</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="2">RSVD</td>
+<td colspan="5">SCANP11</td>
+<td colspan="5">SCANP10</td>
+<td colspan="4">SCAN9</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td>SCAN9</td>
+<td colspan="5">SCANP8</td>
+<td colspan="5">SCANP7</td>
+<td colspan="5">SCANP6</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="11%" />
+<col width="9%" />
+<col width="14%" />
+<col width="55%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:30</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>29:25</td>
+<td>SCANP11</td>
+<td>R/W</td>
+<td>5'HF</td>
+<td>definition is the same as adc_reg_cmd.adc_pos_sel</td>
+</tr>
+<tr class="row-even"><td>24:20</td>
+<td>SCANP10</td>
+<td>R/W</td>
+<td>5'HF</td>
+<td>definition is the same as adc_reg_cmd.adc_pos_sel</td>
+</tr>
+<tr class="row-odd"><td>19:15</td>
+<td>SCAN9</td>
+<td>R/W</td>
+<td>5'HF</td>
+<td>definition is the same as adc_reg_cmd.adc_pos_sel</td>
+</tr>
+<tr class="row-even"><td>14:10</td>
+<td>SCANP8</td>
+<td>R/W</td>
+<td>5'HF</td>
+<td>definition is the same as adc_reg_cmd.adc_pos_sel</td>
+</tr>
+<tr class="row-odd"><td>9:5</td>
+<td>SCANP7</td>
+<td>R/W</td>
+<td>5'HF</td>
+<td>definition is the same as adc_reg_cmd.adc_pos_sel</td>
+</tr>
+<tr class="row-even"><td>4:0</td>
+<td>SCANP6</td>
+<td>R/W</td>
+<td>5'HF</td>
+<td>definition is the same as adc_reg_cmd.adc_pos_sel</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gpadc-reg-scn-neg1">
+<h3>4.4.8. gpadc_reg_scn_neg1<a class="headerlink" href="#gpadc-reg-scn-neg1" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000f920</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="2">RSVD</td>
+<td colspan="5">SCANN5</td>
+<td colspan="5">SCANN4</td>
+<td colspan="4">SCAN3</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td>SCAN3</td>
+<td colspan="5">SCANN2</td>
+<td colspan="5">SCANN1</td>
+<td colspan="5">SCANN0</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="11%" />
+<col width="9%" />
+<col width="14%" />
+<col width="55%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:30</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>29:25</td>
+<td>SCANN5</td>
+<td>R/W</td>
+<td>5'HF</td>
+<td>definition is the same as adc_reg_cmd.adc_neg_sel</td>
+</tr>
+<tr class="row-even"><td>24:20</td>
+<td>SCANN4</td>
+<td>R/W</td>
+<td>5'HF</td>
+<td>definition is the same as adc_reg_cmd.adc_neg_sel</td>
+</tr>
+<tr class="row-odd"><td>19:15</td>
+<td>SCAN3</td>
+<td>R/W</td>
+<td>5'HF</td>
+<td>definition is the same as adc_reg_cmd.adc_neg_sel</td>
+</tr>
+<tr class="row-even"><td>14:10</td>
+<td>SCANN2</td>
+<td>R/W</td>
+<td>5'HF</td>
+<td>definition is the same as adc_reg_cmd.adc_neg_sel</td>
+</tr>
+<tr class="row-odd"><td>9:5</td>
+<td>SCANN1</td>
+<td>R/W</td>
+<td>5'HF</td>
+<td>definition is the same as adc_reg_cmd.adc_neg_sel</td>
+</tr>
+<tr class="row-even"><td>4:0</td>
+<td>SCANN0</td>
+<td>R/W</td>
+<td>5'HF</td>
+<td>definition is the same as adc_reg_cmd.adc_neg_sel</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gpadc-reg-scn-neg2">
+<h3>4.4.9. gpadc_reg_scn_neg2<a class="headerlink" href="#gpadc-reg-scn-neg2" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000f924</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="2">RSVD</td>
+<td colspan="5">SCANN11</td>
+<td colspan="5">SCANN10</td>
+<td colspan="4">SCAN9</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td>SCAN9</td>
+<td colspan="5">SCANN8</td>
+<td colspan="5">SCANN7</td>
+<td colspan="5">SCANN6</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="11%" />
+<col width="9%" />
+<col width="14%" />
+<col width="55%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:30</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>29:25</td>
+<td>SCANN11</td>
+<td>R/W</td>
+<td>5'HF</td>
+<td>definition is the same as adc_reg_cmd.adc_neg_sel</td>
+</tr>
+<tr class="row-even"><td>24:20</td>
+<td>SCANN10</td>
+<td>R/W</td>
+<td>5'HF</td>
+<td>definition is the same as adc_reg_cmd.adc_neg_sel</td>
+</tr>
+<tr class="row-odd"><td>19:15</td>
+<td>SCAN9</td>
+<td>R/W</td>
+<td>5'HF</td>
+<td>definition is the same as adc_reg_cmd.adc_neg_sel</td>
+</tr>
+<tr class="row-even"><td>14:10</td>
+<td>SCANN8</td>
+<td>R/W</td>
+<td>5'HF</td>
+<td>definition is the same as adc_reg_cmd.adc_neg_sel</td>
+</tr>
+<tr class="row-odd"><td>9:5</td>
+<td>SCANN7</td>
+<td>R/W</td>
+<td>5'HF</td>
+<td>definition is the same as adc_reg_cmd.adc_neg_sel</td>
+</tr>
+<tr class="row-even"><td>4:0</td>
+<td>SCANN6</td>
+<td>R/W</td>
+<td>5'HF</td>
+<td>definition is the same as adc_reg_cmd.adc_neg_sel</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gpadc-reg-status">
+<h3>4.4.10. gpadc_reg_status<a class="headerlink" href="#gpadc-reg-status" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000f928</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="15">RSVD</td>
+<td>DRDY</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="14%" />
+<col width="11%" />
+<col width="18%" />
+<col width="45%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:1</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>0</td>
+<td>DRDY</td>
+<td>R</td>
+<td>1'B0</td>
+<td>ADC final conversion data ready</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gpadc-reg-isr">
+<h3>4.4.11. gpadc_reg_isr<a class="headerlink" href="#gpadc-reg-isr" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000f92c</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="6">RSVD</td>
+<td>PSM</td>
+<td>NSM</td>
+<td colspan="2">RSVD</td>
+<td>PSC</td>
+<td>NSC</td>
+<td colspan="2">RSVD</td>
+<td>PS</td>
+<td>NS</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="11%" />
+<col width="9%" />
+<col width="14%" />
+<col width="55%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:10</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>9</td>
+<td>PSM</td>
+<td>R/W</td>
+<td>1'H0</td>
+<td>write 1 mask</td>
+</tr>
+<tr class="row-even"><td>8</td>
+<td>NSM</td>
+<td>R/W</td>
+<td>1'H0</td>
+<td>write 1 mask</td>
+</tr>
+<tr class="row-odd"><td>7:6</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>5</td>
+<td>PSC</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>Write 1 to clear flag</td>
+</tr>
+<tr class="row-odd"><td>4</td>
+<td>NSC</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>Write 1 to clear flag</td>
+</tr>
+<tr class="row-even"><td>3:2</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>PS</td>
+<td>R</td>
+<td>1'B0</td>
+<td>ADC data positive side saturation interrupt flag</td>
+</tr>
+<tr class="row-even"><td>0</td>
+<td>NS</td>
+<td>R</td>
+<td>1'B0</td>
+<td>ADC data negative side saturation interrupt flag</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gpadc-reg-result">
+<h3>4.4.12. gpadc_reg_result<a class="headerlink" href="#gpadc-reg-result" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000f930</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="6">RSVD</td>
+<td colspan="10">DATAOUT</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">DATAOUT</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="8%" />
+<col width="7%" />
+<col width="11%" />
+<col width="67%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:26</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>25:0</td>
+<td>DATAOUT</td>
+<td>R</td>
+<td>26'H1EF0000</td>
+<td>ADC finial conversion result data, after calibration and signed/unsigned process</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gpadc-reg-raw-result">
+<h3>4.4.13. gpadc_reg_raw_result<a class="headerlink" href="#gpadc-reg-raw-result" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000f934</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="4">RSVD</td>
+<td colspan="12">RAWDATA</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="18%" />
+<col width="15%" />
+<col width="24%" />
+<col width="25%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:12</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>11:0</td>
+<td>RAWDATA</td>
+<td>R</td>
+<td>12'H0</td>
+<td>ADC Raw data</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gpadc-reg-define">
+<h3>4.4.14. gpadc_reg_define<a class="headerlink" href="#gpadc-reg-define" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000f938</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">OSCDATA</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="10%" />
+<col width="8%" />
+<col width="13%" />
+<col width="59%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:16</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>15:0</td>
+<td>OSCDATA</td>
+<td>R/W</td>
+<td>16'H0</td>
+<td>User defined or self calculated offset data 16-bit signed</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../DAC/DAC.html" class="btn btn-neutral float-right" title="5. DAC" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../Glb/Glb.html" class="btn btn-neutral float-left" title="3. GLB" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

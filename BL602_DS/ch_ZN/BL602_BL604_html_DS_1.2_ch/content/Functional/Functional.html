@@ -1,0 +1,493 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>2. 功能描述 &mdash; BL602/604 数据手册  文档</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="搜索" href="../../search.html" />
+    <link rel="next" title="3. 管脚定义QFN32" href="../PindefinitionQFN32/PindefinitionQFN32.html" />
+    <link rel="prev" title="1. 概述" href="../overview/overview.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> BL602/604 数据手册
+          
+
+          
+            
+            <img src="../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview/overview.html">1. 概述</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2. 功能描述</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#cpu">2.1. CPU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">2.2. 缓存</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">2.3. 内存</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dma">2.4. DMA控制器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">2.5. 总线结构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">2.6. 中断</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">2.7. 启动选项</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">2.8. 电源管理单元</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">2.9. 时钟架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">2.10. 外设</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../PindefinitionQFN32/PindefinitionQFN32.html">3. 管脚定义QFN32</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PindefinitionQFN40/PindefinitionQFN40.html">4. 管脚定义QFN40</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Electricalcharacteristics/Electricalcharacteristics.html">5. 电气特性</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Referencedesign/Referencedesign.html">6. 参考设计</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PackagingQFN32/PackagingQFN32.html">7. 封装信息QFN32</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PackagingQFN40/PackagingQFN40.html">8. 封装信息QFN40</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TopMarkingDefinition/TopMarkingDefinition.html">9. 标志定义</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OrderingInformation/OrderingInformation.html">10. 订购信息</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../version/version.html">11. 版本信息</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">BL602/604 数据手册</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>2. 功能描述</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>2. 功能描述<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<p>BL602/BL604主要功能描述如下:</p>
+<div class="figure align-center" id="id10">
+<img alt="../../_images/SystemArchitecture.png" src="../../_images/SystemArchitecture.png" />
+<p class="caption"><span class="caption-text">系统框图</span></p>
+</div>
+<div class="section" id="cpu">
+<h2>2.1. CPU<a class="headerlink" href="#cpu" title="永久链接至标题">¶</a></h2>
+<p>BL602/BL604 32-bit RISC CPU包含用于32位单精度算术的FPU（浮点单元），
+三级流水线（IF，EXE，WB），压缩的16位和32位指令集，包含4个硬件可编程断点
+的标准JTAG调试器端口，包含64个中断和16个中断级别/优先级的中断控制器，
+用于低延迟中断处理。 时钟频率高达192MHz，可以动态配置用来更改时钟频率，
+进入省电模式以实现低功耗。</p>
+<p>WiFi/BLE堆栈和应用程序均在单个32-bit RISC CPU上运行，
+用来实现简单和超低功耗的应用程序。CPU性能约1.46 DMIPS / MHz；3.1 CoreMark / MHz。</p>
+</div>
+<div class="section" id="id2">
+<h2>2.2. 缓存<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<p>BL602/BL604的缓存提高了CPU访问外部存储器的效能。
+高速缓存可以部分或全部配置为TCM（紧密耦合内存）。</p>
+</div>
+<div class="section" id="id3">
+<h2>2.3. 内存<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<p>BL602/BL604存储器包括：片上零延迟SRAM存储器，只读存储器，一次写入存储器，
+嵌入式闪存（可选）。</p>
+</div>
+<div class="section" id="dma">
+<h2>2.4. DMA控制器<a class="headerlink" href="#dma" title="永久链接至标题">¶</a></h2>
+<p>BL602/BL604 DMA（直接存储器访问）控制器具有四个专用通道，
+用于管理外设和存储器之间的数据传输，以提高CPU /总线效率。
+DMA有三种主要的传输类型，内存到内存，内存到外设以及外设到内存三种模式。
+DMA还支持LLI（链接列表项）功能，该链表由一系列链接列表预定义了多个传输，
+然后硬件会根据每个LLI的大小和地址自动完成所有传输。</p>
+<p>DMA支持的外设包括UART，I2C，SPI，ADC和DAC。</p>
+</div>
+<div class="section" id="id4">
+<h2>2.5. 总线结构<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<p>BL602/BL604总线连接与地址访问总结如下：</p>
+<table border="1" class="docutils" id="id11">
+<caption><span class="caption-text">总线连接</span><a class="headerlink" href="#id11" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="15%" />
+<col width="22%" />
+<col width="13%" />
+<col width="15%" />
+<col width="19%" />
+<col width="17%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>从/主</td>
+<td>CPU</td>
+<td>SDIO</td>
+<td>DMA</td>
+<td>加密引擎</td>
+<td>调试接口</td>
+</tr>
+<tr class="row-even"><td>内存</td>
+<td>V</td>
+<td>V</td>
+<td>V</td>
+<td>V</td>
+<td>V</td>
+</tr>
+<tr class="row-odd"><td>外设</td>
+<td>V</td>
+<td>V</td>
+<td>V</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>V</td>
+</tr>
+<tr class="row-even"><td>WiFi/BLE</td>
+<td>V</td>
+<td>V</td>
+<td>V</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>V</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils" id="id12">
+<caption><span class="caption-text">地址映像</span><a class="headerlink" href="#id12" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="6%" />
+<col width="16%" />
+<col width="5%" />
+<col width="74%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>目标</td>
+<td>开始地址</td>
+<td>大小</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>WRAM</td>
+<td>0x42030000</td>
+<td>112KB</td>
+<td>无线SRAM存储器</td>
+</tr>
+<tr class="row-odd"><td>RETRAM</td>
+<td>0x40010000</td>
+<td>4KB</td>
+<td>深度睡眠内存（保留RAM）</td>
+</tr>
+<tr class="row-even"><td>HBN</td>
+<td>0x4000F000</td>
+<td>4KB</td>
+<td>深度睡眠控制（休眠）</td>
+</tr>
+<tr class="row-odd"><td>PDS</td>
+<td>0x4000E000</td>
+<td>4KB</td>
+<td>睡眠控制（掉电睡眠）</td>
+</tr>
+<tr class="row-even"><td>SDU</td>
+<td>0x4000D000</td>
+<td>4KB</td>
+<td>SDIO控制</td>
+</tr>
+<tr class="row-odd"><td>DMA</td>
+<td>0x4000C000</td>
+<td>4KB</td>
+<td>DMA控制</td>
+</tr>
+<tr class="row-even"><td>QSPI</td>
+<td>0x4000B000</td>
+<td>4KB</td>
+<td>Flash闪存控制</td>
+</tr>
+<tr class="row-odd"><td>IRR</td>
+<td>0x4000A600</td>
+<td>256B</td>
+<td>红外遥控器</td>
+</tr>
+<tr class="row-even"><td>TIMER</td>
+<td>0x4000A500</td>
+<td>256B</td>
+<td>计时器控制</td>
+</tr>
+<tr class="row-odd"><td>PWM</td>
+<td>0x4000A400</td>
+<td>256B</td>
+<td>脉冲宽度调制控制</td>
+</tr>
+<tr class="row-even"><td>I2C</td>
+<td>0x4000A300</td>
+<td>256B</td>
+<td>I2C控制</td>
+</tr>
+<tr class="row-odd"><td>SPI</td>
+<td>0x4000A200</td>
+<td>256B</td>
+<td>SPI主/从控制</td>
+</tr>
+<tr class="row-even"><td>UART1</td>
+<td>0x4000A100</td>
+<td>256B</td>
+<td>UART控制</td>
+</tr>
+<tr class="row-odd"><td>UART0</td>
+<td>0x4000A000</td>
+<td>256B</td>
+<td>UART控制</td>
+</tr>
+<tr class="row-even"><td>L1C</td>
+<td>0x40009000</td>
+<td>4KB</td>
+<td>缓存控制</td>
+</tr>
+<tr class="row-odd"><td>eFuse</td>
+<td>0x40007000</td>
+<td>4KB</td>
+<td>eFuse存储器控制</td>
+</tr>
+<tr class="row-even"><td>TZ2</td>
+<td>0x40006000</td>
+<td>4KB</td>
+<td>信任区隔离</td>
+</tr>
+<tr class="row-odd"><td>TZ1</td>
+<td>0x40005000</td>
+<td>4KB</td>
+<td>信任区隔离</td>
+</tr>
+<tr class="row-even"><td>SEC</td>
+<td>0x40004000</td>
+<td>4KB</td>
+<td>安全引擎</td>
+</tr>
+<tr class="row-odd"><td>GPIP</td>
+<td>0x40002000</td>
+<td>4KB</td>
+<td>通用DAC / ADC / ACOMP接口控制</td>
+</tr>
+<tr class="row-even"><td>MIX</td>
+<td>0x40001000</td>
+<td>4KB</td>
+<td>混合信号寄存器</td>
+</tr>
+<tr class="row-odd"><td>GLB</td>
+<td>0x40000000</td>
+<td>4KB</td>
+<td>全局寄存器</td>
+</tr>
+<tr class="row-even"><td>RAM</td>
+<td>0x22020000/0x42020000</td>
+<td>64KB</td>
+<td>片上存储器,如果用作数据存储器，则使用0x42020000地址访问；如果用作程序存储器，则使用0x22020000地址访问</td>
+</tr>
+<tr class="row-odd"><td>XIP</td>
+<td>0x23000000</td>
+<td>16MB</td>
+<td>XIP闪存</td>
+</tr>
+<tr class="row-even"><td>TCM1</td>
+<td>0x22014000/0x42014000</td>
+<td>48KB</td>
+<td>紧耦合内存，如果用作数据存储器，则使用0x42014000地址访问；如果用作程序存储器，则使用0x22014000地址访问</td>
+</tr>
+<tr class="row-odd"><td>TCM0</td>
+<td>0x22008000/0x42008000</td>
+<td>48KB</td>
+<td>紧耦合内存，如果用作数据存储器，则使用0x42008000地址访问；如果用作程序存储器，则使用0x22008000地址访问</td>
+</tr>
+<tr class="row-even"><td>ROM</td>
+<td>0x21000000</td>
+<td>128KB</td>
+<td>只读存储器</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id5">
+<h2>2.6. 中断<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<p>BL602/BL604支持内部RTC时钟唤醒、外部中断唤醒，以达到低功耗睡眠唤醒机制。</p>
+<p>CPU中断控制器支持堆栈或嵌套、可选电平或脉冲、高或低电平有效。</p>
+</div>
+<div class="section" id="id6">
+<h2>2.7. 启动选项<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
+<p>BL602/BL604支持多种启动，可选择从UART、SDIO、Flash闪存启动。</p>
+</div>
+<div class="section" id="id7">
+<h2>2.8. 电源管理单元<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h2>
+<p>电源管理单元（PMU）管理整个芯片的电源，可分为运行、空闲、睡眠和休眠电源模式。
+软件配置成进入睡眠模式时，可以通过RTC定时器或EINT来唤醒，以达到低功耗电源管理。</p>
+<p>掉电睡眠模式非常灵活，可以使应用配置为最低功耗。</p>
+</div>
+<div class="section" id="id8">
+<h2>2.9. 时钟架构<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h2>
+<p>时钟控制单元为核心MCU和外围SOC设备生成时钟。 时钟源可以是XTAL，PLL或RC振荡器。
+通过适当的配置（例如sel，div，en等）来动态节省功耗。PMU以32kHz时钟运行，
+使系统在睡眠模式下保持低功耗。</p>
+<div class="figure align-center" id="id13">
+<img alt="../../_images/clocktree.png" src="../../_images/clocktree.png" />
+<p class="caption"><span class="caption-text">时钟框图</span></p>
+</div>
+</div>
+<div class="section" id="id9">
+<h2>2.10. 外设<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h2>
+<p>外设包括SDIO，SPI，UART，I2C，IR remote，PWM，ADC，DAC，PIR。
+可以通过灵活的配置将每个外设分配给不同的GPIO组。
+每个GPIO都可用作通用输入和输出功能。</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../PindefinitionQFN32/PindefinitionQFN32.html" class="btn btn-neutral float-right" title="3. 管脚定义QFN32" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../overview/overview.html" class="btn btn-neutral float-left" title="1. 概述" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

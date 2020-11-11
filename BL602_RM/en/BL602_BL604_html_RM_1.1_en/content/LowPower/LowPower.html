@@ -1,0 +1,2237 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>14. LowPower &mdash; BL602/604 Reference Manual  文档</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="搜索" href="../../search.html" />
+    <link rel="next" title="15. Revision history" href="../version/version.html" />
+    <link rel="prev" title="13. TIMER" href="../Timer/Timer.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> BL602/604 Reference Manual
+          
+
+          
+            
+            <img src="../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../SystemAndMemoryOverview/SystemAndMemoryOverview.html">1. System and memory overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ResetAndClock/ResetAndClock.html">2. Reset and clock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Glb/Glb.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Adc/Adc.html">4. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DAC/DAC.html">5. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Dma/Dma.html">6. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L1c/L1c.html">7. L1C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../IR/IR.html">8. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Spi/Spi.html">9. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Uart/Uart.html">10. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../I2c/I2c.html">11. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Pwm/Pwm.html">12. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Timer/Timer.html">13. TIMER</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">14. LowPower</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">14.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#main-features">14.2. Main features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#function-description">14.3. Function description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#power-domain">14.3.1. Power domain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wakeup-source">14.3.2. Wakeup source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#power-mode">14.3.3. Power mode</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pds-register-description">14.4. PDS Register description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pds-ctl">14.4.1. PDS_CTL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pds-ctl4">14.4.2. PDS_CTL4</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pds-stat">14.4.3. pds_stat</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#hbn-register-description">14.5. HBN Register description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#hbn-ctl">14.5.1. HBN_CTL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hbn-time-l">14.5.2. HBN_TIME_L</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hbn-time-h">14.5.3. HBN_TIME_H</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtc-time-l">14.5.4. RTC_TIME_L</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtc-time-h">14.5.5. RTC_TIME_H</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hbn-irq-mode">14.5.6. HBN_IRQ_MODE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hbn-irq-stat">14.5.7. HBN_IRQ_STAT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hbn-irq-clr">14.5.8. HBN_IRQ_CLR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hbn-pir-cfg">14.5.9. HBN_PIR_CFG</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hbn-pir-vth">14.5.10. HBN_PIR_VTH</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hbn-glb">14.5.11. HBN_GLB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hbn-sram">14.5.12. HBN_SRAM</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../version/version.html">15. Revision history</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">BL602/604 Reference Manual</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>14. LowPower</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="lowpower">
+<h1>14. LowPower<a class="headerlink" href="#lowpower" title="永久链接至标题">¶</a></h1>
+<div class="section" id="introduction">
+<h2>14.1. Introduction<a class="headerlink" href="#introduction" title="永久链接至标题">¶</a></h2>
+<p>Low power consumption is an important indicator for IoT applications. The chip's processor contains three power consumption modes, including working mode, idle power saving mode and sleep mode. You can select the appropriate power consumption mode according to the current application scenario, reduce chip power consumption and extend battery life.</p>
+<div class="figure align-center" id="id1">
+<img alt="../../_images/pwr_st.png" src="../../_images/pwr_st.png" />
+<p class="caption"><span class="caption-text">Low power mode</span></p>
+</div>
+</div>
+<div class="section" id="main-features">
+<h2>14.2. Main features<a class="headerlink" href="#main-features" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li>Clock control: GLB clock control for each peripheral device, small range of power saving, fast response speed</li>
+<li>Sleep control(PDS): Contains 4 levels of PDS1/2/3/7,wide range of power saving, medium response speed</li>
+<li>Deep Sleep Control(HBN): Contains 4 levels of HBN0/1/2/3,global power saving, long response time</li>
+</ul>
+</div>
+<div class="section" id="function-description">
+<h2>14.3. Function description<a class="headerlink" href="#function-description" title="永久链接至标题">¶</a></h2>
+<div class="section" id="power-domain">
+<h3>14.3.1. Power domain<a class="headerlink" href="#power-domain" title="永久链接至标题">¶</a></h3>
+<p>There are 7 power domains in BL602. The main functions of each power domain are as follows:</p>
+<ul>
+<li><p class="first">PD_AON_HBNCORE</p>
+<blockquote>
+<div><ul class="simple">
+<li>Some power control registers</li>
+<li>4KB HBN_RAM, used to save program data before entering PDS / HBN mode, the data will not disappear after entering PDS / HBN</li>
+<li>PIR digital control, PIR is a pyroelectric infrared sensor, a peripheral in the HBN area, can be used as a HBN wakeup source</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">PD_AON_HBNRTC</p>
+<blockquote>
+<div><ul class="simple">
+<li>Reserve RC32K / XTAL32K control register</li>
+<li>RTC can be used to wake up, can also be used for LED flashing</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">PD_AON</p>
+<blockquote>
+<div><ul class="simple">
+<li>HBN state machine control power / isolation / reset / clock</li>
+<li>Maintain internal voltage output selection</li>
+<li>Pin wake-up control</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">PD_CORE</p>
+<blockquote>
+<div><ul class="simple">
+<li>HBN state machine control power / isolation / reset / clock</li>
+<li>64KB reserved RAM</li>
+<li>WIFI / BLE timer control</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">PD_CORE_MISC_DIG</p>
+<blockquote>
+<div><ul class="simple">
+<li>Peripherals</li>
+<li>Chip global register</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">PD_CPU</p>
+<blockquote>
+<div><ul class="simple">
+<li>CPU / Cache Controller</li>
+<li>ROM / high-speed RAM</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">PD_WB</p>
+<blockquote>
+<div><ul class="simple">
+<li>WIFI PHY / MAC</li>
+<li>BLE PHY / MAC</li>
+<li>RF controller</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<p>Each power domain is controlled by 8 different power modes, the specific control method is shown in the following table:</p>
+<table border="1" class="docutils" id="id2">
+<caption><span class="caption-text">Power mode</span><a class="headerlink" href="#id2" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="6%" />
+<col width="9%" />
+<col width="9%" />
+<col width="11%" />
+<col width="12%" />
+<col width="6%" />
+<col width="14%" />
+<col width="14%" />
+<col width="9%" />
+<col width="9%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td rowspan="2">NO.</td>
+<td rowspan="2">Scenario</td>
+<td colspan="8">Power Domain</td>
+</tr>
+<tr class="row-even"><td>PD_AON</td>
+<td>PD_AON_HBNRTC</td>
+<td>PD_AON_HBNCORE</td>
+<td>PD_CORE</td>
+<td>PD_CORE_MISC_DIG</td>
+<td>PD_CORE_MISC_ANA</td>
+<td>PD_CPU</td>
+<td>PD_WB</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Normal</td>
+<td>ON</td>
+<td>ON</td>
+<td>ON</td>
+<td>ON</td>
+<td>ON</td>
+<td>ON</td>
+<td>ON</td>
+<td>ON</td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>PDS1</td>
+<td>ON</td>
+<td>ON</td>
+<td>ON</td>
+<td>ON</td>
+<td>ON</td>
+<td>ON</td>
+<td>ON</td>
+<td>OFF</td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>PDS2</td>
+<td>ON</td>
+<td>ON</td>
+<td>ON</td>
+<td>ON</td>
+<td>ON</td>
+<td>ON</td>
+<td>OFF</td>
+<td>ON</td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>PDS3</td>
+<td>ON</td>
+<td>ON</td>
+<td>ON</td>
+<td>ON</td>
+<td>ON</td>
+<td>ON</td>
+<td>OFF</td>
+<td>OFF</td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>PDS7</td>
+<td>ON</td>
+<td>ON</td>
+<td>ON</td>
+<td>ON</td>
+<td>OFF</td>
+<td>OFF</td>
+<td>OFF</td>
+<td>OFF</td>
+</tr>
+<tr class="row-even"><td>6</td>
+<td>HBN0</td>
+<td>ON</td>
+<td>ON</td>
+<td>ON</td>
+<td>OFF</td>
+<td>OFF</td>
+<td>OFF</td>
+<td>OFF</td>
+<td>OFF</td>
+</tr>
+<tr class="row-odd"><td>7</td>
+<td>HBN1</td>
+<td>ON</td>
+<td>ON</td>
+<td>OFF</td>
+<td>OFF</td>
+<td>OFF</td>
+<td>OFF</td>
+<td>OFF</td>
+<td>OFF</td>
+</tr>
+<tr class="row-even"><td>8</td>
+<td>HBN2</td>
+<td>ON</td>
+<td>OFF</td>
+<td>OFF</td>
+<td>OFF</td>
+<td>OFF</td>
+<td>OFF</td>
+<td>OFF</td>
+<td>OFF</td>
+</tr>
+<tr class="row-odd"><td>9</td>
+<td>HBN3</td>
+<td>OFF</td>
+<td>OFF</td>
+<td>OFF</td>
+<td>OFF</td>
+<td>OFF</td>
+<td>OFF</td>
+<td>OFF</td>
+<td>OFF</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="wakeup-source">
+<h3>14.3.2. Wakeup source<a class="headerlink" href="#wakeup-source" title="永久链接至标题">¶</a></h3>
+<p>The chip supports multiple wake-up sources and can wake up from different power modes.</p>
+<p>PDS1/2/3 can be awakened by:</p>
+<ul class="simple">
+<li>HBN wakeup source</li>
+<li>Wake up from all GPIOs</li>
+<li>Infrared receiver</li>
+<li>BLE wakeup event</li>
+<li>WIFI wake-up event</li>
+<li>PDS timer</li>
+</ul>
+<p>The wake-up sources of the remaining power modes are shown in the following table:</p>
+<table border="1" class="docutils" id="id3">
+<caption><span class="caption-text">Wakeup source</span><a class="headerlink" href="#id3" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Power mode</td>
+<td>Wakeup source</td>
+</tr>
+<tr class="row-even"><td>PDS7</td>
+<td>Can only be awakened by the PDS timer</td>
+</tr>
+<tr class="row-odd"><td>HBN0</td>
+<td>HBN</td>
+</tr>
+<tr class="row-even"><td>HBN1</td>
+<td>RTC/AON_WAKEUP_PIN</td>
+</tr>
+<tr class="row-odd"><td>HBN2</td>
+<td>AON_WAKEUP_PIN</td>
+</tr>
+<tr class="row-even"><td>HBN3</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="power-mode">
+<h3>14.3.3. Power mode<a class="headerlink" href="#power-mode" title="永久链接至标题">¶</a></h3>
+<p><strong>Operating mode</strong></p>
+<p>The chip provides independent clock control for the processor and peripherals. The clock control for each module is introduced in the GLB and Clock chapters. The software can perform clock control for processors or peripherals that do not need to be used according to the current application scenario. The response of the clock control is real-time, in this working mode, there is no need to worry about the response time.</p>
+<p><strong>Power-down sleep mode (PDS)</strong></p>
+<p>Compared with the working mode, the power-down mode consumes less power. After entering the PDS mode, the clocks other than RTC (Real Time Clock) will be controlled and will be switched to the internal low-speed clock, and the external crystal and PLL will be turned off to achieve a more power-saving state. Therefore, entering and leaving this low-power mode will There is a time delay.</p>
+<ol class="arabic simple">
+<li>Enter idle power saving mode</li>
+</ol>
+<p>Software can put this module into power-down mode through PDS configuration and wait for processing. After entering the wait interrupt mode (WFI), the PDS module will trigger the clock control module to enter the gate clock operation and notify the analog circuit to turn off the PLL and external crystal oscillator.</p>
+<ol class="arabic simple" start="2">
+<li>Leave idle power saving mode</li>
+</ol>
+<p>There are two ways to leave the idle power saving mode. The first is that there is a specific interruption or event in the idle to interrupt the idle state. The second is that the software sets the idle time of PDS_TIM to be reached. Both will trigger the PDS module to enter or leave the power-down mode. Note: Because it takes about 1ms to turn on the crystal oscillator, PDS provides software to turn on the crystal oscillator in advance. This method can speed up the wake up of the PDS. When the PDS module is ready to wake up, the module will notify the processor to leave the wait interrupt mode (WFI) through an interrupt. ).</p>
+<p><strong>Sleep Mode (HBN)</strong></p>
+<p>In the sleep mode, while keeping AON (Always On) power, most of the chip logic is powered off (Vcore), and the internal circuit will not be woken up until an external event is received.</p>
+<p>In sleep mode, the ultimate power saving state can be achieved, but the response time required by the previous two modes is also the longest. It is suitable for the state that does not need to work for a long time.</p>
+<p>During the sleep period, most circuits will be powered off, and the corresponding register values ​​and memory data will also disappear. Therefore, 4KB HBN_RAM is reserved inside HBN. This memory will not be powered off when it is in sleep state. The software needs to save the data or state that can be copied to this memory before entering sleep. When restoring from hibernation, data can be directly accessed from RAM, and it can usually be used as a state record or a quick data recovery.</p>
+</div>
+</div>
+<div class="section" id="pds-register-description">
+<h2>14.4. PDS Register description<a class="headerlink" href="#pds-register-description" title="永久链接至标题">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="36%" />
+<col width="64%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Name</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pds-ctl">PDS_CTL</a></td>
+<td>PDS control register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#pds-ctl4">PDS_CTL4</a></td>
+<td>PDS control register4</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pds-stat">pds_stat</a></td>
+<td>PDS status register</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="pds-ctl">
+<h3>14.4.1. PDS_CTL<a class="headerlink" href="#pds-ctl" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000e000</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="15">RSVD</td>
+<td>PDSS</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pds-ctl4">
+<h3>14.4.2. PDS_CTL4<a class="headerlink" href="#pds-ctl4" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000e018</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="4">RSVD</td>
+<td>MGCLK</td>
+<td>MMSS</td>
+<td>MIRE</td>
+<td>MIPO</td>
+<td colspan="8">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td>WGCLK</td>
+<td>WMSS</td>
+<td>WRE</td>
+<td>WPO</td>
+<td colspan="8">RSVD</td>
+<td>NPGCLK</td>
+<td>NMSS</td>
+<td>NPRE</td>
+<td>NPPO</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="7%" />
+<col width="5%" />
+<col width="9%" />
+<col width="72%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:28</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td rowspan="2">27</td>
+<td rowspan="2">MGCLK</td>
+<td rowspan="2">R/W</td>
+<td rowspan="2">1</td>
+<td rowspan="2"><p class="first">1 : make core_misc clock gated at PDS Sleep state</p>
+<p class="last">0 : make core_misc clocking at PDS Sleep state</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="2">26</td>
+<td rowspan="2">MMSS</td>
+<td rowspan="2">R/W</td>
+<td rowspan="2">1</td>
+<td rowspan="2"><p class="first">1 : make core_misc RAM &#64;Retention at PDS Sleep state</p>
+<p class="last">0 : make core_misc RAM &#64; Normal at PDS Sleep state</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="2">25</td>
+<td rowspan="2">MIRE</td>
+<td rowspan="2">R/W</td>
+<td rowspan="2">1</td>
+<td rowspan="2"><p class="first">1 : make core_misc reset at PDS Sleep state</p>
+<p class="last">0 : make core_misc not reset at PDS Sleep state</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="2">24</td>
+<td rowspan="2">MIPO</td>
+<td rowspan="2">R/W</td>
+<td rowspan="2">1</td>
+<td rowspan="2"><p class="first">1 : make core_misc Power off at PDS Sleep state</p>
+<p class="last">0 : make core_misc power on at PDS Sleep state</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td>23:16</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td rowspan="2">15</td>
+<td rowspan="2">WGCLK</td>
+<td rowspan="2">R/W</td>
+<td rowspan="2">1</td>
+<td rowspan="2"><p class="first">1 : make WB clock gated at PDS Sleep state</p>
+<p class="last">0 : make WB clocking at PDS Sleep state</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="2">14</td>
+<td rowspan="2">WMSS</td>
+<td rowspan="2">R/W</td>
+<td rowspan="2">1</td>
+<td rowspan="2"><p class="first">1 : make WB RAM &#64;Retention at PDS Sleep state</p>
+<p class="last">0 : make WB RAM &#64; Normal at PDS Sleep state</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="2">13</td>
+<td rowspan="2">WRE</td>
+<td rowspan="2">R/W</td>
+<td rowspan="2">1</td>
+<td rowspan="2"><p class="first">1 : make WB reset at PDS Sleep state</p>
+<p class="last">0 : make WB not reset at PDS Sleep state</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="2">12</td>
+<td rowspan="2">WPO</td>
+<td rowspan="2">R/W</td>
+<td rowspan="2">1</td>
+<td rowspan="2"><p class="first">1 : make WB Power off at PDS Sleep state</p>
+<p class="last">0 : make WB power on at PDS Sleep state</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td>11:4</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td rowspan="2">3</td>
+<td rowspan="2">NPGCLK</td>
+<td rowspan="2">R/W</td>
+<td rowspan="2">1</td>
+<td rowspan="2"><p class="first">1 : make NP clock gated at PDS Sleep state</p>
+<p class="last">0 : make NP clocking at PDS Sleep state</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="2">2</td>
+<td rowspan="2">NMSS</td>
+<td rowspan="2">R/W</td>
+<td rowspan="2">1</td>
+<td rowspan="2"><p class="first">1 : make NP RAM &#64;Retention at PDS Sleep state</p>
+<p class="last">0 : make NP RAM &#64; Normal at PDS Sleep state</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="2">1</td>
+<td rowspan="2">NPRE</td>
+<td rowspan="2">R/W</td>
+<td rowspan="2">1</td>
+<td rowspan="2"><p class="first">1 : make NP reset at PDS Sleep state</p>
+<p class="last">0 : make NP not reset at PDS Sleep state</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="2">0</td>
+<td rowspan="2">NPPO</td>
+<td rowspan="2">R/W</td>
+<td rowspan="2">1</td>
+<td rowspan="2"><p class="first">1 : make NP Power off at PDS Sleep state</p>
+<p class="last">0 : make NP power on at PDS Sleep state</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pds-stat">
+<h3>14.4.3. pds_stat<a class="headerlink" href="#pds-stat" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000e01c</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="14">RSVD</td>
+<td colspan="2">PLLSTA</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="4">RSVD</td>
+<td colspan="4">RFSTA</td>
+<td colspan="8">RSVD</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="5%" />
+<col width="5%" />
+<col width="4%" />
+<col width="6%" />
+<col width="80%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:18</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td rowspan="4">17:16</td>
+<td rowspan="4">PLLSTA</td>
+<td rowspan="4">R</td>
+<td rowspan="4">2'B00</td>
+<td rowspan="4"><p class="first">ST_PDS_PLL_OFF      = 2'b00   ;</p>
+<p>ST_PDS_PLL_SFREG = 2'b01   ;</p>
+<p>ST_PDS_PLL_PU        = 2'b10   ;</p>
+<p class="last">ST_PDS_PLL_RDY      = 2'b11   ;</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td>15:12</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td rowspan="5">11:8</td>
+<td rowspan="5">RFSTA</td>
+<td rowspan="5">R</td>
+<td rowspan="5">4'B0</td>
+<td rowspan="5"><p class="first">ST_PDS_RF_OFF         = 4'b0000 ;</p>
+<p>ST_PDS_PU_MBG         = 4'b0001 ;</p>
+<p>ST_PDS_PU_LDO15RF = 4'b0011 ;</p>
+<p>ST_PDS_PU_SFREG     = 4'b0111 ;</p>
+<p class="last">ST_PDS_WB_EN_AON  = 4'b1111 ;</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td>7:0</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="hbn-register-description">
+<h2>14.5. HBN Register description<a class="headerlink" href="#hbn-register-description" title="永久链接至标题">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="41%" />
+<col width="59%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Name</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#hbn-ctl">HBN_CTL</a></td>
+<td>HBN control</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#hbn-time-l">HBN_TIME_L</a></td>
+<td>HBN time lower 32-bit</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#hbn-time-h">HBN_TIME_H</a></td>
+<td>HBN time higher 8-bit</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#rtc-time-l">RTC_TIME_L</a></td>
+<td>RTL timer lower 32-bit</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#rtc-time-h">RTC_TIME_H</a></td>
+<td>RTL timer higher 8-bit</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#hbn-irq-mode">HBN_IRQ_MODE</a></td>
+<td>HBN interrupt Control</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#hbn-irq-stat">HBN_IRQ_STAT</a></td>
+<td>HBN interrupt Status</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#hbn-irq-clr">HBN_IRQ_CLR</a></td>
+<td>HBN interrupt Clear</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#hbn-pir-cfg">HBN_PIR_CFG</a></td>
+<td>PIR control</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#hbn-pir-vth">HBN_PIR_VTH</a></td>
+<td>PIR threshold</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#hbn-glb">HBN_GLB</a></td>
+<td>HBN clock control</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#hbn-sram">HBN_SRAM</a></td>
+<td>HBN sram control</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="hbn-ctl">
+<h3>14.5.1. HBN_CTL<a class="headerlink" href="#hbn-ctl" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000f000</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="3">RSVD</td>
+<td>SWRST</td>
+<td colspan="4">RSVD</td>
+<td>MODE</td>
+<td colspan="7">RTCCTL</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="4%" />
+<col width="4%" />
+<col width="3%" />
+<col width="5%" />
+<col width="83%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:13</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>12</td>
+<td>SWRST</td>
+<td>R/W</td>
+<td>0</td>
+<td>soft reset</td>
+</tr>
+<tr class="row-even"><td>11:8</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>7</td>
+<td>MODE</td>
+<td>W</td>
+<td>0</td>
+<td>Enter hibernate</td>
+</tr>
+<tr class="row-even"><td rowspan="5">6:0</td>
+<td rowspan="5">RTCCTL</td>
+<td rowspan="5">R/W</td>
+<td rowspan="5">7'H0</td>
+<td rowspan="5"><p class="first">[6:4] Slow LED, x/0.25/0.5/1/2/4/8/16 seconds</p>
+<p>[3] rtc long time 0~353days (bit 39~13 compare)</p>
+<p>[2] rtc short time 0~488s (bit 23~0 compare)</p>
+<p>[1] rtc time 0~353days (bit 39~0 compare)</p>
+<p class="last">[0] rtc enable</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="hbn-time-l">
+<h3>14.5.2. HBN_TIME_L<a class="headerlink" href="#hbn-time-l" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000f004</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">TIML</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">TIML</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="14%" />
+<col width="12%" />
+<col width="19%" />
+<col width="41%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:0</td>
+<td>TIML</td>
+<td>R/W</td>
+<td>32'H0</td>
+<td>RTC timer compare bit 31:0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="hbn-time-h">
+<h3>14.5.3. HBN_TIME_H<a class="headerlink" href="#hbn-time-h" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000f008</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="8">RSVD</td>
+<td colspan="8">TIMH</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="14%" />
+<col width="11%" />
+<col width="19%" />
+<col width="41%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:8</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>7:0</td>
+<td>TIMH</td>
+<td>R/W</td>
+<td>8'H0</td>
+<td>RTC timer compare bit 39:32</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="rtc-time-l">
+<h3>14.5.4. RTC_TIME_L<a class="headerlink" href="#rtc-time-l" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000f00c</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RTLATL</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">RTLATL</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="14%" />
+<col width="11%" />
+<col width="18%" />
+<col width="45%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:0</td>
+<td>RTLATL</td>
+<td>R</td>
+<td>32'H0</td>
+<td>RTC time latched value bit 31:0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="rtc-time-h">
+<h3>14.5.5. RTC_TIME_H<a class="headerlink" href="#rtc-time-h" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000f010</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td>RTLAT</td>
+<td colspan="15">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="8">RSVD</td>
+<td colspan="8">RTLATH</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="13%" />
+<col width="11%" />
+<col width="17%" />
+<col width="45%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31</td>
+<td>RTLAT</td>
+<td>W</td>
+<td>0</td>
+<td>RTC time latch for SW read</td>
+</tr>
+<tr class="row-odd"><td>30:8</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>7:0</td>
+<td>RTLATH</td>
+<td>R</td>
+<td>8'H0</td>
+<td>RTC time latched value bit 39:32</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="hbn-irq-mode">
+<h3>14.5.6. HBN_IRQ_MODE<a class="headerlink" href="#hbn-irq-mode" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000f014</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="8">RSVD</td>
+<td colspan="2">IRACO1EN</td>
+<td colspan="2">IRACO0EN</td>
+<td>RSVD</td>
+<td>BOREN</td>
+<td colspan="2">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="11%" />
+<col width="9%" />
+<col width="14%" />
+<col width="55%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:24</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>23:22</td>
+<td>IRACO1EN</td>
+<td>R/W</td>
+<td>0</td>
+<td>enable acomp1 interrupt [20] posedge [21] negedge</td>
+</tr>
+<tr class="row-even"><td>21:20</td>
+<td>IRACO0EN</td>
+<td>R/W</td>
+<td>0</td>
+<td>enable acomp0 interrupt [20] posedge [21] negedge</td>
+</tr>
+<tr class="row-odd"><td>19</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>18</td>
+<td>BOREN</td>
+<td>R/W</td>
+<td>0</td>
+<td>enable brown-out interrupt</td>
+</tr>
+<tr class="row-odd"><td>17:0</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="hbn-irq-stat">
+<h3>14.5.7. HBN_IRQ_STAT<a class="headerlink" href="#hbn-irq-stat" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000f018</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">IRQSTA</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">IRQSTA</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="5%" />
+<col width="8%" />
+<col width="74%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td rowspan="6">31:0</td>
+<td rowspan="6">IRQSTA</td>
+<td rowspan="6">R</td>
+<td rowspan="6">0</td>
+<td rowspan="6"><p class="first">[22] acomp1</p>
+<p>[20] acomp0</p>
+<p>[18] brown-out</p>
+<p>[17] irq_pir state</p>
+<p>[16] irq_rtc state</p>
+<p class="last">[1:0] hbn_pin_wakeup state (GPIO8/GPIO7)</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="hbn-irq-clr">
+<h3>14.5.8. HBN_IRQ_CLR<a class="headerlink" href="#hbn-irq-clr" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000f01c</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">IRQCLR</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">IRQCLR</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="5%" />
+<col width="5%" />
+<col width="4%" />
+<col width="7%" />
+<col width="78%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td rowspan="6">31:0</td>
+<td rowspan="6">IRQCLR</td>
+<td rowspan="6">W</td>
+<td rowspan="6">0</td>
+<td rowspan="6"><p class="first">[22] irq_acomp1 clear</p>
+<p>[20] irq_acomp0 clear</p>
+<p>[18] irq_bor clear</p>
+<p>[17] irq_pir clear</p>
+<p>[16] irq_rtc clear</p>
+<p class="last">[1:0] hbn_pin_wakeup clear (GPIO8/GPIO7)</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="hbn-pir-cfg">
+<h3>14.5.9. HBN_PIR_CFG<a class="headerlink" href="#hbn-pir-cfg" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000f020</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="8">RSVD</td>
+<td>PIREN</td>
+<td colspan="7">RSVD</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="19%" />
+<col width="15%" />
+<col width="25%" />
+<col width="23%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:8</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>7</td>
+<td>PIREN</td>
+<td>R/W</td>
+<td>0</td>
+<td>pir enable</td>
+</tr>
+<tr class="row-even"><td>6:0</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="hbn-pir-vth">
+<h3>14.5.10. HBN_PIR_VTH<a class="headerlink" href="#hbn-pir-vth" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000f024</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="2">RSVD</td>
+<td colspan="14">PIRVTH</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="16%" />
+<col width="13%" />
+<col width="20%" />
+<col width="36%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:14</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>13:0</td>
+<td>PIRVTH</td>
+<td>R/W</td>
+<td>14'H3FF</td>
+<td>PIR compare threshold</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="hbn-glb">
+<h3>14.5.11. HBN_GLB<a class="headerlink" href="#hbn-glb" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000f030</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="11">RSVD</td>
+<td colspan="2">F32KSEL</td>
+<td>UARTSOC</td>
+<td colspan="2">ROOTSOC</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="9%" />
+<col width="7%" />
+<col width="12%" />
+<col width="62%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:5</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>4:3</td>
+<td>F32KSEL</td>
+<td>R/W</td>
+<td>0</td>
+<td>32KHz clock source selection (0: RC32K  1: XTAL 32K  3: DIG 32K)</td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>UARTSOC</td>
+<td>R/W</td>
+<td>0</td>
+<td>uart clock source selection (0: bclk  1: PLL 160MHz)</td>
+</tr>
+<tr class="row-odd"><td>1:0</td>
+<td>ROOTSOC</td>
+<td>R/W</td>
+<td>0</td>
+<td>root clock source selection (0: RC32M  1: XTAL  2/3: PLL)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="hbn-sram">
+<h3>14.5.12. HBN_SRAM<a class="headerlink" href="#hbn-sram" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000f034</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="8">RSVD</td>
+<td>RETRSLP</td>
+<td>RETRRET</td>
+<td colspan="6">RSVD</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="15%" />
+<col width="12%" />
+<col width="20%" />
+<col width="37%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:8</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>7</td>
+<td>RETRSLP</td>
+<td>R/W</td>
+<td>0</td>
+<td>SRAM sleep control</td>
+</tr>
+<tr class="row-even"><td>6</td>
+<td>RETRRET</td>
+<td>R/W</td>
+<td>0</td>
+<td>SRAM retention control</td>
+</tr>
+<tr class="row-odd"><td>5:0</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../version/version.html" class="btn btn-neutral float-right" title="15. Revision history" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../Timer/Timer.html" class="btn btn-neutral float-left" title="13. TIMER" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

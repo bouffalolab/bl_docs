@@ -1,0 +1,603 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>5. DAC &mdash; BL602/604 Reference Manual  文档</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="搜索" href="../../search.html" />
+    <link rel="next" title="6. DMA" href="../Dma/Dma.html" />
+    <link rel="prev" title="4. ADC" href="../Adc/Adc.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> BL602/604 Reference Manual
+          
+
+          
+            
+            <img src="../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../SystemAndMemoryOverview/SystemAndMemoryOverview.html">1. System and memory overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ResetAndClock/ResetAndClock.html">2. Reset and clock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Glb/Glb.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Adc/Adc.html">4. ADC</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">5. DAC</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">5.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#main-features">5.2. Main features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#function-description">5.3. Function description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#register-description">5.4. Register description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#gpdac-config">5.4.1. gpdac_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpdac-dma-config">5.4.2. gpdac_dma_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpdac-dma-wdata">5.4.3. gpdac_dma_wdata</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Dma/Dma.html">6. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L1c/L1c.html">7. L1C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../IR/IR.html">8. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Spi/Spi.html">9. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Uart/Uart.html">10. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../I2c/I2c.html">11. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Pwm/Pwm.html">12. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Timer/Timer.html">13. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../version/version.html">14. Revision history</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">BL602/604 Reference Manual</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>5. DAC</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="dac">
+<h1>5. DAC<a class="headerlink" href="#dac" title="永久链接至标题">¶</a></h1>
+<div class="section" id="introduction">
+<h2>5.1. Introduction<a class="headerlink" href="#introduction" title="永久链接至标题">¶</a></h2>
+<p>The chip has a built-in 10Bits digital-to-analog converter (DAC) with a FIFO depth of 1, and supports 2 DAC modulation outputs.</p>
+<p>Can be used for audio playback, transmitter voltage modulation.</p>
+</div>
+<div class="section" id="main-features">
+<h2>5.2. Main features<a class="headerlink" href="#main-features" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li>DAC modulation accuracy is 10-Bits</li>
+<li>DAC input clock can be selected as 32k, 16k, 8k or 512k</li>
+<li>Support DMA to transfer memory to DAC modulation register</li>
+<li>Support dual channel playback DMA transport mode</li>
+<li>The output pin of DAC is fixed to ChannelA as GPIO13, Channel as GPIO14</li>
+</ul>
+</div>
+<div class="section" id="function-description">
+<h2>5.3. Function description<a class="headerlink" href="#function-description" title="永久链接至标题">¶</a></h2>
+<p>The basic block diagram of the DAC module is shown in the figure.</p>
+<div class="figure align-center">
+<img alt="../../_images/gpdac.png" src="../../_images/gpdac.png" />
+</div>
+<ul class="simple">
+<li>DAC module supports up to two modulation outputs</li>
+<li>DAC module supports dual-channel DMA data transfer mode</li>
+<li>DAC module supports a DMA data interface with a length of 32BIT, in which the high 16 bits will be modulated on the pins of ChannelA, and the low 16 bits will be modulated on the pins of ChannelB</li>
+</ul>
+</div>
+<div class="section" id="register-description">
+<h2>5.4. Register description<a class="headerlink" href="#register-description" title="永久链接至标题">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="46%" />
+<col width="54%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Name</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#gpdac-config">gpdac_config</a></td>
+<td>GPDAC configuration</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#gpdac-dma-config">gpdac_dma_config</a></td>
+<td>GPDAC DMA configuration</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#gpdac-dma-wdata">gpdac_dma_wdata</a></td>
+<td>GPDAC DMA write data</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="gpdac-config">
+<h3>5.4.1. gpdac_config<a class="headerlink" href="#gpdac-config" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x40002040</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="8">RSVD</td>
+<td colspan="4">CHBSEL</td>
+<td colspan="4">CHASEL</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="5">RSVD</td>
+<td colspan="3">MODE</td>
+<td colspan="2">RSVD</td>
+<td colspan="2">DSMMODE</td>
+<td colspan="2">RSVD</td>
+<td>EN2</td>
+<td>EN</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="5%" />
+<col width="8%" />
+<col width="75%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:24</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td rowspan="7">23:20</td>
+<td rowspan="7">CHBSEL</td>
+<td rowspan="7">R/W</td>
+<td rowspan="7">0</td>
+<td rowspan="7"><p class="first">Channel B Source Select</p>
+<p>0: Reg</p>
+<p>1: DMA</p>
+<p>2: DMA + Filter</p>
+<p>3: Sin Gen</p>
+<p>4: A (The same as channel A)</p>
+<p class="last">5: ~A (Inverse of channel A)</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="5">19:16</td>
+<td rowspan="5">CHASEL</td>
+<td rowspan="5">R/W</td>
+<td rowspan="5">0</td>
+<td rowspan="5"><p class="first">Channel A Source Select</p>
+<p>0: Reg</p>
+<p>1: DMA</p>
+<p>2: DMA + Filter</p>
+<p class="last">3: Sin Gen</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td>15:11</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>10:8</td>
+<td>MODE</td>
+<td>R/W</td>
+<td>0</td>
+<td>0:32k, 1:16k, 3:8k,  4:512k(for DMA only)</td>
+</tr>
+<tr class="row-odd"><td>7:6</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>5:4</td>
+<td>DSMMODE</td>
+<td>R/W</td>
+<td>0</td>
+<td>0:bypass, 1:dsm order=1, 2: dsm order=2</td>
+</tr>
+<tr class="row-odd"><td>3:2</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>1</td>
+<td>EN2</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPDAC enable 2 (for B channel)</td>
+</tr>
+<tr class="row-odd"><td>0</td>
+<td>EN</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPDAC enable</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gpdac-dma-config">
+<h3>5.4.2. gpdac_dma_config<a class="headerlink" href="#gpdac-dma-config" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x40002044</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="10">RSVD</td>
+<td colspan="2">DMAFM</td>
+<td colspan="3">RSVD</td>
+<td>DMATXEN</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gpdac-dma-wdata">
+<h3>5.4.3. gpdac_dma_wdata<a class="headerlink" href="#gpdac-dma-wdata" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x40002048</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">DMAWDA</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">DMAWDA</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="17%" />
+<col width="13%" />
+<col width="22%" />
+<col width="32%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:0</td>
+<td>DMAWDA</td>
+<td>W</td>
+<td>X</td>
+<td>GPDAC DMA TX data</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Dma/Dma.html" class="btn btn-neutral float-right" title="6. DMA" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../Adc/Adc.html" class="btn btn-neutral float-left" title="4. ADC" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

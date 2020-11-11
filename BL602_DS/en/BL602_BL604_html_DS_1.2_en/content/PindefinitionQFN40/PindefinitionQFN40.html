@@ -1,0 +1,465 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>4. Pin Definition (QFN40) &mdash; BL602/604 Datasheet  文档</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="搜索" href="../../search.html" />
+    <link rel="next" title="5. Electrical Specifications" href="../Electricalcharacteristics/Electricalcharacteristics.html" />
+    <link rel="prev" title="3. Pin Definition (QFN32)" href="../PindefinitionQFN32/PindefinitionQFN32.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> BL602/604 Datasheet
+          
+
+          
+            
+            <img src="../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview/overview.html">1. Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Functional/Functional.html">2. Functional Description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PindefinitionQFN32/PindefinitionQFN32.html">3. Pin Definition (QFN32)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">4. Pin Definition (QFN40)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Electricalcharacteristics/Electricalcharacteristics.html">5. Electrical Specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Referencedesign/Referencedesign.html">6. Reference Design (simplified)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PackagingQFN32/PackagingQFN32.html">7. Package Information(QFN32)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PackagingQFN40/PackagingQFN40.html">8. Package Information(QFN40)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TopMarkingDefinition/TopMarkingDefinition.html">9. Top Marking Definition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OrderingInformation/OrderingInformation.html">10. Ordering Information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../version/version.html">11. Revision history</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">BL602/604 Datasheet</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>4. Pin Definition (QFN40)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="pin-definition-qfn40">
+<h1>4. Pin Definition (QFN40)<a class="headerlink" href="#pin-definition-qfn40" title="永久链接至标题">¶</a></h1>
+<p>BL604 40-pin package includes 10 power pins, 6 analog pins, 1 reset pin, and 23 flexible GPIO pins.</p>
+<div class="figure align-center" id="id1">
+<img alt="../../_images/pinlayout_40_L.png" src="../../_images/pinlayout_40_L.png" />
+<p class="caption"><span class="caption-text">BL604L pin layout</span></p>
+</div>
+<div class="figure align-center" id="id2">
+<img alt="../../_images/pinlayout_40_CE.png" src="../../_images/pinlayout_40_CE.png" />
+<p class="caption"><span class="caption-text">BL604C/E pin layout</span></p>
+</div>
+<table border="1" class="docutils" id="id3">
+<caption><span class="caption-text">Pin Description (QFN40)</span><a class="headerlink" href="#id3" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="6%" />
+<col width="14%" />
+<col width="9%" />
+<col width="71%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>No.</td>
+<td>Name</td>
+<td>Type</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>1</td>
+<td>DVDDIO_1</td>
+<td>Power</td>
+<td>Externally powered 3.3V or 1.8V</td>
+</tr>
+<tr class="row-odd"><td>2</td>
+<td>PAD_GPIO_0</td>
+<td>Digital</td>
+<td>SDIO_CLK, SF_D1, SPI_MOSI/SPI_MISO, I2C_SCL, UART, PWM, GPIO</td>
+</tr>
+<tr class="row-even"><td>3</td>
+<td>PAD_GPIO_1</td>
+<td>Digital</td>
+<td>SDIO_CMD, SF_D2, SPI_MOSI/SPI_MISO, I2C_SDA, UART, PWM, GPIO</td>
+</tr>
+<tr class="row-odd"><td>4</td>
+<td>PAD_GPIO_2</td>
+<td>Digital</td>
+<td>SDIO_DAT0, SF_D3, SPI_SS, I2C_SCL, UART, PWM, GPIO</td>
+</tr>
+<tr class="row-even"><td>5</td>
+<td>PAD_GPIO_3</td>
+<td>Digital</td>
+<td>SDIO_DAT1, SPI_SCLK, I2C_SDA, UART, PWM, GPIO</td>
+</tr>
+<tr class="row-odd"><td>6</td>
+<td>PAD_GPIO_4</td>
+<td>Digital</td>
+<td>SDIO_DAT2, SPI_MOSI/SPI_MISO, I2C_SCL, UART, PWM, GPIO</td>
+</tr>
+<tr class="row-even"><td>7</td>
+<td>PAD_GPIO_5</td>
+<td>Digital</td>
+<td>SDIO_DAT3, SPI_MOSI/SPI_MISO, I2C_SDA, UART, PWM, GPIO</td>
+</tr>
+<tr class="row-odd"><td>8</td>
+<td>PAD_GPIO_6</td>
+<td>Digital</td>
+<td>SPI_SS, I2C_SCL, UART, PWM, GPIO</td>
+</tr>
+<tr class="row-even"><td>9</td>
+<td>AVDD33_1</td>
+<td>Power</td>
+<td>Externally powered 3.3V</td>
+</tr>
+<tr class="row-odd"><td>10</td>
+<td>AVDD33_2</td>
+<td>Power</td>
+<td>Externally powered 3.3V</td>
+</tr>
+<tr class="row-even"><td>11</td>
+<td>ANT</td>
+<td>Analog</td>
+<td>RF input and output (single pin)</td>
+</tr>
+<tr class="row-odd"><td>12</td>
+<td>VDD15</td>
+<td>Power</td>
+<td>power 1.5V</td>
+</tr>
+<tr class="row-even"><td>13</td>
+<td>AVDD18</td>
+<td>Power</td>
+<td>power 1.8V</td>
+</tr>
+<tr class="row-odd"><td>14</td>
+<td>CHIP_EN</td>
+<td>Digital</td>
+<td>Chip enable</td>
+</tr>
+<tr class="row-even"><td rowspan="2">15</td>
+<td>NC</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>For BL604L</td>
+</tr>
+<tr class="row-odd"><td>XTAL32K_IN</td>
+<td>Analog</td>
+<td>Crystal oscillator 32.768kHz input (For BL604C/E)</td>
+</tr>
+<tr class="row-even"><td rowspan="2">16</td>
+<td>NC</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>For BL604L</td>
+</tr>
+<tr class="row-odd"><td>XTAL32K_OUT</td>
+<td>Analog</td>
+<td>Crystal oscillator 32.768kHz output (For BL604C/E)</td>
+</tr>
+<tr class="row-even"><td>17</td>
+<td>AVDD33</td>
+<td>Power</td>
+<td>Externally powered 3.3V</td>
+</tr>
+<tr class="row-odd"><td>18</td>
+<td>PAD_EXT_RST</td>
+<td>Digital</td>
+<td>External reset</td>
+</tr>
+<tr class="row-even"><td>19</td>
+<td>PAD_GPIO_7</td>
+<td>Digital</td>
+<td>SPI_SCLK, I2C_SDA, UART, PWM, AUXADC, GPIO</td>
+</tr>
+<tr class="row-odd"><td>20</td>
+<td>PAD_GPIO_8</td>
+<td>Digital</td>
+<td>SPI_MOSI/SPI_MISO, I2C_SCL, UART, PWM, AUXADC, GPIO</td>
+</tr>
+<tr class="row-even"><td>21</td>
+<td>XTAL_IN</td>
+<td>Analog</td>
+<td>External crystal input, support 24/32/38.4/40MHz</td>
+</tr>
+<tr class="row-odd"><td>22</td>
+<td>XTAL_OUT</td>
+<td>Analog</td>
+<td>External crystal output, support 24/32/38.4/40MHz</td>
+</tr>
+<tr class="row-even"><td>23</td>
+<td>PAD_GPIO_9</td>
+<td>Digital</td>
+<td>SPI_MOSI/SPI_MISO, I2C_SDA, UART, PWM, AUXADC, GPIO</td>
+</tr>
+<tr class="row-odd"><td>24</td>
+<td>PAD_GPIO_10</td>
+<td>Digital</td>
+<td>SPI_SS, I2C_SCL, UART, PWM, AUXADC, GPIO</td>
+</tr>
+<tr class="row-even"><td>25</td>
+<td>PAD_GPIO_11</td>
+<td>Digital</td>
+<td>SPI_SCLK, I2C_SDA, UART, PWM, AUXADC, GPIO</td>
+</tr>
+<tr class="row-odd"><td>26</td>
+<td>PAD_GPIO_12</td>
+<td>Digital</td>
+<td>SPI_MOSI/SPI_MISO, I2C_SCL, UART, PWM, AUXADC, GPIO</td>
+</tr>
+<tr class="row-even"><td>27</td>
+<td>PAD_GPIO_13</td>
+<td>Digital</td>
+<td>SPI_MOSI/SPI_MISO, I2C_SDA, UART, PWM, AUXADC, GPIO</td>
+</tr>
+<tr class="row-odd"><td>28</td>
+<td>PAD_GPIO_14</td>
+<td>Digital</td>
+<td>SPI_SS, I2C_SCL, UART, PWM, AUXADC, GPIO</td>
+</tr>
+<tr class="row-even"><td>29</td>
+<td>PAD_GPIO_15</td>
+<td>Digital</td>
+<td>SPI_SCLK, I2C_SDA, UART, PWM, AUXADC, GPIO</td>
+</tr>
+<tr class="row-odd"><td rowspan="2">30</td>
+<td>VDD33</td>
+<td>Power</td>
+<td>External power supply 3.3V (For BL604L)</td>
+</tr>
+<tr class="row-even"><td>VDD33_DCDC</td>
+<td>Power</td>
+<td>DCDC (For BL604C/E)</td>
+</tr>
+<tr class="row-odd"><td rowspan="2">31</td>
+<td>VDD33</td>
+<td>Power</td>
+<td>External power supply 3.3V (For BL604L)</td>
+</tr>
+<tr class="row-even"><td>SW_DCDC</td>
+<td>Power</td>
+<td>DCDC (For BL604C/E)</td>
+</tr>
+<tr class="row-odd"><td rowspan="2">32</td>
+<td>VDD33</td>
+<td>Power</td>
+<td>External power supply 3.3V (For BL604L)</td>
+</tr>
+<tr class="row-even"><td>DCDC_OUT</td>
+<td>Power</td>
+<td>DCDC (For BL604C/E)</td>
+</tr>
+<tr class="row-odd"><td>33</td>
+<td>VDDCORE</td>
+<td>Power</td>
+<td>Core Power</td>
+</tr>
+<tr class="row-even"><td>34</td>
+<td>PAD_GPIO_16</td>
+<td>Digital</td>
+<td>SPI_MOSI/SPI_MISO, I2C_SCL, UART, PWM, GPIO</td>
+</tr>
+<tr class="row-odd"><td>35</td>
+<td>PAD_GPIO_17</td>
+<td>Digital</td>
+<td>SF_D3, SPI_MOSI/SPI_MISO, I2C_SDA, UART, PWM, GPIO</td>
+</tr>
+<tr class="row-even"><td>36</td>
+<td>PAD_GPIO_18</td>
+<td>Digital</td>
+<td>SF_D2, SPI_SS, I2C_SCL, UART, PWM, GPIO</td>
+</tr>
+<tr class="row-odd"><td>37</td>
+<td>PAD_GPIO_19</td>
+<td>Digital</td>
+<td>SF_D1, SPI_SCLK, I2C_SDA, UART, PWM, GPIO</td>
+</tr>
+<tr class="row-even"><td>38</td>
+<td>PAD_GPIO_20</td>
+<td>Digital</td>
+<td>SF_D0, SPI_MOSI/SPI_MISO, I2C_SCL, UART, PWM, GPIO</td>
+</tr>
+<tr class="row-odd"><td>39</td>
+<td>PAD_GPIO_21</td>
+<td>Digital</td>
+<td>SF_CS, SPI_MOSI/SPI_MISO, I2C_SDA, UART, PWM, GPIO</td>
+</tr>
+<tr class="row-even"><td>40</td>
+<td>PAD_GPIO_22</td>
+<td>Digital</td>
+<td>SF_CLK_OUT, SPI_SS, I2C_SCL, UART, PWM, GPIO</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Electricalcharacteristics/Electricalcharacteristics.html" class="btn btn-neutral float-right" title="5. Electrical Specifications" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../PindefinitionQFN32/PindefinitionQFN32.html" class="btn btn-neutral float-left" title="3. Pin Definition (QFN32)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

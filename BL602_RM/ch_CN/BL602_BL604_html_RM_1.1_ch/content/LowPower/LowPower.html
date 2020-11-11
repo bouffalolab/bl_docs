@@ -1,0 +1,2235 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>LowPower &mdash; BL602/604 参考手册  文档</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="搜索" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> BL602/604 参考手册
+          
+
+          
+            
+            <img src="../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../SystemAndMemoryOverview/SystemAndMemoryOverview.html">1. 系统和存储器概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ResetAndClock/ResetAndClock.html">2. 复位和时钟</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Glb/Glb.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Adc/Adc.html">4. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DAC/DAC.html">5. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Dma/Dma.html">6. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L1c/L1c.html">7. L1C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../IR/IR.html">8. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Spi/Spi.html">9. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Uart/Uart.html">10. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../I2c/I2c.html">11. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Pwm/Pwm.html">12. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Timer/Timer.html">13. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../version/version.html">14. 版本信息</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">BL602/604 参考手册</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>LowPower</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="lowpower">
+<h1>LowPower<a class="headerlink" href="#lowpower" title="永久链接至标题">¶</a></h1>
+<div class="section" id="id1">
+<h2>概述<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<p>低功耗是物联网应用的一项重要指标。芯片的处理器包含3种功耗模式，包含工作模式、
+空闲省电模式和休眠模式，可以根据当前应用场景选择合适的功耗模式，降低芯片功耗延长电池寿命。</p>
+<div class="figure align-center" id="id7">
+<img alt="../../_images/pwr_st.png" src="../../_images/pwr_st.png" />
+<p class="caption"><span class="caption-text">低功耗模式</span></p>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>主要特征<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li>时钟控制:GLB中对各外设的时钟控制，小范围的省电，响应速度较快</li>
+<li>睡眠控制 (PDS) : 包含PDS1/2/3/7这4个等级，大范围省电，响应速度中等</li>
+<li>深度睡眠控制 (HBN) : 包含HBN0/1/2/3这4个等级，全局省电，响应时间长</li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h2>功能描述<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id4">
+<h3>电源域<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h3>
+<p>BL602中有7个电源域，每个电源域的主要功能如下所示：</p>
+<ul>
+<li><p class="first">PD_AON_HBNCORE</p>
+<blockquote>
+<div><ul class="simple">
+<li>部分电源控制寄存器</li>
+<li>4KB的HBN_RAM，用于在进入PDS/HBN模式前保存程序数据，进入PDS/HBN后数据不会消失</li>
+<li>PIR数字控制，PIR是热释电红外传感器，HBN区域内的一个外设，可以用作HBN唤醒源</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">PD_AON_HBNRTC</p>
+<blockquote>
+<div><ul class="simple">
+<li>保留RC32K/XTAL32K控制寄存器</li>
+<li>RTC可以用于唤醒，也可用于LED闪烁</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">PD_AON</p>
+<blockquote>
+<div><ul class="simple">
+<li>HBN状态机控制电源/隔离/复位/时钟</li>
+<li>保持内部电压输出选择</li>
+<li>引脚唤醒控制</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">PD_CORE</p>
+<blockquote>
+<div><ul class="simple">
+<li>HBN状态机控制电源/隔离/复位/时钟</li>
+<li>64KB保留RAM</li>
+<li>WIFI/BLE计时器控制</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">PD_CORE_MISC_DIG</p>
+<blockquote>
+<div><ul class="simple">
+<li>外设</li>
+<li>芯片全局寄存器</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">PD_CPU</p>
+<blockquote>
+<div><ul class="simple">
+<li>CPU/缓存控制器</li>
+<li>ROM/高速RAM</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">PD_WB</p>
+<blockquote>
+<div><ul class="simple">
+<li>WIFI PHY/MAC</li>
+<li>BLE PHY/MAC</li>
+<li>射频控制器</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<p>每个电源域都由8个不同的电源模式控制，具体的控制方式如下表所示：</p>
+<table border="1" class="docutils" id="id8">
+<caption><span class="caption-text">电源模式</span><a class="headerlink" href="#id8" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="6%" />
+<col width="9%" />
+<col width="9%" />
+<col width="11%" />
+<col width="12%" />
+<col width="6%" />
+<col width="14%" />
+<col width="14%" />
+<col width="9%" />
+<col width="9%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td rowspan="2">NO.</td>
+<td rowspan="2">Scenario</td>
+<td colspan="8">Power Domain</td>
+</tr>
+<tr class="row-even"><td>PD_AON</td>
+<td>PD_AON_HBNRTC</td>
+<td>PD_AON_HBNCORE</td>
+<td>PD_CORE</td>
+<td>PD_CORE_MISC_DIG</td>
+<td>PD_CORE_MISC_ANA</td>
+<td>PD_CPU</td>
+<td>PD_WB</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Normal</td>
+<td>ON</td>
+<td>ON</td>
+<td>ON</td>
+<td>ON</td>
+<td>ON</td>
+<td>ON</td>
+<td>ON</td>
+<td>ON</td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>PDS1</td>
+<td>ON</td>
+<td>ON</td>
+<td>ON</td>
+<td>ON</td>
+<td>ON</td>
+<td>ON</td>
+<td>ON</td>
+<td>OFF</td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>PDS2</td>
+<td>ON</td>
+<td>ON</td>
+<td>ON</td>
+<td>ON</td>
+<td>ON</td>
+<td>ON</td>
+<td>OFF</td>
+<td>ON</td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>PDS3</td>
+<td>ON</td>
+<td>ON</td>
+<td>ON</td>
+<td>ON</td>
+<td>ON</td>
+<td>ON</td>
+<td>OFF</td>
+<td>OFF</td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>PDS7</td>
+<td>ON</td>
+<td>ON</td>
+<td>ON</td>
+<td>ON</td>
+<td>OFF</td>
+<td>OFF</td>
+<td>OFF</td>
+<td>OFF</td>
+</tr>
+<tr class="row-even"><td>6</td>
+<td>HBN0</td>
+<td>ON</td>
+<td>ON</td>
+<td>ON</td>
+<td>OFF</td>
+<td>OFF</td>
+<td>OFF</td>
+<td>OFF</td>
+<td>OFF</td>
+</tr>
+<tr class="row-odd"><td>7</td>
+<td>HBN1</td>
+<td>ON</td>
+<td>ON</td>
+<td>OFF</td>
+<td>OFF</td>
+<td>OFF</td>
+<td>OFF</td>
+<td>OFF</td>
+<td>OFF</td>
+</tr>
+<tr class="row-even"><td>8</td>
+<td>HBN2</td>
+<td>ON</td>
+<td>OFF</td>
+<td>OFF</td>
+<td>OFF</td>
+<td>OFF</td>
+<td>OFF</td>
+<td>OFF</td>
+<td>OFF</td>
+</tr>
+<tr class="row-odd"><td>9</td>
+<td>HBN3</td>
+<td>OFF</td>
+<td>OFF</td>
+<td>OFF</td>
+<td>OFF</td>
+<td>OFF</td>
+<td>OFF</td>
+<td>OFF</td>
+<td>OFF</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id5">
+<h3>唤醒源<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
+<p>芯片内部支持多种唤醒源，可从不同电源模式中唤醒。</p>
+<p>PDS1/2/3可以通过以下方式唤醒：</p>
+<ul class="simple">
+<li>HBN唤醒源</li>
+<li>所有GPIO唤醒</li>
+<li>红外接收器</li>
+<li>BLE唤醒事件</li>
+<li>WIFI唤醒事件</li>
+<li>PDS计时器</li>
+</ul>
+<p>其余电源模式的唤醒源如下表所示：</p>
+<table border="1" class="docutils" id="id9">
+<caption><span class="caption-text">唤醒源</span><a class="headerlink" href="#id9" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="33%" />
+<col width="67%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>电源模式</td>
+<td>唤醒源</td>
+</tr>
+<tr class="row-even"><td>PDS7</td>
+<td>只能被PDS计时器唤醒</td>
+</tr>
+<tr class="row-odd"><td>HBN0</td>
+<td>HBN</td>
+</tr>
+<tr class="row-even"><td>HBN1</td>
+<td>RTC/AON_WAKEUP_PIN</td>
+</tr>
+<tr class="row-odd"><td>HBN2</td>
+<td>AON_WAKEUP_PIN</td>
+</tr>
+<tr class="row-even"><td>HBN3</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id6">
+<h3>功耗模式<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
+<p><strong>工作模式</strong></p>
+<p>芯片提供处理器与外设独立的时钟控制，在 GLB 和时钟的章节介绍对各模块的时钟控制，
+软件可以根据当前应用场景，对于不需要使用的处理器或外设进行时钟控制。时钟控制
+的反应是实时的，在此工作模式下，不需要担心响应时间。</p>
+<p><strong>掉电睡眠模式(PDS)</strong></p>
+<p>掉电模式相较于工作模式功耗较低。进入PDS模式后，将 RTC(Real Time Clock) 之外的时钟进行管控，会切换为内部低速时钟，并将外部晶振与PLL
+关闭达到更加省电的状态，因此进入与离开此低功耗模式会有时间延迟。</p>
+<ol class="arabic simple">
+<li>进入空闲省电模式</li>
+</ol>
+<p>软件可通过 PDS 配置让此模块进入掉电模式，等待处理，进入等待中断模式 (WFI) 后，PDS 模
+块会触发时钟控制模块进入gate clock操作，并通知模拟电路关闭PLL以及外部晶振</p>
+<ol class="arabic simple" start="2">
+<li>离开空闲省电模式</li>
+</ol>
+<p>离开空闲省电模式的方式有两种，第一是空闲中间有特定的中断或事件打断空闲状态，第二是软件设定PDS_TIM
+的空闲时间达到，两者均会触发 PDS 模块进入或离开掉电模式。注意：因为打开晶振需要
+约 1ms 的时间，PDS 提供软件提前打开晶振的方式，这个做法可以加速 PDS 醒来，当 PDS
+模块准备醒来时，此模块会通过中断通知处理器离开等待中断模式 (WFI)。</p>
+<p><strong>休眠模式(HBN)</strong></p>
+<p>休眠模式在保留 AON(Always On) 电源的状态下，将大部分的芯片逻辑进行断电 (Vcore)，直到收到外
+部事件才会将内部电路唤醒的。
+在休眠模式下可以达到极致的省电状态，但相对于前两者需要的响应时间也最长，适合长时间不需要工作
+的状态下，可以进入此状态，延长电池寿命。
+休眠时期会将大部分的电路断电，对应的寄存器值和内存的数据也会消失。因此 HBN 内部留有 4KB HBN_RAM，这个
+内存在休眠状态时不会断电，软件有需要保存的资料或状态可以在进入休眠前拷贝到这个内存。从休眠
+恢复时，可以直接从 RAM 中存取数据，通常可以用作状态的纪录或是数据快速恢复。</p>
+</div>
+</div>
+<div class="section" id="pds">
+<h2>PDS寄存器描述<a class="headerlink" href="#pds" title="永久链接至标题">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="36%" />
+<col width="64%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>名称</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pds-ctl">PDS_CTL</a></td>
+<td>PDS control register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#pds-ctl4">PDS_CTL4</a></td>
+<td>PDS control register4</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pds-stat">pds_stat</a></td>
+<td>PDS status register</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="pds-ctl">
+<h3>PDS_CTL<a class="headerlink" href="#pds-ctl" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000e000</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="15">RSVD</td>
+<td>PDSS</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="19%" />
+<col width="15%" />
+<col width="25%" />
+<col width="21%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:1</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>0</td>
+<td>PDSS</td>
+<td>W1P</td>
+<td>0</td>
+<td>Enter PDS</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pds-ctl4">
+<h3>PDS_CTL4<a class="headerlink" href="#pds-ctl4" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000e018</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="4">RSVD</td>
+<td>MGCLK</td>
+<td>MMSS</td>
+<td>MIRE</td>
+<td>MIPO</td>
+<td colspan="8">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td>WGCLK</td>
+<td>WMSS</td>
+<td>WRE</td>
+<td>WPO</td>
+<td colspan="8">RSVD</td>
+<td>NPGCLK</td>
+<td>NMSS</td>
+<td>NPRE</td>
+<td>NPPO</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="11%" />
+<col width="8%" />
+<col width="14%" />
+<col width="57%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:28</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td rowspan="2">27</td>
+<td rowspan="2">MGCLK</td>
+<td rowspan="2">R/W</td>
+<td rowspan="2">1</td>
+<td rowspan="2"><p class="first">1 : make core_misc clock gated at PDS Sleep state</p>
+<p class="last">0 : make core_misc clocking at PDS Sleep state</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="2">26</td>
+<td rowspan="2">MMSS</td>
+<td rowspan="2">R/W</td>
+<td rowspan="2">1</td>
+<td rowspan="2"><p class="first">1 : make core_misc RAM &#64;Retention at PDS Sleep state</p>
+<p class="last">0 : make core_misc RAM &#64; Normal at PDS Sleep state</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="2">25</td>
+<td rowspan="2">MIRE</td>
+<td rowspan="2">R/W</td>
+<td rowspan="2">1</td>
+<td rowspan="2"><p class="first">1 : make core_misc reset at PDS Sleep state</p>
+<p class="last">0 : make core_misc not reset at PDS Sleep state</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="2">24</td>
+<td rowspan="2">MIPO</td>
+<td rowspan="2">R/W</td>
+<td rowspan="2">1</td>
+<td rowspan="2"><p class="first">1 : make core_misc Power off at PDS Sleep state</p>
+<p class="last">0 : make core_misc power on at PDS Sleep state</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td>23:16</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td rowspan="2">15</td>
+<td rowspan="2">WGCLK</td>
+<td rowspan="2">R/W</td>
+<td rowspan="2">1</td>
+<td rowspan="2"><p class="first">1 : make WB clock gated at PDS Sleep state</p>
+<p class="last">0 : make WB clocking at PDS Sleep state</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="2">14</td>
+<td rowspan="2">WMSS</td>
+<td rowspan="2">R/W</td>
+<td rowspan="2">1</td>
+<td rowspan="2"><p class="first">1 : make WB RAM &#64;Retention at PDS Sleep state</p>
+<p class="last">0 : make WB RAM &#64; Normal at PDS Sleep state</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="2">13</td>
+<td rowspan="2">WRE</td>
+<td rowspan="2">R/W</td>
+<td rowspan="2">1</td>
+<td rowspan="2"><p class="first">1 : make WB reset at PDS Sleep state</p>
+<p class="last">0 : make WB not reset at PDS Sleep state</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="2">12</td>
+<td rowspan="2">WPO</td>
+<td rowspan="2">R/W</td>
+<td rowspan="2">1</td>
+<td rowspan="2"><p class="first">1 : make WB Power off at PDS Sleep state</p>
+<p class="last">0 : make WB power on at PDS Sleep state</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td>11:4</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td rowspan="2">3</td>
+<td rowspan="2">NPGCLK</td>
+<td rowspan="2">R/W</td>
+<td rowspan="2">1</td>
+<td rowspan="2"><p class="first">1 : make NP clock gated at PDS Sleep state</p>
+<p class="last">0 : make NP clocking at PDS Sleep state</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="2">2</td>
+<td rowspan="2">NMSS</td>
+<td rowspan="2">R/W</td>
+<td rowspan="2">1</td>
+<td rowspan="2"><p class="first">1 : make NP RAM &#64;Retention at PDS Sleep state</p>
+<p class="last">0 : make NP RAM &#64; Normal at PDS Sleep state</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="2">1</td>
+<td rowspan="2">NPRE</td>
+<td rowspan="2">R/W</td>
+<td rowspan="2">1</td>
+<td rowspan="2"><p class="first">1 : make NP reset at PDS Sleep state</p>
+<p class="last">0 : make NP not reset at PDS Sleep state</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="2">0</td>
+<td rowspan="2">NPPO</td>
+<td rowspan="2">R/W</td>
+<td rowspan="2">1</td>
+<td rowspan="2"><p class="first">1 : make NP Power off at PDS Sleep state</p>
+<p class="last">0 : make NP power on at PDS Sleep state</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pds-stat">
+<h3>pds_stat<a class="headerlink" href="#pds-stat" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000e01c</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="14">RSVD</td>
+<td colspan="2">PLLSTA</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="4">RSVD</td>
+<td colspan="4">RFSTA</td>
+<td colspan="8">RSVD</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="13%" />
+<col width="11%" />
+<col width="17%" />
+<col width="46%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:18</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td rowspan="4">17:16</td>
+<td rowspan="4">PLLSTA</td>
+<td rowspan="4">R</td>
+<td rowspan="4">2'B00</td>
+<td rowspan="4"><p class="first">ST_PDS_PLL_OFF      = 2'b00   ;</p>
+<p>ST_PDS_PLL_SFREG = 2'b01   ;</p>
+<p>ST_PDS_PLL_PU        = 2'b10   ;</p>
+<p class="last">ST_PDS_PLL_RDY      = 2'b11   ;</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td>15:12</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td rowspan="5">11:8</td>
+<td rowspan="5">RFSTA</td>
+<td rowspan="5">R</td>
+<td rowspan="5">4'B0</td>
+<td rowspan="5"><p class="first">ST_PDS_RF_OFF         = 4'b0000 ;</p>
+<p>ST_PDS_PU_MBG         = 4'b0001 ;</p>
+<p>ST_PDS_PU_LDO15RF = 4'b0011 ;</p>
+<p>ST_PDS_PU_SFREG     = 4'b0111 ;</p>
+<p class="last">ST_PDS_WB_EN_AON  = 4'b1111 ;</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td>7:0</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="hbn">
+<h2>HBN寄存器描述<a class="headerlink" href="#hbn" title="永久链接至标题">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="41%" />
+<col width="59%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>名称</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#hbn-ctl">HBN_CTL</a></td>
+<td>HBN control</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#hbn-time-l">HBN_TIME_L</a></td>
+<td>HBN time lower 32-bit</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#hbn-time-h">HBN_TIME_H</a></td>
+<td>HBN time higher 8-bit</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#rtc-time-l">RTC_TIME_L</a></td>
+<td>RTL timer lower 32-bit</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#rtc-time-h">RTC_TIME_H</a></td>
+<td>RTL timer higher 8-bit</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#hbn-irq-mode">HBN_IRQ_MODE</a></td>
+<td>HBN interrupt Control</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#hbn-irq-stat">HBN_IRQ_STAT</a></td>
+<td>HBN interrupt Status</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#hbn-irq-clr">HBN_IRQ_CLR</a></td>
+<td>HBN interrupt Clear</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#hbn-pir-cfg">HBN_PIR_CFG</a></td>
+<td>PIR control</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#hbn-pir-vth">HBN_PIR_VTH</a></td>
+<td>PIR threshold</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#hbn-glb">HBN_GLB</a></td>
+<td>HBN clock control</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#hbn-sram">HBN_SRAM</a></td>
+<td>HBN sram control</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="hbn-ctl">
+<h3>HBN_CTL<a class="headerlink" href="#hbn-ctl" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000f000</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="3">RSVD</td>
+<td>SWRST</td>
+<td colspan="4">RSVD</td>
+<td>MODE</td>
+<td colspan="7">RTCCTL</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="11%" />
+<col width="9%" />
+<col width="14%" />
+<col width="54%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:13</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>12</td>
+<td>SWRST</td>
+<td>R/W</td>
+<td>0</td>
+<td>soft reset</td>
+</tr>
+<tr class="row-even"><td>11:8</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>7</td>
+<td>MODE</td>
+<td>W</td>
+<td>0</td>
+<td>Enter hibernate</td>
+</tr>
+<tr class="row-even"><td rowspan="5">6:0</td>
+<td rowspan="5">RTCCTL</td>
+<td rowspan="5">R/W</td>
+<td rowspan="5">7'H0</td>
+<td rowspan="5"><p class="first">[6:4] Slow LED, x/0.25/0.5/1/2/4/8/16 seconds</p>
+<p>[3] rtc long time 0~353days (bit 39~13 compare)</p>
+<p>[2] rtc short time 0~488s (bit 23~0 compare)</p>
+<p>[1] rtc time 0~353days (bit 39~0 compare)</p>
+<p class="last">[0] rtc enable</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="hbn-time-l">
+<h3>HBN_TIME_L<a class="headerlink" href="#hbn-time-l" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000f004</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">TIML</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">TIML</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="14%" />
+<col width="12%" />
+<col width="19%" />
+<col width="41%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:0</td>
+<td>TIML</td>
+<td>R/W</td>
+<td>32'H0</td>
+<td>RTC timer compare bit 31:0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="hbn-time-h">
+<h3>HBN_TIME_H<a class="headerlink" href="#hbn-time-h" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000f008</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="8">RSVD</td>
+<td colspan="8">TIMH</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="14%" />
+<col width="11%" />
+<col width="19%" />
+<col width="41%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:8</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>7:0</td>
+<td>TIMH</td>
+<td>R/W</td>
+<td>8'H0</td>
+<td>RTC timer compare bit 39:32</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="rtc-time-l">
+<h3>RTC_TIME_L<a class="headerlink" href="#rtc-time-l" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000f00c</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RTLATL</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">RTLATL</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="14%" />
+<col width="11%" />
+<col width="18%" />
+<col width="45%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:0</td>
+<td>RTLATL</td>
+<td>R</td>
+<td>32'H0</td>
+<td>RTC time latched value bit 31:0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="rtc-time-h">
+<h3>RTC_TIME_H<a class="headerlink" href="#rtc-time-h" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000f010</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td>RTLAT</td>
+<td colspan="15">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="8">RSVD</td>
+<td colspan="8">RTLATH</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="13%" />
+<col width="11%" />
+<col width="17%" />
+<col width="45%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31</td>
+<td>RTLAT</td>
+<td>W</td>
+<td>0</td>
+<td>RTC time latch for SW read</td>
+</tr>
+<tr class="row-odd"><td>30:8</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>7:0</td>
+<td>RTLATH</td>
+<td>R</td>
+<td>8'H0</td>
+<td>RTC time latched value bit 39:32</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="hbn-irq-mode">
+<h3>HBN_IRQ_MODE<a class="headerlink" href="#hbn-irq-mode" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000f014</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="8">RSVD</td>
+<td colspan="2">IRACO1EN</td>
+<td colspan="2">IRACO0EN</td>
+<td>RSVD</td>
+<td>BOREN</td>
+<td colspan="2">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="11%" />
+<col width="9%" />
+<col width="14%" />
+<col width="55%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:24</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>23:22</td>
+<td>IRACO1EN</td>
+<td>R/W</td>
+<td>0</td>
+<td>enable acomp1 interrupt [20] posedge [21] negedge</td>
+</tr>
+<tr class="row-even"><td>21:20</td>
+<td>IRACO0EN</td>
+<td>R/W</td>
+<td>0</td>
+<td>enable acomp0 interrupt [20] posedge [21] negedge</td>
+</tr>
+<tr class="row-odd"><td>19</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>18</td>
+<td>BOREN</td>
+<td>R/W</td>
+<td>0</td>
+<td>enable brown-out interrupt</td>
+</tr>
+<tr class="row-odd"><td>17:0</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="hbn-irq-stat">
+<h3>HBN_IRQ_STAT<a class="headerlink" href="#hbn-irq-stat" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000f018</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">IRQSTA</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">IRQSTA</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="12%" />
+<col width="10%" />
+<col width="16%" />
+<col width="51%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td rowspan="6">31:0</td>
+<td rowspan="6">IRQSTA</td>
+<td rowspan="6">R</td>
+<td rowspan="6">0</td>
+<td rowspan="6"><p class="first">[22] acomp1</p>
+<p>[20] acomp0</p>
+<p>[18] brown-out</p>
+<p>[17] irq_pir state</p>
+<p>[16] irq_rtc state</p>
+<p class="last">[1:0] hbn_pin_wakeup state (GPIO8/GPIO7)</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="hbn-irq-clr">
+<h3>HBN_IRQ_CLR<a class="headerlink" href="#hbn-irq-clr" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000f01c</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">IRQCLR</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">IRQCLR</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="12%" />
+<col width="10%" />
+<col width="16%" />
+<col width="51%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td rowspan="6">31:0</td>
+<td rowspan="6">IRQCLR</td>
+<td rowspan="6">W</td>
+<td rowspan="6">0</td>
+<td rowspan="6"><p class="first">[22] irq_acomp1 clear</p>
+<p>[20] irq_acomp0 clear</p>
+<p>[18] irq_bor clear</p>
+<p>[17] irq_pir clear</p>
+<p>[16] irq_rtc clear</p>
+<p class="last">[1:0] hbn_pin_wakeup clear (GPIO8/GPIO7)</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="hbn-pir-cfg">
+<h3>HBN_PIR_CFG<a class="headerlink" href="#hbn-pir-cfg" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000f020</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="8">RSVD</td>
+<td>PIREN</td>
+<td colspan="7">RSVD</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="19%" />
+<col width="15%" />
+<col width="25%" />
+<col width="23%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:8</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>7</td>
+<td>PIREN</td>
+<td>R/W</td>
+<td>0</td>
+<td>pir enable</td>
+</tr>
+<tr class="row-even"><td>6:0</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="hbn-pir-vth">
+<h3>HBN_PIR_VTH<a class="headerlink" href="#hbn-pir-vth" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000f024</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="2">RSVD</td>
+<td colspan="14">PIRVTH</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="16%" />
+<col width="13%" />
+<col width="20%" />
+<col width="36%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:14</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>13:0</td>
+<td>PIRVTH</td>
+<td>R/W</td>
+<td>14'H3FF</td>
+<td>PIR compare threshold</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="hbn-glb">
+<h3>HBN_GLB<a class="headerlink" href="#hbn-glb" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000f030</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="11">RSVD</td>
+<td colspan="2">F32KSEL</td>
+<td>UARTSOC</td>
+<td colspan="2">ROOTSOC</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="9%" />
+<col width="7%" />
+<col width="12%" />
+<col width="62%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:5</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>4:3</td>
+<td>F32KSEL</td>
+<td>R/W</td>
+<td>0</td>
+<td>32KHz clock source selection (0: RC32K  1: XTAL 32K  3: DIG 32K)</td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>UARTSOC</td>
+<td>R/W</td>
+<td>0</td>
+<td>uart clock source selection (0: bclk  1: PLL 160MHz)</td>
+</tr>
+<tr class="row-odd"><td>1:0</td>
+<td>ROOTSOC</td>
+<td>R/W</td>
+<td>0</td>
+<td>root clock source selection (0: RC32M  1: XTAL  2/3: PLL)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="hbn-sram">
+<h3>HBN_SRAM<a class="headerlink" href="#hbn-sram" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000f034</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="8">RSVD</td>
+<td>RETRSLP</td>
+<td>RETRRET</td>
+<td colspan="6">RSVD</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="15%" />
+<col width="12%" />
+<col width="20%" />
+<col width="37%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:8</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>7</td>
+<td>RETRSLP</td>
+<td>R/W</td>
+<td>0</td>
+<td>SRAM sleep control</td>
+</tr>
+<tr class="row-even"><td>6</td>
+<td>RETRRET</td>
+<td>R/W</td>
+<td>0</td>
+<td>SRAM retention control</td>
+</tr>
+<tr class="row-odd"><td>5:0</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
