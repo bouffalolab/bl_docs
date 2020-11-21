@@ -1,0 +1,357 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>1. 概述 &mdash; Image Process  文档</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="搜索" href="../../search.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="../../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Image Process
+          
+
+          
+            
+            <img src="../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">606烧录过程</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. 概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#id2">2. 镜像组成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#id3">3. 镜像生成</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#bootinfo">3.1. 普通bootinfo配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">3.2. 加密bootinfo配置</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#id5">4. 烧录选项配置</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id6">4.1. 烧录方式选择</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">4.2. 芯片擦除</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sha">4.3. SHA检验</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#id8">5. 镜像烧录</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#flash">5.1. 单核flash镜像</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">5.2. 双核flash镜像</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#boot2">5.3. boot2 烧录</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#raw-bin">5.4. Raw bin烧录</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uart-sdio">5.5. UART/SDIO生成</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#timer">6. Timer配置示例</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Image Process</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>1. 概述</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/content/Burning_process/Burning_process.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>1. 概述<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<p>本烧录工具是将用户的应用程序(Firmware)和配置相关的引导信息(Bootinfo)烧录到指定地址中。</p>
+<p>烧录功能如下：</p>
+<ul class="simple">
+<li><p>烧写单核镜像</p></li>
+<li><p>烧写双核镜像</p></li>
+<li><p>烧写raw bin</p></li>
+<li><p>烧写boot2</p></li>
+<li><p>读取flash</p></li>
+<li><p>烧写efuse</p></li>
+<li><p>读取efuse</p></li>
+</ul>
+<p>烧录方式支持UART和JLINK两种方式。</p>
+<p>烧写界面如下：</p>
+<div class="figure align-center" id="id10">
+<img alt="../../_images/interface1.png" src="../../_images/interface1.png" />
+<p class="caption"><span class="caption-text">配置界面</span><a class="headerlink" href="#id10" title="永久链接至图片">¶</a></p>
+</div>
+</div>
+<div class="section" id="id2">
+<h1>2. 镜像组成<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h1>
+<div class="figure align-center" id="id11">
+<img alt="../../_images/Flash_Image_Layout_Common.jpg" src="../../_images/Flash_Image_Layout_Common.jpg" />
+<p class="caption"><span class="caption-text">烧录内容布局</span><a class="headerlink" href="#id11" title="永久链接至图片">¶</a></p>
+</div>
+<p>如果只烧录应用程序无法使芯片正常工作，必须要将引导信息烧录到指定位置。引导信息包含对PLL、Boot、Flash等的配置；固件是用户自己编写的应用程序。</p>
+<p>以双核烧录为例：根据需求选择CPU0或者CPU1,将对PLL、Boot、Flash等配置的信息烧录到Bootinfo_CPU0或Bootinfo_CPU1对应的地址中，将应用程序经过编译后的bin文件烧录到Firmware_CPU0或Firmware_CPU1对应的地址中。</p>
+</div>
+<div class="section" id="id3">
+<h1>3. 镜像生成<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h1>
+<div class="section" id="bootinfo">
+<h2>3.1. 普通bootinfo配置<a class="headerlink" href="#bootinfo" title="永久链接至标题">¶</a></h2>
+<p>选项详细描述如下：</p>
+<ul class="simple">
+<li><p>XTAL : 外部晶振选择，默认为38.4M</p></li>
+<li><p>PLL : PLL时钟配置，默认为160M</p></li>
+<li><p>CacheWayDis : 缓冲通道失能，默认为none</p></li>
+<li><p>Sign : 选择是否需要ECC校验，默认为none</p></li>
+<li><p>CrcIgnore : 是否需要CRC校验</p>
+<ul>
+<li><p>False : 需要做CRC校验</p></li>
+<li><p>True : 不需要做CRC校验</p></li>
+</ul>
+</li>
+<li><p>HashIgnore : 是否需要做Hash校验</p>
+<ul>
+<li><p>False : 需要做Hash校验</p></li>
+<li><p>True : 不需要做Hash校验</p></li>
+</ul>
+</li>
+<li><p>Flash clock type : 选择Flash时钟，默认为80M</p></li>
+<li><p>Flash Type : 根据原理图选择Flash对应的型号</p></li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h2>3.2. 加密bootinfo配置<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+</div>
+</div>
+<div class="section" id="id5">
+<h1>4. 烧录选项配置<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h1>
+<div class="section" id="id6">
+<h2>4.1. 烧录方式选择<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li><p>使用UART烧录</p>
+<ul>
+<li><p>Device选择UART，COMPort配置对应的端口，COMSpeed配置端口速度。</p></li>
+</ul>
+</li>
+<li><p>使用JLINK烧录</p>
+<ul>
+<li><p>Device选择Jlink，JlinkSpeed配置对应的速度。</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id7">
+<h2>4.2. 芯片擦除<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h2>
+<p>ChipErase设置为True，烧写时将Flash擦除；设置为False，烧写时不擦除Flash。</p>
+</div>
+<div class="section" id="sha">
+<h2>4.3. SHA检验<a class="headerlink" href="#sha" title="永久链接至标题">¶</a></h2>
+<p>Verify设置为True时，计算并校验SHA值；设置为False时，读取文件并和原文件对比。</p>
+</div>
+</div>
+<div class="section" id="id8">
+<h1>5. 镜像烧录<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h1>
+<div class="section" id="flash">
+<h2>5.1. 单核flash镜像<a class="headerlink" href="#flash" title="永久链接至标题">¶</a></h2>
+<p>Image Type选择SingleCPU，Image Addr填写0x20000以后的任意地址，BootInfo Addr填写0x0，点击Creat，确认正确选择烧录方式后，点击Program,完成烧录。</p>
+</div>
+<div class="section" id="id9">
+<h2>5.2. 双核flash镜像<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h2>
+<p>Image Type根据需求选择CPU0或CPU1，若选择CPU0，Image Addr填写0x20000以后的任意地址，BootInfo Addr填写0x0；若选择CPU1，Image Addr填写0x80000以后的任意地址，BootInfo Addr填写0x001000，点击Creat，确认正确选择烧录方式后，点击Program,完成烧录。</p>
+</div>
+<div class="section" id="boot2">
+<h2>5.3. boot2 烧录<a class="headerlink" href="#boot2" title="永久链接至标题">¶</a></h2>
+<p>Image Type选择BLSP_Boot2，Image Addr填写0x20000以后的任意地址，BootInfo Addr填写0x0，点击Creat，确认正确选择烧录方式后，点击Program,完成烧录。</p>
+</div>
+<div class="section" id="raw-bin">
+<h2>5.4. Raw bin烧录<a class="headerlink" href="#raw-bin" title="永久链接至标题">¶</a></h2>
+<p>Image Type选择RAW，不需要配置Bootinfo，不点击Creat，直接配置烧录方式，配置完毕，点击Program程序会下载到Image Addr设置的地址中。</p>
+</div>
+<div class="section" id="uart-sdio">
+<h2>5.5. UART/SDIO生成<a class="headerlink" href="#uart-sdio" title="永久链接至标题">¶</a></h2>
+<p>Boot Source选择UART/SDIO，由UART生成bin文件。</p>
+</div>
+</div>
+<div class="section" id="timer">
+<h1>6. Timer配置示例<a class="headerlink" href="#timer" title="永久链接至标题">¶</a></h1>
+<p>打开KEIL工程，编译生成对应的bin文件，烧写配置如下：</p>
+<div class="figure align-center" id="id12">
+<img alt="../../_images/interface2.png" src="../../_images/interface2.png" />
+<p class="caption"><span class="caption-text">配置界面</span><a class="headerlink" href="#id12" title="永久链接至图片">¶</a></p>
+</div>
+<p>点击Creat,会出现如下信息</p>
+<div class="figure align-center" id="id13">
+<img alt="../../_images/interface3.png" src="../../_images/interface3.png" />
+<p class="caption"><span class="caption-text">Log信息</span><a class="headerlink" href="#id13" title="永久链接至图片">¶</a></p>
+</div>
+<p>选择合适的烧录方式并进行配置</p>
+<div class="figure align-center" id="id14">
+<img alt="../../_images/interface4.png" src="../../_images/interface4.png" />
+<p class="caption"><span class="caption-text">配置界面</span><a class="headerlink" href="#id14" title="永久链接至图片">¶</a></p>
+</div>
+<p>点击Program,出现如下信息</p>
+<div class="figure align-center" id="id15">
+<img alt="../../_images/interface5.png" src="../../_images/interface5.png" />
+<p class="caption"><span class="caption-text">Log信息</span><a class="headerlink" href="#id15" title="永久链接至图片">¶</a></p>
+</div>
+<p>通过串口工具，打印程序对应的信息</p>
+<div class="figure align-center" id="id16">
+<img alt="../../_images/interface6.png" src="../../_images/interface6.png" />
+<p class="caption"><span class="caption-text">串口信息</span><a class="headerlink" href="#id16" title="永久链接至图片">¶</a></p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../../index.html" class="btn btn-neutral float-left" title="&lt;no title&gt;" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, bouffalolab
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

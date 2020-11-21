@@ -1,0 +1,1349 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>1. UART/SDIO boot image format &mdash; BL602 ISP protocol  文档</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="prev" title="BL602 ISP protocol" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> BL602 ISP protocol
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">BL602 ISP protocol</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. UART/SDIO boot image format</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#start-pin">1.1. Start pin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uart-handshake">1.2. UART handshake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sdio-handshake">1.3. SDIO handshake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#generate-download-image-file">1.4. Generate download image file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uart-sdio-download-program-communication-protocol">1.5. UART/SDIO download program communication protocol</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#get-boot-info">1.5.1. Get boot info</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#load-boot-header">1.5.2. Load boot header</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#load-public-key-optional">1.5.3. Load public key (Optional)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#load-signature-optional">1.5.4. Load signature (Optional)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#load-aes-iv-optional">1.5.5. Load AES IV (Optional)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#load-segment-header">1.5.6. Load Segment Header</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#load-segment-data">1.5.7. Load Segment Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#check-image">1.5.8. Check image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#run-image">1.5.9. Run image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#error-response-frame">1.5.10. Error response frame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#download-process-schematic">1.5.11. Download process schematic</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#eflash-loader">2. Eflash_loader</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#download-and-run-eflash-loader">2.1. Download and run Eflash_loader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#eflash-loader-communication-protocol">2.2. Eflash_loader communication protocol</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#chip-erase">2.2.1. Chip Erase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#flash-erase">2.2.2. Flash Erase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#flash-program">2.2.3. Flash Program</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#flash-program-check">2.2.4. Flash Program Check</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#flash-read">2.2.5. Flash Read</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sha256-read">2.2.6. SHA256 Read</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">2.2.7. Error response frame</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL602 ISP protocol</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>1. UART/SDIO boot image format</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="uart-sdio-boot-image-format">
+<h1>1. UART/SDIO boot image format<a class="headerlink" href="#uart-sdio-boot-image-format" title="永久链接至标题">¶</a></h1>
+<p>The BL602 series chips support UART/SDIO boot. A section of executable program can be downloaded to RAM to run through UART/SDIO interface. The structure of the download program needs to meet the format defined by BL602 Bootrom. For applications that have not activated security settings, that is, applications that do not enable encryption and signatures, the format of the download image is shown in the following figure:</p>
+<div class="figure align-center" id="id2">
+<img alt="../_images/uart_sdio_Boot_image_nosecret.png" src="../_images/uart_sdio_Boot_image_nosecret.png" />
+<p class="caption"><span class="caption-text">UART/SDIO boot image (no encryption &amp; no signature)</span></p>
+</div>
+<p>The download image consists of three parts:</p>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>BootInfo</dt>
+<dd>It mainly includes the Magic Code of BootInfo, flash configuration information (UART download does not require Flash information, it is only compatible with Flash boot images), PLL configuration information, boot parameter information, and mirror configuration information.</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>SegmentHeader</dt>
+<dd>The section header information of the downloaded program or data section is mainly used to specify the data section to be transmitted next, which address in the memory to be placed, and the data length and other information.</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>SegmenData</dt>
+<dd>Download the main body of the program or data segment.</dd>
+</dl>
+</li>
+</ul>
+<p>There can be multiple SegmentHeader and SegmenData, and the specific number information is set in the mirror configuration information of BootInfo.</p>
+<p>For the downloaded image with encryption and signature settings enabled, the file format is as follows:</p>
+<div class="figure align-center" id="id3">
+<img alt="../_images/uart_sdio_Boot_image.png" src="../_images/uart_sdio_Boot_image.png" />
+<p class="caption"><span class="caption-text">UART/SDIO boot image (encryption &amp; signature)</span></p>
+</div>
+<p>Compared with ordinary download images, for encrypted and signed images, BootInfo needs to include information such as public keys, signatures, and AES IV.</p>
+<p>For downloaded images with encryption enabled but not signed, the file format is as follows:</p>
+<div class="figure align-center" id="id4">
+<img alt="../_images/uart_sdio_Boot_image_secret.png" src="../_images/uart_sdio_Boot_image_secret.png" />
+<p class="caption"><span class="caption-text">UART/SDIO boot image (encryption &amp; no signature)</span></p>
+</div>
+<p>For a downloaded image with signature enabled but not encrypted, the file format is as follows:</p>
+<div class="figure align-center" id="id5">
+<img alt="../_images/uart_sdio_Boot_image_sign.png" src="../_images/uart_sdio_Boot_image_sign.png" />
+<p class="caption"><span class="caption-text">UART/SDIO boot image (signature &amp; unencrypted)</span></p>
+</div>
+<div class="section" id="start-pin">
+<h2>1.1. Start pin<a class="headerlink" href="#start-pin" title="永久链接至标题">¶</a></h2>
+<p>The BL602 series supports one UART and one SDIO start.</p>
+<table border="1" class="docutils" id="id6">
+<caption><span class="caption-text">UART/SDIO start pin assignment</span><a class="headerlink" href="#id6" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="21%" />
+<col width="43%" />
+<col width="36%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>GPIO pin</td>
+<td>Function</td>
+<td>Comments</td>
+</tr>
+<tr class="row-even"><td>GPIO8</td>
+<td>Boot Pin</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>GPIO7</td>
+<td>BL602 UART RXD</td>
+<td rowspan="2">UART Channel1</td>
+</tr>
+<tr class="row-even"><td>GPIO16</td>
+<td>BL602 UART TXD</td>
+</tr>
+<tr class="row-odd"><td>GPIO0</td>
+<td>SDIO_CLK</td>
+<td rowspan="6">SDIO Channel</td>
+</tr>
+<tr class="row-even"><td>GPIO1</td>
+<td>SDIO_CMD</td>
+</tr>
+<tr class="row-odd"><td>GPIO2</td>
+<td>SDIO_DATA0</td>
+</tr>
+<tr class="row-even"><td>GPIO3</td>
+<td>SDIO_DATA1</td>
+</tr>
+<tr class="row-odd"><td>GPIO4</td>
+<td>SDIO_DATA2</td>
+</tr>
+<tr class="row-even"><td>GPIO5</td>
+<td>SDIO_DATA3</td>
+</tr>
+</tbody>
+</table>
+<p>If you want to start from UART/SDIO, you need to pull GPIO8 high and then reset the chip. Bootrom will scan the two interfaces of UART and SDIO in turn, and wait for the handshake signal on this interface. After the handshake timeout (2ms), the next interface will be performed If the handshake is successful on an interface, it will enter the receiving data processing flow. During the data processing, once the transmission error or timeout (2s), the next interface scan will be performed, and so on in turn, until the received legal Start the mirror to complete the startup task.</p>
+</div>
+<div class="section" id="uart-handshake">
+<h2>1.2. UART handshake<a class="headerlink" href="#uart-handshake" title="永久链接至标题">¶</a></h2>
+<p>The configuration of UART communication is 1bit start bit, 8bit data bit, 1bit stop bit, no parity bit.</p>
+<p>After Bootrom is started from UART/SDIO, it will cyclically detect the level change of GPIO7 pin. When the host sends a 0x55 data string and is captured, Bootrom starts to calculate the current serial port baud rate. Set the value of the UART register according to the detection result. The baud rate reply &quot;OK&quot;. The host can communicate normally after receiving &quot;OK&quot;. The UART communication timeout time is 2s. If the Bootrom does not receive any data within 2s after replying &quot;OK&quot;. Or in the communication process, if no data is received within 2s, it is considered that the communication is timed out, and the handshake process is re-entered after the timeout.</p>
+<p>The recommended time for the host to send handshake data is 5ms so that Bootrom has enough time to detect the handshake signal. After the host receives &quot;OK&quot;, it is recommended to delay 20ms before communicating to prevent subsequent communication data from being mixed with previous handshake data.</p>
+<p>Since Bootrom uses RC32M clock when booting from UART/SDIO, it is recommended that the handshake baud rate should not exceed 500K. The handshake process is as follows:</p>
+<div class="figure align-center">
+<img alt="../_images/uarthands.png" src="../_images/uarthands.png" />
+</div>
+</div>
+<div class="section" id="sdio-handshake">
+<h2>1.3. SDIO handshake<a class="headerlink" href="#sdio-handshake" title="永久链接至标题">¶</a></h2>
+<p>Bootrom will wait for the SDIO Host to write the handshake register (SDU_BASE+0x160). When the SDIO query finds that the handshake register is written as 1, the handshake is considered successful. Bootrom will wait for the host to send data and process it according to the received data command. If a timeout occurs (no data is received within 2s), it will re-enter the handshake process.</p>
+</div>
+<div class="section" id="generate-download-image-file">
+<h2>1.4. Generate download image file<a class="headerlink" href="#generate-download-image-file" title="永久链接至标题">¶</a></h2>
+<p>Bouffalo provides UART/SDIO download mirror generation tools, users can download <a class="reference external" href="https://dev.bouffalolab.com/download">Bouffalo Lab Dev Cube For Windows</a>,
+get the latest Dev Cube, run BLDevCube.exe, select BL602/604 in Chip Type, and enter the programming interface. Select the MCU option in the View menu to enter the MCU program download interface.</p>
+<div class="figure align-center">
+<img alt="../_images/create_image.png" src="../_images/create_image.png" />
+</div>
+<p>If only the UART/SDIO download image is generated, only the burning image parameters on the right can be configured. The specific configuration is as follows:</p>
+<ul class="simple">
+<li>Boot Source：Select UART/SDIO, which means to generate UART/SDIO boot image</li>
+<li>BootInfo Addr：The storage address of the program startup parameters, fill in 0x0 here</li>
+<li>Image Type：The default is SingleCPU</li>
+<li>Image Addr：The download address of the application program, the user can fill in according to the actual program running address, such as 0x22020800</li>
+<li>Image File：Select the RAM program being compiled and generated by the user</li>
+</ul>
+<p>After completing the option configuration, click the Create&amp;Download button to generate the corresponding image file. The generated file path is: bl602/img_create2/img_if.bin.
+img_if.bin is the file that meets the UART/SDIO boot image format.</p>
+<p>To enable encryption and signature functions, expand the advanced options option in the tool, and after completing the configuration, click the Create&amp;Download button as well.</p>
+</div>
+<div class="section" id="uart-sdio-download-program-communication-protocol">
+<h2>1.5. UART/SDIO download program communication protocol<a class="headerlink" href="#uart-sdio-download-program-communication-protocol" title="永久链接至标题">¶</a></h2>
+<p>After Bootrom completes the UART/SDIO communication handshake, it can enter the normal download program communication process. The communication process is described in detail below.
+It should be noted that the maximum length of protocol data that Bootrom can receive is 4096 bytes.</p>
+<div class="section" id="get-boot-info">
+<h3>1.5.1. Get boot info<a class="headerlink" href="#get-boot-info" title="永久链接至标题">¶</a></h3>
+<table border="1" class="docutils" id="id7">
+<caption><span class="caption-text">Host-&gt;BL602</span><a class="headerlink" href="#id7" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="25%" />
+<col width="21%" />
+<col width="25%" />
+<col width="29%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>cmdId(1byte)</td>
+<td>Rsvd(1byte)</td>
+<td>Len_lsb(1byte)</td>
+<td>Len_msb(1byte)</td>
+</tr>
+<tr class="row-even"><td>0x10</td>
+<td>0x00</td>
+<td>0x00</td>
+<td>0x00</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils" id="id8">
+<caption><span class="caption-text">BL602-&gt;Host</span><a class="headerlink" href="#id8" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="17%" />
+<col width="18%" />
+<col width="17%" />
+<col width="28%" />
+<col width="20%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>‘OK’(2bytes)</td>
+<td>Len_lsb(1byte)</td>
+<td>Len_msb(1byte)</td>
+<td>BootRom Version(4bytes)</td>
+<td>OTP info(16bytes)</td>
+</tr>
+<tr class="row-even"><td>0x4F 0x4B</td>
+<td>0x14</td>
+<td>0x00</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<p>This is the first command that the host communicates with BL602, read BL602 related information. The host must judge whether BL602 requires to receive the signed image according to sign_type.
+According to encrypted, judge whether BL602 requires to receive encrypted image. If it is known that the chip does not start encryption and signature, then the analysis of the information can be skipped.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>&#160;</td>
+<td>2b’00</td>
+<td>Other</td>
+</tr>
+<tr class="row-even"><td>sign_type</td>
+<td>No signature</td>
+<td>Signature</td>
+</tr>
+<tr class="row-odd"><td>encrypted</td>
+<td>Not encrypted</td>
+<td>Encrypted</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="load-boot-header">
+<h3>1.5.2. Load boot header<a class="headerlink" href="#load-boot-header" title="永久链接至标题">¶</a></h3>
+<table border="1" class="docutils" id="id9">
+<caption><span class="caption-text">Host-&gt;BL602</span><a class="headerlink" href="#id9" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="19%" />
+<col width="15%" />
+<col width="19%" />
+<col width="21%" />
+<col width="26%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>cmdId(1byte)</td>
+<td>Rsvd(1byte)</td>
+<td>Len_lsb(1byte)</td>
+<td>Len_msb(1byte)</td>
+<td>BootHeader(176bytes)</td>
+</tr>
+<tr class="row-even"><td>0x11</td>
+<td>0x00</td>
+<td>0xb0</td>
+<td>0x00</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils" id="id10">
+<caption><span class="caption-text">BL602-&gt;Host</span><a class="headerlink" href="#id10" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>‘OK’(2bytes)</td>
+</tr>
+<tr class="row-even"><td>0x4F 0x4B</td>
+</tr>
+</tbody>
+</table>
+<p>The 176bytes BootHeader structure is as follows:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span> <span class="n">__PACKED_STRUCT</span> <span class="n">boot_flash_cfg_t</span>
+<span class="p">{</span>
+     <span class="kt">uint32_t</span> <span class="n">magiccode</span><span class="p">;</span>       <span class="cm">/*&#39;FCFG&#39;*/</span>
+     <span class="n">SPI_Flash_Cfg_Type</span> <span class="n">cfg</span><span class="p">;</span>
+     <span class="kt">uint32_t</span> <span class="n">crc32</span><span class="p">;</span>
+<span class="p">};</span>
+
+ <span class="n">__PACKED_STRUCT</span> <span class="n">sys_clk_cfg_t</span>
+<span class="p">{</span>
+     <span class="kt">uint8_t</span> <span class="n">xtal_type</span><span class="p">;</span>
+     <span class="kt">uint8_t</span> <span class="n">pll_clk</span><span class="p">;</span>
+     <span class="kt">uint8_t</span> <span class="n">hclk_div</span><span class="p">;</span>
+     <span class="kt">uint8_t</span> <span class="n">bclk_div</span><span class="p">;</span>
+
+     <span class="kt">uint8_t</span> <span class="n">flash_clk_type</span><span class="p">;</span>
+     <span class="kt">uint8_t</span> <span class="n">flash_clk_div</span><span class="p">;</span>
+     <span class="kt">uint8_t</span> <span class="n">rsvd</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+<span class="p">};</span>
+
+ <span class="n">__PACKED_STRUCT</span> <span class="n">boot_clk_cfg_t</span>
+<span class="p">{</span>
+     <span class="kt">uint32_t</span> <span class="n">magiccode</span><span class="p">;</span>       <span class="cm">/*&#39;PCFG&#39;*/</span>
+
+     <span class="k">struct</span> <span class="n">sys_clk_cfg_t</span> <span class="n">cfg</span><span class="p">;</span>
+
+     <span class="kt">uint32_t</span> <span class="n">crc32</span><span class="p">;</span>
+<span class="p">};</span>
+
+ <span class="n">__PACKED_STRUCT</span> <span class="n">bootheader_t</span>
+<span class="p">{</span>
+     <span class="kt">uint32_t</span> <span class="n">magiccode</span><span class="p">;</span>                             <span class="cm">/*&#39;BFXP&#39;*/</span>
+     <span class="kt">uint32_t</span> <span class="n">rivison</span><span class="p">;</span>
+     <span class="k">struct</span> <span class="n">boot_flash_cfg_t</span> <span class="n">flashCfg</span><span class="p">;</span>
+     <span class="k">struct</span> <span class="n">boot_clk_cfg_t</span>   <span class="n">clkCfg</span><span class="p">;</span>
+     <span class="n">__PACKED_UNION</span> <span class="p">{</span>
+         <span class="n">__PACKED_STRUCT</span> <span class="p">{</span>
+             <span class="kt">uint32_t</span> <span class="nl">sign</span>               <span class="p">:</span>  <span class="mi">2</span><span class="p">;</span>   <span class="cm">/* [1: 0]  for sign*/</span>
+             <span class="kt">uint32_t</span> <span class="nl">encrypt_type</span>       <span class="p">:</span>  <span class="mi">2</span><span class="p">;</span>   <span class="cm">/* [3: 2]  for encrypt */</span>
+             <span class="kt">uint32_t</span> <span class="nl">key_sel</span>            <span class="p">:</span>  <span class="mi">2</span><span class="p">;</span>   <span class="cm">/* [5: 4]  for key sel in boot interface*/</span>
+             <span class="kt">uint32_t</span> <span class="nl">rsvd6_7</span>            <span class="p">:</span>  <span class="mi">2</span><span class="p">;</span>   <span class="cm">/* [7: 6]  for encrypt*/</span>
+             <span class="kt">uint32_t</span> <span class="nl">no_segment</span>         <span class="p">:</span>  <span class="mi">1</span><span class="p">;</span>   <span class="cm">/* [8]     no segment info */</span>
+             <span class="kt">uint32_t</span> <span class="nl">cache_enable</span>       <span class="p">:</span>  <span class="mi">1</span><span class="p">;</span>   <span class="cm">/* [9]     for cache */</span>
+             <span class="kt">uint32_t</span> <span class="nl">notload_in_bootrom</span> <span class="p">:</span>  <span class="mi">1</span><span class="p">;</span>   <span class="cm">/* [10]    not load this img in bootrom */</span>
+             <span class="kt">uint32_t</span> <span class="nl">aes_region_lock</span>    <span class="p">:</span>  <span class="mi">1</span><span class="p">;</span>   <span class="cm">/* [11]    aes region lock */</span>
+             <span class="kt">uint32_t</span> <span class="nl">cache_way_disable</span>  <span class="p">:</span>  <span class="mi">4</span><span class="p">;</span>   <span class="cm">/* [15: 12]  cache way disable info*/</span>
+             <span class="kt">uint32_t</span> <span class="nl">crc_ignore</span>         <span class="p">:</span>  <span class="mi">1</span><span class="p">;</span>   <span class="cm">/* [16]    ignore crc */</span>
+             <span class="kt">uint32_t</span> <span class="nl">hash_ignore</span>        <span class="p">:</span>  <span class="mi">1</span><span class="p">;</span>   <span class="cm">/* [17]    hash crc */</span>
+             <span class="kt">uint32_t</span> <span class="nl">halt_ap</span>            <span class="p">:</span>  <span class="mi">1</span><span class="p">;</span>   <span class="cm">/* [18]    halt ap */</span>
+             <span class="kt">uint32_t</span> <span class="nl">rsvd19_31</span>          <span class="p">:</span>  <span class="mi">13</span><span class="p">;</span>  <span class="cm">/* [31:19]  rsvd */</span>
+         <span class="p">}</span> <span class="n">bval</span><span class="p">;</span>
+         <span class="kt">uint32_t</span> <span class="n">wval</span><span class="p">;</span>
+     <span class="p">}</span><span class="n">bootcfg</span> <span class="p">;</span>
+
+     <span class="kt">uint32_t</span> <span class="n">segment_cnt</span><span class="p">;</span>
+
+     <span class="kt">uint32_t</span> <span class="n">bootentry</span><span class="p">;</span>      <span class="cm">/* entry point of the image*/</span>
+
+     <span class="kt">uint32_t</span> <span class="n">flashoffset</span><span class="p">;</span>
+
+     <span class="kt">uint8_t</span> <span class="n">hash</span><span class="p">[</span><span class="n">BFLB_BOOTROM_HASH_SIZE</span><span class="p">];</span>    <span class="cm">/*hash of the image*/</span>
+
+     <span class="kt">uint32_t</span> <span class="n">rsv1</span><span class="p">;</span>
+     <span class="kt">uint32_t</span> <span class="n">rsv2</span><span class="p">;</span>
+     <span class="kt">uint32_t</span> <span class="n">crc32</span><span class="p">;</span>
+ <span class="p">};</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="load-public-key-optional">
+<h3>1.5.3. Load public key (Optional)<a class="headerlink" href="#load-public-key-optional" title="永久链接至标题">¶</a></h3>
+<table border="1" class="docutils" id="id11">
+<caption><span class="caption-text">Host-&gt;BL602</span><a class="headerlink" href="#id11" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="19%" />
+<col width="15%" />
+<col width="19%" />
+<col width="21%" />
+<col width="26%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>cmdId(1byte)</td>
+<td>Rsvd(1byte)</td>
+<td>Len_lsb(1byte)</td>
+<td>Len_msb(1byte)</td>
+<td>PKey(68bytes)</td>
+</tr>
+<tr class="row-even"><td>0x12</td>
+<td>0x00</td>
+<td>0x44</td>
+<td>0x00</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils" id="id12">
+<caption><span class="caption-text">BL602-&gt;Host</span><a class="headerlink" href="#id12" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>‘OK’(2bytes)</td>
+</tr>
+<tr class="row-even"><td>0x4F 0x4B</td>
+</tr>
+</tbody>
+</table>
+<p>The host sends this command only when the image is signed. If the signature is not started, the sending of this command should be skipped. The 68-byte Public Key structure is as follows:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">__PACKED_STRUCT</span> <span class="n">pkey_cfg_t</span>
+<span class="p">{</span>
+    <span class="kt">uint8_t</span> <span class="n">eckeyx</span><span class="p">[</span><span class="mi">32</span><span class="p">];</span>        <span class="c1">//ec key in boot info</span>
+    <span class="kt">uint8_t</span> <span class="n">eckeyy</span><span class="p">[</span><span class="mi">32</span><span class="p">];</span>        <span class="c1">//ec key in boot info</span>
+    <span class="kt">uint32_t</span> <span class="n">crc32</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="load-signature-optional">
+<h3>1.5.4. Load signature (Optional)<a class="headerlink" href="#load-signature-optional" title="永久链接至标题">¶</a></h3>
+<table border="1" class="docutils" id="id13">
+<caption><span class="caption-text">Host-&gt;BL602</span><a class="headerlink" href="#id13" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="19%" />
+<col width="15%" />
+<col width="19%" />
+<col width="21%" />
+<col width="26%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>cmdId(1byte)</td>
+<td>Rsvd(1byte)</td>
+<td>Len_lsb(1byte)</td>
+<td>Len_msb(1byte)</td>
+<td>Signature(Nbytes)</td>
+</tr>
+<tr class="row-even"><td>0x14</td>
+<td>0x00</td>
+<td>N&amp;0xFF</td>
+<td>(N&amp;0xFF00)&gt;&gt;8</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils" id="id14">
+<caption><span class="caption-text">BL602-&gt;Host</span><a class="headerlink" href="#id14" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>‘OK’(2bytes)</td>
+</tr>
+<tr class="row-even"><td>0x4F 0x4B</td>
+</tr>
+</tbody>
+</table>
+<p>The host sends this command only when the image is signed. If the signature is not started, the sending of this command should be skipped.</p>
+<p>The effective length of Signature is not fixed, and its structure is shown as follows:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">__PACKED_STRUCT</span> <span class="n">sign_cfg_t</span>
+<span class="p">{</span>
+        <span class="kt">uint32_t</span> <span class="n">sig_len</span><span class="p">;</span>
+        <span class="kt">uint8_t</span> <span class="n">signature</span><span class="p">[</span><span class="n">sig_len</span><span class="p">];</span>
+        <span class="kt">uint32_t</span> <span class="n">crc32</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>When the host sends the signature, it can read sig_len first to obtain the length of the signature to be sent as sig_len+8.</p>
+</div>
+<div class="section" id="load-aes-iv-optional">
+<h3>1.5.5. Load AES IV (Optional)<a class="headerlink" href="#load-aes-iv-optional" title="永久链接至标题">¶</a></h3>
+<table border="1" class="docutils" id="id15">
+<caption><span class="caption-text">Host-&gt;BL602</span><a class="headerlink" href="#id15" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="19%" />
+<col width="15%" />
+<col width="19%" />
+<col width="21%" />
+<col width="26%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>cmdId(1byte)</td>
+<td>Rsvd(1byte)</td>
+<td>Len_lsb(1byte)</td>
+<td>Len_msb(1byte)</td>
+<td>AES IV(20bytes)</td>
+</tr>
+<tr class="row-even"><td>0x16</td>
+<td>0x00</td>
+<td>0x14</td>
+<td>0x00</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils" id="id16">
+<caption><span class="caption-text">BL602-&gt;Host</span><a class="headerlink" href="#id16" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>‘OK’(2bytes)</td>
+</tr>
+<tr class="row-even"><td>0x4F 0x4B</td>
+</tr>
+</tbody>
+</table>
+<p>The host sends this command only when the image is encrypted. If encryption is not started, the sending of this command should be skipped.</p>
+<p>The 20bytes AES IV structure is as follows:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span> <span class="n">__PACKED_STRUCT</span> <span class="n">aesiv_cfg_t</span>
+<span class="p">{</span>
+      <span class="kt">uint8_t</span> <span class="n">aesiv</span><span class="p">[</span><span class="mi">16</span><span class="p">];</span>
+      <span class="kt">uint32_t</span> <span class="n">crc32</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="load-segment-header">
+<h3>1.5.6. Load Segment Header<a class="headerlink" href="#load-segment-header" title="永久链接至标题">¶</a></h3>
+<table border="1" class="docutils" id="id17">
+<caption><span class="caption-text">Host-&gt;BL602</span><a class="headerlink" href="#id17" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="19%" />
+<col width="15%" />
+<col width="19%" />
+<col width="21%" />
+<col width="26%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>cmdId(1byte)</td>
+<td>Rsvd(1byte)</td>
+<td>Len_lsb(1byte)</td>
+<td>Len_msb(1byte)</td>
+<td>Seg header(16bytes)</td>
+</tr>
+<tr class="row-even"><td>0x17</td>
+<td>0x00</td>
+<td>0x10</td>
+<td>0x00</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils" id="id18">
+<caption><span class="caption-text">BL602-&gt;Host</span><a class="headerlink" href="#id18" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>‘OK’(2bytes)</td>
+</tr>
+<tr class="row-even"><td>0x4F 0x4B</td>
+</tr>
+</tbody>
+</table>
+<p>The UART/SDIO boot image supports multiple segments, and the data and code of each segment can be loaded by the boot program to the address specified by the Segheader. The number of segments in the image is determined by the segment_cnt (refer to 2.2) member in BootHeader. The host needs to record this variable during the Load boot header process, and then loop Load Segment Header and Load Segment Data for segment_cnt times.</p>
+<p>The 16bytes seg header is described by the following structure:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">__PACKED_STRUCT</span> <span class="n">segment_header_t</span>
+<span class="p">{</span>
+         <span class="kt">uint32_t</span> <span class="n">destaddr</span><span class="p">;</span>
+         <span class="kt">uint32_t</span> <span class="n">len</span><span class="p">;</span>
+         <span class="kt">uint32_t</span> <span class="n">rsvd</span><span class="p">;</span>
+         <span class="kt">uint32_t</span> <span class="n">crc32</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="load-segment-data">
+<h3>1.5.7. Load Segment Data<a class="headerlink" href="#load-segment-data" title="永久链接至标题">¶</a></h3>
+<table border="1" class="docutils" id="id19">
+<caption><span class="caption-text">Host-&gt;BL602</span><a class="headerlink" href="#id19" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="19%" />
+<col width="15%" />
+<col width="19%" />
+<col width="21%" />
+<col width="26%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>cmdId(1byte)</td>
+<td>Rsvd(1byte)</td>
+<td>Len_lsb(1byte)</td>
+<td>Len_msb(1byte)</td>
+<td>Seg Data(Nbytes)</td>
+</tr>
+<tr class="row-even"><td>0x18</td>
+<td>0x00</td>
+<td>N&amp;0xFF</td>
+<td>(N&amp;0xFF00)&gt;&gt;8</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils" id="id20">
+<caption><span class="caption-text">BL602-&gt;Host</span><a class="headerlink" href="#id20" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>‘OK’(2bytes)</td>
+</tr>
+<tr class="row-even"><td>0x4F 0x4B</td>
+</tr>
+</tbody>
+</table>
+<p>For a segment data, due to the limitation of 4096 bytes in a protocol frame, it may be necessary to send Load Segment Data multiple times to transmit data.</p>
+<p>Here, it is necessary to ensure that the sum of the data length in the data frame transmitted multiple times is equal to the len described in the Segment Header.</p>
+</div>
+<div class="section" id="check-image">
+<h3>1.5.8. Check image<a class="headerlink" href="#check-image" title="永久链接至标题">¶</a></h3>
+<table border="1" class="docutils" id="id21">
+<caption><span class="caption-text">Host-&gt;BL602</span><a class="headerlink" href="#id21" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="25%" />
+<col width="21%" />
+<col width="25%" />
+<col width="29%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>cmdId(1byte)</td>
+<td>Rsvd(1byte)</td>
+<td>Len_lsb(1byte)</td>
+<td>Len_msb(1byte)</td>
+</tr>
+<tr class="row-even"><td>0x19</td>
+<td>0x00</td>
+<td>0x00</td>
+<td>0x00</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils" id="id22">
+<caption><span class="caption-text">BL602-&gt;Host</span><a class="headerlink" href="#id22" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>‘OK’(2bytes)</td>
+</tr>
+<tr class="row-even"><td>0x4F 0x4B</td>
+</tr>
+</tbody>
+</table>
+<p>After the image is downloaded to RAM, the integrity and legality of the image must be checked.</p>
+</div>
+<div class="section" id="run-image">
+<h3>1.5.9. Run image<a class="headerlink" href="#run-image" title="永久链接至标题">¶</a></h3>
+<table border="1" class="docutils" id="id23">
+<caption><span class="caption-text">Host-&gt;BL602</span><a class="headerlink" href="#id23" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="25%" />
+<col width="21%" />
+<col width="25%" />
+<col width="29%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>cmdId(1byte)</td>
+<td>Rsvd(1byte)</td>
+<td>Len_lsb(1byte)</td>
+<td>Len_msb(1byte)</td>
+</tr>
+<tr class="row-even"><td>0x1A</td>
+<td>0x00</td>
+<td>0x00</td>
+<td>0x00</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils" id="id24">
+<caption><span class="caption-text">BL602-&gt;Host</span><a class="headerlink" href="#id24" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>‘OK’(2bytes)</td>
+</tr>
+<tr class="row-even"><td>0x4F 0x4B</td>
+</tr>
+</tbody>
+</table>
+<p>When the Check image command returns OK, the image downloaded to the RAM can be run through this command. After BL602 executes the command, it jumps from the UART/SDIO startup program to the downloaded image program to run.</p>
+</div>
+<div class="section" id="error-response-frame">
+<h3>1.5.10. Error response frame<a class="headerlink" href="#error-response-frame" title="永久链接至标题">¶</a></h3>
+<p>The above response frames of BL602Host are all responses under correct conditions. If an error occurs during communication, the format of the Bootrom error return data is as follows, and the user can query the cause of the error according to the error code:</p>
+<table border="1" class="docutils" id="id25">
+<caption><span class="caption-text">Host-&gt;BL602</span><a class="headerlink" href="#id25" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="26%" />
+<col width="39%" />
+<col width="35%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>‘FL’(2bytes)</td>
+<td>Error_Code_LSB(1byte)</td>
+<td>Error_Code_MSB(1byte)</td>
+</tr>
+<tr class="row-even"><td>0x46 0x4C</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<p>Error_Code is listed as follows:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*error code definition*/</span>
+<span class="k">typedef</span>  <span class="k">enum</span> <span class="n">tag_bootrom_error_code_t</span>
+<span class="p">{</span>
+     <span class="n">BFLB_BOOTROM_SUCCESS</span><span class="o">=</span><span class="mh">0x00</span><span class="p">,</span>
+
+     <span class="cm">/*flash*/</span>
+     <span class="n">BFLB_BOOTROM_FLASH_INIT_ERROR</span><span class="o">=</span><span class="mh">0x0001</span><span class="p">,</span>
+     <span class="n">BFLB_BOOTROM_FLASH_ERASE_PARA_ERROR</span><span class="o">=</span><span class="mh">0x0002</span><span class="p">,</span>
+     <span class="n">BFLB_BOOTROM_FLASH_ERASE_ERROR</span><span class="o">=</span><span class="mh">0x0003</span><span class="p">,</span>
+     <span class="n">BFLB_BOOTROM_FLASH_WRITE_PARA_ERROR</span><span class="o">=</span><span class="mh">0x0004</span><span class="p">,</span>
+     <span class="n">BFLB_BOOTROM_FLASH_WRITE_ADDR_ERROR</span><span class="o">=</span><span class="mh">0x0005</span><span class="p">,</span>
+     <span class="n">BFLB_BOOTROM_FLASH_WRITE_ERROR</span><span class="o">=</span><span class="mh">0x0006</span><span class="p">,</span>
+     <span class="n">BFLB_BOOTROM_FLASH_BOOT_PARA</span><span class="o">=</span><span class="mh">0x0007</span><span class="p">,</span>
+
+     <span class="cm">/*cmd*/</span>
+     <span class="n">BFLB_BOOTROM_CMD_ID_ERROR</span> <span class="o">=</span><span class="mh">0x0101</span><span class="p">,</span>
+     <span class="n">BFLB_BOOTROM_CMD_LEN_ERROR</span><span class="o">=</span><span class="mh">0x0102</span><span class="p">,</span>
+     <span class="n">BFLB_BOOTROM_CMD_CRC_ERROR</span><span class="o">=</span><span class="mh">0x0103</span><span class="p">,</span>
+     <span class="n">BFLB_BOOTROM_CMD_SEQ_ERROR</span><span class="o">=</span><span class="mh">0x0104</span><span class="p">,</span>
+
+     <span class="cm">/*image*/</span>
+     <span class="n">BFLB_BOOTROM_IMG_BOOTHEADER_LEN_ERROR</span><span class="o">=</span><span class="mh">0x0201</span><span class="p">,</span>
+     <span class="n">BFLB_BOOTROM_IMG_BOOTHEADER_NOT_LOAD_ERROR</span><span class="o">=</span><span class="mh">0x0202</span><span class="p">,</span>
+     <span class="n">BFLB_BOOTROM_IMG_BOOTHEADER_MAGIC_ERROR</span><span class="o">=</span><span class="mh">0x0203</span><span class="p">,</span>
+     <span class="n">BFLB_BOOTROM_IMG_BOOTHEADER_CRC_ERROR</span><span class="o">=</span><span class="mh">0x0204</span><span class="p">,</span>
+     <span class="n">BFLB_BOOTROM_IMG_BOOTHEADER_ENCRYPT_NOTFIT</span><span class="o">=</span><span class="mh">0x0205</span><span class="p">,</span>
+     <span class="n">BFLB_BOOTROM_IMG_BOOTHEADER_SIGN_NOTFIT</span><span class="o">=</span><span class="mh">0x0206</span><span class="p">,</span>
+     <span class="n">BFLB_BOOTROM_IMG_SEGMENT_CNT_ERROR</span><span class="o">=</span><span class="mh">0x0207</span><span class="p">,</span>
+     <span class="n">BFLB_BOOTROM_IMG_AES_IV_LEN_ERROR</span><span class="o">=</span><span class="mh">0x0208</span><span class="p">,</span>
+     <span class="n">BFLB_BOOTROM_IMG_AES_IV_CRC_ERROR</span><span class="o">=</span><span class="mh">0x0209</span><span class="p">,</span>
+     <span class="n">BFLB_BOOTROM_IMG_PK_LEN_ERROR</span><span class="o">=</span><span class="mh">0x020a</span><span class="p">,</span>
+     <span class="n">BFLB_BOOTROM_IMG_PK_CRC_ERROR</span><span class="o">=</span><span class="mh">0x020b</span><span class="p">,</span>
+     <span class="n">BFLB_BOOTROM_IMG_PK_HASH_ERROR</span><span class="o">=</span><span class="mh">0x020c</span><span class="p">,</span>
+     <span class="n">BFLB_BOOTROM_IMG_SIGNATURE_LEN_ERROR</span><span class="o">=</span><span class="mh">0x020d</span><span class="p">,</span>
+     <span class="n">BFLB_BOOTROM_IMG_SIGNATURE_CRC_ERROR</span><span class="o">=</span><span class="mh">0x020e</span><span class="p">,</span>
+     <span class="n">BFLB_BOOTROM_IMG_SECTIONHEADER_LEN_ERROR</span><span class="o">=</span><span class="mh">0x020f</span><span class="p">,</span>
+     <span class="n">BFLB_BOOTROM_IMG_SECTIONHEADER_CRC_ERROR</span><span class="o">=</span><span class="mh">0x0210</span><span class="p">,</span>
+     <span class="n">BFLB_BOOTROM_IMG_SECTIONHEADER_DST_ERROR</span><span class="o">=</span><span class="mh">0x0211</span><span class="p">,</span>
+     <span class="n">BFLB_BOOTROM_IMG_SECTIONDATA_LEN_ERROR</span><span class="o">=</span><span class="mh">0x0212</span><span class="p">,</span>
+     <span class="n">BFLB_BOOTROM_IMG_SECTIONDATA_DEC_ERROR</span><span class="o">=</span><span class="mh">0x0213</span><span class="p">,</span>
+     <span class="n">BFLB_BOOTROM_IMG_SECTIONDATA_TLEN_ERROR</span><span class="o">=</span><span class="mh">0x0214</span><span class="p">,</span>
+     <span class="n">BFLB_BOOTROM_IMG_SECTIONDATA_CRC_ERROR</span><span class="o">=</span><span class="mh">0x0215</span><span class="p">,</span>
+     <span class="n">BFLB_BOOTROM_IMG_HALFBAKED_ERROR</span><span class="o">=</span><span class="mh">0x0216</span><span class="p">,</span>
+     <span class="n">BFLB_BOOTROM_IMG_HASH_ERROR</span><span class="o">=</span><span class="mh">0x0217</span><span class="p">,</span>
+     <span class="n">BFLB_BOOTROM_IMG_SIGN_PARSE_ERROR</span><span class="o">=</span><span class="mh">0x0218</span><span class="p">,</span>
+     <span class="n">BFLB_BOOTROM_IMG_SIGN_ERROR</span><span class="o">=</span><span class="mh">0x0219</span><span class="p">,</span>
+     <span class="n">BFLB_BOOTROM_IMG_DEC_ERROR</span><span class="o">=</span><span class="mh">0x021a</span><span class="p">,</span>
+     <span class="n">BFLB_BOOTROM_IMG_ALL_INVALID_ERROR</span><span class="o">=</span><span class="mh">0x021b</span><span class="p">,</span>
+
+     <span class="cm">/*IF*/</span>
+     <span class="n">BFLB_BOOTROM_IF_RATE_LEN_ERROR</span><span class="o">=</span><span class="mh">0x0301</span><span class="p">,</span>
+     <span class="n">BFLB_BOOTROM_IF_RATE_PARA_ERROR</span><span class="o">=</span><span class="mh">0x0302</span><span class="p">,</span>
+     <span class="n">BFLB_BOOTROM_IF_PASSWORDERROR</span><span class="o">=</span><span class="mh">0x0303</span><span class="p">,</span>
+     <span class="n">BFLB_BOOTROM_IF_PASSWORDCLOSE</span><span class="o">=</span><span class="mh">0x0304</span><span class="p">,</span>
+
+     <span class="cm">/*MISC*/</span>
+     <span class="n">BFLB_BOOTROM_PLL_ERROR</span><span class="o">=</span><span class="mh">0xfffc</span><span class="p">,</span>
+     <span class="n">BFLB_BOOTROM_INVASION_ERROR</span><span class="o">=</span><span class="mh">0xfffd</span><span class="p">,</span>
+     <span class="n">BFLB_BOOTROM_POLLING</span><span class="o">=</span><span class="mh">0xfffe</span><span class="p">,</span>
+     <span class="n">BFLB_BOOTROM_FAIL</span><span class="o">=</span><span class="mh">0xffff</span><span class="p">,</span>
+
+ <span class="p">}</span><span class="n">bootrom_error_code_t</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="download-process-schematic">
+<h3>1.5.11. Download process schematic<a class="headerlink" href="#download-process-schematic" title="永久链接至标题">¶</a></h3>
+<p>For a program that does not enable encryption and signature, when there is only one segment, the download process is as follows:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span>1.Set BL602 to boot from UART/SDIO
+2.Open the serial port, set the communication baud rate, and open the file to be downloaded fp=open(&quot;img_if.bin&quot;,&quot;rb&quot;)
+3.Send 5ms handshake signal, UART_Send(0x555555...)
+4.Waiting to receive 602&#39;s OK response, delay 20ms
+5.Send the get boot info command
+6.Waiting to receive a 4+20 byte response
+7.Read 176 bytes of data, data=fp.read(176), use the load boot header command to send 176 bytes of BootHeader
+8.Waiting to receive OK response
+9.Read 16 bytes of data, data=fp.read(16), parse the total length of SegmentData segDataLen, and use the load segment header command to send 16 bytes of SegmentHeader
+10.Waiting to receive OK response
+11.sendDataLen=0;
+   while sendDataLen&lt;segDataLen:
+        readDataLen=segDataLen-sendDataLen
+        if readDataLen&gt;4096-4:
+            readDataLen=4096-4:
+        Read readDataLen byte data, data = fp.read(readDataLen)
+        Use the load segment data command to send SegmentData of readDataLen bytes
+        sendDataLen+=readDataLen
+        Waiting to receive OK response
+12.Send the Check image command to check the image and wait for the OK response to be received
+13.Send the Run image command to run the program and wait for the OK response to be received
+</pre></div>
+</div>
+<p>In the above process, if Bootrom returns an error, the download process will be terminated.</p>
+</div>
+</div>
+</div>
+<div class="section" id="eflash-loader">
+<h1>2. Eflash_loader<a class="headerlink" href="#eflash-loader" title="永久链接至标题">¶</a></h1>
+<p>Eflash_loader is an executable program for Flash programming, reading, and verification. It can be downloaded to RAM and run through UART/SDIO. The Eflash_Loader image is not encrypted and signed, and there is only one segment. Its image structure is shown in the figure below:</p>
+<div class="figure align-center" id="id26">
+<img alt="../_images/Eflash_Loader.png" src="../_images/Eflash_Loader.png" />
+<p class="caption"><span class="caption-text">Eflash_Loader starts the mirror</span></p>
+</div>
+<div class="section" id="download-and-run-eflash-loader">
+<h2>2.1. Download and run Eflash_loader<a class="headerlink" href="#download-and-run-eflash-loader" title="永久链接至标题">¶</a></h2>
+<p>Through the above 1.5.11 steps, you can download Elfash_loader to RAM and run: handshake, Get boot info, Load boot header, Load Segment Header, Load Segment Data, Check image, Run Image.</p>
+</div>
+<div class="section" id="eflash-loader-communication-protocol">
+<h2>2.2. Eflash_loader communication protocol<a class="headerlink" href="#eflash-loader-communication-protocol" title="永久链接至标题">¶</a></h2>
+<p>After the host downloads Eflash_loader to RAM through UART/SDIO and runs, the host continues to communicate with Eflash_loader through UART interface. UART pins are the same as 1.1, and the handshake process is the same as 1.2. Eflash_loader is equipped with a high-precision PLL, which can use a higher baud rate for handshake communication. The recommended baud rate is 115200, 1M, 2M, 2.5M. After the handshake is successful, the host realizes the Flash programming function through the following protocol:</p>
+<div class="section" id="chip-erase">
+<h3>2.2.1. Chip Erase<a class="headerlink" href="#chip-erase" title="永久链接至标题">¶</a></h3>
+<table border="1" class="docutils" id="id27">
+<caption><span class="caption-text">Host-&gt;BL602</span><a class="headerlink" href="#id27" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="25%" />
+<col width="22%" />
+<col width="25%" />
+<col width="28%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>cmdId(1byte)</td>
+<td>cksum(1byte)</td>
+<td>Len_lsb(1byte)</td>
+<td>Len_msb(1byte)</td>
+</tr>
+<tr class="row-even"><td>0x3C</td>
+<td>Cksum for len</td>
+<td>0x00</td>
+<td>0x00</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils" id="id28">
+<caption><span class="caption-text">BL602-&gt;Host</span><a class="headerlink" href="#id28" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>‘OK’(2bytes)</td>
+</tr>
+<tr class="row-even"><td>0x4F 0x4B</td>
+</tr>
+</tbody>
+</table>
+<p>This command is used to erase the entire flash. The data involved in the checksum calculation here is all the data after cksum bytes (the following instructions are the same). Check is optional. If you don't want to enable check, you can set cksum to 0.</p>
+<p>Assuming that data with the length of data_len (including Len_lsb and Len_msb) is required to participate in the calculation, the pseudo code for calculating the checksum is as follows:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">uint32</span> <span class="n">sum</span><span class="p">;</span>
+<span class="n">uint8</span> <span class="n">cksum</span>
+<span class="k">while</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">data_len</span>
+       <span class="n">sum</span><span class="o">+=</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="n">chsum</span><span class="o">=</span><span class="n">sum</span><span class="o">&amp;</span><span class="mh">0xff</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="flash-erase">
+<h3>2.2.2. Flash Erase<a class="headerlink" href="#flash-erase" title="永久链接至标题">¶</a></h3>
+<table border="1" class="docutils" id="id29">
+<caption><span class="caption-text">Host-&gt;BL602</span><a class="headerlink" href="#id29" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="15%" />
+<col width="19%" />
+<col width="15%" />
+<col width="17%" />
+<col width="18%" />
+<col width="17%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>cmdId(1byte)</td>
+<td>cksum(1byte)</td>
+<td>Len_lsb(1byte)</td>
+<td>Len_msb(1byte)</td>
+<td>Start_addr(4bytes)</td>
+<td>End_addr(4bytes)</td>
+</tr>
+<tr class="row-even"><td>0x30</td>
+<td>Cksum datas behind</td>
+<td>0x08</td>
+<td>0x00</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils" id="id30">
+<caption><span class="caption-text">BL602-&gt;Host</span><a class="headerlink" href="#id30" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>‘OK’(2bytes)</td>
+</tr>
+<tr class="row-even"><td>0x4F 0x4B</td>
+</tr>
+</tbody>
+</table>
+<p>This command is used to erase the Flash in the specified address space.</p>
+<p>The address of Flash starts from 0. Here, 1M Flash is taken as an example to indicate the Flash address space:</p>
+<div class="figure align-center" id="id31">
+<img alt="../_images/Flash_address.png" src="../_images/Flash_address.png" />
+<p class="caption"><span class="caption-text">Flash address space indication</span></p>
+</div>
+</div>
+<div class="section" id="flash-program">
+<h3>2.2.3. Flash Program<a class="headerlink" href="#flash-program" title="永久链接至标题">¶</a></h3>
+<table border="1" class="docutils" id="id32">
+<caption><span class="caption-text">Host-&gt;BL602</span><a class="headerlink" href="#id32" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="15%" />
+<col width="19%" />
+<col width="15%" />
+<col width="17%" />
+<col width="18%" />
+<col width="17%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>cmdId(1byte)</td>
+<td>cksum(1byte)</td>
+<td>Len_lsb(1byte)</td>
+<td>Len_msb(1byte)</td>
+<td>Start_addr(4bytes)</td>
+<td>payload(Nbytes)</td>
+</tr>
+<tr class="row-even"><td>0x31</td>
+<td>Cksum datas behind</td>
+<td>(N+4)&amp;0xff</td>
+<td>((N+4)&gt;&gt;8)&amp;0xff</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils" id="id33">
+<caption><span class="caption-text">BL602-&gt;Host</span><a class="headerlink" href="#id33" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>‘OK’(2bytes)</td>
+</tr>
+<tr class="row-even"><td>0x4F 0x4B</td>
+</tr>
+</tbody>
+</table>
+<p>Write Nbytes of data to the specified address space of Flash. Due to the limitation of the buffer used in Eflash_loader, the maximum payload is 8Kbytes.</p>
+</div>
+<div class="section" id="flash-program-check">
+<h3>2.2.4. Flash Program Check<a class="headerlink" href="#flash-program-check" title="永久链接至标题">¶</a></h3>
+<table border="1" class="docutils" id="id34">
+<caption><span class="caption-text">Host-&gt;BL602</span><a class="headerlink" href="#id34" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="25%" />
+<col width="22%" />
+<col width="25%" />
+<col width="28%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>cmdId(1byte)</td>
+<td>cksum(1byte)</td>
+<td>Len_lsb(1byte)</td>
+<td>Len_msb(1byte)</td>
+</tr>
+<tr class="row-even"><td>0x3A</td>
+<td>Cksum for len</td>
+<td>0x00</td>
+<td>0x00</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils" id="id35">
+<caption><span class="caption-text">BL602-&gt;Host</span><a class="headerlink" href="#id35" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>‘OK’(2bytes)</td>
+</tr>
+<tr class="row-even"><td>0x4F 0x4B</td>
+</tr>
+</tbody>
+</table>
+<p>This command is used to confirm whether there is an error in the flash data programming process after all the flash programming data are sent. If all Flash programming is correct, it returns OK. Otherwise, it returns an FL+ error code, where the error code is BFLB_EFLASH_LOADER_FLASH_WRITE_ERROR, see the error response frame for details.</p>
+</div>
+<div class="section" id="flash-read">
+<h3>2.2.5. Flash Read<a class="headerlink" href="#flash-read" title="永久链接至标题">¶</a></h3>
+<table border="1" class="docutils" id="id36">
+<caption><span class="caption-text">Host-&gt;BL602</span><a class="headerlink" href="#id36" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="15%" />
+<col width="19%" />
+<col width="15%" />
+<col width="17%" />
+<col width="18%" />
+<col width="17%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>cmdId(1byte)</td>
+<td>cksum(1byte)</td>
+<td>Len_lsb(1byte)</td>
+<td>Len_msb(1byte)</td>
+<td>Start_addr(4bytes)</td>
+<td>Read_len(4bytes)</td>
+</tr>
+<tr class="row-even"><td>0x32</td>
+<td>Cksum datas behind</td>
+<td>0x08</td>
+<td>0x00</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils" id="id37">
+<caption><span class="caption-text">BL602-&gt;Host</span><a class="headerlink" href="#id37" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="26%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>‘OK’(2bytes)</td>
+<td>Len_lsb(1byte)</td>
+<td>Len_msb(1byte)</td>
+<td>payload(Nbytes)</td>
+</tr>
+<tr class="row-even"><td>0x4F 0x4B</td>
+<td>N&amp;0xff</td>
+<td>(N&gt;&gt;8)&amp;0xff</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<p>This command reads Nbytes of data from the specified address space of Flash. Due to the limitation of the buffer used in Eflash_loader, the maximum Read_len is 8K.</p>
+</div>
+<div class="section" id="sha256-read">
+<h3>2.2.6. SHA256 Read<a class="headerlink" href="#sha256-read" title="永久链接至标题">¶</a></h3>
+<table border="1" class="docutils" id="id38">
+<caption><span class="caption-text">Host-&gt;BL602</span><a class="headerlink" href="#id38" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="15%" />
+<col width="19%" />
+<col width="15%" />
+<col width="17%" />
+<col width="18%" />
+<col width="17%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>cmdId(1byte)</td>
+<td>cksum(1byte)</td>
+<td>Len_lsb(1byte)</td>
+<td>Len_msb(1byte)</td>
+<td>Start_addr(4bytes)</td>
+<td>Len(4bytes)</td>
+</tr>
+<tr class="row-even"><td>0x3D</td>
+<td>Cksum datas behind</td>
+<td>0x08</td>
+<td>0x00</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils" id="id39">
+<caption><span class="caption-text">BL602-&gt;Host</span><a class="headerlink" href="#id39" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="26%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>‘OK’(2bytes)</td>
+<td>Len_lsb(1byte)</td>
+<td>Len_msb(1byte)</td>
+<td>payload(32bytes)</td>
+</tr>
+<tr class="row-even"><td>0x4F 0x4B</td>
+<td>0x20</td>
+<td>0x00</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<p>This command is used to quickly verify whether the Flash programming is correct. The host sends the starting address and length of the flash data to be calculated, and BL602 returns the SHA256 value of the data. The host also synchronously calculates the SHA256 of the file just burned, and then compares it with the returned result to quickly verify whether the Flash is programmed correctly.</p>
+</div>
+<div class="section" id="id1">
+<h3>2.2.7. Error response frame<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h3>
+<p>The above response frames of BL602Host are responses under correct conditions, and the format of Eflash_loader error return frame is as follows:</p>
+<table border="1" class="docutils" id="id40">
+<caption><span class="caption-text">Host-&gt;BL602</span><a class="headerlink" href="#id40" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="26%" />
+<col width="39%" />
+<col width="35%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>‘FL’(2bytes)</td>
+<td>Error_Code_LSB(1byte)</td>
+<td>Error_Code_MSB(1byte)</td>
+</tr>
+<tr class="row-even"><td>0x46 0x4C</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<p>Error_Code is listed as follows:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span>  <span class="k">enum</span> <span class="n">tag_eflash_loader_error_code_t</span>
+<span class="p">{</span>
+    <span class="n">BFLB_EFLASH_LOADER_SUCCESS</span><span class="o">=</span><span class="mh">0x00</span><span class="p">,</span>
+
+    <span class="cm">/*flash*/</span>
+    <span class="n">BFLB_EFLASH_LOADER_FLASH_INIT_ERROR</span><span class="o">=</span><span class="mh">0x0001</span><span class="p">,</span>
+    <span class="n">BFLB_EFLASH_LOADER_FLASH_ERASE_PARA_ERROR</span><span class="o">=</span><span class="mh">0x0002</span><span class="p">,</span>
+    <span class="n">BFLB_EFLASH_LOADER_FLASH_ERASE_ERROR</span><span class="o">=</span><span class="mh">0x0003</span><span class="p">,</span>
+    <span class="n">BFLB_EFLASH_LOADER_FLASH_WRITE_PARA_ERROR</span><span class="o">=</span><span class="mh">0x0004</span><span class="p">,</span>
+    <span class="n">BFLB_EFLASH_LOADER_FLASH_WRITE_ADDR_ERROR</span><span class="o">=</span><span class="mh">0x0005</span><span class="p">,</span>
+    <span class="n">BFLB_EFLASH_LOADER_FLASH_WRITE_ERROR</span><span class="o">=</span><span class="mh">0x0006</span><span class="p">,</span>
+    <span class="n">BFLB_EFLASH_LOADER_FLASH_BOOT_PARA_ERROR</span><span class="o">=</span><span class="mh">0x0007</span><span class="p">,</span>
+    <span class="n">BFLB_EFLASH_LOADER_FLASH_SET_PARA_ERROR</span><span class="o">=</span><span class="mh">0x0008</span><span class="p">,</span>
+    <span class="n">BFLB_EFLASH_LOADER_FLASH_READ_STATUS_REG_ERROR</span><span class="o">=</span><span class="mh">0x0009</span><span class="p">,</span>
+    <span class="n">BFLB_EFLASH_LOADER_FLASH_WRITE_STATUS_REG_ERROR</span><span class="o">=</span><span class="mh">0x000A</span><span class="p">,</span>
+
+    <span class="cm">/*cmd*/</span>
+    <span class="n">BFLB_EFLASH_LOADER_CMD_ID_ERROR</span> <span class="o">=</span><span class="mh">0x0101</span><span class="p">,</span>
+    <span class="n">BFLB_EFLASH_LOADER_CMD_LEN_ERROR</span><span class="o">=</span><span class="mh">0x0102</span><span class="p">,</span>
+    <span class="n">BFLB_EFLASH_LOADER_CMD_CRC_ERROR</span><span class="o">=</span><span class="mh">0x0103</span><span class="p">,</span>
+    <span class="n">BFLB_EFLASH_LOADER_CMD_SEQ_ERROR</span><span class="o">=</span><span class="mh">0x0104</span><span class="p">,</span>
+
+    <span class="cm">/*image*/</span>
+    <span class="n">BFLB_EFLASH_LOADER_IMG_BOOTHEADER_LEN_ERROR</span><span class="o">=</span><span class="mh">0x0201</span><span class="p">,</span>
+    <span class="n">BFLB_EFLASH_LOADER_IMG_BOOTHEADER_NOT_LOAD_ERROR</span><span class="o">=</span><span class="mh">0x0202</span><span class="p">,</span>
+    <span class="n">BFLB_EFLASH_LOADER_IMG_BOOTHEADER_MAGIC_ERROR</span><span class="o">=</span><span class="mh">0x0203</span><span class="p">,</span>
+    <span class="n">BFLB_EFLASH_LOADER_IMG_BOOTHEADER_CRC_ERROR</span><span class="o">=</span><span class="mh">0x0204</span><span class="p">,</span>
+    <span class="n">BFLB_EFLASH_LOADER_IMG_BOOTHEADER_ENCRYPT_NOTFIT</span><span class="o">=</span><span class="mh">0x0205</span><span class="p">,</span>
+    <span class="n">BFLB_EFLASH_LOADER_IMG_BOOTHEADER_SIGN_NOTFIT</span><span class="o">=</span><span class="mh">0x0206</span><span class="p">,</span>
+    <span class="n">BFLB_EFLASH_LOADER_IMG_SEGMENT_CNT_ERROR</span><span class="o">=</span><span class="mh">0x0207</span><span class="p">,</span>
+    <span class="n">BFLB_EFLASH_LOADER_IMG_AES_IV_LEN_ERROR</span><span class="o">=</span><span class="mh">0x0208</span><span class="p">,</span>
+    <span class="n">BFLB_EFLASH_LOADER_IMG_AES_IV_CRC_ERROR</span><span class="o">=</span><span class="mh">0x0209</span><span class="p">,</span>
+    <span class="n">BFLB_EFLASH_LOADER_IMG_PK_LEN_ERROR</span><span class="o">=</span><span class="mh">0x020a</span><span class="p">,</span>
+    <span class="n">BFLB_EFLASH_LOADER_IMG_PK_CRC_ERROR</span><span class="o">=</span><span class="mh">0x020b</span><span class="p">,</span>
+    <span class="n">BFLB_EFLASH_LOADER_IMG_PK_HASH_ERROR</span><span class="o">=</span><span class="mh">0x020c</span><span class="p">,</span>
+    <span class="n">BFLB_EFLASH_LOADER_IMG_SIGNATURE_LEN_ERROR</span><span class="o">=</span><span class="mh">0x020d</span><span class="p">,</span>
+    <span class="n">BFLB_EFLASH_LOADER_IMG_SIGNATURE_CRC_ERROR</span><span class="o">=</span><span class="mh">0x020e</span><span class="p">,</span>
+    <span class="n">BFLB_EFLASH_LOADER_IMG_SECTIONHEADER_LEN_ERROR</span><span class="o">=</span><span class="mh">0x020f</span><span class="p">,</span>
+    <span class="n">BFLB_EFLASH_LOADER_IMG_SECTIONHEADER_CRC_ERROR</span><span class="o">=</span><span class="mh">0x0210</span><span class="p">,</span>
+    <span class="n">BFLB_EFLASH_LOADER_IMG_SECTIONHEADER_DST_ERROR</span><span class="o">=</span><span class="mh">0x0211</span><span class="p">,</span>
+    <span class="n">BFLB_EFLASH_LOADER_IMG_SECTIONDATA_LEN_ERROR</span><span class="o">=</span><span class="mh">0x0212</span><span class="p">,</span>
+    <span class="n">BFLB_EFLASH_LOADER_IMG_SECTIONDATA_DEC_ERROR</span><span class="o">=</span><span class="mh">0x0213</span><span class="p">,</span>
+    <span class="n">BFLB_EFLASH_LOADER_IMG_SECTIONDATA_TLEN_ERROR</span><span class="o">=</span><span class="mh">0x0214</span><span class="p">,</span>
+    <span class="n">BFLB_EFLASH_LOADER_IMG_SECTIONDATA_CRC_ERROR</span><span class="o">=</span><span class="mh">0x0215</span><span class="p">,</span>
+    <span class="n">BFLB_EFLASH_LOADER_IMG_HALFBAKED_ERROR</span><span class="o">=</span><span class="mh">0x0216</span><span class="p">,</span>
+    <span class="n">BFLB_EFLASH_LOADER_IMG_HASH_ERROR</span><span class="o">=</span><span class="mh">0x0217</span><span class="p">,</span>
+    <span class="n">BFLB_EFLASH_LOADER_IMG_SIGN_PARSE_ERROR</span><span class="o">=</span><span class="mh">0x0218</span><span class="p">,</span>
+    <span class="n">BFLB_EFLASH_LOADER_IMG_SIGN_ERROR</span><span class="o">=</span><span class="mh">0x0219</span><span class="p">,</span>
+    <span class="n">BFLB_EFLASH_LOADER_IMG_DEC_ERROR</span><span class="o">=</span><span class="mh">0x021a</span><span class="p">,</span>
+    <span class="n">BFLB_EFLASH_LOADER_IMG_ALL_INVALID_ERROR</span><span class="o">=</span><span class="mh">0x021b</span><span class="p">,</span>
+
+    <span class="cm">/*IF*/</span>
+    <span class="n">BFLB_EFLASH_LOADER_IF_RATE_LEN_ERROR</span><span class="o">=</span><span class="mh">0x0301</span><span class="p">,</span>
+    <span class="n">BFLB_EFLASH_LOADER_IF_RATE_PARA_ERROR</span><span class="o">=</span><span class="mh">0x0302</span><span class="p">,</span>
+    <span class="n">BFLB_EFLASH_LOADER_IF_PASSWORDERROR</span><span class="o">=</span><span class="mh">0x0303</span><span class="p">,</span>
+    <span class="n">BFLB_EFLASH_LOADER_IF_PASSWORDCLOSE</span><span class="o">=</span><span class="mh">0x0304</span><span class="p">,</span>
+
+    <span class="cm">/*MISC*/</span>
+    <span class="n">BFLB_EFLASH_LOADER_PLL_ERROR</span><span class="o">=</span><span class="mh">0xfffc</span><span class="p">,</span>
+    <span class="n">BFLB_EFLASH_LOADER_INVASION_ERROR</span><span class="o">=</span><span class="mh">0xfffd</span><span class="p">,</span>
+    <span class="n">BFLB_EFLASH_LOADER_POLLING</span><span class="o">=</span><span class="mh">0xfffe</span><span class="p">,</span>
+    <span class="n">BFLB_EFLASH_LOADER_FAIL</span><span class="o">=</span><span class="mh">0xffff</span><span class="p">,</span>
+
+<span class="p">}</span><span class="n">eflash_loader_error_code_t</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../index.html" class="btn btn-neutral float-left" title="BL602 ISP protocol" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
