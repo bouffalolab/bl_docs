@@ -1,0 +1,610 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>1. 芯片调试 &mdash; OpenOCD和GDB简介与使用  文档</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="prev" title="OpenOCD和GDB简介与使用" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> OpenOCD和GDB简介与使用
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. 芯片调试</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#jtag">1.1. JTAG</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">1.2. 调试环境</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#risc-v">2. RISC-V调试部件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#openocd">3. OpenOCD</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id3">3.1. 简介</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ft2232">3.2. FT2232</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#gdb">4. GDB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#id4">5. 调试实战</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">OpenOCD和GDB简介与使用</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>1. 芯片调试</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/content/OpenocdGdb.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>1. 芯片调试<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<p>芯片调试的目的是为了快速的分析及解决软硬件出现的问题。</p>
+<p>调试的手段有：硬件模拟器(如早期8031)，硬件仿真器，打log等等。微处理器调试的历史参考
+<a class="reference external" href="https://www.embedded.com/a-history-of-microprocessor-debug-1980-2016/">A history of uP debug, 1980 – 2016</a>。
+新的处理器增加了片上调试部件(OCD/ICE)，可用于实现在线仿真。</p>
+<p>调试部件的硬件接口：</p>
+<ul class="simple">
+<li>单线（debugWIRE）：为了降低成本和调试引脚的开销，仅使用一根信号线（RESET），即可完成调试信息的交互，达到控制程序流向，执行指令以及编程熔丝位的功能</li>
+<li>双线（SWD）：SWDIO--串行数据线；SWDCLK--串行时钟线</li>
+<li>四线（JTAG）：TCK--测试时钟输入；TDI--测试数据输入，数据通过TDI输入JTAG口；
+TDO--测试数据输出，数据通过TDO从JTAG口输出；TMS--测试模式选择，TMS用来设置JTAG口处于某种特定的测试模式</li>
+</ul>
+<div class="section" id="jtag">
+<h2>1.1. JTAG<a class="headerlink" href="#jtag" title="永久链接至标题">¶</a></h2>
+<p>JTAG(Joint Test Action Group，联合测试工作组)是一种国际标准测试协议（IEEE 1149.1兼容），主要用于芯片内部测试。现在多数的高级器件都支持JTAG协议，如DSP、FPGA器件等。标准的JTAG接口是4线：TMS、TCK、TDI、TDO，分别为模式选择、时钟、数据输入和数据输出线。
+还有一个可选引脚TRST，用来测试复位，是输入引脚，低电平时有效。</p>
+<p>JTAG接口可以一对一的使用，也可以组成菊花链的一对多拓扑结构，拓扑结构如下图所示：</p>
+<div class="figure align-center" id="id21">
+<img alt="../_images/JTAG.png" src="../_images/JTAG.png" />
+<p class="caption"><span class="caption-text">JTAG接口连接</span></p>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>1.2. 调试环境<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li>PC上的调试器(GDB)</li>
+<li>软件调试的代理(OpenOCD)</li>
+<li>硬件调试代理/适配器(FT2232)</li>
+<li>调试目标(RISC-V)</li>
+</ul>
+<div class="figure align-center" id="id22">
+<img alt="../_images/DebugEnvir.png" src="../_images/DebugEnvir.png" />
+<p class="caption"><span class="caption-text">调试环境示意图</span></p>
+</div>
+</div>
+</div>
+<div class="section" id="risc-v">
+<h1>2. RISC-V调试部件<a class="headerlink" href="#risc-v" title="永久链接至标题">¶</a></h1>
+<div class="figure align-center" id="id23">
+<img alt="../_images/DebugBlock.png" src="../_images/DebugBlock.png" />
+<p class="caption"><span class="caption-text">RISC-V调试系统框架</span></p>
+</div>
+<p>由上图看出，框架一共分为3个部分，分别是Debug Host，例如PC；
+Debug Transport Hardware，例如JLink或者CMSIS-DAP等的调试工具；
+第三部分是嵌入在芯片内部的调试模块。在调试模块内部，
+DTM模块与调试工具直接进行交互，它通过DMI接口与DM模块进行交互。</p>
+</div>
+<div class="section" id="openocd">
+<h1>3. OpenOCD<a class="headerlink" href="#openocd" title="永久链接至标题">¶</a></h1>
+<div class="section" id="id3">
+<h2>3.1. 简介<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<p>OpenOCD是一个开源的软件调试代理，可以支持各种架构处理器的调试和烧写；
+支持各种调试硬件代理/适配器：FTDI, J-link等。OpenOCD接收来自GDB的命令(socket)，再通过硬件代理与芯片上的调试部件通信以完成各种调试任务。
+OpenOCD还有一个telnet服务器，可以进行一些独立的操作。具体可参考
+<a class="reference external" href="https://github.com/ntfreak/openocd">https://github.com/ntfreak/openocd</a></p>
+</div>
+<div class="section" id="ft2232">
+<h2>3.2. FT2232<a class="headerlink" href="#ft2232" title="永久链接至标题">¶</a></h2>
+<p>FT2232 是FTDI生产的一系列USB转串口的桥接芯片中的一颗。
+其中的第一个数字2，表示芯片有2个转串口组件；尾缀字母代表规格(速度等)。
+其特殊之处在于其内部每个串口组件都实现了MPSSE，可以实现USB转JTAG，因此被广泛应用在了JTAG仿真器的硬件上。
+默认情况下，芯片被识别为2个(USB转接出来的)串口，
+OpenOCD对FTDI系列的支持：通过特定驱动使用MPSSE做为JTAG硬件接口。
+在Windows下使用需要调整驱动(Zadig, WinUSB)，
+在Linux下使用需要注意权限。</p>
+<p>因为FT2xxx内部有两个转串口部件(interface)，因此在OpenOCD的配置中需要选择JTAG口位于哪个interface。</p>
+<ul class="simple">
+<li>Sipeed USB 调试器：基于FT2232d，速度低，JTAG口位于interface 0，无EEPROM ，需要使用Zadig进行驱动替换。更换USB口可能会丢失驱动配置。</li>
+<li>Bouffalolab debugger适配板：基于FT2232HL，速度快，JTAG口位于interface 1，且有EEPROM。在使用FT_Prog编程后，直接使用UsbDriverTool切换驱动即可。更换USB口不会丢失配置。</li>
+<li>除了MPSSE转JTAG的引脚是固定的之外，其它引脚可以被自定义成不同的功能，例如但不限于：SRST，TRST，LED</li>
+<li>可以支持两线的调试接口，比如SWD及cJTAG(目前602并不支持)</li>
+</ul>
+</div>
+</div>
+<div class="section" id="gdb">
+<h1>4. GDB<a class="headerlink" href="#gdb" title="永久链接至标题">¶</a></h1>
+<p>GDB --- GNU Debugger，是GNU软件系统中的标准调试器。它的功能如下：</p>
+<ul class="simple">
+<li>可移植到不同平台运行，功能可配置</li>
+<li>GDB支持各种体系架构的调试：ARM,RISC-V,MIPS,x86, …</li>
+<li>GDB支持各种编程语言的调试</li>
+<li>GDB默认是命令行工具，但也有图形化的前端，例如eclipse里的debug GUI</li>
+<li>目前的RISC-V GDB在Linux下使用更方便：tab补全，路径补全，命令历史，…</li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h1>5. 调试实战<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h1>
+<ol class="arabic">
+<li><p class="first">从命令行启动OpenOCD调试代理，其默认在3333端口等待GDB连接</p>
+<ul class="simple">
+<li>openocd.exe -f if_bflb_dbg.cfg -f tgt_602.cfg</li>
+<li>启动openocd时需要提供配置脚本</li>
+<li>为了分离调试器硬件及目标芯片，这里将其分开成两个脚本</li>
+<li>其中if开头的是调试器硬件配置，而tgt开头的是目标定义，例如   tgt_702.cfg就是702的目标配置</li>
+<li>如果希望连接时，只是attach而不对target进行任何初始化/改动，需要使用_attach脚本，比如 tgt_602_attach.cfg。这通常在脱机运行出现异常后需要进行连接调试时使用</li>
+</ul>
+</li>
+<li><p class="first">如果是XIP的代码，需要先烧写再进行debug</p>
+<ul class="simple">
+<li>目前OpenOCD + GDB不能实现602的SPI/XIP flash的烧写</li>
+<li>从命令行启动GDB</li>
+<li>riscv64-unknown-elf-gdb freertos.elf –x 602.init</li>
+<li>freertos.elf是需要调试的程序</li>
+<li>其中 –x指定了一些与target相关的初始化命令(target类型，连接方式，mem map)</li>
+<li>mem map会对断点(BP)的行为有影响，ro区域会使用硬件断点(Hardware Breakpoint)</li>
+<li>GDB会根据其中的配置连接到OpenOCD</li>
+<li>可以支持远程调试，即OpenOCD与GDB不在同一台PC上</li>
+</ul>
+</li>
+<li><p class="first">在GDB下加载调试的elf文件(代码)内容</p>
+<ul>
+<li><p class="first">对于运行于ram的代码，使用如下命令</p>
+<blockquote>
+<div><ul class="simple">
+<li>load</li>
+<li>执行这个命令后，PC会被设置到elf的入口地址。</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">对于运行于XIP的代码，无需也不能使用load，因为XIP的程序需要在调试前使用烧写工具进行烧写，且对XIP区域进行写入可能会造成未知错误。另外，XIP的程序需要依赖ROM code(0x21000000)进行相关的软硬件初始化，所以需要进行如下配置：</p>
+<blockquote>
+<div><ul class="simple">
+<li>set $pc = 0x21000000</li>
+<li>set $mie = 0</li>
+<li>set $mstatus = 0x1880</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</li>
+<li><p class="first">运行控制</p>
+<ul>
+<li><p class="first">单步执行(step 与 next): s, si, n, ni</p>
+<blockquote>
+<div><ul class="simple">
+<li>带有i的是指令级别，step 与 next的区别在于next不会进入函数调用</li>
+<li>si 4   &lt;- 单步执行4个指令</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">显示汇编指令上下文： set disassemble-next-line on</p>
+</li>
+<li><p class="first">从当前函数返回：finish / return</p>
+</li>
+<li><p class="first">继续程序执行(continue): c</p>
+</li>
+</ul>
+</li>
+<li><p class="first">断点</p>
+<ul class="simple">
+<li>在函数main处打一个断点(breakpoint)：b main</li>
+<li>在函数main处打一个临时(temporary)硬件(hardware)断点：thb main</li>
+<li>硬件断点是有限资源，602上有4个</li>
+<li>条件断点：当argc为3时停在main：b main if argc == 3</li>
+<li>指定(源码)类型数据断点(观察点): watch <a href="#id5"><span class="problematic" id="id6">*</span></a>(uint32_t <a href="#id7"><span class="problematic" id="id8">*</span></a>)addr</li>
+<li>列出所有断点：i[nfo] b</li>
+<li>使能/禁止1号断点：enable/disable 1</li>
+<li>删除1号断点：d 1</li>
+</ul>
+</li>
+<li><p class="first">查看信息1</p>
+<ul>
+<li><p class="first">读寄存器，并以16进制显示：p/x $a0</p>
+</li>
+<li><p class="first">查看寄存器: info register  &lt;- 简写成 i r</p>
+<blockquote>
+<div><ul class="simple">
+<li>i r $mstatus</li>
+</ul>
+</div></blockquote>
+<div class="figure align-center" id="id24">
+<img alt="../_images/CheckInfm.png" src="../_images/CheckInfm.png" />
+<p class="caption"><span class="caption-text">查看寄存器</span></p>
+</div>
+</li>
+<li><p class="first">修改寄存器值：set $a0 = 0x5a5a5a5a</p>
+</li>
+<li><p class="first">修改变量x的值为5：set var x = 5</p>
+</li>
+<li><p class="first">查看内存，以16进制输出32个word：x/32xw 0x22008000</p>
+</li>
+<li><p class="first">查看变量，输出16进制：p/x pxCurrentTCB</p>
+</li>
+<li><p class="first">格式化内存为结构体：p/x <a href="#id9"><span class="problematic" id="id10">*</span></a>(TCB_t <a href="#id11"><span class="problematic" id="id12">*</span></a>)pxCurrentTCB</p>
+</li>
+<li><p class="first">以字符串格式显示：p/s pxCurrentTCB-&gt;pcTaskName</p>
+</li>
+<li><p class="first">输出结构体成员地址： p/x &amp;(pxCurrentTCB-&gt;pcTaskName)</p>
+</li>
+<li><p class="first">“美化”结构体输出：set print pretty on</p>
+</li>
+</ul>
+</li>
+<li><p class="first">查看信息2</p>
+<ul class="simple">
+<li>获取当前调试文件信息：info files</li>
+<li>获取当前调试文件的全部函数：info functions</li>
+<li>获取寄存器值指向的代码位置： info line <a href="#id13"><span class="problematic" id="id14">*</span></a>($ra)</li>
+<li>获取某个地址相关的源码信息： info line <a href="#id15"><span class="problematic" id="id16">*</span></a>0x2200f7f4</li>
+<li>查看当前源码(list)：l</li>
+<li>查看函数main的源码：l main</li>
+<li>查看文件main.c行号123开始的源码：l main.c:123</li>
+<li>显示当前的调用栈(backtrace)：bt</li>
+<li>显示当前所处位置：where</li>
+</ul>
+</li>
+<li><p class="first">反汇编</p>
+<ul>
+<li><p class="first">从当前PC – 10位置开始反汇编10条指令： x/10i $pc – 10</p>
+</li>
+<li><p class="first">反汇编函数main：disas main</p>
+<blockquote>
+<div><ul class="simple">
+<li>以源码混合模式反汇编函数main：disas /m main</li>
+<li>显示汇编指令的同时也显示机器码：disas /r main</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">反汇编地址0x22008000：disas 0x22008000</p>
+</li>
+</ul>
+</li>
+<li><p class="first">dump/restore内存</p>
+<ul>
+<li><p class="first">保存从0x21000000开始的128KB内存到文件rom.bin：</p>
+<blockquote>
+<div><ul class="simple">
+<li>dump binary memory ./rom.bin 0x21000000 0x21020000</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">将文件ram.bin恢复到内存0x22008000处：</p>
+<blockquote>
+<div><ul class="simple">
+<li>restore ram.bin binary 0x22008000</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</li>
+<li><p class="first">文件路径映射</p>
+</li>
+</ol>
+<blockquote>
+<div><ul>
+<li><p class="first">如果elf内的源码路径与当前调试环境里的源码路径不一致。比如：在WSL下编译而在windows上调试，使用如下命令可以map文件的搜索路径：</p>
+<blockquote>
+<div><ul class="simple">
+<li>set substitute-path /mnt/c  c:</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="11">
+<li>增加一个符号表</li>
+</ol>
+<blockquote>
+<div><ul>
+<li><p class="first">如果在调试XIP代码时，发现系统在ROM区域出现了问题。因为当前加载的是XIP用户程序的elf符号，所以GDB无法提示ROM代码的详细信息，此时，可以使用如下命令添加bootloader的符号表以便于调试：</p>
+<blockquote>
+<div><ul class="simple">
+<li>add-symbol-file bootloader.elf</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">如果elf文件的link地址与运行地址有offset，此命令也可以做相应的处理。</p>
+</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="12">
+<li>脚本</li>
+</ol>
+<blockquote>
+<div><ul>
+<li><p class="first">使用用户脚本可以增加一些操作，比如目前有脚本freertos_fault.gdb。其功能是在freertos系统fault之后，尝试恢复当前任务的上下文，以供分析。</p>
+</li>
+<li><p class="first">脚本是文本文件，可以随时更新</p>
+</li>
+<li><p class="first">使用方法：</p>
+<blockquote>
+<div><ul class="simple">
+<li>source freertos_fault.gdb</li>
+<li>freertos_fault</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="13">
+<li>Freertos awareness</li>
+</ol>
+<blockquote>
+<div><ul>
+<li><p class="first">GDB支持thread调试</p>
+</li>
+<li><p class="first">OpenOCD支持一些OS的awareness，包括FreeRTOS。</p>
+<blockquote>
+<div><ul class="simple">
+<li>但是目前不支持RISC-V上的FreeRTOS awareness。</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">目前的代码是hack性质，还有不少问题</p>
+</li>
+<li><p class="first">代码，编译，使用流程请看：
+<a class="reference external" href="http://10.28.10.249:3000/dytang/bl602_openocd/src/as_patch_set">http://10.28.10.249:3000/dytang/bl602_openocd/src/as_patch_set</a></p>
+</li>
+<li><p class="first">使用效果：</p>
+<blockquote>
+<div><ul class="simple">
+<li>info threads</li>
+</ul>
+<div class="figure align-center" id="id25">
+<img alt="../_images/FreertosAwareness.png" src="../_images/FreertosAwareness.png" />
+<p class="caption"><span class="caption-text">使用效果</span></p>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">查看所有线程的调用栈:</p>
+<blockquote>
+<div><ul class="simple">
+<li>thread apply all bt</li>
+</ul>
+<div class="figure align-center" id="id26">
+<img alt="../_images/CallStack.png" src="../_images/CallStack.png" />
+<p class="caption"><span class="caption-text">调用栈效果</span></p>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">切换线程2(可能会出问题)：thread 2</p>
+<blockquote>
+<div><div class="figure align-center" id="id27">
+<img alt="../_images/SwitchThread2.png" src="../_images/SwitchThread2.png" />
+<p class="caption"><span class="caption-text">切换线程2效果</span></p>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">打印线程2的TCB：</p>
+<blockquote>
+<div><ul class="simple">
+<li>p/x <a href="#id17"><span class="problematic" id="id18">*</span></a>(TCB_t <a href="#id19"><span class="problematic" id="id20">*</span></a>)1107426736</li>
+</ul>
+<div class="figure align-center" id="id28">
+<img alt="../_images/PrintThread2.png" src="../_images/PrintThread2.png" />
+<p class="caption"><span class="caption-text">打印线程2效果</span></p>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="14">
+<li>其它</li>
+</ol>
+<blockquote>
+<div><ul>
+<li><p class="first">在GDB下可以通过mon(monitor)命令调用调试代理内部的命令</p>
+</li>
+<li><p class="first">例如：调用OpenOCD的内建命令来调整JTAG频率：</p>
+<blockquote>
+<div><ul class="simple">
+<li>mon adapter_khz</li>
+<li>mon adapter_khz 8000</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="15">
+<li>Risc-v SBA</li>
+</ol>
+<blockquote>
+<div><ul>
+<li><p class="first">如果要在RISC-V运行时查看内存数据，那么需要：</p>
+<blockquote>
+<div><ul class="simple">
+<li>RISC-V core需要支持System Bus Access    &lt;- 602 支持</li>
+<li>OpenOCD中打开SBA： riscv&nbsp;set_prefer_sba&nbsp;on  &lt;- tgt_*中默认配置</li>
+<li>当GDB处于continue状态而不能接受更多用户命令时</li>
+<li>启动一个telnet程序，连接到OpenOCD telnet服务器端口(默认4444)</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">使用mdw命令可以进行mem dump word：</p>
+<blockquote>
+<div><div class="figure align-center" id="id29">
+<img alt="../_images/Mdw.png" src="../_images/Mdw.png" />
+<p class="caption"><span class="caption-text">使用mdw效果</span></p>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">其它的telnet命令可以使用help获取</p>
+</li>
+</ul>
+</div></blockquote>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../index.html" class="btn btn-neutral float-left" title="OpenOCD和GDB简介与使用" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, bouffalolab
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

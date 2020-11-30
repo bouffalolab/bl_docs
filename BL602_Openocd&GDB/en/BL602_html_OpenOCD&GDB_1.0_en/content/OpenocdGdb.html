@@ -1,0 +1,603 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>1. Chip debugging &mdash; Introduction of OpenOCD and GDB  文档</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="prev" title="Introduction of OpenOCD and GDB" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Introduction of OpenOCD and GDB
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. Chip debugging</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#jtag">1.1. JTAG</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#debugging-environment">1.2. Debugging environment</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#risc-v-debugging-components">2. RISC-V debugging components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#openocd">3. OpenOCD</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">3.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ft2232">3.2. FT2232</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#gdb">4. GDB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#debugging-actual-combat">5. Debugging actual combat</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Introduction of OpenOCD and GDB</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>1. Chip debugging</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/content/OpenocdGdb.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="chip-debugging">
+<h1>1. Chip debugging<a class="headerlink" href="#chip-debugging" title="永久链接至标题">¶</a></h1>
+<p>The purpose of chip debugging is to quickly analyze and solve the problems of software and hardware.</p>
+<p>The debugging methods are: hardware simulator (such as the early 8031), hardware emulator, logging and so on. Historical reference for microprocessor debugging
+<a class="reference external" href="https://www.embedded.com/a-history-of-microprocessor-debug-1980-2016/">A history of uP debug, 1980 – 2016</a>.
+The new processor adds on-chip debugging components (OCD/ICE), which can be used to implement online simulation.</p>
+<p>Hardware interface of debugging component:</p>
+<ul class="simple">
+<li>Single wire (debugWIRE): In order to reduce the cost and the overhead of debugging pins, only one signal wire (RESET) can be used to complete the interaction of debugging information, achieve the function of controlling program flow, executing instructions and programming fuse bits</li>
+<li>Two-wire (SWD): SWDIO--serial data line; SWDCLK--serial clock line</li>
+<li>Four-wire (JTAG): TCK--test clock input; TDI--test data input, data is input to the JTAG port through TDI; TDO--test data output, data is output from the JTAG port through TDO; TMS--test mode selection, TMS is used to set the JTAG port in a specific test mode</li>
+</ul>
+<div class="section" id="jtag">
+<h2>1.1. JTAG<a class="headerlink" href="#jtag" title="永久链接至标题">¶</a></h2>
+<p>JTAG (Joint Test Action Group) is an international standard test protocol (IEEE 1149.1 compatible), mainly used for internal chip testing. Now most advanced devices support JTAG protocol, such as DSP, FPGA device and so on. The standard JTAG interface is 4 wires: TMS, TCK, TDI, TDO, which are the mode selection, clock, data input and data output lines respectively.
+There is also an optional pin TRST, which is used to test the reset. It is an input pin and is valid at low level.</p>
+<p>The JTAG interface can be used one-to-one, or it can form a one-to-many topology of a daisy chain. The topology is shown in the figure below:</p>
+<div class="figure align-center" id="id17">
+<img alt="../_images/JTAG.png" src="../_images/JTAG.png" />
+<p class="caption"><span class="caption-text">JTAG interface connection</span></p>
+</div>
+</div>
+<div class="section" id="debugging-environment">
+<h2>1.2. Debugging environment<a class="headerlink" href="#debugging-environment" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li>Debugger (GDB) on PC</li>
+<li>Software debugging agent (OpenOCD)</li>
+<li>Hardware debugging agent/adapter (FT2232)</li>
+<li>Debug target (RISC-V)</li>
+</ul>
+<div class="figure align-center" id="id18">
+<img alt="../_images/DebugEnvir.png" src="../_images/DebugEnvir.png" />
+<p class="caption"><span class="caption-text">Schematic diagram of debugging environment</span></p>
+</div>
+</div>
+</div>
+<div class="section" id="risc-v-debugging-components">
+<h1>2. RISC-V debugging components<a class="headerlink" href="#risc-v-debugging-components" title="永久链接至标题">¶</a></h1>
+<div class="figure align-center" id="id19">
+<img alt="../_images/DebugBlock.png" src="../_images/DebugBlock.png" />
+<p class="caption"><span class="caption-text">RISC-V debugging system framework</span></p>
+</div>
+<p>As can be seen from the above figure, the framework is divided into three parts, namely Debug Host, such as PC; Debug Transport Hardware, such as debugging tools such as JLink or CMSIS-DAP; The third part is the debugging module embedded in the chip. Inside the debugging module, the DTM module directly interacts with the debugging tool, and it interacts with the DM module through the DMI interface.</p>
+</div>
+<div class="section" id="openocd">
+<h1>3. OpenOCD<a class="headerlink" href="#openocd" title="永久链接至标题">¶</a></h1>
+<div class="section" id="introduction">
+<h2>3.1. Introduction<a class="headerlink" href="#introduction" title="永久链接至标题">¶</a></h2>
+<p>OpenOCD is an open source software debugging agent that can support debugging and programming of various architecture processors; it supports various debugging hardware agents/adapters: FTDI, J-link, etc. OpenOCD receives commands (socket) from GDB, and communicates with debugging components on the chip through hardware agents to complete various debugging tasks.</p>
+<p>OpenOCD also has a telnet server that can perform some independent operations. Specific reference
+<a class="reference external" href="https://github.com/ntfreak/openocd">https://github.com/ntfreak/openocd</a>.</p>
+</div>
+<div class="section" id="ft2232">
+<h2>3.2. FT2232<a class="headerlink" href="#ft2232" title="永久链接至标题">¶</a></h2>
+<p>FT2232 is one of a series of USB-to-serial bridge chips produced by FTDI.</p>
+<p>The first number 2 indicates that the chip has 2 serial-to-serial components; the suffix letters represent specifications (speed, etc.).</p>
+<p>Its special feature is that each serial port component inside it implements MPSSE, which can realize USB to JTAG conversion, so it is widely used in the hardware of JTAG emulators.</p>
+<p>By default, the chip is identified as 2 serial ports (from USB transfer). OpenOCD support for FTDI series: use MPSSE as JTAG hardware interface through specific drivers.</p>
+<p>Use under Windows requires adjustment of the driver (Zadig, WinUSB), use under Linux requires attention to permissions.</p>
+<p>Because there are two serial port components (interface) inside FT2xxx, it is necessary to select which interface the JTAG port is located in in the configuration of OpenOCD.</p>
+<ul class="simple">
+<li>Sipeed USB debugger: based on FT2232d, low speed, JTAG port is located at interface 0, no EEPROM, need to use Zadig for driver replacement. Changing the USB port may lose the drive configuration.</li>
+<li>Bouffalolab debugger adapter board: based on FT2232HL, fast speed, JTAG port is located in interface 1, and has EEPROM. After programming with FT_Prog, you can directly use UsbDriverTool to switch drivers. Changing the USB port will not lose the configuration.</li>
+<li>Except for the fixed pins of MPSSE to JTAG, other pins can be customized to different functions, such as but not limited to: SRST, TRST, LED.</li>
+<li>Can support two-wire debugging interface, such as SWD and cJTAG (currently 602 does not support)</li>
+</ul>
+</div>
+</div>
+<div class="section" id="gdb">
+<h1>4. GDB<a class="headerlink" href="#gdb" title="永久链接至标题">¶</a></h1>
+<p>GDB --- GNU Debugger, is the standard debugger in the GNU software system. Its functions are as follows:</p>
+<ul class="simple">
+<li>Can be transplanted to different platforms to run, functions can be configured</li>
+<li>GDB supports debugging of various architectures: ARM, RISC-V, MIPS, x86,…</li>
+<li>GDB supports debugging in various programming languages</li>
+<li>GDB is a command line tool by default, but it also has a graphical front end, such as the debug GUI in eclipse</li>
+<li>The current RISC-V GDB is more convenient to use under Linux: tab completion, path completion, command history,...</li>
+</ul>
+</div>
+<div class="section" id="debugging-actual-combat">
+<h1>5. Debugging actual combat<a class="headerlink" href="#debugging-actual-combat" title="永久链接至标题">¶</a></h1>
+<ol class="arabic">
+<li><p class="first">Start the OpenOCD debugging agent from the command line, which waits for GDB connection on port 3333 by default</p>
+<ul class="simple">
+<li>openocd.exe -f if_bflb_dbg.cfg -f tgt_602.cfg</li>
+<li>Need to provide configuration script when starting openocd</li>
+<li>In order to separate the debugger hardware and the target chip, here is divided into two scripts</li>
+<li>The beginning of if is the debugger hardware configuration, and the beginning of tgt is the target definition, for example, tgt_702.cfg is the target configuration of 702</li>
+<li>If you want to connect, just attach without any initialization/change to the target, you need to use the _attach script, such as tgt_602_attach.cfg. This is usually used when connection debugging is required after an abnormality occurs in offline operation</li>
+</ul>
+</li>
+<li><p class="first">If it is XIP code, you need to burn it first and then debug</p>
+<ul class="simple">
+<li>Currently OpenOCD + GDB cannot achieve 602 SPI/XIP flash programming</li>
+<li>Start GDB from the command line</li>
+<li>riscv64-unknown-elf-gdb freertos.elf –x 602.init</li>
+<li>freertos.elf is the program to be debugged</li>
+<li>Among them -x specifies some initialization commands related to the target (target type, connection method, mem map)</li>
+<li>The mem map will affect the behavior of the breakpoint (BP), and the ro area will use the hardware breakpoint (Hardware Breakpoint)</li>
+<li>GDB will connect to OpenOCD according to its configuration</li>
+<li>Can support remote debugging, that is, OpenOCD and GDB are not on the same PC</li>
+</ul>
+</li>
+<li><p class="first">Load the content of the debugged elf file (code) under GDB</p>
+<ul>
+<li><p class="first">For code running on ram, use the following command</p>
+<blockquote>
+<div><ul class="simple">
+<li>load</li>
+<li>After executing this command, the PC will be set to the entry address of elf</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">For the code running on XIP, load is unnecessary and cannot be used, because XIP programs need to be programmed with a programming tool before debugging, and writing to the XIP area may cause unknown errors. In addition, the XIP program needs to rely on ROM code (0x21000000) to initialize the related software and hardware, so the following configuration is required:</p>
+<blockquote>
+<div><ul class="simple">
+<li>set $pc = 0x21000000</li>
+<li>set $mie = 0</li>
+<li>set $mstatus = 0x1880</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</li>
+<li><p class="first">Operational control</p>
+<ul>
+<li><p class="first">Single step execution (step and next): s, si, n, ni</p>
+<blockquote>
+<div><ul class="simple">
+<li>&quot;I&quot; is the instruction level, the difference between step and next is that next will not enter the function call</li>
+<li>si 4 &lt;- step 4 instructions</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Display the assembly instruction context: set disassemble-next-line on</p>
+</li>
+<li><p class="first">Return from the current function: finish / return</p>
+</li>
+<li><p class="first">Continue program execution (continue): c</p>
+</li>
+</ul>
+</li>
+<li><p class="first">Breakpoint</p>
+<ul class="simple">
+<li>Make a breakpoint at the function main: b main</li>
+<li>Set a temporary hardware breakpoint at the function main: thb main</li>
+<li>Hardware breakpoints are limited resources, there are 4 on 602</li>
+<li>Conditional breakpoint: stop at main when argc is 3: b main if argc == 3</li>
+<li>Specify (source code) type data breakpoint (watch point): watch <a href="#id1"><span class="problematic" id="id2">*</span></a>(uint32_t <a href="#id3"><span class="problematic" id="id4">*</span></a>)addr</li>
+<li>List all breakpoints: i[nfo] b</li>
+<li>Enable/disable breakpoint No. 1: enable/disable 1</li>
+<li>Delete breakpoint No. 1: d 1</li>
+</ul>
+</li>
+<li><p class="first">View information 1</p>
+<ul>
+<li><p class="first">Read the register and display it in hexadecimal: p/x $a0</p>
+</li>
+<li><p class="first">Check the register: info register &lt;- abbreviated as &quot;i r&quot;</p>
+<blockquote>
+<div><ul class="simple">
+<li>i r $mstatus</li>
+</ul>
+</div></blockquote>
+<div class="figure align-center" id="id20">
+<img alt="../_images/CheckInfm.png" src="../_images/CheckInfm.png" />
+<p class="caption"><span class="caption-text">View register</span></p>
+</div>
+</li>
+<li><p class="first">Modify the register value: set $a0 = 0x5a5a5a5a</p>
+</li>
+<li><p class="first">Modify the value of variable x to 5: set var x = 5</p>
+</li>
+<li><p class="first">Check the memory and output 32 words in hexadecimal: x/32xw 0x22008000</p>
+</li>
+<li><p class="first">View variables, output hexadecimal: p/x pxCurrentTCB</p>
+</li>
+<li><p class="first">Format the memory as a structure: p/x <a href="#id5"><span class="problematic" id="id6">*</span></a>(TCB_t <a href="#id7"><span class="problematic" id="id8">*</span></a>)pxCurrentTCB</p>
+</li>
+<li><p class="first">Display in string format: p/s pxCurrentTCB-&gt;pcTaskName</p>
+</li>
+<li><p class="first">Output structure member address: p/x &amp;(pxCurrentTCB-&gt;pcTaskName)</p>
+</li>
+<li><p class="first">&quot;Beautify&quot; structure output: set print pretty on</p>
+</li>
+</ul>
+</li>
+<li><p class="first">View information 2</p>
+<ul class="simple">
+<li>Get current debugging file information: info files</li>
+<li>Get all the functions of the current debug file: info functions</li>
+<li>Get the code location pointed to by the register value: info line <a href="#id9"><span class="problematic" id="id10">*</span></a>($ra)</li>
+<li>Get source information related to an address: info line <a href="#id11"><span class="problematic" id="id12">*</span></a>0x2200f7f4</li>
+<li>View the current source code (list): l</li>
+<li>View the source code of the function main: l main</li>
+<li>View the source code starting at line 123 of file main.c: l main.c:123</li>
+<li>Display the current call stack (backtrace): bt</li>
+<li>Display the current location: where</li>
+</ul>
+</li>
+<li><p class="first">Disassembly</p>
+<ul>
+<li><p class="first">Disassemble 10 instructions from the current PC – 10 position: x/10i $pc – 10</p>
+</li>
+<li><p class="first">Disassembly function main: disas main</p>
+<blockquote>
+<div><ul class="simple">
+<li>Disassemble function main in mixed source code mode: disas /m main</li>
+<li>Display the machine code as well as the assembly instructions: disas /r main</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Disassembly address 0x22008000: disas 0x22008000</p>
+</li>
+</ul>
+</li>
+<li><p class="first">dump/restore memory</p>
+<ul>
+<li><p class="first">Save 128KB memory starting from 0x21000000 to file rom.bin:</p>
+<blockquote>
+<div><ul class="simple">
+<li>dump binary memory ./rom.bin 0x21000000 0x21020000</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Restore the file ram.bin to memory 0x22008000:</p>
+<blockquote>
+<div><ul class="simple">
+<li>restore ram.bin binary 0x22008000</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</li>
+<li><p class="first">File path mapping</p>
+</li>
+</ol>
+<blockquote>
+<div><ul>
+<li><p class="first">If the source code path in elf is inconsistent with the source code path in the current debugging environment. For example: compiling under WSL and debugging on windows, use the following command to map the search path of the file:</p>
+<blockquote>
+<div><ul class="simple">
+<li>set substitute-path /mnt/c  c:</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="11">
+<li>Add a symbol table</li>
+</ol>
+<blockquote>
+<div><ul>
+<li><p class="first">If you find that the system has a problem in the ROM area when debugging the XIP code. Because the elf symbol of the XIP user program is currently loaded, GDB cannot prompt the detailed information of the ROM code. At this time, you can use the following command to add the symbol table of the bootloader for debugging:</p>
+<blockquote>
+<div><ul class="simple">
+<li>add-symbol-file bootloader.elf</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">If the link address of the elf file is offset from the running address, this command can also be processed accordingly.</p>
+</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="12">
+<li>Script</li>
+</ol>
+<blockquote>
+<div><ul>
+<li><p class="first">Use user scripts to add some operations, for example, there is currently a script freertos_fault.gdb. Its function is to try to restore the context of the current task for analysis after a freertos system fault.</p>
+</li>
+<li><p class="first">The script is a text file and can be updated at any time</p>
+</li>
+<li><p class="first">Instructions:</p>
+<blockquote>
+<div><ul class="simple">
+<li>source freertos_fault.gdb</li>
+<li>freertos_fault</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="13">
+<li>Freertos awareness</li>
+</ol>
+<blockquote>
+<div><ul>
+<li><p class="first">GDB supports thread debugging</p>
+</li>
+<li><p class="first">OpenOCD supports the awareness of some OS, including FreeRTOS</p>
+<blockquote>
+<div><ul class="simple">
+<li>However, FreeRTOS awareness on RISC-V is currently not supported</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">The current code is hack in nature, there are still many problems</p>
+</li>
+<li><p class="first">Please see the code, compile and use process:
+<a class="reference external" href="http://10.28.10.249:3000/dytang/bl602_openocd/src/as_patch_set">http://10.28.10.249:3000/dytang/bl602_openocd/src/as_patch_set</a></p>
+</li>
+<li><p class="first">Effect:</p>
+<blockquote>
+<div><ul class="simple">
+<li>info threads</li>
+</ul>
+<div class="figure align-center" id="id21">
+<img alt="../_images/FreertosAwareness.png" src="../_images/FreertosAwareness.png" />
+<p class="caption"><span class="caption-text">Effect</span></p>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">View the call stacks of all threads:</p>
+<blockquote>
+<div><ul class="simple">
+<li>thread apply all bt</li>
+</ul>
+<div class="figure align-center" id="id22">
+<img alt="../_images/CallStack.png" src="../_images/CallStack.png" />
+<p class="caption"><span class="caption-text">Call stack effect</span></p>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Switch thread 2 (may cause problems): thread 2</p>
+<blockquote>
+<div><div class="figure align-center" id="id23">
+<img alt="../_images/SwitchThread2.png" src="../_images/SwitchThread2.png" />
+<p class="caption"><span class="caption-text">Switch thread 2 effect</span></p>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Print the TCB of thread 2:</p>
+<blockquote>
+<div><ul class="simple">
+<li>p/x <a href="#id13"><span class="problematic" id="id14">*</span></a>(TCB_t <a href="#id15"><span class="problematic" id="id16">*</span></a>)1107426736</li>
+</ul>
+<div class="figure align-center" id="id24">
+<img alt="../_images/PrintThread2.png" src="../_images/PrintThread2.png" />
+<p class="caption"><span class="caption-text">Print thread 2 effect</span></p>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="14">
+<li>Other</li>
+</ol>
+<blockquote>
+<div><ul>
+<li><p class="first">Under GDB, the commands inside the debugging agent can be called through the mon (monitor) command</p>
+</li>
+<li><p class="first">For example: call the built-in command of OpenOCD to adjust the JTAG frequency:</p>
+<blockquote>
+<div><ul class="simple">
+<li>mon adapter_khz</li>
+<li>mon adapter_khz 8000</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="15">
+<li>RISC-V SBA</li>
+</ol>
+<blockquote>
+<div><ul>
+<li><p class="first">If you want to view the memory data while RISC-V is running, you need:</p>
+<blockquote>
+<div><ul class="simple">
+<li>RISC-V core needs to support System Bus Access &lt;- 602 support</li>
+<li>Open SBA in OpenOCD: riscv set_prefer_sba on &lt;- tgt_* in the default configuration</li>
+<li>When GDB is in the continue state and cannot accept more user commands</li>
+<li>Start a telnet program and connect to the OpenOCD telnet server port (default 4444)</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Use mdw command to do mem dump word:</p>
+<blockquote>
+<div><div class="figure align-center" id="id25">
+<img alt="../_images/Mdw.png" src="../_images/Mdw.png" />
+<p class="caption"><span class="caption-text">Use mdw effect</span></p>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Other telnet commands can be obtained using help</p>
+</li>
+</ul>
+</div></blockquote>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../index.html" class="btn btn-neutral float-left" title="Introduction of OpenOCD and GDB" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, bouffalolab
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
