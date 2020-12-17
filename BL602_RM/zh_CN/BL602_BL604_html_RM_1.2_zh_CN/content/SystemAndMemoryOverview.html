@@ -1,0 +1,558 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>1. 系统和存储器概述 &mdash; BL602/604 参考手册  文档</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="2. 复位和时钟" href="ResetAndClock.html" />
+    <link rel="prev" title="BL602/604 参考手册" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> BL602/604 参考手册
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. 系统和存储器概述</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">1.1. 简介</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">1.2. 主要特征</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">1.3. 功能描述</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">1.4. 中断源</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. 复位和时钟</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">4. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">5. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">6. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="L1C.html">7. L1C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">8. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">9. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">10. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">11. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">12. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">13. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">14. 版本信息</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL602/604 参考手册</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>1. 系统和存储器概述</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>1. 系统和存储器概述<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<div class="section" id="id2">
+<h2>1.1. 简介<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<p>芯片内处理器采用 RISC-V 32-bit 带浮点。
+搭配高速处理内存系统 (详见 L1C 章节)，达到优质的运算效率。
+处理器外部为多层 32-bit AHB 架构，具有低功耗、低延迟、高弹性的特性。
+内存的部分包含高速紧耦合内存以及缓存和系统共享内存。
+片外存储器支持 Flash 扩充。</p>
+</div>
+<div class="section" id="id3">
+<h2>1.2. 主要特征<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li>RISC-V 32-bit 带浮点</li>
+<li>多层 32-bit AHB 总线架构</li>
+<li>96KB 高速内存</li>
+<li>180KB 系统内存</li>
+<li>128KB 只读内存</li>
+<li>片外存储器 Flash</li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h2>1.3. 功能描述<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<p>BL602/BL604总线连接与地址访问总结如下。
+总线主设备包括CPU,SDIO,DMA,加密引擎,调试接口。
+总线从设备包括内存,外设,WiFi/BLE。
+除了加密引擎只能访问内存外，其余总线主设备皆可访问所有总线从设备。</p>
+<table border="1" class="docutils" id="id6">
+<caption><span class="caption-text">总线连接</span><a class="headerlink" href="#id6" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="15%" />
+<col width="22%" />
+<col width="13%" />
+<col width="15%" />
+<col width="19%" />
+<col width="17%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>从/主</td>
+<td>CPU</td>
+<td>SDIO</td>
+<td>DMA</td>
+<td>加密引擎</td>
+<td>调试接口</td>
+</tr>
+<tr class="row-even"><td>内存</td>
+<td>V</td>
+<td>V</td>
+<td>V</td>
+<td>V</td>
+<td>V</td>
+</tr>
+<tr class="row-odd"><td>外设</td>
+<td>V</td>
+<td>V</td>
+<td>V</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>V</td>
+</tr>
+<tr class="row-even"><td>WiFi/BLE</td>
+<td>V</td>
+<td>V</td>
+<td>V</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>V</td>
+</tr>
+</tbody>
+</table>
+<p>地址访问主要以[27:24]来区分&quot;存储&quot;或&quot;外设&quot;，可忽略[31:28]。
+内存空间是连续的X2008000~X204BFFF (272KB SRAM)，只读内存X1000000，深度睡眠内存X0010000。
+片外空间是X3000000 (最大支持 16MB Flash)。
+外设空间是X0000000~X000F000。</p>
+<table border="1" class="docutils" id="id7">
+<caption><span class="caption-text">地址映像</span><a class="headerlink" href="#id7" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="6%" />
+<col width="16%" />
+<col width="5%" />
+<col width="74%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>目标</td>
+<td>开始地址</td>
+<td>大小</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>WRAM</td>
+<td>0x42030000</td>
+<td>112KB</td>
+<td>无线SRAM存储器</td>
+</tr>
+<tr class="row-odd"><td>RETRAM</td>
+<td>0x40010000</td>
+<td>4KB</td>
+<td>深度睡眠内存（保留RAM）</td>
+</tr>
+<tr class="row-even"><td>HBN</td>
+<td>0x4000F000</td>
+<td>4KB</td>
+<td>深度睡眠控制（休眠）</td>
+</tr>
+<tr class="row-odd"><td>PDS</td>
+<td>0x4000E000</td>
+<td>4KB</td>
+<td>睡眠控制（掉电睡眠）</td>
+</tr>
+<tr class="row-even"><td>SDU</td>
+<td>0x4000D000</td>
+<td>4KB</td>
+<td>SDIO控制</td>
+</tr>
+<tr class="row-odd"><td>DMA</td>
+<td>0x4000C000</td>
+<td>4KB</td>
+<td>DMA控制</td>
+</tr>
+<tr class="row-even"><td>QSPI</td>
+<td>0x4000B000</td>
+<td>4KB</td>
+<td>Flash闪存控制</td>
+</tr>
+<tr class="row-odd"><td>IRR</td>
+<td>0x4000A600</td>
+<td>256B</td>
+<td>红外遥控器</td>
+</tr>
+<tr class="row-even"><td>TIMER</td>
+<td>0x4000A500</td>
+<td>256B</td>
+<td>计时器控制</td>
+</tr>
+<tr class="row-odd"><td>PWM</td>
+<td>0x4000A400</td>
+<td>256B</td>
+<td>脉冲宽度调制控制</td>
+</tr>
+<tr class="row-even"><td>I2C</td>
+<td>0x4000A300</td>
+<td>256B</td>
+<td>I2C控制</td>
+</tr>
+<tr class="row-odd"><td>SPI</td>
+<td>0x4000A200</td>
+<td>256B</td>
+<td>SPI主/从控制</td>
+</tr>
+<tr class="row-even"><td>UART1</td>
+<td>0x4000A100</td>
+<td>256B</td>
+<td>UART控制</td>
+</tr>
+<tr class="row-odd"><td>UART0</td>
+<td>0x4000A000</td>
+<td>256B</td>
+<td>UART控制</td>
+</tr>
+<tr class="row-even"><td>L1C</td>
+<td>0x40009000</td>
+<td>4KB</td>
+<td>缓存控制</td>
+</tr>
+<tr class="row-odd"><td>eFuse</td>
+<td>0x40007000</td>
+<td>4KB</td>
+<td>eFuse存储器控制</td>
+</tr>
+<tr class="row-even"><td>TZ2</td>
+<td>0x40006000</td>
+<td>4KB</td>
+<td>信任区隔离</td>
+</tr>
+<tr class="row-odd"><td>TZ1</td>
+<td>0x40005000</td>
+<td>4KB</td>
+<td>信任区隔离</td>
+</tr>
+<tr class="row-even"><td>SEC</td>
+<td>0x40004000</td>
+<td>4KB</td>
+<td>安全引擎</td>
+</tr>
+<tr class="row-odd"><td>GPIP</td>
+<td>0x40002000</td>
+<td>4KB</td>
+<td>通用DAC / ADC / ACOMP接口控制</td>
+</tr>
+<tr class="row-even"><td>MIX</td>
+<td>0x40001000</td>
+<td>4KB</td>
+<td>混合信号寄存器</td>
+</tr>
+<tr class="row-odd"><td>GLB</td>
+<td>0x40000000</td>
+<td>4KB</td>
+<td>全局寄存器</td>
+</tr>
+<tr class="row-even"><td>RAM</td>
+<td>0x22020000/0x42020000</td>
+<td>64KB</td>
+<td>片上存储器,如果用作数据存储器，则使用0x42020000地址访问；如果用作程序存储器，则使用0x22020000地址访问</td>
+</tr>
+<tr class="row-odd"><td>XIP</td>
+<td>0x23000000</td>
+<td>16MB</td>
+<td>XIP闪存</td>
+</tr>
+<tr class="row-even"><td>TCM1</td>
+<td>0x22014000/0x42014000</td>
+<td>48KB</td>
+<td>紧耦合内存，如果用作数据存储器，则使用0x42014000地址访问；如果用作程序存储器，则使用0x22014000地址访问</td>
+</tr>
+<tr class="row-odd"><td>TCM0</td>
+<td>0x22008000/0x42008000</td>
+<td>48KB</td>
+<td>紧耦合内存，如果用作数据存储器，则使用0x42008000地址访问；如果用作程序存储器，则使用0x22008000地址访问</td>
+</tr>
+<tr class="row-even"><td>ROM</td>
+<td>0x21000000</td>
+<td>128KB</td>
+<td>只读存储器</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id5">
+<h2>1.4. 中断源<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<p>BL602/BL604一共包含18个中断源，中断源与对应的中断号如下表所示：</p>
+<table border="1" class="docutils" id="id8">
+<caption><span class="caption-text">中断分配</span><a class="headerlink" href="#id8" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="9%" />
+<col width="24%" />
+<col width="24%" />
+<col width="43%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td colspan="2">中断源</td>
+<td>中断号</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td rowspan="2">L1C</td>
+<td>L1C_BMX_ERR</td>
+<td>IRQ_NUM_BASE+2</td>
+<td>L1C BMX Error Interrupt</td>
+</tr>
+<tr class="row-odd"><td>L1C_BMX_TO</td>
+<td>IRQ_NUM_BASE+3</td>
+<td>L1C BMX Timeout Interrupt</td>
+</tr>
+<tr class="row-even"><td>DMA</td>
+<td>DMA_BMX_ERR</td>
+<td>IRQ_NUM_BASE+8</td>
+<td>DMA BMX Error Interrupt</td>
+</tr>
+<tr class="row-odd"><td rowspan="2">IR</td>
+<td>IRTX</td>
+<td>IRQ_NUM_BASE+19</td>
+<td>IR TX Interrupt</td>
+</tr>
+<tr class="row-even"><td>IRRX</td>
+<td>IRQ_NUM_BASE+20</td>
+<td>IR RX Interrupt</td>
+</tr>
+<tr class="row-odd"><td>ADC</td>
+<td>GPADC_DMA</td>
+<td>IRQ_NUM_BASE+25</td>
+<td>GPADC_DMA Interrupt</td>
+</tr>
+<tr class="row-even"><td>SPI</td>
+<td>SPI</td>
+<td>IRQ_NUM_BASE+27</td>
+<td>SPI Interrupt</td>
+</tr>
+<tr class="row-odd"><td rowspan="2">UART</td>
+<td>UART0</td>
+<td>IRQ_NUM_BASE+29</td>
+<td>UART0 Interrupt</td>
+</tr>
+<tr class="row-even"><td>UART1</td>
+<td>IRQ_NUM_BASE+30</td>
+<td>UART1 Interrupt</td>
+</tr>
+<tr class="row-odd"><td>I2C</td>
+<td>I2C</td>
+<td>IRQ_NUM_BASE+32</td>
+<td>I2C Interrupt</td>
+</tr>
+<tr class="row-even"><td>PWM</td>
+<td>PWM</td>
+<td>IRQ_NUM_BASE+34</td>
+<td>PWM Interrupt</td>
+</tr>
+<tr class="row-odd"><td rowspan="3">TIMER</td>
+<td>TIMER_CH0</td>
+<td>IRQ_NUM_BASE+36</td>
+<td>Timer Channel 0 Interrupt</td>
+</tr>
+<tr class="row-even"><td>TIMER_CH1</td>
+<td>IRQ_NUM_BASE+37</td>
+<td>Timer Channel 1 Interrupt</td>
+</tr>
+<tr class="row-odd"><td>TIMER_WDT</td>
+<td>IRQ_NUM_BASE+38</td>
+<td>Watch Dog Interrupt</td>
+</tr>
+<tr class="row-even"><td>GPIO</td>
+<td>GPIO_INT0</td>
+<td>IRQ_NUM_BASE+44</td>
+<td>GPIO Interrupt</td>
+</tr>
+<tr class="row-odd"><td>PDS</td>
+<td>PDS_WAKEUP</td>
+<td>IRQ_NUM_BASE+50</td>
+<td>PDS Wakeup Interrupt</td>
+</tr>
+<tr class="row-even"><td rowspan="2">HBN</td>
+<td>HBN_OUT0</td>
+<td>IRQ_NUM_BASE+51</td>
+<td>Hibernate out 0 Interrupt</td>
+</tr>
+<tr class="row-odd"><td>HBN_OUT1</td>
+<td>IRQ_NUM_BASE+52</td>
+<td>Hibernate out 1 Interrupt</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">其中IRQ_NUM_BASE为16，中断号0-15为RISC-V 保留中断。</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ResetAndClock.html" class="btn btn-neutral float-right" title="2. 复位和时钟" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../index.html" class="btn btn-neutral float-left" title="BL602/604 参考手册" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

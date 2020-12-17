@@ -1,0 +1,503 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>2. Functional Description &mdash; BL602/604 Datasheet  文档</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="3. Pin Definition (QFN32)" href="PindefinitionQFN32.html" />
+    <link rel="prev" title="1. Overview" href="overview.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> BL602/604 Datasheet
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">1. Overview</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2. Functional Description</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#cpu">2.1. CPU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cache">2.2. Cache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#memory">2.3. Memory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dma">2.4. DMA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bus">2.5. Bus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#interrupt">2.6. Interrupt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#boot">2.7. Boot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#power">2.8. Power</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#clock">2.9. Clock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#peripherals">2.10. Peripherals</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="PindefinitionQFN32.html">3. Pin Definition (QFN32)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PindefinitionQFN40.html">4. Pin Definition (QFN40)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Electricalcharacteristics.html">5. Electrical Specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Referencedesign.html">6. Reference Design (simplified)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PackagingQFN32.html">7. Package Information(QFN32)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PackagingQFN40.html">8. Package Information(QFN40)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TopMarkingDefinition.html">9. Top Marking Definition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OrderingInformation.html">10. Ordering Information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">11. Revision history</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL602/604 Datasheet</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>2. Functional Description</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="functional-description">
+<h1>2. Functional Description<a class="headerlink" href="#functional-description" title="永久链接至标题">¶</a></h1>
+<p>BL602/BL604 main functions described as follows：</p>
+<div class="figure align-center" id="id3">
+<img alt="../_images/SystemArchitecture.png" src="../_images/SystemArchitecture.png" />
+<p class="caption"><span class="caption-text">System Architecture</span></p>
+</div>
+<div class="section" id="cpu">
+<h2>2.1. CPU<a class="headerlink" href="#cpu" title="永久链接至标题">¶</a></h2>
+<p>BL602/BL604 32-bit RISC CPU contains FPU (floating-point unit) for 32-bit
+single-precision arithmetic, three-stage pipelined (IF, EXE, WB),
+compressed 16 and 32-bit instruction set,
+standard JTAG debugger port including 4 hardware-programmable breakpoints,
+interrupt controller including 64 interrupts and 16 interrupt levels/priorities
+for low latency interrupt processing.
+Up to 192MHz clock frequency,
+can be dynamically configured to change clock frequency,
+enter the power saving mode to achieve low power consumption.</p>
+<p>Both WiFi/BLE stack and application run on single 32-bit RISC CPU for simple and ultra-low power applications. CPU performance ~1.46 DMIPS/MHz. ~3.1 CoreMark/MHz.</p>
+</div>
+<div class="section" id="cache">
+<h2>2.2. Cache<a class="headerlink" href="#cache" title="永久链接至标题">¶</a></h2>
+<p>BL602/BL604 cache improves CPU performance to access external memory.
+Cache memories can be partially or fully configured as TCM (tightly coupled memory).</p>
+</div>
+<div class="section" id="memory">
+<h2>2.3. Memory<a class="headerlink" href="#memory" title="永久链接至标题">¶</a></h2>
+<p>BL602/BL604 memories include: on-chip zero-delay SRAM memories, read-only memories,
+write-once memories,
+embedded flash memory (optional).</p>
+</div>
+<div class="section" id="dma">
+<h2>2.4. DMA<a class="headerlink" href="#dma" title="永久链接至标题">¶</a></h2>
+<p>BL602/BL604 DMA (direct memory access) controller has four dedicated channels
+that manage data transfer between peripherals and memories to improve cpu/bus
+efficiency. There are three main types of transfers including memory to memory,
+memory to peripheral, and peripheral to memory. DMA also supports LLI
+(link list item) that multiple transfers are pre-defined by a series of
+linked lists, then hardware automatically complete all transfers according
+to each LLI size and address. DMA supports peripheral UART, I2C, SPI, ADC
+and DAC.</p>
+</div>
+<div class="section" id="bus">
+<h2>2.5. Bus<a class="headerlink" href="#bus" title="永久链接至标题">¶</a></h2>
+<p>BL602/BL604 bus fabric connection and memory-map summarized as follows:</p>
+<table border="1" class="docutils" id="id4">
+<caption><span class="caption-text">Bus Connection</span><a class="headerlink" href="#id4" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="24%" />
+<col width="18%" />
+<col width="10%" />
+<col width="12%" />
+<col width="22%" />
+<col width="13%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Slave/ Master</td>
+<td>CPU</td>
+<td>SDIO</td>
+<td>DMA</td>
+<td>Crypto Engine</td>
+<td>Debug</td>
+</tr>
+<tr class="row-even"><td>SRAM</td>
+<td>V</td>
+<td>V</td>
+<td>V</td>
+<td>V</td>
+<td>V</td>
+</tr>
+<tr class="row-odd"><td>Peripheral</td>
+<td>V</td>
+<td>V</td>
+<td>V</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>V</td>
+</tr>
+<tr class="row-even"><td>WiFi/BLE</td>
+<td>V</td>
+<td>V</td>
+<td>V</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>V</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils" id="id5">
+<caption><span class="caption-text">Memory Map</span><a class="headerlink" href="#id5" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="5%" />
+<col width="13%" />
+<col width="4%" />
+<col width="78%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Module</td>
+<td>Base Address</td>
+<td>Size</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>WRAM</td>
+<td>0x42030000</td>
+<td>112KB</td>
+<td>Wireless SRAM memory</td>
+</tr>
+<tr class="row-odd"><td>RETRAM</td>
+<td>0x40010000</td>
+<td>4KB</td>
+<td>Deep sleep memory (Retention RAM)</td>
+</tr>
+<tr class="row-even"><td>HBN</td>
+<td>0x4000F000</td>
+<td>4KB</td>
+<td>Deep sleep control (Hibernate)</td>
+</tr>
+<tr class="row-odd"><td>PDS</td>
+<td>0x4000E000</td>
+<td>4KB</td>
+<td>Sleep control (Power Down Sleep)</td>
+</tr>
+<tr class="row-even"><td>SDU</td>
+<td>0x4000D000</td>
+<td>4KB</td>
+<td>SDIO control</td>
+</tr>
+<tr class="row-odd"><td>DMA</td>
+<td>0x4000C000</td>
+<td>4KB</td>
+<td>DMA control</td>
+</tr>
+<tr class="row-even"><td>QSPI</td>
+<td>0x4000B000</td>
+<td>4KB</td>
+<td>Flash control</td>
+</tr>
+<tr class="row-odd"><td>IRR</td>
+<td>0x4000A600</td>
+<td>256B</td>
+<td>IR Remote control</td>
+</tr>
+<tr class="row-even"><td>TIMER</td>
+<td>0x4000A500</td>
+<td>256B</td>
+<td>Timer control</td>
+</tr>
+<tr class="row-odd"><td>PWM</td>
+<td>0x4000A400</td>
+<td>256B</td>
+<td>Pulse Width Modulation <a href="#id1"><span class="problematic" id="id2">*</span></a>5 control</td>
+</tr>
+<tr class="row-even"><td>I2C</td>
+<td>0x4000A300</td>
+<td>256B</td>
+<td>I2C control</td>
+</tr>
+<tr class="row-odd"><td>SPI</td>
+<td>0x4000A200</td>
+<td>256B</td>
+<td>SPI master/slave control</td>
+</tr>
+<tr class="row-even"><td>UART1</td>
+<td>0x4000A100</td>
+<td>256B</td>
+<td>UART control</td>
+</tr>
+<tr class="row-odd"><td>UART0</td>
+<td>0x4000A000</td>
+<td>256B</td>
+<td>UART control</td>
+</tr>
+<tr class="row-even"><td>L1C</td>
+<td>0x40009000</td>
+<td>4KB</td>
+<td>Cache control</td>
+</tr>
+<tr class="row-odd"><td>eFuse</td>
+<td>0x40007000</td>
+<td>4KB</td>
+<td>eFuse memory control</td>
+</tr>
+<tr class="row-even"><td>TZ2</td>
+<td>0x40006000</td>
+<td>4KB</td>
+<td>Trust isolation</td>
+</tr>
+<tr class="row-odd"><td>TZ1</td>
+<td>0x40005000</td>
+<td>4KB</td>
+<td>Trust isolation</td>
+</tr>
+<tr class="row-even"><td>SEC</td>
+<td>0x40004000</td>
+<td>4KB</td>
+<td>Security engine</td>
+</tr>
+<tr class="row-odd"><td>GPIP</td>
+<td>0x40002000</td>
+<td>4KB</td>
+<td>General purpose DAC/ADC/ACOMP interface control</td>
+</tr>
+<tr class="row-even"><td>MIX</td>
+<td>0x40001000</td>
+<td>4KB</td>
+<td>Mixed signal register</td>
+</tr>
+<tr class="row-odd"><td>GLB</td>
+<td>0x40000000</td>
+<td>4KB</td>
+<td>Global control register</td>
+</tr>
+<tr class="row-even"><td>RAM</td>
+<td>0x22020000/0x42020000</td>
+<td>64KB</td>
+<td>On-chip memory.If used as data memory, use address 0x42020000 for access; if used as program memory, use address 0x22020000 for access</td>
+</tr>
+<tr class="row-odd"><td>XIP</td>
+<td>0x23000000</td>
+<td>16MB</td>
+<td>XIP Flash memory</td>
+</tr>
+<tr class="row-even"><td>TCM1</td>
+<td>0x22014000/0x42014000</td>
+<td>48KB</td>
+<td>Cache memory.If used as data memory, use address 0x42014000 for access; if used as program memory, use address 0x22014000 for access</td>
+</tr>
+<tr class="row-odd"><td>TCM0</td>
+<td>0x22008000/0x42008000</td>
+<td>48KB</td>
+<td>Cache memory.If used as data memory, use address 0x42008000 for access; if used as program memory, use address 0x22008000 for access</td>
+</tr>
+<tr class="row-even"><td>ROM</td>
+<td>0x21000000</td>
+<td>128KB</td>
+<td>Read-only memory</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="interrupt">
+<h2>2.6. Interrupt<a class="headerlink" href="#interrupt" title="永久链接至标题">¶</a></h2>
+<p>BL602/BL604 supports internal RTC wake-up and external interrupts wake-up.</p>
+<p>CPU interrupt controller supports stack/nesting, level/pulse, and high/low active.</p>
+</div>
+<div class="section" id="boot">
+<h2>2.7. Boot<a class="headerlink" href="#boot" title="永久链接至标题">¶</a></h2>
+<p>BL602/BL604 supports multiple boot options: UART, SDIO, and Flash.</p>
+</div>
+<div class="section" id="power">
+<h2>2.8. Power<a class="headerlink" href="#power" title="永久链接至标题">¶</a></h2>
+<p>PMU (power management unit) manages the power of the entire chip and is
+divided into active, idle, sleep, and hibernate power modes.
+The software can be configured to enter sleep mode and wake-up
+via RTC timer or EINT to achieve low-power sleep and accurate wake-up
+management.</p>
+<p>Power down sleep modes are flexible for applications to configure as the lowest power consumption.</p>
+</div>
+<div class="section" id="clock">
+<h2>2.9. Clock<a class="headerlink" href="#clock" title="永久链接至标题">¶</a></h2>
+<p>Clock control unit generates clocks to the core MCU and the peripheral SOC
+devices. The root clock source can be XTAL, PLL or RC oscillator.
+Dynamic power-saved by proper configurations such as sel, div, en, etc.
+PMU runs at 32kHz clock to keep system low-power in sleep mode.</p>
+<div class="figure align-center" id="id6">
+<img alt="../_images/clocktree.png" src="../_images/clocktree.png" />
+<p class="caption"><span class="caption-text">Clock Architecture</span></p>
+</div>
+</div>
+<div class="section" id="peripherals">
+<h2>2.10. Peripherals<a class="headerlink" href="#peripherals" title="永久链接至标题">¶</a></h2>
+<p>Peripherals include SDIO, SPI, UART, I2C, IR remote, PWM, ADC, DAC, PIR.</p>
+<p>Each peripheral can be assigned to different groups of GPIOs through flexible configurations.</p>
+<p>Each GPIO can be used as a general-purpose input and output function.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="PindefinitionQFN32.html" class="btn btn-neutral float-right" title="3. Pin Definition (QFN32)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="overview.html" class="btn btn-neutral float-left" title="1. Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

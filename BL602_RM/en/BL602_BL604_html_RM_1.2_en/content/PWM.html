@@ -1,0 +1,3769 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>12. PWM &mdash; BL602/604 Reference Manual  文档</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="13. TIMER" href="TIMER.html" />
+    <link rel="prev" title="11. I2C" href="I2C.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> BL602/604 Reference Manual
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. System and memory overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. Reset and clock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">4. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">5. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">6. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="L1C.html">7. L1C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">8. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">9. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">10. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">11. I2C</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">12. PWM</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">12.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#main-features">12.2. Main features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#function-description">12.3. Function description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#clock-and-divider">12.3.1. Clock and divider</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pulse-generation-principle">12.3.2. Pulse generation principle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pwm-interrupt">12.3.3. PWM interrupt</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#register-description">12.4. Register description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pwm-int-config">12.4.1. pwm_int_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pwm0-clkdiv">12.4.2. pwm0_clkdiv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pwm0-thre1">12.4.3. pwm0_thre1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pwm0-thre2">12.4.4. pwm0_thre2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pwm0-period">12.4.5. pwm0_period</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pwm0-config">12.4.6. pwm0_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pwm0-interrupt">12.4.7. pwm0_interrupt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pwm1-clkdiv">12.4.8. pwm1_clkdiv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pwm1-thre1">12.4.9. pwm1_thre1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pwm1-thre2">12.4.10. pwm1_thre2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pwm1-period">12.4.11. pwm1_period</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pwm1-config">12.4.12. pwm1_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pwm1-interrupt">12.4.13. pwm1_interrupt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pwm2-clkdiv">12.4.14. pwm2_clkdiv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pwm2-thre1">12.4.15. pwm2_thre1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pwm2-thre2">12.4.16. pwm2_thre2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pwm2-period">12.4.17. pwm2_period</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pwm2-config">12.4.18. pwm2_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pwm2-interrupt">12.4.19. pwm2_interrupt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pwm3-clkdiv">12.4.20. pwm3_clkdiv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pwm3-thre1">12.4.21. pwm3_thre1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pwm3-thre2">12.4.22. pwm3_thre2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pwm3-period">12.4.23. pwm3_period</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pwm3-config">12.4.24. pwm3_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pwm3-interrupt">12.4.25. pwm3_interrupt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pwm4-clkdiv">12.4.26. pwm4_clkdiv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pwm4-thre1">12.4.27. pwm4_thre1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pwm4-thre2">12.4.28. pwm4_thre2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pwm4-period">12.4.29. pwm4_period</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pwm4-config">12.4.30. pwm4_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pwm4-interrupt">12.4.31. pwm4_interrupt</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">13. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">14. Revision history</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL602/604 Reference Manual</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>12. PWM</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="pwm">
+<h1>12. PWM<a class="headerlink" href="#pwm" title="永久链接至标题">¶</a></h1>
+<div class="section" id="introduction">
+<h2>12.1. Introduction<a class="headerlink" href="#introduction" title="永久链接至标题">¶</a></h2>
+<p>Pulse width modulation (PWM) is an analog control method that modulates the bias of the transistor base or the grid of the MOS tube according to the change in the corresponding load. Therefore, the on-time of the transistor or the MOS tube is changed, and the output of the switch stabilized power supply is changed. This method can keep the output voltage of the power supply constant when the operating conditions change. It is a very effective technique for controlling analog circuits using digital signals from microprocessors. It is widely used in many fields from measurement and communication to power control and conversion.</p>
+</div>
+<div class="section" id="main-features">
+<h2>12.2. Main features<a class="headerlink" href="#main-features" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li>Supports 5-channel PWM signal generation</li>
+<li>Three clock sources can be selected (bus clock &lt;bclk&gt;, crystal clock &lt;xtal_ck&gt;, slow clock &lt;32k&gt;), with 16-bit clock divider</li>
+<li>Double threshold setting to increase pulse flexibility</li>
+<li>The maximum operating frequency is 40MHz</li>
+</ul>
+</div>
+<div class="section" id="function-description">
+<h2>12.3. Function description<a class="headerlink" href="#function-description" title="永久链接至标题">¶</a></h2>
+<div class="section" id="clock-and-divider">
+<h3>12.3.1. Clock and divider<a class="headerlink" href="#clock-and-divider" title="永久链接至标题">¶</a></h3>
+<p>There are three options for each PWM counter clock source, the sources are as follows:</p>
+<ol class="upperalpha simple">
+<li>bclk - Chip bus clock</li>
+<li>XTAL - External crystal clock</li>
+<li>f32k - System RTC clock</li>
+</ol>
+<p>Each counter has its own 16-bit frequency divider. The selected clock can be divided by APB. The PWM counter will use the divided clock as the counting cycle unit, and perform one action every time a counting cycle passes .</p>
+</div>
+<div class="section" id="pulse-generation-principle">
+<h3>12.3.2. Pulse generation principle<a class="headerlink" href="#pulse-generation-principle" title="永久链接至标题">¶</a></h3>
+<p>There is a counter in the PWM. When the counter is in the middle of two settable thresholds, the PWM output is 1, otherwise when the counter is outside the two set thresholds, the PWM output is 0. As shown below:</p>
+<div class="figure align-center" id="id1">
+<img alt="../_images/PwmWave.png" src="../_images/PwmWave.png" />
+<p class="caption"><span class="caption-text">Pwm</span></p>
+</div>
+<p>The PWM period is determined by two parts, one is the clock frequency division coefficient, and the other is the clock duration.</p>
+<p>The clock division coefficient is set by the register PWMn_CLK_DIV[15:0] (n is 0~5), which is used to divide the PWM source clock.</p>
+<p>The clock duration is set by the register PWMn_PERIOD[15:0] (n is 0~5), which is used to set the number of divided clock cycles for a PWM cycle. That is, the period of PWM = PWM source clock/PWMn_CLK_DIV[15:0]/PWMn_PERIOD[15:0].</p>
+<p>The duty cycle of the PWM is determined by the clock duration and two thresholds. The first threshold is set by the register PWMn_THRE1[15:0] (n is 0~5), the second threshold is set by the register PWMn_THRE2[15:0] (n is 0~5), the PWM waveform will be in the first Pull up at one threshold, and pull down at the second threshold. That is, the duty cycle of PWM=(PWMn_THRE2[15:0]-PWMn_THRE1[15:0])/PWMn_PERIOD[15:0].</p>
+<p>example:
+The PWM source clock is 80MHz. To generate a 1kHz PWM wave with a duty ratio of 20%, the settings are as follows:</p>
+<p>PWMn_CLK_DIV[15:0]=2</p>
+<p>PWMn_PERIOD[15:0]=80000000/2/1000=40000</p>
+<p>PWMn_THRE1[15:0]=0</p>
+<p>PWMn_THRE2[15:0]=0+40000*20%=8000</p>
+</div>
+<div class="section" id="pwm-interrupt">
+<h3>12.3.3. PWM interrupt<a class="headerlink" href="#pwm-interrupt" title="永久链接至标题">¶</a></h3>
+<p>For each PWM channel, you can set the cycle count value. When the number of cycles of the PWM output reaches this count value, a PWM interrupt will be generated.</p>
+<table border="1" class="docutils" id="id2">
+<caption><span class="caption-text">Duty Cycle Parameters</span><a class="headerlink" href="#id2" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="14%" />
+<col width="8%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Frequency/MHz</td>
+<td colspan="12">Supported duty cycle (n is an integer, and 2 &lt;= n &lt;= 65535^2)</td>
+</tr>
+<tr class="row-even"><td>40</td>
+<td>0%</td>
+<td>50%</td>
+<td>100%</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>26.67</td>
+<td>0%</td>
+<td>33.33%</td>
+<td>66.67%</td>
+<td>100%</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>20</td>
+<td>0%</td>
+<td>25%</td>
+<td>50%</td>
+<td>75%</td>
+<td>100%</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>16</td>
+<td>0%</td>
+<td>20%</td>
+<td>40%</td>
+<td>60%</td>
+<td>80%</td>
+<td>100%</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>13.33</td>
+<td>0%</td>
+<td>16.67%</td>
+<td>33.33%</td>
+<td>50%</td>
+<td>66.67%</td>
+<td>83.33%</td>
+<td>100%</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>11.43</td>
+<td>0%</td>
+<td>14.29%</td>
+<td>28.57%</td>
+<td>42.86%</td>
+<td>57.14%</td>
+<td>71.43%</td>
+<td>85.71%</td>
+<td>100%</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>10</td>
+<td>0%</td>
+<td>12.50%</td>
+<td>25%</td>
+<td>37.50%</td>
+<td>50%</td>
+<td>62.50%</td>
+<td>75%</td>
+<td>87.50%</td>
+<td>100%</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>8.89</td>
+<td>0%</td>
+<td>11.11%</td>
+<td>22.22%</td>
+<td>33.33%</td>
+<td>44.44%</td>
+<td>55.56%</td>
+<td>66.67%</td>
+<td>77.78%</td>
+<td>88.89%</td>
+<td>100%</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>8</td>
+<td>0%</td>
+<td>10%</td>
+<td>20%</td>
+<td>30%</td>
+<td>40%</td>
+<td>50%</td>
+<td>60%</td>
+<td>70%</td>
+<td>80%</td>
+<td>90%</td>
+<td>100%</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>·</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>·</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>·</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>80/n</td>
+<td>0/n</td>
+<td>1/n</td>
+<td>2/n</td>
+<td>3/n</td>
+<td>4/n</td>
+<td>5/n</td>
+<td>6/n</td>
+<td>7/n</td>
+<td>8/n</td>
+<td>9/n</td>
+<td>···</td>
+<td>n/n</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="register-description">
+<h2>12.4. Register description<a class="headerlink" href="#register-description" title="永久链接至标题">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="74%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Name</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pwm-int-config">pwm_int_config</a></td>
+<td>PWM interrupt configuration register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#pwm0-clkdiv">pwm0_clkdiv</a></td>
+<td>PWM0 clock division configuration register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pwm0-thre1">pwm0_thre1</a></td>
+<td>PWM0 first counter threshold configuration register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#pwm0-thre2">pwm0_thre2</a></td>
+<td>PWM0 sencond counter threshold configuration register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pwm0-period">pwm0_period</a></td>
+<td>PWM0 period setting register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#pwm0-config">pwm0_config</a></td>
+<td>PWM0 configuration register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pwm0-interrupt">pwm0_interrupt</a></td>
+<td>PWM0 interrupt register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#pwm1-clkdiv">pwm1_clkdiv</a></td>
+<td>PWM1 clock division configuration register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pwm1-thre1">pwm1_thre1</a></td>
+<td>PWM1 first counter threshold configuration register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#pwm1-thre2">pwm1_thre2</a></td>
+<td>PWM1 sencond counter threshold configuration register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pwm1-period">pwm1_period</a></td>
+<td>PWM1 period setting register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#pwm1-config">pwm1_config</a></td>
+<td>PWM1 configuration register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pwm1-interrupt">pwm1_interrupt</a></td>
+<td>PWM1 interrupt register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#pwm2-clkdiv">pwm2_clkdiv</a></td>
+<td>PWM2 clock division configuration register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pwm2-thre1">pwm2_thre1</a></td>
+<td>PWM2 first counter threshold configuration register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#pwm2-thre2">pwm2_thre2</a></td>
+<td>PWM2 sencond counter threshold configuration register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pwm2-period">pwm2_period</a></td>
+<td>PWM2 period setting register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#pwm2-config">pwm2_config</a></td>
+<td>PWM2 configuration register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pwm2-interrupt">pwm2_interrupt</a></td>
+<td>PWM2 interrupt register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#pwm3-clkdiv">pwm3_clkdiv</a></td>
+<td>PWM3 clock division configuration register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pwm3-thre1">pwm3_thre1</a></td>
+<td>PWM3 first counter threshold configuration register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#pwm3-thre2">pwm3_thre2</a></td>
+<td>PWM3 sencond counter threshold configuration register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pwm3-period">pwm3_period</a></td>
+<td>PWM3 period setting register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#pwm3-config">pwm3_config</a></td>
+<td>PWM3 configuration register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pwm3-interrupt">pwm3_interrupt</a></td>
+<td>PWM3 interrupt register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#pwm4-clkdiv">pwm4_clkdiv</a></td>
+<td>PWM4 clock division configuration register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pwm4-thre1">pwm4_thre1</a></td>
+<td>PWM4 first counter threshold configuration register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#pwm4-thre2">pwm4_thre2</a></td>
+<td>PWM4 sencond counter threshold configuration register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pwm4-period">pwm4_period</a></td>
+<td>PWM4 period setting register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#pwm4-config">pwm4_config</a></td>
+<td>PWM4 configuration register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pwm4-interrupt">pwm4_interrupt</a></td>
+<td>PWM4 interrupt register</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="pwm-int-config">
+<h3>12.4.1. pwm_int_config<a class="headerlink" href="#pwm-int-config" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a400</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="2">RSVD</td>
+<td colspan="6">INTCLR</td>
+<td colspan="2">RSVD</td>
+<td colspan="6">INTSTS</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="14%" />
+<col width="11%" />
+<col width="18%" />
+<col width="42%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:14</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>13:8</td>
+<td>INTCLR</td>
+<td>W</td>
+<td>6'D0</td>
+<td>PWM channel interrupt clear</td>
+</tr>
+<tr class="row-even"><td>7:6</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>5:0</td>
+<td>INTSTS</td>
+<td>R</td>
+<td>6'D0</td>
+<td>PWM channel interrupt status</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pwm0-clkdiv">
+<h3>12.4.2. pwm0_clkdiv<a class="headerlink" href="#pwm0-clkdiv" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a420</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">CLKDIV</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="16%" />
+<col width="13%" />
+<col width="21%" />
+<col width="33%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:16</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>15:0</td>
+<td>CLKDIV</td>
+<td>R/W</td>
+<td>16'B0</td>
+<td>PWM clock division</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pwm0-thre1">
+<h3>12.4.3. pwm0_thre1<a class="headerlink" href="#pwm0-thre1" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a424</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">THRE1</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="10%" />
+<col width="8%" />
+<col width="13%" />
+<col width="60%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:16</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>15:0</td>
+<td>THRE1</td>
+<td>R/W</td>
+<td>16'B0</td>
+<td>PWM first counter threshold, can't be larger that pwm_thre2</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pwm0-thre2">
+<h3>12.4.4. pwm0_thre2<a class="headerlink" href="#pwm0-thre2" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a428</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">THRE2</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="10%" />
+<col width="8%" />
+<col width="12%" />
+<col width="61%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:16</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>15:0</td>
+<td>THRE2</td>
+<td>R/W</td>
+<td>16'D0</td>
+<td>PWM sencond counter threshold, can't be smaller that pwm_thre1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pwm0-period">
+<h3>12.4.5. pwm0_period<a class="headerlink" href="#pwm0-period" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a42c</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">PERIOD</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="16%" />
+<col width="13%" />
+<col width="21%" />
+<col width="33%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:16</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>15:0</td>
+<td>PERIOD</td>
+<td>R/W</td>
+<td>16'D0</td>
+<td>PWM period setting</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pwm0-config">
+<h3>12.4.6. pwm0_config<a class="headerlink" href="#pwm0-config" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a430</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="8">RSVD</td>
+<td>STOPSTA</td>
+<td>STOPEN</td>
+<td>SWMODE</td>
+<td>SWFVAL</td>
+<td>STOPMODE</td>
+<td>OUTINV</td>
+<td colspan="2">CLKSEL</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="9%" />
+<col width="7%" />
+<col width="12%" />
+<col width="62%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:8</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>7</td>
+<td>STOPSTA</td>
+<td>R</td>
+<td>1'B0</td>
+<td>PWM stop status</td>
+</tr>
+<tr class="row-even"><td>6</td>
+<td>STOPEN</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>PWM stop enable</td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>SWMODE</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>PWM SW Mode setting</td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>SWFVAL</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>PWM SW Mode force value</td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>STOPMODE</td>
+<td>R/W</td>
+<td>1'B1</td>
+<td>PWM stop mode, 1'b1 - graceful ; 1'b0 - abrupt</td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>OUTINV</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>PWM invert output mode</td>
+</tr>
+<tr class="row-odd"><td>1:0</td>
+<td>CLKSEL</td>
+<td>R/W</td>
+<td>2'D0</td>
+<td>PWM clock source select, 2'b00-xclk ; 2'b01-bclk ; others-f32k_clk</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pwm0-interrupt">
+<h3>12.4.7. pwm0_interrupt<a class="headerlink" href="#pwm0-interrupt" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a434</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="15">RSVD</td>
+<td>INTEN</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">INTPECN</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="12%" />
+<col width="10%" />
+<col width="16%" />
+<col width="49%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:17</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>16</td>
+<td>INTEN</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>PWM interrupt enable</td>
+</tr>
+<tr class="row-even"><td>15:0</td>
+<td>INTPECN</td>
+<td>R/W</td>
+<td>16'D0</td>
+<td>PWM interrupt period counter threshold</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pwm1-clkdiv">
+<h3>12.4.8. pwm1_clkdiv<a class="headerlink" href="#pwm1-clkdiv" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a440</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">CLKDIV</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="16%" />
+<col width="13%" />
+<col width="21%" />
+<col width="33%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:16</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>15:0</td>
+<td>CLKDIV</td>
+<td>R/W</td>
+<td>16'B0</td>
+<td>PWM clock division</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pwm1-thre1">
+<h3>12.4.9. pwm1_thre1<a class="headerlink" href="#pwm1-thre1" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a444</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">THRE1</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="10%" />
+<col width="8%" />
+<col width="13%" />
+<col width="60%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:16</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>15:0</td>
+<td>THRE1</td>
+<td>R/W</td>
+<td>16'B0</td>
+<td>PWM first counter threshold, can't be larger that pwm_thre2</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pwm1-thre2">
+<h3>12.4.10. pwm1_thre2<a class="headerlink" href="#pwm1-thre2" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a448</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">THRE2</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="10%" />
+<col width="8%" />
+<col width="12%" />
+<col width="61%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:16</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>15:0</td>
+<td>THRE2</td>
+<td>R/W</td>
+<td>16'D0</td>
+<td>PWM sencond counter threshold, can't be smaller that pwm_thre1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pwm1-period">
+<h3>12.4.11. pwm1_period<a class="headerlink" href="#pwm1-period" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a44c</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">PERIOD</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="16%" />
+<col width="13%" />
+<col width="21%" />
+<col width="33%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:16</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>15:0</td>
+<td>PERIOD</td>
+<td>R/W</td>
+<td>16'D0</td>
+<td>PWM period setting</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pwm1-config">
+<h3>12.4.12. pwm1_config<a class="headerlink" href="#pwm1-config" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a450</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="8">RSVD</td>
+<td>STOPSTA</td>
+<td>STOPEN</td>
+<td>SWMODE</td>
+<td>SWFVAL</td>
+<td>STOPMODE</td>
+<td>OUTINV</td>
+<td colspan="2">CLKSEL</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="9%" />
+<col width="7%" />
+<col width="12%" />
+<col width="62%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:8</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>7</td>
+<td>STOPSTA</td>
+<td>R</td>
+<td>1'B0</td>
+<td>PWM stop status</td>
+</tr>
+<tr class="row-even"><td>6</td>
+<td>STOPEN</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>PWM stop enable</td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>SWMODE</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>PWM SW Mode setting</td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>SWFVAL</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>PWM SW Mode force value</td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>STOPMODE</td>
+<td>R/W</td>
+<td>1'B1</td>
+<td>PWM stop mode, 1'b1 - graceful ; 1'b0 - abrupt</td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>OUTINV</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>PWM invert output mode</td>
+</tr>
+<tr class="row-odd"><td>1:0</td>
+<td>CLKSEL</td>
+<td>R/W</td>
+<td>2'D0</td>
+<td>PWM clock source select, 2'b00-xclk ; 2'b01-bclk ; others-f32k_clk</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pwm1-interrupt">
+<h3>12.4.13. pwm1_interrupt<a class="headerlink" href="#pwm1-interrupt" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a454</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="15">RSVD</td>
+<td>INTEN</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">INTPECN</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="12%" />
+<col width="10%" />
+<col width="16%" />
+<col width="49%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:17</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>16</td>
+<td>INTEN</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>PWM interrupt enable</td>
+</tr>
+<tr class="row-even"><td>15:0</td>
+<td>INTPECN</td>
+<td>R/W</td>
+<td>16'D0</td>
+<td>PWM interrupt period counter threshold</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pwm2-clkdiv">
+<h3>12.4.14. pwm2_clkdiv<a class="headerlink" href="#pwm2-clkdiv" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a460</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">CLKDIV</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="16%" />
+<col width="13%" />
+<col width="21%" />
+<col width="33%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:16</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>15:0</td>
+<td>CLKDIV</td>
+<td>R/W</td>
+<td>16'B0</td>
+<td>PWM clock division</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pwm2-thre1">
+<h3>12.4.15. pwm2_thre1<a class="headerlink" href="#pwm2-thre1" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a464</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">THRE1</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="10%" />
+<col width="8%" />
+<col width="13%" />
+<col width="60%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:16</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>15:0</td>
+<td>THRE1</td>
+<td>R/W</td>
+<td>16'B0</td>
+<td>PWM first counter threshold, can't be larger that pwm_thre2</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pwm2-thre2">
+<h3>12.4.16. pwm2_thre2<a class="headerlink" href="#pwm2-thre2" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a468</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">THRE2</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="10%" />
+<col width="8%" />
+<col width="12%" />
+<col width="61%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:16</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>15:0</td>
+<td>THRE2</td>
+<td>R/W</td>
+<td>16'D0</td>
+<td>PWM sencond counter threshold, can't be smaller that pwm_thre1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pwm2-period">
+<h3>12.4.17. pwm2_period<a class="headerlink" href="#pwm2-period" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a46c</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">PERIOD</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="16%" />
+<col width="13%" />
+<col width="21%" />
+<col width="33%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:16</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>15:0</td>
+<td>PERIOD</td>
+<td>R/W</td>
+<td>16'D0</td>
+<td>PWM period setting</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pwm2-config">
+<h3>12.4.18. pwm2_config<a class="headerlink" href="#pwm2-config" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a470</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="8">RSVD</td>
+<td>STOPSTA</td>
+<td>STOPEN</td>
+<td>SWMODE</td>
+<td>SWFVAL</td>
+<td>STOPMODE</td>
+<td>OUTINV</td>
+<td colspan="2">CLKSEL</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="9%" />
+<col width="7%" />
+<col width="12%" />
+<col width="62%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:8</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>7</td>
+<td>STOPSTA</td>
+<td>R</td>
+<td>1'B0</td>
+<td>PWM stop status</td>
+</tr>
+<tr class="row-even"><td>6</td>
+<td>STOPEN</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>PWM stop enable</td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>SWMODE</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>PWM SW Mode setting</td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>SWFVAL</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>PWM SW Mode force value</td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>STOPMODE</td>
+<td>R/W</td>
+<td>1'B1</td>
+<td>PWM stop mode, 1'b1 - graceful ; 1'b0 - abrupt</td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>OUTINV</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>PWM invert output mode</td>
+</tr>
+<tr class="row-odd"><td>1:0</td>
+<td>CLKSEL</td>
+<td>R/W</td>
+<td>2'D0</td>
+<td>PWM clock source select, 2'b00-xclk ; 2'b01-bclk ; others-f32k_clk</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pwm2-interrupt">
+<h3>12.4.19. pwm2_interrupt<a class="headerlink" href="#pwm2-interrupt" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a474</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="15">RSVD</td>
+<td>INTEN</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">INTPECN</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="12%" />
+<col width="10%" />
+<col width="16%" />
+<col width="49%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:17</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>16</td>
+<td>INTEN</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>PWM interrupt enable</td>
+</tr>
+<tr class="row-even"><td>15:0</td>
+<td>INTPECN</td>
+<td>R/W</td>
+<td>16'D0</td>
+<td>PWM interrupt period counter threshold</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pwm3-clkdiv">
+<h3>12.4.20. pwm3_clkdiv<a class="headerlink" href="#pwm3-clkdiv" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a480</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">CLKDIV</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="16%" />
+<col width="13%" />
+<col width="21%" />
+<col width="33%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:16</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>15:0</td>
+<td>CLKDIV</td>
+<td>R/W</td>
+<td>16'B0</td>
+<td>PWM clock division</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pwm3-thre1">
+<h3>12.4.21. pwm3_thre1<a class="headerlink" href="#pwm3-thre1" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a484</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">THRE1</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="10%" />
+<col width="8%" />
+<col width="13%" />
+<col width="60%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:16</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>15:0</td>
+<td>THRE1</td>
+<td>R/W</td>
+<td>16'B0</td>
+<td>PWM first counter threshold, can't be larger that pwm_thre2</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pwm3-thre2">
+<h3>12.4.22. pwm3_thre2<a class="headerlink" href="#pwm3-thre2" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a488</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">THRE2</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="10%" />
+<col width="8%" />
+<col width="12%" />
+<col width="61%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:16</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>15:0</td>
+<td>THRE2</td>
+<td>R/W</td>
+<td>16'D0</td>
+<td>PWM sencond counter threshold, can't be smaller that pwm_thre1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pwm3-period">
+<h3>12.4.23. pwm3_period<a class="headerlink" href="#pwm3-period" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a48c</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">PERIOD</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="16%" />
+<col width="13%" />
+<col width="21%" />
+<col width="33%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:16</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>15:0</td>
+<td>PERIOD</td>
+<td>R/W</td>
+<td>16'D0</td>
+<td>PWM period setting</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pwm3-config">
+<h3>12.4.24. pwm3_config<a class="headerlink" href="#pwm3-config" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a490</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="8">RSVD</td>
+<td>STOPSTA</td>
+<td>STOPEN</td>
+<td>SWMODE</td>
+<td>SWFVAL</td>
+<td>STOPMODE</td>
+<td>OUTINV</td>
+<td colspan="2">CLKSEL</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="9%" />
+<col width="7%" />
+<col width="12%" />
+<col width="62%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:8</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>7</td>
+<td>STOPSTA</td>
+<td>R</td>
+<td>1'B0</td>
+<td>PWM stop status</td>
+</tr>
+<tr class="row-even"><td>6</td>
+<td>STOPEN</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>PWM stop enable</td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>SWMODE</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>PWM SW Mode setting</td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>SWFVAL</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>PWM SW Mode force value</td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>STOPMODE</td>
+<td>R/W</td>
+<td>1'B1</td>
+<td>PWM stop mode, 1'b1 - graceful ; 1'b0 - abrupt</td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>OUTINV</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>PWM invert output mode</td>
+</tr>
+<tr class="row-odd"><td>1:0</td>
+<td>CLKSEL</td>
+<td>R/W</td>
+<td>2'D0</td>
+<td>PWM clock source select, 2'b00-xclk ; 2'b01-bclk ; others-f32k_clk</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pwm3-interrupt">
+<h3>12.4.25. pwm3_interrupt<a class="headerlink" href="#pwm3-interrupt" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a494</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="15">RSVD</td>
+<td>INTEN</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">INTPECN</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="12%" />
+<col width="10%" />
+<col width="16%" />
+<col width="49%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:17</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>16</td>
+<td>INTEN</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>PWM interrupt enable</td>
+</tr>
+<tr class="row-even"><td>15:0</td>
+<td>INTPECN</td>
+<td>R/W</td>
+<td>16'D0</td>
+<td>PWM interrupt period counter threshold</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pwm4-clkdiv">
+<h3>12.4.26. pwm4_clkdiv<a class="headerlink" href="#pwm4-clkdiv" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a4a0</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">CLKDIV</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="16%" />
+<col width="13%" />
+<col width="21%" />
+<col width="33%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:16</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>15:0</td>
+<td>CLKDIV</td>
+<td>R/W</td>
+<td>16'B0</td>
+<td>PWM clock division</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pwm4-thre1">
+<h3>12.4.27. pwm4_thre1<a class="headerlink" href="#pwm4-thre1" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a4a4</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">THRE1</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="10%" />
+<col width="8%" />
+<col width="13%" />
+<col width="60%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:16</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>15:0</td>
+<td>THRE1</td>
+<td>R/W</td>
+<td>16'B0</td>
+<td>PWM first counter threshold, can't be larger that pwm_thre2</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pwm4-thre2">
+<h3>12.4.28. pwm4_thre2<a class="headerlink" href="#pwm4-thre2" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a4a8</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">THRE2</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="10%" />
+<col width="8%" />
+<col width="12%" />
+<col width="61%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:16</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>15:0</td>
+<td>THRE2</td>
+<td>R/W</td>
+<td>16'D0</td>
+<td>PWM sencond counter threshold, can't be smaller that pwm_thre1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pwm4-period">
+<h3>12.4.29. pwm4_period<a class="headerlink" href="#pwm4-period" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a4ac</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">PERIOD</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="16%" />
+<col width="13%" />
+<col width="21%" />
+<col width="33%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:16</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>15:0</td>
+<td>PERIOD</td>
+<td>R/W</td>
+<td>16'D0</td>
+<td>PWM period setting</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pwm4-config">
+<h3>12.4.30. pwm4_config<a class="headerlink" href="#pwm4-config" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a4b0</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="8">RSVD</td>
+<td>STOPSTA</td>
+<td>STOPEN</td>
+<td>SWMODE</td>
+<td>SWFVAL</td>
+<td>STOPMODE</td>
+<td>OUTINV</td>
+<td colspan="2">CLKSEL</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="9%" />
+<col width="7%" />
+<col width="12%" />
+<col width="62%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:8</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>7</td>
+<td>STOPSTA</td>
+<td>R</td>
+<td>1'B0</td>
+<td>PWM stop status</td>
+</tr>
+<tr class="row-even"><td>6</td>
+<td>STOPEN</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>PWM stop enable</td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>SWMODE</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>PWM SW Mode setting</td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>SWFVAL</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>PWM SW Mode force value</td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>STOPMODE</td>
+<td>R/W</td>
+<td>1'B1</td>
+<td>PWM stop mode, 1'b1 - graceful ; 1'b0 - abrupt</td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>OUTINV</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>PWM invert output mode</td>
+</tr>
+<tr class="row-odd"><td>1:0</td>
+<td>CLKSEL</td>
+<td>R/W</td>
+<td>2'D0</td>
+<td>PWM clock source select, 2'b00-xclk ; 2'b01-bclk ; others-f32k_clk</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pwm4-interrupt">
+<h3>12.4.31. pwm4_interrupt<a class="headerlink" href="#pwm4-interrupt" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a4b4</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="15">RSVD</td>
+<td>INTEN</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">INTPECN</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="12%" />
+<col width="10%" />
+<col width="16%" />
+<col width="49%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:17</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>16</td>
+<td>INTEN</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>PWM interrupt enable</td>
+</tr>
+<tr class="row-even"><td>15:0</td>
+<td>INTPECN</td>
+<td>R/W</td>
+<td>16'D0</td>
+<td>PWM interrupt period counter threshold</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="TIMER.html" class="btn btn-neutral float-right" title="13. TIMER" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="I2C.html" class="btn btn-neutral float-left" title="11. I2C" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

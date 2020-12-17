@@ -1,0 +1,4238 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>6. DMA &mdash; BL602/604 参考手册  文档</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="7. L1C" href="L1C.html" />
+    <link rel="prev" title="5. DAC" href="DAC.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> BL602/604 参考手册
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. 系统和存储器概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. 复位和时钟</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">4. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">5. DAC</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">6. DMA</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">6.1. 简介</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">6.2. 主要特征</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">6.3. 功能描述</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">6.3.1. 工作原理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">6.3.2. DMA通道配置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">6.3.3. 外设支持</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">6.3.4. 链表模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">6.3.5. DMA中断</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">6.4. 传输模式</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id10">6.4.1. 内存到内存</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">6.4.2. 内存到外设</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">6.4.3. 外设到内存</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id13">6.5. 寄存器描述</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dma-intstatus">6.5.1. DMA_IntStatus</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-inttcstatus">6.5.2. DMA_IntTCStatus</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-inttcclear">6.5.3. DMA_IntTCClear</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-interrorstatus">6.5.4. DMA_IntErrorStatus</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-interrclr">6.5.5. DMA_IntErrClr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-rawinttcstatus">6.5.6. DMA_RawIntTCStatus</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-rawinterrorstatus">6.5.7. DMA_RawIntErrorStatus</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-enbldchns">6.5.8. DMA_EnbldChns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-softbreq">6.5.9. DMA_SoftBReq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-softsreq">6.5.10. DMA_SoftSReq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-softlbreq">6.5.11. DMA_SoftLBReq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-softlsreq">6.5.12. DMA_SoftLSReq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-config">6.5.13. DMA_Config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-sync">6.5.14. DMA_Sync</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-c0srcaddr">6.5.15. DMA_C0SrcAddr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-c0dstaddr">6.5.16. DMA_C0DstAddr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-c0lli">6.5.17. DMA_C0LLI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-c0control">6.5.18. DMA_C0Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-c0config">6.5.19. DMA_C0Config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-c1srcaddr">6.5.20. DMA_C1SrcAddr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-c1dstaddr">6.5.21. DMA_C1DstAddr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-c1lli">6.5.22. DMA_C1LLI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-c1control">6.5.23. DMA_C1Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-c1config">6.5.24. DMA_C1Config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-c2srcaddr">6.5.25. DMA_C2SrcAddr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-c2dstaddr">6.5.26. DMA_C2DstAddr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-c2lli">6.5.27. DMA_C2LLI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-c2control">6.5.28. DMA_C2Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-c2config">6.5.29. DMA_C2Config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-c3srcaddr">6.5.30. DMA_C3SrcAddr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-c3dstaddr">6.5.31. DMA_C3DstAddr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-c3lli">6.5.32. DMA_C3LLI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-c3control">6.5.33. DMA_C3Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-c3config">6.5.34. DMA_C3Config</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="L1C.html">7. L1C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">8. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">9. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">10. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">11. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">12. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">13. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">14. 版本信息</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL602/604 参考手册</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>6. DMA</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="dma">
+<h1>6. DMA<a class="headerlink" href="#dma" title="永久链接至标题">¶</a></h1>
+<div class="section" id="id1">
+<h2>6.1. 简介<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<p>DMA(Direct Memory Access)是一种内存存取技术，可以独立地直接读写系统内存，而不需处理器介入处理。
+在同等程度的处理器负担下，DMA是一种快速的数据传送方式。
+DMA控制器有4组独立专用通道，管理外围设备和内存之间的数据传输以提高总线效率。
+主要有三种类型传输包括内存至内存、内存至外设、外设至内存。并支持LLI链接列表功能。
+使用上由软件配置传输数据大小、数据源地址和目标地址。</p>
+</div>
+<div class="section" id="id2">
+<h2>6.2. 主要特征<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li>4组独立专用通道</li>
+<li>独立控制来源与目标存取宽度(单字节、双字节、四字节)</li>
+<li>每个通道独立作为读写缓存</li>
+<li>每个通道可被独立的外设硬件触发或是软件触发</li>
+<li>支持外设包括UART、I2C、SPI、ADC。</li>
+<li>八种流程控制<ul>
+<li>DMA流程控制，来源内存、目标内存</li>
+<li>DMA流程控制，来源内存、目标外设</li>
+<li>DMA流程控制，来源外设、目标内存</li>
+<li>DMA流程控制，来源外设、目标外设</li>
+<li>目标外设流程控制，来源外设、目标外设</li>
+<li>目标外设流程控制，来源内存、目标外设</li>
+<li>来源外设流程控制，来源外设、目标内存</li>
+<li>来源外设流程控制，来源外设、目标外设</li>
+</ul>
+</li>
+<li>支持LLI链表功能，提高DMA效率</li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h2>6.3. 功能描述<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id4">
+<h3>6.3.1. 工作原理<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h3>
+<p>当一个设备试图通过总线直接向另一个设备传输数据时，
+它会先向CPU发送DMA请求信号。外设通过DMA
+向CPU提出接管总线控制权的总线请求，CPU收到该信号后，在当前的总线周期结束后，
+会按DMA信号的优先级和提出DMA请求的先后顺序响应DMA信号。
+CPU对某个设备接口响应DMA请求时，会让出总线控制权。
+于是在DMA控制器的管理下，外设和存储器直接进行数据交换，
+而不需CPU干预。数据传送完毕后，设备会向CPU发送DMA结束信号，交还总线控制权。</p>
+<div class="figure align-center" id="id14">
+<img alt="../_images/DmaArch.png" src="../_images/DmaArch.png" />
+<p class="caption"><span class="caption-text">DMA框图</span></p>
+</div>
+<p>DMA 包含一组 AHB Master 接口和一组 AHB Slave 接口。AHB Master 接口根据当前配置需求通过系
+统总线主动存取内存或是外设，做为数据搬移的端口。AHB Slave 接口作为配置 DMA 的接口，只支持32-bit 存取。</p>
+</div>
+<div class="section" id="id5">
+<h3>6.3.2. DMA通道配置<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
+<p>DMA共支持4路通道，各通道之间互不干涉，可以同时运行，下面是DMA通道x的配置过程：</p>
+<ol class="arabic simple">
+<li>在DMA_C0SrcAddr寄存器中设置32-bit来源地址</li>
+<li>在DMA_C0DstAddr寄存器中设置32-bit目标地址</li>
+<li>地址自动累加，可通过配置DMA_C0Control寄存器中SI(来源)、DI(目标)设定是否开启地址自动累加模式，设置为1时，开启地址自动累加模式</li>
+<li>设置传输数据宽度，可通过配置DMA_C0Control寄存器中STW(来源)、DTW(目标)位，宽度选项有单字节、双自结、四字节</li>
+<li>Burst型态，可通过配置DMA_C0Control寄存器中SBS(来源)、DBS(目标)位来设置，配置选项有Single、INCR4、INCR8、INCR16</li>
+<li>需要特别注意的是所配置的组合，单笔burst不能超过16字节</li>
+<li>设置数据传输长度的范围为：0-4095</li>
+</ol>
+</div>
+<div class="section" id="id6">
+<h3>6.3.3. 外设支持<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
+<p>可通过配置SrcPeripheral(来源)和DstPeripheral(目标)来决定当前DMA配合的外设，关系为0-3 : UART / 6-7 : I2C / 10-11 : SPI / 22-23 : ADC/DAC</p>
+<p><strong>UART使用DMA传输数据</strong></p>
+<p>UART发送数据包，使用DMA方式能大量减轻CPU处理的时间，使其CPU资源不被大量浪费，
+尤其在UART收发大量数据包（如高频率收发指令）时具有明显优势。</p>
+<p>以UART0传输为例，配置过程如下：</p>
+<ol class="arabic simple">
+<li>将寄存器DMA_C0Config[SRCPH]位的值设置为1，即将Source peripheral设置为UART_TX</li>
+<li>将寄存器DMA_C0Config[DSTPH]位的值设置为0，即将Destination peripheral设置为UART_RX</li>
+</ol>
+<p><strong>I2C使用DMA传输数据</strong></p>
+<p>配置如下：</p>
+<ol class="arabic simple">
+<li>将寄存器DMA_C0Config[SRCPH]位的值设置为7，即将Source peripheral设置为I2C_TX</li>
+<li>将寄存器DMA_C0Config[DSTPH]位的值设置为6，即将Destination peripheral设置为I2C_RX</li>
+</ol>
+<p><strong>SPI使用DMA传输数据</strong></p>
+<p>配置如下：</p>
+<ol class="arabic simple">
+<li>将寄存器DMA_C0Config[SRCPH]位的值设置为11，即将Source peripheral设置为SPI_TX</li>
+<li>将寄存器DMA_C0Config[DSTPH]位的值设置为10，即将Destination peripheral设置为SPI_RX</li>
+</ol>
+<p><strong>ADC0/1使用DMA传输数据</strong></p>
+<p>配置如下：</p>
+<ol class="arabic simple">
+<li>将寄存器DMA_C0Config[SRCPH]位的值设置为22/23，即将Source peripheral设置为GPADC0/GPADC1</li>
+</ol>
+</div>
+<div class="section" id="id7">
+<h3>6.3.4. 链表模式<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h3>
+<p>DMA支持链表工作模式。在进行一次DMA读或写操作时，可以向下一条链表中填写数据，
+当完成当前链表的数据传输后，通过读取DMA_C0LLI寄存器的数值获取下一条链表的起始地址，
+直接传输下一条链表中的数据。保证DMA传输过程中连续不间断的工作，提高CPU和DMA的效率。</p>
+<div class="figure align-center" id="id15">
+<img alt="../_images/DMALLI.png" src="../_images/DMALLI.png" />
+<p class="caption"><span class="caption-text">LLI 框架</span></p>
+</div>
+</div>
+<div class="section" id="id8">
+<h3>6.3.5. DMA中断<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h3>
+<ul>
+<li><p class="first">DMA_INT_TCOMPLETED</p>
+<blockquote>
+<div><ul class="simple">
+<li>数据传输完成中断，当一次数据传输完毕后，会进入此中断</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">DMA_INT_ERR</p>
+<blockquote>
+<div><ul class="simple">
+<li>数据传输出错中断，当数据传输过程中出现错误时，会进入此中断</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="id9">
+<h2>6.4. 传输模式<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id10">
+<h3>6.4.1. 内存到内存<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h3>
+<p>这个模式启动后，DMA会根据设定好的搬移数量(TransferSize)，将数据从来源地址搬到目标地址，
+传输完毕后DMA控制器会自动回到空闲状态，等待下一次的搬运。</p>
+<p>具体配置流程如下：</p>
+<ol class="arabic simple">
+<li>将寄存器DMA_C0SrcAddr的值设置为来源的内存地址</li>
+<li>将寄存器DMA_C0DstAddr的值设置为目标的内存地址</li>
+<li>选择传输模式，将寄存器DMA_C0Config[FLOWCTRL]位的值设置为0，即选择memory-to-memory模式</li>
+<li>设置DMA_C0Control寄存器中对应的位的数值：DI、SI位设置为1，开启地址自动累加模式，
+DTW、STW位分别设置来源和目标的传输宽度，DBS、SBS位分别设置来源和目标的burst型态，</li>
+<li>选择合适的通道，使能DMA，完成数据传输</li>
+</ol>
+</div>
+<div class="section" id="id11">
+<h3>6.4.2. 内存到外设<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h3>
+<p>在这种工作模式下，DMA会根据设定好的搬移数量(TransferSize)，
+把数据从来源端搬至内部缓存，当缓存空间不够时自动暂停，
+待有足够的缓存空间时继续，直到设定的搬移数量达到。
+另外一方面当目标外设请求触发会将目标配置burst到目标地址，
+直到达到设定搬移数量完成自动回到空闲状态，等待下一次启动</p>
+<p>具体配置流程如下：</p>
+<ol class="arabic simple">
+<li>将寄存器DMA_C0SrcAddr的值设置为来源的内存地址</li>
+<li>将寄存器DMA_C0DstAddr的值设置为目标的外设地址</li>
+<li>选择传输模式，将寄存器DMA_C0Config[FLOWCTRL]位的值设置为1，
+即选择Memory-to-peripheral模式</li>
+<li>设置DMA_C0Control寄存器中对应的位的数值：DI、SI位设置为1，开启地址自动累加模式，
+DTW、STW位分别设置来源和目标的传输宽度，DBS、SBS位分别设置来源和目标的burst型态，</li>
+<li>选择合适的通道，使能DMA，完成数据传输</li>
+</ol>
+</div>
+<div class="section" id="id12">
+<h3>6.4.3. 外设到内存<a class="headerlink" href="#id12" title="永久链接至标题">¶</a></h3>
+<p>在这种工作模式下，当来源外设请求触发时将来源配置burst到缓存，
+直到设定的搬移数量达到停止。另外一方面，当内部缓存足够一次目标burst数量时，
+DMA会自动将缓存的内容搬到目标地址直到达到设定搬移数量完成自动回到空闲状态，
+等待下一次启动</p>
+<p>具体配置流程如下：</p>
+<ol class="arabic simple">
+<li>将寄存器DMA_C0SrcAddr的值设置为来源的外设地址</li>
+<li>将寄存器DMA_C0DstAddr的值设置为目标的内存地址</li>
+<li>选择传输模式，将寄存器DMA_C0Config[FLOWCTRL]位的值设置为2，
+即选择Peripheral-to-memory模式</li>
+<li>设置DMA_C0Control寄存器中对应的位的数值：DI、SI位设置为1，开启地址自动累加模式，
+DTW、STW位分别设置来源和目标的传输宽度，DBS、SBS位分别设置来源和目标的burst型态，</li>
+<li>选择合适的通道，使能DMA，完成数据传输</li>
+</ol>
+</div>
+</div>
+<div class="section" id="id13">
+<h2>6.5. 寄存器描述<a class="headerlink" href="#id13" title="永久链接至标题">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="31%" />
+<col width="69%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>名称</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#dma-intstatus">DMA_IntStatus</a></td>
+<td>Interrupt status</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#dma-inttcstatus">DMA_IntTCStatus</a></td>
+<td>Interrupt terminal count request status</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#dma-inttcclear">DMA_IntTCClear</a></td>
+<td>Terminal count request clear</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#dma-interrorstatus">DMA_IntErrorStatus</a></td>
+<td>Interrupt error status</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#dma-interrclr">DMA_IntErrClr</a></td>
+<td>Interrupt error clear</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#dma-rawinttcstatus">DMA_RawIntTCStatus</a></td>
+<td>Status of the terminal count interrupt prior to masking</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#dma-rawinterrorstatus">DMA_RawIntErrorStatus</a></td>
+<td>Status of the error interrupt prior to masking</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#dma-enbldchns">DMA_EnbldChns</a></td>
+<td>Channel enable status</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#dma-softbreq">DMA_SoftBReq</a></td>
+<td>Software burst request</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#dma-softsreq">DMA_SoftSReq</a></td>
+<td>Software single request</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#dma-softlbreq">DMA_SoftLBReq</a></td>
+<td>Software last burst request</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#dma-softlsreq">DMA_SoftLSReq</a></td>
+<td>Software last single request</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#dma-config">DMA_Config</a></td>
+<td>DMA general configuration</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#dma-sync">DMA_Sync</a></td>
+<td>DMA request asynchronous setting</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#dma-c0srcaddr">DMA_C0SrcAddr</a></td>
+<td>Channel DMA source address</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#dma-c0dstaddr">DMA_C0DstAddr</a></td>
+<td>Channel DMA Destination address</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#dma-c0lli">DMA_C0LLI</a></td>
+<td>Channel DMA link list</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#dma-c0control">DMA_C0Control</a></td>
+<td>Channel DMA bus control</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#dma-c0config">DMA_C0Config</a></td>
+<td>Channel DMA configuration</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#dma-c1srcaddr">DMA_C1SrcAddr</a></td>
+<td>Channel DMA source address</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#dma-c1dstaddr">DMA_C1DstAddr</a></td>
+<td>Channel DMA Destination address</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#dma-c1lli">DMA_C1LLI</a></td>
+<td>Channel DMA link list</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#dma-c1control">DMA_C1Control</a></td>
+<td>Channel DMA bus control</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#dma-c1config">DMA_C1Config</a></td>
+<td>Channel DMA configuration</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#dma-c2srcaddr">DMA_C2SrcAddr</a></td>
+<td>Channel DMA source address</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#dma-c2dstaddr">DMA_C2DstAddr</a></td>
+<td>Channel DMA Destination address</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#dma-c2lli">DMA_C2LLI</a></td>
+<td>Channel DMA link list</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#dma-c2control">DMA_C2Control</a></td>
+<td>Channel DMA bus control</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#dma-c2config">DMA_C2Config</a></td>
+<td>Channel DMA configuration</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#dma-c3srcaddr">DMA_C3SrcAddr</a></td>
+<td>Channel DMA source address</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#dma-c3dstaddr">DMA_C3DstAddr</a></td>
+<td>Channel DMA Destination address</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#dma-c3lli">DMA_C3LLI</a></td>
+<td>Channel DMA link list</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#dma-c3control">DMA_C3Control</a></td>
+<td>Channel DMA bus control</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#dma-c3config">DMA_C3Config</a></td>
+<td>Channel DMA configuration</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="dma-intstatus">
+<h3>6.5.1. DMA_IntStatus<a class="headerlink" href="#dma-intstatus" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000c000</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="8">RSVD</td>
+<td colspan="8">INTSTA</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="12%" />
+<col width="9%" />
+<col width="15%" />
+<col width="52%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:8</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>7:0</td>
+<td>INTSTA</td>
+<td>R</td>
+<td>0</td>
+<td>Status of the DMA interrupts after masking</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="dma-inttcstatus">
+<h3>6.5.2. DMA_IntTCStatus<a class="headerlink" href="#dma-inttcstatus" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000c004</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="8">RSVD</td>
+<td colspan="8">INTTCSTA</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="12%" />
+<col width="10%" />
+<col width="16%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:8</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>7:0</td>
+<td>INTTCSTA</td>
+<td>R</td>
+<td>0</td>
+<td>Interrupt terminal count request status</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="dma-inttcclear">
+<h3>6.5.3. DMA_IntTCClear<a class="headerlink" href="#dma-inttcclear" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000c008</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="8">RSVD</td>
+<td colspan="8">TCRC</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="14%" />
+<col width="11%" />
+<col width="18%" />
+<col width="42%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:8</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>7:0</td>
+<td>TCRC</td>
+<td>W</td>
+<td>0</td>
+<td>Terminal count request clear</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="dma-interrorstatus">
+<h3>6.5.4. DMA_IntErrorStatus<a class="headerlink" href="#dma-interrorstatus" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000c00c</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="8">RSVD</td>
+<td colspan="8">IES</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="15%" />
+<col width="12%" />
+<col width="20%" />
+<col width="37%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:8</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>7:0</td>
+<td>IES</td>
+<td>R</td>
+<td>0</td>
+<td>Interrupt error status</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="dma-interrclr">
+<h3>6.5.5. DMA_IntErrClr<a class="headerlink" href="#dma-interrclr" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000c010</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="8">RSVD</td>
+<td colspan="8">IEC</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="16%" />
+<col width="13%" />
+<col width="20%" />
+<col width="36%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:8</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>7:0</td>
+<td>IEC</td>
+<td>W</td>
+<td>0</td>
+<td>Interrupt error clear</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="dma-rawinttcstatus">
+<h3>6.5.6. DMA_RawIntTCStatus<a class="headerlink" href="#dma-rawinttcstatus" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000c014</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="8">RSVD</td>
+<td colspan="8">SOTCIPTM</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="10%" />
+<col width="8%" />
+<col width="13%" />
+<col width="58%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:8</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>7:0</td>
+<td>SOTCIPTM</td>
+<td>R</td>
+<td>0</td>
+<td>Status of the terminal count interrupt prior to masking</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="dma-rawinterrorstatus">
+<h3>6.5.7. DMA_RawIntErrorStatus<a class="headerlink" href="#dma-rawinterrorstatus" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000c018</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="8">RSVD</td>
+<td colspan="8">SOTEIPTM</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="11%" />
+<col width="9%" />
+<col width="15%" />
+<col width="54%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:8</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>7:0</td>
+<td>SOTEIPTM</td>
+<td>R</td>
+<td>0</td>
+<td>Status of the error interrupt prior to masking</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="dma-enbldchns">
+<h3>6.5.8. DMA_EnbldChns<a class="headerlink" href="#dma-enbldchns" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000c01c</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="8">RSVD</td>
+<td colspan="8">CES</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="16%" />
+<col width="13%" />
+<col width="20%" />
+<col width="36%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:8</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>7:0</td>
+<td>CES</td>
+<td>R</td>
+<td>0</td>
+<td>Channel enable status</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="dma-softbreq">
+<h3>6.5.9. DMA_SoftBReq<a class="headerlink" href="#dma-softbreq" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000c020</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">SBR</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">SBR</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="15%" />
+<col width="12%" />
+<col width="20%" />
+<col width="37%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:0</td>
+<td>SBR</td>
+<td>R/W</td>
+<td>0</td>
+<td>Software burst request</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="dma-softsreq">
+<h3>6.5.10. DMA_SoftSReq<a class="headerlink" href="#dma-softsreq" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000c024</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">SSR</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">SSR</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="15%" />
+<col width="12%" />
+<col width="20%" />
+<col width="38%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:0</td>
+<td>SSR</td>
+<td>R/W</td>
+<td>0</td>
+<td>Software single request</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="dma-softlbreq">
+<h3>6.5.11. DMA_SoftLBReq<a class="headerlink" href="#dma-softlbreq" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000c028</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">SLBR</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">SLBR</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="14%" />
+<col width="11%" />
+<col width="19%" />
+<col width="41%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:0</td>
+<td>SLBR</td>
+<td>R/W</td>
+<td>0</td>
+<td>Software last burst request</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="dma-softlsreq">
+<h3>6.5.12. DMA_SoftLSReq<a class="headerlink" href="#dma-softlsreq" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000c02c</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">SLSR</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">SLSR</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="14%" />
+<col width="11%" />
+<col width="18%" />
+<col width="42%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:0</td>
+<td>SLSR</td>
+<td>R/W</td>
+<td>0</td>
+<td>Software last single request</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="dma-config">
+<h3>6.5.13. DMA_Config<a class="headerlink" href="#dma-config" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000c030</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="14">RSVD</td>
+<td>AHBMEC</td>
+<td>SDMAEN</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="9%" />
+<col width="7%" />
+<col width="12%" />
+<col width="64%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:2</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>AHBMEC</td>
+<td>R/W</td>
+<td>0</td>
+<td>AHB Master endianness configuration: 0 = little-endian, 1 = big-endian</td>
+</tr>
+<tr class="row-even"><td>0</td>
+<td>SDMAEN</td>
+<td>R/W</td>
+<td>0</td>
+<td>SMDMA Enable.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="dma-sync">
+<h3>6.5.14. DMA_Sync<a class="headerlink" href="#dma-sync" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000c034</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">DSLFDRS</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">DSLFDRS</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="9%" />
+<col width="7%" />
+<col width="11%" />
+<col width="65%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:0</td>
+<td>DSLFDRS</td>
+<td>R/W</td>
+<td>0</td>
+<td>DMA synchronization logic for DMA request signals: 0 = enable, 1 = disable</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="dma-c0srcaddr">
+<h3>6.5.15. DMA_C0SrcAddr<a class="headerlink" href="#dma-c0srcaddr" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000c100</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">DMASA</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">DMASA</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="16%" />
+<col width="13%" />
+<col width="21%" />
+<col width="33%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:0</td>
+<td>DMASA</td>
+<td>R/W</td>
+<td>0</td>
+<td>DMA source address</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="dma-c0dstaddr">
+<h3>6.5.16. DMA_C0DstAddr<a class="headerlink" href="#dma-c0dstaddr" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000c104</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">DMADA</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">DMADA</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="15%" />
+<col width="12%" />
+<col width="20%" />
+<col width="38%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:0</td>
+<td>DMADA</td>
+<td>R/W</td>
+<td>0</td>
+<td>DMA Destination address</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="dma-c0lli">
+<h3>6.5.17. DMA_C0LLI<a class="headerlink" href="#dma-c0lli" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000c108</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">FLLI</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">FLLI</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="11%" />
+<col width="9%" />
+<col width="15%" />
+<col width="53%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:0</td>
+<td>FLLI</td>
+<td>R/W</td>
+<td>0</td>
+<td>First linked list item. Bits [1:0] must be 0.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="dma-c0control">
+<h3>6.5.18. DMA_C0Control<a class="headerlink" href="#dma-c0control" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000c10c</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td>TCIEN</td>
+<td colspan="3">PROTECT</td>
+<td>DI</td>
+<td>SI</td>
+<td>RSVD</td>
+<td>IMTMMODE</td>
+<td colspan="3">DTW</td>
+<td colspan="3">STW</td>
+<td colspan="2">DBS</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td>DBS</td>
+<td colspan="3">SBS</td>
+<td colspan="12">TS</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="5%" />
+<col width="8%" />
+<col width="76%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31</td>
+<td>TCIEN</td>
+<td>R/W</td>
+<td>0</td>
+<td>Terminal count interrupt enable bit. It controls whether the current LLI is expected to trigger the terminal count interrupt.</td>
+</tr>
+<tr class="row-odd"><td>30:28</td>
+<td>PROTECT</td>
+<td>R/W</td>
+<td>0</td>
+<td>Protection.</td>
+</tr>
+<tr class="row-even"><td>27</td>
+<td>DI</td>
+<td>R/W</td>
+<td>1</td>
+<td>Destination increment. When set, the Destination address is incremented after each transfer.</td>
+</tr>
+<tr class="row-odd"><td>26</td>
+<td>SI</td>
+<td>R/W</td>
+<td>1</td>
+<td>Source increment. When set, the source address is incremented after each transfer.</td>
+</tr>
+<tr class="row-even"><td>25</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>24</td>
+<td>IMTMMODE</td>
+<td>R/W</td>
+<td>0</td>
+<td>In Memory-to-memory mode, Set this bit high when Src data size is larger than Dst.</td>
+</tr>
+<tr class="row-even"><td>23:21</td>
+<td>DTW</td>
+<td>R/W</td>
+<td>3'B010</td>
+<td>Destination transfer width: 8/16/32</td>
+</tr>
+<tr class="row-odd"><td>20:18</td>
+<td>STW</td>
+<td>R/W</td>
+<td>3'B010</td>
+<td>Source transfer width: 8/16/32</td>
+</tr>
+<tr class="row-even"><td>17:15</td>
+<td>DBS</td>
+<td>R/W</td>
+<td>3'B001</td>
+<td>Destination burst size: 1/4/8/16</td>
+</tr>
+<tr class="row-odd"><td>14:12</td>
+<td>SBS</td>
+<td>R/W</td>
+<td>3'B001</td>
+<td>Source burst size: 1/4/8/16. Note CH FIFO Size is 16Bytes and SBSize*Swidth should &lt;= 16B</td>
+</tr>
+<tr class="row-even"><td>11:0</td>
+<td>TS</td>
+<td>R/W</td>
+<td>0</td>
+<td>Transfer size: 0~4095. Number of data transfers left to complete when the SMDMA is the flow controller.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="dma-c0config">
+<h3>6.5.19. DMA_C0Config<a class="headerlink" href="#dma-c0config" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000c110</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="2">RSVD</td>
+<td colspan="10">LLICOUNT</td>
+<td>RSVD</td>
+<td>HALT</td>
+<td>ACTIVE</td>
+<td>LOCK</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td>TCIM</td>
+<td>IEM</td>
+<td colspan="3">FLOWCTRL</td>
+<td colspan="5">DSTPH</td>
+<td colspan="5">SRCPH</td>
+<td>CHEN</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="8%" />
+<col width="7%" />
+<col width="11%" />
+<col width="66%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:30</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>29:20</td>
+<td>LLICOUNT</td>
+<td>R</td>
+<td>0</td>
+<td>LLI counter. Increased 1 each LLI run. Cleared 0 when config Control.</td>
+</tr>
+<tr class="row-even"><td>19</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>18</td>
+<td>HALT</td>
+<td>R/W</td>
+<td>0</td>
+<td>Halt: 0 = enable DMA requests, 1 = ignore subsequent source DMA requests.</td>
+</tr>
+<tr class="row-even"><td>17</td>
+<td>ACTIVE</td>
+<td>R</td>
+<td>0</td>
+<td>Active: 0 = no data in FIFO of the channel, 1 = FIFO of the channel has data.</td>
+</tr>
+<tr class="row-odd"><td>16</td>
+<td>LOCK</td>
+<td>R/W</td>
+<td>0</td>
+<td>Lock.</td>
+</tr>
+<tr class="row-even"><td>15</td>
+<td>TCIM</td>
+<td>R/W</td>
+<td>0</td>
+<td>Terminal count interrupt mask.</td>
+</tr>
+<tr class="row-odd"><td>14</td>
+<td>IEM</td>
+<td>R/W</td>
+<td>0</td>
+<td>Interrupt error mask.</td>
+</tr>
+<tr class="row-even"><td rowspan="8">13:11</td>
+<td rowspan="8">FLOWCTRL</td>
+<td rowspan="8">R/W</td>
+<td rowspan="8">0</td>
+<td rowspan="8"><p class="first">000: Memory-to-memory (DMA)</p>
+<p>001: Memory-to-peripheral (DMA)</p>
+<p>010: Peripheral-to-memory (DMA)</p>
+<p>011: Source peripheral-to-Destination peripheral (DMA)</p>
+<p>100: Source peripheral-to-Destination peripheral (Destination peripheral)</p>
+<p>101: Memory-to-peripheral (peripheral)</p>
+<p>110: Peripheral-to-memory (peripheral)</p>
+<p class="last">111: Source peripheral-to-Destination peripheral (Source peripheral)</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="5">10:6</td>
+<td rowspan="5">DSTPH</td>
+<td rowspan="5">R/W</td>
+<td rowspan="5">0</td>
+<td rowspan="5"><p class="first">Destination peripheral.</p>
+<p>[23:22] DAC/ADC</p>
+<p>[11:10] SPI TX/RX</p>
+<p>[ 7: 6] I2C TX/RX</p>
+<p class="last">[ 3: 0] UART1 TX/RX ; UART0 TX/RX</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td>5:1</td>
+<td>SRCPH</td>
+<td>R/W</td>
+<td>0</td>
+<td>Source peripheral.</td>
+</tr>
+<tr class="row-even"><td>0</td>
+<td>CHEN</td>
+<td>R/W</td>
+<td>0</td>
+<td>Channel enable.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="dma-c1srcaddr">
+<h3>6.5.20. DMA_C1SrcAddr<a class="headerlink" href="#dma-c1srcaddr" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000c200</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">SRCADDR</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">SRCADDR</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="16%" />
+<col width="13%" />
+<col width="21%" />
+<col width="33%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:0</td>
+<td>SRCADDR</td>
+<td>R/W</td>
+<td>0</td>
+<td>DMA source address</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="dma-c1dstaddr">
+<h3>6.5.21. DMA_C1DstAddr<a class="headerlink" href="#dma-c1dstaddr" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000c204</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">DSTADDR</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">DSTADDR</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="15%" />
+<col width="12%" />
+<col width="20%" />
+<col width="38%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:0</td>
+<td>DSTADDR</td>
+<td>R/W</td>
+<td>0</td>
+<td>DMA Destination address</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="dma-c1lli">
+<h3>6.5.22. DMA_C1LLI<a class="headerlink" href="#dma-c1lli" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000c208</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">LLI</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="14">LLI</td>
+<td colspan="2">RSVD</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="11%" />
+<col width="9%" />
+<col width="15%" />
+<col width="53%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:2</td>
+<td>LLI</td>
+<td>R/W</td>
+<td>0</td>
+<td>First linked list item. Bits [1:0] must be 0.</td>
+</tr>
+<tr class="row-odd"><td>1:0</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="dma-c1control">
+<h3>6.5.23. DMA_C1Control<a class="headerlink" href="#dma-c1control" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000c20c</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td>I</td>
+<td colspan="3">PROT</td>
+<td>DI</td>
+<td>SI</td>
+<td colspan="2">RSVD</td>
+<td colspan="3">DWIDTH</td>
+<td colspan="3">SWIDTH</td>
+<td colspan="2">DBSIZE</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td>DBSIZE</td>
+<td colspan="3">SBSIZE</td>
+<td colspan="12">TRANSIZE</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="5%" />
+<col width="8%" />
+<col width="76%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31</td>
+<td>I</td>
+<td>R/W</td>
+<td>0</td>
+<td>Terminal count interrupt enable bit. It controls whether the current LLI is expected to trigger the terminal count interrupt.</td>
+</tr>
+<tr class="row-odd"><td>30:28</td>
+<td>PROT</td>
+<td>R/W</td>
+<td>0</td>
+<td>Protection.</td>
+</tr>
+<tr class="row-even"><td>27</td>
+<td>DI</td>
+<td>R/W</td>
+<td>1</td>
+<td>Destination increment. When set, the Destination address is incremented after each transfer.</td>
+</tr>
+<tr class="row-odd"><td>26</td>
+<td>SI</td>
+<td>R/W</td>
+<td>1</td>
+<td>Source increment. When set, the source address is incremented after each transfer.</td>
+</tr>
+<tr class="row-even"><td>25:24</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>23:21</td>
+<td>DWIDTH</td>
+<td>R/W</td>
+<td>3'B010</td>
+<td>Destination transfer width: 8/16/32</td>
+</tr>
+<tr class="row-even"><td>20:18</td>
+<td>SWIDTH</td>
+<td>R/W</td>
+<td>3'B010</td>
+<td>Source transfer width: 8/16/32</td>
+</tr>
+<tr class="row-odd"><td>17:15</td>
+<td>DBSIZE</td>
+<td>R/W</td>
+<td>3'B001</td>
+<td>Destination burst size: 1/4/8/16</td>
+</tr>
+<tr class="row-even"><td>14:12</td>
+<td>SBSIZE</td>
+<td>R/W</td>
+<td>3'B001</td>
+<td>Source burst size: 1/4/8/16. Note CH FIFO Size is 16Bytes and SBSize*Swidth should &lt;= 16B</td>
+</tr>
+<tr class="row-odd"><td>11:0</td>
+<td>TRANSIZE</td>
+<td>R/W</td>
+<td>0</td>
+<td>Transfer size: 0~4095. Number of data transfers left to complete when the SMDMA is the flow controller.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="dma-c1config">
+<h3>6.5.24. DMA_C1Config<a class="headerlink" href="#dma-c1config" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000c210</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="13">RSVD</td>
+<td>H</td>
+<td>A</td>
+<td>L</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td>ITC</td>
+<td>IE</td>
+<td colspan="3">FLOWCTRL</td>
+<td colspan="5">DSTPH</td>
+<td colspan="5">SRCPH</td>
+<td>E</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="8%" />
+<col width="7%" />
+<col width="11%" />
+<col width="66%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:19</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>18</td>
+<td>H</td>
+<td>R/W</td>
+<td>0</td>
+<td>Halt: 0 = enable DMA requests, 1 = ignore subsequent source DMA requests.</td>
+</tr>
+<tr class="row-even"><td>17</td>
+<td>A</td>
+<td>R</td>
+<td>0</td>
+<td>Active: 0 = no data in FIFO of the channel, 1 = FIFO of the channel has data.</td>
+</tr>
+<tr class="row-odd"><td>16</td>
+<td>L</td>
+<td>R/W</td>
+<td>0</td>
+<td>Lock.</td>
+</tr>
+<tr class="row-even"><td>15</td>
+<td>ITC</td>
+<td>R/W</td>
+<td>0</td>
+<td>Terminal count interrupt mask.</td>
+</tr>
+<tr class="row-odd"><td>14</td>
+<td>IE</td>
+<td>R/W</td>
+<td>0</td>
+<td>Interrupt error mask.</td>
+</tr>
+<tr class="row-even"><td rowspan="8">13:11</td>
+<td rowspan="8">FLOWCTRL</td>
+<td rowspan="8">R/W</td>
+<td rowspan="8">0</td>
+<td rowspan="8"><p class="first">000: Memory-to-memory (DMA)</p>
+<p>001: Memory-to-peripheral (DMA)</p>
+<p>010: Peripheral-to-memory (DMA)</p>
+<p>011: Source peripheral-to-Destination peripheral (DMA)</p>
+<p>100: Source peripheral-to-Destination peripheral (Destination peripheral)</p>
+<p>101: Memory-to-peripheral (peripheral)</p>
+<p>110: Peripheral-to-memory (peripheral)</p>
+<p class="last">111: Source peripheral-to-Destination peripheral (Source peripheral)</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="7">10:6</td>
+<td rowspan="7">DSTPH</td>
+<td rowspan="7">R/W</td>
+<td rowspan="7">0</td>
+<td rowspan="7"><p class="first">Destination peripheral.</p>
+<p>[23:22] GPADC</p>
+<p>[21:18] I2S</p>
+<p>[17:14] PDM</p>
+<p>[13:10] SPI</p>
+<p>[ 9: 6] I2C</p>
+<p class="last">[ 5: 0] UART</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td>5:1</td>
+<td>SRCPH</td>
+<td>R/W</td>
+<td>0</td>
+<td>Source peripheral.</td>
+</tr>
+<tr class="row-even"><td>0</td>
+<td>E</td>
+<td>R/W</td>
+<td>0</td>
+<td>Channel enable.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="dma-c2srcaddr">
+<h3>6.5.25. DMA_C2SrcAddr<a class="headerlink" href="#dma-c2srcaddr" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000c300</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">SRCADDR</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">SRCADDR</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="16%" />
+<col width="13%" />
+<col width="21%" />
+<col width="33%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:0</td>
+<td>SRCADDR</td>
+<td>R/W</td>
+<td>0</td>
+<td>DMA source address</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="dma-c2dstaddr">
+<h3>6.5.26. DMA_C2DstAddr<a class="headerlink" href="#dma-c2dstaddr" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000c304</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">DSTADDR</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">DSTADDR</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="15%" />
+<col width="12%" />
+<col width="20%" />
+<col width="38%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:0</td>
+<td>DSTADDR</td>
+<td>R/W</td>
+<td>0</td>
+<td>DMA Destination address</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="dma-c2lli">
+<h3>6.5.27. DMA_C2LLI<a class="headerlink" href="#dma-c2lli" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000c308</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">LLI</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="14">LLI</td>
+<td colspan="2">RSVD</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="11%" />
+<col width="9%" />
+<col width="15%" />
+<col width="53%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:2</td>
+<td>LLI</td>
+<td>R/W</td>
+<td>0</td>
+<td>First linked list item. Bits [1:0] must be 0.</td>
+</tr>
+<tr class="row-odd"><td>1:0</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="dma-c2control">
+<h3>6.5.28. DMA_C2Control<a class="headerlink" href="#dma-c2control" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000c30c</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td>I</td>
+<td colspan="3">PROT</td>
+<td>DI</td>
+<td>SI</td>
+<td colspan="2">RSVD</td>
+<td colspan="3">DWIDTH</td>
+<td colspan="3">SWIDTH</td>
+<td colspan="2">DBSIZE</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td>DBSIZE</td>
+<td colspan="3">SBSIZE</td>
+<td colspan="12">TRANSIZE</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="5%" />
+<col width="8%" />
+<col width="76%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31</td>
+<td>I</td>
+<td>R/W</td>
+<td>0</td>
+<td>Terminal count interrupt enable bit. It controls whether the current LLI is expected to trigger the terminal count interrupt.</td>
+</tr>
+<tr class="row-odd"><td>30:28</td>
+<td>PROT</td>
+<td>R/W</td>
+<td>0</td>
+<td>Protection.</td>
+</tr>
+<tr class="row-even"><td>27</td>
+<td>DI</td>
+<td>R/W</td>
+<td>1</td>
+<td>Destination increment. When set, the Destination address is incremented after each transfer.</td>
+</tr>
+<tr class="row-odd"><td>26</td>
+<td>SI</td>
+<td>R/W</td>
+<td>1</td>
+<td>Source increment. When set, the source address is incremented after each transfer.</td>
+</tr>
+<tr class="row-even"><td>25:24</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>23:21</td>
+<td>DWIDTH</td>
+<td>R/W</td>
+<td>3'B010</td>
+<td>Destination transfer width: 8/16/32</td>
+</tr>
+<tr class="row-even"><td>20:18</td>
+<td>SWIDTH</td>
+<td>R/W</td>
+<td>3'B010</td>
+<td>Source transfer width: 8/16/32</td>
+</tr>
+<tr class="row-odd"><td>17:15</td>
+<td>DBSIZE</td>
+<td>R/W</td>
+<td>3'B001</td>
+<td>Destination burst size: 1/4/8/16</td>
+</tr>
+<tr class="row-even"><td>14:12</td>
+<td>SBSIZE</td>
+<td>R/W</td>
+<td>3'B001</td>
+<td>Source burst size: 1/4/8/16. Note CH FIFO Size is 16Bytes and SBSize*Swidth should &lt;= 16B</td>
+</tr>
+<tr class="row-odd"><td>11:0</td>
+<td>TRANSIZE</td>
+<td>R/W</td>
+<td>0</td>
+<td>Transfer size: 0~4095. Number of data transfers left to complete when the SMDMA is the flow controller.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="dma-c2config">
+<h3>6.5.29. DMA_C2Config<a class="headerlink" href="#dma-c2config" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000c310</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="13">RSVD</td>
+<td>H</td>
+<td>A</td>
+<td>L</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td>ITC</td>
+<td>IE</td>
+<td colspan="3">FLOWCTRL</td>
+<td colspan="5">DSTPH</td>
+<td colspan="5">SRCPH</td>
+<td>E</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="8%" />
+<col width="7%" />
+<col width="11%" />
+<col width="66%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:19</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>18</td>
+<td>H</td>
+<td>R/W</td>
+<td>0</td>
+<td>Halt: 0 = enable DMA requests, 1 = ignore subsequent source DMA requests.</td>
+</tr>
+<tr class="row-even"><td>17</td>
+<td>A</td>
+<td>R</td>
+<td>0</td>
+<td>Active: 0 = no data in FIFO of the channel, 1 = FIFO of the channel has data.</td>
+</tr>
+<tr class="row-odd"><td>16</td>
+<td>L</td>
+<td>R/W</td>
+<td>0</td>
+<td>Lock.</td>
+</tr>
+<tr class="row-even"><td>15</td>
+<td>ITC</td>
+<td>R/W</td>
+<td>0</td>
+<td>Terminal count interrupt mask.</td>
+</tr>
+<tr class="row-odd"><td>14</td>
+<td>IE</td>
+<td>R/W</td>
+<td>0</td>
+<td>Interrupt error mask.</td>
+</tr>
+<tr class="row-even"><td rowspan="8">13:11</td>
+<td rowspan="8">FLOWCTRL</td>
+<td rowspan="8">R/W</td>
+<td rowspan="8">0</td>
+<td rowspan="8"><p class="first">000: Memory-to-memory (DMA)</p>
+<p>001: Memory-to-peripheral (DMA)</p>
+<p>010: Peripheral-to-memory (DMA)</p>
+<p>011: Source peripheral-to-Destination peripheral (DMA)</p>
+<p>100: Source peripheral-to-Destination peripheral (Destination peripheral)</p>
+<p>101: Memory-to-peripheral (peripheral)</p>
+<p>110: Peripheral-to-memory (peripheral)</p>
+<p class="last">111: Source peripheral-to-Destination peripheral (Source peripheral)</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="7">10:6</td>
+<td rowspan="7">DSTPH</td>
+<td rowspan="7">R/W</td>
+<td rowspan="7">0</td>
+<td rowspan="7"><p class="first">Destination peripheral.</p>
+<p>[23:22] GPADC</p>
+<p>[21:18] I2S</p>
+<p>[17:14] PDM</p>
+<p>[13:10] SPI</p>
+<p>[ 9: 6] I2C</p>
+<p class="last">[ 5: 0] UART</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td>5:1</td>
+<td>SRCPH</td>
+<td>R/W</td>
+<td>0</td>
+<td>Source peripheral.</td>
+</tr>
+<tr class="row-even"><td>0</td>
+<td>E</td>
+<td>R/W</td>
+<td>0</td>
+<td>Channel enable.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="dma-c3srcaddr">
+<h3>6.5.30. DMA_C3SrcAddr<a class="headerlink" href="#dma-c3srcaddr" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000c400</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">SRCADDR</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">SRCADDR</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="16%" />
+<col width="13%" />
+<col width="21%" />
+<col width="33%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:0</td>
+<td>SRCADDR</td>
+<td>R/W</td>
+<td>0</td>
+<td>DMA source address</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="dma-c3dstaddr">
+<h3>6.5.31. DMA_C3DstAddr<a class="headerlink" href="#dma-c3dstaddr" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000c404</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">DSTADDR</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">DSTADDR</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="15%" />
+<col width="12%" />
+<col width="20%" />
+<col width="38%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:0</td>
+<td>DSTADDR</td>
+<td>R/W</td>
+<td>0</td>
+<td>DMA Destination address</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="dma-c3lli">
+<h3>6.5.32. DMA_C3LLI<a class="headerlink" href="#dma-c3lli" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000c408</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">LLI</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="14">LLI</td>
+<td colspan="2">RSVD</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="11%" />
+<col width="9%" />
+<col width="15%" />
+<col width="53%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:2</td>
+<td>LLI</td>
+<td>R/W</td>
+<td>0</td>
+<td>First linked list item. Bits [1:0] must be 0.</td>
+</tr>
+<tr class="row-odd"><td>1:0</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="dma-c3control">
+<h3>6.5.33. DMA_C3Control<a class="headerlink" href="#dma-c3control" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000c40c</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td>I</td>
+<td colspan="3">PROT</td>
+<td>DI</td>
+<td>SI</td>
+<td colspan="2">RSVD</td>
+<td colspan="3">DWIDTH</td>
+<td colspan="3">SWIDTH</td>
+<td colspan="2">DBSIZE</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td>DBSIZE</td>
+<td colspan="3">SBSIZE</td>
+<td colspan="12">TRANSIZE</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="5%" />
+<col width="8%" />
+<col width="76%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31</td>
+<td>I</td>
+<td>R/W</td>
+<td>0</td>
+<td>Terminal count interrupt enable bit. It controls whether the current LLI is expected to trigger the terminal count interrupt.</td>
+</tr>
+<tr class="row-odd"><td>30:28</td>
+<td>PROT</td>
+<td>R/W</td>
+<td>0</td>
+<td>Protection.</td>
+</tr>
+<tr class="row-even"><td>27</td>
+<td>DI</td>
+<td>R/W</td>
+<td>1</td>
+<td>Destination increment. When set, the Destination address is incremented after each transfer.</td>
+</tr>
+<tr class="row-odd"><td>26</td>
+<td>SI</td>
+<td>R/W</td>
+<td>1</td>
+<td>Source increment. When set, the source address is incremented after each transfer.</td>
+</tr>
+<tr class="row-even"><td>25:24</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>23:21</td>
+<td>DWIDTH</td>
+<td>R/W</td>
+<td>3'B010</td>
+<td>Destination transfer width: 8/16/32</td>
+</tr>
+<tr class="row-even"><td>20:18</td>
+<td>SWIDTH</td>
+<td>R/W</td>
+<td>3'B010</td>
+<td>Source transfer width: 8/16/32</td>
+</tr>
+<tr class="row-odd"><td>17:15</td>
+<td>DBSIZE</td>
+<td>R/W</td>
+<td>3'B001</td>
+<td>Destination burst size: 1/4/8/16</td>
+</tr>
+<tr class="row-even"><td>14:12</td>
+<td>SBSIZE</td>
+<td>R/W</td>
+<td>3'B001</td>
+<td>Source burst size: 1/4/8/16. Note CH FIFO Size is 16Bytes and SBSize*Swidth should &lt;= 16B</td>
+</tr>
+<tr class="row-odd"><td>11:0</td>
+<td>TRANSIZE</td>
+<td>R/W</td>
+<td>0</td>
+<td>Transfer size: 0~4095. Number of data transfers left to complete when the SMDMA is the flow controller.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="dma-c3config">
+<h3>6.5.34. DMA_C3Config<a class="headerlink" href="#dma-c3config" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000c410</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="13">RSVD</td>
+<td>H</td>
+<td>A</td>
+<td>L</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td>ITC</td>
+<td>IE</td>
+<td colspan="3">FLOWCTRL</td>
+<td colspan="5">DSTPH</td>
+<td colspan="5">SRCPH</td>
+<td>E</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="8%" />
+<col width="7%" />
+<col width="11%" />
+<col width="66%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:19</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>18</td>
+<td>H</td>
+<td>R/W</td>
+<td>0</td>
+<td>Halt: 0 = enable DMA requests, 1 = ignore subsequent source DMA requests.</td>
+</tr>
+<tr class="row-even"><td>17</td>
+<td>A</td>
+<td>R</td>
+<td>0</td>
+<td>Active: 0 = no data in FIFO of the channel, 1 = FIFO of the channel has data.</td>
+</tr>
+<tr class="row-odd"><td>16</td>
+<td>L</td>
+<td>R/W</td>
+<td>0</td>
+<td>Lock.</td>
+</tr>
+<tr class="row-even"><td>15</td>
+<td>ITC</td>
+<td>R/W</td>
+<td>0</td>
+<td>Terminal count interrupt mask.</td>
+</tr>
+<tr class="row-odd"><td>14</td>
+<td>IE</td>
+<td>R/W</td>
+<td>0</td>
+<td>Interrupt error mask.</td>
+</tr>
+<tr class="row-even"><td rowspan="8">13:11</td>
+<td rowspan="8">FLOWCTRL</td>
+<td rowspan="8">R/W</td>
+<td rowspan="8">0</td>
+<td rowspan="8"><p class="first">000: Memory-to-memory (DMA)</p>
+<p>001: Memory-to-peripheral (DMA)</p>
+<p>010: Peripheral-to-memory (DMA)</p>
+<p>011: Source peripheral-to-Destination peripheral (DMA)</p>
+<p>100: Source peripheral-to-Destination peripheral (Destination peripheral)</p>
+<p>101: Memory-to-peripheral (peripheral)</p>
+<p>110: Peripheral-to-memory (peripheral)</p>
+<p class="last">111: Source peripheral-to-Destination peripheral (Source peripheral)</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="7">10:6</td>
+<td rowspan="7">DSTPH</td>
+<td rowspan="7">R/W</td>
+<td rowspan="7">0</td>
+<td rowspan="7"><p class="first">Destination peripheral.</p>
+<p>[23:22] GPADC</p>
+<p>[21:18] I2S</p>
+<p>[17:14] PDM</p>
+<p>[13:10] SPI</p>
+<p>[ 9: 6] I2C</p>
+<p class="last">[ 5: 0] UART</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td>5:1</td>
+<td>SRCPH</td>
+<td>R/W</td>
+<td>0</td>
+<td>Source peripheral.</td>
+</tr>
+<tr class="row-even"><td>0</td>
+<td>E</td>
+<td>R/W</td>
+<td>0</td>
+<td>Channel enable.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="L1C.html" class="btn btn-neutral float-right" title="7. L1C" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="DAC.html" class="btn btn-neutral float-left" title="5. DAC" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

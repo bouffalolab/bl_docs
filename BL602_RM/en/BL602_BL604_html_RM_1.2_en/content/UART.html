@@ -1,0 +1,2479 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>10. UART &mdash; BL602/604 Reference Manual  文档</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="11. I2C" href="I2C.html" />
+    <link rel="prev" title="9. SPI" href="SPI.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> BL602/604 Reference Manual
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. System and memory overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. Reset and clock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">4. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">5. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">6. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="L1C.html">7. L1C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">8. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">9. SPI</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">10. UART</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">10.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#main-features">10.2. Main features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#function-description">10.3. Function description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data-format-description">10.3.1. Data format description</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#basic-architecture-diagram">10.3.2. Basic architecture diagram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clock-source">10.3.3. Clock source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#baud-rate-setting">10.3.4. Baud rate setting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#transmitter">10.3.5. Transmitter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#receiver">10.3.6. Receiver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#automatic-baud-rate-detection">10.3.7. Automatic baud rate detection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hardware-flow-control">10.3.8. Hardware flow control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-transfer-mode">10.3.9. DMA transfer mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uart-interrupt">10.3.10. UART interrupt</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#register-description">10.4. Register description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#utx-config">10.4.1. utx_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#urx-config">10.4.2. urx_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uart-bit-prd">10.4.3. uart_bit_prd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data-config">10.4.4. data_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#utx-ir-position">10.4.5. utx_ir_position</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#urx-ir-position">10.4.6. urx_ir_position</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#urx-rto-timer">10.4.7. urx_rto_timer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uart-int-sts">10.4.8. uart_int_sts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uart-int-mask">10.4.9. uart_int_mask</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uart-int-clear">10.4.10. uart_int_clear</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uart-int-en">10.4.11. uart_int_en</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uart-status">10.4.12. uart_status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sts-urx-abr-prd">10.4.13. sts_urx_abr_prd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uart-fifo-config-0">10.4.14. uart_fifo_config_0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uart-fifo-config-1">10.4.15. uart_fifo_config_1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uart-fifo-wdata">10.4.16. uart_fifo_wdata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uart-fifo-rdata">10.4.17. uart_fifo_rdata</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">11. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">12. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">13. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">14. Revision history</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL602/604 Reference Manual</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>10. UART</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="uart">
+<h1>10. UART<a class="headerlink" href="#uart" title="永久链接至标题">¶</a></h1>
+<div class="section" id="introduction">
+<h2>10.1. Introduction<a class="headerlink" href="#introduction" title="永久链接至标题">¶</a></h2>
+<p>Universal Asynchronous Receiver / Transmitter (commonly known as UART) is an asynchronous transceiver that provides a flexible way to exchange full-duplex data with external devices.</p>
+<p>BL602/BL604 has two sets of UART ports (UART0 and UART1). By using with DMA, you can achieve efficient data communication.</p>
+</div>
+<div class="section" id="main-features">
+<h2>10.2. Main features<a class="headerlink" href="#main-features" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li>Full-duplex asynchronous communication</li>
+<li>Data bit length can be selected from 5/6/7/8 bits</li>
+<li>Stop bit length can be selected from 0.5/1/1.5/2 bits</li>
+<li>Supports odd/even/no parity bits</li>
+<li>Detects wrong start bit</li>
+<li>Multiple interrupt control</li>
+<li>Support hardware flow control (RTS / CTS)</li>
+<li>Convenient baud rate programming</li>
+<li>Configurable MSB / LSB priority transmission</li>
+<li>Normal / fixed character automatic baud rate detection</li>
+<li>32-byte transmit / receive FIFO</li>
+<li>Support DMA transfer mode</li>
+<li>Maximum operating frequency is 160MHz</li>
+</ul>
+</div>
+<div class="section" id="function-description">
+<h2>10.3. Function description<a class="headerlink" href="#function-description" title="永久链接至标题">¶</a></h2>
+<div class="section" id="data-format-description">
+<h3>10.3.1. Data format description<a class="headerlink" href="#data-format-description" title="永久链接至标题">¶</a></h3>
+<p>Normal UART communication data is composed of a start bit, a data bit, a parity bit, and a stop bit. The BL602/BL604's UART supports configurable data bits, parity bits, and stop bits, all of which are set in the UTX_CONFIG and URX_CONFIG registers. The waveform of one frame of data is shown below:</p>
+<div class="figure align-center" id="id1">
+<img alt="../_images/UARTData.png" src="../_images/UARTData.png" />
+<p class="caption"><span class="caption-text">UART data</span></p>
+</div>
+<p>The start bit of a data frame occupies 1-bit, and the stop bit can be configured to be 0.5 / 1 / 1.5 / 2 bits wide by configuring &lt;TXBCNTP&gt; and &lt;CR_URX_BIT_CNT_P&gt;. The start bit is low and the stop bit is high.</p>
+<p>The data bit width can be configured to 5/6/7/8 bit width by &lt;TXBCNTD&gt; and &lt;RXBCNTD&gt;.</p>
+<p>When &lt;TXPREN&gt; and &lt;RXPREN&gt; are set, the data frame adds a parity bit after the data. &lt;TXPRSEL&gt; and &lt;RXPRSEL&gt; are used to select odd or even parity. When the receiver detects a parity error in the input data, a parity error interrupt is generated.</p>
+<p>Odd parity calculation method: If the current data bit 1 is an odd number, the odd parity bit is 0; otherwise, it is 1.</p>
+<p>Calculation method of even parity: If the number of current data bit 1 is odd, even parity is 1; otherwise it is 0.</p>
+</div>
+<div class="section" id="basic-architecture-diagram">
+<h3>10.3.2. Basic architecture diagram<a class="headerlink" href="#basic-architecture-diagram" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="clock-source">
+<h3>10.3.3. Clock source<a class="headerlink" href="#clock-source" title="永久链接至标题">¶</a></h3>
+<p>The UART has two clock sources: 160MHz APB_CLK and FCLK. The frequency divider in the clock is used to divide the clock source and then generate a clock signal to drive the UART module. As shown below:</p>
+<div class="figure align-center" id="id2">
+<img alt="../_images/UARTClk.png" src="../_images/UARTClk.png" />
+<p class="caption"><span class="caption-text">UART clock</span></p>
+</div>
+</div>
+<div class="section" id="baud-rate-setting">
+<h3>10.3.4. Baud rate setting<a class="headerlink" href="#baud-rate-setting" title="永久链接至标题">¶</a></h3>
+<p>The user can generate the required baud rate by setting the register UART_BIT_PRD. The upper 16 bits and lower 16 bits of this register correspond to RX and TX respectively, that is, the baud rates of RX and TX can be set independently. The 16-bit value needs It is calculated that the formula is as follows:</p>
+<p>Baud rate = UART clock / (16-bit coefficient + 1)</p>
+<p>That is: 16-bit coefficient = UART clock / baud rate -1</p>
+<p>The meaning of the 16-bit coefficient is the count value obtained by counting the current baud rate bit width with the UART clock. Because the maximum 16-bit coefficient is 65535, the minimum baud rate supported by the UART is: UART clock / 65536. The maximum baud rate supported by the UART is 10Mbps.</p>
+<p>Before the UART samples the data, it will first filter the data to filter out the glitches in the waveform. Sampling is then performed at the intermediate value of the above 16-bit coefficients, so that different sampling times are adjusted according to different baud rates to keep the median value always being taken, greatly improving flexibility and accuracy. The sampling process is shown in the following figure:</p>
+<div class="figure align-center" id="id3">
+<img alt="../_images/UARTSample.png" src="../_images/UARTSample.png" />
+<p class="caption"><span class="caption-text">UART sample</span></p>
+</div>
+</div>
+<div class="section" id="transmitter">
+<h3>10.3.5. Transmitter<a class="headerlink" href="#transmitter" title="永久链接至标题">¶</a></h3>
+<p>The transmitter contains a 32-byte transmit FIFO to store the data to be transmitted. Software can write the TX FIFO through the APB bus, and can also move data into the TX FIFO through DMA. When the transmit enable bit is set, the data stored in the FIFO will be output from the TX pin. Software can choose to transfer data into TX FIFO through two methods: DMA or APB bus.</p>
+<p>Software can check the status of the transmitter by querying the TX FIFO remaining free space count value in bit &lt;TFICNT&gt; of the register UART_FIFO_CONFIG_1. The transmitter's FreeRun mode is as follows:</p>
+<blockquote>
+<div><ul class="simple">
+<li>If the FreeRun mode is not turned on, the transmission behavior is terminated and an interrupt is generated when the transmission byte reaches the specified length. If you want to continue the transmission, you need to turn it off and then enable the transmission enable bit.</li>
+<li>If the FreeRun mode is turned on, the transmitter will transmit when there is data in the TX FIFO, and the transmitted byte will not terminate when it reaches the specified length.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="receiver">
+<h3>10.3.6. Receiver<a class="headerlink" href="#receiver" title="永久链接至标题">¶</a></h3>
+<p>The receiver contains a 32-byte receive FIFO to store the received data. Software can check the status of the receiver by querying the RX FIFO available data count value through the bit &lt;RFICNT&gt; in the register UART_FIFO_CONFIG_1. The lower 8 bits of the URX_RTO_TIMER register are used to set a receive timeout threshold. When the receiver does not receive data beyond this time value, an interrupt will be triggered. Bits &lt;CR_URX_DEG_EN&gt; and &lt;CR_URX_DEG_CNT&gt; of the URX_CONFIG register are used to enable the deburring function and set the threshold value, which controls the filtering part before UART sampling. The UART filters the glitches below the threshold width in the waveform and sends them for sampling.</p>
+</div>
+<div class="section" id="automatic-baud-rate-detection">
+<h3>10.3.7. Automatic baud rate detection<a class="headerlink" href="#automatic-baud-rate-detection" title="永久链接至标题">¶</a></h3>
+<p>The UART module supports automatic baud rate detection. The detection is divided into two types, one is the general mode and the other is the fixed character mode. Each time the bit &lt;ABREN&gt; of the set register URX_CONFIG is turned on, these two detection modes are enabled.</p>
+<p><strong>General mode</strong></p>
+<p>For any character data received, the UART module counts the number of clocks in the bit width. This number is then written to the lower 16 bits of the register STS_URX_ABR_PRD and used to calculate the baud rate. Therefore, when the value of the first received data bit is 1, you can get the correct baud rate, such as '0x01' under LSB-FIRST.</p>
+<p><strong>Fixed character mode</strong></p>
+<p>In this mode, after counting the number of clocks in the starting bit width, the UART module will continue to count the clocks of subsequent data bits and compare them with the start bit. If it fluctuates within the allowable error range, it passes the test, otherwise, the count value is discarded. Therefore, only when the fixed characters '0x55' / '0xD5' are received under LSB-FIRST or '0xAA' / '0xAB' under MSB-FIRST, the UART module will start counting the number of clocks in the bit width. The value is written to the upper 16 bits of the register STS_URX_ABR_PRD. As shown below:</p>
+<div class="figure align-center" id="id4">
+<img alt="../_images/UARTAbr.png" src="../_images/UARTAbr.png" />
+<p class="caption"><span class="caption-text">UART fixed character mode</span></p>
+</div>
+<p>For an unknown baud rate, the UART uses UART_CLK to count the start bit with a width of 1000 and the second bit with a width of 1001, which does not fluctuate more than 4 UART_CLK from the previous bit width. The UART will continue to count the third bit. The third bit is 1005. If the difference between the UART and the start bit exceeds 4, the test fails and the data is discarded. The UART compares the first 6 bits of the data bit with the start bit in turn.</p>
+<p>The formula for calculating the detected baud rate is as follows:</p>
+<p>Baud rate = source clock/(16-bit detection value + 1)</p>
+</div>
+<div class="section" id="hardware-flow-control">
+<h3>10.3.8. Hardware flow control<a class="headerlink" href="#hardware-flow-control" title="永久链接至标题">¶</a></h3>
+<p>The UART supports hardware flow control in CTS / RTS mode to prevent data in the FIFO from being lost because it is too late to process. The hardware flow control connection is shown in the following figure:</p>
+<div class="figure align-center" id="id5">
+<img alt="../_images/UARTCTSRTS.png" src="../_images/UARTCTSRTS.png" />
+<p class="caption"><span class="caption-text">UART flow control</span></p>
+</div>
+<p>When using the hardware flow control function, the output signal RTS is high to request the other party to send data, and RTS is low to notify the other party to stop data transmission until the RTS returns to high. There are two ways for the hardware flow control of the transmitter.</p>
+<blockquote>
+<div><ul class="simple">
+<li>The bit &lt;RTSSWM&gt; of the URX_CONFIG register is equal to 0: pull down the RTS level when the amount of data in the RX FIFO is greater than &lt;RFITH&gt;.</li>
+<li>The bit &lt;RTSSWM&gt; of the URX_CONFIG register is equal to 1: The RTS level can be changed by configuring the bit &lt;RTSSWV&gt; of the URX_CONFIG register.</li>
+</ul>
+</div></blockquote>
+<p>The TX CTS can be enabled by configuring bit &lt;CTSEN&gt; of UTX_CONFIG. When the device detects that the input signal CTS is pulled low, TX stops sending data until it detects that CTS is pulled high before continuing to transmit.</p>
+</div>
+<div class="section" id="dma-transfer-mode">
+<h3>10.3.9. DMA transfer mode<a class="headerlink" href="#dma-transfer-mode" title="永久链接至标题">¶</a></h3>
+<p>The UART supports DMA transfer mode. To use this mode, you need to set the TX and RX FIFO thresholds through the bits &lt;TFITH&gt; and &lt;RFITH&gt; of the UART_FIFO_CONFIG_1 register. When this mode is enabled, the UART will check the TX / RX FIFO. Above the set threshold, a DMA request will be initiated, and the DMA will move data to the TX FIFO or out of the RX FIFO according to the setting.</p>
+</div>
+<div class="section" id="uart-interrupt">
+<h3>10.3.10. UART interrupt<a class="headerlink" href="#uart-interrupt" title="永久链接至标题">¶</a></h3>
+<p>The UART has multiple interrupt control, including the following interrupt modes:</p>
+<ul class="simple">
+<li>TX transmission end interrupt</li>
+<li>RX transmission end interrupt</li>
+<li>TX FIFO request interrupt</li>
+<li>RX FIFO request interrupt</li>
+<li>RX timeout interrupt</li>
+<li>RX parity error interrupt</li>
+<li>TX FIFO overflow interrupt</li>
+<li>RX FIFO overflow interrupt</li>
+</ul>
+<p>TX and RX can set a transmission length value through the upper 16 bits of the UTX_CONFIG and URX_CONFIG registers. When the number of bytes transmitted reaches this value, the corresponding TX / RX transmission end interrupt will be triggered. The TX / RX FIFO request interrupt will be triggered when its FIFO available count value is greater than the threshold set in the register UART_FIFO_CONFIG_1. When the condition is not met, the interrupt flag will be automatically cleared. The RX timeout interrupt is triggered when the receiver does not receive data beyond the timeout threshold, and the RX parity error interrupt occurs when a parity error occurs. If the TX / RX FIFO overflows or underflows, the corresponding overflow interrupt will be triggered. When the FIFO clear bit TFICLR / RFICLR is set to 1, the corresponding FIFO will be cleared and the overflow interrupt flag will be automatically cleared.</p>
+<p>Query the interrupt status through the register UART_INT_STS, and clear the interrupt by writing 1 to the corresponding bit in the register UART_INT_CLEAR.</p>
+</div>
+</div>
+<div class="section" id="register-description">
+<h2>10.4. Register description<a class="headerlink" href="#register-description" title="永久链接至标题">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="38%" />
+<col width="62%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Name</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#utx-config">utx_config</a></td>
+<td>UART TX configuration register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#urx-config">urx_config</a></td>
+<td>UART RX configuration register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#uart-bit-prd">uart_bit_prd</a></td>
+<td>UART period control register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#data-config">data_config</a></td>
+<td>UART data configuration register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#utx-ir-position">utx_ir_position</a></td>
+<td>UART TX ir position control register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#urx-ir-position">urx_ir_position</a></td>
+<td>UART RX ir position control register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#urx-rto-timer">urx_rto_timer</a></td>
+<td>RTO interrupt control register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#uart-int-sts">uart_int_sts</a></td>
+<td>UART interrupt status</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#uart-int-mask">uart_int_mask</a></td>
+<td>UART interrupt mask</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#uart-int-clear">uart_int_clear</a></td>
+<td>UART interrupt clear</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#uart-int-en">uart_int_en</a></td>
+<td>UART interrupt enable</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#uart-status">uart_status</a></td>
+<td>UART status control register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sts-urx-abr-prd">sts_urx_abr_prd</a></td>
+<td>Auto baud detection control register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#uart-fifo-config-0">uart_fifo_config_0</a></td>
+<td>UART FIFO configuration register0</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#uart-fifo-config-1">uart_fifo_config_1</a></td>
+<td>UART FIFO configuration register1</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#uart-fifo-wdata">uart_fifo_wdata</a></td>
+<td>UART FIFO write data</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#uart-fifo-rdata">uart_fifo_rdata</a></td>
+<td>UART FIFO read data</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="utx-config">
+<h3>10.4.1. utx_config<a class="headerlink" href="#utx-config" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a000</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">TXLEN</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="2">RSVD</td>
+<td colspan="2">TXBCNTP</td>
+<td>RSVD</td>
+<td colspan="3">TXBCNTD</td>
+<td>IRTXINV</td>
+<td>IRTXEN</td>
+<td>TXPRSEL</td>
+<td>TXPREN</td>
+<td>RSVD</td>
+<td>FRMEN</td>
+<td>CTSEN</td>
+<td>EN</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="5%" />
+<col width="8%" />
+<col width="75%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:16</td>
+<td>TXLEN</td>
+<td>R/W</td>
+<td>16'D0</td>
+<td>Length of UART TX data transfer (Unit: character/byte) (Don't-care if cr_utx_frm_en is enabled)</td>
+</tr>
+<tr class="row-odd"><td>15:14</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>13:12</td>
+<td>TXBCNTP</td>
+<td>R/W</td>
+<td>2'D1</td>
+<td>UART TX STOP bit count (unit: 0.5 bit)</td>
+</tr>
+<tr class="row-odd"><td>11</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>10:8</td>
+<td>TXBCNTD</td>
+<td>R/W</td>
+<td>3'D7</td>
+<td>UART TX DATA bit count for each character</td>
+</tr>
+<tr class="row-odd"><td>7</td>
+<td>IRTXINV</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>Inverse signal of UART TX output in IR mode</td>
+</tr>
+<tr class="row-even"><td>6</td>
+<td>IRTXEN</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>Enable signal of UART TX IR mode</td>
+</tr>
+<tr class="row-odd"><td rowspan="3">5</td>
+<td rowspan="3">TXPRSEL</td>
+<td rowspan="3">R/W</td>
+<td rowspan="3">1'B0</td>
+<td rowspan="3"><p class="first">Select signal of UART TX parity bit</p>
+<p>1: Odd parity</p>
+<p class="last">0: Even parity</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td>4</td>
+<td>TXPREN</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>Enable signal of UART TX parity bit</td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>FRMEN</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>Enable signal of UART TX freerun mode (utx_end_int will be disabled)</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>CTSEN</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>Enable signal of UART TX CTS flow control function</td>
+</tr>
+<tr class="row-even"><td rowspan="2">0</td>
+<td rowspan="2">EN</td>
+<td rowspan="2">R/W</td>
+<td rowspan="2">1'B0</td>
+<td rowspan="2"><p class="first">Enable signal of UART TX function</p>
+<p class="last">Asserting this bit will trigger the transaction, and should be de-asserted after finish</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="urx-config">
+<h3>10.4.2. urx_config<a class="headerlink" href="#urx-config" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a004</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RXLEN</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="4">DEGCNT</td>
+<td>DEGEN</td>
+<td colspan="3">RXBCNTD</td>
+<td>IRRXINV</td>
+<td>IRRXEN</td>
+<td>RXPRSEL</td>
+<td>RXPREN</td>
+<td>ABREN</td>
+<td>RTSSWV</td>
+<td>RTSSWM</td>
+<td>EN</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="7%" />
+<col width="5%" />
+<col width="9%" />
+<col width="72%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td rowspan="2">31:16</td>
+<td rowspan="2">RXLEN</td>
+<td rowspan="2">R/W</td>
+<td rowspan="2">16'D0</td>
+<td rowspan="2"><p class="first">Length of UART RX data transfer (Unit: character/byte)</p>
+<p class="last">urx_end_int will assert when this length is reached</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td>15:12</td>
+<td>DEGCNT</td>
+<td>R/W</td>
+<td>4'D0</td>
+<td>De-glitch function cycle count</td>
+</tr>
+<tr class="row-odd"><td>11</td>
+<td>DEGEN</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>Enable signal of RXD input de-glitch function</td>
+</tr>
+<tr class="row-even"><td>10:8</td>
+<td>RXBCNTD</td>
+<td>R/W</td>
+<td>3'D7</td>
+<td>UART RX DATA bit count for each character</td>
+</tr>
+<tr class="row-odd"><td>7</td>
+<td>IRRXINV</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>Inverse signal of UART RX input in IR mode</td>
+</tr>
+<tr class="row-even"><td>6</td>
+<td>IRRXEN</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>Enable signal of UART RX IR mode</td>
+</tr>
+<tr class="row-odd"><td rowspan="3">5</td>
+<td rowspan="3">RXPRSEL</td>
+<td rowspan="3">R/W</td>
+<td rowspan="3">1'B0</td>
+<td rowspan="3"><p class="first">Select signal of UART RX parity bit</p>
+<p>1: Odd parity</p>
+<p class="last">0: Even parity</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td>4</td>
+<td>RXPREN</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>Enable signal of UART RX parity bit</td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>ABREN</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>Enable signal of UART RX Auto Baud Rate detection function</td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>RTSSWV</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>UART RX RTS output SW control value</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>RTSSWM</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>UART RX RTS output SW control mode</td>
+</tr>
+<tr class="row-even"><td>0</td>
+<td>EN</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>Enable signal of UART RX function</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="uart-bit-prd">
+<h3>10.4.3. uart_bit_prd<a class="headerlink" href="#uart-bit-prd" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a008</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RBITPRD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">TBITPRD</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="11%" />
+<col width="9%" />
+<col width="14%" />
+<col width="55%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:16</td>
+<td>RBITPRD</td>
+<td>R/W</td>
+<td>16'D255</td>
+<td>Period of each UART RX bit, related to baud rate</td>
+</tr>
+<tr class="row-odd"><td>15:0</td>
+<td>TBITPRD</td>
+<td>R/W</td>
+<td>16'D255</td>
+<td>Period of each UART TX bit, related to baud rate</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="data-config">
+<h3>10.4.4. data_config<a class="headerlink" href="#data-config" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a00c</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="15">RSVD</td>
+<td>BITINV</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="7%" />
+<col width="5%" />
+<col width="9%" />
+<col width="73%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:1</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td rowspan="3">0</td>
+<td rowspan="3">BITINV</td>
+<td rowspan="3">R/W</td>
+<td rowspan="3">1'B0</td>
+<td rowspan="3"><p class="first">Bit-inverse signal for each data byte</p>
+<p>0: Each byte is sent out LSB-first</p>
+<p class="last">1: Each byte is sent out MSB-first</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="utx-ir-position">
+<h3>10.4.5. utx_ir_position<a class="headerlink" href="#utx-ir-position" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a010</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">TXIRPP</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">TXIRPS</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="13%" />
+<col width="10%" />
+<col width="17%" />
+<col width="47%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:16</td>
+<td>TXIRPP</td>
+<td>R/W</td>
+<td>16'D159</td>
+<td>STOP position of UART TX IR pulse</td>
+</tr>
+<tr class="row-odd"><td>15:0</td>
+<td>TXIRPS</td>
+<td>R/W</td>
+<td>16'D112</td>
+<td>START position of UART TX IR pulse</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="urx-ir-position">
+<h3>10.4.6. urx_ir_position<a class="headerlink" href="#urx-ir-position" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a014</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">RXIRPS</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="10%" />
+<col width="8%" />
+<col width="13%" />
+<col width="59%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:16</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>15:0</td>
+<td>RXIRPS</td>
+<td>R/W</td>
+<td>16'D111</td>
+<td>START position of UART RXD pulse recovered from IR signal</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="urx-rto-timer">
+<h3>10.4.7. urx_rto_timer<a class="headerlink" href="#urx-rto-timer" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a018</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="8">RSVD</td>
+<td colspan="8">RXRTOVA</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="10%" />
+<col width="8%" />
+<col width="13%" />
+<col width="60%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:8</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>7:0</td>
+<td>RXRTOVA</td>
+<td>R/W</td>
+<td>8'D15</td>
+<td>Time-out value for triggering RTO interrupt (unit: bit time)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="uart-int-sts">
+<h3>10.4.8. uart_int_sts<a class="headerlink" href="#uart-int-sts" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a020</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="8">RSVD</td>
+<td>RFERINT</td>
+<td>TFIN</td>
+<td>RPCEINT</td>
+<td>RRTOINT</td>
+<td>RFIN</td>
+<td>TFIN</td>
+<td>REIN</td>
+<td>TEIN</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="7%" />
+<col width="6%" />
+<col width="10%" />
+<col width="70%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:8</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>7</td>
+<td>RFERINT</td>
+<td>R</td>
+<td>1'B0</td>
+<td>UART RX FIFO error interrupt, auto-cleared when FIFO overflow/underflow error flag is cleared</td>
+</tr>
+<tr class="row-even"><td>6</td>
+<td>TFIN</td>
+<td>R</td>
+<td>1'B0</td>
+<td>UART TX FIFO error interrupt, auto-cleared when FIFO overflow/underflow error flag is cleared</td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>RPCEINT</td>
+<td>R</td>
+<td>1'B0</td>
+<td>UART RX parity check error interrupt</td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>RRTOINT</td>
+<td>R</td>
+<td>1'B0</td>
+<td>UART RX Time-out interrupt</td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>RFIN</td>
+<td>R</td>
+<td>1'B0</td>
+<td>UART RX FIFO ready (rx_fifo_cnt &gt; rx_fifo_th) interrupt, auto-cleared when data is popped</td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>TFIN</td>
+<td>R</td>
+<td>1'B0</td>
+<td>UART TX FIFO ready (tx_fifo_cnt &gt; tx_fifo_th) interrupt, auto-cleared when data is pushed</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>REIN</td>
+<td>R</td>
+<td>1'B0</td>
+<td>UART RX transfer end interrupt (set according to cr_urx_len)</td>
+</tr>
+<tr class="row-even"><td>0</td>
+<td>TEIN</td>
+<td>R</td>
+<td>1'B0</td>
+<td>UART TX transfer end interrupt (set according to cr_utx_len)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="uart-int-mask">
+<h3>10.4.9. uart_int_mask<a class="headerlink" href="#uart-int-mask" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a024</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="8">RSVD</td>
+<td>RFERMASK</td>
+<td>TFERMASK</td>
+<td>RPCEMASK</td>
+<td>RRTOMASK</td>
+<td>RFMS</td>
+<td>TFMS</td>
+<td>REMS</td>
+<td>TEMS</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="14%" />
+<col width="11%" />
+<col width="18%" />
+<col width="44%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:8</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>7</td>
+<td>RFERMASK</td>
+<td>R/W</td>
+<td>1'B1</td>
+<td>Interrupt mask of urx_fer_int</td>
+</tr>
+<tr class="row-even"><td>6</td>
+<td>TFERMASK</td>
+<td>R/W</td>
+<td>1'B1</td>
+<td>Interrupt mask of utx_fer_int</td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>RPCEMASK</td>
+<td>R/W</td>
+<td>1'B1</td>
+<td>Interrupt mask of urx_pce_int</td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>RRTOMASK</td>
+<td>R/W</td>
+<td>1'B1</td>
+<td>Interrupt mask of urx_rto_int</td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>RFMS</td>
+<td>R/W</td>
+<td>1'B1</td>
+<td>Interrupt mask of urx_fifo_int</td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>TFMS</td>
+<td>R/W</td>
+<td>1'B1</td>
+<td>Interrupt mask of utx_fifo_int</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>REMS</td>
+<td>R/W</td>
+<td>1'B1</td>
+<td>Interrupt mask of urx_end_int</td>
+</tr>
+<tr class="row-even"><td>0</td>
+<td>TEMS</td>
+<td>R/W</td>
+<td>1'B1</td>
+<td>Interrupt mask of utx_end_int</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="uart-int-clear">
+<h3>10.4.10. uart_int_clear<a class="headerlink" href="#uart-int-clear" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a028</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="10">RSVD</td>
+<td>RPCECLR</td>
+<td>RRTOCLR</td>
+<td colspan="2">RSVD</td>
+<td>RECL</td>
+<td>TECL</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="14%" />
+<col width="11%" />
+<col width="18%" />
+<col width="44%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:6</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>RPCECLR</td>
+<td>W1C</td>
+<td>1'B0</td>
+<td>Interrupt clear of urx_pce_int</td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>RRTOCLR</td>
+<td>W1C</td>
+<td>1'B0</td>
+<td>Interrupt clear of urx_rto_int</td>
+</tr>
+<tr class="row-odd"><td>3:2</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>1</td>
+<td>RECL</td>
+<td>W1C</td>
+<td>1'B0</td>
+<td>Interrupt clear of urx_end_int</td>
+</tr>
+<tr class="row-odd"><td>0</td>
+<td>TECL</td>
+<td>W1C</td>
+<td>1'B0</td>
+<td>Interrupt clear of utx_end_int</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="uart-int-en">
+<h3>10.4.11. uart_int_en<a class="headerlink" href="#uart-int-en" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a02c</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="8">RSVD</td>
+<td>RFER</td>
+<td>TFER</td>
+<td>RPCE</td>
+<td>RRTO</td>
+<td>RFIF</td>
+<td>TFIF</td>
+<td>REND</td>
+<td>TEND</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="13%" />
+<col width="11%" />
+<col width="17%" />
+<col width="45%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:8</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>7</td>
+<td>RFER</td>
+<td>R/W</td>
+<td>1'B1</td>
+<td>Interrupt enable of urx_fer_int</td>
+</tr>
+<tr class="row-even"><td>6</td>
+<td>TFER</td>
+<td>R/W</td>
+<td>1'B1</td>
+<td>Interrupt enable of utx_fer_int</td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>RPCE</td>
+<td>R/W</td>
+<td>1'B1</td>
+<td>Interrupt enable of urx_pce_int</td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>RRTO</td>
+<td>R/W</td>
+<td>1'B1</td>
+<td>Interrupt enable of urx_rto_int</td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>RFIF</td>
+<td>R/W</td>
+<td>1'B1</td>
+<td>Interrupt enable of urx_fifo_int</td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>TFIF</td>
+<td>R/W</td>
+<td>1'B1</td>
+<td>Interrupt enable of utx_fifo_int</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>REND</td>
+<td>R/W</td>
+<td>1'B1</td>
+<td>Interrupt enable of urx_end_int</td>
+</tr>
+<tr class="row-even"><td>0</td>
+<td>TEND</td>
+<td>R/W</td>
+<td>1'B1</td>
+<td>Interrupt enable of utx_end_int</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="uart-status">
+<h3>10.4.12. uart_status<a class="headerlink" href="#uart-status" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a030</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="14">RSVD</td>
+<td>RBB</td>
+<td>TBB</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="14%" />
+<col width="11%" />
+<col width="18%" />
+<col width="43%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:2</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>RBB</td>
+<td>R</td>
+<td>1'B0</td>
+<td>Indicator of UART RX bus busy</td>
+</tr>
+<tr class="row-even"><td>0</td>
+<td>TBB</td>
+<td>R</td>
+<td>1'B0</td>
+<td>Indicator of UART TX bus busy</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="sts-urx-abr-prd">
+<h3>10.4.13. sts_urx_abr_prd<a class="headerlink" href="#sts-urx-abr-prd" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a034</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">ABRPRD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">ABRPRDS</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="10%" />
+<col width="8%" />
+<col width="13%" />
+<col width="59%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:16</td>
+<td>ABRPRD</td>
+<td>R</td>
+<td>16'D0</td>
+<td>Bit period of Auto Baud Rate detection using codeword 0x55</td>
+</tr>
+<tr class="row-odd"><td>15:0</td>
+<td>ABRPRDS</td>
+<td>R</td>
+<td>16'D0</td>
+<td>Bit period of Auto Baud Rate detection using START bit</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="uart-fifo-config-0">
+<h3>10.4.14. uart_fifo_config_0<a class="headerlink" href="#uart-fifo-config-0" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a080</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="8">RSVD</td>
+<td>RFIU</td>
+<td>RFIO</td>
+<td>TFIU</td>
+<td>TFIO</td>
+<td>RFICLR</td>
+<td>TFICLR</td>
+<td>UDREN</td>
+<td>UDTEN</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="10%" />
+<col width="8%" />
+<col width="13%" />
+<col width="59%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:8</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>7</td>
+<td>RFIU</td>
+<td>R</td>
+<td>1'B0</td>
+<td>Underflow flag of RX FIFO, can be cleared by rx_fifo_clr</td>
+</tr>
+<tr class="row-even"><td>6</td>
+<td>RFIO</td>
+<td>R</td>
+<td>1'B0</td>
+<td>Overflow flag of RX FIFO, can be cleared by rx_fifo_clr</td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>TFIU</td>
+<td>R</td>
+<td>1'B0</td>
+<td>Underflow flag of TX FIFO, can be cleared by tx_fifo_clr</td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>TFIO</td>
+<td>R</td>
+<td>1'B0</td>
+<td>Overflow flag of TX FIFO, can be cleared by tx_fifo_clr</td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>RFICLR</td>
+<td>W1C</td>
+<td>1'B0</td>
+<td>Clear signal of RX FIFO</td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>TFICLR</td>
+<td>W1C</td>
+<td>1'B0</td>
+<td>Clear signal of TX FIFO</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>UDREN</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>Enable signal of dma_rx_req/ack interface</td>
+</tr>
+<tr class="row-even"><td>0</td>
+<td>UDTEN</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>Enable signal of dma_tx_req/ack interface</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="uart-fifo-config-1">
+<h3>10.4.15. uart_fifo_config_1<a class="headerlink" href="#uart-fifo-config-1" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a084</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="3">RSVD</td>
+<td colspan="5">RFITH</td>
+<td colspan="3">RSVD</td>
+<td colspan="5">TFITH</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="2">RSVD</td>
+<td colspan="6">RFICNT</td>
+<td colspan="2">RSVD</td>
+<td colspan="6">TFICNT</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="8%" />
+<col width="6%" />
+<col width="10%" />
+<col width="69%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:29</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>28:24</td>
+<td>RFITH</td>
+<td>R/W</td>
+<td>5'D0</td>
+<td>RX FIFO threshold, dma_rx_req will not be asserted if tx_fifo_cnt is less than this value</td>
+</tr>
+<tr class="row-even"><td>23:21</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>20:16</td>
+<td>TFITH</td>
+<td>R/W</td>
+<td>5'D0</td>
+<td>TX FIFO threshold, dma_tx_req will not be asserted if tx_fifo_cnt is less than this value</td>
+</tr>
+<tr class="row-even"><td>15:14</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>13:8</td>
+<td>RFICNT</td>
+<td>R</td>
+<td>6'D0</td>
+<td>RX FIFO available count</td>
+</tr>
+<tr class="row-even"><td>7:6</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>5:0</td>
+<td>TFICNT</td>
+<td>R</td>
+<td>6'D32</td>
+<td>TX FIFO available count</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="uart-fifo-wdata">
+<h3>10.4.16. uart_fifo_wdata<a class="headerlink" href="#uart-fifo-wdata" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a088</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="8">RSVD</td>
+<td colspan="8">UFIWD</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="16%" />
+<col width="13%" />
+<col width="21%" />
+<col width="35%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:8</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>7:0</td>
+<td>UFIWD</td>
+<td>W</td>
+<td>X</td>
+<td>UART FIFO write data</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="uart-fifo-rdata">
+<h3>10.4.17. uart_fifo_rdata<a class="headerlink" href="#uart-fifo-rdata" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a08c</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="8">RSVD</td>
+<td colspan="8">UFIRD</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="16%" />
+<col width="13%" />
+<col width="21%" />
+<col width="34%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:8</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>7:0</td>
+<td>UFIRD</td>
+<td>R</td>
+<td>8'H0</td>
+<td>UART FIFO read data</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="I2C.html" class="btn btn-neutral float-right" title="11. I2C" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="SPI.html" class="btn btn-neutral float-left" title="9. SPI" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

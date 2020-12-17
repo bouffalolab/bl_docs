@@ -10,7 +10,9 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-
+# import os
+# import sys
+# sys.path.insert(0, os.path.abspath('.'))
 import sphinx_rtd_theme
 import os
 import sys 
@@ -18,8 +20,8 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 
 # -- Project information -----------------------------------------------------
-
 project = 'BL602/604 参考手册'
+
 copyright = '2020'
 author = 'bouffalolab'
 
@@ -90,6 +92,8 @@ latex_elements = {
 \\usepackage{xeCJK} 
 \\usepackage{hyphenat}
 \\usepackage{multirow}
+\\newcolumntype{I}{!{\vrule width 1pt}}
+
 \definecolor{tbcol}{RGB}{235,241,249}
 \definecolor{regcell}{RGB}{196,214,236}
 
@@ -159,7 +163,6 @@ leftmargin=15pt
 %\\renewcommand{\headrule}{\color{MidnightBlue}\hrule width\\textwidth}
 \\renewcommand{\headrulewidth}{0pt}
 
-
 \\fancyfoot[L]{\color{black} \\fontsize{9}{9} \selectfont BL602/604 参考手册}
 \\fancyfoot[C]{\color{black} \\fontsize{9}{9} \selectfont \\thepage / \pageref{LastPage}}
 \\fancyfoot[R]{\color{black} \\fontsize{9}{9} \selectfont @2020 {\href{http://www.bouffalolab.com/}{\color{black} Bouffalo Lab}}}
@@ -168,12 +171,10 @@ leftmargin=15pt
 	\\fancyfoot[L]{\color{black} BL602/604 参考手册}
 	\\fancyhead{}
 }
-
 \\fancyhead[R]{\makebox[165pt][r]{\\fontsize{15}{15} \selectfont BL602/604 参考手册}\\vspace{1pt}\hrule height 0pt \\vspace{10pt}}
 
 %\\fancyhead[L]{\includegraphics[scale=0.3]{logo.png}}
 \\fancyhead[L]{\makebox[50pt][l]{\includegraphics[scale=0.25]{logo.png}}\color{MidnightBlue}\hrule height 2pt \\vspace{0pt}  }
-
 \\pagenumbering{arabic}
    
 \\renewcommand\\arraystretch{1.3}
@@ -225,7 +226,7 @@ leftmargin=15pt
 {
 	\\begin{table}[H]
 	    \\footnotesize
-		\\begin{tabular}[c]{|p{19.7pt}<{\centering}|p{19.7pt}<{\centering}|p{19.7pt}<{\centering}|p{19.7pt}<{\centering}|p{19.7pt}<{\centering}|p{19.7pt}<{\centering}|p{19.7pt}<{\centering}|p{19.7pt}<{\centering}|p{19.7pt}<{\centering}|p{19.7pt}<{\centering}|p{19.7pt}<{\centering}|p{19.7pt}<{\centering}|p{19.7pt}<{\centering}|p{19.7pt}<{\centering}|p{19.7pt}<{\centering}|p{19.7pt}<{\centering}|}
+		\\begin{tabular}[c]{Ip{19.7pt}<{\centering}Ip{19.7pt}<{\centering}Ip{19.7pt}<{\centering}Ip{19.7pt}<{\centering}Ip{19.7pt}<{\centering}Ip{19.7pt}<{\centering}Ip{19.7pt}<{\centering}Ip{19.7pt}<{\centering}Ip{19.7pt}<{\centering}Ip{19.7pt}<{\centering}Ip{19.7pt}<{\centering}Ip{19.7pt}<{\centering}Ip{19.7pt}<{\centering}Ip{19.7pt}<{\centering}Ip{19.7pt}<{\centering}Ip{19.7pt}<{\centering}I}
 			\hline
 			\\rowcolor{tbcol}
 			
@@ -240,7 +241,8 @@ leftmargin=15pt
 	\\begin{center}
 		\small
 		
-		\\begin{longtable}[c]{|p{30pt}<{\centering}|p{128pt}<{\centering}|p{20pt}<{\centering}|p{40pt}<{\centering}|p{233pt}|}
+		\\begin{longtable}[c]{|p{30pt}<{\centering}|p{110pt}<{\centering}|p{34pt}<{\centering}|p{57pt}<{\centering}|p{230pt}|}
+
 			\hline\hline
 			\\rowcolor{tbcol}
 			\\begin{minipage}{1.5cm}\\vspace{0.2cm}{\\bfseries \centering 位}\\vspace{0.2cm}\end{minipage}&\\bfseries 名称&\\bfseries 权限 &\\bfseries 复位值&{\\bfseries \centering 描述} \\\\

@@ -1,0 +1,2975 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>4. ADC &mdash; BL602/604 Reference Manual  文档</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="5. DAC" href="DAC.html" />
+    <link rel="prev" title="3. GLB" href="GLB.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> BL602/604 Reference Manual
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. System and memory overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. Reset and clock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">4. ADC</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">4.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#adc-main-features">4.2. ADC main features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#adc-functional-description">4.3. ADC functional description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#adc-pins-and-internal-signals">4.3.1. ADC pins and internal signals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adc-channel">4.3.2. ADC channel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adc-clock">4.3.3. ADC clock</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adc-conversion-mode">4.3.4. ADC conversion mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adc-consequence">4.3.5. ADC consequence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adc-interrupt">4.3.6. ADC interrupt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adc-fifo">4.3.7. ADC FIFO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adc-configuration-process">4.3.8. ADC configuration process</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vbat-measurement">4.3.9. VBAT measurement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tsen-measurement">4.3.10. TSEN measurement</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#register-description">4.4. Register description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#gpadc-config">4.4.1. gpadc_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpadc-dma-rdata">4.4.2. gpadc_dma_rdata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpadc-reg-cmd">4.4.3. gpadc_reg_cmd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpadc-reg-config1">4.4.4. gpadc_reg_config1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpadc-reg-config2">4.4.5. gpadc_reg_config2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpadc-reg-scn-pos1">4.4.6. gpadc_reg_scn_pos1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpadc-reg-scn-pos2">4.4.7. gpadc_reg_scn_pos2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpadc-reg-scn-neg1">4.4.8. gpadc_reg_scn_neg1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpadc-reg-scn-neg2">4.4.9. gpadc_reg_scn_neg2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpadc-reg-status">4.4.10. gpadc_reg_status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpadc-reg-isr">4.4.11. gpadc_reg_isr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpadc-reg-result">4.4.12. gpadc_reg_result</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpadc-reg-raw-result">4.4.13. gpadc_reg_raw_result</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpadc-reg-define">4.4.14. gpadc_reg_define</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">5. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">6. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="L1C.html">7. L1C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">8. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">9. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">10. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">11. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">12. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">13. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">14. Revision history</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL602/604 Reference Manual</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>4. ADC</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="adc">
+<h1>4. ADC<a class="headerlink" href="#adc" title="永久链接至标题">¶</a></h1>
+<div class="section" id="introduction">
+<h2>4.1. Introduction<a class="headerlink" href="#introduction" title="永久链接至标题">¶</a></h2>
+<p>The chip contains a 12-bit successive approximation analog-to-digital
+converter (ADC), which supports 12 external analog inputs and several
+internal analog signal selections.</p>
+<p>The ADC works in two modes: single conversion and multi-channel scanning.
+The conversion result is 12/14/16 bits left-justified mode.
+The ADC has a depth of 32 FIFOs and supports multiple interrupts
+and DMA operations. In addition to ordinary analog signal measurement,
+the ADC can also be used to measure the supply voltage. In addition,
+the ADC can also be used for temperature detection by measuring the
+internal/external diode voltage.</p>
+</div>
+<div class="section" id="adc-main-features">
+<h2>4.2. ADC main features<a class="headerlink" href="#adc-main-features" title="永久链接至标题">¶</a></h2>
+<ul>
+<li><p class="first">High performance</p>
+<blockquote>
+<div><ul class="simple">
+<li>12-bit, 14-bit or 16-bit conversion result output</li>
+<li>ADC conversion time:fastest 0.5us for 12-bit resolution</li>
+<li>1.8V, 3.3V optional reference voltage</li>
+<li>DMA support</li>
+<li>Two working modes: single-channel conversion and multi-channel scanning</li>
+<li>Two input modes: single-ended and differential</li>
+<li>Support jitter compensation</li>
+<li>User can set conversion result offset value</li>
+<li>Scanning mode supports up to 1M, non-scanning mode is 2M</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Analog channels</p>
+<blockquote>
+<div><ul class="simple">
+<li>12 external analog channels</li>
+<li>2 DAC internal channels</li>
+<li>1 VBAT / 2 channel</li>
+<li>1 TSEN channel</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="adc-functional-description">
+<h2>4.3. ADC functional description<a class="headerlink" href="#adc-functional-description" title="永久链接至标题">¶</a></h2>
+<p>The basic block diagram of the ADC is shown below.</p>
+<div class="figure align-center" id="id1">
+<img alt="../_images/ADCBasicStruct.png" src="../_images/ADCBasicStruct.png" />
+<p class="caption"><span class="caption-text">ADC block diagram</span></p>
+</div>
+<p>The ADC consists of five parts: front-end input channel selector,
+program-controlled amplifier, ADC sampling module, data processing
+module, and FIFO.</p>
+<p>The input channel selector is used to select the channel to be sampled.
+It contains both external analog signals and internal analog signals.
+The program-controlled amplifier is used to further process the input
+signal. It can be set according to the characteristics of the input
+signal, such as DC and AC. In order to get more accurate conversion
+values.</p>
+<p>The ADC sampling module is the most important function module.
+It obtains the conversion from analog signals to digital signals
+through successive comparisons. The conversion result is 12Bit.
+The data processing module is responsible for further processing
+the conversion results, including adding channel information.
+The resulting data is pushed into the FIFO.</p>
+<div class="section" id="adc-pins-and-internal-signals">
+<h3>4.3.1. ADC pins and internal signals<a class="headerlink" href="#adc-pins-and-internal-signals" title="永久链接至标题">¶</a></h3>
+<table border="1" class="docutils" id="id2">
+<caption><span class="caption-text">ADC internal signals</span><a class="headerlink" href="#id2" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="23%" />
+<col width="17%" />
+<col width="60%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Internal signals</td>
+<td>Signal type</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>VBAT/2</td>
+<td>Input</td>
+<td>Voltage signal divided from the power pin</td>
+</tr>
+<tr class="row-odd"><td>TSEN</td>
+<td>Input</td>
+<td>Internal temperature sensor output voltage</td>
+</tr>
+<tr class="row-even"><td>VREF</td>
+<td>Input</td>
+<td>Internal analog module reference voltage</td>
+</tr>
+<tr class="row-odd"><td>DACOUTA</td>
+<td>Input</td>
+<td>DAC module output</td>
+</tr>
+<tr class="row-even"><td>DACOUTB</td>
+<td>Input</td>
+<td>DAC module output</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils" id="id3">
+<caption><span class="caption-text">ADC external pins</span><a class="headerlink" href="#id3" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="16%" />
+<col width="14%" />
+<col width="70%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>External pins</td>
+<td>Signal type</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>VDDA</td>
+<td>Input</td>
+<td>Analog power supply and positive reference voltage for the ADC</td>
+</tr>
+<tr class="row-odd"><td>VSSA</td>
+<td>Input</td>
+<td>Ground for analog power supply</td>
+</tr>
+<tr class="row-even"><td>ADC_CHX</td>
+<td>Input</td>
+<td>12 analog input channels</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="adc-channel">
+<h3>4.3.2. ADC channel<a class="headerlink" href="#adc-channel" title="永久链接至标题">¶</a></h3>
+<p>The channels that can be selected by the ADC include the input signals of external
+analog pins and the optional signals inside the chip:</p>
+<ul class="simple">
+<li>ADC CH0</li>
+<li>ADC CH1</li>
+<li>ADC CH2</li>
+<li>ADC CH3</li>
+<li>ADC CH4</li>
+<li>ADC CH5</li>
+<li>ADC CH6</li>
+<li>ADC CH7</li>
+<li>ADC CH8</li>
+<li>ADC CH9</li>
+<li>ADC CH10</li>
+<li>ADC CH11</li>
+<li>DAC OUTA</li>
+<li>DAC OUTB</li>
+<li>VBAT/2</li>
+<li>TSEN</li>
+<li>VREF</li>
+<li>GND</li>
+</ul>
+<p>It should be noted that if VBAT/2 or TSEN is selected as the input signal to be
+acquired, gpadc_vbat_en or gpadc_ts_en needs to be set.</p>
+<p>The ADC module can support single-ended input or differential input.
+If it is single-ended input mode, the negative input channel needs to select GND.</p>
+</div>
+<div class="section" id="adc-clock">
+<h3>4.3.3. ADC clock<a class="headerlink" href="#adc-clock" title="永久链接至标题">¶</a></h3>
+<p>The working clock source of the ADC module is shown in the following figure:</p>
+<div class="figure align-center" id="id4">
+<img alt="../_images/ADCClock.png" src="../_images/ADCClock.png" />
+<p class="caption"><span class="caption-text">ADC Clock</span></p>
+</div>
+<p>The ADC clock source can select 96M, XTAL or internal RC32M from the PLL.
+The clock source selection is set in the GLB module. At the same time,
+the GLB module also provides the clock frequency division. By default,
+the ADC clock source is 96M. The frequency is 2, and the clock to the
+ADC module is 32M.</p>
+<p>Inside the ADC module, a clock frequency division is provided. The default
+is 16 frequency division, so the internal clock of the ADC module is 2M by
+default. Users can adjust the ADC's clock source and various frequency
+division coefficients according to actual sampling requirements.</p>
+<p>The gpadc_32m_clk_div divider register width is 6 bits,
+and the maximum divider is 64. Frequency division formula:
+fout = fsource / (gpadc_32m_clk_div + 1).</p>
+<p>The gpadc_clk_div_ratio frequency division register is located inside
+the ADC module and has a width of 3 bits. The frequency division value
+is defined as follows:</p>
+<ul class="simple">
+<li>3'b000: div=1</li>
+<li>3'b001: div=4</li>
+<li>3'b010: div=8</li>
+<li>3'b011: div=12</li>
+<li>3'b100: div=16</li>
+<li>3'b101: div=20</li>
+<li>3'b110: div=24</li>
+<li>3'b111: div=32</li>
+</ul>
+</div>
+<div class="section" id="adc-conversion-mode">
+<h3>4.3.4. ADC conversion mode<a class="headerlink" href="#adc-conversion-mode" title="永久链接至标题">¶</a></h3>
+<p>The ADC supports two conversion modes: single-channel conversion mode and scan mode.</p>
+<p>In single-channel conversion mode, the user needs to select the positive
+input channel through gpadc_pos_sel, select the negative input channel
+through gpadc_neg_sel, and set the gpadc_cont_conv_en control bit to 0,
+which means single-channel conversion, and then set the gpadc_conv_start
+control bit to start the conversion.</p>
+<p>In scan conversion mode, the gpadc_cont_conv_en control bit needs to be
+set to 1, and the number of conversion channels set by the ADC according
+to the gpadc_scan_length control bit. According to the channel order set
+by the gpadc_reg_scn_posX (X = 1, 2) and gpadc_reg_scn_negX (X = 1, 2)
+registers, the conversion is performed one by one, and the result of the
+conversion is automatically pushed into the ADC FIFO. The channels set by
+the gpadc_reg_scn_posX (X = 1, 2) and gpadc_reg_scn_negX (X = 1, 2)
+registers can be the same, which means that users can implement multiple
+sampling conversions on a channel.</p>
+<p>ADC conversion results are generally placed in the FIFO.
+Users need to set the FIFO receive data threshold interrupt based
+on the actual number of conversion channels. The FIFO threshold
+interrupt is used as the ADC conversion completion interrupt.</p>
+</div>
+<div class="section" id="adc-consequence">
+<h3>4.3.5. ADC consequence<a class="headerlink" href="#adc-consequence" title="永久链接至标题">¶</a></h3>
+<p>The gpadc_raw_data register stores the raw result of the ADC.
+In single-ended mode, the data valid bit is 12 bits, unsigned bit.
+In differential mode, the highest bit is the sign bit.
+The remaining 11 bits represent the result of the conversion.</p>
+<p>The gpadc_data_out register stores the ADC result.
+This result contains the ADC result, sign bit and channel information.
+The data format is as follows:</p>
+<table border="1" class="docutils" id="id5">
+<caption><span class="caption-text">ADC conversion result format</span><a class="headerlink" href="#id5" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="10%" />
+<col width="5%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="5%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="5%" />
+<col width="5%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>BitS</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+<td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td>meaning</td>
+<td colspan="5">Positive channel number</td>
+<td colspan="5">Negative channel number</td>
+<td colspan="16">Conversion result</td>
+</tr>
+</tbody>
+</table>
+<p>Bit21-Bit25 of the conversion result is the positive channel number,
+Bit16-Bit20 is the negative channel number, and Bit0-Bit15 is the
+converted value.</p>
+<p>The gpadc_res_sel control bit can set the number of bits of the
+conversion result, which are 12 bits, 14 bits, and 16 bits,
+respectively. Among them, 14 bits and 16 bits are the results
+obtained by multiple sampling to improve the accuracy.</p>
+<p>The values that can be set are as follows:</p>
+<ul class="simple">
+<li>3'b000    12bit 2MS/s, OSR=1</li>
+<li>3'b001    14bit 125kS/s, OSR=16</li>
+<li>3'b010    14bit 31.25kS/s, OSR=64</li>
+<li>3'b011    16bit 15.625KS/s, OSR=128</li>
+<li>3'b100    16bit 7.8125KS/s, OSR=256</li>
+</ul>
+<p>The ADC conversion result is left-justified.
+When 12 bits are selected, Bit15-Bit4 of the conversion result is
+valid. When 14 bits are selected, Bit15-Bit2 of the conversion result
+is valid. When 16 bits are selected, Bit15-Bit0 of the conversion
+result is valid.</p>
+<p>Similarly, in the differential mode, the highest is the sign, that is,
+when 14 bits are selected, Bit15 is the sign bit, Bit14-Bit2 is the
+conversion result, and Bit14 is the MSB.</p>
+<p>In single-ended mode, there is no sign bit, that is, when 12 bits
+are selected, Bit15-Bit4 is the conversion result and Bit15 is the MSB.</p>
+<p>In actual use, the results of the ADC are generally placed in the
+FIFO, which is particularly important in the multi-channel scan mode.
+Therefore, users generally obtain conversion results from the ADC FIFO. The data format of the ADC FIFO is the same in the gpadc_data_out register.</p>
+</div>
+<div class="section" id="adc-interrupt">
+<h3>4.3.6. ADC interrupt<a class="headerlink" href="#adc-interrupt" title="永久链接至标题">¶</a></h3>
+<p>The ADC module can generate interrupts when the positive sampling
+is saturated and the negative sampling is saturated. The respective
+interrupts can be masked by gpadc_pos_satur_mask, gpadc_neg_satur_mask.</p>
+<p>When the interrupt is generated, the interrupt status can be queried
+by the gpadc_pos_satur, and gpadc_neg_satur registers, and the
+interrupt can be cleared by gpadc_pos_satur_clr and gpadc_neg_satur_clr.
+This function can be used to determine whether the input voltage
+is abnormal.</p>
+</div>
+<div class="section" id="adc-fifo">
+<h3>4.3.7. ADC FIFO<a class="headerlink" href="#adc-fifo" title="永久链接至标题">¶</a></h3>
+<p>The ADC module has a FIFO with a depth of 32 and a data width of 26 bits.
+After the ADC completes the conversion, it will automatically push
+the result into the FIFO. The ADC's FIFO has the following status
+and interrupt management functions:</p>
+<ul class="simple">
+<li>FIFO full status</li>
+<li>FIFO is not empty</li>
+<li>FIFO Overrun interrupt</li>
+<li>FIFO Underrun interrupt</li>
+</ul>
+<p>When an interrupt occurs, the interrupt flag can be cleared by
+the corresponding clear bit.</p>
+<p>Using the ADC's FIFO, users can implement three modes of data
+acquisition: query mode, interrupt mode, and DMA mode.</p>
+<p><strong>Query mode</strong></p>
+<p>The CPU polls the gpadc_rdy bit. When this control bit is set,
+it indicates that there is valid data in the FIFO. The CPU can
+obtain the number of FIFO data according to gpadc_fifo_data_count
+and read these data from the FIFO.</p>
+<p><strong>Interrupt mode</strong></p>
+<p>The CPU sets gpadc_rdy_mask to 0, and the ADC will generate an
+interrupt when there is data in the FIFO. The user can use the
+interrupt function to obtain the number of FIFO data according
+to gpadc_fifo_data_count and read these data from the FIFO. Then
+set gpadc_rdy_clr to clear the interrupt.</p>
+<p><strong>DMA mode</strong></p>
+<p>The user sets the gpadc_dma_en control bit, which can cooperate
+with DMA to complete the transfer of data to memory. When using
+the DMA mode, the gpadc_fifo_thl is used to set the threshold
+of the number of data sent by the ADC FIFO by the FIFO. When
+the DMA receives the request, it will automatically transfer
+the specified number of results from the FIFO to the
+corresponding memory according to the parameters set by the user.</p>
+</div>
+<div class="section" id="adc-configuration-process">
+<h3>4.3.8. ADC configuration process<a class="headerlink" href="#adc-configuration-process" title="永久链接至标题">¶</a></h3>
+<p><strong>Setting the ADC clock</strong></p>
+<p>According to the ADC conversion speed requirements, determine the
+working clock of the ADC, set the ADC clock source and frequency
+division of the GLB module, and combine with gpadc_clk_div_ratio
+to determine the final working module's clock frequency.</p>
+<p><strong>Set GPIO according to the channel used</strong></p>
+<p>According to the analog pin used, determine the channel number
+used, initialize the corresponding GPIO as an analog function.
+It should be noted that when setting the GPIO as an analog input,
+do not set the GPIO pull-up or pull-down, you need to set it to
+float.</p>
+<p><strong>Set the channel to be converted</strong></p>
+<p>Set the corresponding channel register according to the analog
+channel and conversion mode used.</p>
+<p>For single-channel conversion, set the converted channel
+information in the gpadc_pos_sel and gpadc_neg_sel registers.</p>
+<p>For multi-channel scanning mode, set gpadc_scan_length,
+gpadc_reg_scn_posX and gpadc_reg_scn_negX according to the
+number of scanning channels and scanning order.</p>
+<p><strong>Set the data reading method</strong></p>
+<p>According to the way of reading data introduced by ADC FIFO,
+select the mode to use and set the corresponding register.
+If you use DMA, you also need to configure a channel of DMA
+to cooperate with the ADC FIFO to complete the data transfer.</p>
+<p><strong>Start conversion</strong></p>
+<p>Finally set gpadc_res_sel to select the precision of the data
+conversion result. Finally set gpadc_global_en = 1 and
+gpadc_conv_start = 1 to start the ADC to start conversion.</p>
+<p>When the conversion is complete and needs to be converted again,
+gpadc_conv_start needs to be set to 0 and then set to 1 in order
+to trigger the conversion again.</p>
+</div>
+<div class="section" id="vbat-measurement">
+<h3>4.3.9. VBAT measurement<a class="headerlink" href="#vbat-measurement" title="永久链接至标题">¶</a></h3>
+<p>The VBAT/2 measurement is the voltage of the chip VDD33,
+not the voltage of an external battery such as a lithium battery.
+If you need to measure the voltage of a power supply head such as
+a lithium battery, you can divide the voltage and then input it
+to the ADC's GPIO analog channel. Measuring the voltage of VDD33
+can reduce the use of GPIO.</p>
+<p>The VBAT/2 voltage measured by the ADC module is after a
+partial pressure.The actual input voltage to the ADC module is
+half of VDD33, that is, VBAT/2 = VDD33/2. Because the voltage
+is divided, in order to obtain higher accuracy, it is recommended
+that the reference voltage of the ADC is 1.8V, single-ended mode
+is used, the positive input voltage is VBAT/2, the negative
+input voltage is GND, and Gpadc_vbat_en is set to 1 to start.</p>
+<p>After conversion, multiply the corresponding conversion result
+by 2 to get the VDD33 voltage.</p>
+</div>
+<div class="section" id="tsen-measurement">
+<h3>4.3.10. TSEN measurement<a class="headerlink" href="#tsen-measurement" title="永久链接至标题">¶</a></h3>
+<p>The ADC can measure the internal diode or external diode voltage
+value, and the voltage difference between the diode and
+temperature is related, so by measuring the voltage of the
+diode, the ambient temperature can be calculated. We call it
+Temperature Sensor, referred to as TSEN.</p>
+<p>The test principle of TSEN is to generate a fitted curve by
+measuring the voltage difference ΔV generated by two different
+currents on a diode with temperature.</p>
+<p>Regardless of the measurement of the external or internal diode, the final
+output value is related to temperature, which can be expressed
+as Δ(ADC_out) = 7.753T + X. When we know the voltage value,
+we also know the temperature T. Here X is an offset value that
+can be used as a standard value. Before actual use, we need to
+determine X. The chip manufacturer will measure Δ(ADC_out) at
+a standard temperature, such as 25 degrees at room temperature,
+before the chip leaves the factory to get X.</p>
+<p>When the user uses it, as long as the formula
+T = [Δ(ADC_out) -X]/7.753, the temperature T can be obtained.</p>
+<p>When using TSEN, it is recommended to set the ADC to 16 bits mode,
+reduce the error by multiple sampling, and select 1.8V as the
+reference voltage to improve accuracy. Set gpadc_ts_en to 1 to
+enable the TSEN function. If the internal diode is selected,
+gpadc_tsext_sel = 0. External diode, gpadc_tsext_sel = 1,
+select the forward input channel according to the actual
+situation.</p>
+<p>If it is an internal diode, select the TSEN channel.
+If it is external, select the corresponding analog GPIO channel.
+Select the negative input terminal as GND. After the above
+settings are completed, set gpadc_tsvbe_low = 0 to start the
+measurement and get the measurement result V0, then set
+gpadc_tsvbe_low = 1 to start the measurement and get the
+measurement result V1, Δ(ADC_out) = V1-V0, according to the
+formula T = [Δ(ADC_out) -X] /7.753 to obtain the temperature T.</p>
+</div>
+</div>
+<div class="section" id="register-description">
+<h2>4.4. Register description<a class="headerlink" href="#register-description" title="永久链接至标题">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="45%" />
+<col width="55%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Name</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#gpadc-config">gpadc_config</a></td>
+<td>GPADC configuration</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#gpadc-dma-rdata">gpadc_dma_rdata</a></td>
+<td>GPADC DMA read data</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#gpadc-reg-cmd">gpadc_reg_cmd</a></td>
+<td>GPADC configuration register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#gpadc-reg-config1">gpadc_reg_config1</a></td>
+<td>GPADC configuration register1</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#gpadc-reg-config2">gpadc_reg_config2</a></td>
+<td>GPADC configuration register2</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#gpadc-reg-scn-pos1">gpadc_reg_scn_pos1</a></td>
+<td>GPADC converation sequence 1</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#gpadc-reg-scn-pos2">gpadc_reg_scn_pos2</a></td>
+<td>GPADC converation sequence 2</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#gpadc-reg-scn-neg1">gpadc_reg_scn_neg1</a></td>
+<td>GPADC converation sequence 3</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#gpadc-reg-scn-neg2">gpadc_reg_scn_neg2</a></td>
+<td>GPADC converation sequence 4</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#gpadc-reg-status">gpadc_reg_status</a></td>
+<td>GPADC status register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#gpadc-reg-isr">gpadc_reg_isr</a></td>
+<td>GPADC status flag register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#gpadc-reg-result">gpadc_reg_result</a></td>
+<td>GPADC result register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#gpadc-reg-raw-result">gpadc_reg_raw_result</a></td>
+<td>GPADC raw result register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#gpadc-reg-define">gpadc_reg_define</a></td>
+<td>GPADC define register</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="gpadc-config">
+<h3>4.4.1. gpadc_config<a class="headerlink" href="#gpadc-config" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x40002000</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="8">RSVD</td>
+<td colspan="2">FIFOTHL</td>
+<td colspan="6">FIFODACN</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td>FIFORDYM</td>
+<td>FURM</td>
+<td>FORM</td>
+<td>RDYM</td>
+<td>RSVD</td>
+<td>URCL</td>
+<td>ORCL</td>
+<td>RDYCLR</td>
+<td>FIFORDY</td>
+<td>FIFOUR</td>
+<td>FIFOOR</td>
+<td>RDY</td>
+<td>FIFOFULL</td>
+<td>FIFONE</td>
+<td>FIFOCLR</td>
+<td>DMAEN</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="9%" />
+<col width="7%" />
+<col width="11%" />
+<col width="65%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:24</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td rowspan="5">23:22</td>
+<td rowspan="5">FIFOTHL</td>
+<td rowspan="5">R/W</td>
+<td rowspan="5">2'D0</td>
+<td rowspan="5"><p class="first">fifo threshold</p>
+<p>2'b00: 1 data</p>
+<p>2'b01: 4 data</p>
+<p>2'b10: 8 data</p>
+<p class="last">2'b11: 16 data</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td>21:16</td>
+<td>FIFODACN</td>
+<td>R</td>
+<td>6'D0</td>
+<td>fifo data number</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>FIFORDYM</td>
+<td>R/W</td>
+<td>1'B1</td>
+<td>write 1 mask</td>
+</tr>
+<tr class="row-even"><td>14</td>
+<td>FURM</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>write 1 mask</td>
+</tr>
+<tr class="row-odd"><td>13</td>
+<td>FORM</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>write 1 mask</td>
+</tr>
+<tr class="row-even"><td>12</td>
+<td>RDYM</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>write 1 mask</td>
+</tr>
+<tr class="row-odd"><td>11</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>10</td>
+<td>URCL</td>
+<td>W1C</td>
+<td>1'B0</td>
+<td>Write 1 to clear flag</td>
+</tr>
+<tr class="row-odd"><td>9</td>
+<td>ORCL</td>
+<td>W1C</td>
+<td>1'B0</td>
+<td>Write 1 to clear flag</td>
+</tr>
+<tr class="row-even"><td>8</td>
+<td>RDYCLR</td>
+<td>W1C</td>
+<td>1'B0</td>
+<td>Write 1 to clear flag</td>
+</tr>
+<tr class="row-odd"><td>7</td>
+<td>FIFORDY</td>
+<td>R</td>
+<td>1'B0</td>
+<td>FIFO ready interrupt flag</td>
+</tr>
+<tr class="row-even"><td>6</td>
+<td>FIFOUR</td>
+<td>R</td>
+<td>1'B0</td>
+<td>FIFO underrun interrupt flag</td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>FIFOOR</td>
+<td>R</td>
+<td>1'B0</td>
+<td>FIFO overrun interrupt flag</td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>RDY</td>
+<td>R</td>
+<td>1'B0</td>
+<td>Conversion data ready interrupt flag</td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>FIFOFULL</td>
+<td>R</td>
+<td>1'B0</td>
+<td>FIFO full flag</td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>FIFONE</td>
+<td>R</td>
+<td>1'B0</td>
+<td>FIFO not empty flag</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>FIFOCLR</td>
+<td>W1C</td>
+<td>1'B0</td>
+<td>FIFO clear signal</td>
+</tr>
+<tr class="row-even"><td>0</td>
+<td>DMAEN</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>GPADC DMA enbale</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gpadc-dma-rdata">
+<h3>4.4.2. gpadc_dma_rdata<a class="headerlink" href="#gpadc-dma-rdata" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x40002004</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="6">RSVD</td>
+<td colspan="10">DMARDA</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">DMARDA</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="11%" />
+<col width="9%" />
+<col width="14%" />
+<col width="55%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:26</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>25:0</td>
+<td>DMARDA</td>
+<td>R</td>
+<td>26'D0</td>
+<td>GPADC finial conversion result stored in the FIFO</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gpadc-reg-cmd">
+<h3>4.4.3. gpadc_reg_cmd<a class="headerlink" href="#gpadc-reg-cmd" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000f90c</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td>RSVD</td>
+<td>STEN</td>
+<td colspan="2">SENSEL</td>
+<td>CSPU</td>
+<td colspan="3">RSVD</td>
+<td>MBEN</td>
+<td colspan="2">MPG</td>
+<td>M1D</td>
+<td>M2D</td>
+<td>DWEN</td>
+<td>RSVD</td>
+<td>BMB</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td>MPEN</td>
+<td>MBIEN</td>
+<td>NG</td>
+<td colspan="5">POSSEL</td>
+<td colspan="5">NEGSEL</td>
+<td>SRST</td>
+<td>CSTA</td>
+<td>GEN</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="3%" />
+<col width="3%" />
+<col width="2%" />
+<col width="4%" />
+<col width="88%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>30</td>
+<td>STEN</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>enable sensor dc test mux</td>
+</tr>
+<tr class="row-even"><td rowspan="5">29:28</td>
+<td rowspan="5">SENSEL</td>
+<td rowspan="5">R/W</td>
+<td rowspan="5">2'H0</td>
+<td rowspan="5"><p class="first">selected output current channel and measurement channel</p>
+<p>2'h0: 1st channel</p>
+<p>2'h1: 2nd channel</p>
+<p>2'h2: 3rd channel</p>
+<p class="last">2'h3: 4th channel</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3">27</td>
+<td rowspan="3">CSPU</td>
+<td rowspan="3">R/W</td>
+<td rowspan="3">1'B0</td>
+<td rowspan="3"><p class="first">enable chip sensor test</p>
+<p>1'b0: disable</p>
+<p class="last">1'b1: enable</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td>26:24</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td rowspan="3">23</td>
+<td rowspan="3">MBEN</td>
+<td rowspan="3">R/W</td>
+<td rowspan="3">1'B0</td>
+<td rowspan="3"><p class="first">micboost 32db enable</p>
+<p>1'b0: 16dB</p>
+<p class="last">1'b1: 32dB</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="5">22:21</td>
+<td rowspan="5">MPG</td>
+<td rowspan="5">R/W</td>
+<td rowspan="5">2'H0</td>
+<td rowspan="5"><p class="first">mic_pga2_gain</p>
+<p>2'h0: 0dB</p>
+<p>2'h1: 6dB</p>
+<p>2'h2: -6dB</p>
+<p class="last">2'h3: 12dB</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3">20</td>
+<td rowspan="3">M1D</td>
+<td rowspan="3">R/W</td>
+<td rowspan="3">1'B0</td>
+<td rowspan="3"><p class="first">mic1 diff enable</p>
+<p>1'b0: single</p>
+<p class="last">1'b1: diff</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3">19</td>
+<td rowspan="3">M2D</td>
+<td rowspan="3">R/W</td>
+<td rowspan="3">1'B0</td>
+<td rowspan="3"><p class="first">mic2 diff enable</p>
+<p>1'b0: single</p>
+<p class="last">1'b1: diff</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3">18</td>
+<td rowspan="3">DWEN</td>
+<td rowspan="3">R/W</td>
+<td rowspan="3">1'B0</td>
+<td rowspan="3"><p class="first">dwa enable</p>
+<p>1'b0: dwa disable</p>
+<p class="last">1'b1: dwa enable</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td>17</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td rowspan="3">16</td>
+<td rowspan="3">BMB</td>
+<td rowspan="3">R/W</td>
+<td rowspan="3">1'B0</td>
+<td rowspan="3"><p class="first">micboost amp bypass</p>
+<p>1'b0: not bypass</p>
+<p class="last">1'b1: bypass</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3">15</td>
+<td rowspan="3">MPEN</td>
+<td rowspan="3">R/W</td>
+<td rowspan="3">1'B0</td>
+<td rowspan="3"><p class="first">micpga enable</p>
+<p>1'b0: micpga disable</p>
+<p class="last">1'b1: miapga enable</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3">14</td>
+<td rowspan="3">MBIEN</td>
+<td rowspan="3">R/W</td>
+<td rowspan="3">1'B0</td>
+<td rowspan="3"><p class="first">enable micbias</p>
+<p>1'b0: micbias power down</p>
+<p class="last">1'b1: miabias power on</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3">13</td>
+<td rowspan="3">NG</td>
+<td rowspan="3">R/W</td>
+<td rowspan="3">1'B0</td>
+<td rowspan="3"><p class="first">set negative input of adc to ground</p>
+<p>1'b0: disable</p>
+<p class="last">1'b1: enable</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="19">12:8</td>
+<td rowspan="19">POSSEL</td>
+<td rowspan="19">R/W</td>
+<td rowspan="19">5'HF</td>
+<td rowspan="19"><p class="first">select adc positive input in none-scan mode</p>
+<p>5‘h0 gpip_ch[0]</p>
+<p>5'h1 gpip_ch[1]</p>
+<p>5'h2 gpip_ch[2]</p>
+<p>5‘h3 gpip_ch[3]</p>
+<p>5'h4 gpip_ch[4]</p>
+<p>5'h5 gpip_ch[5]</p>
+<p>5‘h6 gpip_ch[6]</p>
+<p>5'h7 gpip_ch[7]</p>
+<p>5'h8 gpip_ch[8]</p>
+<p>5‘h9 gpip_ch[9]</p>
+<p>5'h10 gpip_ch[10]</p>
+<p>5'h11 gpip_ch[11]</p>
+<p>5‘h12 daca</p>
+<p>5'h13 dacb</p>
+<p>5'h14 temp_p</p>
+<p>5'h16 vref</p>
+<p>5‘h18 vbat/2</p>
+<p class="last">5'h23~31 avss</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="19">7:3</td>
+<td rowspan="19">NEGSEL</td>
+<td rowspan="19">R/W</td>
+<td rowspan="19">5'HF</td>
+<td rowspan="19"><p class="first">select adc negative input in none-scan mode</p>
+<p>5‘h0 gpip_ch[0]</p>
+<p>5'h1 gpip_ch[1]</p>
+<p>5'h2 gpip_ch[2]</p>
+<p>5‘h3 gpip_ch[3]</p>
+<p>5'h4 gpip_ch[4]</p>
+<p>5'h5 gpip_ch[5]</p>
+<p>5‘h6 gpip_ch[6]</p>
+<p>5'h7 gpip_ch[7]</p>
+<p>5'h8 gpip_ch[8]</p>
+<p>5‘h9 gpip_ch[9]</p>
+<p>5'h10 gpip_ch[10]</p>
+<p>5'h11 gpip_ch[11]</p>
+<p>5‘h12 daca</p>
+<p>5'h13 dacb</p>
+<p>5'h14 temp_p</p>
+<p>5'h16 vref</p>
+<p>5‘h18 vbat/2</p>
+<p class="last">5'h23~31 avss</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td>2</td>
+<td>SRST</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>user reset the whole block 1'h0: not reset  1'h1: reset</td>
+</tr>
+<tr class="row-even"><td>1</td>
+<td>CSTA</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>1'h0: stop converation  1'h1: start converation</td>
+</tr>
+<tr class="row-odd"><td>0</td>
+<td>GEN</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>1'h0: disable ADC  1'h1: enable ADC</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gpadc-reg-config1">
+<h3>4.4.4. gpadc_reg_config1<a class="headerlink" href="#gpadc-reg-config1" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000f910</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td>RSVD</td>
+<td colspan="2">V18SEL</td>
+<td colspan="2">V11SEL</td>
+<td>DTEN</td>
+<td>SCEN</td>
+<td colspan="4">SCLEN</td>
+<td colspan="3">CLKDVRT</td>
+<td>ALCLKINV</td>
+<td>RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="5">RSVD</td>
+<td>LDEN</td>
+<td>HYSTSEL</td>
+<td>SELEN</td>
+<td colspan="3">RSVD</td>
+<td colspan="3">RESSEL</td>
+<td>CTCVEN</td>
+<td>CALOSEN</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="2%" />
+<col width="94%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>30:29</td>
+<td>V18SEL</td>
+<td>R/W</td>
+<td>2'H0</td>
+<td>internal vdd18 select</td>
+</tr>
+<tr class="row-even"><td>28:27</td>
+<td>V11SEL</td>
+<td>R/W</td>
+<td>2'H0</td>
+<td>internal vdd11 select</td>
+</tr>
+<tr class="row-odd"><td>26</td>
+<td>DTEN</td>
+<td>R/W</td>
+<td>1'H0</td>
+<td>Dither compensation enable</td>
+</tr>
+<tr class="row-even"><td>25</td>
+<td>SCEN</td>
+<td>R/W</td>
+<td>1'H0</td>
+<td>select scan mode enable: 0: select  gpadc_pos/neg_sel;1: select  : select gpadc_scan_pos_x and gpadc_scan_neg_x</td>
+</tr>
+<tr class="row-odd"><td rowspan="13">24:21</td>
+<td rowspan="13">SCLEN</td>
+<td rowspan="13">R/W</td>
+<td rowspan="13">4'H0</td>
+<td rowspan="13"><p class="first">select scan mode length</p>
+<p>4'b0000 : select gpadc_scan_pos_0 and gpadc_scan_neg_0</p>
+<p>4'b0001 : select gpadc_scan_pos_1 and gpadc_scan_neg_1</p>
+<p>4'b0010 : select gpadc_scan_pos_2 and gpadc_scan_neg_2</p>
+<p>4'b0011 : select gpadc_scan_pos_3 and gpadc_scan_neg_3</p>
+<p>4'b0100 : select gpadc_scan_pos_4 and gpadc_scan_neg_4</p>
+<p>4'b0101 : select gpadc_scan_pos_5 and gpadc_scan_neg_5</p>
+<p>4'b0110 : select gpadc_scan_pos_6 and gpadc_scan_neg_6</p>
+<p>4'b0111 : select gpadc_scan_pos_7 and gpadc_scan_neg_7</p>
+<p>4'b1000 : select gpadc_scan_pos_8 and gpadc_scan_neg_8</p>
+<p>4'b1001 : select gpadc_scan_pos_9 and gpadc_scan_neg_9</p>
+<p>4'b1010 : select gpadc_scan_pos_10 and gpadc_scan_neg_10</p>
+<p class="last">4'b1011 : select gpadc_scan_pos_11 and gpadc_scan_neg_11</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="9">20:18</td>
+<td rowspan="9">CLKDVRT</td>
+<td rowspan="9">R/W</td>
+<td rowspan="9">3'H3</td>
+<td rowspan="9"><p class="first">analog 32M clock division ratio</p>
+<p>3'b000: div=1</p>
+<p>3'b001: div=4</p>
+<p>3'b010: div=8</p>
+<p>3'b011: div=12</p>
+<p>3'b100: div=16</p>
+<p>3'b101: div=20</p>
+<p>3'b110: div=24</p>
+<p class="last">3'b111: div=32</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td>17</td>
+<td>ALCLKINV</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>analog clock 2M inverted</td>
+</tr>
+<tr class="row-even"><td>16:11</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>10</td>
+<td>LDEN</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>9</td>
+<td>HYSTSEL</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>8</td>
+<td>SELEN</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>7:5</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td rowspan="6">4:2</td>
+<td rowspan="6">RESSEL</td>
+<td rowspan="6">R/W</td>
+<td rowspan="6">3'H0</td>
+<td rowspan="6"><p class="first">adc resolution/over-sample rate select</p>
+<p>3'b000    12bit 2MS/s, OSR=1</p>
+<p>3'b001    14bit 125kS/s, OSR=16</p>
+<p>3'b010    14bit 31.25kS/s, OSR=64</p>
+<p>3'b011    16bit 15.625KS/s, OSR=128 (voice mode16KS/s)</p>
+<p class="last">3'b100    16bit 7.8125KS/s, OSR=256 (voice mode 8KS/s)</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="2">1</td>
+<td rowspan="2">CTCVEN</td>
+<td rowspan="2">R/W</td>
+<td rowspan="2">1'B1</td>
+<td rowspan="2"><p class="first">To enable continuous conversion</p>
+<p class="last">1'h0: one shot conversion  1'h1: continuous conversion</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td>0</td>
+<td>CALOSEN</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>offset calibration enable</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gpadc-reg-config2">
+<h3>4.4.5. gpadc_reg_config2<a class="headerlink" href="#gpadc-reg-config2" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000f914</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td>TSDC</td>
+<td colspan="3">CVSP</td>
+<td colspan="3">PGA1GAIN</td>
+<td colspan="3">PGA2GAIN</td>
+<td colspan="3">TESTSEL</td>
+<td>TESTEN</td>
+<td>BSEL</td>
+<td>CHOPM</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td>CHOPM</td>
+<td>PVBEN</td>
+<td>PGAEN</td>
+<td colspan="4">POSCAL</td>
+<td colspan="2">PGAVCM</td>
+<td>TSEN</td>
+<td>TSXTEN</td>
+<td>VBATEN</td>
+<td>VREFSEL</td>
+<td>DFMD</td>
+<td colspan="2">RSVD</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="7%" />
+<col width="5%" />
+<col width="9%" />
+<col width="73%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31</td>
+<td>TSDC</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>tsen diode current</td>
+</tr>
+<tr class="row-odd"><td>30:28</td>
+<td>CVSP</td>
+<td>R/W</td>
+<td>3'H0</td>
+<td>adc conversion speed</td>
+</tr>
+<tr class="row-even"><td rowspan="8">27:25</td>
+<td rowspan="8">PGA1GAIN</td>
+<td rowspan="8">R/W</td>
+<td rowspan="8">3'H0</td>
+<td rowspan="8"><p class="first">3'h0: disable</p>
+<p>3'h1: gain=1</p>
+<p>3'h2: gain=2</p>
+<p>3'h3: gain=4</p>
+<p>3'h4: gain=8</p>
+<p>3'h5: gain=16</p>
+<p>3'h6: gain=32</p>
+<p class="last">3'h7: gain=32</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="8">24:22</td>
+<td rowspan="8">PGA2GAIN</td>
+<td rowspan="8">R/W</td>
+<td rowspan="8">3'H0</td>
+<td rowspan="8"><p class="first">3'h0: disable</p>
+<p>3'h1: gain=1</p>
+<p>3'h2: gain=2</p>
+<p>3'h3: gain=4</p>
+<p>3'h4: gain=8</p>
+<p>3'h5: gain=16</p>
+<p>3'h6: gain=32</p>
+<p class="last">3'h7: gain=32</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td>21:19</td>
+<td>TESTSEL</td>
+<td>R/W</td>
+<td>3'H0</td>
+<td>select test point 0~7</td>
+</tr>
+<tr class="row-odd"><td>18</td>
+<td>TESTEN</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>Analog test enable.</td>
+</tr>
+<tr class="row-even"><td rowspan="3">17</td>
+<td rowspan="3">BSEL</td>
+<td rowspan="3">R/W</td>
+<td rowspan="3">1'B0</td>
+<td rowspan="3"><p class="first">adc analog portion low power mode select</p>
+<p>1'h0: Full biasing current</p>
+<p class="last">1'h1: Half biasing current</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="4">16:15</td>
+<td rowspan="4">CHOPM</td>
+<td rowspan="4">R/W</td>
+<td rowspan="4">2'H3</td>
+<td rowspan="4"><p class="first">2'b11    all  off</p>
+<p>2'b11    Vref AZ on</p>
+<p>2'b11    Vref AZ and PGA chop on</p>
+<p class="last">2'b11    Vref AZ and PGA chop+RPC on</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td>14</td>
+<td>PVBEN</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>enable pga input vcm bias</td>
+</tr>
+<tr class="row-even"><td>13</td>
+<td>PGAEN</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>1'h0: disable PGA 1'h1 enable PGA</td>
+</tr>
+<tr class="row-odd"><td>12:9</td>
+<td>POSCAL</td>
+<td>R/W</td>
+<td>4'H8</td>
+<td>pga offset calibration</td>
+</tr>
+<tr class="row-even"><td rowspan="5">8:7</td>
+<td rowspan="5">PGAVCM</td>
+<td rowspan="5">R/W</td>
+<td rowspan="5">2'H2</td>
+<td rowspan="5"><p class="first">Audio PGA output common mode control</p>
+<p>2'b00: cm=1V</p>
+<p>2'b11: cm=1.2V</p>
+<p>2'b11: cm=1.4V</p>
+<p class="last">2'b11: cm=1.6V</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td>6</td>
+<td>TSEN</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>1'h0: disable temperature sensor 1'h1: enable temperature sensor</td>
+</tr>
+<tr class="row-even"><td>5</td>
+<td>TSXTEN</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>1'h0: internal diode mode  1'h1: external diode mode</td>
+</tr>
+<tr class="row-odd"><td>4</td>
+<td>VBATEN</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>1'h0: disable VBAT sensor 1'h1 enable VBAT sensor</td>
+</tr>
+<tr class="row-even"><td rowspan="3">3</td>
+<td rowspan="3">VREFSEL</td>
+<td rowspan="3">R/W</td>
+<td rowspan="3">1'B0</td>
+<td rowspan="3"><p class="first">ADC reference select</p>
+<p>1'h0 3.3V</p>
+<p class="last">1'h1 1.8V</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td>2</td>
+<td>DFMD</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>1'h0 single-ended 1'h1 differential</td>
+</tr>
+<tr class="row-even"><td>1:0</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gpadc-reg-scn-pos1">
+<h3>4.4.6. gpadc_reg_scn_pos1<a class="headerlink" href="#gpadc-reg-scn-pos1" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000f918</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="2">RSVD</td>
+<td colspan="5">SCP5</td>
+<td colspan="5">SCP4</td>
+<td colspan="4">SCP3</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td>SCP3</td>
+<td colspan="5">SCP2</td>
+<td colspan="5">SCP1</td>
+<td colspan="5">SCP0</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="11%" />
+<col width="9%" />
+<col width="14%" />
+<col width="55%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:30</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>29:25</td>
+<td>SCP5</td>
+<td>R/W</td>
+<td>5'HF</td>
+<td>definition is the same as adc_reg_cmd.adc_pos_sel</td>
+</tr>
+<tr class="row-even"><td>24:20</td>
+<td>SCP4</td>
+<td>R/W</td>
+<td>5'HF</td>
+<td>definition is the same as adc_reg_cmd.adc_pos_sel</td>
+</tr>
+<tr class="row-odd"><td>19:15</td>
+<td>SCP3</td>
+<td>R/W</td>
+<td>5'HF</td>
+<td>definition is the same as adc_reg_cmd.adc_pos_sel</td>
+</tr>
+<tr class="row-even"><td>14:10</td>
+<td>SCP2</td>
+<td>R/W</td>
+<td>5'HF</td>
+<td>definition is the same as adc_reg_cmd.adc_pos_sel</td>
+</tr>
+<tr class="row-odd"><td>9:5</td>
+<td>SCP1</td>
+<td>R/W</td>
+<td>5'HF</td>
+<td>definition is the same as adc_reg_cmd.adc_pos_sel</td>
+</tr>
+<tr class="row-even"><td>4:0</td>
+<td>SCP0</td>
+<td>R/W</td>
+<td>5'HF</td>
+<td>definition is the same as adc_reg_cmd.adc_pos_sel</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gpadc-reg-scn-pos2">
+<h3>4.4.7. gpadc_reg_scn_pos2<a class="headerlink" href="#gpadc-reg-scn-pos2" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000f91c</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="2">RSVD</td>
+<td colspan="5">SCP11</td>
+<td colspan="5">SCP10</td>
+<td colspan="4">SCP9</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td>SCP9</td>
+<td colspan="5">SCP8</td>
+<td colspan="5">SCP7</td>
+<td colspan="5">SCP6</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="11%" />
+<col width="9%" />
+<col width="14%" />
+<col width="55%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:30</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>29:25</td>
+<td>SCP11</td>
+<td>R/W</td>
+<td>5'HF</td>
+<td>definition is the same as adc_reg_cmd.adc_pos_sel</td>
+</tr>
+<tr class="row-even"><td>24:20</td>
+<td>SCP10</td>
+<td>R/W</td>
+<td>5'HF</td>
+<td>definition is the same as adc_reg_cmd.adc_pos_sel</td>
+</tr>
+<tr class="row-odd"><td>19:15</td>
+<td>SCP9</td>
+<td>R/W</td>
+<td>5'HF</td>
+<td>definition is the same as adc_reg_cmd.adc_pos_sel</td>
+</tr>
+<tr class="row-even"><td>14:10</td>
+<td>SCP8</td>
+<td>R/W</td>
+<td>5'HF</td>
+<td>definition is the same as adc_reg_cmd.adc_pos_sel</td>
+</tr>
+<tr class="row-odd"><td>9:5</td>
+<td>SCP7</td>
+<td>R/W</td>
+<td>5'HF</td>
+<td>definition is the same as adc_reg_cmd.adc_pos_sel</td>
+</tr>
+<tr class="row-even"><td>4:0</td>
+<td>SCP6</td>
+<td>R/W</td>
+<td>5'HF</td>
+<td>definition is the same as adc_reg_cmd.adc_pos_sel</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gpadc-reg-scn-neg1">
+<h3>4.4.8. gpadc_reg_scn_neg1<a class="headerlink" href="#gpadc-reg-scn-neg1" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000f920</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="2">RSVD</td>
+<td colspan="5">SCN5</td>
+<td colspan="5">SCN4</td>
+<td colspan="4">SCN3</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td>SCN3</td>
+<td colspan="5">SCN2</td>
+<td colspan="5">SCN1</td>
+<td colspan="5">SCN0</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="11%" />
+<col width="9%" />
+<col width="14%" />
+<col width="55%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:30</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>29:25</td>
+<td>SCN5</td>
+<td>R/W</td>
+<td>5'HF</td>
+<td>definition is the same as adc_reg_cmd.adc_neg_sel</td>
+</tr>
+<tr class="row-even"><td>24:20</td>
+<td>SCN4</td>
+<td>R/W</td>
+<td>5'HF</td>
+<td>definition is the same as adc_reg_cmd.adc_neg_sel</td>
+</tr>
+<tr class="row-odd"><td>19:15</td>
+<td>SCN3</td>
+<td>R/W</td>
+<td>5'HF</td>
+<td>definition is the same as adc_reg_cmd.adc_neg_sel</td>
+</tr>
+<tr class="row-even"><td>14:10</td>
+<td>SCN2</td>
+<td>R/W</td>
+<td>5'HF</td>
+<td>definition is the same as adc_reg_cmd.adc_neg_sel</td>
+</tr>
+<tr class="row-odd"><td>9:5</td>
+<td>SCN1</td>
+<td>R/W</td>
+<td>5'HF</td>
+<td>definition is the same as adc_reg_cmd.adc_neg_sel</td>
+</tr>
+<tr class="row-even"><td>4:0</td>
+<td>SCN0</td>
+<td>R/W</td>
+<td>5'HF</td>
+<td>definition is the same as adc_reg_cmd.adc_neg_sel</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gpadc-reg-scn-neg2">
+<h3>4.4.9. gpadc_reg_scn_neg2<a class="headerlink" href="#gpadc-reg-scn-neg2" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000f924</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="2">RSVD</td>
+<td colspan="5">SCN11</td>
+<td colspan="5">SCN10</td>
+<td colspan="4">SCN9</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td>SCN9</td>
+<td colspan="5">SCN8</td>
+<td colspan="5">SCN7</td>
+<td colspan="5">SCN6</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="11%" />
+<col width="9%" />
+<col width="14%" />
+<col width="55%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:30</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>29:25</td>
+<td>SCN11</td>
+<td>R/W</td>
+<td>5'HF</td>
+<td>definition is the same as adc_reg_cmd.adc_neg_sel</td>
+</tr>
+<tr class="row-even"><td>24:20</td>
+<td>SCN10</td>
+<td>R/W</td>
+<td>5'HF</td>
+<td>definition is the same as adc_reg_cmd.adc_neg_sel</td>
+</tr>
+<tr class="row-odd"><td>19:15</td>
+<td>SCN9</td>
+<td>R/W</td>
+<td>5'HF</td>
+<td>definition is the same as adc_reg_cmd.adc_neg_sel</td>
+</tr>
+<tr class="row-even"><td>14:10</td>
+<td>SCN8</td>
+<td>R/W</td>
+<td>5'HF</td>
+<td>definition is the same as adc_reg_cmd.adc_neg_sel</td>
+</tr>
+<tr class="row-odd"><td>9:5</td>
+<td>SCN7</td>
+<td>R/W</td>
+<td>5'HF</td>
+<td>definition is the same as adc_reg_cmd.adc_neg_sel</td>
+</tr>
+<tr class="row-even"><td>4:0</td>
+<td>SCN6</td>
+<td>R/W</td>
+<td>5'HF</td>
+<td>definition is the same as adc_reg_cmd.adc_neg_sel</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gpadc-reg-status">
+<h3>4.4.10. gpadc_reg_status<a class="headerlink" href="#gpadc-reg-status" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000f928</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="15">RSVD</td>
+<td>DARD</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="14%" />
+<col width="11%" />
+<col width="18%" />
+<col width="45%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:1</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>0</td>
+<td>DARD</td>
+<td>R</td>
+<td>1'B0</td>
+<td>ADC final conversion data ready</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gpadc-reg-isr">
+<h3>4.4.11. gpadc_reg_isr<a class="headerlink" href="#gpadc-reg-isr" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000f92c</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="6">RSVD</td>
+<td>PSM</td>
+<td>NSM</td>
+<td colspan="2">RSVD</td>
+<td>PSC</td>
+<td>NSC</td>
+<td colspan="2">RSVD</td>
+<td>PS</td>
+<td>NS</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="11%" />
+<col width="9%" />
+<col width="14%" />
+<col width="55%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:10</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>9</td>
+<td>PSM</td>
+<td>R/W</td>
+<td>1'H0</td>
+<td>write 1 mask</td>
+</tr>
+<tr class="row-even"><td>8</td>
+<td>NSM</td>
+<td>R/W</td>
+<td>1'H0</td>
+<td>write 1 mask</td>
+</tr>
+<tr class="row-odd"><td>7:6</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>5</td>
+<td>PSC</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>Write 1 to clear flag</td>
+</tr>
+<tr class="row-odd"><td>4</td>
+<td>NSC</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>Write 1 to clear flag</td>
+</tr>
+<tr class="row-even"><td>3:2</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>PS</td>
+<td>R</td>
+<td>1'B0</td>
+<td>ADC data positive side saturation interrupt flag</td>
+</tr>
+<tr class="row-even"><td>0</td>
+<td>NS</td>
+<td>R</td>
+<td>1'B0</td>
+<td>ADC data negative side saturation interrupt flag</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gpadc-reg-result">
+<h3>4.4.12. gpadc_reg_result<a class="headerlink" href="#gpadc-reg-result" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000f930</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="6">RSVD</td>
+<td colspan="10">DAOUT</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">DAOUT</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="8%" />
+<col width="7%" />
+<col width="11%" />
+<col width="67%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:26</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>25:0</td>
+<td>DAOUT</td>
+<td>R</td>
+<td>26'H1EF0000</td>
+<td>ADC finial conversion result data, after calibration and signed/unsigned process</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gpadc-reg-raw-result">
+<h3>4.4.13. gpadc_reg_raw_result<a class="headerlink" href="#gpadc-reg-raw-result" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000f934</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="4">RSVD</td>
+<td colspan="12">RAWDA</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="18%" />
+<col width="15%" />
+<col width="24%" />
+<col width="25%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:12</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>11:0</td>
+<td>RAWDA</td>
+<td>R</td>
+<td>12'H0</td>
+<td>ADC Raw data</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gpadc-reg-define">
+<h3>4.4.14. gpadc_reg_define<a class="headerlink" href="#gpadc-reg-define" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000f938</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">OSCALDA</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="10%" />
+<col width="8%" />
+<col width="13%" />
+<col width="59%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:16</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>15:0</td>
+<td>OSCALDA</td>
+<td>R/W</td>
+<td>16'H0</td>
+<td>User defined or self calculated offset data 16-bit signed</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="DAC.html" class="btn btn-neutral float-right" title="5. DAC" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="GLB.html" class="btn btn-neutral float-left" title="3. GLB" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

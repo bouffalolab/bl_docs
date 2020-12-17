@@ -10,7 +10,9 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-
+# import os
+# import sys
+# sys.path.insert(0, os.path.abspath('.'))
 import sphinx_rtd_theme
 import os
 import sys 
@@ -18,7 +20,6 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 
 # -- Project information -----------------------------------------------------
-
 project = 'BL602/604 数据手册'
 copyright = '2020'
 author = 'bouffalolab'
@@ -160,7 +161,6 @@ leftmargin=15pt
 %\\renewcommand{\headrule}{\color{MidnightBlue}\hrule width\\textwidth}
 \\renewcommand{\headrulewidth}{0pt}
 
-
 \\fancyfoot[L]{\color{black} \\fontsize{9}{9} \selectfont BL602/604 数据手册}
 \\fancyfoot[C]{\color{black} \\fontsize{9}{9} \selectfont \\thepage / \pageref{LastPage}}
 \\fancyfoot[R]{\color{black} \\fontsize{9}{9} \selectfont @2020 {\href{http://www.bouffalolab.com/}{\color{black} Bouffalo Lab}}}
@@ -169,9 +169,7 @@ leftmargin=15pt
 	\\fancyfoot[L]{\color{black} BL602/604 数据手册}
 	\\fancyhead{}
 }
-
 \\fancyhead[R]{\makebox[165pt][r]{\\fontsize{15}{15} \selectfont BL602/604 数据手册}\\vspace{1pt}\hrule height 0pt \\vspace{10pt}}
-
 %\\fancyhead[L]{\includegraphics[scale=0.3]{logo.png}}
 \\fancyhead[L]{\makebox[50pt][l]{\includegraphics[scale=0.25]{logo.png}}\color{MidnightBlue}\hrule height 2pt \\vspace{0pt}  }
 

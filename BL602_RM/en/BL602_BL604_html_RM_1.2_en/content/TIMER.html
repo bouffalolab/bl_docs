@@ -1,0 +1,4047 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>13. TIMER &mdash; BL602/604 Reference Manual  文档</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="14. Revision history" href="version.html" />
+    <link rel="prev" title="12. PWM" href="PWM.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> BL602/604 Reference Manual
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. System and memory overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. Reset and clock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">4. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">5. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">6. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="L1C.html">7. L1C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">8. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">9. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">10. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">11. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">12. PWM</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">13. TIMER</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">13.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#main-features">13.2. Main features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#function-description">13.3. Function description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bit-divider">13.3.1. 8-bit divider</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#general-timer-operating-mode">13.3.2. General timer operating mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#watchdog-timer-operating-mode">13.3.3. Watchdog timer operating mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#alarm-setting">13.3.4. Alarm setting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#watchdog-alarm">13.3.5. Watchdog alarm</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#register-description">13.4. Register description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#tccr">13.4.1. TCCR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tmr2-0">13.4.2. TMR2_0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tmr2-1">13.4.3. TMR2_1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tmr2-2">13.4.4. TMR2_2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tmr3-0">13.4.5. TMR3_0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tmr3-1">13.4.6. TMR3_1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tmr3-2">13.4.7. TMR3_2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tcr2">13.4.8. TCR2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tcr3">13.4.9. TCR3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tmsr2">13.4.10. TMSR2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tmsr3">13.4.11. TMSR3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tier2">13.4.12. TIER2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tier3">13.4.13. TIER3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tplvr2">13.4.14. TPLVR2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tplvr3">13.4.15. TPLVR3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tplcr2">13.4.16. TPLCR2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tplcr3">13.4.17. TPLCR3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wmer">13.4.18. WMER</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wmr">13.4.19. WMR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wvr">13.4.20. WVR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wsr">13.4.21. WSR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ticr2">13.4.22. TICR2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ticr3">13.4.23. TICR3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wicr">13.4.24. WICR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tcer">13.4.25. TCER</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tcmr">13.4.26. TCMR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tilr2">13.4.27. TILR2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tilr3">13.4.28. TILR3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wcr">13.4.29. WCR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wfar">13.4.30. WFAR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wsar">13.4.31. WSAR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tcvwr2">13.4.32. TCVWR2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tcvwr3">13.4.33. TCVWR3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tcvsyn2">13.4.34. TCVSYN2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tcvsyn3">13.4.35. TCVSYN3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tcdr">13.4.36. TCDR</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">14. Revision history</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL602/604 Reference Manual</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>13. TIMER</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="timer">
+<h1>13. TIMER<a class="headerlink" href="#timer" title="永久链接至标题">¶</a></h1>
+<div class="section" id="introduction">
+<h2>13.1. Introduction<a class="headerlink" href="#introduction" title="永久链接至标题">¶</a></h2>
+<p>The chip has two 32-bit counters, each of which can independently control and configure its parameters and clock frequency.</p>
+<p>There is a watchdog counter in the chip. Unpredictable software or hardware behavior may cause the application to malfunction. A watchdog timer can help the system recover from it. If the current time exceeds the predetermined time, but the dog is not fed or closed Timer, which can trigger interrupt or system reset according to the setting.</p>
+<div class="figure align-center" id="id1">
+<img alt="../_images/TimerBlock.png" src="../_images/TimerBlock.png" />
+<p class="caption"><span class="caption-text">Timer block diagram</span></p>
+</div>
+<div class="figure align-center" id="id2">
+<img alt="../_images/WatchdogBlock.png" src="../_images/WatchdogBlock.png" />
+<p class="caption"><span class="caption-text">Watchdog timer block diagram</span></p>
+</div>
+</div>
+<div class="section" id="main-features">
+<h2>13.2. Main features<a class="headerlink" href="#main-features" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li>Multiple clock sources, up to 160M clock</li>
+<li>8-bit clock divider with a division factor of 1-256</li>
+<li>Two 32-bit timers</li>
+<li>Each timer contains three alarm value settings, which can be set independently to alarm when each alarm value overflows</li>
+<li>Support Free Run mode and Pre_load mode</li>
+<li>16-bit watchdog timer</li>
+<li>Supports write password protection to prevent system abnormalities caused by incorrect settings</li>
+<li>Support two watchdog overflow methods: interrupt or reset</li>
+</ul>
+</div>
+<div class="section" id="function-description">
+<h2>13.3. Function description<a class="headerlink" href="#function-description" title="永久链接至标题">¶</a></h2>
+<div class="section" id="bit-divider">
+<h3>13.3.1. 8-bit divider<a class="headerlink" href="#bit-divider" title="永久链接至标题">¶</a></h3>
+<p>There are three types of Watchdog timer clocks:</p>
+<ul class="simple">
+<li>Fclk--System master clock</li>
+<li>32K--32K clock</li>
+<li>Xtal--External crystal</li>
+</ul>
+<p>There are four timer clock sources:</p>
+<ul class="simple">
+<li>Fclk--System master clock</li>
+<li>32K--32K clock</li>
+<li>1K--1K clock (32K frequency division)</li>
+<li>Xtal--External crystal</li>
+</ul>
+<p>Each counter has its own 8-bit frequency divider. The selected clock can be divided by 1-256 through APB. Specifically, when it is set to 0, it means no frequency division, and when it is set to 1, it divides it by 2. , The maximum frequency division coefficient is 256, the counter will use the divided clock as the unit of the counting cycle, each time a counting cycle is increased by one.</p>
+</div>
+<div class="section" id="general-timer-operating-mode">
+<h3>13.3.2. General timer operating mode<a class="headerlink" href="#general-timer-operating-mode" title="永久链接至标题">¶</a></h3>
+<p>Each general-purpose timer includes three comparators, a counter and a preload register. When the clock source is set and the timer is started, the counter starts to count up. When the counter value is equal to the comparator, the comparison is performed. When the flag is set, a compare interrupt is generated.</p>
+<p>The initial value of the counter depends on the timing mode. In FreeRun mode, the initial value of the counter is 0, and then counts up. When it reaches the maximum value, it starts counting from 0 again.</p>
+<p>In PreLoad mode, the initial value of the counter is the value of the PreLoad register and then counts up. When the PreLoad condition is met, the value of the counter is set to the value of the PreLoad register, and then the counter starts to count up again. During the counting process, once the value of the counter matches one of the three comparators, the comparator's comparison flag will be set and a corresponding comparison interrupt can be generated.</p>
+<p>If the value of the preload register is 10, the value of Comparator 0 is 13, the value of Comparator 1 is 16, and the value of Comparator 2 is 19, the working sequence of the timer in PreLoad mode is as follows:</p>
+<div class="figure align-center" id="id3">
+<img alt="../_images/TimerPreload.png" src="../_images/TimerPreload.png" />
+<p class="caption"><span class="caption-text">Timer Preload</span></p>
+</div>
+<p>In FreeRun mode, the timer working sequence is basically the same as PreLoad, the difference is that the counter will start to accumulate from 0 to the maximum value. The mechanism of the generated compare flags and compare interrupts is the same as in FreeRun mode.</p>
+</div>
+<div class="section" id="watchdog-timer-operating-mode">
+<h3>13.3.3. Watchdog timer operating mode<a class="headerlink" href="#watchdog-timer-operating-mode" title="永久链接至标题">¶</a></h3>
+<p>The watchdog timer includes a counter and a comparator. The counter counts up from 0. If the counter is reset (feed the dog), it starts counting up from 0 again. When the counter value is equal to the comparator, a comparison interrupt signal or a system reset signal will be generated, and the user can choose to use one of them as required.</p>
+<p>The watchdog counter is incremented by one in each counting cycle unit. Software can reset the watchdog counter to zero at any point in time through the APB.</p>
+<p>If the value of the comparator is 6, the working sequence of Watchdog is shown in the figure below:</p>
+<div class="figure align-center" id="id4">
+<img alt="../_images/WatchDog.png" src="../_images/WatchDog.png" />
+<p class="caption"><span class="caption-text">Watchdog timing</span></p>
+</div>
+</div>
+<div class="section" id="alarm-setting">
+<h3>13.3.4. Alarm setting<a class="headerlink" href="#alarm-setting" title="永久链接至标题">¶</a></h3>
+<p>Each counter has three comparison values, and can set whether each comparison value triggers an alarm interrupt. When the counter matches the comparison value and the setting will alarm, the counter will notify the processor through the interrupt.</p>
+<p>The software can read through the APB whether an alarm has occurred and which comparison value triggered the alarm interrupt. When the alarm interrupt is cleared, the alarm status is also cleared simultaneously.</p>
+</div>
+<div class="section" id="watchdog-alarm">
+<h3>13.3.5. Watchdog alarm<a class="headerlink" href="#watchdog-alarm" title="永久链接至标题">¶</a></h3>
+<p>A comparison value can be set for each counter. When the software fails to reset the watchdog counter to zero due to a system error, which causes the watchdog counter to exceed the comparison value, a watchdog alarm is triggered. There are two types of alarms. The first is to perform necessary actions through interrupt notification software. The second is to enter the system watchdog reset. When the watchdog reset is triggered, it will notify the system reset controller and prepare for system reset. When everything is ready, enter the system watchdog reset. It is worth noting that software can read the WSR register through APB to know if a watchdog system reset has occurred.</p>
+<div class="figure align-center" id="id5">
+<img alt="../_images/WatchDogAlarm.png" src="../_images/WatchDogAlarm.png" />
+<p class="caption"><span class="caption-text">Watchdog alarm mechanism</span></p>
+</div>
+</div>
+</div>
+<div class="section" id="register-description">
+<h2>13.4. Register description<a class="headerlink" href="#register-description" title="永久链接至标题">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="79%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Name</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#tccr">TCCR</a></td>
+<td>Timer clock source configuration register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#tmr2-0">TMR2_0</a></td>
+<td>Timer2 match register 0</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#tmr2-1">TMR2_1</a></td>
+<td>Timer2 match register 1</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#tmr2-2">TMR2_2</a></td>
+<td>Timer2 match register 2</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#tmr3-0">TMR3_0</a></td>
+<td>Timer3 match register 0</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#tmr3-1">TMR3_1</a></td>
+<td>Timer3 match register 1</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#tmr3-2">TMR3_2</a></td>
+<td>Timer3 match register 2</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#tcr2">TCR2</a></td>
+<td>Timer2 counter register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#tcr3">TCR3</a></td>
+<td>Timer3 counter register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#tmsr2">TMSR2</a></td>
+<td>Timer2 match register status</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#tmsr3">TMSR3</a></td>
+<td>Timer3 match register status</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#tier2">TIER2</a></td>
+<td>Timer2 match interrupt enable register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#tier3">TIER3</a></td>
+<td>Timer3 match interrupt enable register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#tplvr2">TPLVR2</a></td>
+<td>Timer2 pre-load value register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#tplvr3">TPLVR3</a></td>
+<td>Timer3 pre-load value register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#tplcr2">TPLCR2</a></td>
+<td>Timer2 pre-load control register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#tplcr3">TPLCR3</a></td>
+<td>Timer3 pre-load control register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#wmer">WMER</a></td>
+<td>WDT reset/interrupt mode register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#wmr">WMR</a></td>
+<td>WDT counter match value register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#wvr">WVR</a></td>
+<td>WDT counter value register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#wsr">WSR</a></td>
+<td>WDT timer reset indication register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#ticr2">TICR2</a></td>
+<td>Timer2 Interrupt clear control register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#ticr3">TICR3</a></td>
+<td>Timer3 Interrupt clear control register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#wicr">WICR</a></td>
+<td>WDT Interrupt clear register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#tcer">TCER</a></td>
+<td>Timer count enable register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#tcmr">TCMR</a></td>
+<td>Timer count mode register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#tilr2">TILR2</a></td>
+<td>Timer2 match interrupt mode register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#tilr3">TILR3</a></td>
+<td>Timer3 match interrupt mode register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#wcr">WCR</a></td>
+<td>WDT timer count reset register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#wfar">WFAR</a></td>
+<td>WDT access key1 register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#wsar">WSAR</a></td>
+<td>WDT access key2 register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#tcvwr2">TCVWR2</a></td>
+<td>Timer2 capture value of counter register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#tcvwr3">TCVWR3</a></td>
+<td>Timer3 capture value of counter register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#tcvsyn2">TCVSYN2</a></td>
+<td>Timer2 synchronous value of counter register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#tcvsyn3">TCVSYN3</a></td>
+<td>Timer3 synchronous value of counter register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#tcdr">TCDR</a></td>
+<td>WDT/Timer clock division register</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="tccr">
+<h3>13.4.1. TCCR<a class="headerlink" href="#tccr" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a500</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="6">RSVD</td>
+<td colspan="2">CSWDT</td>
+<td>RSVD</td>
+<td colspan="2">CS2</td>
+<td>RSVD</td>
+<td colspan="2">CS1</td>
+<td colspan="2">RSVD</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="7%" />
+<col width="6%" />
+<col width="10%" />
+<col width="70%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:10</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td rowspan="5">9:8</td>
+<td rowspan="5">CSWDT</td>
+<td rowspan="5">R/W</td>
+<td rowspan="5">2'D0</td>
+<td rowspan="5"><p class="first">Clock Source for Timer #1/#2/#3/WDT</p>
+<p>2'd0 - fclk</p>
+<p>2'd1 - f32k_clk</p>
+<p>2'd2 - 1 kHz</p>
+<p class="last">2'd3 - PLL 32MHz</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td>7</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td rowspan="5">6:5</td>
+<td rowspan="5">CS2</td>
+<td rowspan="5">R/W</td>
+<td rowspan="5">2'D0</td>
+<td rowspan="5"><p class="first">Clock Source for Timer #1/#2/#3/WDT</p>
+<p>2'd0 - fclk</p>
+<p>2'd1 - f32k_clk</p>
+<p>2'd2 - 1 kHz</p>
+<p class="last">2'd3 - PLL 32MHz</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td>4</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td rowspan="5">3:2</td>
+<td rowspan="5">CS1</td>
+<td rowspan="5">R/W</td>
+<td rowspan="5">2'D0</td>
+<td rowspan="5"><p class="first">Clock Source for Timer #1/#2/#3/WDT</p>
+<p>2'd0 - fclk</p>
+<p>2'd1 - f32k_clk</p>
+<p>2'd2 - 1 kHz</p>
+<p class="last">2'd3 - PLL 32MHz</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td>1:0</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tmr2-0">
+<h3>13.4.2. TMR2_0<a class="headerlink" href="#tmr2-0" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a510</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">TMR20</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">TMR20</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="15%" />
+<col width="12%" />
+<col width="20%" />
+<col width="38%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:0</td>
+<td>TMR20</td>
+<td>R/W</td>
+<td>32'HFFFFFFFF</td>
+<td>Timer2 match register 0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tmr2-1">
+<h3>13.4.3. TMR2_1<a class="headerlink" href="#tmr2-1" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a514</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">TMR21</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">TMR21</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="15%" />
+<col width="12%" />
+<col width="20%" />
+<col width="38%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:0</td>
+<td>TMR21</td>
+<td>R/W</td>
+<td>32'HFFFFFFFF</td>
+<td>Timer2 match register 1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tmr2-2">
+<h3>13.4.4. TMR2_2<a class="headerlink" href="#tmr2-2" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a518</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">TMR22</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">TMR22</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="15%" />
+<col width="12%" />
+<col width="20%" />
+<col width="38%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:0</td>
+<td>TMR22</td>
+<td>R/W</td>
+<td>32'HFFFFFFFF</td>
+<td>Timer2 match register 2</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tmr3-0">
+<h3>13.4.5. TMR3_0<a class="headerlink" href="#tmr3-0" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a51c</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">TMR30</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">TMR30</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="15%" />
+<col width="12%" />
+<col width="20%" />
+<col width="38%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:0</td>
+<td>TMR30</td>
+<td>R/W</td>
+<td>32'HFFFFFFFF</td>
+<td>Timer3 match register 0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tmr3-1">
+<h3>13.4.6. TMR3_1<a class="headerlink" href="#tmr3-1" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a520</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">TMR31</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">TMR31</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="15%" />
+<col width="12%" />
+<col width="20%" />
+<col width="38%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:0</td>
+<td>TMR31</td>
+<td>R/W</td>
+<td>32'HFFFFFFFF</td>
+<td>Timer3 match register 1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tmr3-2">
+<h3>13.4.7. TMR3_2<a class="headerlink" href="#tmr3-2" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a524</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">TMR32</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">TMR32</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="15%" />
+<col width="12%" />
+<col width="20%" />
+<col width="38%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:0</td>
+<td>TMR32</td>
+<td>R/W</td>
+<td>32'HFFFFFFFF</td>
+<td>Timer3 match register 2</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tcr2">
+<h3>13.4.8. TCR2<a class="headerlink" href="#tcr2" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a52c</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">TCR2COUT</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">TCR2COUT</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="15%" />
+<col width="12%" />
+<col width="20%" />
+<col width="38%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:0</td>
+<td>TCR2COUT</td>
+<td>R</td>
+<td>32'H0</td>
+<td>Timer2 counter register</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tcr3">
+<h3>13.4.9. TCR3<a class="headerlink" href="#tcr3" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a530</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">TCR3COUT</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">TCR3COUT</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="15%" />
+<col width="12%" />
+<col width="20%" />
+<col width="38%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:0</td>
+<td>TCR3COUT</td>
+<td>R</td>
+<td>32'H0</td>
+<td>Timer3 counter register</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tmsr2">
+<h3>13.4.10. TMSR2<a class="headerlink" href="#tmsr2" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a538</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="13">RSVD</td>
+<td>T2MR2S</td>
+<td>T2MR1S</td>
+<td>T2MR0S</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="9%" />
+<col width="7%" />
+<col width="11%" />
+<col width="64%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:3</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>2</td>
+<td>T2MR2S</td>
+<td>R</td>
+<td>1'B0</td>
+<td>Timer2 match register 2 status/Clear interrupt would also clear this bit</td>
+</tr>
+<tr class="row-even"><td>1</td>
+<td>T2MR1S</td>
+<td>R</td>
+<td>1'B0</td>
+<td>Timer2 match register 1 status/Clear interrupt would also clear this bit</td>
+</tr>
+<tr class="row-odd"><td>0</td>
+<td>T2MR0S</td>
+<td>R</td>
+<td>1'B0</td>
+<td>Timer2 match register 0 status/Clear interrupt would also clear this bit</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tmsr3">
+<h3>13.4.11. TMSR3<a class="headerlink" href="#tmsr3" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a53c</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="13">RSVD</td>
+<td>T3MR2S</td>
+<td>T3MR1S</td>
+<td>T3MR0S</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="9%" />
+<col width="7%" />
+<col width="11%" />
+<col width="64%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:3</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>2</td>
+<td>T3MR2S</td>
+<td>R</td>
+<td>1'B0</td>
+<td>Timer3 match register 2 status/Clear interrupt would also clear this bit</td>
+</tr>
+<tr class="row-even"><td>1</td>
+<td>T3MR1S</td>
+<td>R</td>
+<td>1'B0</td>
+<td>Timer3 match register 1 status/Clear interrupt would also clear this bit</td>
+</tr>
+<tr class="row-odd"><td>0</td>
+<td>T3MR0S</td>
+<td>R</td>
+<td>1'B0</td>
+<td>Timer3 match register 0 status/Clear interrupt would also clear this bit</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tier2">
+<h3>13.4.12. TIER2<a class="headerlink" href="#tier2" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a544</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="13">RSVD</td>
+<td>TIER22</td>
+<td>TIER21</td>
+<td>TIER20</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="11%" />
+<col width="9%" />
+<col width="14%" />
+<col width="55%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:3</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>2</td>
+<td>TIER22</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>Timer2 match register 2 interrupt enable register</td>
+</tr>
+<tr class="row-even"><td>1</td>
+<td>TIER21</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>Timer2 match register 1 interrupt enable register</td>
+</tr>
+<tr class="row-odd"><td>0</td>
+<td>TIER20</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>Timer2 match register 0 interrupt enable register</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tier3">
+<h3>13.4.13. TIER3<a class="headerlink" href="#tier3" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a548</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="13">RSVD</td>
+<td>TIER32</td>
+<td>TIER31</td>
+<td>TIER30</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="11%" />
+<col width="9%" />
+<col width="14%" />
+<col width="55%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:3</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>2</td>
+<td>TIER32</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>Timer3 match register 2 interrupt enable register</td>
+</tr>
+<tr class="row-even"><td>1</td>
+<td>TIER31</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>Timer3 match register 1 interrupt enable register</td>
+</tr>
+<tr class="row-odd"><td>0</td>
+<td>TIER30</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>Timer3 match register 0 interrupt enable register</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tplvr2">
+<h3>13.4.14. TPLVR2<a class="headerlink" href="#tplvr2" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a550</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">TPLVR2</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">TPLVR2</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="14%" />
+<col width="11%" />
+<col width="18%" />
+<col width="44%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:0</td>
+<td>TPLVR2</td>
+<td>R/W</td>
+<td>32'H0</td>
+<td>Timer2 pre-load value register</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tplvr3">
+<h3>13.4.15. TPLVR3<a class="headerlink" href="#tplvr3" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a554</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">TPLVR3</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">TPLVR3</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="14%" />
+<col width="11%" />
+<col width="18%" />
+<col width="44%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:0</td>
+<td>TPLVR3</td>
+<td>R/W</td>
+<td>32'H0</td>
+<td>Timer3 pre-load value register</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tplcr2">
+<h3>13.4.16. TPLCR2<a class="headerlink" href="#tplcr2" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a55c</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="14">RSVD</td>
+<td colspan="2">TPLCR2</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="5%" />
+<col width="5%" />
+<col width="4%" />
+<col width="6%" />
+<col width="81%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:2</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td rowspan="5">1:0</td>
+<td rowspan="5">TPLCR2</td>
+<td rowspan="5">R/W</td>
+<td rowspan="5">2'H0</td>
+<td rowspan="5"><p class="first">Timer2 pre-load control register</p>
+<p>2'd0 - No pre-load</p>
+<p>2'd1 - Pre-load with match comparator 0</p>
+<p>2'd2 - Pre-load with match comparator 1</p>
+<p class="last">2'd3 - Pre-load with match comparator 2</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tplcr3">
+<h3>13.4.17. TPLCR3<a class="headerlink" href="#tplcr3" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a560</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="14">RSVD</td>
+<td colspan="2">TPLCR3</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="5%" />
+<col width="5%" />
+<col width="4%" />
+<col width="6%" />
+<col width="81%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:2</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td rowspan="5">1:0</td>
+<td rowspan="5">TPLCR3</td>
+<td rowspan="5">R/W</td>
+<td rowspan="5">2'H0</td>
+<td rowspan="5"><p class="first">Timer3 pre-load control register</p>
+<p>2'd0 - No pre-load</p>
+<p>2'd1 - Pre-load with match comparator 0</p>
+<p>2'd2 - Pre-load with match comparator 1</p>
+<p class="last">2'd3 - Pre-load with match comparator 2</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="wmer">
+<h3>13.4.18. WMER<a class="headerlink" href="#wmer" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a564</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="14">RSVD</td>
+<td>WRIE</td>
+<td>WE</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="5%" />
+<col width="8%" />
+<col width="75%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:2</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td rowspan="3">1</td>
+<td rowspan="3">WRIE</td>
+<td rowspan="3">R/W</td>
+<td rowspan="3">1'B0</td>
+<td rowspan="3"><p class="first">WDT reset/interrupt mode register</p>
+<p>1'b0 - WDT expiration to generate interrupt</p>
+<p class="last">1'b1 - WDT expiration to generate reset source</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td>0</td>
+<td>WE</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>WDT enable register</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="wmr">
+<h3>13.4.19. WMR<a class="headerlink" href="#wmr" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a568</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">WMR</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="13%" />
+<col width="11%" />
+<col width="17%" />
+<col width="45%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:16</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>15:0</td>
+<td>WMR</td>
+<td>R/W</td>
+<td>16'HFFFF</td>
+<td>WDT counter match value register</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="wvr">
+<h3>13.4.20. WVR<a class="headerlink" href="#wvr" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a56c</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">WVR</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="14%" />
+<col width="12%" />
+<col width="19%" />
+<col width="41%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:16</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>15:0</td>
+<td>WVR</td>
+<td>R</td>
+<td>16'H0</td>
+<td>WDT counter value register</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="wsr">
+<h3>13.4.21. WSR<a class="headerlink" href="#wsr" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a570</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="15">RSVD</td>
+<td>WTS</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="4%" />
+<col width="86%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:1</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td rowspan="5">0</td>
+<td rowspan="5">WTS</td>
+<td rowspan="5">R/W</td>
+<td rowspan="5">1'B0</td>
+<td rowspan="5"><p class="first">WDT timer reset indication, Indicates that reset was caused by the WDT.</p>
+<p>(Write)1'b0 - clear the WDT reset status</p>
+<p>(Write)1'b1 - no affect</p>
+<p>(Read)1'b0 - Watchdog timer did not cause reset because this bit was cleare</p>
+<p class="last">(Read)1'b1 - Watchdog timer caused reset</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="ticr2">
+<h3>13.4.22. TICR2<a class="headerlink" href="#ticr2" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a578</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="13">RSVD</td>
+<td>TCLR22</td>
+<td>TCLR21</td>
+<td>TCLR20</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="11%" />
+<col width="9%" />
+<col width="15%" />
+<col width="53%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:3</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>2</td>
+<td>TCLR22</td>
+<td>W</td>
+<td>1'B0</td>
+<td>Timer2 Interrupt clear for match comparator 2</td>
+</tr>
+<tr class="row-even"><td>1</td>
+<td>TCLR21</td>
+<td>W</td>
+<td>1'B0</td>
+<td>Timer2 Interrupt clear for match comparator 1</td>
+</tr>
+<tr class="row-odd"><td>0</td>
+<td>TCLR20</td>
+<td>W</td>
+<td>1'B0</td>
+<td>Timer2 Interrupt clear for match comparator 0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="ticr3">
+<h3>13.4.23. TICR3<a class="headerlink" href="#ticr3" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a57c</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="13">RSVD</td>
+<td>TCLR32</td>
+<td>TCLR31</td>
+<td>TCLR30</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="11%" />
+<col width="9%" />
+<col width="15%" />
+<col width="53%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:3</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>2</td>
+<td>TCLR32</td>
+<td>W</td>
+<td>1'B0</td>
+<td>Timer3 Interrupt clear for match comparator 2</td>
+</tr>
+<tr class="row-even"><td>1</td>
+<td>TCLR31</td>
+<td>W</td>
+<td>1'B0</td>
+<td>Timer3 Interrupt clear for match comparator 1</td>
+</tr>
+<tr class="row-odd"><td>0</td>
+<td>TCLR30</td>
+<td>W</td>
+<td>1'B0</td>
+<td>Timer3 Interrupt clear for match comparator 0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="wicr">
+<h3>13.4.24. WICR<a class="headerlink" href="#wicr" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a580</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="15">RSVD</td>
+<td>WICLR</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="14%" />
+<col width="11%" />
+<col width="18%" />
+<col width="42%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:1</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>0</td>
+<td>WICLR</td>
+<td>W</td>
+<td>1'B0</td>
+<td>WDT Interrupt clear register</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tcer">
+<h3>13.4.25. TCER<a class="headerlink" href="#tcer" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a584</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="13">RSVD</td>
+<td>TIM3EN</td>
+<td>TIM2EN</td>
+<td>RSVD</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="16%" />
+<col width="13%" />
+<col width="21%" />
+<col width="34%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:3</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>2</td>
+<td>TIM3EN</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>Timer3 count enable</td>
+</tr>
+<tr class="row-even"><td>1</td>
+<td>TIM2EN</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>Timer2 count enable</td>
+</tr>
+<tr class="row-odd"><td>0</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tcmr">
+<h3>13.4.26. TCMR<a class="headerlink" href="#tcmr" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a588</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="13">RSVD</td>
+<td>TIM3MODE</td>
+<td>TIM2MODE</td>
+<td>RSVD</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="9%" />
+<col width="7%" />
+<col width="11%" />
+<col width="64%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:3</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td rowspan="3">2</td>
+<td rowspan="3">TIM3MODE</td>
+<td rowspan="3">R/W</td>
+<td rowspan="3">1'B0</td>
+<td rowspan="3"><p class="first">Timer1/2/3 count mode register</p>
+<p>1'b0 - pre-load mode</p>
+<p class="last">1'b1 - free run mode</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3">1</td>
+<td rowspan="3">TIM2MODE</td>
+<td rowspan="3">R/W</td>
+<td rowspan="3">1'B0</td>
+<td rowspan="3"><p class="first">Timer1/2/3 count mode register</p>
+<p>1'b0 - pre-load mode</p>
+<p class="last">1'b1 - free run mode</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td>0</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tilr2">
+<h3>13.4.27. TILR2<a class="headerlink" href="#tilr2" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a590</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="13">RSVD</td>
+<td>TILR22</td>
+<td>TILR21</td>
+<td>TILR20</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="8%" />
+<col width="6%" />
+<col width="10%" />
+<col width="69%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:3</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td rowspan="3">2</td>
+<td rowspan="3">TILR22</td>
+<td rowspan="3">R/W</td>
+<td rowspan="3">1'B0</td>
+<td rowspan="3"><p class="first">Timer2 match 0/1/2 interrupt mode register</p>
+<p>1'b0 - level interrupt</p>
+<p class="last">1'b1 - pulse interrupt</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3">1</td>
+<td rowspan="3">TILR21</td>
+<td rowspan="3">R/W</td>
+<td rowspan="3">1'B0</td>
+<td rowspan="3"><p class="first">Timer2 match 0/1/2 interrupt mode register</p>
+<p>1'b0 - level interrupt</p>
+<p class="last">1'b1 - pulse interrupt</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3">0</td>
+<td rowspan="3">TILR20</td>
+<td rowspan="3">R/W</td>
+<td rowspan="3">1'B0</td>
+<td rowspan="3"><p class="first">Timer2 match 0/1/2 interrupt mode register</p>
+<p>1'b0 - level interrupt</p>
+<p class="last">1'b1 - pulse interrupt</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tilr3">
+<h3>13.4.28. TILR3<a class="headerlink" href="#tilr3" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a594</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="13">RSVD</td>
+<td>TILR32</td>
+<td>TILR31</td>
+<td>TILR30</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="8%" />
+<col width="6%" />
+<col width="10%" />
+<col width="69%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:3</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td rowspan="3">2</td>
+<td rowspan="3">TILR32</td>
+<td rowspan="3">R/W</td>
+<td rowspan="3">1'B0</td>
+<td rowspan="3"><p class="first">Timer3 match 0/1/2 interrupt mode register</p>
+<p>1'b0 - level interrupt</p>
+<p class="last">1'b1 - pulse interrupt</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3">1</td>
+<td rowspan="3">TILR31</td>
+<td rowspan="3">R/W</td>
+<td rowspan="3">1'B0</td>
+<td rowspan="3"><p class="first">Timer3 match 0/1/2 interrupt mode register</p>
+<p>1'b0 - level interrupt</p>
+<p class="last">1'b1 - pulse interrupt</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3">0</td>
+<td rowspan="3">TILR30</td>
+<td rowspan="3">R/W</td>
+<td rowspan="3">1'B0</td>
+<td rowspan="3"><p class="first">Timer3 match 0/1/2 interrupt mode register</p>
+<p>1'b0 - level interrupt</p>
+<p class="last">1'b1 - pulse interrupt</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="wcr">
+<h3>13.4.29. WCR<a class="headerlink" href="#wcr" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a598</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="15">RSVD</td>
+<td>WCR</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="14%" />
+<col width="11%" />
+<col width="18%" />
+<col width="44%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:1</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>0</td>
+<td>WCR</td>
+<td>W</td>
+<td>1'B0</td>
+<td>WDT timer count reset register</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="wfar">
+<h3>13.4.30. WFAR<a class="headerlink" href="#wfar" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a59c</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">WFAR</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="14%" />
+<col width="12%" />
+<col width="19%" />
+<col width="41%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:16</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>15:0</td>
+<td>WFAR</td>
+<td>W</td>
+<td>16'B0</td>
+<td>WDT access key1 - 16'hBABA</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="wsar">
+<h3>13.4.31. WSAR<a class="headerlink" href="#wsar" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a5a0</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">WSAR</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="14%" />
+<col width="12%" />
+<col width="19%" />
+<col width="41%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:16</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>15:0</td>
+<td>WSAR</td>
+<td>W</td>
+<td>16'B0</td>
+<td>WDT access key2 - 16'hEB10</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tcvwr2">
+<h3>13.4.32. TCVWR2<a class="headerlink" href="#tcvwr2" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a5a8</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">TCVWR2</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">TCVWR2</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="14%" />
+<col width="11%" />
+<col width="18%" />
+<col width="45%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:0</td>
+<td>TCVWR2</td>
+<td>R</td>
+<td>32'H0</td>
+<td>Timer2 capture value of counter</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tcvwr3">
+<h3>13.4.33. TCVWR3<a class="headerlink" href="#tcvwr3" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a5ac</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">TCVWR3</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">TCVWR3</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="14%" />
+<col width="11%" />
+<col width="18%" />
+<col width="45%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:0</td>
+<td>TCVWR3</td>
+<td>R</td>
+<td>32'H0</td>
+<td>Timer3 capture value of counter</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tcvsyn2">
+<h3>13.4.34. TCVSYN2<a class="headerlink" href="#tcvsyn2" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a5b4</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">TCVSYN2</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">TCVSYN2</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="13%" />
+<col width="10%" />
+<col width="17%" />
+<col width="47%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:0</td>
+<td>TCVSYN2</td>
+<td>R</td>
+<td>32'H0</td>
+<td>Timer2 synchronous value of counter</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tcvsyn3">
+<h3>13.4.35. TCVSYN3<a class="headerlink" href="#tcvsyn3" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a5b8</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">TCVSYN3</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">TCVSYN3</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="13%" />
+<col width="10%" />
+<col width="17%" />
+<col width="47%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:0</td>
+<td>TCVSYN3</td>
+<td>R</td>
+<td>32'H0</td>
+<td>Timer3 synchronous value of counter</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tcdr">
+<h3>13.4.36. TCDR<a class="headerlink" href="#tcdr" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000a5bc</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="8">WCDR</td>
+<td colspan="8">TCDR3</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="8">TCDR2</td>
+<td colspan="8">RSVD</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="13%" />
+<col width="10%" />
+<col width="16%" />
+<col width="48%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:24</td>
+<td>WCDR</td>
+<td>R/W</td>
+<td>8'H0</td>
+<td>WDT clock division value register</td>
+</tr>
+<tr class="row-odd"><td>23:16</td>
+<td>TCDR3</td>
+<td>R/W</td>
+<td>8'H0</td>
+<td>Timer3 clock division value register</td>
+</tr>
+<tr class="row-even"><td>15:8</td>
+<td>TCDR2</td>
+<td>R/W</td>
+<td>8'H0</td>
+<td>Timer2 clock division value register</td>
+</tr>
+<tr class="row-odd"><td>7:0</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="version.html" class="btn btn-neutral float-right" title="14. Revision history" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="PWM.html" class="btn btn-neutral float-left" title="12. PWM" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

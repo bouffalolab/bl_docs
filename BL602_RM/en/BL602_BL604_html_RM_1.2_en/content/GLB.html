@@ -1,0 +1,4105 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>3. GLB &mdash; BL602/604 Reference Manual  文档</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="4. ADC" href="ADC.html" />
+    <link rel="prev" title="2. Reset and clock" href="ResetAndClock.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> BL602/604 Reference Manual
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. System and memory overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. Reset and clock</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">3. GLB</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">3.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#glb-function-description">3.2. GLB function description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#clock">3.2.1. Clock</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reset">3.2.2. Reset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bus">3.2.3. Bus</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#memory">3.2.4. Memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpio-overview">3.2.5. GPIO overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpio-main-features">3.2.6. GPIO main features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpio-function-description">3.2.7. GPIO function description</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpio-function">3.2.8. GPIO function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpio-output">3.2.9. GPIO output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpio-input">3.2.10. GPIO input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpio-optional-function">3.2.11. GPIO optional function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpio-interrupt">3.2.12. GPIO interrupt</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#register-description">3.3. Register description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#clk-cfg0">3.3.1. clk_cfg0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clk-cfg2">3.3.2. clk_cfg2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clk-cfg3">3.3.3. clk_cfg3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpadc-32m-src-ctrl">3.3.4. GPADC_32M_SRC_CTRL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpio-cfgctl0">3.3.5. GPIO_CFGCTL0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpio-cfgctl1">3.3.6. GPIO_CFGCTL1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpio-cfgctl2">3.3.7. GPIO_CFGCTL2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpio-cfgctl3">3.3.8. GPIO_CFGCTL3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpio-cfgctl4">3.3.9. GPIO_CFGCTL4</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpio-cfgctl5">3.3.10. GPIO_CFGCTL5</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpio-cfgctl6">3.3.11. GPIO_CFGCTL6</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpio-cfgctl7">3.3.12. GPIO_CFGCTL7</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpio-cfgctl8">3.3.13. GPIO_CFGCTL8</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpio-cfgctl9">3.3.14. GPIO_CFGCTL9</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpio-cfgctl10">3.3.15. GPIO_CFGCTL10</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpio-cfgctl11">3.3.16. GPIO_CFGCTL11</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpio-cfgctl12">3.3.17. GPIO_CFGCTL12</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpio-cfgctl13">3.3.18. GPIO_CFGCTL13</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpio-cfgctl14">3.3.19. GPIO_CFGCTL14</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">4. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">5. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">6. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="L1C.html">7. L1C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">8. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">9. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">10. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">11. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">12. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">13. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">14. Revision history</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL602/604 Reference Manual</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>3. GLB</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="glb">
+<h1>3. GLB<a class="headerlink" href="#glb" title="永久链接至标题">¶</a></h1>
+<div class="section" id="introduction">
+<h2>3.1. Introduction<a class="headerlink" href="#introduction" title="永久链接至标题">¶</a></h2>
+<p>GLB (Global Register) is a chip's general global setting module, which mainly includes
+functions such as clock management, reset management, bus management, memory management,
+and GPIO management.</p>
+</div>
+<div class="section" id="glb-function-description">
+<h2>3.2. GLB function description<a class="headerlink" href="#glb-function-description" title="永久链接至标题">¶</a></h2>
+<div class="section" id="clock">
+<h3>3.2.1. Clock<a class="headerlink" href="#clock" title="永久链接至标题">¶</a></h3>
+<p>The clock management function is mainly used to set the clock of the processor, bus,
+and various peripherals. This module can set the clock source, clock frequency
+division, etc. of the module's work, and can also achieve the gate control of
+the module's clock to achieve the purpose of low power consumption of the system.</p>
+<p>For detailed settings, please refer to the relevant chapter of the system clock.</p>
+</div>
+<div class="section" id="reset">
+<h3>3.2.2. Reset<a class="headerlink" href="#reset" title="永久链接至标题">¶</a></h3>
+<p>Provide individual reset function for each peripheral and chip reset function.</p>
+<p>The chip reset includes:</p>
+<ul class="simple">
+<li>CPU reset: just reset the CPU module, the program will run again, and the peripherals will not be reset</li>
+<li>System reset: each peripheral and CPU will be reset, but the related registers of the AON domain will not be reset</li>
+<li>Power-on reset: the entire system including the AON domain related registers will be reset</li>
+</ul>
+<p>The application can choose to use the corresponding reset method as required.</p>
+</div>
+<div class="section" id="bus">
+<h3>3.2.3. Bus<a class="headerlink" href="#bus" title="永久链接至标题">¶</a></h3>
+<p>Provide bus arbitration settings and bus error settings. You can set whether to
+generate an interrupt when a bus error occurs, and provide error bus address
+information to facilitate user debugging procedures.</p>
+</div>
+<div class="section" id="memory">
+<h3>3.2.4. Memory<a class="headerlink" href="#memory" title="永久链接至标题">¶</a></h3>
+<p>Provides the power management of each memory module in the low-power mode
+of the chip system, including two setting modes:</p>
+<ul class="simple">
+<li>retention mode：In this mode, the data on the memory can be saved, but cannot be read or written until exiting the low power mode.</li>
+<li>sleep mode：In this mode, the data in the memory will be lost and is only used to reduce system power consumption.</li>
+</ul>
+</div>
+<div class="section" id="gpio-overview">
+<h3>3.2.5. GPIO overview<a class="headerlink" href="#gpio-overview" title="永久链接至标题">¶</a></h3>
+<p>The GPIO management function provides GPIO control registers to realize the
+configuration of GPIO attributes by software, so that users can conveniently operate
+GPIO. Each GPIO can be configured as three modes of input, output and optional
+function. In each mode (except for analog optional functions), it provides three
+port states: pull-up, pull-down, and floating. In addition, GPIO also provides
+interrupt functions, which can be configured as rising edge trigger, falling edge
+trigger, or High/low level trigger.</p>
+</div>
+<div class="section" id="gpio-main-features">
+<h3>3.2.6. GPIO main features<a class="headerlink" href="#gpio-main-features" title="永久链接至标题">¶</a></h3>
+<ul class="simple">
+<li>It can be configured as a normal input / output function. In this mode, pull-up, pull-down or floating input/output can be set.</li>
+<li>It can be configured as an optional function and used with peripheral functions. In this mode, pull-up and pull-down can also be set. When using the analog function, it must be set to floating.</li>
+<li>The drive capability can be set to provide greater output current.</li>
+<li>Schmitt trigger function can be set to provide simple hardware anti-shake function.</li>
+</ul>
+</div>
+<div class="section" id="gpio-function-description">
+<h3>3.2.7. GPIO function description<a class="headerlink" href="#gpio-function-description" title="永久链接至标题">¶</a></h3>
+<p>Each GPIO can be configured by software as:</p>
+<ul class="simple">
+<li>Floating input</li>
+<li>Pull-up input</li>
+<li>Pull down input</li>
+<li>Pull-up interrupt input</li>
+<li>Pull-down interrupt input</li>
+<li>Floating interrupt input</li>
+<li>Pull-up output</li>
+<li>Pull-down output</li>
+<li>Floating output</li>
+<li>Analog input optional function</li>
+<li>Analog output optional function</li>
+<li>Digital optional functions</li>
+</ul>
+<p>The basic block diagram of the GPIO module is shown below:</p>
+<div class="figure align-center" id="id1">
+<img alt="../_images/GPIOBasicStruct.png" src="../_images/GPIOBasicStruct.png" />
+<p class="caption"><span class="caption-text">GPIO Basic Struct</span></p>
+</div>
+</div>
+<div class="section" id="gpio-function">
+<h3>3.2.8. GPIO function<a class="headerlink" href="#gpio-function" title="永久链接至标题">¶</a></h3>
+<p>The function of GPIO is set through the GPIO_CFGCTL register group. The main setting items include:</p>
+<ul class="simple">
+<li>func_sel: select GPIO function</li>
+<li>pu: choose whether to pull up</li>
+<li>pd: choose whether to pull down</li>
+<li>drv: set the driving capability</li>
+<li>smt: select whether to enable Schmitt trigger</li>
+<li>ie: set input enable</li>
+<li>oe: set output enable</li>
+</ul>
+<p>The functions that GPIO can set include:</p>
+<ul class="simple">
+<li>Flash/QSPI：set GPIO as QSPI function, can be connected to Flash as program storage / run medium</li>
+<li>SPI: set GPIO as SPI function</li>
+<li>I2C: set GPIO to I2C function</li>
+<li>UART: set GPIO as UART function</li>
+<li>PWM: set GPIO to PWM function</li>
+<li>ANA: set GPIO to Analog function</li>
+<li>SWGPIO: set GPIO as general IO function</li>
+<li>JTAG: set GPIO to JTAG function</li>
+</ul>
+<p>In order to meet the needs of customers as much as possible, each of the
+GPIOs can basically select the above optional functions. When selecting an
+optional function, the GPIO and corresponding function signals are shown
+in the following table:</p>
+<table border="1" class="docutils" id="id2">
+<caption><span class="caption-text">GPIO function table</span><a class="headerlink" href="#id2" title="永久链接至表格">¶</a></caption>
+<colgroup>
+<col width="7%" />
+<col width="10%" />
+<col width="10%" />
+<col width="10%" />
+<col width="10%" />
+<col width="10%" />
+<col width="10%" />
+<col width="11%" />
+<col width="10%" />
+<col width="10%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>GPIO</td>
+<td>SDIO</td>
+<td>FLASH</td>
+<td>SPI</td>
+<td>I2C</td>
+<td>UART</td>
+<td>PWM</td>
+<td>Analog</td>
+<td>SWGPIO</td>
+<td>JTAG</td>
+</tr>
+<tr class="row-even"><td>GPIO0</td>
+<td>CLK</td>
+<td>D1</td>
+<td>MISO</td>
+<td>SCL</td>
+<td>SIG0</td>
+<td>CH0</td>
+<td>&#160;</td>
+<td>SWGPIO0</td>
+<td>TMS</td>
+</tr>
+<tr class="row-odd"><td>GPIO1</td>
+<td>CMD</td>
+<td>D2</td>
+<td>MOSI</td>
+<td>SDA</td>
+<td>SIG1</td>
+<td>CH1</td>
+<td>&#160;</td>
+<td>SWGPIO1</td>
+<td>TDI</td>
+</tr>
+<tr class="row-even"><td>GPIO2</td>
+<td>DAT0</td>
+<td>D2</td>
+<td>SS</td>
+<td>SCL</td>
+<td>SIG2</td>
+<td>CH2</td>
+<td>&#160;</td>
+<td>SWGPIO2</td>
+<td>TCK</td>
+</tr>
+<tr class="row-odd"><td>GPIO3</td>
+<td>DAT1</td>
+<td>D3</td>
+<td>SCLK</td>
+<td>SDA</td>
+<td>SIG3</td>
+<td>CH3</td>
+<td>&#160;</td>
+<td>SWGPIO3</td>
+<td>TDO</td>
+</tr>
+<tr class="row-even"><td>GPIO4</td>
+<td>DAT2</td>
+<td>&#160;</td>
+<td>MISO</td>
+<td>SCL</td>
+<td>SIG4</td>
+<td>CH4</td>
+<td>CH1</td>
+<td>SWGPIO4</td>
+<td>TMS</td>
+</tr>
+<tr class="row-odd"><td>GPIO5</td>
+<td>DAT3</td>
+<td>&#160;</td>
+<td>MOSI</td>
+<td>SDA</td>
+<td>SIG5</td>
+<td>CH0</td>
+<td>CH4</td>
+<td>SWGPIO5</td>
+<td>TDI</td>
+</tr>
+<tr class="row-even"><td>GPIO6</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>SS</td>
+<td>SCL</td>
+<td>SIG6</td>
+<td>CH1</td>
+<td>CH5</td>
+<td>SWGPIO6</td>
+<td>TCK</td>
+</tr>
+<tr class="row-odd"><td>GPIO7</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>SCLK</td>
+<td>SDA</td>
+<td>SIG7</td>
+<td>CH2</td>
+<td>&#160;</td>
+<td>SWGPIO7</td>
+<td>TDO</td>
+</tr>
+<tr class="row-even"><td>GPIO8</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>MISO</td>
+<td>SCL</td>
+<td>SIG0</td>
+<td>CH3</td>
+<td>&#160;</td>
+<td>SWGPIO8</td>
+<td>TMS</td>
+</tr>
+<tr class="row-odd"><td>GPIO9</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>MOSI</td>
+<td>SDA</td>
+<td>SIG1</td>
+<td>CH4</td>
+<td>CH6/7</td>
+<td>SWGPIO9</td>
+<td>TDI</td>
+</tr>
+<tr class="row-even"><td>GPIO10</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>SS</td>
+<td>SCL</td>
+<td>SIG2</td>
+<td>CH0</td>
+<td>MICBIAS/CH8/9</td>
+<td>SWGPIO10</td>
+<td>TCK</td>
+</tr>
+<tr class="row-odd"><td>GPIO11</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>SCLK</td>
+<td>SDA</td>
+<td>SIG3</td>
+<td>CH1</td>
+<td>IROUT/CH10</td>
+<td>SWGPIO11</td>
+<td>TDO</td>
+</tr>
+<tr class="row-even"><td>GPIO12</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>MISO</td>
+<td>SCL</td>
+<td>SIG4</td>
+<td>CH2</td>
+<td>ADC_VREF/CH0</td>
+<td>SWGPIO12</td>
+<td>TMS</td>
+</tr>
+<tr class="row-odd"><td>GPIO13</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>MOSI</td>
+<td>SDA</td>
+<td>SIG5</td>
+<td>CH3</td>
+<td>CH3</td>
+<td>SWGPIO13</td>
+<td>TDI</td>
+</tr>
+<tr class="row-even"><td>GPIO14</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>SS</td>
+<td>SCL</td>
+<td>SIG6</td>
+<td>CH4</td>
+<td>CH2</td>
+<td>SWGPIO14</td>
+<td>TCK</td>
+</tr>
+<tr class="row-odd"><td>GPIO15</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>SCLK</td>
+<td>SDA</td>
+<td>SIG7</td>
+<td>CH0</td>
+<td>PSWIROUT/CH11</td>
+<td>SWGPIO15</td>
+<td>TDO</td>
+</tr>
+<tr class="row-even"><td>GPIO16</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>MISO</td>
+<td>SCL</td>
+<td>SIG0</td>
+<td>CH1</td>
+<td>&#160;</td>
+<td>SWGPIO16</td>
+<td>TMS</td>
+</tr>
+<tr class="row-odd"><td>GPIO17</td>
+<td>&#160;</td>
+<td>D3</td>
+<td>MOSI</td>
+<td>SDA</td>
+<td>SIG1</td>
+<td>CH2</td>
+<td>DC_TP_OUT</td>
+<td>SWGPIO17</td>
+<td>TDI</td>
+</tr>
+<tr class="row-even"><td>GPIO18</td>
+<td>&#160;</td>
+<td>D2</td>
+<td>SS</td>
+<td>SCL</td>
+<td>SIG2</td>
+<td>CH3</td>
+<td>&#160;</td>
+<td>SWGPIO18</td>
+<td>TCK</td>
+</tr>
+<tr class="row-odd"><td>GPIO19</td>
+<td>&#160;</td>
+<td>D1</td>
+<td>SCLK</td>
+<td>SDA</td>
+<td>SIG3</td>
+<td>CH4</td>
+<td>&#160;</td>
+<td>SWGPIO19</td>
+<td>TDO</td>
+</tr>
+<tr class="row-even"><td>GPIO20</td>
+<td>&#160;</td>
+<td>D0</td>
+<td>MISO</td>
+<td>SCL</td>
+<td>SIG4</td>
+<td>CH0</td>
+<td>&#160;</td>
+<td>SWGPIO20</td>
+<td>TMS</td>
+</tr>
+<tr class="row-odd"><td>GPIO21</td>
+<td>&#160;</td>
+<td>CS</td>
+<td>MOSI</td>
+<td>SDA</td>
+<td>SIG5</td>
+<td>CH1</td>
+<td>&#160;</td>
+<td>SWGPIO21</td>
+<td>TDI</td>
+</tr>
+<tr class="row-even"><td>GPIO22</td>
+<td>&#160;</td>
+<td>CLK_OUT</td>
+<td>SS</td>
+<td>SCL</td>
+<td>SIG6</td>
+<td>CH2</td>
+<td>&#160;</td>
+<td>SWGPIO22</td>
+<td>TCK</td>
+</tr>
+</tbody>
+</table>
+<p>In the above table, when the UART function is selected, only one signal of
+the UART is selected, and the specific function of the pin is not specified
+(such as UART TX or UART RX). It is also necessary to use
+UART_SIGX_SEL(X = 0-7) to select specific UART signals and corresponding functions.</p>
+<p>The signals that can be selected for each UART_SIGX_SEL include:</p>
+<ul class="simple">
+<li>0 : UART0_RTS</li>
+<li>1 : UART0_CTS</li>
+<li>2 : UART0_TXD</li>
+<li>3 : UART0_RXD</li>
+<li>4 : UART1_RTS</li>
+<li>5 : UART1_CTS</li>
+<li>6 : UART1_TXD</li>
+<li>7 : UART1_RXD</li>
+</ul>
+<p>Take GPIO0 as an example, when fun_sel selects UART, GPIO0 selects UART_SIG0.
+By default, the value of UART_SIG0_SEL is 0, which is UART0_RTS, that is,
+GPIO is UART0_RTS function. If the application wants to use GPIO as UART1_TXD,
+as long as UART_SIG0_SEL is set to 6, then the function of GPIO0 is UART1_TXD.</p>
+</div>
+<div class="section" id="gpio-output">
+<h3>3.2.9. GPIO output<a class="headerlink" href="#gpio-output" title="永久链接至标题">¶</a></h3>
+<p>By setting func_sel to SWGPIO, GPIO can be used as the input / output of ordinary GPIO.
+Setting ie to 0 and oe to 1 can configure GPIO as an output function. The output value
+is set through the GPIO_O register group.</p>
+<p>When the corresponding bit of GPIO_O is set to 0, the GPIO output is low, and when the
+corresponding bit of GPIO_O is set to 1, the GPIO output is high. The output capability
+can be set via the DRV control bit.</p>
+</div>
+<div class="section" id="gpio-input">
+<h3>3.2.10. GPIO input<a class="headerlink" href="#gpio-input" title="永久链接至标题">¶</a></h3>
+<p>Set func_sel to SWGPIO, set ie to 1, and oe to 0. The user can configure the GPIO as an
+input function, set whether to enable the Schmitt trigger through the smt control bit,
+and set the pull-down property through the pd, pu control bit .</p>
+<p>The value of the external input can be obtained by reading the corresponding bit of
+the GPIO_I register.</p>
+</div>
+<div class="section" id="gpio-optional-function">
+<h3>3.2.11. GPIO optional function<a class="headerlink" href="#gpio-optional-function" title="永久链接至标题">¶</a></h3>
+<p>Setting func_sel as the corresponding peripheral function can realize the connection
+between GPIO and peripherals, and realize the input and output of peripherals.
+As can be seen from the basic functional block diagram of GPIO, when selecting
+optional functions, it is necessary to set ie to 1, oe Set to 0, that is to disconnect
+the output control function of ordinary GPIO.</p>
+<p>In this way, for peripherals with fixed input functions, the OE signal of the peripheral
+is always 0 to implement the input function; for peripherals with fixed output, the OE
+signal is always 1 so that the output is controlled by the peripheral. At this time,
+The input signal is the output signal, but it will not be collected by the output peripheral.
+When the peripheral needs both input and output, the input and output can be realized by
+controlling the peripheral OE signal.</p>
+</div>
+<div class="section" id="gpio-interrupt">
+<h3>3.2.12. GPIO interrupt<a class="headerlink" href="#gpio-interrupt" title="永久链接至标题">¶</a></h3>
+<p>To use the GPIO interrupt function, the user needs to set the GPIO to the input mode first,
+and the interrupt trigger mode is set through the GPIO_INT_MODE_SET register group.
+The interrupt modes that can be set include:</p>
+<ul class="simple">
+<li>Interrupt on rising edge</li>
+<li>Interrupt on falling edge</li>
+<li>High level trigger interrupt</li>
+<li>Low level trigger interrupt</li>
+</ul>
+<p>Each GPIO can be set as an interrupt function. Whether to enable a GPIO interrupt can
+be set through the GPIO_INT_MASK register. When an interrupt occurs, the GPIO pin number
+that generated the interrupt can be obtained through the GPIO_INT_STAT register in the
+interrupt function. Clear the corresponding interrupt signal through GPIO_INT_CLR.</p>
+</div>
+</div>
+<div class="section" id="register-description">
+<h2>3.3. Register description<a class="headerlink" href="#register-description" title="永久链接至标题">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="39%" />
+<col width="61%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Name</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#clk-cfg0">clk_cfg0</a></td>
+<td>Clock configuration-processor, bus</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#clk-cfg2">clk_cfg2</a></td>
+<td>Clock configuration-UART,Flash</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#clk-cfg3">clk_cfg3</a></td>
+<td>Clock configuration-I2C,SPI</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#gpadc-32m-src-ctrl">GPADC_32M_SRC_CTRL</a></td>
+<td>Clock configuration-GPADC</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#gpio-cfgctl0">GPIO_CFGCTL0</a></td>
+<td>GPIO0, GPIO1 configuration</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#gpio-cfgctl1">GPIO_CFGCTL1</a></td>
+<td>GPIO2, GPIO3 configuration</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#gpio-cfgctl2">GPIO_CFGCTL2</a></td>
+<td>GPIO4, GPIO5 configuration</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#gpio-cfgctl3">GPIO_CFGCTL3</a></td>
+<td>GPIO6, GPIO7 configuration</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#gpio-cfgctl4">GPIO_CFGCTL4</a></td>
+<td>GPIO8, GPIO9 configuration</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#gpio-cfgctl5">GPIO_CFGCTL5</a></td>
+<td>GPIO10, GPIO11 configuration</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#gpio-cfgctl6">GPIO_CFGCTL6</a></td>
+<td>GPIO12, GPIO13 configuration</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#gpio-cfgctl7">GPIO_CFGCTL7</a></td>
+<td>GPIO14, GPIO15 configuration</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#gpio-cfgctl8">GPIO_CFGCTL8</a></td>
+<td>GPIO16, GPIO17 configuration</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#gpio-cfgctl9">GPIO_CFGCTL9</a></td>
+<td>GPIO18, GPIO19 configuration</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#gpio-cfgctl10">GPIO_CFGCTL10</a></td>
+<td>GPIO20, GPIO21 configuration</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#gpio-cfgctl11">GPIO_CFGCTL11</a></td>
+<td>GPIO22, GPIO23 configuration</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#gpio-cfgctl12">GPIO_CFGCTL12</a></td>
+<td>GPIO24, GPIO25 configuration</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#gpio-cfgctl13">GPIO_CFGCTL13</a></td>
+<td>GPIO26, GPIO27 configuration</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#gpio-cfgctl14">GPIO_CFGCTL14</a></td>
+<td>GPIO28 configuration</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="clk-cfg0">
+<h3>3.3.1. clk_cfg0<a class="headerlink" href="#clk-cfg0" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x40000000</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="4">GLBID</td>
+<td colspan="4">RSVD</td>
+<td colspan="8">BCLKDIV</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="8">HCLKDIV</td>
+<td colspan="2">RCSEL</td>
+<td colspan="2">PLLSEL</td>
+<td colspan="4">RSVD</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="9%" />
+<col width="7%" />
+<col width="11%" />
+<col width="64%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:28</td>
+<td>GLBID</td>
+<td>R</td>
+<td>4'H6</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>27:24</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>23:16</td>
+<td>BCLKDIV</td>
+<td>R/W</td>
+<td>0</td>
+<td>bclk divide from hclk</td>
+</tr>
+<tr class="row-odd"><td>15:8</td>
+<td>HCLKDIV</td>
+<td>R/W</td>
+<td>0</td>
+<td>hclk divide from root clock (clock source selected by hbn_root_clk_sel)</td>
+</tr>
+<tr class="row-even"><td>7:6</td>
+<td>RCSEL</td>
+<td>R</td>
+<td>0</td>
+<td>root clock selection from HBN (0: RC32M 1: XTAL  2/3: PLL others)</td>
+</tr>
+<tr class="row-odd"><td>5:4</td>
+<td>PLLSEL</td>
+<td>R/W</td>
+<td>0</td>
+<td>pll clock selection (0: 48MHz 1: 120MHz  2: 160MHz  3: 192MHz)</td>
+</tr>
+<tr class="row-even"><td>3:0</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="clk-cfg2">
+<h3>3.3.2. clk_cfg2<a class="headerlink" href="#clk-cfg2" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x40000008</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="8">DMAEN</td>
+<td colspan="8">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="2">RSVD</td>
+<td colspan="2">SFSEL</td>
+<td>SFEN</td>
+<td colspan="3">SFDIV</td>
+<td>HUCSEL</td>
+<td colspan="2">RSVD</td>
+<td>UARTEN</td>
+<td>RSVD</td>
+<td colspan="3">UARTDIV</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="8%" />
+<col width="6%" />
+<col width="10%" />
+<col width="69%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:24</td>
+<td>DMAEN</td>
+<td>R/W</td>
+<td>8'HFF</td>
+<td>CH0, 1, 2, AHBm, AHBs, Rqs</td>
+</tr>
+<tr class="row-odd"><td>23:14</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>13:12</td>
+<td>SFSEL</td>
+<td>R/W</td>
+<td>2'D2</td>
+<td>Flash Clock Select (0: 120M, 1:80M, 2:HCLK, 3:96M)</td>
+</tr>
+<tr class="row-odd"><td>11</td>
+<td>SFEN</td>
+<td>R/W</td>
+<td>1</td>
+<td>Flash Clock Enable</td>
+</tr>
+<tr class="row-even"><td>10:8</td>
+<td>SFDIV</td>
+<td>R/W</td>
+<td>3'D3</td>
+<td>Flash Clock Divider (Selected Flash Clock)/(N+1)</td>
+</tr>
+<tr class="row-odd"><td>7</td>
+<td>HUCSEL</td>
+<td>R</td>
+<td>0</td>
+<td>uart clock selection from HBN (0: root clock 1: PLL 160M)</td>
+</tr>
+<tr class="row-even"><td>6:5</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>4</td>
+<td>UARTEN</td>
+<td>R/W</td>
+<td>1</td>
+<td>UART Clock Enable</td>
+</tr>
+<tr class="row-even"><td>3</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>2:0</td>
+<td>UARTDIV</td>
+<td>R/W</td>
+<td>3'D7</td>
+<td>UART Clock Divider (root clock or 160M)/(N+1) (clock source selected by hbn_uart_clk_sel)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="clk-cfg3">
+<h3>3.3.3. clk_cfg3<a class="headerlink" href="#clk-cfg3" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000000c</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="7">RSVD</td>
+<td>I2CEN</td>
+<td colspan="8">I2CDIV</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="7">RSVD</td>
+<td>SPIEN</td>
+<td colspan="3">RSVD</td>
+<td colspan="5">SPIDIV</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="10%" />
+<col width="8%" />
+<col width="14%" />
+<col width="57%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:25</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>24</td>
+<td>I2CEN</td>
+<td>R/W</td>
+<td>1</td>
+<td>I2C Master Clock Out Enable</td>
+</tr>
+<tr class="row-even"><td>23:16</td>
+<td>I2CDIV</td>
+<td>R/W</td>
+<td>8'D255</td>
+<td>I2C Master Clock Out Divider (Freq_of_BCLK/(N+1))</td>
+</tr>
+<tr class="row-odd"><td>15:9</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>8</td>
+<td>SPIEN</td>
+<td>R/W</td>
+<td>1</td>
+<td>SPI Clock Enable (Default : Enable)</td>
+</tr>
+<tr class="row-odd"><td>7:5</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>4:0</td>
+<td>SPIDIV</td>
+<td>R/W</td>
+<td>5'D3</td>
+<td>SPI Clock Divider (BUS_CLK/(N+1)),  default BUS_CLK/4</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gpadc-32m-src-ctrl">
+<h3>3.3.4. GPADC_32M_SRC_CTRL<a class="headerlink" href="#gpadc-32m-src-ctrl" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x400000a4</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="7">RSVD</td>
+<td>GADCDIV</td>
+<td>GADCSEL</td>
+<td>RSVD</td>
+<td colspan="6">GADCDIV</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="10%" />
+<col width="8%" />
+<col width="13%" />
+<col width="60%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:9</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>8</td>
+<td>GADCDIV</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPADC 32M Clock Dvider Enable</td>
+</tr>
+<tr class="row-even"><td>7</td>
+<td>GADCSEL</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPADC Clock Source Select.  0: 96MHz,  1: xclk</td>
+</tr>
+<tr class="row-odd"><td>6</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>5:0</td>
+<td>GADCDIV</td>
+<td>R/W</td>
+<td>6'D2</td>
+<td>GPADC 32M Clock Divider (96M)/(N+1) , default : 96M/3 = 32M</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gpio-cfgctl0">
+<h3>3.3.5. GPIO_CFGCTL0<a class="headerlink" href="#gpio-cfgctl0" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x40000100</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="4">RSVD</td>
+<td colspan="4">GP1FUNC</td>
+<td colspan="2">RSVD</td>
+<td>GP1PD</td>
+<td>GP1PU</td>
+<td colspan="2">GP1DRV</td>
+<td>GP1SMT</td>
+<td>GP1IE</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="4">RSVD</td>
+<td colspan="4">GP0FUNC</td>
+<td colspan="2">RSVD</td>
+<td>GP0PD</td>
+<td>GP0PU</td>
+<td colspan="2">GP0DRV</td>
+<td>GP0SMT</td>
+<td>GP0IE</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="13%" />
+<col width="10%" />
+<col width="16%" />
+<col width="49%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:28</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>27:24</td>
+<td>GP1FUNC</td>
+<td>R/W</td>
+<td>4'H1</td>
+<td>GPIO Function Select (Default : SDIO)</td>
+</tr>
+<tr class="row-even"><td>23:22</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>21</td>
+<td>GP1PD</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Down Control</td>
+</tr>
+<tr class="row-even"><td>20</td>
+<td>GP1PU</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Up Control</td>
+</tr>
+<tr class="row-odd"><td>19:18</td>
+<td>GP1DRV</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Driving Control</td>
+</tr>
+<tr class="row-even"><td>17</td>
+<td>GP1SMT</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO SMT Control</td>
+</tr>
+<tr class="row-odd"><td>16</td>
+<td>GP1IE</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO Input Enable</td>
+</tr>
+<tr class="row-even"><td>15:12</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>11:8</td>
+<td>GP0FUNC</td>
+<td>R/W</td>
+<td>4'H1</td>
+<td>GPIO Function Select (Default : SDIO)</td>
+</tr>
+<tr class="row-even"><td>7:6</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>GP0PD</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Down Control</td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>GP0PU</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Up Control</td>
+</tr>
+<tr class="row-odd"><td>3:2</td>
+<td>GP0DRV</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Driving Control</td>
+</tr>
+<tr class="row-even"><td>1</td>
+<td>GP0SMT</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO SMT Control</td>
+</tr>
+<tr class="row-odd"><td>0</td>
+<td>GP0IE</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO Input Enable</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gpio-cfgctl1">
+<h3>3.3.6. GPIO_CFGCTL1<a class="headerlink" href="#gpio-cfgctl1" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x40000104</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="4">RSVD</td>
+<td colspan="4">GP3FUNC</td>
+<td colspan="2">RSVD</td>
+<td>GP3PD</td>
+<td>GP3PU</td>
+<td colspan="2">GP3DRV</td>
+<td>GP3SMT</td>
+<td>GP3IE</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="4">RSVD</td>
+<td colspan="4">GP2FUNC</td>
+<td colspan="2">RSVD</td>
+<td>GP2PD</td>
+<td>GP2PU</td>
+<td colspan="2">GP2DRV</td>
+<td>GP2SMT</td>
+<td>GP2IE</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="13%" />
+<col width="10%" />
+<col width="16%" />
+<col width="49%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:28</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>27:24</td>
+<td>GP3FUNC</td>
+<td>R/W</td>
+<td>4'H1</td>
+<td>GPIO Function Select (Default : SDIO)</td>
+</tr>
+<tr class="row-even"><td>23:22</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>21</td>
+<td>GP3PD</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Down Control</td>
+</tr>
+<tr class="row-even"><td>20</td>
+<td>GP3PU</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Up Control</td>
+</tr>
+<tr class="row-odd"><td>19:18</td>
+<td>GP3DRV</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Driving Control</td>
+</tr>
+<tr class="row-even"><td>17</td>
+<td>GP3SMT</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO SMT Control</td>
+</tr>
+<tr class="row-odd"><td>16</td>
+<td>GP3IE</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO Input Enable</td>
+</tr>
+<tr class="row-even"><td>15:12</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>11:8</td>
+<td>GP2FUNC</td>
+<td>R/W</td>
+<td>4'H1</td>
+<td>GPIO Function Select (Default : SDIO)</td>
+</tr>
+<tr class="row-even"><td>7:6</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>GP2PD</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Down Control</td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>GP2PU</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Up Control</td>
+</tr>
+<tr class="row-odd"><td>3:2</td>
+<td>GP2DRV</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Driving Control</td>
+</tr>
+<tr class="row-even"><td>1</td>
+<td>GP2SMT</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO SMT Control</td>
+</tr>
+<tr class="row-odd"><td>0</td>
+<td>GP2IE</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO Input Enable</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gpio-cfgctl2">
+<h3>3.3.7. GPIO_CFGCTL2<a class="headerlink" href="#gpio-cfgctl2" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x40000108</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="4">RSVD</td>
+<td colspan="4">GP5FUNC</td>
+<td colspan="2">RSVD</td>
+<td>GP5PD</td>
+<td>GP5PU</td>
+<td colspan="2">GP5DRV</td>
+<td>GP5SMT</td>
+<td>GP5IE</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="4">RSVD</td>
+<td colspan="4">GP4FUNC</td>
+<td colspan="2">RSVD</td>
+<td>GP4PD</td>
+<td>GP4PU</td>
+<td colspan="2">GP4DRV</td>
+<td>GP4SMT</td>
+<td>GP4IE</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="13%" />
+<col width="10%" />
+<col width="16%" />
+<col width="49%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:28</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>27:24</td>
+<td>GP5FUNC</td>
+<td>R/W</td>
+<td>4'H1</td>
+<td>GPIO Function Select (Default : SDIO)</td>
+</tr>
+<tr class="row-even"><td>23:22</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>21</td>
+<td>GP5PD</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Down Control</td>
+</tr>
+<tr class="row-even"><td>20</td>
+<td>GP5PU</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Up Control</td>
+</tr>
+<tr class="row-odd"><td>19:18</td>
+<td>GP5DRV</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Driving Control</td>
+</tr>
+<tr class="row-even"><td>17</td>
+<td>GP5SMT</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO SMT Control</td>
+</tr>
+<tr class="row-odd"><td>16</td>
+<td>GP5IE</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO Input Enable</td>
+</tr>
+<tr class="row-even"><td>15:12</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>11:8</td>
+<td>GP4FUNC</td>
+<td>R/W</td>
+<td>4'H1</td>
+<td>GPIO Function Select (Default : SDIO)</td>
+</tr>
+<tr class="row-even"><td>7:6</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>GP4PD</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Down Control</td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>GP4PU</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Up Control</td>
+</tr>
+<tr class="row-odd"><td>3:2</td>
+<td>GP4DRV</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Driving Control</td>
+</tr>
+<tr class="row-even"><td>1</td>
+<td>GP4SMT</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO SMT Control</td>
+</tr>
+<tr class="row-odd"><td>0</td>
+<td>GP4IE</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO Input Enable</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gpio-cfgctl3">
+<h3>3.3.8. GPIO_CFGCTL3<a class="headerlink" href="#gpio-cfgctl3" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000010c</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="4">RSVD</td>
+<td colspan="4">GP7FUNC</td>
+<td colspan="2">RSVD</td>
+<td>GP7PD</td>
+<td>GP7PU</td>
+<td colspan="2">GP7DRV</td>
+<td>GP7SMT</td>
+<td>GP7IE</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="4">RSVD</td>
+<td colspan="4">GP6FUNC</td>
+<td colspan="2">RSVD</td>
+<td>GP6PD</td>
+<td>GP6PU</td>
+<td colspan="2">GP6DRV</td>
+<td>GP6SMT</td>
+<td>GP6IE</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="12%" />
+<col width="10%" />
+<col width="16%" />
+<col width="51%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:28</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>27:24</td>
+<td>GP7FUNC</td>
+<td>R/W</td>
+<td>4'HB</td>
+<td>GPIO Function Select (Default : SWGPIO )</td>
+</tr>
+<tr class="row-even"><td>23:22</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>21</td>
+<td>GP7PD</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Down Control</td>
+</tr>
+<tr class="row-even"><td>20</td>
+<td>GP7PU</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Up Control</td>
+</tr>
+<tr class="row-odd"><td>19:18</td>
+<td>GP7DRV</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Driving Control</td>
+</tr>
+<tr class="row-even"><td>17</td>
+<td>GP7SMT</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO SMT Control</td>
+</tr>
+<tr class="row-odd"><td>16</td>
+<td>GP7IE</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO Input Enable</td>
+</tr>
+<tr class="row-even"><td>15:12</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>11:8</td>
+<td>GP6FUNC</td>
+<td>R/W</td>
+<td>4'HB</td>
+<td>GPIO Function Select (Default : SWGPIO )</td>
+</tr>
+<tr class="row-even"><td>7:6</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>GP6PD</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Down Control</td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>GP6PU</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Up Control</td>
+</tr>
+<tr class="row-odd"><td>3:2</td>
+<td>GP6DRV</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Driving Control</td>
+</tr>
+<tr class="row-even"><td>1</td>
+<td>GP6SMT</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO SMT Control</td>
+</tr>
+<tr class="row-odd"><td>0</td>
+<td>GP6IE</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO Input Enable</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gpio-cfgctl4">
+<h3>3.3.9. GPIO_CFGCTL4<a class="headerlink" href="#gpio-cfgctl4" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x40000110</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="4">RSVD</td>
+<td colspan="4">GP9FUNC</td>
+<td colspan="2">RSVD</td>
+<td>GP9PD</td>
+<td>GP9PU</td>
+<td colspan="2">GP9DRV</td>
+<td>GP9SMT</td>
+<td>GP9IE</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="4">RSVD</td>
+<td colspan="4">GP8FUNC</td>
+<td colspan="2">RSVD</td>
+<td>GP8PD</td>
+<td>GP8PU</td>
+<td colspan="2">GP8DRV</td>
+<td>GP8SMT</td>
+<td>GP8IE</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="12%" />
+<col width="10%" />
+<col width="16%" />
+<col width="51%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:28</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>27:24</td>
+<td>GP9FUNC</td>
+<td>R/W</td>
+<td>4'HB</td>
+<td>GPIO Function Select (Default : SWGPIO )</td>
+</tr>
+<tr class="row-even"><td>23:22</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>21</td>
+<td>GP9PD</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Down Control</td>
+</tr>
+<tr class="row-even"><td>20</td>
+<td>GP9PU</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Up Control</td>
+</tr>
+<tr class="row-odd"><td>19:18</td>
+<td>GP9DRV</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Driving Control</td>
+</tr>
+<tr class="row-even"><td>17</td>
+<td>GP9SMT</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO SMT Control</td>
+</tr>
+<tr class="row-odd"><td>16</td>
+<td>GP9IE</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO Input Enable</td>
+</tr>
+<tr class="row-even"><td>15:12</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>11:8</td>
+<td>GP8FUNC</td>
+<td>R/W</td>
+<td>4'HB</td>
+<td>GPIO Function Select (Default : SWGPIO )</td>
+</tr>
+<tr class="row-even"><td>7:6</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>GP8PD</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Down Control</td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>GP8PU</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Up Control</td>
+</tr>
+<tr class="row-odd"><td>3:2</td>
+<td>GP8DRV</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Driving Control</td>
+</tr>
+<tr class="row-even"><td>1</td>
+<td>GP8SMT</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO SMT Control</td>
+</tr>
+<tr class="row-odd"><td>0</td>
+<td>GP8IE</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO Input Enable</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gpio-cfgctl5">
+<h3>3.3.10. GPIO_CFGCTL5<a class="headerlink" href="#gpio-cfgctl5" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x40000114</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="4">RSVD</td>
+<td colspan="4">GP11FUNC</td>
+<td colspan="2">RSVD</td>
+<td>GP11PD</td>
+<td>GP11PU</td>
+<td colspan="2">GP11DRV</td>
+<td>GP11SMT</td>
+<td>GP11IE</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="4">RSVD</td>
+<td colspan="4">GP10FUNC</td>
+<td colspan="2">RSVD</td>
+<td>GP10PD</td>
+<td>GP10PU</td>
+<td colspan="2">GP10DRV</td>
+<td>GP10SMT</td>
+<td>GP10IE</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="12%" />
+<col width="10%" />
+<col width="16%" />
+<col width="51%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:28</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>27:24</td>
+<td>GP11FUNC</td>
+<td>R/W</td>
+<td>4'HE</td>
+<td>GPIO Function Select (Default : JTAG )</td>
+</tr>
+<tr class="row-even"><td>23:22</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>21</td>
+<td>GP11PD</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Down Control</td>
+</tr>
+<tr class="row-even"><td>20</td>
+<td>GP11PU</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Up Control</td>
+</tr>
+<tr class="row-odd"><td>19:18</td>
+<td>GP11DRV</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Driving Control</td>
+</tr>
+<tr class="row-even"><td>17</td>
+<td>GP11SMT</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO SMT Control</td>
+</tr>
+<tr class="row-odd"><td>16</td>
+<td>GP11IE</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO Input Enable</td>
+</tr>
+<tr class="row-even"><td>15:12</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>11:8</td>
+<td>GP10FUNC</td>
+<td>R/W</td>
+<td>4'HB</td>
+<td>GPIO Function Select (Default : SWGPIO )</td>
+</tr>
+<tr class="row-even"><td>7:6</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>GP10PD</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Down Control</td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>GP10PU</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Up Control</td>
+</tr>
+<tr class="row-odd"><td>3:2</td>
+<td>GP10DRV</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Driving Control</td>
+</tr>
+<tr class="row-even"><td>1</td>
+<td>GP10SMT</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO SMT Control</td>
+</tr>
+<tr class="row-odd"><td>0</td>
+<td>GP10IE</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO Input Enable</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gpio-cfgctl6">
+<h3>3.3.11. GPIO_CFGCTL6<a class="headerlink" href="#gpio-cfgctl6" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x40000118</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="4">RSVD</td>
+<td colspan="4">GP13FUNC</td>
+<td colspan="2">RSVD</td>
+<td>GP13PD</td>
+<td>GP13PU</td>
+<td colspan="2">GP13DRV</td>
+<td>GP13SMT</td>
+<td>GP13IE</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="4">RSVD</td>
+<td colspan="4">GP12FUNC</td>
+<td colspan="2">RSVD</td>
+<td>GP12PD</td>
+<td>GP12PU</td>
+<td colspan="2">GP12DRV</td>
+<td>GP12SMT</td>
+<td>GP12IE</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="12%" />
+<col width="10%" />
+<col width="16%" />
+<col width="51%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:28</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>27:24</td>
+<td>GP13FUNC</td>
+<td>R/W</td>
+<td>4'HB</td>
+<td>GPIO Function Select (Default : SWGPIO )</td>
+</tr>
+<tr class="row-even"><td>23:22</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>21</td>
+<td>GP13PD</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Down Control</td>
+</tr>
+<tr class="row-even"><td>20</td>
+<td>GP13PU</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Up Control</td>
+</tr>
+<tr class="row-odd"><td>19:18</td>
+<td>GP13DRV</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Driving Control</td>
+</tr>
+<tr class="row-even"><td>17</td>
+<td>GP13SMT</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO SMT Control</td>
+</tr>
+<tr class="row-odd"><td>16</td>
+<td>GP13IE</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO Input Enable</td>
+</tr>
+<tr class="row-even"><td>15:12</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>11:8</td>
+<td>GP12FUNC</td>
+<td>R/W</td>
+<td>4'HE</td>
+<td>GPIO Function Select (Default : JTAG )</td>
+</tr>
+<tr class="row-even"><td>7:6</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>GP12PD</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Down Control</td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>GP12PU</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Up Control</td>
+</tr>
+<tr class="row-odd"><td>3:2</td>
+<td>GP12DRV</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Driving Control</td>
+</tr>
+<tr class="row-even"><td>1</td>
+<td>GP12SMT</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO SMT Control</td>
+</tr>
+<tr class="row-odd"><td>0</td>
+<td>GP12IE</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO Input Enable</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gpio-cfgctl7">
+<h3>3.3.12. GPIO_CFGCTL7<a class="headerlink" href="#gpio-cfgctl7" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000011c</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="4">RSVD</td>
+<td colspan="4">GP15FUNC</td>
+<td colspan="2">RSVD</td>
+<td>GP15PD</td>
+<td>GP15PU</td>
+<td colspan="2">GP15DRV</td>
+<td>GP15SMT</td>
+<td>GP15IE</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="4">RSVD</td>
+<td colspan="4">GP14FUNC</td>
+<td colspan="2">RSVD</td>
+<td>GP14PD</td>
+<td>GP14PU</td>
+<td colspan="2">GP14DRV</td>
+<td>GP14SMT</td>
+<td>GP14IE</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="12%" />
+<col width="10%" />
+<col width="16%" />
+<col width="51%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:28</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>27:24</td>
+<td>GP15FUNC</td>
+<td>R/W</td>
+<td>4'HB</td>
+<td>GPIO Function Select (Default : SWGPIO )</td>
+</tr>
+<tr class="row-even"><td>23:22</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>21</td>
+<td>GP15PD</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Down Control</td>
+</tr>
+<tr class="row-even"><td>20</td>
+<td>GP15PU</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Up Control</td>
+</tr>
+<tr class="row-odd"><td>19:18</td>
+<td>GP15DRV</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Driving Control</td>
+</tr>
+<tr class="row-even"><td>17</td>
+<td>GP15SMT</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO SMT Control</td>
+</tr>
+<tr class="row-odd"><td>16</td>
+<td>GP15IE</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO Input Enable</td>
+</tr>
+<tr class="row-even"><td>15:12</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>11:8</td>
+<td>GP14FUNC</td>
+<td>R/W</td>
+<td>4'HE</td>
+<td>GPIO Function Select (Default : JTAG )</td>
+</tr>
+<tr class="row-even"><td>7:6</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>GP14PD</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Down Control</td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>GP14PU</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Up Control</td>
+</tr>
+<tr class="row-odd"><td>3:2</td>
+<td>GP14DRV</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Driving Control</td>
+</tr>
+<tr class="row-even"><td>1</td>
+<td>GP14SMT</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO SMT Control</td>
+</tr>
+<tr class="row-odd"><td>0</td>
+<td>GP14IE</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO Input Enable</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gpio-cfgctl8">
+<h3>3.3.13. GPIO_CFGCTL8<a class="headerlink" href="#gpio-cfgctl8" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x40000120</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="4">RSVD</td>
+<td colspan="4">GP17FUNC</td>
+<td colspan="2">RSVD</td>
+<td>GP17PD</td>
+<td>GP17PU</td>
+<td colspan="2">GP17DRV</td>
+<td>GP17SMT</td>
+<td>GP17IE</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="4">RSVD</td>
+<td colspan="4">GP16FUNC</td>
+<td colspan="2">RSVD</td>
+<td>GP16PD</td>
+<td>GP16PU</td>
+<td colspan="2">GP16DRV</td>
+<td>GP16SMT</td>
+<td>GP16IE</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="12%" />
+<col width="10%" />
+<col width="16%" />
+<col width="51%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:28</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>27:24</td>
+<td>GP17FUNC</td>
+<td>R/W</td>
+<td>4'HE</td>
+<td>GPIO Function Select (Default : JTAG )</td>
+</tr>
+<tr class="row-even"><td>23:22</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>21</td>
+<td>GP17PD</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Down Control</td>
+</tr>
+<tr class="row-even"><td>20</td>
+<td>GP17PU</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Up Control</td>
+</tr>
+<tr class="row-odd"><td>19:18</td>
+<td>GP17DRV</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Driving Control</td>
+</tr>
+<tr class="row-even"><td>17</td>
+<td>GP17SMT</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO SMT Control</td>
+</tr>
+<tr class="row-odd"><td>16</td>
+<td>GP17IE</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO Input Enable</td>
+</tr>
+<tr class="row-even"><td>15:12</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>11:8</td>
+<td>GP16FUNC</td>
+<td>R/W</td>
+<td>4'HB</td>
+<td>GPIO Function Select (Default : SWGPIO )</td>
+</tr>
+<tr class="row-even"><td>7:6</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>GP16PD</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Down Control</td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>GP16PU</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Up Control</td>
+</tr>
+<tr class="row-odd"><td>3:2</td>
+<td>GP16DRV</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Driving Control</td>
+</tr>
+<tr class="row-even"><td>1</td>
+<td>GP16SMT</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO SMT Control</td>
+</tr>
+<tr class="row-odd"><td>0</td>
+<td>GP16IE</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO Input Enable</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gpio-cfgctl9">
+<h3>3.3.14. GPIO_CFGCTL9<a class="headerlink" href="#gpio-cfgctl9" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x40000124</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="4">RSVD</td>
+<td colspan="4">GP19FUNC</td>
+<td colspan="2">RSVD</td>
+<td>GP19PD</td>
+<td>GP19PU</td>
+<td colspan="2">GP19DRV</td>
+<td>GP19SMT</td>
+<td>GP19IE</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="4">RSVD</td>
+<td colspan="4">GP18FUNC</td>
+<td colspan="2">RSVD</td>
+<td>GP18PD</td>
+<td>GP18PU</td>
+<td colspan="2">GP18DRV</td>
+<td>GP18SMT</td>
+<td>GP18IE</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="12%" />
+<col width="10%" />
+<col width="16%" />
+<col width="51%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:28</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>27:24</td>
+<td>GP19FUNC</td>
+<td>R/W</td>
+<td>4'HB</td>
+<td>GPIO Function Select (Default : SWGPIO )</td>
+</tr>
+<tr class="row-even"><td>23:22</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>21</td>
+<td>GP19PD</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Down Control</td>
+</tr>
+<tr class="row-even"><td>20</td>
+<td>GP19PU</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Up Control</td>
+</tr>
+<tr class="row-odd"><td>19:18</td>
+<td>GP19DRV</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Driving Control</td>
+</tr>
+<tr class="row-even"><td>17</td>
+<td>GP19SMT</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO SMT Control</td>
+</tr>
+<tr class="row-odd"><td>16</td>
+<td>GP19IE</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO Input Enable</td>
+</tr>
+<tr class="row-even"><td>15:12</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>11:8</td>
+<td>GP18FUNC</td>
+<td>R/W</td>
+<td>4'HB</td>
+<td>GPIO Function Select (Default : SWGPIO )</td>
+</tr>
+<tr class="row-even"><td>7:6</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>GP18PD</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Down Control</td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>GP18PU</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Up Control</td>
+</tr>
+<tr class="row-odd"><td>3:2</td>
+<td>GP18DRV</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Driving Control</td>
+</tr>
+<tr class="row-even"><td>1</td>
+<td>GP18SMT</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO SMT Control</td>
+</tr>
+<tr class="row-odd"><td>0</td>
+<td>GP18IE</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO Input Enable</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gpio-cfgctl10">
+<h3>3.3.15. GPIO_CFGCTL10<a class="headerlink" href="#gpio-cfgctl10" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x40000128</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="4">RSVD</td>
+<td colspan="4">GP21FUNC</td>
+<td colspan="2">RSVD</td>
+<td>GP21PD</td>
+<td>GP21PU</td>
+<td colspan="2">GP21DRV</td>
+<td>GP21SMT</td>
+<td>GP21IE</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="4">RSVD</td>
+<td colspan="4">GP20FUNC</td>
+<td colspan="2">RSVD</td>
+<td>GP20PD</td>
+<td>GP20PU</td>
+<td colspan="2">GP20DRV</td>
+<td>GP20SMT</td>
+<td>GP20IE</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="12%" />
+<col width="10%" />
+<col width="16%" />
+<col width="51%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:28</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>27:24</td>
+<td>GP21FUNC</td>
+<td>R/W</td>
+<td>4'HB</td>
+<td>GPIO Function Select (Default : SWGPIO )</td>
+</tr>
+<tr class="row-even"><td>23:22</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>21</td>
+<td>GP21PD</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Down Control</td>
+</tr>
+<tr class="row-even"><td>20</td>
+<td>GP21PU</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Up Control</td>
+</tr>
+<tr class="row-odd"><td>19:18</td>
+<td>GP21DRV</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Driving Control</td>
+</tr>
+<tr class="row-even"><td>17</td>
+<td>GP21SMT</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO SMT Control</td>
+</tr>
+<tr class="row-odd"><td>16</td>
+<td>GP21IE</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO Input Enable</td>
+</tr>
+<tr class="row-even"><td>15:12</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>11:8</td>
+<td>GP20FUNC</td>
+<td>R/W</td>
+<td>4'HB</td>
+<td>GPIO Function Select (Default : SWGPIO )</td>
+</tr>
+<tr class="row-even"><td>7:6</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>GP20PD</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Down Control</td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>GP20PU</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Up Control</td>
+</tr>
+<tr class="row-odd"><td>3:2</td>
+<td>GP20DRV</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Driving Control</td>
+</tr>
+<tr class="row-even"><td>1</td>
+<td>GP20SMT</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO SMT Control</td>
+</tr>
+<tr class="row-odd"><td>0</td>
+<td>GP20IE</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO Input Enable</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gpio-cfgctl11">
+<h3>3.3.16. GPIO_CFGCTL11<a class="headerlink" href="#gpio-cfgctl11" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x4000012c</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="4">RSVD</td>
+<td colspan="4">GP23FUNC</td>
+<td colspan="2">RSVD</td>
+<td>GP23PD</td>
+<td>GP23PU</td>
+<td colspan="2">GP23DRV</td>
+<td>GP23SMT</td>
+<td>GP23IE</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="4">RSVD</td>
+<td colspan="4">GP22FUNC</td>
+<td colspan="2">RSVD</td>
+<td>GP22PD</td>
+<td>GP22PU</td>
+<td colspan="2">GP22DRV</td>
+<td>GP22SMT</td>
+<td>GP22IE</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="12%" />
+<col width="10%" />
+<col width="16%" />
+<col width="51%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:28</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>27:24</td>
+<td>GP23FUNC</td>
+<td>R/W</td>
+<td>4'HB</td>
+<td>GPIO Function Select (Default : SWGPIO )</td>
+</tr>
+<tr class="row-even"><td>23:22</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>21</td>
+<td>GP23PD</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Down Control</td>
+</tr>
+<tr class="row-even"><td>20</td>
+<td>GP23PU</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Up Control</td>
+</tr>
+<tr class="row-odd"><td>19:18</td>
+<td>GP23DRV</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Driving Control</td>
+</tr>
+<tr class="row-even"><td>17</td>
+<td>GP23SMT</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO SMT Control</td>
+</tr>
+<tr class="row-odd"><td>16</td>
+<td>GP23IE</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO Input Enable</td>
+</tr>
+<tr class="row-even"><td>15:12</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>11:8</td>
+<td>GP22FUNC</td>
+<td>R/W</td>
+<td>4'HB</td>
+<td>GPIO Function Select (Default : SWGPIO )</td>
+</tr>
+<tr class="row-even"><td>7:6</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>GP22PD</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Down Control</td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>GP22PU</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Up Control</td>
+</tr>
+<tr class="row-odd"><td>3:2</td>
+<td>GP22DRV</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Driving Control</td>
+</tr>
+<tr class="row-even"><td>1</td>
+<td>GP22SMT</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO SMT Control</td>
+</tr>
+<tr class="row-odd"><td>0</td>
+<td>GP22IE</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO Input Enable</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gpio-cfgctl12">
+<h3>3.3.17. GPIO_CFGCTL12<a class="headerlink" href="#gpio-cfgctl12" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x40000130</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="4">RSVD</td>
+<td colspan="4">GP25FUNC</td>
+<td colspan="2">RSVD</td>
+<td>GP25PD</td>
+<td>GP25PU</td>
+<td colspan="2">GP25DRV</td>
+<td>GP25SMT</td>
+<td>GP25IE</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="4">RSVD</td>
+<td colspan="4">GP24FUNC</td>
+<td colspan="2">RSVD</td>
+<td>GP24PD</td>
+<td>GP24PU</td>
+<td colspan="2">GP24DRV</td>
+<td>GP24SMT</td>
+<td>GP24IE</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="12%" />
+<col width="10%" />
+<col width="16%" />
+<col width="51%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:28</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>27:24</td>
+<td>GP25FUNC</td>
+<td>R/W</td>
+<td>4'HB</td>
+<td>GPIO Function Select (Default : SWGPIO )</td>
+</tr>
+<tr class="row-even"><td>23:22</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>21</td>
+<td>GP25PD</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Down Control</td>
+</tr>
+<tr class="row-even"><td>20</td>
+<td>GP25PU</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Up Control</td>
+</tr>
+<tr class="row-odd"><td>19:18</td>
+<td>GP25DRV</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Driving Control</td>
+</tr>
+<tr class="row-even"><td>17</td>
+<td>GP25SMT</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO SMT Control</td>
+</tr>
+<tr class="row-odd"><td>16</td>
+<td>GP25IE</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO Input Enable</td>
+</tr>
+<tr class="row-even"><td>15:12</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>11:8</td>
+<td>GP24FUNC</td>
+<td>R/W</td>
+<td>4'HB</td>
+<td>GPIO Function Select (Default : SWGPIO )</td>
+</tr>
+<tr class="row-even"><td>7:6</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>GP24PD</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO Pull Down Control</td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>GP24PU</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Up Control</td>
+</tr>
+<tr class="row-odd"><td>3:2</td>
+<td>GP24DRV</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Driving Control</td>
+</tr>
+<tr class="row-even"><td>1</td>
+<td>GP24SMT</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO SMT Control</td>
+</tr>
+<tr class="row-odd"><td>0</td>
+<td>GP24IE</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO Input Enable</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gpio-cfgctl13">
+<h3>3.3.18. GPIO_CFGCTL13<a class="headerlink" href="#gpio-cfgctl13" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x40000134</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="4">RSVD</td>
+<td colspan="4">GP27FUNC</td>
+<td colspan="2">RSVD</td>
+<td>GP27PD</td>
+<td>GP27PU</td>
+<td colspan="2">GP27DRV</td>
+<td>GP27SMT</td>
+<td>GP27IE</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="4">RSVD</td>
+<td colspan="4">GP26FUNC</td>
+<td colspan="2">RSVD</td>
+<td>GP26PD</td>
+<td>GP26PU</td>
+<td colspan="2">GP26DRV</td>
+<td>GP26SMT</td>
+<td>GP26IE</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="12%" />
+<col width="10%" />
+<col width="16%" />
+<col width="51%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:28</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>27:24</td>
+<td>GP27FUNC</td>
+<td>R/W</td>
+<td>4'HB</td>
+<td>GPIO Function Select (Default : SWGPIO )</td>
+</tr>
+<tr class="row-even"><td>23:22</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>21</td>
+<td>GP27PD</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Down Control</td>
+</tr>
+<tr class="row-even"><td>20</td>
+<td>GP27PU</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Up Control</td>
+</tr>
+<tr class="row-odd"><td>19:18</td>
+<td>GP27DRV</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Driving Control</td>
+</tr>
+<tr class="row-even"><td>17</td>
+<td>GP27SMT</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO SMT Control</td>
+</tr>
+<tr class="row-odd"><td>16</td>
+<td>GP27IE</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO Input Enable</td>
+</tr>
+<tr class="row-even"><td>15:12</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>11:8</td>
+<td>GP26FUNC</td>
+<td>R/W</td>
+<td>4'HB</td>
+<td>GPIO Function Select (Default : SWGPIO )</td>
+</tr>
+<tr class="row-even"><td>7:6</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>GP26PD</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Down Control</td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>GP26PU</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Up Control</td>
+</tr>
+<tr class="row-odd"><td>3:2</td>
+<td>GP26DRV</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Driving Control</td>
+</tr>
+<tr class="row-even"><td>1</td>
+<td>GP26SMT</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO SMT Control</td>
+</tr>
+<tr class="row-odd"><td>0</td>
+<td>GP26IE</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO Input Enable</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gpio-cfgctl14">
+<h3>3.3.19. GPIO_CFGCTL14<a class="headerlink" href="#gpio-cfgctl14" title="永久链接至标题">¶</a></h3>
+<p><strong>Address：</strong>  0x40000138</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="10">RSVD</td>
+<td>GP28PD</td>
+<td>GP28PU</td>
+<td colspan="2">GP28DRV</td>
+<td>GP28SMT</td>
+<td>GP28IE</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="15%" />
+<col width="12%" />
+<col width="20%" />
+<col width="37%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Bit</td>
+<td>Name</td>
+<td>Type</td>
+<td>Reset</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>31:6</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>GP28PD</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Down Control</td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>GP28PU</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Pull Up Control</td>
+</tr>
+<tr class="row-odd"><td>3:2</td>
+<td>GP28DRV</td>
+<td>R/W</td>
+<td>0</td>
+<td>GPIO Driving Control</td>
+</tr>
+<tr class="row-even"><td>1</td>
+<td>GP28SMT</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO SMT Control</td>
+</tr>
+<tr class="row-odd"><td>0</td>
+<td>GP28IE</td>
+<td>R/W</td>
+<td>1</td>
+<td>GPIO Input Enable</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ADC.html" class="btn btn-neutral float-right" title="4. ADC" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ResetAndClock.html" class="btn btn-neutral float-left" title="2. Reset and clock" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

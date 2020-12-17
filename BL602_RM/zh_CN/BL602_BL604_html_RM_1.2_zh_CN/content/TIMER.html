@@ -1,0 +1,4070 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>13. TIMER &mdash; BL602/604 参考手册  文档</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="14. 版本信息" href="version.html" />
+    <link rel="prev" title="12. PWM" href="PWM.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> BL602/604 参考手册
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. 系统和存储器概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. 复位和时钟</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">4. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">5. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">6. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="L1C.html">7. L1C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">8. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">9. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">10. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">11. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">12. PWM</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">13. TIMER</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">13.1. 简介</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">13.2. 主要特征</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">13.3. 功能描述</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bit">13.3.1. 8-bit分频器</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">13.3.2. 通用定时器工作原理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">13.3.3. 看门狗定时器工作原理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">13.3.4. 报警设定</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">13.3.5. 看门狗报警</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">13.4. 寄存器描述</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#tccr">13.4.1. TCCR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tmr2-0">13.4.2. TMR2_0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tmr2-1">13.4.3. TMR2_1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tmr2-2">13.4.4. TMR2_2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tmr3-0">13.4.5. TMR3_0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tmr3-1">13.4.6. TMR3_1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tmr3-2">13.4.7. TMR3_2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tcr2">13.4.8. TCR2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tcr3">13.4.9. TCR3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tmsr2">13.4.10. TMSR2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tmsr3">13.4.11. TMSR3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tier2">13.4.12. TIER2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tier3">13.4.13. TIER3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tplvr2">13.4.14. TPLVR2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tplvr3">13.4.15. TPLVR3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tplcr2">13.4.16. TPLCR2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tplcr3">13.4.17. TPLCR3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wmer">13.4.18. WMER</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wmr">13.4.19. WMR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wvr">13.4.20. WVR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wsr">13.4.21. WSR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ticr2">13.4.22. TICR2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ticr3">13.4.23. TICR3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wicr">13.4.24. WICR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tcer">13.4.25. TCER</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tcmr">13.4.26. TCMR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tilr2">13.4.27. TILR2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tilr3">13.4.28. TILR3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wcr">13.4.29. WCR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wfar">13.4.30. WFAR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wsar">13.4.31. WSAR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tcvwr2">13.4.32. TCVWR2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tcvwr3">13.4.33. TCVWR3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tcvsyn2">13.4.34. TCVSYN2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tcvsyn3">13.4.35. TCVSYN3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tcdr">13.4.36. TCDR</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">14. 版本信息</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL602/604 参考手册</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>13. TIMER</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="timer">
+<h1>13. TIMER<a class="headerlink" href="#timer" title="永久链接至标题">¶</a></h1>
+<div class="section" id="id1">
+<h2>13.1. 简介<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<p>芯片内置2组32-bit 计数器，每个计数器可独立控制配置其参数与时钟频率。</p>
+<p>芯片内有一组看门狗计数器，不可预知的软件或硬件行为有可能导致应用程序工作失常，
+看门狗定时器可以帮助系统从中恢复，如果当前阶段超过预定时间，
+但没有喂狗或关闭看门狗定时器，可依设定触发中断或系统复位。</p>
+<div class="figure align-center" id="id9">
+<img alt="../_images/TimerBlock.png" src="../_images/TimerBlock.png" />
+<p class="caption"><span class="caption-text">定时器框图</span></p>
+</div>
+<div class="figure align-center" id="id10">
+<img alt="../_images/WatchdogBlock.png" src="../_images/WatchdogBlock.png" />
+<p class="caption"><span class="caption-text">看门狗定时器框图</span></p>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>13.2. 主要特征<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li>多种时钟来源，最高可支持160M时钟</li>
+<li>8-bit 时钟分频器，分频系数为1-256</li>
+<li>两组32-bit定时器</li>
+<li>每个定时器包含三组报警值设定，可独立设定每组报警值溢出时报警</li>
+<li>支持Free Run模式和Pre_load模式</li>
+<li>16-bit 看门狗定时器</li>
+<li>支持写入密码保护，防止误设定造成系统异常</li>
+<li>支持中断或复位两种看门狗溢出方式</li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h2>13.3. 功能描述<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<div class="section" id="bit">
+<h3>13.3.1. 8-bit分频器<a class="headerlink" href="#bit" title="永久链接至标题">¶</a></h3>
+<p>Watchdog定时器时钟有3种选择：</p>
+<ul class="simple">
+<li>Fclk--系统主时钟</li>
+<li>32K--32K时钟</li>
+<li>Xtal--外部晶振</li>
+</ul>
+<p>每个定时器时钟来源都有四种选择，来源如下：</p>
+<ul class="simple">
+<li>Fclk--系统主时钟</li>
+<li>32K--32K时钟</li>
+<li>1K--1K时钟（32K的分频）</li>
+<li>Xtal--外部晶振</li>
+</ul>
+<p>每个计数器有各自的8-bit分频器，可通过APB将选择到的时钟进行1-256的分频，
+具体来说设定为0时表示不分频，设定为1时进行2分频以此类推，
+最大分频系数为256，
+计数器将以分频后的时钟作为计数周期单位，每经过一个计数周期进行上数一的动作。</p>
+</div>
+<div class="section" id="id4">
+<h3>13.3.2. 通用定时器工作原理<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h3>
+<p>每个通用定时器都包含三组比较器，一个计数器以及一个预加载寄存器，当设定好时钟源，
+启动定时器后，计数器开始向上累加计数，当计数器的值与比较器相等的时候，
+比较标志置位同时可以产生比较中断。</p>
+<p>计数器的初始值取决于定时的模式，在FreeRun模式下，计数器的初始值是0，然后累加计数，
+当达到计数最大值后，然后从0再次开始计数。</p>
+<p>在PreLoad模式下，计数器的初始值是PreLoad寄存器的值，然后向上累加计数，
+当满足PreLoad条件时，计数器的值被置为PreLoad寄存器的值，然后计数器再次开始向上累加计数，
+在定时器的计数器计数过程中，一旦计数器的值与三个比较器中的某比较值一致，
+该比较器的比较标志就会置位，并可以产生相应的比较中断。</p>
+<p>若预加载寄存器的值为10，比较器0的值为13，比较器1的值为16，比较器2的值为19，
+则定时器在PreLoad的模式下工作时序如下图：</p>
+<div class="figure align-center" id="id11">
+<img alt="../_images/TimerPreload.png" src="../_images/TimerPreload.png" />
+<p class="caption"><span class="caption-text">定时器在PreLoad模式下工作时序</span></p>
+</div>
+<p>在FreeRun模式下，定时器工作时序与PreLoad基本相同，
+只是计数器会从0开始累计到最大值，期间产生的比较标志和比较中断的机制与FreeRun模式相同。</p>
+</div>
+<div class="section" id="id5">
+<h3>13.3.3. 看门狗定时器工作原理<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
+<p>Watchdog定时器包含一个计数器和一个比较器，计数器从0开始累加计数，
+如果计数器被复位(喂狗)，则从0再次开始向上计数，当计数器的值与比较器相等的时候，
+可以产生一个比较中断信号或者系统复位信号，用户可以根据需要选择使用其中一个。
+看门狗计数器会在每个计数周期单位上加1，软件可以在任何时间点通过APB将看门狗计数器归零。</p>
+<p>若比较器的值为6,Watchdog的工作时序如下图所示</p>
+<div class="figure align-center" id="id12">
+<img alt="../_images/WatchDog.png" src="../_images/WatchDog.png" />
+<p class="caption"><span class="caption-text">Watchdog工作时序</span></p>
+</div>
+</div>
+<div class="section" id="id6">
+<h3>13.3.4. 报警设定<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
+<p>每一组计数器有三个比较值提供软件设定，并可设定每一组比较值是否触发报警中断，
+当计数器与比较值吻合且设定会报警时，计数器会通过中断通知处理器。
+软件可以通过APB读取目前是否发生报警和是哪个比较值触发报警中断，
+当清理报警中断时亦会同步清理报警状态。</p>
+</div>
+<div class="section" id="id7">
+<h3>13.3.5. 看门狗报警<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h3>
+<p>每个计数器可设定一组比较值，当软件因为系统错误，
+来不及将看门狗计数器归零，
+导致看门狗计数器超过比较值时，便会触发看门狗报警，报警方式有两种，
+第一种是通过中断通知软件进行必要的处置，第二种是进入系统看门狗复位，
+看门狗复位被触发时，会通知系统复位控制器，并做好系统复位前准备，
+当一切就绪后进入系统勘门狗复位，值得注意的是，软件可通过APB读取WSR
+寄存器得知是否曾经发生看门狗系统复位。</p>
+<div class="figure align-center" id="id13">
+<img alt="../_images/WatchDogAlarm.png" src="../_images/WatchDogAlarm.png" />
+<p class="caption"><span class="caption-text">看门狗报警机制</span></p>
+</div>
+</div>
+</div>
+<div class="section" id="id8">
+<h2>13.4. 寄存器描述<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="79%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>名称</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#tccr">TCCR</a></td>
+<td>Timer clock source configuration register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#tmr2-0">TMR2_0</a></td>
+<td>Timer2 match register 0</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#tmr2-1">TMR2_1</a></td>
+<td>Timer2 match register 1</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#tmr2-2">TMR2_2</a></td>
+<td>Timer2 match register 2</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#tmr3-0">TMR3_0</a></td>
+<td>Timer3 match register 0</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#tmr3-1">TMR3_1</a></td>
+<td>Timer3 match register 1</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#tmr3-2">TMR3_2</a></td>
+<td>Timer3 match register 2</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#tcr2">TCR2</a></td>
+<td>Timer2 counter register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#tcr3">TCR3</a></td>
+<td>Timer3 counter register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#tmsr2">TMSR2</a></td>
+<td>Timer2 match register status</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#tmsr3">TMSR3</a></td>
+<td>Timer3 match register status</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#tier2">TIER2</a></td>
+<td>Timer2 match interrupt enable register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#tier3">TIER3</a></td>
+<td>Timer3 match interrupt enable register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#tplvr2">TPLVR2</a></td>
+<td>Timer2 pre-load value register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#tplvr3">TPLVR3</a></td>
+<td>Timer3 pre-load value register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#tplcr2">TPLCR2</a></td>
+<td>Timer2 pre-load control register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#tplcr3">TPLCR3</a></td>
+<td>Timer3 pre-load control register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#wmer">WMER</a></td>
+<td>WDT reset/interrupt mode register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#wmr">WMR</a></td>
+<td>WDT counter match value register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#wvr">WVR</a></td>
+<td>WDT counter value register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#wsr">WSR</a></td>
+<td>WDT timer reset indication register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#ticr2">TICR2</a></td>
+<td>Timer2 Interrupt clear control register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#ticr3">TICR3</a></td>
+<td>Timer3 Interrupt clear control register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#wicr">WICR</a></td>
+<td>WDT Interrupt clear register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#tcer">TCER</a></td>
+<td>Timer count enable register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#tcmr">TCMR</a></td>
+<td>Timer count mode register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#tilr2">TILR2</a></td>
+<td>Timer2 match interrupt mode register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#tilr3">TILR3</a></td>
+<td>Timer3 match interrupt mode register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#wcr">WCR</a></td>
+<td>WDT timer count reset register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#wfar">WFAR</a></td>
+<td>WDT access key1 register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#wsar">WSAR</a></td>
+<td>WDT access key2 register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#tcvwr2">TCVWR2</a></td>
+<td>Timer2 capture value of counter register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#tcvwr3">TCVWR3</a></td>
+<td>Timer3 capture value of counter register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#tcvsyn2">TCVSYN2</a></td>
+<td>Timer2 synchronous value of counter register</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#tcvsyn3">TCVSYN3</a></td>
+<td>Timer3 synchronous value of counter register</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#tcdr">TCDR</a></td>
+<td>WDT/Timer clock division register</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="tccr">
+<h3>13.4.1. TCCR<a class="headerlink" href="#tccr" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000a500</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="6">RSVD</td>
+<td colspan="2">CSWDT</td>
+<td>RSVD</td>
+<td colspan="2">CS2</td>
+<td>RSVD</td>
+<td colspan="2">CS1</td>
+<td colspan="2">RSVD</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="13%" />
+<col width="10%" />
+<col width="17%" />
+<col width="47%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:10</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td rowspan="5">9:8</td>
+<td rowspan="5">CSWDT</td>
+<td rowspan="5">R/W</td>
+<td rowspan="5">2'D0</td>
+<td rowspan="5"><p class="first">Clock Source for Timer #1/#2/#3/WDT</p>
+<p>2'd0 - fclk</p>
+<p>2'd1 - f32k_clk</p>
+<p>2'd2 - 1 kHz</p>
+<p class="last">2'd3 - PLL 32MHz</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td>7</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td rowspan="5">6:5</td>
+<td rowspan="5">CS2</td>
+<td rowspan="5">R/W</td>
+<td rowspan="5">2'D0</td>
+<td rowspan="5"><p class="first">Clock Source for Timer #1/#2/#3/WDT</p>
+<p>2'd0 - fclk</p>
+<p>2'd1 - f32k_clk</p>
+<p>2'd2 - 1 kHz</p>
+<p class="last">2'd3 - PLL 32MHz</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td>4</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td rowspan="5">3:2</td>
+<td rowspan="5">CS1</td>
+<td rowspan="5">R/W</td>
+<td rowspan="5">2'D0</td>
+<td rowspan="5"><p class="first">Clock Source for Timer #1/#2/#3/WDT</p>
+<p>2'd0 - fclk</p>
+<p>2'd1 - f32k_clk</p>
+<p>2'd2 - 1 kHz</p>
+<p class="last">2'd3 - PLL 32MHz</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td>1:0</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tmr2-0">
+<h3>13.4.2. TMR2_0<a class="headerlink" href="#tmr2-0" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000a510</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">TMR20</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">TMR20</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="15%" />
+<col width="12%" />
+<col width="20%" />
+<col width="38%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:0</td>
+<td>TMR20</td>
+<td>R/W</td>
+<td>32'HFFFFFFFF</td>
+<td>Timer2 match register 0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tmr2-1">
+<h3>13.4.3. TMR2_1<a class="headerlink" href="#tmr2-1" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000a514</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">TMR21</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">TMR21</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="15%" />
+<col width="12%" />
+<col width="20%" />
+<col width="38%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:0</td>
+<td>TMR21</td>
+<td>R/W</td>
+<td>32'HFFFFFFFF</td>
+<td>Timer2 match register 1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tmr2-2">
+<h3>13.4.4. TMR2_2<a class="headerlink" href="#tmr2-2" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000a518</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">TMR22</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">TMR22</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="15%" />
+<col width="12%" />
+<col width="20%" />
+<col width="38%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:0</td>
+<td>TMR22</td>
+<td>R/W</td>
+<td>32'HFFFFFFFF</td>
+<td>Timer2 match register 2</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tmr3-0">
+<h3>13.4.5. TMR3_0<a class="headerlink" href="#tmr3-0" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000a51c</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">TMR30</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">TMR30</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="15%" />
+<col width="12%" />
+<col width="20%" />
+<col width="38%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:0</td>
+<td>TMR30</td>
+<td>R/W</td>
+<td>32'HFFFFFFFF</td>
+<td>Timer3 match register 0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tmr3-1">
+<h3>13.4.6. TMR3_1<a class="headerlink" href="#tmr3-1" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000a520</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">TMR31</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">TMR31</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="15%" />
+<col width="12%" />
+<col width="20%" />
+<col width="38%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:0</td>
+<td>TMR31</td>
+<td>R/W</td>
+<td>32'HFFFFFFFF</td>
+<td>Timer3 match register 1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tmr3-2">
+<h3>13.4.7. TMR3_2<a class="headerlink" href="#tmr3-2" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000a524</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">TMR32</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">TMR32</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="15%" />
+<col width="12%" />
+<col width="20%" />
+<col width="38%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:0</td>
+<td>TMR32</td>
+<td>R/W</td>
+<td>32'HFFFFFFFF</td>
+<td>Timer3 match register 2</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tcr2">
+<h3>13.4.8. TCR2<a class="headerlink" href="#tcr2" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000a52c</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">TCR2COUT</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">TCR2COUT</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="15%" />
+<col width="12%" />
+<col width="20%" />
+<col width="38%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:0</td>
+<td>TCR2COUT</td>
+<td>R</td>
+<td>32'H0</td>
+<td>Timer2 counter register</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tcr3">
+<h3>13.4.9. TCR3<a class="headerlink" href="#tcr3" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000a530</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">TCR3COUT</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">TCR3COUT</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="15%" />
+<col width="12%" />
+<col width="20%" />
+<col width="38%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:0</td>
+<td>TCR3COUT</td>
+<td>R</td>
+<td>32'H0</td>
+<td>Timer3 counter register</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tmsr2">
+<h3>13.4.10. TMSR2<a class="headerlink" href="#tmsr2" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000a538</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="13">RSVD</td>
+<td>T2MR2S</td>
+<td>T2MR1S</td>
+<td>T2MR0S</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="9%" />
+<col width="7%" />
+<col width="11%" />
+<col width="64%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:3</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>2</td>
+<td>T2MR2S</td>
+<td>R</td>
+<td>1'B0</td>
+<td>Timer2 match register 2 status/Clear interrupt would also clear this bit</td>
+</tr>
+<tr class="row-even"><td>1</td>
+<td>T2MR1S</td>
+<td>R</td>
+<td>1'B0</td>
+<td>Timer2 match register 1 status/Clear interrupt would also clear this bit</td>
+</tr>
+<tr class="row-odd"><td>0</td>
+<td>T2MR0S</td>
+<td>R</td>
+<td>1'B0</td>
+<td>Timer2 match register 0 status/Clear interrupt would also clear this bit</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tmsr3">
+<h3>13.4.11. TMSR3<a class="headerlink" href="#tmsr3" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000a53c</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="13">RSVD</td>
+<td>T3MR2S</td>
+<td>T3MR1S</td>
+<td>T3MR0S</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="9%" />
+<col width="7%" />
+<col width="11%" />
+<col width="64%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:3</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>2</td>
+<td>T3MR2S</td>
+<td>R</td>
+<td>1'B0</td>
+<td>Timer3 match register 2 status/Clear interrupt would also clear this bit</td>
+</tr>
+<tr class="row-even"><td>1</td>
+<td>T3MR1S</td>
+<td>R</td>
+<td>1'B0</td>
+<td>Timer3 match register 1 status/Clear interrupt would also clear this bit</td>
+</tr>
+<tr class="row-odd"><td>0</td>
+<td>T3MR0S</td>
+<td>R</td>
+<td>1'B0</td>
+<td>Timer3 match register 0 status/Clear interrupt would also clear this bit</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tier2">
+<h3>13.4.12. TIER2<a class="headerlink" href="#tier2" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000a544</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="13">RSVD</td>
+<td>TIER22</td>
+<td>TIER21</td>
+<td>TIER20</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="11%" />
+<col width="9%" />
+<col width="14%" />
+<col width="55%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:3</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>2</td>
+<td>TIER22</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>Timer2 match register 2 interrupt enable register</td>
+</tr>
+<tr class="row-even"><td>1</td>
+<td>TIER21</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>Timer2 match register 1 interrupt enable register</td>
+</tr>
+<tr class="row-odd"><td>0</td>
+<td>TIER20</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>Timer2 match register 0 interrupt enable register</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tier3">
+<h3>13.4.13. TIER3<a class="headerlink" href="#tier3" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000a548</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="13">RSVD</td>
+<td>TIER32</td>
+<td>TIER31</td>
+<td>TIER30</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="11%" />
+<col width="9%" />
+<col width="14%" />
+<col width="55%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:3</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>2</td>
+<td>TIER32</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>Timer3 match register 2 interrupt enable register</td>
+</tr>
+<tr class="row-even"><td>1</td>
+<td>TIER31</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>Timer3 match register 1 interrupt enable register</td>
+</tr>
+<tr class="row-odd"><td>0</td>
+<td>TIER30</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>Timer3 match register 0 interrupt enable register</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tplvr2">
+<h3>13.4.14. TPLVR2<a class="headerlink" href="#tplvr2" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000a550</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">TPLVR2</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">TPLVR2</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="14%" />
+<col width="11%" />
+<col width="18%" />
+<col width="44%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:0</td>
+<td>TPLVR2</td>
+<td>R/W</td>
+<td>32'H0</td>
+<td>Timer2 pre-load value register</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tplvr3">
+<h3>13.4.15. TPLVR3<a class="headerlink" href="#tplvr3" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000a554</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">TPLVR3</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">TPLVR3</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="14%" />
+<col width="11%" />
+<col width="18%" />
+<col width="44%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:0</td>
+<td>TPLVR3</td>
+<td>R/W</td>
+<td>32'H0</td>
+<td>Timer3 pre-load value register</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tplcr2">
+<h3>13.4.16. TPLCR2<a class="headerlink" href="#tplcr2" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000a55c</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="14">RSVD</td>
+<td colspan="2">TPLCR2</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="12%" />
+<col width="10%" />
+<col width="16%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:2</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td rowspan="5">1:0</td>
+<td rowspan="5">TPLCR2</td>
+<td rowspan="5">R/W</td>
+<td rowspan="5">2'H0</td>
+<td rowspan="5"><p class="first">Timer2 pre-load control register</p>
+<p>2'd0 - No pre-load</p>
+<p>2'd1 - Pre-load with match comparator 0</p>
+<p>2'd2 - Pre-load with match comparator 1</p>
+<p class="last">2'd3 - Pre-load with match comparator 2</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tplcr3">
+<h3>13.4.17. TPLCR3<a class="headerlink" href="#tplcr3" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000a560</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="14">RSVD</td>
+<td colspan="2">TPLCR3</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="12%" />
+<col width="10%" />
+<col width="16%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:2</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td rowspan="5">1:0</td>
+<td rowspan="5">TPLCR3</td>
+<td rowspan="5">R/W</td>
+<td rowspan="5">2'H0</td>
+<td rowspan="5"><p class="first">Timer3 pre-load control register</p>
+<p>2'd0 - No pre-load</p>
+<p>2'd1 - Pre-load with match comparator 0</p>
+<p>2'd2 - Pre-load with match comparator 1</p>
+<p class="last">2'd3 - Pre-load with match comparator 2</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="wmer">
+<h3>13.4.18. WMER<a class="headerlink" href="#wmer" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000a564</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="14">RSVD</td>
+<td>WRIE</td>
+<td>WE</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="11%" />
+<col width="9%" />
+<col width="15%" />
+<col width="54%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:2</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td rowspan="3">1</td>
+<td rowspan="3">WRIE</td>
+<td rowspan="3">R/W</td>
+<td rowspan="3">1'B0</td>
+<td rowspan="3"><p class="first">WDT reset/interrupt mode register</p>
+<p>1'b0 - WDT expiration to generate interrupt</p>
+<p class="last">1'b1 - WDT expiration to generate reset source</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td>0</td>
+<td>WE</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>WDT enable register</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="wmr">
+<h3>13.4.19. WMR<a class="headerlink" href="#wmr" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000a568</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">WMR</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="13%" />
+<col width="11%" />
+<col width="17%" />
+<col width="45%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:16</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>15:0</td>
+<td>WMR</td>
+<td>R/W</td>
+<td>16'HFFFF</td>
+<td>WDT counter match value register</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="wvr">
+<h3>13.4.20. WVR<a class="headerlink" href="#wvr" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000a56c</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">WVR</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="14%" />
+<col width="12%" />
+<col width="19%" />
+<col width="41%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:16</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>15:0</td>
+<td>WVR</td>
+<td>R</td>
+<td>16'H0</td>
+<td>WDT counter value register</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="wsr">
+<h3>13.4.21. WSR<a class="headerlink" href="#wsr" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000a570</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="15">RSVD</td>
+<td>WTS</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="8%" />
+<col width="7%" />
+<col width="11%" />
+<col width="65%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:1</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td rowspan="5">0</td>
+<td rowspan="5">WTS</td>
+<td rowspan="5">R/W</td>
+<td rowspan="5">1'B0</td>
+<td rowspan="5"><p class="first">WDT timer reset indication, Indicates that reset was caused by the WDT.</p>
+<p>(Write)1'b0 - clear the WDT reset status</p>
+<p>(Write)1'b1 - no affect</p>
+<p>(Read)1'b0 - Watchdog timer did not cause reset because this bit was cleare</p>
+<p class="last">(Read)1'b1 - Watchdog timer caused reset</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="ticr2">
+<h3>13.4.22. TICR2<a class="headerlink" href="#ticr2" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000a578</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="13">RSVD</td>
+<td>TCLR22</td>
+<td>TCLR21</td>
+<td>TCLR20</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="11%" />
+<col width="9%" />
+<col width="15%" />
+<col width="53%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:3</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>2</td>
+<td>TCLR22</td>
+<td>W</td>
+<td>1'B0</td>
+<td>Timer2 Interrupt clear for match comparator 2</td>
+</tr>
+<tr class="row-even"><td>1</td>
+<td>TCLR21</td>
+<td>W</td>
+<td>1'B0</td>
+<td>Timer2 Interrupt clear for match comparator 1</td>
+</tr>
+<tr class="row-odd"><td>0</td>
+<td>TCLR20</td>
+<td>W</td>
+<td>1'B0</td>
+<td>Timer2 Interrupt clear for match comparator 0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="ticr3">
+<h3>13.4.23. TICR3<a class="headerlink" href="#ticr3" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000a57c</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="13">RSVD</td>
+<td>TCLR32</td>
+<td>TCLR31</td>
+<td>TCLR30</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="11%" />
+<col width="9%" />
+<col width="15%" />
+<col width="53%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:3</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>2</td>
+<td>TCLR32</td>
+<td>W</td>
+<td>1'B0</td>
+<td>Timer3 Interrupt clear for match comparator 2</td>
+</tr>
+<tr class="row-even"><td>1</td>
+<td>TCLR31</td>
+<td>W</td>
+<td>1'B0</td>
+<td>Timer3 Interrupt clear for match comparator 1</td>
+</tr>
+<tr class="row-odd"><td>0</td>
+<td>TCLR30</td>
+<td>W</td>
+<td>1'B0</td>
+<td>Timer3 Interrupt clear for match comparator 0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="wicr">
+<h3>13.4.24. WICR<a class="headerlink" href="#wicr" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000a580</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="15">RSVD</td>
+<td>WICLR</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="14%" />
+<col width="11%" />
+<col width="18%" />
+<col width="42%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:1</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>0</td>
+<td>WICLR</td>
+<td>W</td>
+<td>1'B0</td>
+<td>WDT Interrupt clear register</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tcer">
+<h3>13.4.25. TCER<a class="headerlink" href="#tcer" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000a584</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="13">RSVD</td>
+<td>TIM3EN</td>
+<td>TIM2EN</td>
+<td>RSVD</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="16%" />
+<col width="13%" />
+<col width="21%" />
+<col width="34%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:3</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>2</td>
+<td>TIM3EN</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>Timer3 count enable</td>
+</tr>
+<tr class="row-even"><td>1</td>
+<td>TIM2EN</td>
+<td>R/W</td>
+<td>1'B0</td>
+<td>Timer2 count enable</td>
+</tr>
+<tr class="row-odd"><td>0</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tcmr">
+<h3>13.4.26. TCMR<a class="headerlink" href="#tcmr" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000a588</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="13">RSVD</td>
+<td>TIM3MODE</td>
+<td>TIM2MODE</td>
+<td>RSVD</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="14%" />
+<col width="11%" />
+<col width="18%" />
+<col width="44%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:3</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td rowspan="3">2</td>
+<td rowspan="3">TIM3MODE</td>
+<td rowspan="3">R/W</td>
+<td rowspan="3">1'B0</td>
+<td rowspan="3"><p class="first">Timer1/2/3 count mode register</p>
+<p>1'b0 - pre-load mode</p>
+<p class="last">1'b1 - free run mode</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3">1</td>
+<td rowspan="3">TIM2MODE</td>
+<td rowspan="3">R/W</td>
+<td rowspan="3">1'B0</td>
+<td rowspan="3"><p class="first">Timer1/2/3 count mode register</p>
+<p>1'b0 - pre-load mode</p>
+<p class="last">1'b1 - free run mode</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td>0</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tilr2">
+<h3>13.4.27. TILR2<a class="headerlink" href="#tilr2" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000a590</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="13">RSVD</td>
+<td>TILR22</td>
+<td>TILR21</td>
+<td>TILR20</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="12%" />
+<col width="9%" />
+<col width="15%" />
+<col width="52%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:3</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td rowspan="3">2</td>
+<td rowspan="3">TILR22</td>
+<td rowspan="3">R/W</td>
+<td rowspan="3">1'B0</td>
+<td rowspan="3"><p class="first">Timer2 match 0/1/2 interrupt mode register</p>
+<p>1'b0 - level interrupt</p>
+<p class="last">1'b1 - pulse interrupt</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3">1</td>
+<td rowspan="3">TILR21</td>
+<td rowspan="3">R/W</td>
+<td rowspan="3">1'B0</td>
+<td rowspan="3"><p class="first">Timer2 match 0/1/2 interrupt mode register</p>
+<p>1'b0 - level interrupt</p>
+<p class="last">1'b1 - pulse interrupt</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3">0</td>
+<td rowspan="3">TILR20</td>
+<td rowspan="3">R/W</td>
+<td rowspan="3">1'B0</td>
+<td rowspan="3"><p class="first">Timer2 match 0/1/2 interrupt mode register</p>
+<p>1'b0 - level interrupt</p>
+<p class="last">1'b1 - pulse interrupt</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tilr3">
+<h3>13.4.28. TILR3<a class="headerlink" href="#tilr3" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000a594</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="13">RSVD</td>
+<td>TILR32</td>
+<td>TILR31</td>
+<td>TILR30</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="12%" />
+<col width="9%" />
+<col width="15%" />
+<col width="52%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:3</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td rowspan="3">2</td>
+<td rowspan="3">TILR32</td>
+<td rowspan="3">R/W</td>
+<td rowspan="3">1'B0</td>
+<td rowspan="3"><p class="first">Timer3 match 0/1/2 interrupt mode register</p>
+<p>1'b0 - level interrupt</p>
+<p class="last">1'b1 - pulse interrupt</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3">1</td>
+<td rowspan="3">TILR31</td>
+<td rowspan="3">R/W</td>
+<td rowspan="3">1'B0</td>
+<td rowspan="3"><p class="first">Timer3 match 0/1/2 interrupt mode register</p>
+<p>1'b0 - level interrupt</p>
+<p class="last">1'b1 - pulse interrupt</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3">0</td>
+<td rowspan="3">TILR30</td>
+<td rowspan="3">R/W</td>
+<td rowspan="3">1'B0</td>
+<td rowspan="3"><p class="first">Timer3 match 0/1/2 interrupt mode register</p>
+<p>1'b0 - level interrupt</p>
+<p class="last">1'b1 - pulse interrupt</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="wcr">
+<h3>13.4.29. WCR<a class="headerlink" href="#wcr" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000a598</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="15">RSVD</td>
+<td>WCR</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="14%" />
+<col width="11%" />
+<col width="18%" />
+<col width="44%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:1</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>0</td>
+<td>WCR</td>
+<td>W</td>
+<td>1'B0</td>
+<td>WDT timer count reset register</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="wfar">
+<h3>13.4.30. WFAR<a class="headerlink" href="#wfar" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000a59c</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">WFAR</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="14%" />
+<col width="12%" />
+<col width="19%" />
+<col width="41%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:16</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>15:0</td>
+<td>WFAR</td>
+<td>W</td>
+<td>16'B0</td>
+<td>WDT access key1 - 16'hBABA</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="wsar">
+<h3>13.4.31. WSAR<a class="headerlink" href="#wsar" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000a5a0</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">RSVD</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">WSAR</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="14%" />
+<col width="12%" />
+<col width="19%" />
+<col width="41%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:16</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>15:0</td>
+<td>WSAR</td>
+<td>W</td>
+<td>16'B0</td>
+<td>WDT access key2 - 16'hEB10</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tcvwr2">
+<h3>13.4.32. TCVWR2<a class="headerlink" href="#tcvwr2" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000a5a8</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">TCVWR2</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">TCVWR2</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="14%" />
+<col width="11%" />
+<col width="18%" />
+<col width="45%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:0</td>
+<td>TCVWR2</td>
+<td>R</td>
+<td>32'H0</td>
+<td>Timer2 capture value of counter</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tcvwr3">
+<h3>13.4.33. TCVWR3<a class="headerlink" href="#tcvwr3" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000a5ac</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">TCVWR3</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">TCVWR3</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="14%" />
+<col width="11%" />
+<col width="18%" />
+<col width="45%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:0</td>
+<td>TCVWR3</td>
+<td>R</td>
+<td>32'H0</td>
+<td>Timer3 capture value of counter</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tcvsyn2">
+<h3>13.4.34. TCVSYN2<a class="headerlink" href="#tcvsyn2" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000a5b4</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">TCVSYN2</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">TCVSYN2</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="13%" />
+<col width="10%" />
+<col width="17%" />
+<col width="47%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:0</td>
+<td>TCVSYN2</td>
+<td>R</td>
+<td>32'H0</td>
+<td>Timer2 synchronous value of counter</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tcvsyn3">
+<h3>13.4.35. TCVSYN3<a class="headerlink" href="#tcvsyn3" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000a5b8</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="16">TCVSYN3</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="16">TCVSYN3</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="13%" />
+<col width="10%" />
+<col width="17%" />
+<col width="47%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:0</td>
+<td>TCVSYN3</td>
+<td>R</td>
+<td>32'H0</td>
+<td>Timer3 synchronous value of counter</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tcdr">
+<h3>13.4.36. TCDR<a class="headerlink" href="#tcdr" title="永久链接至标题">¶</a></h3>
+<p><strong>地址：</strong>  0x4000a5bc</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>31</td>
+<td>30</td>
+<td>29</td>
+<td>28</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+<td>24</td>
+<td>23</td>
+<td>22</td>
+<td>21</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>17</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td colspan="8">WCDR</td>
+<td colspan="8">TCDR3</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>14</td>
+<td>13</td>
+<td>12</td>
+<td>11</td>
+<td>10</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td colspan="8">TCDR2</td>
+<td colspan="8">RSVD</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="13%" />
+<col width="10%" />
+<col width="16%" />
+<col width="48%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>位</td>
+<td>名称</td>
+<td>权限</td>
+<td>复位值</td>
+<td>描述</td>
+</tr>
+<tr class="row-even"><td>31:24</td>
+<td>WCDR</td>
+<td>R/W</td>
+<td>8'H0</td>
+<td>WDT clock division value register</td>
+</tr>
+<tr class="row-odd"><td>23:16</td>
+<td>TCDR3</td>
+<td>R/W</td>
+<td>8'H0</td>
+<td>Timer3 clock division value register</td>
+</tr>
+<tr class="row-even"><td>15:8</td>
+<td>TCDR2</td>
+<td>R/W</td>
+<td>8'H0</td>
+<td>Timer2 clock division value register</td>
+</tr>
+<tr class="row-odd"><td>7:0</td>
+<td>RSVD</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="version.html" class="btn btn-neutral float-right" title="14. 版本信息" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="PWM.html" class="btn btn-neutral float-left" title="12. PWM" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
