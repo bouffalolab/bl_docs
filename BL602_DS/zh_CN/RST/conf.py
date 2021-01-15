@@ -265,6 +265,11 @@ leftmargin=15pt
 \\hyphenpenalty=5
 \\tolerance=1
 \\usepackage{ragged2e}
+\\usepackage{threeparttablex}
+\\usepackage{makecell,rotating}
+\\renewcommand\\theadalign{lc}
+\\usepackage{pdflscape}
+\\usepackage{multicol}
 
 
 \\usepackage{array}

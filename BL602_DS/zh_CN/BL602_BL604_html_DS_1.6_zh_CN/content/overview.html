@@ -1,0 +1,324 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>1. 概述 &mdash; BL602/604 数据手册  文档</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="2. 功能描述" href="Functional.html" />
+    <link rel="prev" title="BL602/604 数据手册" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> BL602/604 数据手册
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. 概述</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">1.1. 无线</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mcu">1.2. MCU子系统</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">1.3. 存储</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">1.4. 安全机制</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">1.5. 外设</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">1.6. 电源管理模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">1.7. 时钟架构</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Functional.html">2. 功能描述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Pindefinition.html">3. 管脚定义</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Electricalcharacteristics.html">4. 电气特性</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Referencedesign.html">5. 参考设计</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PackagingQFN32.html">6. 封装信息QFN32</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PackagingQFN40.html">7. 封装信息QFN40</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TopMarkingDefinition.html">8. 标志定义</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OrderingInformation.html">9. 订购信息</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">10. 版本信息</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL602/604 数据手册</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>1. 概述</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>1. 概述<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<p>BL602/BL604
+是一款Wi-Fi + BLE组合的芯片组，
+用于低功耗和高性能应用开发。
+无线子系统包含2.4G无线电，Wi-Fi 802.11b/g/n和BLE 5.0 基带/MAC设计。
+微控制器子系统包含一个低功耗的32位RISC CPU，高速缓存和存储器。
+电源管理单元控制低功耗模式。 此外，还支持各种安全性能。</p>
+<p>外围接口包括SDIO，SPI，UART，I2C，IR remote，PWM，ADC，DAC，PIR和GPIO。</p>
+<div class="figure align-center" id="id8">
+<img alt="../_images/Functionalblockdiagram.png" src="../_images/Functionalblockdiagram.png" />
+<p class="caption"><span class="caption-text">功能框图</span></p>
+</div>
+<div class="section" id="id2">
+<h2>1.1. 无线<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li>支持IEEE 802.11 b/g/n协议</li>
+<li>2.4 GHz频带1T1R模式，支持20 MHz，数据速率高达72.2 Mbps</li>
+<li>Wi-Fi 安全WPS/WEP/WPA/WPA2 Personal/WPA2 Enterprise/WPA3</li>
+<li>无线多媒体(WMM)</li>
+<li>帧聚合(AMPDU,AMSDU)</li>
+<li>立即块回复(Immediate Block ACK)</li>
+<li>分片和重组(Fragmentation and defragmentation)</li>
+<li>Beacon自动接收(硬件TSF)</li>
+<li>硬件支持6 × 虚拟Wi-Fi接口</li>
+<li>支持Station模式、SoftAP模式、Station + SoftAP模式、Sniffer模式</li>
+<li>支持多个云同时接入</li>
+<li>集成balun，PA/LNA</li>
+<li>Bluetooth低能耗 5.0，Bluetooth Mesh</li>
+<li>BLE协助实现Wi-Fi快速连接</li>
+<li>Wi-Fi和BLE共存</li>
+<li>支持BLE 5.0通道选择＃2</li>
+<li>不支持2M PHY /编码PHY / ADV扩展</li>
+</ul>
+</div>
+<div class="section" id="mcu">
+<h2>1.2. MCU子系统<a class="headerlink" href="#mcu" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li>带FPU（浮点单元）的32位RISC CPU</li>
+<li>一级缓存</li>
+<li>1 个 RTC 计时器，最长计数周期为 1 年</li>
+<li>两个32位通用定时器</li>
+<li>四个DMA通道</li>
+<li>DFS（动态频率缩放）从1MHz到192MHz</li>
+<li>支持JTAG开发调试</li>
+<li>支持XIP QSPI Flash启动，内置镜像解密单元</li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h2>1.3. 存储<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li>276KB RAM</li>
+<li>128KB ROM</li>
+<li>1Kb eFuse</li>
+<li>嵌入式Flash闪存 (选配)</li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h2>1.4. 安全机制<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li>安全启动，支持使用ECC-256签名的镜像</li>
+<li>安全调试端口</li>
+<li>支持QSPI/SPI Flash即时AES解密（OTFAD）,支持 AES128 CTR模式</li>
+<li>支持AES 128/192/256位加密引擎</li>
+<li>支持SHA-1/224/256</li>
+<li>真实随机数发生器(TRNG)</li>
+<li>公钥加速器(PKA),支持大数基本运算,软件提供签名，验证等应用程序接口</li>
+</ul>
+</div>
+<div class="section" id="id5">
+<h2>1.5. 外设<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li>1路SDIO2.0从机</li>
+<li>1路SPI主/从机，最高速度可达40Mbps</li>
+<li>2路UART，最高波特率可达10Mbps,支持RTS/CTS流控</li>
+<li>1路I2C主机，最高速速度可达3Mbps</li>
+<li>5路PWM通道，最高输出频率可达40MHz</li>
+<li>2路 10-bit 通用DAC，最高转换速度可达512Ksps</li>
+<li>12路 12-bit 通用ADC，最高转换速度可达2Msps</li>
+<li>2路通用模拟比较器（ACOMP），可作为CPU睡眠唤醒源</li>
+<li>1路PIR（被动红外）检测，可作为CPU睡眠唤醒源</li>
+<li>1路Infrared Remote 红外遥控，支持NEC RC5协议</li>
+<li>16或23个GPIO</li>
+</ul>
+</div>
+<div class="section" id="id6">
+<h2>1.6. 电源管理模式<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li>关闭</li>
+<li>休眠（多种模式可配）</li>
+<li>掉电睡眠（多种模式可配）</li>
+<li>正常运作</li>
+</ul>
+</div>
+<div class="section" id="id7">
+<h2>1.7. 时钟架构<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li>支持外部晶振频率24/32/38.4/40MHz</li>
+<li>内置RC 32kHz振荡器</li>
+<li>内置RC 32MHz振荡器</li>
+<li>内置系统PLL</li>
+<li>支持外部XTAL 32kHz 晶振</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Functional.html" class="btn btn-neutral float-right" title="2. 功能描述" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../index.html" class="btn btn-neutral float-left" title="BL602/604 数据手册" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

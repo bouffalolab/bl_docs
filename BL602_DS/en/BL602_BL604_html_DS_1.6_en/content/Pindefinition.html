@@ -1,0 +1,1630 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>3. Pin Definition &mdash; BL602/604 Datasheet  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="4. Electrical Specifications" href="Electricalcharacteristics.html" />
+    <link rel="prev" title="2. Functional Description" href="Functional.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> BL602/604 Datasheet
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">1. Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Functional.html">2. Functional Description</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">3. Pin Definition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Electricalcharacteristics.html">4. Electrical Specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Referencedesign.html">5. Reference Design (simplified)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PackagingQFN32.html">6. Package Information(QFN32)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PackagingQFN40.html">7. Package Information(QFN40)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TopMarkingDefinition.html">8. Top Marking Definition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OrderingInformation.html">9. Ordering Information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">10. Revision history</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL602/604 Datasheet</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>3. Pin Definition</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="pin-definition">
+<h1>3. Pin Definition<a class="headerlink" href="#pin-definition" title="Permalink to this headline">¶</a></h1>
+<p>BL602 32-pin package includes 10 power pins, 6 analog pins, and 16 flexible GPIO pins.</p>
+<div class="figure align-center" id="id5">
+<img alt="../_images/Pinlayout32CE.png" src="../_images/Pinlayout32CE.png" />
+<p class="caption"><span class="caption-text">BL602 pin layout</span></p>
+</div>
+<p>BL604 40-pin package includes 10 power pins, 6 analog pins, 1 reset pin, and 23 flexible GPIO pins.</p>
+<div class="figure align-center" id="id6">
+<img alt="../_images/Pinlayout40CE.png" src="../_images/Pinlayout40CE.png" />
+<p class="caption"><span class="caption-text">BL604 pin layout</span></p>
+</div>
+<table border="1" class="docutils" id="id7">
+<caption><span class="caption-text">Pin description</span><a class="headerlink" href="#id7" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="5%" />
+<col width="12%" />
+<col width="6%" />
+<col width="6%" />
+<col width="8%" />
+<col width="12%" />
+<col width="52%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>No</td>
+<td>Voltage Domain</td>
+<td>BL602</td>
+<td>BL604</td>
+<td>I/O Type</td>
+<td>Pin Name</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>1</td>
+<td>VDDIO_1</td>
+<td>1</td>
+<td>2</td>
+<td>DI/DO</td>
+<td>PAD_GPIO_0</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>2</td>
+<td>VDDIO_1</td>
+<td>2</td>
+<td>3</td>
+<td>DI/DO</td>
+<td>PAD_GPIO_1</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td>3</td>
+<td>VDDIO_1</td>
+<td>3</td>
+<td>4</td>
+<td>DI/DO</td>
+<td>PAD_GPIO_2</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>4</td>
+<td>VDDIO_1</td>
+<td>4</td>
+<td>5</td>
+<td>DI/DO</td>
+<td>PAD_GPIO_3</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td>5</td>
+<td>VDDIO_1</td>
+<td>5</td>
+<td>6</td>
+<td>DI/DO</td>
+<td>PAD_GPIO_4</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>6</td>
+<td>VDDIO_1</td>
+<td>6</td>
+<td>7</td>
+<td>DI/DO</td>
+<td>PAD_GPIO_5</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td>7</td>
+<td>VDDIO_1</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>8</td>
+<td>DI/DO</td>
+<td>PAD_GPIO_6</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>8</td>
+<td>AVDD33</td>
+<td>16</td>
+<td>19</td>
+<td>DI/DO</td>
+<td>PAD_GPIO_7</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td>9</td>
+<td>AVDD33</td>
+<td>17</td>
+<td>20</td>
+<td>DI/DO</td>
+<td>PAD_GPIO_8</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>10</td>
+<td>VDD33_DCDC</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>23</td>
+<td>DI/DO</td>
+<td>PAD_GPIO_9</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td>11</td>
+<td>VDD33_DCDC</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>24</td>
+<td>DI/DO</td>
+<td>PAD_GPIO_10</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>12</td>
+<td>VDD33_DCDC</td>
+<td>20</td>
+<td>25</td>
+<td>DI/DO</td>
+<td>PAD_GPIO_11</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td>13</td>
+<td>VDD33_DCDC</td>
+<td>21</td>
+<td>26</td>
+<td>DI/DO</td>
+<td>PAD_GPIO_12</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>14</td>
+<td>VDD33_DCDC</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>27</td>
+<td>DI/DO</td>
+<td>PAD_GPIO_13</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td>15</td>
+<td>VDD33_DCDC</td>
+<td>22</td>
+<td>28</td>
+<td>DI/DO</td>
+<td>PAD_GPIO_14</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>16</td>
+<td>VDD33_DCDC</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>29</td>
+<td>DI/DO</td>
+<td>PAD_GPIO_15</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td>17</td>
+<td>VDDIO_1</td>
+<td>27</td>
+<td>34</td>
+<td>DI/DO</td>
+<td>PAD_GPIO_16</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>18</td>
+<td>VDDIO_1</td>
+<td>28</td>
+<td>35</td>
+<td>DI/DO</td>
+<td>PAD_GPIO_17</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td>19</td>
+<td>VDDIO_1</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>36</td>
+<td>DI/DO</td>
+<td>PAD_GPIO_18</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>20</td>
+<td>VDDIO_1</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>37</td>
+<td>DI/DO</td>
+<td>PAD_GPIO_19</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td>21</td>
+<td>VDDIO_1</td>
+<td>29</td>
+<td>38</td>
+<td>DI/DO</td>
+<td>PAD_GPIO_20</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>22</td>
+<td>VDDIO_1</td>
+<td>30</td>
+<td>39</td>
+<td>DI/DO</td>
+<td>PAD_GPIO_21</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td>23</td>
+<td>VDDIO_1</td>
+<td>31</td>
+<td>40</td>
+<td>DI/DO</td>
+<td>PAD_GPIO_22</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>24</td>
+<td>VDDIO_1</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>DI/DO</td>
+<td>PAD_GPIO_23</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td>25</td>
+<td>VDDIO_1</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>DI/DO</td>
+<td>PAD_GPIO_24</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>26</td>
+<td>VDDIO_1</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>DI/DO</td>
+<td>PAD_GPIO_25</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td>27</td>
+<td>VDDIO_1</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>DI/DO</td>
+<td>PAD_GPIO_26</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>28</td>
+<td>VDDIO_1</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>DI/DO</td>
+<td>PAD_GPIO_27</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td>29</td>
+<td>VDDIO_1</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>DI/DO</td>
+<td>PAD_GPIO_28</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>30</td>
+<td>AVDD33</td>
+<td>12</td>
+<td>14</td>
+<td>Analog</td>
+<td>CHIP_EN</td>
+<td>Chip enable</td>
+</tr>
+<tr class="row-even"><td>31</td>
+<td>AVDD33</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>18</td>
+<td>DI</td>
+<td>PAD_EXT_RST_N</td>
+<td>External reset</td>
+</tr>
+<tr class="row-odd"><td>32</td>
+<td>AVDD33</td>
+<td>13</td>
+<td>15</td>
+<td>Analog</td>
+<td>XTAL32K_IN</td>
+<td>Crystal oscillator 32.768kHz input</td>
+</tr>
+<tr class="row-even"><td>33</td>
+<td>AVDD33</td>
+<td>14</td>
+<td>16</td>
+<td>Analog</td>
+<td>XTAL32K_OUT</td>
+<td>Crystal oscillator 32.768kHz output</td>
+</tr>
+<tr class="row-odd"><td>34</td>
+<td>AVDD33</td>
+<td>18</td>
+<td>21</td>
+<td>Analog</td>
+<td>XTAL_IN</td>
+<td>External crystal input, support 24/32/38.4/40MHz</td>
+</tr>
+<tr class="row-even"><td>35</td>
+<td>AVDD33</td>
+<td>19</td>
+<td>22</td>
+<td>Analog</td>
+<td>XTAL_OUT</td>
+<td>External crystal output, support 24/32/38.4/40MHz</td>
+</tr>
+<tr class="row-odd"><td>36</td>
+<td>VDD15</td>
+<td>9</td>
+<td>11</td>
+<td>Analog</td>
+<td>ANT</td>
+<td>RF input and output (single pin)</td>
+</tr>
+<tr class="row-even"><td>37</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>32</td>
+<td>1</td>
+<td>Power</td>
+<td>VDDIO_1</td>
+<td>Externally powered 3.3V or 1.8V</td>
+</tr>
+<tr class="row-odd"><td>38</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>23</td>
+<td>30</td>
+<td>Power</td>
+<td>VDD33_DCDC</td>
+<td>DCDC</td>
+</tr>
+<tr class="row-even"><td>39</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>24</td>
+<td>31</td>
+<td>Power</td>
+<td>SW_DCDC</td>
+<td>DCDC</td>
+</tr>
+<tr class="row-odd"><td>40</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>25</td>
+<td>32</td>
+<td>Power</td>
+<td>DCDC_OUT</td>
+<td>DCDC</td>
+</tr>
+<tr class="row-even"><td>41</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>7</td>
+<td>9</td>
+<td>Power</td>
+<td>AVDD33_1</td>
+<td>Externally powered 3.3V</td>
+</tr>
+<tr class="row-odd"><td>42</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>8</td>
+<td>10</td>
+<td>Power</td>
+<td>AVDD33_2</td>
+<td>Externally powered 3.3V</td>
+</tr>
+<tr class="row-even"><td>43</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>15</td>
+<td>17</td>
+<td>Power</td>
+<td>AVDD33</td>
+<td>Externally powered 3.3V</td>
+</tr>
+<tr class="row-odd"><td>44</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>10</td>
+<td>12</td>
+<td>Power</td>
+<td>VDD15</td>
+<td>Power 1.5V</td>
+</tr>
+<tr class="row-even"><td>45</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>11</td>
+<td>13</td>
+<td>Power</td>
+<td>AVDD18</td>
+<td>Power 1.8V</td>
+</tr>
+<tr class="row-odd"><td>46</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>26</td>
+<td>33</td>
+<td>Power</td>
+<td>VDDCORE</td>
+<td>Core power</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils" id="id8">
+<caption><span class="caption-text">GPIO Muxed Pins</span><a class="headerlink" href="#id8" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="6%" />
+<col width="9%" />
+<col width="5%" />
+<col width="6%" />
+<col width="15%" />
+<col width="6%" />
+<col width="5%" />
+<col width="13%" />
+<col width="7%" />
+<col width="12%" />
+<col width="14%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Pin Name</td>
+<td>Flash <a class="footnote-reference" href="#id3" id="id1">[1]</a></td>
+<td>SDIO</td>
+<td>SPI</td>
+<td>UART (Default/SWAP=1) <a class="footnote-reference" href="#id4" id="id2">[2]</a></td>
+<td>I2C Master</td>
+<td>PWM</td>
+<td>Analog</td>
+<td>External_PA</td>
+<td>JTAG(Default/SWAP=1)</td>
+<td>IR</td>
+</tr>
+<tr class="row-even"><td>PAD_GPIO_0</td>
+<td>SF2_D1</td>
+<td>CLK</td>
+<td>MIS0 /MOSI</td>
+<td>SIG0 /SIG4</td>
+<td>SCL</td>
+<td>PWM_CH0</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>FEM0</td>
+<td>TMS/TCK</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>PAD_GPIO_1</td>
+<td>SF2_D2</td>
+<td>CMD</td>
+<td>MOSI /MISO</td>
+<td>SIG1 /SIG5</td>
+<td>SDA</td>
+<td>PWM_CH1</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>FEM1</td>
+<td>TDI/TDO</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td>PAD_GPIO_2</td>
+<td>SF2_D3</td>
+<td>DAT0</td>
+<td>SS</td>
+<td>SIG2 /SIG6</td>
+<td>SCL</td>
+<td>PWM_CH2</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>FEM2</td>
+<td>TCK/TMS</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>PAD_GPIO_3</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>DAT1</td>
+<td>SCLK</td>
+<td>SIG3 /SIG7</td>
+<td>SDA</td>
+<td>PWM_CH3</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>FEM3</td>
+<td>TDO/TDI</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td>PAD_GPIO_4</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>DAT2</td>
+<td>MISO /MOSI</td>
+<td>SIG4 /SIG0</td>
+<td>SCL</td>
+<td>PWM_CH4</td>
+<td>ADC_CH1</td>
+<td>FEM0</td>
+<td>TMS/TCK</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>PAD_GPIO_5</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>DAT3</td>
+<td>MOSI /MISO</td>
+<td>SIG5 /SIG1</td>
+<td>SDA</td>
+<td>PWM_CH0</td>
+<td>ADC_CH4</td>
+<td>FEM1</td>
+<td>TDI/TDO</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td>PAD_GPIO_6</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>SS</td>
+<td>SIG6 /SIG2</td>
+<td>SCL</td>
+<td>PWM_CH1</td>
+<td>ADC_CH5</td>
+<td>FEM2</td>
+<td>TCK/TMS</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>PAD_GPIO_7</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>SCLK</td>
+<td>SIG7 /SIG3</td>
+<td>SDA</td>
+<td>PWM_CH2</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>FEM3</td>
+<td>TDO/TDI</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td>PAD_GPIO_8</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>MISO /MOSI</td>
+<td>SIG0 /SIG4</td>
+<td>SCL</td>
+<td>PWM_CH3</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>FEM0</td>
+<td>TMS/TCK</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>PAD_GPIO_9</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>MOSI /MISO</td>
+<td>SIG1 /SIG5</td>
+<td>SDA</td>
+<td>PWM_CH4</td>
+<td>ADC_CH6/7</td>
+<td>FEM1</td>
+<td>TDI/TDO</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td>PAD_GPIO_10</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>SS</td>
+<td>SIG2 /SIG6</td>
+<td>SCL</td>
+<td>PWM_CH0</td>
+<td>MICBIAS /ADC_CH8/9</td>
+<td>FEM2</td>
+<td>TCK/TMS</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>PAD_GPIO_11</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>SCLK</td>
+<td>SIG3 /SIG7</td>
+<td>SDA</td>
+<td>PWM_CH1</td>
+<td>ADC_CH10 /IRTX</td>
+<td>FEM3</td>
+<td>TDO/TDI</td>
+<td>IRRX (ir_rx_gpio_sel=1)</td>
+</tr>
+<tr class="row-even"><td>PAD_GPIO_12</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>MISO /MOSI</td>
+<td>SIG4 /SIG0</td>
+<td>SCL</td>
+<td>PWM_CH2</td>
+<td>ADC_CH0</td>
+<td>FEM0</td>
+<td>TMS/TCK</td>
+<td>IRRX (ir_rx_gpio_sel=2)</td>
+</tr>
+<tr class="row-odd"><td>PAD_GPIO_13</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>MOSI /MISO</td>
+<td>SIG5 /SIG1</td>
+<td>SDA</td>
+<td>PWM_CH3</td>
+<td>ADC_CH3 /DAC_A</td>
+<td>FEM1</td>
+<td>TDI/TDO</td>
+<td>IRRX (ir_rx_gpio_sel=3)</td>
+</tr>
+<tr class="row-even"><td>PAD_GPIO_14</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>SS</td>
+<td>SIG6 /SIG2</td>
+<td>SCL</td>
+<td>PWM_CH4</td>
+<td>ADC_CH2 /DAC_B</td>
+<td>FEM2</td>
+<td>TCK/TMS</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>PAD_GPIO_15</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>SCLK</td>
+<td>SIG7 /SIG3</td>
+<td>SDA</td>
+<td>PWM_CH0</td>
+<td>psw_irrcv_out /ADC_CH11</td>
+<td>FEM3</td>
+<td>TDO/TDI</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td>PAD_GPIO_16</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>MISO /MOSI</td>
+<td>SIG0 /SIG4</td>
+<td>SCL</td>
+<td>PWM_CH1</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>FEM0</td>
+<td>TMS/TCK</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>PAD_GPIO_17</td>
+<td>SF1_D3</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>MOSI /MISO</td>
+<td>SIG1 /SIG5</td>
+<td>SDA</td>
+<td>PWM_CH2</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>FEM1</td>
+<td>TDI/TDO</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td>PAD_GPIO_18</td>
+<td>SF1_D2</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>SS</td>
+<td>SIG2 /SIG6</td>
+<td>SCL</td>
+<td>PWM_CH3</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>FEM2</td>
+<td>TCK/TMS</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>PAD_GPIO_19</td>
+<td>SF1_D1</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>SCLK</td>
+<td>SIG3 /SIG7</td>
+<td>SDA</td>
+<td>PWM_CH4</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>FEM3</td>
+<td>TDO/TDI</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td>PAD_GPIO_20</td>
+<td>SF1_D0 /SF2_D0</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>MISO /MOSI</td>
+<td>SIG4 /SIG0</td>
+<td>SCL</td>
+<td>PWM_CH0</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>FEM0</td>
+<td>TMS/TCK</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>PAD_GPIO_21</td>
+<td>SF1_CS /SF2_CS</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>MOSI /MISO</td>
+<td>SIG5 /SIG1</td>
+<td>SDA</td>
+<td>PWM_CH1</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>FEM1</td>
+<td>TDI/TDO</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td>PAD_GPIO_22</td>
+<td>SF1_CLK /SF2_CLK</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>SS</td>
+<td>SIG6 /SIG2</td>
+<td>SCL</td>
+<td>PWM_CH2</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>FEM2</td>
+<td>TCK/TMS</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>PAD_GPIO_23</td>
+<td>SF0_CLK</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td>PAD_GPIO_24</td>
+<td>SF0_CS</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>PAD_GPIO_25</td>
+<td>SF0_D0</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td>PAD_GPIO_26</td>
+<td>SF0_D1</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>PAD_GPIO_27</td>
+<td>SF0_D2</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td>PAD_GPIO_28</td>
+<td>SF0_D3</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>There are 3 groups of Flash, and the smallest selection unit is group, which is configured according to group when used.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>The default UART signal mapping table is shown below.</td></tr>
+</tbody>
+</table>
+<table border="1" class="docutils" id="id9">
+<caption><span class="caption-text">UART Signal Mapping(Default)</span><a class="headerlink" href="#id9" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="28%" />
+<col width="38%" />
+<col width="34%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>UART Signal</td>
+<td>uart_sig_x_sel</td>
+<td>Mapping Signal</td>
+</tr>
+<tr class="row-even"><td>UART_SIG0</td>
+<td>uart_sig_0_sel=0</td>
+<td>UART0_RTS</td>
+</tr>
+<tr class="row-odd"><td>UART_SIG1</td>
+<td>uart_sig_1_sel=1</td>
+<td>UART0_CTS</td>
+</tr>
+<tr class="row-even"><td>UART_SIG2</td>
+<td>uart_sig_2_sel=2</td>
+<td>UART0_TXD</td>
+</tr>
+<tr class="row-odd"><td>UART_SIG3</td>
+<td>uart_sig_3_sel=3</td>
+<td>UART0_RXD</td>
+</tr>
+<tr class="row-even"><td>UART_SIG4</td>
+<td>uart_sig_4_sel=4</td>
+<td>UART1_RTS</td>
+</tr>
+<tr class="row-odd"><td>UART_SIG5</td>
+<td>uart_sig_5_sel=5</td>
+<td>UART1_CTS</td>
+</tr>
+<tr class="row-even"><td>UART_SIG6</td>
+<td>uart_sig_6_sel=6</td>
+<td>UART1_TXD</td>
+</tr>
+<tr class="row-odd"><td>UART_SIG7</td>
+<td>uart_sig_7_sel=7</td>
+<td>UART1_RXD</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">UART_SIG0-UART_SIG7 can be configured as any of 8 Mapping Signals. For example: UART_SIG0 can also be configured as UART_RXD. The specific signal mapping example is shown in the table below.</p>
+</div>
+<table border="1" class="docutils" id="id10">
+<caption><span class="caption-text">UART Signal Mapping(Example)</span><a class="headerlink" href="#id10" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="28%" />
+<col width="38%" />
+<col width="34%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>UART Signal</td>
+<td>uart_sig_x_sel</td>
+<td>Mapping Signal</td>
+</tr>
+<tr class="row-even"><td>UART_SIG0</td>
+<td>uart_sig_0_sel=7</td>
+<td>UART1_RXD</td>
+</tr>
+<tr class="row-odd"><td>UART_SIG1</td>
+<td>uart_sig_1_sel=6</td>
+<td>UART1_TXD</td>
+</tr>
+<tr class="row-even"><td>UART_SIG2</td>
+<td>uart_sig_2_sel=5</td>
+<td>UART1_CTS</td>
+</tr>
+<tr class="row-odd"><td>UART_SIG3</td>
+<td>uart_sig_3_sel=4</td>
+<td>UART1_RTS</td>
+</tr>
+<tr class="row-even"><td>UART_SIG4</td>
+<td>uart_sig_4_sel=3</td>
+<td>UART0_RXD</td>
+</tr>
+<tr class="row-odd"><td>UART_SIG5</td>
+<td>uart_sig_5_sel=2</td>
+<td>UART0_TXD</td>
+</tr>
+<tr class="row-even"><td>UART_SIG6</td>
+<td>uart_sig_6_sel=1</td>
+<td>UART0_CTS</td>
+</tr>
+<tr class="row-odd"><td>UART_SIG7</td>
+<td>uart_sig_7_sel=0</td>
+<td>UART0_RTS</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Electricalcharacteristics.html" class="btn btn-neutral float-right" title="4. Electrical Specifications" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Functional.html" class="btn btn-neutral float-left" title="2. Functional Description" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
