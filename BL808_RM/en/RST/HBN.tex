@@ -1,0 +1,31 @@
+\section{Register description}
+\regover{
+{\hyperref[HBN-HBN-TIME-L]{HBN\_TIME\_L}}&
+\\
+\hline
+{\hyperref[HBN-HBN-TIME-H]{HBN\_TIME\_H}}&
+\\
+\hline
+}
+
+\subsection{HBN\_TIME\_L}
+\label{HBN-HBN-TIME-L}
+Address：0x2000f004
+ \begin{figure}[H]
+\includegraphics{HBN_HBN_TIME_L.pdf}
+\end{figure}
+
+\regdes{31:0&hbn\_time\_l&r/w&32'h0&RTC timer compare bit 31:0\\\hline
+
+}
+\subsection{HBN\_TIME\_H}
+\label{HBN-HBN-TIME-H}
+Address：0x2000f008
+ \begin{figure}[H]
+\includegraphics{HBN_HBN_TIME_H.pdf}
+\end{figure}
+
+\regdes{31:8&RSVD& & & \\\hline
+7:0&hbn\_time\_h&r/w&8'h0&RTC timer compare bit 39:32\\\hline
+
+}

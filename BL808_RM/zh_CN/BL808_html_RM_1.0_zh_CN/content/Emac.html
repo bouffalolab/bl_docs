@@ -1,0 +1,1543 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>24. Emac &mdash; BL808 参考手册  文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="25. USB" href="USB.html" />
+    <link rel="prev" title="23. PSRAM Contorller" href="PSRAM.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL808 参考手册
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. 系统和存储器概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. 复位和时钟</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPIO.html">4. GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">5. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">6. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">7. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA2D.html">8. DMA2D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lz4d.html">9. LZ4D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBI.html">10. DBI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DPI.html">11. DPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DSI.html">12. DSI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cam.html">13. CAM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">14. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">15. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">16. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">17. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">18. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">19. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2s.html">20. I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PDM.html">21. PDM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AUDIO.html">22. AUDIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PSRAM.html">23. PSRAM Contorller</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">24. Emac</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">24.1. 简介</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">24.2. 主要特征</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">24.3. 功能描述</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">24.4. 时钟</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bd-buffer-descriptor">24.5. 收发缓冲描述符(BD, Buffer Descriptor)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#phy">24.6. PHY交互</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">24.7. 编程流程</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id6">24.7.1. PHY初始化</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">24.7.2. 发送数据帧</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">24.7.3. 接收数据帧</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">24.8. 寄存器描述</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mode">24.8.1. MODE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#int-source">24.8.2. INT_SOURCE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#int-mask">24.8.3. INT_MASK</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ipgt">24.8.4. IPGT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#packetlen">24.8.5. PACKETLEN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#collconfig">24.8.6. COLLCONFIG</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tx-bd-num">24.8.7. TX_BD_NUM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#miimode">24.8.8. MIIMODE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#miicommand">24.8.9. MIICOMMAND</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#miiaddress">24.8.10. MIIADDRESS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#miitx-data">24.8.11. MIITX_DATA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#miirx-data">24.8.12. MIIRX_DATA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#miistatus">24.8.13. MIISTATUS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mac-addr0">24.8.14. MAC_ADDR0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mac-addr1">24.8.15. MAC_ADDR1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hash0-addr">24.8.16. HASH0_ADDR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hash1-addr">24.8.17. HASH1_ADDR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#txctrl">24.8.18. TXCTRL</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="USB.html">25. USB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ISO11898.html">26. ISO11898</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MJPEG.html">27. MJPEG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="JDEC.html">28. JDEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="VENC.html">29. VENC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NPUtoolchain.html">30. NPU toolchain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NPU.html">31. NPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IPC.html">32. IPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LowPower.html">33. LowPower</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SEC_ENG.html">34. SEC ENG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">35. 版本信息</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL808 参考手册</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">24. </span>Emac</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="emac">
+<h1><span class="section-number">24. </span>Emac<a class="headerlink" href="#emac" title="永久链接至标题"></a></h1>
+<section id="id1">
+<h2><span class="section-number">24.1. </span>简介<a class="headerlink" href="#id1" title="永久链接至标题"></a></h2>
+<p>EMAC模块是一个兼容 IEEE 802.3 的10/100Mbps 以太网MAC(Ethernet Media Access Controller)。
+其包含状态及控制寄存器组，收发模块，收发缓冲描述符组，主机接口，MDIO接口，物理层芯片(PHY)接口。</p>
+<p>状态及控制寄存器组包含了EMAC的状态位及控制位，是与用户程序的接口，负责控制数据收发，并汇报状态。</p>
+<p>收发模块负责根据收发描述符内的控制字，从指定内存位置取得数据帧，添加前导，CRC，并扩充短的帧后通过PHY发出；
+或是从PHY接收数据，并根据收发缓冲描述符，将数据放入指定内存。收发完成后设置相关的事件标志。如果使能了事件中断，
+将通过中断请求到主机进行处理。</p>
+<p>MDIO及MII/RMII接口负责与PHY进行通信，包括读写PHY的寄存器，以及数据包的收发。</p>
+</section>
+<section id="id2">
+<h2><span class="section-number">24.2. </span>主要特征<a class="headerlink" href="#id2" title="永久链接至标题"></a></h2>
+<ul class="simple">
+<li><p>兼容 IEEE 802.3 定义的MAC层功能</p></li>
+<li><p>支持 IEEE 802.3 定义的MII/RMII接口的PHY</p></li>
+<li><p>通过MDIO接口与PHY交互</p></li>
+<li><p>支持10Mbps与100Mbps以太网</p></li>
+<li><p>支持半双工与全双工</p></li>
+<li><p>在全双工模式下，支持自动流控及生成控制帧</p></li>
+<li><p>在半双工模式下，支持碰撞检测及重传</p></li>
+<li><p>支持CRC的生成及校验</p></li>
+<li><p>数据帧前导生成及移除</p></li>
+<li><p>发送时，自动扩展短的数据帧</p></li>
+<li><p>检测过长或过短的数据帧(长度限制)</p></li>
+<li><p>可传输长数据帧(&gt; 标准以太帧长度)</p></li>
+<li><p>自动丢弃重发次数超限或帧间隙过小的数据包</p></li>
+<li><p>广播包过滤</p></li>
+<li><p>用于保存多达128个BD(Buffer Descriptor)的内部RAM</p></li>
+<li><p>在发送时，支持将一个数据包分拆配置到多个连续的BD</p></li>
+<li><p>发送/接收的各种事件标志</p></li>
+<li><p>在事件发生时产生对应中断</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2><span class="section-number">24.3. </span>功能描述<a class="headerlink" href="#id3" title="永久链接至标题"></a></h2>
+<p>EMAC模块的组成如下图。</p>
+<figure class="align-center" id="id10">
+<img alt="../_images/EMAC.svg" src="../_images/EMAC.svg" /><figcaption>
+<p><span class="caption-number">图 24.1 </span><span class="caption-text">EMAC框图</span><a class="headerlink" href="#id10" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>模块的控制寄存器通过MDIO接口，可以读写PHY的寄存器，从而实现配置、选择模式(半/全双工)、发起协商等操作。
+接收模块过滤并检查收到的数据帧：是否有合法的前导，FCS，长度等，并根据缓冲描述符(BD)，将数据存放到指定内存地址。
+发送模块根据数据缓冲描述符，从内存中取得数据，添加前导，FCS，pad等，然后根据CSMA/CD协议，将数据发出。
+如果检测到CRS，将会延迟重试。
+收发缓冲描述符组连接到系统RAM，此RAM用于保存发送和接收的以太网数据帧。每个描述符包含相应的控制状态字以及对应的
+缓冲内存地址。描述符一共有128组，用于发送或者接收，可以灵活分配。</p>
+</section>
+<section id="id4">
+<h2><span class="section-number">24.4. </span>时钟<a class="headerlink" href="#id4" title="永久链接至标题"></a></h2>
+<p>EMAC模块需要一路时钟用于同步收发(100Mbps时，25MHz(MII)或50MHz(RMII)；10Mbps时，2.5MHz)。
+此时钟必须在EMAC与PHY之间同步。</p>
+</section>
+<section id="bd-buffer-descriptor">
+<h2><span class="section-number">24.5. </span>收发缓冲描述符(BD, Buffer Descriptor)<a class="headerlink" href="#bd-buffer-descriptor" title="永久链接至标题"></a></h2>
+<p>收发缓冲描述符，用于提供EAMC与数据帧缓存地址信息之间的关联，对收发数据帧进行控制，以及提供收发状态提示。
+每个描述符由两个连续的word(32bit)构成，低地址的word提供了本buffer包含的数据帧的长度，控制及状态位；高地址的word是内存指针。
+具体的BD描述可以参考寄存器描述章节。
+需要注意的是：对于BD，需要按word写入。
+EMAC模块支持128个BD，由发送/接收逻辑共享，可自由组合。但发送BD总是占据前面的连续区域(个数由MAC_TX_BD_NUM寄存器中的TXBDNUM域来指定)。
+EMAC按照BD的顺序，循环处理发送/接收BD，直到遇到标记为WR的BD就回绕到发送/接收各自的首个BD。</p>
+</section>
+<section id="phy">
+<h2><span class="section-number">24.6. </span>PHY交互<a class="headerlink" href="#phy" title="永久链接至标题"></a></h2>
+<p>PHY交互寄存器组提供了与PHY交互需要的命令及数据通信的方式。EMAC通过MDIO接口控制PHY的工作模式，并保证两者的工作模式匹配(速率，全/半双工等)。
+数据包通过MII/RMII接口在EMAC与PHY之间交互，可以通过EMAC的模式寄存器(EMAC_MODE)中的RMII_EN位选择：当此bit为1，则选择RMII模式，否则就是MII模式。
+MII及RMII模式均支持 IEEE 802.3u 标准中指定的 10Mbps 与 100Mbps的传输速率。
+MII及RMII的传输信号描述与下表。</p>
+<table class="colwidths-given docutils align-center" id="id11" style="width: 80%">
+<caption><span class="caption-number">表 24.1 </span><span class="caption-text">传输信号</span><a class="headerlink" href="#id11" title="永久链接至表格"></a></caption>
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 30%" />
+<col style="width: 40%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>名称</p></th>
+<th class="head"><p>MII</p></th>
+<th class="head"><p>RMII</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>EXTCK_EREFCK</p></td>
+<td><p>ETXCK: 发送时钟信号</p></td>
+<td><p>EREFCK：参考时钟</p></td>
+</tr>
+<tr class="row-odd"><td><p>ECRS</p></td>
+<td><p>ECRS: 载波探测</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>ECOL</p></td>
+<td><p>ECOL：碰撞检测</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>ERXDV</p></td>
+<td><p>ERXDV：数据valid</p></td>
+<td><p>ECRSDV: 载波检测/数据valid</p></td>
+</tr>
+<tr class="row-even"><td><p>ERX0-ERX3</p></td>
+<td><p>ERX0-ERX3：4-bit接收数据</p></td>
+<td><p>ERX0-ERX1：2-bit接收数据</p></td>
+</tr>
+<tr class="row-odd"><td><p>ERXER</p></td>
+<td><p>ERXER：接收错误指示</p></td>
+<td><p>ERXER：接收错误指示</p></td>
+</tr>
+<tr class="row-even"><td><p>ERXCK</p></td>
+<td><p>ERXCK：接收时钟信号</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>ETXEN</p></td>
+<td><p>ETXEN：发送使能</p></td>
+<td><p>ETXEN：发送使能</p></td>
+</tr>
+<tr class="row-even"><td><p>ETX0-ETX3</p></td>
+<td><p>ETX0-ETX3：4-bit发送数据</p></td>
+<td><p>ETX0-ETX1：2-bit发送数据</p></td>
+</tr>
+<tr class="row-odd"><td><p>ETXER</p></td>
+<td><p>ETXER：发送错误指示</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>EMDC</p></td>
+<td><p>MDIO Clock</p></td>
+<td><p>MDIO Clock</p></td>
+</tr>
+<tr class="row-odd"><td><p>EMDIO</p></td>
+<td><p>MDIO Data Input Output</p></td>
+<td><p>MDIO Data Input Output</p></td>
+</tr>
+</tbody>
+</table>
+<p>RMII接口引脚较少，使用2-bit数据线用于收发，在100Mbps速率时，需要提供50MHz的参考时钟。</p>
+</section>
+<section id="id5">
+<h2><span class="section-number">24.7. </span>编程流程<a class="headerlink" href="#id5" title="永久链接至标题"></a></h2>
+<section id="id6">
+<h3><span class="section-number">24.7.1. </span>PHY初始化<a class="headerlink" href="#id6" title="永久链接至标题"></a></h3>
+<ul class="simple">
+<li><p>根据PHY类型，设置EMAC_MODE寄存器中的RMII_EN位来选择合适的连接方式</p></li>
+<li><p>设置EMAC的MAC地址到EMAC_MAC_ADDR0与EMAC_MAC_ADDR1中</p></li>
+<li><p>通过编程EMAC_MIIMODE寄存器中的域CLKDIV，为MDIO部分设置合适的时钟</p></li>
+<li><p>设置对应PHY的地址到寄存器EMAC_MIIADDRESS的域FIAD中</p></li>
+<li><p>根据PHY的手册，通过EMAC_MIICOMMAND与EMAC_MIITX_DATA寄存器发送命令</p></li>
+<li><p>读取PHY的数据会保存在EMAC_MIIRX_DATA寄存器中</p></li>
+<li><p>通过EMAC_MIISTATUS寄存器可以查询与PHY命令交互的状态</p></li>
+</ul>
+<p>基础的交互完成后，应当使PHY进入自动协商状态。协商完成之后，根据协商结果编程模式到EMAC_MODE寄存器中的FULLD位。</p>
+</section>
+<section id="id7">
+<h3><span class="section-number">24.7.2. </span>发送数据帧<a class="headerlink" href="#id7" title="永久链接至标题"></a></h3>
+<ul class="simple">
+<li><p>配置EMAC_MODE寄存器中数据帧格式、间隔等位域</p></li>
+<li><p>通过配置EMAC_TX_BD_NUM寄存器中的TXBDNUM域来指定发送所使用的BD的个数，那么剩余的就是RX的BD</p></li>
+<li><p>在内存中准备好需要发送的数据帧</p></li>
+<li><p>将数据帧的地址填写到对应发送BD的数据指针域(word 1)中</p></li>
+<li><p>清空对应发送BD的控制与状态域(wrod 0)中的状态标记，并设置控制域(CRC使能，PAD使能，中断使能等)</p></li>
+<li><p>写入数据帧长度，并设置好RD域，告知EMAC此BD数据需要发送；如需要，设置上IRQ位，以使能中断</p></li>
+<li><p>特别的，如果是最后一个发送的BD，需要设置上WR位，EMAC会在处理完这个BD之后&quot;回绕&quot;到第一个发送BD进行处理</p></li>
+<li><p>如果有多个BD需要发送，则重复设置BD的步骤以填充所有的发送BD</p></li>
+<li><p>如果一个数据包只包含在一个BD中，那么需要设置其EOF位为1</p></li>
+<li><p>如果一个数据包分在多个BD里进行发送，那么只需要将其占用的最后一个BD标记为数据包结束(设置EOF位)</p></li>
+<li><p>如果需要使能发送中断，还需要配置EMAC_INT_MASK寄存器中的TX相关位</p></li>
+<li><p>配置EMAC_MODE寄存器中的TXEN位，以使能发送</p></li>
+<li><p>如果使能了中断，在发送的中断中，可用通过EMAC_TX_BD_NUM寄存器中的TXBDNUM域获取当前的BD</p></li>
+<li><p>根据当前BD的状态字进行相应的处理</p></li>
+<li><p>数据已被发送出去的BD，其控制域中的RD位会被硬件清零，且不会被再次发送；需要填充新数据后，置位RD，此BD即可再次用于发送</p></li>
+</ul>
+</section>
+<section id="id8">
+<h3><span class="section-number">24.7.3. </span>接收数据帧<a class="headerlink" href="#id8" title="永久链接至标题"></a></h3>
+<ul class="simple">
+<li><p>配置EMAC_MODE寄存器中数据帧格式、间隔等位域</p></li>
+<li><p>通过配置EMAC_TX_BD_NUM寄存器中的TXBDNUM域来指定发送所使用的BD的个数，那么剩余的就是RX的BD</p></li>
+<li><p>在内存中准备好接收数据的区域</p></li>
+<li><p>将数据帧的地址填写到对应接收BD的数据指针域(word 1)中</p></li>
+<li><p>清空对应发送BD的控制与状态域(wrod 0)中的状态标记，并设置控制域(中断使能等)</p></li>
+<li><p>写入可接收的数据帧长度，并设置好E位域，告知EMAC此BD空闲，可以用于数据接收；如需要，设置上IRQ位，以使能中断</p></li>
+<li><p>特别的，如果是最后一个有效接收BD，需要设置上WR位，EMAC会在处理完这个BD之后&quot;回绕&quot;到第一个接收BD进行处理</p></li>
+<li><p>如果有多个BD可供接收数据，则重复设置BD的步骤以填充所有的BD</p></li>
+<li><p>如果需要使能接收中断，还需要配置EMAC_INT_MASK寄存器中的RX相关位</p></li>
+<li><p>配置EMAC_MODE寄存器中的RXEN位，以使能接收</p></li>
+<li><p>如果使能了中断，在接收的中断中，可用通过EMAC_TX_BD_NUM寄存器中的RXBDNUM域获取当前的BD</p></li>
+<li><p>根据当前BD的状态字进行相应的处理</p></li>
+<li><p>接收完成的BD，其控制域中的E位会被硬件清零，且不会被再次用于接收；需要取走数据，置位E，此BD即可再次用于接收</p></li>
+</ul>
+</section>
+</section>
+<section id="id9">
+<h2><span class="section-number">24.8. </span>寄存器描述<a class="headerlink" href="#id9" title="永久链接至标题"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 71%" />
+<col style="width: 29%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>名称</p></td>
+<td><p>描述</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mode">MODE</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#int-source">INT_SOURCE</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#int-mask">INT_MASK</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ipgt">IPGT</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#packetlen">PACKETLEN</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#collconfig">COLLCONFIG</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tx-bd-num">TX_BD_NUM</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#miimode">MIIMODE</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#miicommand">MIICOMMAND</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#miiaddress">MIIADDRESS</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#miitx-data">MIITX_DATA</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#miirx-data">MIIRX_DATA</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#miistatus">MIISTATUS</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mac-addr0">MAC_ADDR0</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mac-addr1">MAC_ADDR1</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hash0-addr">HASH0_ADDR</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hash1-addr">HASH1_ADDR</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#txctrl">TXCTRL</a></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<section id="mode">
+<h3><span class="section-number">24.8.1. </span>MODE<a class="headerlink" href="#mode" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x20070000</p>
+<figure class="align-center">
+<img alt="../_images/emac_MODE.svg" src="../_images/emac_MODE.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:24</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>23:18</p></td>
+<td><p>rsvd</p></td>
+<td><p>rsvd</p></td>
+<td><p>6'h0</p></td>
+<td><p>Reserved</p></td>
+</tr>
+<tr class="row-even"><td rowspan="3"><p>17</p></td>
+<td rowspan="3"><p>RMII_EN</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b0</p></td>
+<td rowspan="3"><p>RMII mode enable</p>
+<p>0: MII PHY I/F is used</p>
+<p>1: RMII PHY I/F is used</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3"><p>16</p></td>
+<td rowspan="3"><p>RECSMALL</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b0</p></td>
+<td rowspan="3"><p>Receive small frame enable</p>
+<p>0: Frames smaller than MINFL are ignored.</p>
+<p>1: Frames smaller than MINFL are accepted.</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3"><p>15</p></td>
+<td rowspan="3"><p>PAD</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b1</p></td>
+<td rowspan="3"><p>Padding enable</p>
+<p>0: Do not add pads to frames shorter than MINFL.</p>
+<p>1: Add pads to short frames, until the length equals MINFL.</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3"><p>14</p></td>
+<td rowspan="3"><p>HUGEN</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b0</p></td>
+<td rowspan="3"><p>Huge frames enable</p>
+<p>0: The maximum frame length is MAXFL. All additional bytes are dropped.</p>
+<p>1: Frame size is not limited by MAXFL and can be up to 64K bytes.</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3"><p>13</p></td>
+<td rowspan="3"><p>CRCEN</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b1</p></td>
+<td rowspan="3"><p>CRC Enable</p>
+<p>0: TX MAC does not append CRC field.</p>
+<p>1: TX MAC will append CRC field to every frame.</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>12:11</p></td>
+<td><p>rsvd</p></td>
+<td><p>rsvd</p></td>
+<td><p>2'b0</p></td>
+<td><p>Reserved</p></td>
+</tr>
+<tr class="row-even"><td rowspan="3"><p>10</p></td>
+<td rowspan="3"><p>FULLD</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b0</p></td>
+<td rowspan="3"><p>Full duplex</p>
+<p>0: Half duplex mode.</p>
+<p>1: Full duplex mode.</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>9:7</p></td>
+<td><p>rsvd</p></td>
+<td><p>rsvd</p></td>
+<td><p>3'b0</p></td>
+<td><p>Reserved</p></td>
+</tr>
+<tr class="row-even"><td rowspan="3"><p>6</p></td>
+<td rowspan="3"><p>IFG</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b0</p></td>
+<td rowspan="3"><p>Inter frame gap check</p>
+<p>0: IFG is verified before each frame be received.</p>
+<p>1: All frames are received regardless to IFG requirement.</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3"><p>5</p></td>
+<td rowspan="3"><p>PRO</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b0</p></td>
+<td rowspan="3"><p>Promiscuous mode enable</p>
+<p>0: The destination address is checked before receiving.</p>
+<p>1: All frames received regardless of the address.</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>rsvd</p></td>
+<td><p>rsvd</p></td>
+<td><p>1'b0</p></td>
+<td><p>Reserved</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><p>3</p></td>
+<td rowspan="3"><p>BRO</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b1</p></td>
+<td rowspan="3"><p>Broadcast address enable</p>
+<p>0: Reject all frames containing the broadcast address unless the PRO bit is asserted.</p>
+<p>1: Receive all frames containing broadcast address.</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3"><p>2</p></td>
+<td rowspan="3"><p>NOPRE</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b0</p></td>
+<td rowspan="3"><p>No preamble mode</p>
+<p>0: 7-byte preamble will be sent.</p>
+<p>1: No preamble will be sent.</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="4"><p>1</p></td>
+<td rowspan="4"><p>TXEN</p></td>
+<td rowspan="4"><p>r/w</p></td>
+<td rowspan="4"><p>1'b0</p></td>
+<td rowspan="4"><p>Transmit enable</p>
+<p>0: Transmitter is disabled.</p>
+<p>1: Transmitter is enabled.</p>
+<p>If TX_BD_NUM equals 0x0 (zero buffer descriptors are used), then the transmitter is disabled regardless of TXEN.</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="4"><p>0</p></td>
+<td rowspan="4"><p>RXEN</p></td>
+<td rowspan="4"><p>r/w</p></td>
+<td rowspan="4"><p>1'b0</p></td>
+<td rowspan="4"><p>Receiver enable</p>
+<p>0: Receiver is disabled.</p>
+<p>1: Receiver is enabled.</p>
+<p>If TX_BD_NUM equals 0x80 (all buffer descriptors are used for TX), then the receiver is disabled regardless of RXEN.</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+</tbody>
+</table>
+</section>
+<section id="int-source">
+<h3><span class="section-number">24.8.2. </span>INT_SOURCE<a class="headerlink" href="#int-source" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x20070004</p>
+<figure class="align-center">
+<img alt="../_images/emac_INT_SOURCE.svg" src="../_images/emac_INT_SOURCE.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:7</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><p>6</p></td>
+<td rowspan="3"><p>RXC</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b0</p></td>
+<td rowspan="3"><p>Receive control frame</p>
+<p>This bit indicates that the control frame was received. It is cleared by writing 1 to it.</p>
+<p>Bit RXFLOW in the CTRLMODE register must be set to 1 in order to get the RXC bit set.</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3"><p>5</p></td>
+<td rowspan="3"><p>TXC</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b0</p></td>
+<td rowspan="3"><p>Transmit control frame</p>
+<p>This bit indicates that a control frame was transmitted. It is cleared by writing 1 to it.</p>
+<p>Bit TXFLOW in the CTRLMODE register must be set to 1 in order to get the TXC bit set.</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3"><p>4</p></td>
+<td rowspan="3"><p>BUSY</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b0</p></td>
+<td rowspan="3"><p>Busy</p>
+<p>This bit indicates that RX packet is being received and there is no empty buffer descriptor to use. It iscleared by writing 1 to it.</p>
+<p>This bit appears regardless to the IRQ bits in the Receive Buffer Descriptor.</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="4"><p>3</p></td>
+<td rowspan="4"><p>RXE</p></td>
+<td rowspan="4"><p>r/w</p></td>
+<td rowspan="4"><p>1'b0</p></td>
+<td rowspan="4"><p>Receive error</p>
+<p>This bit indicates that an error occurred while receiving data (overrun, receiver error, dribble</p>
+<p>nibble, too long, &gt;64K, CRC error, bus error or late collision. It is cleared by writing 1 to it.</p>
+<p>This bit appears only when IRQ bit is set in the Receive Buffer Descriptor.</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3"><p>2</p></td>
+<td rowspan="3"><p>RXB</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b0</p></td>
+<td rowspan="3"><p>Receive frame</p>
+<p>This bit indicates that a frame was received. It is cleared by writing 1 to it.</p>
+<p>This bit appears only when IRQ bit is set in the Receive Buffer Descriptor.</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="4"><p>1</p></td>
+<td rowspan="4"><p>TXE</p></td>
+<td rowspan="4"><p>r/w</p></td>
+<td rowspan="4"><p>1'b0</p></td>
+<td rowspan="4"><p>Transmit error</p>
+<p>This bit indicates that a buffer was not transmitted due to a transmit error (underrun,</p>
+<p>retransmission limit, late collision, bus error or defer timeout). It is cleared by writing 1 to it.</p>
+<p>This bit appears only when IRQ bit is set in the Transmit Buffer Descriptor.</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3"><p>0</p></td>
+<td rowspan="3"><p>TXB</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b0</p></td>
+<td rowspan="3"><p>Transmit buffer</p>
+<p>This bit indicates that a buffer has been transmitted. It is cleared by writing 1 to it.</p>
+<p>This bit appears only when IRQ bit is set in the Transmit Buffer Descriptor.</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</section>
+<section id="int-mask">
+<h3><span class="section-number">24.8.3. </span>INT_MASK<a class="headerlink" href="#int-mask" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x20070008</p>
+<figure class="align-center">
+<img alt="../_images/emac_INT_MASK.svg" src="../_images/emac_INT_MASK.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:7</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><p>6</p></td>
+<td rowspan="3"><p>RXC_M</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b1</p></td>
+<td rowspan="3"><p>Receive control frame mask ENABLE</p>
+<p>0: Interrupt is un-masked</p>
+<p>1: Interrupt is masked</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3"><p>5</p></td>
+<td rowspan="3"><p>TXC_M</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b1</p></td>
+<td rowspan="3"><p>Transmit control frame mask ENABLE</p>
+<p>0: Interrupt is un-masked</p>
+<p>1: Interrupt is masked</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3"><p>4</p></td>
+<td rowspan="3"><p>BUSY_M</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b1</p></td>
+<td rowspan="3"><p>Busy mask ENABLE</p>
+<p>0: Interrupt is un-masked</p>
+<p>1: Interrupt is masked</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3"><p>3</p></td>
+<td rowspan="3"><p>RXE_M</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b1</p></td>
+<td rowspan="3"><p>Receive error mask ENABLE</p>
+<p>0: Interrupt is un-masked</p>
+<p>1: Interrupt is masked</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3"><p>2</p></td>
+<td rowspan="3"><p>RXB_M</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b1</p></td>
+<td rowspan="3"><p>Receive frame mask ENABLE</p>
+<p>0: Interrupt is un-masked</p>
+<p>1: Interrupt is masked</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3"><p>1</p></td>
+<td rowspan="3"><p>TXE_M</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b1</p></td>
+<td rowspan="3"><p>Transmit error mask ENABLE</p>
+<p>0: Interrupt is un-masked</p>
+<p>1: Interrupt is masked</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3"><p>0</p></td>
+<td rowspan="3"><p>TXB_M</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b1</p></td>
+<td rowspan="3"><p>Transmit buffer mask ENABLE</p>
+<p>0: Interrupt is un-masked</p>
+<p>1: Interrupt is masked</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</section>
+<section id="ipgt">
+<h3><span class="section-number">24.8.4. </span>IPGT<a class="headerlink" href="#ipgt" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x2007000c</p>
+<figure class="align-center">
+<img alt="../_images/emac_IPGT.svg" src="../_images/emac_IPGT.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:7</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><p>6:0</p></td>
+<td rowspan="3"><p>IPGT</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>7'h18</p></td>
+<td rowspan="3"><p>Inter packet gap</p>
+<p>The recommended value is 0x18 (24 clock cycles),</p>
+<p>which equals 9.6 us for 10 Mbps and 0.96 us for 100 Mbps mode</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</section>
+<section id="packetlen">
+<h3><span class="section-number">24.8.5. </span>PACKETLEN<a class="headerlink" href="#packetlen" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x20070018</p>
+<figure class="align-center">
+<img alt="../_images/emac_PACKETLEN.svg" src="../_images/emac_PACKETLEN.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td rowspan="4"><p>31:16</p></td>
+<td rowspan="4"><p>MINFL</p></td>
+<td rowspan="4"><p>r/w</p></td>
+<td rowspan="4"><p>16'h40</p></td>
+<td rowspan="4"><p>Minimum frame length</p>
+<p>The minimum Ethernet packet is 64 bytes long (0x40).</p>
+<p>To receive small packets, assert the RECSMALL bit or change the MINFL value.</p>
+<p>To transmit small packets, assert the PAD bit or change the MINFL value.</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="4"><p>15:0</p></td>
+<td rowspan="4"><p>MAXFL</p></td>
+<td rowspan="4"><p>r/w</p></td>
+<td rowspan="4"><p>16'h600</p></td>
+<td rowspan="4"><p>Maximum frame length</p>
+<p>The maximum Ethernet packet is 1518 bytes long. To support this and to have some additional</p>
+<p>space for tags, a default maximum packet length equals to 1536 bytes (0x600).</p>
+<p>For bigger packets, you can assert the HUGEN bit or increase the value of MAXFL field.</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</section>
+<section id="collconfig">
+<h3><span class="section-number">24.8.6. </span>COLLCONFIG<a class="headerlink" href="#collconfig" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x2007001c</p>
+<figure class="align-center">
+<img alt="../_images/emac_COLLCONFIG.svg" src="../_images/emac_COLLCONFIG.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:20</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="4"><p>19:16</p></td>
+<td rowspan="4"><p>MAXRET</p></td>
+<td rowspan="4"><p>r/w</p></td>
+<td rowspan="4"><p>4'hF</p></td>
+<td rowspan="4"><p>Maximum retry</p>
+<p>This field specifies the maximum number of consequential retransmission attempts after the collision is detected.</p>
+<p>When the maximum number has been reached, the TX MAC reports an error and stops transmitting the current packet.</p>
+<p>According to the Ethernet standard, the MAXRET default value is set to 0xf (15).</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>15:6</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td rowspan="3"><p>5:0</p></td>
+<td rowspan="3"><p>COLLVALID</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>6'h3F</p></td>
+<td rowspan="3"><p>Collision valid</p>
+<p>This field specifies a collision time window. A collision that occurs later than the time window</p>
+<p>is reported as a &quot;Late Collisions&quot; and transmission of the current packet is aborted.</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+</tbody>
+</table>
+</section>
+<section id="tx-bd-num">
+<h3><span class="section-number">24.8.7. </span>TX_BD_NUM<a class="headerlink" href="#tx-bd-num" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x20070020</p>
+<figure class="align-center">
+<img alt="../_images/emac_TX_BD_NUM.svg" src="../_images/emac_TX_BD_NUM.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>30:24</p></td>
+<td><p>RXBDPTR</p></td>
+<td><p>r</p></td>
+<td><p>7'h0</p></td>
+<td><p>RX buffer descriptors (BD) pointer, pointing at the RXBD currently being used</p></td>
+</tr>
+<tr class="row-even"><td><p>23</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>22:16</p></td>
+<td><p>TXBDPTR</p></td>
+<td><p>r</p></td>
+<td><p>7'h0</p></td>
+<td><p>TX buffer descriptors (BD) pointer, pointing at the TXBD currently being used</p></td>
+</tr>
+<tr class="row-even"><td><p>15:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><p>7:0</p></td>
+<td rowspan="3"><p>TXBDNUM</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>8'h40</p></td>
+<td rowspan="3"><p>TX buffer descriptors (BD) number</p>
+<p>Number of TX BD. TX and RX share 128 (0x80) descriptors, so the number of RX BD equals 0x80 - TXBDNUM.</p>
+<p>The maximum number of TXBDNUM is 0x80. Values greater then 0x80 cannot be written into this register.</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</section>
+<section id="miimode">
+<h3><span class="section-number">24.8.8. </span>MIIMODE<a class="headerlink" href="#miimode" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x20070028</p>
+<figure class="align-center">
+<img alt="../_images/emac_MIIMODE.svg" src="../_images/emac_MIIMODE.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:9</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><p>8</p></td>
+<td rowspan="3"><p>MIINOPRE</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b0</p></td>
+<td rowspan="3"><p>No preamble for Management Data (MD)</p>
+<p>0: 32-bit preamble will be sent.</p>
+<p>1: No preamble will be sent.</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="2"><p>7:0</p></td>
+<td rowspan="2"><p>CLKDIV</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>8'h64</p></td>
+<td rowspan="2"><p>Clock divider for Management Data Clock (MDC)</p>
+<p>The source clock is bus clock and can be divided by any even number.</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</section>
+<section id="miicommand">
+<h3><span class="section-number">24.8.9. </span>MIICOMMAND<a class="headerlink" href="#miicommand" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x2007002c</p>
+<figure class="align-center">
+<img alt="../_images/emac_MIICOMMAND.svg" src="../_images/emac_MIICOMMAND.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:3</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><p>2</p></td>
+<td rowspan="2"><p>WCTRLDATA</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>1'b0</p></td>
+<td rowspan="2"><p>Write control data, setting this bit to 1 will trigger the command (auto cleared)</p>
+<p>Note: [2]/[1]/[0] cannot be asserted at the same time, execute one command at a time</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="2"><p>1</p></td>
+<td rowspan="2"><p>RSTAT</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>1'b0</p></td>
+<td rowspan="2"><p>Read status, setting this bit to 1 will trigger the command (auto cleared)</p>
+<p>Note: [2]/[1]/[0] cannot be asserted at the same time, execute one command at a time</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="2"><p>0</p></td>
+<td rowspan="2"><p>SCANSTAT</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>1'b0</p></td>
+<td rowspan="2"><p>Scan status, setting this bit to 1 will trigger the command (auto cleared)</p>
+<p>Note: [2]/[1]/[0] cannot be asserted at the same time, execute one command at a time</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+</tbody>
+</table>
+</section>
+<section id="miiaddress">
+<h3><span class="section-number">24.8.10. </span>MIIADDRESS<a class="headerlink" href="#miiaddress" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x20070030</p>
+<figure class="align-center">
+<img alt="../_images/emac_MIIADDRESS.svg" src="../_images/emac_MIIADDRESS.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:13</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>12:8</p></td>
+<td><p>RGAD</p></td>
+<td><p>r/w</p></td>
+<td><p>5'h0</p></td>
+<td><p>Register Address</p></td>
+</tr>
+<tr class="row-even"><td><p>7:5</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>4:0</p></td>
+<td><p>FIAD</p></td>
+<td><p>r/w</p></td>
+<td><p>5'h0</p></td>
+<td><p>PHY Address</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="miitx-data">
+<h3><span class="section-number">24.8.11. </span>MIITX_DATA<a class="headerlink" href="#miitx-data" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x20070034</p>
+<figure class="align-center">
+<img alt="../_images/emac_MIITX_DATA.svg" src="../_images/emac_MIITX_DATA.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15:0</p></td>
+<td><p>CTRLDATA</p></td>
+<td><p>r/w</p></td>
+<td><p>16'h0</p></td>
+<td><p>Control Data to be written to PHY</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="miirx-data">
+<h3><span class="section-number">24.8.12. </span>MIIRX_DATA<a class="headerlink" href="#miirx-data" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x20070038</p>
+<figure class="align-center">
+<img alt="../_images/emac_MIIRX_DATA.svg" src="../_images/emac_MIIRX_DATA.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15:0</p></td>
+<td><p>PRSD</p></td>
+<td><p>r</p></td>
+<td><p>16'h0</p></td>
+<td><p>Received Data from PHY</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="miistatus">
+<h3><span class="section-number">24.8.13. </span>MIISTATUS<a class="headerlink" href="#miistatus" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x2007003c</p>
+<figure class="align-center">
+<img alt="../_images/emac_MIISTATUS.svg" src="../_images/emac_MIISTATUS.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:2</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><p>1</p></td>
+<td rowspan="3"><p>MIIM_BUSY</p></td>
+<td rowspan="3"><p>r</p></td>
+<td rowspan="3"><p>1'b0</p></td>
+<td rowspan="3"><p>MIIM I/F busy signal</p>
+<p>0: The MIIM I/F is ready.</p>
+<p>1: The MIIM I/F is busy.</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>MIIM_LINKFAIL</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>MIIM I/F link fail signal</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="mac-addr0">
+<h3><span class="section-number">24.8.14. </span>MAC_ADDR0<a class="headerlink" href="#mac-addr0" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x20070040</p>
+<figure class="align-center">
+<img alt="../_images/emac_MAC_ADDR0.svg" src="../_images/emac_MAC_ADDR0.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:24</p></td>
+<td><p>MAC_B2</p></td>
+<td><p>r/w</p></td>
+<td><p>8'd0</p></td>
+<td><p>Ethernet MAC address byte 2</p></td>
+</tr>
+<tr class="row-odd"><td><p>23:16</p></td>
+<td><p>MAC_B3</p></td>
+<td><p>r/w</p></td>
+<td><p>8'd0</p></td>
+<td><p>Ethernet MAC address byte 3</p></td>
+</tr>
+<tr class="row-even"><td><p>15:8</p></td>
+<td><p>MAC_B4</p></td>
+<td><p>r/w</p></td>
+<td><p>8'd0</p></td>
+<td><p>Ethernet MAC address byte 4</p></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>MAC_B5</p></td>
+<td><p>r/w</p></td>
+<td><p>8'd0</p></td>
+<td><p>Ethernet MAC address byte 5</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="mac-addr1">
+<h3><span class="section-number">24.8.15. </span>MAC_ADDR1<a class="headerlink" href="#mac-addr1" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x20070044</p>
+<figure class="align-center">
+<img alt="../_images/emac_MAC_ADDR1.svg" src="../_images/emac_MAC_ADDR1.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15:8</p></td>
+<td><p>MAC_B0</p></td>
+<td><p>r/w</p></td>
+<td><p>8'd0</p></td>
+<td><p>Ethernet MAC address byte 0</p></td>
+</tr>
+<tr class="row-even"><td><p>7:0</p></td>
+<td><p>MAC_B1</p></td>
+<td><p>r/w</p></td>
+<td><p>8'd0</p></td>
+<td><p>Ethernet MAC address byte 1</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="hash0-addr">
+<h3><span class="section-number">24.8.16. </span>HASH0_ADDR<a class="headerlink" href="#hash0-addr" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x20070048</p>
+<figure class="align-center">
+<img alt="../_images/emac_HASH0_ADDR.svg" src="../_images/emac_HASH0_ADDR.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>HASH0</p></td>
+<td><p>r/w</p></td>
+<td><p>32'h0</p></td>
+<td><p>Lower 32-bit of HASH register</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="hash1-addr">
+<h3><span class="section-number">24.8.17. </span>HASH1_ADDR<a class="headerlink" href="#hash1-addr" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x2007004c</p>
+<figure class="align-center">
+<img alt="../_images/emac_HASH1_ADDR.svg" src="../_images/emac_HASH1_ADDR.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>HASH1</p></td>
+<td><p>r/w</p></td>
+<td><p>32'h0</p></td>
+<td><p>Upper 32-bit of HASH register</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="txctrl">
+<h3><span class="section-number">24.8.18. </span>TXCTRL<a class="headerlink" href="#txctrl" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x20070050</p>
+<figure class="align-center">
+<img alt="../_images/emac_TXCTRL.svg" src="../_images/emac_TXCTRL.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:17</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><p>16</p></td>
+<td rowspan="2"><p>TXPAUSERQ</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>1'b0</p></td>
+<td rowspan="2"><p>TX Pause Request</p>
+<p>Writing 1 to this bit starts sending control frame and is automatically cleared to zero.</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="2"><p>15:0</p></td>
+<td rowspan="2"><p>TXPAUSETV</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>16'h0</p></td>
+<td rowspan="2"><p>TX Pause Timer Value</p>
+<p>The value that is sent in the pause control frame.</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="PSRAM.html" class="btn btn-neutral float-left" title="23. PSRAM Contorller" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="USB.html" class="btn btn-neutral float-right" title="25. USB" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2021.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

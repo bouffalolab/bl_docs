@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>31. NPU &mdash; BL808 参考手册  文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="32. IPC" href="IPC.html" />
+    <link rel="prev" title="30. NPU toolchain" href="NPUtoolchain.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL808 参考手册
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. 系统和存储器概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. 复位和时钟</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPIO.html">4. GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">5. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">6. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">7. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA2D.html">8. DMA2D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lz4d.html">9. LZ4D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBI.html">10. DBI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DPI.html">11. DPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DSI.html">12. DSI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cam.html">13. CAM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">14. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">15. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">16. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">17. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">18. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">19. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2s.html">20. I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PDM.html">21. PDM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AUDIO.html">22. AUDIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PSRAM.html">23. PSRAM Contorller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Emac.html">24. Emac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USB.html">25. USB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ISO11898.html">26. ISO11898</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MJPEG.html">27. MJPEG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="JDEC.html">28. JDEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="VENC.html">29. VENC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NPUtoolchain.html">30. NPU toolchain</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">31. NPU</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">31.1. 简介</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">31.2. 主要特点</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">31.3. 功能列表</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#api">31.4. API参考</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">31.5. 数据结构参考</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="IPC.html">32. IPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LowPower.html">33. LowPower</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SEC_ENG.html">34. SEC ENG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">35. 版本信息</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL808 参考手册</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">31. </span>NPU</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="npu">
+<h1><span class="section-number">31. </span>NPU<a class="headerlink" href="#npu" title="永久链接至标题"></a></h1>
+<section id="id1">
+<h2><span class="section-number">31.1. </span>简介<a class="headerlink" href="#id1" title="永久链接至标题"></a></h2>
+<p>神经处理单元 (NPU) 或简称为 AI 加速器是一种专用电路，可实现执行机器学习算法所需的所有必要控制和算术逻辑
+，是为深度学习算法设计的电子电路，通常具有单独的数据存储器和专用指令集架构。NPU的目标是为深度学习算法提供
+比一般中央处理单元(CPU)更高的效率和性能。NPU使用大量计算组件来利用高数据级并行性，使用相对较大的缓冲区/内存
+来利用数据重用模式，以及用于深度学习容错的有限数据宽度运算符。</p>
+</section>
+<section id="id2">
+<h2><span class="section-number">31.2. </span>主要特点<a class="headerlink" href="#id2" title="永久链接至标题"></a></h2>
+<ul class="simple">
+<li><p>AI算力 <strong>0.1 TOPS</strong></p></li>
+<li><p>支持8-bit运算</p></li>
+<li><p>兼容TensorFlow-lite/ONNX/Caffe/Mxnet/Darknet/Pytorch模型，可支持多类框架</p></li>
+<li><p>提供PC端方便易用的开发工具，包含模型转换、模型量化、性能预估、精度验证</p></li>
+<li><p>支持单层指令模式、多层指令模式</p></li>
+<li><p>支持最大特征图4096 x 4096 x 4096(宽、高、深度)</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2><span class="section-number">31.3. </span>功能列表<a class="headerlink" href="#id3" title="永久链接至标题"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 24%" />
+<col style="width: 33%" />
+<col style="width: 21%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Operators</p></th>
+<th class="head"><p>Applicable Subset Spec.</p></th>
+<th class="head"><p>Processor</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td rowspan="4"><p>Convolution</p></td>
+<td><p>Conv</p></td>
+<td><p>1x1 up to 7x7</p></td>
+<td><p><strong>NPU</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>Depthwise Conv</p></td>
+<td><p>1x1 up to 7x7</p></td>
+<td><p><strong>NPU</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>Pad</p></td>
+<td><p>same</p></td>
+<td><p><strong>NPU</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>Deconvolution</p></td>
+<td><p>use Upsample + Conv</p></td>
+<td><p><strong>NPU</strong></p></td>
+</tr>
+<tr class="row-even"><td rowspan="5"><p>Pooling</p></td>
+<td><p>MaxPool(2x2)</p></td>
+<td><p>Stride 2</p></td>
+<td><p><strong>NPU</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>MaxPool(3x3)</p></td>
+<td><p>3x3</p></td>
+<td><p><strong>NPU</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>AveragePool</p></td>
+<td><p>Stride 1, 2</p></td>
+<td><p>DSP</p></td>
+</tr>
+<tr class="row-odd"><td><p>GlobalAveragePool</p></td>
+<td></td>
+<td><p>DSP</p></td>
+</tr>
+<tr class="row-even"><td><p>GlobalMaxPool</p></td>
+<td></td>
+<td><p>DSP</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="7"><p>Activation</p></td>
+<td><p>Relu</p></td>
+<td></td>
+<td><p><strong>NPU</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>LeakyRelu</p></td>
+<td></td>
+<td><p><strong>NPU</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>Relu-n</p></td>
+<td><p>n &gt; 0 (Relu6)</p></td>
+<td><p><strong>NPU</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>Mish</p></td>
+<td><p>Look up table</p></td>
+<td><p><strong>NPU</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>ELU</p></td>
+<td><p>Look up table</p></td>
+<td><p><strong>NPU</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>PRelu</p></td>
+<td></td>
+<td><p>DSP</p></td>
+</tr>
+<tr class="row-odd"><td><p>Sigmoid</p></td>
+<td></td>
+<td><p>DSP</p></td>
+</tr>
+<tr class="row-even"><td rowspan="6"><p>Other processing</p></td>
+<td><p>BatchNormalization</p></td>
+<td></td>
+<td><p>DSP</p></td>
+</tr>
+<tr class="row-odd"><td><p>Add (shortcut)</p></td>
+<td></td>
+<td><p><strong>NPU</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>Concat (route)</p></td>
+<td></td>
+<td><p><strong>NPU</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>Fully Connected</p></td>
+<td></td>
+<td><p><strong>NPU</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>Mul</p></td>
+<td></td>
+<td><p><strong>NPU</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>Slice</p></td>
+<td></td>
+<td><p>DSP</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="api">
+<h2><span class="section-number">31.4. </span>API参考<a class="headerlink" href="#api" title="永久链接至标题"></a></h2>
+<p>void gen_npu_inst_layer(npu_layer* l, bool use_tflite, bool unsgn_input, bool img_in)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/**</span>
+<span class="o">*</span> <span class="n">function</span>     <span class="n">产生NPU指令</span>
+<span class="o">*</span> <span class="nd">@param</span><span class="p">[</span><span class="ow">in</span><span class="p">]</span>   <span class="n">l</span><span class="p">:</span> <span class="n">NPU层数据结构指标</span>
+<span class="o">*</span> <span class="nd">@param</span><span class="p">[</span><span class="ow">in</span><span class="p">]</span>   <span class="n">use_tflite</span><span class="p">:</span> <span class="n">是否使用tflite数据格式</span>
+<span class="o">*</span> <span class="nd">@param</span><span class="p">[</span><span class="ow">in</span><span class="p">]</span>   <span class="n">unsgn_input</span><span class="p">:</span> <span class="n">输入数据是否为uint8</span>
+<span class="o">*</span> <span class="nd">@param</span><span class="p">[</span><span class="ow">in</span><span class="p">]</span>   <span class="n">img_in</span><span class="p">:</span> <span class="n">输入数据是否为YUV400</span>
+<span class="o">*</span> <span class="nd">@return</span>      <span class="n">空</span>
+<span class="o">**/</span>
+</pre></div>
+</div>
+<p>bool check_BLAI_NPU_RUN(int type, int size, int stride, int dilation)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/**</span>
+<span class="o">*</span> <span class="n">function</span>     <span class="n">确认该层是否符合NPU加速条件</span>
+<span class="o">*</span> <span class="nd">@param</span><span class="p">[</span><span class="ow">in</span><span class="p">]</span>   <span class="nb">type</span><span class="p">:</span> <span class="n">该层类别</span> <span class="p">(</span><span class="n">enum</span> <span class="n">LAYER_TYPE</span><span class="p">)</span>
+<span class="o">*</span> <span class="nd">@param</span><span class="p">[</span><span class="ow">in</span><span class="p">]</span>   <span class="n">size</span><span class="p">:</span> <span class="n">卷积核大小</span>
+<span class="o">*</span> <span class="nd">@param</span><span class="p">[</span><span class="ow">in</span><span class="p">]</span>   <span class="n">stride</span><span class="p">:</span> <span class="n">步伐大小</span>
+<span class="o">*</span> <span class="nd">@param</span><span class="p">[</span><span class="ow">in</span><span class="p">]</span>   <span class="n">dilation</span><span class="p">:</span> <span class="n">空洞卷积核大小</span>
+<span class="o">*</span> <span class="nd">@return</span>      <span class="n">true</span><span class="p">:</span> <span class="n">符合NPU加速条件</span><span class="p">,</span> <span class="n">false</span><span class="p">:</span> <span class="n">未符合NPU加速条件</span>
+<span class="o">**/</span>
+</pre></div>
+</div>
+<p>bool BLAI_MEM_alloc(npu_layer l, PSRAM_ctrl <a href="#id4"><span class="problematic" id="id5">*</span></a>ctrl)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/**</span>
+<span class="o">*</span> <span class="n">function</span>     <span class="n">自动产生NPU相关记忆体配置</span>
+<span class="o">*</span> <span class="nd">@param</span><span class="p">[</span><span class="ow">in</span><span class="p">]</span>   <span class="n">l</span><span class="p">:</span> <span class="n">NPU层数据结构指标</span>
+<span class="o">*</span> <span class="nd">@param</span><span class="p">[</span><span class="ow">in</span><span class="p">]</span>   <span class="n">ctrl</span><span class="p">:</span> <span class="n">记忆体配置参数结构</span>
+<span class="o">*</span> <span class="nd">@return</span>      <span class="n">true</span><span class="p">:</span> <span class="n">记忆体配置成功</span><span class="p">,</span> <span class="n">false</span><span class="p">:</span> <span class="n">记忆体配置失败</span>
+<span class="o">**/</span>
+</pre></div>
+</div>
+<p>void fetch_BLAI_data_general(npu_layer <em>l, PSRAM_ctrl</em> ctrl, bool use_tflite, bool img_in)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/**</span>
+<span class="o">*</span> <span class="n">function</span>     <span class="n">自动产生NPU指令</span> <span class="p">(</span><span class="n">输入层数量最多为2</span><span class="p">)</span>
+<span class="o">*</span> <span class="nd">@param</span><span class="p">[</span><span class="ow">in</span><span class="p">]</span>   <span class="n">l</span><span class="p">:</span> <span class="n">NPU层数据结构指标</span>
+<span class="o">*</span> <span class="nd">@param</span><span class="p">[</span><span class="ow">in</span><span class="p">]</span>   <span class="n">ctrl</span><span class="p">:</span> <span class="n">记忆体配置参数结构</span>
+<span class="o">*</span> <span class="nd">@param</span><span class="p">[</span><span class="ow">in</span><span class="p">]</span>   <span class="n">use_tflite</span><span class="p">:</span> <span class="n">是否使用tflite数据格式</span>
+<span class="o">*</span> <span class="nd">@param</span><span class="p">[</span><span class="ow">in</span><span class="p">]</span>   <span class="n">img_in</span><span class="p">:</span> <span class="n">输入数据是否为YUV400</span>
+<span class="o">*</span> <span class="nd">@return</span>      <span class="n">空</span>
+<span class="o">**/</span>
+</pre></div>
+</div>
+<p>void fetch_BLAI_data_route(npu_layer <em>l, PSRAM_ctrl</em> ctrl, bool use_tflite, bool img_in)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>/**
+* function     针对输入层数量大于两层的ROUTE层，自动产生NPU指令
+* @param[in]   l: NPU层数据结构指标
+* @param[in]   ctrl: 记忆体配置参数结构
+* @param[in]   use_tflite: 是否使用tflite数据格式
+* @param[in]   img_in: 输入数据是否为YUV400
+* @return      空
+**/
+</pre></div>
+</div>
+<p>bool BLAI_encode(npu_layer <em>l, PSRAM_ctrl</em> ctrl, int use_tflite, bool img_in)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>/**
+* function     自动产生NPU指令、NPU相关记忆体配置
+* @param[in]   l: NPU层数据结构指标
+* @param[in]   ctrl: 记忆体配置参数结构
+* @param[in]   use_tflite: 是否使用tflite数据格式
+* @param[in]   img_in: 输入数据是否为YUV400
+* @return      true: 符合NPU加速条件且记忆体配置成功, false: 未符合NPU加速条件或记忆体配置失败
+**/
+</pre></div>
+</div>
+<p>void Load_NPU_weights(npu_layer l, int8_t* WEI_buf, int* BIAS_buf, bool use_tflite)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/**</span>
+<span class="o">*</span> <span class="n">function</span>     <span class="n">将该层卷积参数照NPU指定方式存储入NPU专用参数记忆体</span>
+<span class="o">*</span> <span class="nd">@param</span><span class="p">[</span><span class="ow">in</span><span class="p">]</span>   <span class="n">l</span><span class="p">:</span> <span class="n">NPU层数据结构指标</span>
+<span class="o">*</span> <span class="nd">@param</span><span class="p">[</span><span class="ow">in</span><span class="p">]</span>   <span class="n">WEI_buf</span><span class="p">:</span> <span class="n">NPU专用参数记忆体</span>
+<span class="o">*</span> <span class="nd">@param</span><span class="p">[</span><span class="ow">in</span><span class="p">]</span>   <span class="n">BIAS_buf</span><span class="p">:</span> <span class="n">NPU专用参数记忆体</span>
+<span class="o">*</span> <span class="nd">@param</span><span class="p">[</span><span class="ow">in</span><span class="p">]</span>   <span class="n">use_tflite</span><span class="p">:</span> <span class="n">是否使用tflite数据格式</span>
+<span class="o">*</span> <span class="nd">@return</span>      <span class="n">空</span>
+<span class="o">**/</span>
+</pre></div>
+</div>
+<p>void Store_tensor_data_to_NPU(npu_layer l, fixed_point_t* DATA_buf)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/**</span>
+<span class="o">*</span> <span class="n">function</span>     <span class="n">将运算图中的张量数据存储入NPU专用数据记忆体</span>
+<span class="o">*</span> <span class="nd">@param</span><span class="p">[</span><span class="ow">in</span><span class="p">]</span>   <span class="n">l</span><span class="p">:</span> <span class="n">NPU层数据结构指标</span>
+<span class="o">*</span> <span class="nd">@param</span><span class="p">[</span><span class="ow">in</span><span class="p">]</span>   <span class="n">DATA_buf</span><span class="p">:</span> <span class="n">NPU专用数据记忆体</span>
+<span class="o">*</span> <span class="nd">@return</span>      <span class="n">空</span>
+<span class="o">**/</span>
+</pre></div>
+</div>
+<p>void Load_NPU_data_to_tensor(npu_layer l, fixed_point_t* DATA_buf)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/**</span>
+<span class="o">*</span> <span class="n">function</span>     <span class="n">从NPU专用数据记忆体读取张量数据</span>
+<span class="o">*</span> <span class="nd">@param</span><span class="p">[</span><span class="ow">in</span><span class="p">]</span>   <span class="n">l</span><span class="p">:</span> <span class="n">NPU层数据结构指标</span>
+<span class="o">*</span> <span class="nd">@param</span><span class="p">[</span><span class="ow">in</span><span class="p">]</span>   <span class="n">DATA_buf</span><span class="p">:</span> <span class="n">NPU专用数据记忆体</span>
+<span class="o">*</span> <span class="nd">@return</span>      <span class="n">空</span>
+<span class="o">**/</span>
+</pre></div>
+</div>
+<p>void forward_NPU(npu_layer l, int8_t* DATA_buf, bool use_tflite)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/**</span>
+<span class="o">*</span> <span class="n">function</span>     <span class="n">使用指令运行NPU</span> <span class="p">(</span><span class="n">需先使用gen_npu_inst_layer产生指令</span><span class="p">)</span>
+<span class="o">*</span> <span class="nd">@param</span><span class="p">[</span><span class="ow">in</span><span class="p">]</span>   <span class="n">l</span><span class="p">:</span> <span class="n">NPU层数据结构指标</span>
+<span class="o">*</span> <span class="nd">@param</span><span class="p">[</span><span class="ow">in</span><span class="p">]</span>   <span class="n">DATA_buf</span><span class="p">:</span> <span class="n">NPU专用数据记忆体</span>
+<span class="o">*</span> <span class="nd">@param</span><span class="p">[</span><span class="ow">in</span><span class="p">]</span>   <span class="n">use_tflite</span><span class="p">:</span> <span class="n">是否使用tflite数据格式</span>
+<span class="o">*</span> <span class="nd">@return</span>      <span class="n">空</span>
+<span class="o">**/</span>
+</pre></div>
+</div>
+</section>
+<section id="id6">
+<h2><span class="section-number">31.5. </span>数据结构参考<a class="headerlink" href="#id6" title="永久链接至标题"></a></h2>
+<p><strong>npu_layer数据结构：</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/**</span> <span class="n">NPU</span> <span class="n">layer</span> <span class="n">information</span> <span class="n">of</span> <span class="n">dynamic</span> <span class="n">fixed</span> <span class="n">point</span> <span class="nb">format</span><span class="p">(</span><span class="n">CMSIS</span><span class="o">/</span><span class="n">NMSIS</span><span class="p">)</span> <span class="o">*/</span>
+
+<span class="n">struct</span> <span class="n">npu_layer</span> <span class="p">{</span>
+
+    <span class="o">///////////////////////////////////////////////</span>
+    <span class="o">/////</span>    <span class="n">Begin</span> <span class="n">of</span> <span class="n">user</span> <span class="n">define</span> <span class="n">region</span>      <span class="o">/////</span>
+    <span class="o">///////////////////////////////////////////////</span>
+
+    <span class="o">/**</span> <span class="n">operation</span> <span class="nb">type</span> <span class="p">(</span><span class="n">enum</span> <span class="n">LAYER_TYPE</span><span class="p">)</span><span class="o">*/</span>
+    <span class="n">uint8_t</span> <span class="nb">type</span><span class="p">;</span>
+
+    <span class="o">/**</span> <span class="n">activation</span> <span class="nb">type</span> <span class="p">(</span><span class="n">enum</span> <span class="n">ACTIVATION</span><span class="p">)</span><span class="o">*/</span>
+    <span class="n">uint8_t</span> <span class="n">activation</span><span class="p">;</span>
+
+    <span class="o">/**</span> <span class="n">layer</span> <span class="n">width</span> <span class="o">*/</span>
+    <span class="n">uint16_t</span> <span class="n">w</span><span class="p">;</span>
+
+    <span class="o">/**</span> <span class="n">layer</span> <span class="n">height</span> <span class="o">*/</span>
+    <span class="n">uint16_t</span> <span class="n">h</span><span class="p">;</span>
+
+    <span class="o">/**</span> <span class="n">layer</span> <span class="n">channel</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">*/</span>
+    <span class="n">uint16_t</span> <span class="n">c</span><span class="p">;</span>
+
+    <span class="o">/**</span> <span class="n">extra</span> <span class="n">layer</span> <span class="n">channel</span> <span class="p">(</span><span class="mi">2</span><span class="o">-</span><span class="mi">8</span><span class="p">)</span> <span class="o">*/</span>
+    <span class="n">uint16_t</span> <span class="n">cn</span><span class="p">[</span><span class="mi">7</span><span class="p">];</span>
+
+    <span class="o">/**</span> <span class="n">layer</span> <span class="n">output</span> <span class="n">width</span> <span class="o">*/</span>
+    <span class="n">uint16_t</span> <span class="n">out_w</span><span class="p">;</span>
+
+    <span class="o">/**</span> <span class="n">layer</span> <span class="n">output</span> <span class="n">height</span> <span class="o">*/</span>
+    <span class="n">uint16_t</span> <span class="n">out_h</span><span class="p">;</span>
+
+    <span class="o">/**</span> <span class="n">layer</span> <span class="n">output</span> <span class="n">channel</span> <span class="o">*/</span>
+    <span class="n">uint16_t</span> <span class="n">out_c</span><span class="p">;</span>
+
+    <span class="o">/**</span> <span class="n">number</span> <span class="n">of</span> <span class="nb">input</span> <span class="n">layers</span><span class="o">*/</span>
+    <span class="n">uint8_t</span> <span class="n">input_num</span><span class="p">;</span>
+
+    <span class="o">/**</span> <span class="n">CONV</span> <span class="n">kernel</span> <span class="n">size</span> <span class="o">*/</span>
+    <span class="n">uint8_t</span> <span class="n">size</span><span class="p">;</span>
+
+    <span class="o">/**</span> <span class="n">CONV</span> <span class="n">groups</span> <span class="n">size</span> <span class="o">*/</span>
+    <span class="n">uint16_t</span> <span class="n">groups</span><span class="p">;</span>
+
+    <span class="o">/**</span> <span class="n">CONV</span> <span class="n">dilation</span> <span class="n">size</span> <span class="o">*/</span>
+    <span class="n">uint8_t</span> <span class="n">dilation</span><span class="p">;</span>
+
+    <span class="o">/**</span> <span class="n">stride</span> <span class="n">size</span> <span class="o">*/</span>
+    <span class="n">uint8_t</span> <span class="n">stride</span><span class="p">;</span>
+
+    <span class="o">/**</span> <span class="nb">input</span> <span class="n">tensor</span> <span class="nb">type</span><span class="o">*/</span>
+    <span class="n">uint8_t</span> <span class="n">input_type</span><span class="p">;</span>
+
+    <span class="o">/**</span> <span class="kc">True</span><span class="p">:</span> <span class="n">combined</span> <span class="n">layer</span> <span class="n">need</span> <span class="n">to</span> <span class="n">keep</span> <span class="n">output</span> <span class="n">data</span> <span class="o">*/</span>
+    <span class="nb">bool</span> <span class="n">mid_out</span><span class="p">;</span>
+
+    <span class="o">/**</span> <span class="kc">True</span><span class="p">:</span> <span class="nb">input</span> <span class="n">image</span> <span class="ow">is</span> <span class="mi">1</span><span class="o">-</span><span class="n">channel</span> <span class="o">*/</span>
+    <span class="nb">bool</span> <span class="n">img_in</span><span class="p">;</span>
+
+    <span class="o">/**</span> <span class="n">dynamic</span> <span class="n">fixed</span> <span class="n">point</span> <span class="nb">format</span><span class="p">(</span><span class="n">CMSIS</span><span class="o">/</span><span class="n">NMSIS</span><span class="p">)</span> <span class="k">for</span> <span class="nb">input</span> <span class="n">data</span> <span class="o">*/</span>
+    <span class="n">int8_t</span> <span class="n">fdata</span><span class="p">;</span>
+
+    <span class="o">/**</span> <span class="n">dynamic</span> <span class="n">fixed</span> <span class="n">point</span> <span class="nb">format</span><span class="p">(</span><span class="n">CMSIS</span><span class="o">/</span><span class="n">NMSIS</span><span class="p">)</span> <span class="k">for</span> <span class="n">weight</span> <span class="o">*/</span>
+    <span class="n">int8_t</span> <span class="n">fweight</span><span class="p">;</span>
+
+    <span class="o">/**</span> <span class="n">dynamic</span> <span class="n">fixed</span> <span class="n">point</span> <span class="nb">format</span><span class="p">(</span><span class="n">CMSIS</span><span class="o">/</span><span class="n">NMSIS</span><span class="p">)</span> <span class="k">for</span> <span class="n">bias</span> <span class="o">*/</span>
+    <span class="n">int8_t</span> <span class="n">fbias</span><span class="p">;</span>
+
+    <span class="o">/**</span> <span class="n">dynamic</span> <span class="n">fixed</span> <span class="n">point</span> <span class="nb">format</span><span class="p">(</span><span class="n">CMSIS</span><span class="o">/</span><span class="n">NMSIS</span><span class="p">)</span> <span class="k">for</span> <span class="n">output</span> <span class="n">data</span> <span class="o">*/</span>
+    <span class="n">int8_t</span> <span class="n">fout</span><span class="p">;</span>
+
+    <span class="o">/**</span> <span class="n">dynamic</span> <span class="n">fixed</span> <span class="n">point</span> <span class="nb">format</span><span class="p">(</span><span class="n">CMSIS</span><span class="o">/</span><span class="n">NMSIS</span><span class="p">)</span> <span class="k">for</span> <span class="n">route</span> <span class="nb">input</span> <span class="n">data</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">*/</span>
+    <span class="n">int8_t</span> <span class="n">froute1</span><span class="p">;</span>
+
+    <span class="o">/**</span> <span class="n">dynamic</span> <span class="n">fixed</span> <span class="n">point</span> <span class="nb">format</span><span class="p">(</span><span class="n">CMSIS</span><span class="o">/</span><span class="n">NMSIS</span><span class="p">)</span> <span class="k">for</span> <span class="n">route</span> <span class="nb">input</span> <span class="n">data</span> <span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">*/</span>
+    <span class="n">int8_t</span> <span class="n">froute2</span><span class="p">;</span>
+
+    <span class="o">/**</span> <span class="n">dynamic</span> <span class="n">fixed</span> <span class="n">point</span> <span class="nb">format</span><span class="p">(</span><span class="n">CMSIS</span><span class="o">/</span><span class="n">NMSIS</span><span class="p">)</span> <span class="k">for</span> <span class="n">route</span> <span class="nb">input</span> <span class="n">data</span> <span class="p">(</span><span class="mi">3</span><span class="o">-</span><span class="mi">8</span><span class="p">)</span> <span class="o">*/</span>
+    <span class="n">int8_t</span> <span class="n">frouten</span><span class="p">[</span><span class="mi">6</span><span class="p">];</span>
+
+    <span class="o">/**</span> <span class="n">Tensorflow</span><span class="o">-</span><span class="n">Lite</span> <span class="nb">input</span> <span class="n">offset</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">*/</span>
+    <span class="n">uint8_t</span> <span class="n">tf_input1_offset</span><span class="p">;</span>
+
+    <span class="o">/**</span> <span class="n">Tensorflow</span><span class="o">-</span><span class="n">Lite</span> <span class="nb">input</span> <span class="n">offset</span> <span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">*/</span>
+    <span class="n">uint8_t</span> <span class="n">tf_input2_offset</span><span class="p">;</span>
+
+    <span class="o">/**</span> <span class="n">Tensorflow</span><span class="o">-</span><span class="n">Lite</span> <span class="nb">input</span> <span class="n">offset</span> <span class="p">(</span><span class="mi">3</span><span class="o">-</span><span class="mi">8</span><span class="p">)</span> <span class="o">*/</span>
+    <span class="n">uint8_t</span> <span class="n">tf_input_offset_extra</span><span class="p">[</span><span class="mi">6</span><span class="p">];</span>
+
+    <span class="o">/**</span> <span class="n">Tensorflow</span><span class="o">-</span><span class="n">Lite</span> <span class="n">output</span> <span class="n">offset</span> <span class="o">*/</span>
+    <span class="n">uint8_t</span> <span class="n">tf_output_offset</span><span class="p">;</span>
+
+    <span class="o">/**</span> <span class="n">Tensorflow</span><span class="o">-</span><span class="n">Lite</span> <span class="nb">input</span> <span class="n">shift</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">*/</span>
+    <span class="n">int8_t</span> <span class="n">tf_input1_shift</span><span class="p">;</span>
+
+    <span class="o">/**</span> <span class="n">Tensorflow</span><span class="o">-</span><span class="n">Lite</span> <span class="nb">input</span> <span class="n">shift</span> <span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">*/</span>
+    <span class="n">int8_t</span> <span class="n">tf_input2_shift</span><span class="p">;</span>
+
+    <span class="o">/**</span> <span class="n">Tensorflow</span><span class="o">-</span><span class="n">Lite</span> <span class="nb">input</span> <span class="n">shift</span> <span class="p">(</span><span class="mi">3</span><span class="o">-</span><span class="mi">8</span><span class="p">)</span> <span class="o">*/</span>
+    <span class="n">int8_t</span> <span class="n">tf_input_shift_extra</span><span class="p">[</span><span class="mi">6</span><span class="p">];</span>
+
+    <span class="o">/**</span> <span class="n">Tensorflow</span><span class="o">-</span><span class="n">Lite</span> <span class="n">output</span> <span class="n">shift</span> <span class="o">*/</span>
+    <span class="n">int8_t</span> <span class="n">tf_output_shift</span><span class="p">;</span>
+
+    <span class="o">/**</span> <span class="n">Tensorflow</span><span class="o">-</span><span class="n">Lite</span> <span class="n">quantized_activation_min</span> <span class="o">*/</span>
+    <span class="n">int16_t</span> <span class="n">quantized_activation_min</span><span class="p">;</span>
+
+    <span class="o">/**</span> <span class="n">Tensorflow</span><span class="o">-</span><span class="n">Lite</span> <span class="n">quantized_activation_max</span> <span class="o">*/</span>
+    <span class="n">int16_t</span> <span class="n">quantized_activation_max</span><span class="p">;</span>
+
+    <span class="o">/**</span> <span class="n">Tensorflow</span><span class="o">-</span><span class="n">Lite</span> <span class="nb">input</span> <span class="n">multiplier</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">*/</span>
+    <span class="nb">int</span> <span class="n">tf_input1_multiplier</span><span class="p">;</span>
+
+    <span class="o">/**</span> <span class="n">Tensorflow</span><span class="o">-</span><span class="n">Lite</span> <span class="nb">input</span> <span class="n">multiplier</span> <span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">*/</span>
+    <span class="nb">int</span> <span class="n">tf_input2_multiplier</span><span class="p">;</span>
+
+    <span class="o">/**</span> <span class="n">Tensorflow</span><span class="o">-</span><span class="n">Lite</span> <span class="nb">input</span> <span class="n">multiplier</span> <span class="p">(</span><span class="mi">3</span><span class="o">-</span><span class="mi">8</span><span class="p">)</span> <span class="o">*/</span>
+    <span class="nb">int</span> <span class="n">tf_input_multiplier_extra</span><span class="p">[</span><span class="mi">6</span><span class="p">];</span>
+
+    <span class="o">/**</span> <span class="n">Tensorflow</span><span class="o">-</span><span class="n">Lite</span> <span class="n">output</span> <span class="n">multiplier</span> <span class="o">*/</span>
+    <span class="nb">int</span> <span class="n">tf_output_multiplier</span><span class="p">;</span>
+
+    <span class="o">/**</span> <span class="n">Tensorflow</span><span class="o">-</span><span class="n">Lite</span> <span class="n">route</span> <span class="nb">input</span> <span class="n">multiplier</span> <span class="o">*/</span>
+    <span class="nb">int</span> <span class="n">tf_route_input_multiplier</span><span class="p">;</span>
+
+    <span class="o">/**</span> <span class="n">Tensorflow</span><span class="o">-</span><span class="n">Lite</span> <span class="n">route</span> <span class="nb">input</span> <span class="n">multiplier</span> <span class="o">*/</span>
+    <span class="nb">int</span> <span class="n">tf_route_input_shift</span><span class="p">;</span>
+
+    <span class="o">/**</span> <span class="n">Tensorflow</span><span class="o">-</span><span class="n">Lite</span> <span class="n">left</span> <span class="n">shift</span> <span class="o">*/</span>
+    <span class="n">int8_t</span> <span class="n">tf_left_shift</span><span class="p">;</span>
+
+    <span class="o">/**</span> <span class="n">pointer</span> <span class="n">of</span> <span class="nb">input</span> <span class="n">data</span> <span class="n">buffers</span> <span class="o">*/</span>
+    <span class="n">int8_t</span><span class="o">*</span> <span class="n">input_i8</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span>
+
+    <span class="o">/**</span> <span class="n">pointer</span> <span class="n">of</span> <span class="n">output</span> <span class="n">data</span> <span class="n">buffer</span> <span class="o">*/</span>
+    <span class="n">int8_t</span><span class="o">*</span> <span class="n">output_i8</span><span class="p">;</span>
+
+    <span class="o">/**</span> <span class="n">pointer</span> <span class="n">of</span> <span class="n">combined</span> <span class="n">layer</span> <span class="n">output</span> <span class="n">data</span> <span class="n">buffer</span> <span class="o">*/</span>
+    <span class="n">int8_t</span><span class="o">*</span> <span class="n">mid_output_i8</span><span class="p">;</span>
+
+    <span class="o">/**</span> <span class="n">pointer</span> <span class="n">of</span> <span class="n">weight</span> <span class="n">buffer</span> <span class="o">*/</span>
+    <span class="nb">int</span><span class="o">*</span> <span class="n">weights</span><span class="p">;</span>
+
+    <span class="o">/**</span> <span class="n">pointer</span> <span class="n">of</span> <span class="n">bias</span> <span class="n">buffer</span> <span class="o">*/</span>
+    <span class="nb">int</span><span class="o">*</span> <span class="n">biases</span><span class="p">;</span>
+
+    <span class="o">///////////////////////////////////////////////</span>
+    <span class="o">/////</span>     <span class="n">End</span> <span class="n">of</span> <span class="n">user</span> <span class="n">define</span> <span class="n">region</span>       <span class="o">/////</span>
+    <span class="o">///////////////////////////////////////////////</span>
+
+    <span class="o">/**</span> <span class="n">pointer</span> <span class="n">of</span> <span class="n">NPU</span> <span class="n">instruction</span> <span class="n">buffer</span> <span class="o">*/</span>
+    <span class="n">uint8_t</span><span class="o">*</span> <span class="n">NPU_inst</span><span class="p">;</span>
+
+    <span class="o">/**</span> <span class="n">flag</span> <span class="n">of</span> <span class="n">NPU</span> <span class="n">processor</span> <span class="o">*/</span>
+    <span class="nb">bool</span> <span class="n">NPU_on</span><span class="p">;</span>
+
+    <span class="o">/**</span> <span class="n">memory</span> <span class="n">patch</span> <span class="n">size</span><span class="o">*/</span>
+    <span class="n">uint32_t</span> <span class="n">DRAM_patch_size</span><span class="p">;</span>
+
+    <span class="o">/**</span> <span class="n">memory</span> <span class="n">patch</span> <span class="n">location</span> <span class="k">for</span> <span class="nb">input</span> <span class="n">data</span> <span class="o">*/</span>
+    <span class="n">uint16_t</span> <span class="n">DRAM_in</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span>
+
+    <span class="o">/**</span> <span class="n">memory</span> <span class="n">patch</span> <span class="n">location</span> <span class="k">for</span> <span class="n">output</span> <span class="n">data</span> <span class="o">*/</span>
+    <span class="n">uint16_t</span> <span class="n">DRAM_out</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span>
+
+    <span class="o">/**</span> <span class="n">memory</span> <span class="n">patch</span> <span class="n">location</span> <span class="k">for</span> <span class="n">mid</span> <span class="n">output</span> <span class="n">data</span> <span class="o">*/</span>
+    <span class="n">uint16_t</span> <span class="n">DRAM_mid_out</span><span class="p">;</span>
+
+    <span class="o">/**</span> <span class="n">memory</span> <span class="n">patch</span> <span class="n">location</span> <span class="k">for</span> <span class="n">weight</span> <span class="n">data</span> <span class="o">*/</span>
+    <span class="n">uint16_t</span> <span class="n">DRAM_weight</span><span class="p">;</span>
+
+    <span class="o">/**</span> <span class="n">size</span> <span class="n">of</span> <span class="n">weight</span> <span class="n">data</span> <span class="o">*/</span>
+    <span class="nb">int</span> <span class="n">DRAM_nweight</span><span class="p">;</span>
+
+    <span class="o">/**</span> <span class="n">memory</span> <span class="n">patch</span> <span class="n">location</span> <span class="k">for</span> <span class="n">bias</span> <span class="n">data</span> <span class="o">*/</span>
+    <span class="n">uint16_t</span> <span class="n">DRAM_bias</span><span class="p">;</span>
+
+    <span class="o">/**</span> <span class="n">size</span> <span class="n">of</span> <span class="n">bias</span> <span class="n">data</span> <span class="o">*/</span>
+    <span class="nb">int</span> <span class="n">DRAM_nbias</span><span class="p">;</span>
+
+    <span class="o">/**</span> <span class="n">uint8_t</span> <span class="nb">input</span> <span class="n">data</span> <span class="o">*/</span>
+    <span class="nb">bool</span> <span class="n">unsgn_input</span><span class="p">;</span>
+
+    <span class="o">/**</span> <span class="n">number</span> <span class="n">of</span> <span class="n">instruction</span> <span class="o">*/</span>
+    <span class="n">uint8_t</span> <span class="n">inst_cnt</span><span class="p">;</span>
+    <span class="p">};</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="NPUtoolchain.html" class="btn btn-neutral float-left" title="30. NPU toolchain" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="IPC.html" class="btn btn-neutral float-right" title="32. IPC" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2021.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

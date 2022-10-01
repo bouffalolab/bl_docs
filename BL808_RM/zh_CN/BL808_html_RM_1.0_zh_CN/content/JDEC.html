@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>28. JDEC &mdash; BL808 参考手册  文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="29. VENC" href="VENC.html" />
+    <link rel="prev" title="27. MJPEG" href="MJPEG.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL808 参考手册
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. 系统和存储器概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. 复位和时钟</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPIO.html">4. GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">5. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">6. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">7. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA2D.html">8. DMA2D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lz4d.html">9. LZ4D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBI.html">10. DBI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DPI.html">11. DPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DSI.html">12. DSI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cam.html">13. CAM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">14. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">15. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">16. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">17. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">18. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">19. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2s.html">20. I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PDM.html">21. PDM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AUDIO.html">22. AUDIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PSRAM.html">23. PSRAM Contorller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Emac.html">24. Emac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USB.html">25. USB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ISO11898.html">26. ISO11898</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MJPEG.html">27. MJPEG</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">28. JDEC</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">28.1. 简介</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">28.2. 主要特点</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">28.3. 功能描述</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">28.3.1. 输出配置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">28.3.2. 量化系数</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#swap">28.3.3. swap模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#skip">28.3.4. skip模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">28.3.5. 缓冲区</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">28.3.6. 操作流程</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">28.4. 使用注意事项</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">28.5. 寄存器描述</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="VENC.html">29. VENC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NPUtoolchain.html">30. NPU toolchain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NPU.html">31. NPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IPC.html">32. IPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LowPower.html">33. LowPower</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SEC_ENG.html">34. SEC ENG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">35. 版本信息</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL808 参考手册</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">28. </span>JDEC</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="jdec">
+<h1><span class="section-number">28. </span>JDEC<a class="headerlink" href="#jdec" title="永久链接至标题"></a></h1>
+<section id="id1">
+<h2><span class="section-number">28.1. </span>简介<a class="headerlink" href="#id1" title="永久链接至标题"></a></h2>
+<p>JDEC可将内存中的jpg压缩图片解码成原始图片，进一步通过YUV2RGB模块转换成RGB模式进行显示。</p>
+</section>
+<section id="id2">
+<h2><span class="section-number">28.2. </span>主要特点<a class="headerlink" href="#id2" title="永久链接至标题"></a></h2>
+<ul class="simple">
+<li><p>支持YUV400/YUV420/YUV422格式</p></li>
+<li><p>量化系数可调，范围是1~75、100</p></li>
+<li><p>支持swap模式</p></li>
+<li><p>支持skip模式，自动跳过jpg头</p></li>
+<li><p>有多达16张jpg图片的缓冲区</p></li>
+<li><p>支持灵活的中断配置模式，既可设定指定张数中断，也可以设置全部完成中断</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2><span class="section-number">28.3. </span>功能描述<a class="headerlink" href="#id3" title="永久链接至标题"></a></h2>
+<section id="id4">
+<h3><span class="section-number">28.3.1. </span>输出配置<a class="headerlink" href="#id4" title="永久链接至标题"></a></h3>
+<p>通过寄存器JDEC_CONTROL_1的位&lt;REG_YUV_MODE&gt;可以选择输出数据的YCbCr格式，包括YCbCr4:2:2平面模式，YCbCr4:2:0平面模式和YCbCr4:0:0灰度图。输出图像数据的起始地址由寄存器JDEC_YY_FRAME_ADDR和JDEC_UV_FRAME_ADDR决定。输出图像数据的分辨率由寄存器JDEC_FRAME_SIZE决定，该寄存器中位&lt;REG_FRAME_HBLK&gt;代表垂直方向8x8块的数量，位&lt;REG_FRAME_WBLK&gt;代表水平方向8x8块的数量。</p>
+</section>
+<section id="id5">
+<h3><span class="section-number">28.3.2. </span>量化系数<a class="headerlink" href="#id5" title="永久链接至标题"></a></h3>
+<p>通过寄存器JDEC_CONTROL_1的位&lt;REG_Q_MODE&gt;可以设置量化系数，当设置值不超过75时，量化系数为设置值；当设置值超过75时，量化系数为100。</p>
+</section>
+<section id="swap">
+<h3><span class="section-number">28.3.3. </span>swap模式<a class="headerlink" href="#swap" title="永久链接至标题"></a></h3>
+<p>使用swap模式时，会有两帧输出图像大小的空间作为缓冲区，当其中一帧空间放满后则会继续将解压后的图像数据放在另一块帧空间缓冲区里，来回交替使用。该模式可以和显示模块连动提高效率。</p>
+</section>
+<section id="skip">
+<h3><span class="section-number">28.3.4. </span>skip模式<a class="headerlink" href="#skip" title="永久链接至标题"></a></h3>
+<p>当将寄存器JDEC_HEADER_SKIP中位&lt;REG_HDER_SKIP&gt;设置为1时，则skip模式被启用，此时JDEC模块会以寄存器JDEC_FRAM_PUSH寄存器中位&lt;REG_JP_ADDR&gt;设定的jpg图片起始地址加上寄存器JDEC_HEADER_SKIP中位&lt;REG_HDER_SKIP_BYTE&gt;设定的偏移字节数量作为最终解压jpg的实际起始地址。这种操作方式可以用在跳过jpg头部信息的场景中。</p>
+</section>
+<section id="id6">
+<h3><span class="section-number">28.3.5. </span>缓冲区<a class="headerlink" href="#id6" title="永久链接至标题"></a></h3>
+<p>JDEC输入缓冲区可以存放多达16张jpg的相关信息，每次向JDEC_FRAM_PUSH寄存器的位&lt;REG_JP_PUSH&gt;写1都会使得缓冲区可用空间递减，JDEC每次解压完一张JPG后该缓冲区的可用空间会递增，可通过读取JDEC_FRAM_STS寄存器中的位&lt;JP_FRAME_CNT&gt;获取当前缓冲区中待解压的jpg图片数量。JDEC_CONTROL_3寄存器中的位&lt;FRAME_VALID_CNT&gt;表示当前解压完成但没有POP的图片数量。</p>
+</section>
+<section id="id7">
+<h3><span class="section-number">28.3.6. </span>操作流程<a class="headerlink" href="#id7" title="永久链接至标题"></a></h3>
+<ul class="simple">
+<li><p>失能JDEC模块，将寄存器JDEC_CONTROL_1中位REG_MJ_DEC_ENABLE清零。</p></li>
+<li><p>设置输出图像数据的模式为YUV422/YUV420/YUV400等。</p></li>
+<li><p>根据应用场景选择是否使能swap模式。</p></li>
+<li><p>设置图像的量化系数。</p></li>
+<li><p>设定输出图像Y和UV分量分别在内存中的起始地址。</p></li>
+<li><p>根据数据图像数据的分辨率设置水平和垂直的8x8块数量。</p></li>
+<li><p>如果需要使能skip模式，则需要设置skip的字节数量。</p></li>
+<li><p>使能JDEC模块，将寄存器JDEC_CONTROL_1中位REG_MJ_DEC_ENABLE置1。</p></li>
+<li><p>同步写入输入jpg图像的起始地址和加入缓冲区的命令，即将jpg图像的起始地址写入寄存器JDEC_FRAM_PUSH且该寄存器的位&lt;REG_JP_PUSH&gt;为1。</p></li>
+</ul>
+</section>
+</section>
+<section id="id8">
+<h2><span class="section-number">28.4. </span>使用注意事项<a class="headerlink" href="#id8" title="永久链接至标题"></a></h2>
+<ul class="simple">
+<li><p>JPG图片在内存中的起始地址需要8字节对齐</p></li>
+<li><p>JPG图片的分辨率必须是8的整数倍</p></li>
+<li><p>目前仅支持标准的霍夫曼编码</p></li>
+</ul>
+</section>
+<section id="id9">
+<h2><span class="section-number">28.5. </span>寄存器描述<a class="headerlink" href="#id9" title="永久链接至标题"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="MJPEG.html" class="btn btn-neutral float-left" title="27. MJPEG" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="VENC.html" class="btn btn-neutral float-right" title="29. VENC" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2021.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

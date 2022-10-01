@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>20. I2S &mdash; BL808 Reference Manual  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="21. PDM" href="PDM.html" />
+    <link rel="prev" title="19. TIMER" href="TIMER.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL808 Reference Manual
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. System and Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. Reset and Clock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPIO.html">4. GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">5. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">6. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">7. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA2D.html">8. DMA2D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lz4d.html">9. LZ4D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBI.html">10. DBI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DPI.html">11. DPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DSI.html">12. DSI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cam.html">13. CAM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">14. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">15. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">16. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">17. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">18. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">19. TIMER</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">20. I2S</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">20.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#features">20.2. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#functional-description">20.3. Functional Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">20.4. Functional Description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data-formats">20.4.1. Data Formats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#basic-architecture">20.4.2. Basic architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clock-source">20.4.3. Clock source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#i2s-interrupt">20.4.4. I2S Interrupt</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#register-description">20.5. Register description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#i2s-config">20.5.1. i2s_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#i2s-int-sts">20.5.2. i2s_int_sts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#i2s-bclk-config">20.5.3. i2s_bclk_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#i2s-fifo-config-0">20.5.4. i2s_fifo_config_0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#i2s-fifo-config-1">20.5.5. i2s_fifo_config_1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#i2s-fifo-wdata">20.5.6. i2s_fifo_wdata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#i2s-fifo-rdata">20.5.7. i2s_fifo_rdata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#i2s-io-config">20.5.8. i2s_io_config</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="PDM.html">21. PDM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AUDIO.html">22. AUDIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PSRAM.html">23. PSRAM Contorller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Emac.html">24. Emac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USB.html">25. USB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ISO11898.html">26. ISO11898</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MJPEG.html">27. MJPEG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="JDEC.html">28. JDEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="VENC.html">29. VENC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NPUtoolchain.html">30. NPU toolchain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NPU.html">31. NPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IPC.html">32. IPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LowPower.html">33. LowPower</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SEC_ENG.html">34. SEC ENG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">35. Revision history</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL808 Reference Manual</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">20. </span>I2S</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="i2s">
+<h1><span class="section-number">20. </span>I2S<a class="headerlink" href="#i2s" title="Permalink to this headline"></a></h1>
+<section id="overview">
+<h2><span class="section-number">20.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
+<p>InterIC Sound (I2S), also Integrated Interchip Sound (IIS), is a digital audio transmission specification defined by Philips in 1986 (revised in 1996) for transmitting digital audio data between internal devices of a system.</p>
+<p>I2S transmits clock signals and data signals separately, so that the receiver does not need to restore the clock from the data signal, reducing the design difficulty of the receiver.</p>
+</section>
+<section id="features">
+<h2><span class="section-number">20.2. </span>Features<a class="headerlink" href="#features" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p>Supports master and slave modes</p></li>
+<li><p>Supported data formats: LeftJustified/RightJustified/Normal I2S/DSP</p></li>
+<li><p>Supports 8/16/24/32-bit data width</p></li>
+<li><p>Supports data MSB/LSB switching</p></li>
+<li><p>Supports DMA transfer mode</p></li>
+<li><p>Supports 4-channel and 6-channel modes in addition to mono/2-channel mode</p></li>
+<li><p>Supports playing of mono audio in the 2-channel mode and channel mode swapping</p></li>
+<li><p>The 2-channel recording data with less than 16 bits can be merged into FIFO data with less than 32 bits</p></li>
+<li><p>Supports 16/32/48/64-bit frame size</p></li>
+<li><p>Supports dynamic mute switch function</p></li>
+<li><p>TX FIFO has a width of 32 bits and a depth of 16</p></li>
+<li><p>RX FIFO has a width of 32 bits and a depth of 16</p></li>
+</ul>
+</section>
+<section id="functional-description">
+<h2><span class="section-number">20.3. </span>Functional Description<a class="headerlink" href="#functional-description" title="Permalink to this headline"></a></h2>
+<table class="colwidths-given docutils align-center" id="id2" style="width: 80%">
+<caption><span class="caption-number">Table 20.1 </span><span class="caption-text">I2S pin list</span><a class="headerlink" href="#id2" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 30%" />
+<col style="width: 40%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>I2Sx_DI</p></td>
+<td><p>Input</p></td>
+<td><p>Serial data input</p></td>
+</tr>
+<tr class="row-odd"><td><p>I2Sx_DO</p></td>
+<td><p>Output</p></td>
+<td><p>Serial data output</p></td>
+</tr>
+<tr class="row-even"><td><p>I2Sx_BCLK</p></td>
+<td><p>Input/output</p></td>
+<td><p>Synchronous transmission clock: output (master)/input (slave)</p></td>
+</tr>
+<tr class="row-odd"><td><p>I2Sx_FS</p></td>
+<td><p>Input/output</p></td>
+<td><p>Data start/end signal: output (master)/input (slave)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id1">
+<h2><span class="section-number">20.4. </span>Functional Description<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h2>
+<section id="data-formats">
+<h3><span class="section-number">20.4.1. </span>Data Formats<a class="headerlink" href="#data-formats" title="Permalink to this headline"></a></h3>
+<p>I2S supports Normal I2S/LeftJustified/RightJustified modes. Normal I2S is a special case of the LeftJustified mode. The mode is set by I2S_CONFIG[17:16].</p>
+<figure class="align-center" id="id3">
+<img alt="../_images/I2sNormal.svg" src="../_images/I2sNormal.svg" /><figcaption>
+<p><span class="caption-number">Fig. 20.1 </span><span class="caption-text">Normal I2S</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>OFFET is configured by I2S_CONFIG[25:20]. The only difference between LeftJustified and Normal I2S modes is the different configuration of I2S_CONFIG[25:20].</p>
+<figure class="align-center" id="id4">
+<img alt="../_images/I2sLeftRight.svg" src="../_images/I2sLeftRight.svg" /><figcaption>
+<p><span class="caption-number">Fig. 20.2 </span><span class="caption-text">I2S LeftJustified/RightJustified</span><a class="headerlink" href="#id4" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id5">
+<img alt="../_images/I2sTDM64.svg" src="../_images/I2sTDM64.svg" /><figcaption>
+<p><span class="caption-number">Fig. 20.3 </span><span class="caption-text">I2S TDM64 Mode—6-Channel Recording</span><a class="headerlink" href="#id5" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The width of a single pulse is controlled by I2S_CONFIG[6]. When it is set to 0, the width of high-level pulse of FS signal line is the width of data size, and when it is set to 1, that width is 1. Generally, this register is set to 1 in the multi-channel TDM64 mode.</p>
+</section>
+<section id="basic-architecture">
+<h3><span class="section-number">20.4.2. </span>Basic architecture<a class="headerlink" href="#basic-architecture" title="Permalink to this headline"></a></h3>
+</section>
+<section id="clock-source">
+<h3><span class="section-number">20.4.3. </span>Clock source<a class="headerlink" href="#clock-source" title="Permalink to this headline"></a></h3>
+<p>The clock source of I2S is provided by audio PLL, and the clock divider is used to divide the clock source and then generate the clock signal to drive I2S, as shown below:</p>
+<figure class="align-center" id="id6">
+<img alt="../_images/I2SClk.svg" src="../_images/I2SClk.svg" /><figcaption>
+<p><span class="caption-number">Fig. 20.4 </span><span class="caption-text">I2S clock</span><a class="headerlink" href="#id6" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="i2s-interrupt">
+<h3><span class="section-number">20.4.4. </span>I2S Interrupt<a class="headerlink" href="#i2s-interrupt" title="Permalink to this headline"></a></h3>
+<p>I2S supports the following interrupt control modes:</p>
+<ul class="simple">
+<li><p>TX FIFO request interrupt</p></li>
+<li><p>RX FIFO request interrupt</p></li>
+<li><p>Overrun/undderun error interrupt</p></li>
+</ul>
+<p>A TX FIFO request interrupt will be generated when TX_FIFO_CNT in I2S_FIFO_CONFIG_1 is greater than TX_FIFO_TH. When the condition is not met, the interrupt flag will be cleared automatically.</p>
+<p>A RX FIFO request interrupt will be generated when RX_FIFO_CNT in I2S_FIFO_CONFIG_1 is greater than RX_FIFO_TH. When the condition is not met, the interrupt flag will be cleared automatically.</p>
+<p>If the TX/RX FIFO overflows or underflows, it will trigger the error interrupt. When the error disappears, the flag bit will be cleared automatically.</p>
+<p>All the interrupt enable bits and interrupt flag bits of I2S are in the I2S_INT_STS register.</p>
+</section>
+</section>
+<section id="register-description">
+<h2><span class="section-number">20.5. </span>Register description<a class="headerlink" href="#register-description" title="Permalink to this headline"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 63%" />
+<col style="width: 37%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Name</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#i2s-config">i2s_config</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#i2s-int-sts">i2s_int_sts</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#i2s-bclk-config">i2s_bclk_config</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#i2s-fifo-config-0">i2s_fifo_config_0</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#i2s-fifo-config-1">i2s_fifo_config_1</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#i2s-fifo-wdata">i2s_fifo_wdata</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#i2s-fifo-rdata">i2s_fifo_rdata</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#i2s-io-config">i2s_io_config</a></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<section id="i2s-config">
+<h3><span class="section-number">20.5.1. </span>i2s_config<a class="headerlink" href="#i2s-config" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000ab00</p>
+<figure class="align-center">
+<img alt="../_images/i2s_i2s_config.svg" src="../_images/i2s_i2s_config.svg" /></figure>
+</section>
+<section id="i2s-int-sts">
+<h3><span class="section-number">20.5.2. </span>i2s_int_sts<a class="headerlink" href="#i2s-int-sts" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000ab04</p>
+<figure class="align-center">
+<img alt="../_images/i2s_i2s_int_sts.svg" src="../_images/i2s_i2s_int_sts.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:27</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>26</p></td>
+<td><p>cr_i2s_fer_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt enable of i2s_fer_int</p></td>
+</tr>
+<tr class="row-even"><td><p>25</p></td>
+<td><p>cr_i2s_rxf_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt enable of i2s_rxf_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>24</p></td>
+<td><p>cr_i2s_txf_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt enable of i2s_txf_int</p></td>
+</tr>
+<tr class="row-even"><td><p>23:11</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>cr_i2s_fer_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt mask of i2s_fer_int</p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>cr_i2s_rxf_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt mask of i2s_rxf_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>cr_i2s_txf_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt mask of i2s_txf_int</p></td>
+</tr>
+<tr class="row-even"><td><p>7:3</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>i2s_fer_int</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>I2S TX/RX FIFO error interrupt, auto-cleared when FIFO overflow/underflow error flag is cleared</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>i2s_rxf_int</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>I2S RX FIFO ready (rx_fifo_cnt &gt; rx_fifo_th) interrupt, auto-cleared when data is popped</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>i2s_txf_int</p></td>
+<td><p>r</p></td>
+<td><p>1’b1</p></td>
+<td><p>I2S TX FIFO ready (tx_fifo_cnt &gt; tx_fifo_th) interrupt, auto-cleared when data is pushed</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="i2s-bclk-config">
+<h3><span class="section-number">20.5.3. </span>i2s_bclk_config<a class="headerlink" href="#i2s-bclk-config" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000ab10</p>
+<figure class="align-center">
+<img alt="../_images/i2s_i2s_bclk_config.svg" src="../_images/i2s_i2s_bclk_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:28</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>27:16</p></td>
+<td><p>cr_bclk_div_h</p></td>
+<td><p>r/w</p></td>
+<td><p>12’d1</p></td>
+<td><p>I2S BCLK active high period (unit: cycle of i2s_clk)</p></td>
+</tr>
+<tr class="row-even"><td><p>15:12</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>11:0</p></td>
+<td><p>cr_bclk_div_l</p></td>
+<td><p>r/w</p></td>
+<td><p>12’d1</p></td>
+<td><p>I2S BCLK active low period (unit: cycle of i2s_clk)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="i2s-fifo-config-0">
+<h3><span class="section-number">20.5.4. </span>i2s_fifo_config_0<a class="headerlink" href="#i2s-fifo-config-0" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000ab80</p>
+<figure class="align-center">
+<img alt="../_images/i2s_i2s_fifo_config_0.svg" src="../_images/i2s_i2s_fifo_config_0.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:11</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="4"><p>10</p></td>
+<td rowspan="4"><p>cr_fifo_24b_lj</p></td>
+<td rowspan="4"><p>r/w</p></td>
+<td rowspan="4"><p>1’b0</p></td>
+<td rowspan="4"><p>FIFO 24-bit data left-justified mode</p>
+<p>1’b0: Right-justified, {8’h0, data[23:0]}</p>
+<p>1’b1: Left-justified, {data[23:0], 8’h0}</p>
+<p>Note: Valid only when cr_data_size = 2’d2 (24-bit)</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="2"><p>9</p></td>
+<td rowspan="2"><p>cr_fifo_lr_exchg</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>1’b0</p></td>
+<td rowspan="2"><p>The position of L/R channel data within each entry is exchanged if this bit is enabled</p>
+<p>Can only be enabled if data size is 8 or 16 bits and csr_fifo_lr_merge is enabled</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="4"><p>8</p></td>
+<td rowspan="4"><p>cr_fifo_lr_merge</p></td>
+<td rowspan="4"><p>r/w</p></td>
+<td rowspan="4"><p>1’b0</p></td>
+<td rowspan="4"><p>Each FIFO entry contains both L/R channel data if this bit is enabled</p>
+<p>Can only be enabled if data size is 8 or 16 bits</p>
+<p>Note: cr_fifo_lr_merge &amp;cr_mono_mode should NOT be enabled at the same time</p>
+<p>Note: cr_fifo_lr_merge &amp;cr_fifo_l_shift should NOT be enabled at the same time</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>rx_fifo_underflow</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>Underflow flag of RX FIFO, can be cleared by rx_fifo_clr</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>rx_fifo_overflow</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>Overflow flag of RX FIFO, can be cleared by rx_fifo_clr</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>tx_fifo_underflow</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>Underflow flag of TX FIFO, can be cleared by tx_fifo_clr</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>tx_fifo_overflow</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>Overflow flag of TX FIFO, can be cleared by tx_fifo_clr</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>rx_fifo_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1’b0</p></td>
+<td><p>Clear signal of RX FIFO</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>tx_fifo_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1’b0</p></td>
+<td><p>Clear signal of TX FIFO</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>i2s_dma_rx_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Enable signal of dma_rx_req/ack interface</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>i2s_dma_tx_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Enable signal of dma_tx_req/ack interface</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="i2s-fifo-config-1">
+<h3><span class="section-number">20.5.5. </span>i2s_fifo_config_1<a class="headerlink" href="#i2s-fifo-config-1" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000ab84</p>
+<figure class="align-center">
+<img alt="../_images/i2s_i2s_fifo_config_1.svg" src="../_images/i2s_i2s_fifo_config_1.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:28</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>27:24</p></td>
+<td><p>rx_fifo_th</p></td>
+<td><p>r/w</p></td>
+<td><p>4’d0</p></td>
+<td><p>RX FIFO threshold, dma_rx_req will not be asserted if rx_fifo_cnt is less than this value</p></td>
+</tr>
+<tr class="row-even"><td><p>23:20</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>19:16</p></td>
+<td><p>tx_fifo_th</p></td>
+<td><p>r/w</p></td>
+<td><p>4’d0</p></td>
+<td><p>TX FIFO threshold, dma_tx_req will not be asserted if tx_fifo_cnt is less than this value</p></td>
+</tr>
+<tr class="row-even"><td><p>15:13</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>12:8</p></td>
+<td><p>rx_fifo_cnt</p></td>
+<td><p>r</p></td>
+<td><p>5’d0</p></td>
+<td><p>RX FIFO available count</p></td>
+</tr>
+<tr class="row-even"><td><p>7:5</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>4:0</p></td>
+<td><p>tx_fifo_cnt</p></td>
+<td><p>r</p></td>
+<td><p>5’d16</p></td>
+<td><p>TX FIFO available count</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="i2s-fifo-wdata">
+<h3><span class="section-number">20.5.6. </span>i2s_fifo_wdata<a class="headerlink" href="#i2s-fifo-wdata" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000ab88</p>
+<figure class="align-center">
+<img alt="../_images/i2s_i2s_fifo_wdata.svg" src="../_images/i2s_i2s_fifo_wdata.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>i2s_fifo_wdata</p></td>
+<td><p>w</p></td>
+<td><p>x</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="i2s-fifo-rdata">
+<h3><span class="section-number">20.5.7. </span>i2s_fifo_rdata<a class="headerlink" href="#i2s-fifo-rdata" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000ab8c</p>
+<figure class="align-center">
+<img alt="../_images/i2s_i2s_fifo_rdata.svg" src="../_images/i2s_i2s_fifo_rdata.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>i2s_fifo_rdata</p></td>
+<td><p>r</p></td>
+<td><p>32’h0</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="i2s-io-config">
+<h3><span class="section-number">20.5.8. </span>i2s_io_config<a class="headerlink" href="#i2s-io-config" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000abfc</p>
+<figure class="align-center">
+<img alt="../_images/i2s_i2s_io_config.svg" src="../_images/i2s_i2s_io_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><p>7</p></td>
+<td rowspan="2"><p>cr_deg_en</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>1’b0</p></td>
+<td rowspan="2"><p>Deglitch enable (for all th input pins)</p>
+<p>1’b0: Disabled, 1’b1: Enabled</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="4"><p>6:4</p></td>
+<td rowspan="4"><p>cr_deg_cnt</p></td>
+<td rowspan="4"><p>r/w</p></td>
+<td rowspan="4"><p>3’d0</p></td>
+<td rowspan="4"><p>Deglitch cycle count (unit: cycle of I2S kernel clock)</p>
+<p>3’d0: 1 cycle</p>
+<p>3’d1: 2 cycles</p>
+<p>···</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="2"><p>3</p></td>
+<td rowspan="2"><p>cr_i2s_bclk_inv</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>1’b0</p></td>
+<td rowspan="2"><p>Inverse BCLK signal</p>
+<p>0: No inverse, 1: Inverse</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="2"><p>2</p></td>
+<td rowspan="2"><p>cr_i2s_fs_inv</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>1’b0</p></td>
+<td rowspan="2"><p>Inverse FS signal</p>
+<p>0: No inverse, 1: Inverse</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="2"><p>1</p></td>
+<td rowspan="2"><p>cr_i2s_rxd_inv</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>1’b0</p></td>
+<td rowspan="2"><p>Inverse RXD signal</p>
+<p>0: No inverse, 1: Inverse</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="2"><p>0</p></td>
+<td rowspan="2"><p>cr_i2s_txd_inv</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>1’b0</p></td>
+<td rowspan="2"><p>Inverse TXD signal</p>
+<p>0: No inverse, 1: Inverse</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="TIMER.html" class="btn btn-neutral float-left" title="19. TIMER" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="PDM.html" class="btn btn-neutral float-right" title="21. PDM" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

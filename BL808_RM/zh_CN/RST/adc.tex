@@ -1,0 +1,70 @@
+\section{寄存器描述}
+\regover{
+{\hyperref[gpip-gpadc-config]{gpadc\_config}}&
+\\
+\hline
+{\hyperref[gpip-gpadc-dma-rdata]{gpadc\_dma\_rdata}}&
+\\
+\hline
+{\hyperref[gpip-gpadc-pir-train]{gpadc\_pir\_train}}&
+\\
+\hline
+}
+
+\subsection{gpadc\_config}
+\label{gpip-gpadc-config}
+地址：0x20002000
+ \begin{figure}[H]
+\includegraphics{gpip_gpadc_config.pdf}
+\end{figure}
+
+\regdes{31:24&rsvd&rsvd&8'd0&\\\hline
+23:22&gpadc\_fifo\_thl&r/w&2'd0&fifo threshold \par 2'b00: 1 data  \par 2'b01: 4 data  \par 2'b10: 8 data \par 2'b11: 16 data
+\\\hline
+21:16&gpadc\_fifo\_data\_count&r&6'd0&fifo data number\\\hline
+15&RSVD& & & \\\hline
+14&gpadc\_fifo\_underrun\_mask&r/w&1'b0&write 1 mask\\\hline
+13&gpadc\_fifo\_overrun\_mask&r/w&1'b0&write 1 mask\\\hline
+12&gpadc\_rdy\_mask&r/w&1'b0&write 1 mask\\\hline
+11&RSVD& & & \\\hline
+10&gpadc\_fifo\_underrun\_clr&r/w&1'b0&Write 1 to clear flag\\\hline
+9&gpadc\_fifo\_overrun\_clr&r/w&1'b0&Write 1 to clear flag\\\hline
+8&gpadc\_rdy\_clr&r/w&1'b0&Write 1 to clear flag\\\hline
+7&RSVD& & & \\\hline
+6&gpadc\_fifo\_underrun&r&1'b0&FIFO underrun interrupt flag\\\hline
+5&gpadc\_fifo\_overrun&r&1'b0&FIFO overrun interrupt flag\\\hline
+4&gpadc\_rdy&r&1'b0&Conversion data ready interrupt flag\\\hline
+3&gpadc\_fifo\_full&r&1'b0&FIFO full flag\\\hline
+2&gpadc\_fifo\_ne&r&1'b0&FIFO not empty flag\\\hline
+1&gpadc\_fifo\_clr&w1c&1'b0&FIFO clear signal\\\hline
+0&gpadc\_dma\_en&r/w&1'b0&GPADC DMA enbale\\\hline
+
+}
+\subsection{gpadc\_dma\_rdata}
+\label{gpip-gpadc-dma-rdata}
+地址：0x20002004
+ \begin{figure}[H]
+\includegraphics{gpip_gpadc_dma_rdata.pdf}
+\end{figure}
+
+\regdes{31:26&rsvd&rsvd&6'd0&\\\hline
+25:0&gpadc\_dma\_rdata&r&26'd0&GPADC finial conversion result stored in the FIFO\\\hline
+
+}
+\subsection{gpadc\_pir\_train}
+\label{gpip-gpadc-pir-train}
+地址：0x20002020
+ \begin{figure}[H]
+\includegraphics{gpip_gpadc_pir_train.pdf}
+\end{figure}
+
+\regdes{31:18&RSVD& & & \\\hline
+17&pir\_stop&r&0&PIR Training End\\\hline
+16&pir\_train&r/w&0&PIR Training Mode\\\hline
+15:13&RSVD& & & \\\hline
+12:8&pir\_cnt\_v&r&0&GPADC Record Extension Counter Value\\\hline
+7:5&RSVD& & & \\\hline
+4:0&pir\_extend&r/w&5'd15&GPADC Record Extension after PIR interrupt\\\hline
+
+}
+

@@ -1,0 +1,2299 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:v="http://schemas.microsoft.com/visio/2003/SVGExtensions/"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="7.0866141in"
+   height="4.7883186in"
+   viewBox="0 0 510.23628 344.75902"
+   xml:space="preserve"
+   color-interpolation-filters="sRGB"
+   class="st15"
+   version="1.1"
+   id="svg750"
+   sodipodi:docname="SystemArch.svg"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"><metadata
+   id="metadata754"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><sodipodi:namedview
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="0"
+   inkscape:pageshadow="2"
+   inkscape:window-width="1920"
+   inkscape:window-height="1017"
+   id="namedview752"
+   showgrid="false"
+   inkscape:zoom="1.6953059"
+   inkscape:cx="332.93947"
+   inkscape:cy="226.02448"
+   inkscape:window-x="-8"
+   inkscape:window-y="-8"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="svg750"
+   inkscape:document-rotation="0" />
+	<v:documentProperties
+   v:langID="2052"
+   v:metric="true"
+   v:viewMarkup="false">
+		<v:userDefs>
+			<v:ud
+   v:nameU="msvSubprocessMaster"
+   v:prompt=""
+   v:val="VT4(Box)" />
+			<v:ud
+   v:nameU="msvNoAutoConnect"
+   v:val="VT0(1):26" />
+		</v:userDefs>
+	</v:documentProperties>
+
+	<style
+   type="text/css"
+   id="style2">
+	<![CDATA[
+		.st1 {fill:#ffffff;stroke:#7f7f7f;stroke-dasharray:7,5;stroke-linecap:round;stroke-linejoin:round;stroke-width:1}
+		.st2 {fill:#7f7f7f;fill-opacity:1;stroke:#7f7f7f;stroke-opacity:1;stroke-width:0.28409090909091}
+		.st3 {fill:#fd9759;stroke:#ffffff;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.5}
+		.st4 {fill:#ffffff;font-family:Calibri;font-size:0.666664em}
+		.st5 {font-size:1em}
+		.st6 {fill:#ffffff;stroke:#4271c6;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.5}
+		.st7 {fill:#ffffff;stroke:#5b9bd5;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.5}
+		.st8 {fill:#5b9bd5;stroke:#ffffff;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.5}
+		.st9 {fill:none;marker-end:url(#mrkr13-246);marker-start:url(#mrkr13-244);stroke:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.5}
+		.st10 {fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-opacity:1;stroke-width:0.16556291390728}
+		.st11 {fill:#5b9bd5;font-family:Calibri;font-size:0.666664em}
+		.st12 {fill:#85b6cc;stroke:#5b9bd5;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.5}
+		.st13 {fill:#7030a0;stroke:#ffffff;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.5}
+		.st14 {fill:#ffffff;font-family:Calibri;font-size:0.75em}
+		.st15 {fill:none;fill-rule:evenodd;font-size:12px;overflow:visible;stroke-linecap:square;stroke-miterlimit:3}
+	]]>
+	</style>
+
+	<defs
+   id="Markers">
+		<g
+   id="lend13">
+			<path
+   d="M 3,1 0,0 3,-1 v 2"
+   style="stroke:none"
+   id="path4" />
+		</g>
+		<marker
+   id="mrkr13-4"
+   class="st2"
+   v:arrowType="13"
+   v:arrowSize="2"
+   v:setback="10.56"
+   refX="10.56"
+   orient="auto"
+   markerUnits="strokeWidth"
+   overflow="visible">
+			<use
+   xlink:href="#lend13"
+   transform="scale(3.52)"
+   id="use7"
+   x="0"
+   y="0"
+   width="100%"
+   height="100%" />
+		</marker>
+		<marker
+   id="mrkr13-6"
+   class="st2"
+   v:arrowType="13"
+   v:arrowSize="2"
+   v:setback="10.56"
+   refX="-10.56"
+   orient="auto"
+   markerUnits="strokeWidth"
+   overflow="visible">
+			<use
+   xlink:href="#lend13"
+   transform="scale(-3.52)"
+   id="use10"
+   x="0"
+   y="0"
+   width="100%"
+   height="100%" />
+		</marker>
+		<marker
+   id="mrkr13-244"
+   class="st10"
+   v:arrowType="13"
+   v:arrowSize="2"
+   v:setback="18.12"
+   refX="18.120001"
+   orient="auto"
+   markerUnits="strokeWidth"
+   overflow="visible">
+			<use
+   xlink:href="#lend13"
+   transform="scale(6.04)"
+   id="use13"
+   x="0"
+   y="0"
+   width="100%"
+   height="100%" />
+		</marker>
+		<marker
+   id="mrkr13-246"
+   class="st10"
+   v:arrowType="13"
+   v:arrowSize="2"
+   v:setback="18.12"
+   refX="-18.120001"
+   orient="auto"
+   markerUnits="strokeWidth"
+   overflow="visible">
+			<use
+   xlink:href="#lend13"
+   transform="scale(-6.04)"
+   id="use16"
+   x="0"
+   y="0"
+   width="100%"
+   height="100%" />
+		</marker>
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	
+			
+			
+			
+			
+			
+					
+			
+			
+			
+			
+			
+			
+					
+			
+			
+			
+			
+			
+			
+					
+			
+			
+			
+			
+			
+			
+					
+			
+			
+			
+			
+			
+			
+					
+			
+			
+			
+			
+			
+			
+					
+			
+			
+			
+			
+			
+			
+					
+			
+			
+			
+			
+			
+			
+					
+			
+			
+			
+			
+			
+			
+					
+			
+			
+			
+			
+			
+			
+					
+			
+			
+			
+			
+			
+			
+					
+			
+			
+			
+			
+			
+			
+					
+			
+			
+			
+			
+			
+			
+					
+			
+			
+			
+			
+			
+			
+					
+			
+			
+			
+			
+			
+			
+					
+			
+			
+			
+			
+			
+			
+					
+			
+			
+			
+			
+			
+			
+					
+			
+			
+			
+			
+			
+			
+					
+			
+			
+			
+			
+			
+			
+					
+			
+			
+			
+			
+			
+			
+					
+			
+			
+			
+			
+			
+			
+					
+			
+			
+			
+			
+			
+			
+					
+			
+			
+			
+			
+			
+			
+					
+			
+			
+			
+			
+			
+			
+					
+			
+			
+			
+			
+			
+			
+					
+			
+			
+			
+			
+			
+			
+					
+			
+			
+			
+			
+			
+			
+					
+			
+			
+			
+			
+			
+			
+					
+			
+			
+			
+			
+			
+			
+					
+			
+			
+			
+			
+			
+			
+					
+			
+			
+			
+			
+			
+			
+					
+			
+			
+			
+			
+			
+			
+					
+			
+			
+			
+			
+			
+			
+					
+			
+			
+			
+			
+			
+			
+					
+			
+			
+			
+			
+			
+			
+					
+			
+			
+			
+			
+			
+			
+					
+			
+			
+			
+			
+			
+			
+					
+			
+			
+			
+			
+			
+			
+					
+			
+			
+			
+			
+			
+			
+					
+			
+			
+			
+			
+			
+			
+					
+			
+			
+			
+			
+			
+			
+					
+			
+			
+			
+			
+			
+			
+					
+			
+			
+			
+			
+			
+			
+					
+			
+			
+			
+			
+			
+			
+					
+			
+			
+			
+			
+			
+					
+			
+			
+			
+			
+			
+			
+					
+			
+			
+			
+			
+			
+			
+					
+			
+			
+			
+			
+			
+			
+					
+			
+			
+			
+			
+			
+			
+					</defs>
+	<g
+   id="shape109-1"
+   v:mID="109"
+   v:groupContext="shape"
+   transform="matrix(1.0409731,0,0,1,80.236608,-51.293599)"
+   style="fill:none;stroke:#000000;stroke-width:0.490061;stroke-miterlimit:3;stroke-dasharray:3.92049, 3.92049;stroke-dashoffset:0;stroke-opacity:1">
+			<title
+   id="title22">工作表.109</title>
+			<path
+   d="M 0,375.6 H 356.31 V 175.75 H 0 Z"
+   class="st1"
+   id="path24"
+   style="fill:none;stroke:#000000;stroke-width:0.490061;stroke-miterlimit:3;stroke-dasharray:3.92049, 3.92049;stroke-dashoffset:0;stroke-opacity:1" />
+		</g><g
+   id="shape108-7"
+   v:mID="108"
+   v:groupContext="shape"
+   transform="matrix(1.0409731,0,0,1,80.661808,-256.6634)"
+   style="fill:none;stroke:#000000;stroke-width:0.490061;stroke-miterlimit:3;stroke-dasharray:3.92049, 3.92049;stroke-dashoffset:0;stroke-opacity:1">
+			<title
+   id="title27">工作表.108</title>
+			<path
+   d="M 0,375.6 H 356.31 V 275.67 H 0 Z"
+   class="st1"
+   id="path29"
+   style="fill:none;stroke:#000000;stroke-width:0.490061;stroke-miterlimit:3;stroke-dasharray:3.92049, 3.92049;stroke-dashoffset:0;stroke-opacity:1" />
+		</g><rect
+   x="100.22091"
+   y="131.5466"
+   width="34.582699"
+   height="22.2519"
+   class="st3"
+   id="rect36"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /><text
+   x="117.28249"
+   y="140.27261"
+   class="st4"
+   v:langID="2052"
+   id="text40"
+   style="text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1"><tspan
+     sodipodi:role="line"
+     id="tspan1397"
+     x="117.28249"
+     y="140.27261"><v:paragraph
+   v:horizAlign="1" /><v:tabList />M0<v:newlineChar /></tspan><tspan
+     sodipodi:role="line"
+     id="tspan1399"
+     x="117.28249"
+     y="150.27257">(RISC-V)</tspan></text><g
+   id="shape2-15"
+   v:mID="2"
+   v:groupContext="shape"
+   transform="matrix(1.056775,0,0,1,86.331108,-195.8604)"
+   style="fill:none;stroke:#000000;stroke-width:0.486384;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1">
+			<title
+   id="title43">二维双向箭头</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<path
+   d="m 2.13,369.22 v -2.13 L 0,371.34 2.13,375.6 v -2.13 h 330.8 v 2.13 l 2.13,-4.26 -2.13,-4.25 v 2.13 z"
+   class="st6"
+   id="path45"
+   style="fill:none;stroke:#000000;stroke-width:0.486384;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" />
+		</g><g
+   id="shape3-17"
+   v:mID="3"
+   v:groupContext="shape"
+   transform="rotate(-90,-40.945496,214.3031)"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none">
+			<title
+   id="title48">一维双向箭头</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<path
+   d="m 1.42,371.34 v -1.41 L 0,372.76 1.42,375.6 v -1.42 h 16.72 v 1.42 l 1.42,-2.84 -1.42,-2.83 v 1.41 z"
+   class="st7"
+   id="path50"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none" />
+		</g><rect
+   x="143.591"
+   y="131.5466"
+   width="31.181101"
+   height="22.252001"
+   class="st8"
+   id="rect57"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /><text
+   x="149.36101"
+   y="145.0726"
+   class="st4"
+   v:langID="2052"
+   id="text59"
+   style="fill:#000000;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1;"><v:paragraph
+   v:horizAlign="1" /><v:tabList />EMAC</text><g
+   id="shape5-22"
+   v:mID="5"
+   v:groupContext="shape"
+   transform="rotate(-90,-20.110996,193.4686)"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none">
+			<title
+   id="title62">一维双向箭头.5</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<path
+   d="m 1.42,371.34 v -1.41 L 0,372.76 1.42,375.6 v -1.42 h 16.72 v 1.42 l 1.42,-2.84 -1.42,-2.83 v 1.41 z"
+   class="st7"
+   id="path64"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none" />
+		</g><rect
+   x="179.02441"
+   y="131.5466"
+   width="22.6772"
+   height="22.2519"
+   class="st8"
+   id="rect71"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /><text
+   x="183.57442"
+   y="145.0726"
+   class="st4"
+   v:langID="2052"
+   id="text73"
+   style="fill:#000000;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1;"><v:paragraph
+   v:horizAlign="1" /><v:tabList />SDH</text><g
+   id="shape7-27"
+   v:mID="7"
+   v:groupContext="shape"
+   transform="rotate(-90,-4.5204956,177.8781)"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none">
+			<title
+   id="title76">一维双向箭头.7</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<path
+   d="m 1.42,371.34 v -1.41 L 0,372.76 1.42,375.6 v -1.42 h 16.72 v 1.42 l 1.42,-2.84 -1.42,-2.83 v 1.41 z"
+   class="st7"
+   id="path78"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none" />
+		</g><rect
+   x="204.81941"
+   y="131.5466"
+   width="22.6772"
+   height="22.2519"
+   class="st8"
+   id="rect85"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /><text
+   x="209.57941"
+   y="145.0726"
+   class="st4"
+   v:langID="2052"
+   id="text87"
+   style="fill:#000000;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1;"><v:paragraph
+   v:horizAlign="1" /><v:tabList />USB</text><g
+   id="shape9-32"
+   v:mID="9"
+   v:groupContext="shape"
+   transform="rotate(-90,8.1645044,165.0511)"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none">
+			<title
+   id="title90">一维双向箭头.9</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<path
+   d="m 1.42,371.34 v -1.41 L 0,372.76 1.42,375.6 v -1.42 h 16.72 v 1.42 l 1.42,-2.84 -1.42,-2.83 v 1.41 z"
+   class="st7"
+   id="path92"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none" />
+		</g><rect
+   x="231.46541"
+   y="131.5466"
+   width="22.6772"
+   height="22.2519"
+   class="st8"
+   id="rect99"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /><text
+   x="237.28542"
+   y="140.27261"
+   class="st4"
+   v:langID="2052"
+   id="text103"
+   style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1"><tspan
+     sodipodi:role="line"
+     id="tspan1402"
+     x="237.28542"
+     y="140.27261"><v:paragraph
+   v:horizAlign="1" /><v:tabList />Sec<v:newlineChar /><tspan
+   x="236.86542"
+   class="st5"
+   id="tspan101"
+   style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /></tspan><tspan
+     sodipodi:role="line"
+     id="tspan1404"
+     x="236.86542"
+     y="150.27257"><tspan
+       x="236.86542"
+       class="st5"
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1"
+       id="tspan1406">Eng</tspan></tspan></text><g
+   id="shape13-38"
+   v:mID="13"
+   v:groupContext="shape"
+   transform="rotate(-90,21.487504,151.7281)"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none">
+			<title
+   id="title106">一维双向箭头.13</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<path
+   d="m 1.42,371.34 v -1.41 L 0,372.76 1.42,375.6 v -1.42 h 16.72 v 1.42 l 1.42,-2.84 -1.42,-2.83 v 1.41 z"
+   class="st7"
+   id="path108"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none" />
+		</g><rect
+   x="258.74841"
+   y="131.5466"
+   width="28.913401"
+   height="22.2519"
+   class="st8"
+   id="rect115"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /><text
+   x="262.97842"
+   y="145.0726"
+   class="st4"
+   v:langID="2052"
+   id="text117"
+   style="fill:#000000;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1;"><v:paragraph
+   v:horizAlign="1" /><v:tabList />DMA0</text><g
+   id="shape15-43"
+   v:mID="15"
+   v:groupContext="shape"
+   transform="rotate(-90,37.255004,135.9606)"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none">
+			<title
+   id="title120">一维双向箭头.15</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<path
+   d="m 1.42,371.34 v -1.41 L 0,372.76 1.42,375.6 v -1.42 h 16.72 v 1.42 l 1.42,-2.84 -1.42,-2.83 v 1.41 z"
+   class="st7"
+   id="path122"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none" />
+		</g><rect
+   x="290.42542"
+   y="131.5466"
+   width="28.913401"
+   height="22.2519"
+   class="st8"
+   id="rect129"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /><text
+   x="294.6554"
+   y="145.0726"
+   class="st4"
+   v:langID="2052"
+   id="text131"
+   style="fill:#000000;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1;"><v:paragraph
+   v:horizAlign="1" /><v:tabList />DMA1</text><g
+   id="shape19-48"
+   v:mID="19"
+   v:groupContext="shape"
+   transform="rotate(-90,53.093504,120.1221)"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none">
+			<title
+   id="title134">一维双向箭头.19</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<path
+   d="m 1.42,371.34 v -1.41 L 0,372.76 1.42,375.6 v -1.42 h 16.72 v 1.42 l 1.42,-2.84 -1.42,-2.83 v 1.41 z"
+   class="st7"
+   id="path136"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none" />
+		</g><rect
+   x="92.567307"
+   y="197.16859"
+   width="31.181101"
+   height="22.252001"
+   class="st8"
+   id="rect159"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /><text
+   x="99.917305"
+   y="210.6946"
+   class="st4"
+   v:langID="2052"
+   id="text161"
+   style="fill:#000000;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1;"><v:paragraph
+   v:horizAlign="1" /><v:tabList />ROM</text><g
+   id="shape23-59"
+   v:mID="23"
+   v:groupContext="shape"
+   transform="rotate(90,151.6549,329.2645)"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none">
+			<title
+   id="title164">一维双向箭头.23</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<path
+   d="m 1.42,371.34 v -1.41 L 0,372.76 1.42,375.6 v -1.42 h 16.72 v 1.42 l 1.42,-2.84 -1.42,-2.83 v 1.41 z"
+   class="st7"
+   id="path166"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none" />
+		</g><rect
+   x="137.00041"
+   y="197.16859"
+   width="31.181101"
+   height="22.252001"
+   class="st8"
+   id="rect173"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /><text
+   x="141.14041"
+   y="210.6946"
+   class="st4"
+   v:langID="2052"
+   id="text175"
+   style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1"><v:paragraph
+   v:horizAlign="1" /><v:tabList />SF_Ctrl</text><g
+   id="shape25-64"
+   v:mID="25"
+   v:groupContext="shape"
+   transform="rotate(90,173.8714,351.481)"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1">
+			<title
+   id="title178">一维双向箭头.25</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<path
+   d="m 1.42,371.34 v -1.41 L 0,372.76 1.42,375.6 v -1.42 h 16.72 v 1.42 l 1.42,-2.84 -1.42,-2.83 v 1.41 z"
+   class="st7"
+   id="path180"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" />
+		</g><rect
+   x="181.5164"
+   y="197.16859"
+   width="33.448799"
+   height="22.252001"
+   class="st8"
+   id="rect187"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /><text
+   x="197.64536"
+   y="205.89461"
+   class="st4"
+   v:langID="2052"
+   id="text191"
+   style="text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1"><tspan
+     sodipodi:role="line"
+     id="tspan1412"
+     x="197.64536"
+     y="205.89461"><v:paragraph
+   v:horizAlign="1" /><v:tabList />OCRAM<v:newlineChar /></tspan><tspan
+     sodipodi:role="line"
+     id="tspan1414"
+     x="197.64536"
+     y="215.89456">(64K)</tspan></text><g
+   id="shape27-70"
+   v:mID="27"
+   v:groupContext="shape"
+   transform="rotate(90,196.8379,374.4475)"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1">
+			<title
+   id="title194">一维双向箭头.27</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<path
+   d="m 1.42,371.34 v -1.41 L 0,372.76 1.42,375.6 v -1.42 h 16.72 v 1.42 l 1.42,-2.84 -1.42,-2.83 v 1.41 z"
+   class="st7"
+   id="path196"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" />
+		</g><rect
+   x="228.86641"
+   y="197.16859"
+   width="31.181101"
+   height="22.252001"
+   class="st8"
+   id="rect203"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /><text
+   x="232.99641"
+   y="205.89461"
+   class="st4"
+   v:langID="2052"
+   id="text207"
+   style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1"><tspan
+     sodipodi:role="line"
+     id="tspan1416"
+     x="232.99641"
+     y="205.89461"><v:paragraph
+   v:horizAlign="1" /><v:tabList />WRAM<v:newlineChar /></tspan><tspan
+     sodipodi:role="line"
+     id="tspan1418"
+     x="232.99641"
+     y="215.89456">(160K)</tspan></text><g
+   id="shape29-76"
+   v:mID="29"
+   v:groupContext="shape"
+   transform="rotate(90,219.8044,397.414)"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1">
+			<title
+   id="title210">一维双向箭头.29</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<path
+   d="m 1.42,371.34 v -1.41 L 0,372.76 1.42,375.6 v -1.42 h 16.72 v 1.42 l 1.42,-2.84 -1.42,-2.83 v 1.41 z"
+   class="st7"
+   id="path212"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" />
+		</g><rect
+   x="273.2764"
+   y="197.5936"
+   width="43.937"
+   height="22.252001"
+   class="st8"
+   id="rect219"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /><text
+   x="276.7164"
+   y="206.31961"
+   class="st4"
+   v:langID="2052"
+   id="text223"
+   style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1"><tspan
+     sodipodi:role="line"
+     id="tspan1421"
+     x="276.7164"
+     y="206.31961"><v:paragraph
+   v:horizAlign="1" /><v:tabList />Wi-Fi+BLE+<tspan
+   x="276.8764"
+   class="st5"
+   id="tspan221"
+   style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /></tspan><tspan
+     sodipodi:role="line"
+     id="tspan1423"
+     x="276.8764"
+     y="216.31956"><tspan
+   x="276.8764"
+   class="st5"
+   style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1"
+   id="tspan1425">BT</tspan>+Zigbee</tspan></text><g
+   id="shape31-82"
+   v:mID="31"
+   v:groupContext="shape"
+   transform="rotate(90,245.3399,423.3745)"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none">
+			<title
+   id="title226">一维双向箭头.31</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<path
+   d="m 1.42,371.34 v -1.41 L 0,372.76 1.42,375.6 v -1.42 h 16.72 v 1.42 l 1.42,-2.84 -1.42,-2.83 v 1.41 z"
+   class="st7"
+   id="path228"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none" />
+		</g><rect
+   x="92.567307"
+   y="236.85359"
+   width="27.779499"
+   height="22.252001"
+   class="st8"
+   id="rect235"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /><rect
+   x="125.59101"
+   y="236.85359"
+   width="24.6614"
+   height="22.252001"
+   class="st8"
+   id="rect246"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /><text
+   x="133.01102"
+   y="250.37959"
+   class="st4"
+   v:langID="2052"
+   id="text248"
+   style="fill:#000000;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1;"><v:paragraph
+   v:horizAlign="1" /><v:tabList />SPI</text><rect
+   x="155.49641"
+   y="236.85359"
+   width="27.779499"
+   height="22.252001"
+   class="st8"
+   id="rect255"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /><text
+   x="169.01523"
+   y="245.57961"
+   class="st4"
+   v:langID="2052"
+   id="text259"
+   style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1;text-anchor:middle;text-align:center;"><tspan
+     sodipodi:role="line"
+     id="tspan1431"
+     x="164.21642"
+     y="245.57961"><v:paragraph
+   v:horizAlign="1" /><v:tabList />I2C<v:newlineChar /></tspan><tspan
+     sodipodi:role="line"
+     id="tspan1433"
+     x="164.21642"
+     y="255.57956">(2)</tspan></text><rect
+   x="188.52042"
+   y="236.85359"
+   width="24.6614"
+   height="22.252001"
+   class="st8"
+   id="rect266"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /><text
+   x="195.98041"
+   y="250.37959"
+   class="st4"
+   v:langID="2052"
+   id="text268"
+   style="fill:#000000;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1;"><v:paragraph
+   v:horizAlign="1" /><v:tabList />I2S</text><rect
+   x="220.8354"
+   y="236.85359"
+   width="20.551201"
+   height="22.252001"
+   class="st8"
+   id="rect275"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /><text
+   x="227.93541"
+   y="250.37959"
+   class="st4"
+   v:langID="2052"
+   id="text277"
+   style="fill:#000000;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1;"><v:paragraph
+   v:horizAlign="1" /><v:tabList />IR</text><rect
+   x="247.62241"
+   y="236.85359"
+   width="27.779499"
+   height="22.252001"
+   class="st8"
+   id="rect284"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /><text
+   x="252.06241"
+   y="250.37959"
+   class="st4"
+   v:langID="2052"
+   id="text286"
+   style="fill:#000000;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1;"><v:paragraph
+   v:horizAlign="1" /><v:tabList />Timer</text><rect
+   x="92.213005"
+   y="294.96381"
+   width="28.1339"
+   height="22.252001"
+   class="st8"
+   id="rect293"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /><text
+   x="97.233009"
+   y="308.48981"
+   class="st4"
+   v:langID="2052"
+   id="text295"
+   style="fill:#000000;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1;"><v:paragraph
+   v:horizAlign="1" /><v:tabList />PWM</text><rect
+   x="125.59101"
+   y="294.75119"
+   width="24.6614"
+   height="22.252001"
+   class="st8"
+   id="rect302"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /><text
+   x="132.71101"
+   y="308.27719"
+   class="st4"
+   v:langID="2052"
+   id="text304"
+   style="fill:#000000;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1;"><v:paragraph
+   v:horizAlign="1" /><v:tabList />IPC</text><rect
+   x="155.49641"
+   y="294.75119"
+   width="27.779499"
+   height="22.252001"
+   class="st8"
+   id="rect311"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /><text
+   x="163.42641"
+   y="308.27719"
+   class="st4"
+   v:langID="2052"
+   id="text313"
+   style="fill:#000000;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1;"><v:paragraph
+   v:horizAlign="1" /><v:tabList />TZC</text><rect
+   x="188.52042"
+   y="294.82199"
+   width="27.779499"
+   height="22.252001"
+   class="st8"
+   id="rect320"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /><text
+   x="193.58041"
+   y="308.34799"
+   class="st4"
+   v:langID="2052"
+   id="text322"
+   style="fill:#000000;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1;"><v:paragraph
+   v:horizAlign="1" /><v:tabList />Efuse</text><rect
+   x="281.3544"
+   y="236.85359"
+   width="27.779499"
+   height="22.252001"
+   class="st8"
+   id="rect343"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /><text
+   x="285.70441"
+   y="250.37959"
+   class="st4"
+   v:langID="2052"
+   id="text345"
+   style="fill:#000000;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1;"><v:paragraph
+   v:horizAlign="1" /><v:tabList />Audio</text><rect
+   x="221.54341"
+   y="294.82199"
+   width="27.779499"
+   height="22.252001"
+   class="st8"
+   id="rect352"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /><text
+   x="229.06342"
+   y="308.34799"
+   class="st4"
+   v:langID="2052"
+   id="text354"
+   style="fill:#000000;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1;"><v:paragraph
+   v:horizAlign="1" /><v:tabList />PDS</text><rect
+   x="254.56741"
+   y="294.82199"
+   width="27.779499"
+   height="22.252001"
+   class="st8"
+   id="rect361"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /><text
+   x="261.2074"
+   y="308.34799"
+   class="st4"
+   v:langID="2052"
+   id="text363"
+   style="fill:#000000;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1;"><v:paragraph
+   v:horizAlign="1" /><v:tabList />HBN</text><g
+   id="shape54-130"
+   v:mID="54"
+   v:groupContext="shape"
+   transform="translate(106.45711,-98.0653)"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none">
+			<title
+   id="title366">尖圆角右箭头</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="DblArrow"
+   v:prompt=""
+   v:val="VT0(0):5" />
+				<v:ud
+   v:nameU="visVersion"
+   v:prompt=""
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<path
+   d="m 0,375.6 h 242.65 v -95.11 h 2.83 l -4.96,-4.82 -4.96,4.82 h 2.83 v 90.85 H 0 v 2.13 z"
+   class="st7"
+   id="path368"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none" />
+		</g><g
+   id="shape55-132"
+   v:mID="55"
+   v:groupContext="shape"
+   transform="rotate(180,52.519904,325.5003)"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none">
+			<title
+   id="title371">虚尾箭头</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:prompt=""
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<path
+   d="m 6,373.61 h 11.29 v -1.98 l 4.25,3.97 -4.25,3.96 v -1.98 H 6 Z m -3.6,0 h 2.4 v 3.97 H 2.4 Z m -2.4,0 h 1.2 v 3.97 H 0 Z"
+   class="st7"
+   id="path373"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none" />
+		</g><g
+   id="shape59-134"
+   v:mID="59"
+   v:groupContext="shape"
+   transform="rotate(90,110.4814,369.02)"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none">
+			<title
+   id="title376">一维双向箭头.59</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<path
+   d="m 1.42,371.34 v -1.41 L 0,372.76 1.42,375.6 v -1.42 h 11.9 v 1.42 l 1.42,-2.84 -1.42,-2.83 v 1.41 z"
+   class="st7"
+   id="path378"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none" />
+		</g><g
+   id="shape60-136"
+   v:mID="60"
+   v:groupContext="shape"
+   transform="rotate(90,126.0719,384.6105)"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none">
+			<title
+   id="title381">一维双向箭头.60</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<path
+   d="m 1.42,371.34 v -1.41 L 0,372.76 1.42,375.6 v -1.42 h 11.9 v 1.42 l 1.42,-2.84 -1.42,-2.83 v 1.41 z"
+   class="st7"
+   id="path383"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none" />
+		</g><g
+   id="shape61-138"
+   v:mID="61"
+   v:groupContext="shape"
+   transform="rotate(90,141.5209,400.0595)"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none">
+			<title
+   id="title386">一维双向箭头.61</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<path
+   d="m 1.42,371.34 v -1.41 L 0,372.76 1.42,375.6 v -1.42 h 11.9 v 1.42 l 1.42,-2.84 -1.42,-2.83 v 1.41 z"
+   class="st7"
+   id="path388"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none" />
+		</g><g
+   id="shape62-140"
+   v:mID="62"
+   v:groupContext="shape"
+   transform="rotate(90,157.2534,415.792)"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none">
+			<title
+   id="title391">一维双向箭头.62</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<path
+   d="m 1.42,371.34 v -1.41 L 0,372.76 1.42,375.6 v -1.42 h 11.9 v 1.42 l 1.42,-2.84 -1.42,-2.83 v 1.41 z"
+   class="st7"
+   id="path393"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none" />
+		</g><g
+   id="shape63-142"
+   v:mID="63"
+   v:groupContext="shape"
+   transform="rotate(90,172.1349,430.6735)"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none">
+			<title
+   id="title396">一维双向箭头.63</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<path
+   d="m 1.42,371.34 v -1.41 L 0,372.76 1.42,375.6 v -1.42 h 11.9 v 1.42 l 1.42,-2.84 -1.42,-2.83 v 1.41 z"
+   class="st7"
+   id="path398"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none" />
+		</g><g
+   id="shape64-144"
+   v:mID="64"
+   v:groupContext="shape"
+   transform="rotate(90,187.7259,446.2645)"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none">
+			<title
+   id="title401">一维双向箭头.64</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<path
+   d="m 1.42,371.34 v -1.41 L 0,372.76 1.42,375.6 v -1.42 h 11.9 v 1.42 l 1.42,-2.84 -1.42,-2.83 v 1.41 z"
+   class="st7"
+   id="path403"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none" />
+		</g><g
+   id="shape65-146"
+   v:mID="65"
+   v:groupContext="shape"
+   transform="rotate(90,204.7334,463.272)"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none">
+			<title
+   id="title406">一维双向箭头.65</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<path
+   d="m 1.42,371.34 v -1.41 L 0,372.76 1.42,375.6 v -1.42 h 11.9 v 1.42 l 1.42,-2.84 -1.42,-2.83 v 1.41 z"
+   class="st7"
+   id="path408"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none" />
+		</g><g
+   id="shape66-148"
+   v:mID="66"
+   v:groupContext="shape"
+   transform="rotate(89.521,182.00108,460.59996)"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none">
+			<title
+   id="title411">一维双向箭头.66</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<path
+   d="m 1.42,371.34 v -1.41 L 0,372.76 1.42,375.6 v -1.42 h 14.11 v 1.42 l 1.42,-2.84 -1.42,-2.83 v 1.41 z"
+   class="st7"
+   id="path413"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none" />
+		</g><g
+   id="shape67-150"
+   v:mID="67"
+   v:groupContext="shape"
+   transform="rotate(89.525,100.31671,378.45736)"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none">
+			<title
+   id="title416">一维双向箭头.67</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<path
+   d="m 1.42,371.34 v -1.41 L 0,372.76 1.42,375.6 v -1.42 h 14.26 v 1.42 l 1.41,-2.84 -1.41,-2.83 v 1.41 z"
+   class="st7"
+   id="path418"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none" />
+		</g><g
+   id="shape68-152"
+   v:mID="68"
+   v:groupContext="shape"
+   transform="rotate(89.525,116.90854,394.74464)"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none">
+			<title
+   id="title421">一维双向箭头.68</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<path
+   d="m 1.42,371.34 v -1.41 L 0,372.76 1.42,375.6 v -1.42 h 14.26 v 1.42 l 1.41,-2.84 -1.41,-2.83 v 1.41 z"
+   class="st7"
+   id="path423"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none" />
+		</g><g
+   id="shape69-154"
+   v:mID="69"
+   v:groupContext="shape"
+   transform="rotate(89.525,132.24956,410.57034)"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none">
+			<title
+   id="title426">一维双向箭头.69</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<path
+   d="m 1.42,371.34 v -1.41 L 0,372.76 1.42,375.6 v -1.42 h 14.26 v 1.42 l 1.41,-2.84 -1.41,-2.83 v 1.41 z"
+   class="st7"
+   id="path428"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none" />
+		</g><g
+   id="shape70-156"
+   v:mID="70"
+   v:groupContext="shape"
+   transform="rotate(89.525,148.83265,427.1493)"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none">
+			<title
+   id="title431">一维双向箭头.70</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<path
+   d="m 1.42,371.34 v -1.41 L 0,372.76 1.42,375.6 v -1.42 h 14.26 v 1.42 l 1.41,-2.84 -1.41,-2.83 v 1.41 z"
+   class="st7"
+   id="path433"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none" />
+		</g><g
+   id="shape71-158"
+   v:mID="71"
+   v:groupContext="shape"
+   transform="rotate(89.525,165.20265,443.65558)"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none">
+			<title
+   id="title436">一维双向箭头.71</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<path
+   d="m 1.42,371.34 v -1.41 L 0,372.76 1.42,375.6 v -1.42 h 14.26 v 1.42 l 1.41,-2.84 -1.41,-2.83 v 1.41 z"
+   class="st7"
+   id="path438"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none" />
+		</g><rect
+   x="96.252411"
+   y="26.451593"
+   width="34.582699"
+   height="22.2519"
+   class="st3"
+   id="rect445"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /><text
+   x="112.81213"
+   y="35.177608"
+   class="st4"
+   v:langID="2052"
+   id="text449"
+   style="text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1"><tspan
+     sodipodi:role="line"
+     id="tspan1385"
+     x="112.81213"
+     y="35.177608"><v:paragraph
+   v:horizAlign="1" /><v:tabList />D0<v:newlineChar /></tspan><tspan
+     sodipodi:role="line"
+     id="tspan1387"
+     x="112.81213"
+     y="45.17757">(RISC-V)</tspan></text><g
+   id="shape73-164"
+   v:mID="73"
+   v:groupContext="shape"
+   transform="rotate(-90,-95.477396,163.7402)"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none">
+			<title
+   id="title452">一维双向箭头.73</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<path
+   d="m 1.42,371.34 v -1.41 L 0,372.76 1.42,375.6 v -1.42 h 16.72 v 1.42 l 1.42,-2.84 -1.42,-2.83 v 1.41 z"
+   class="st7"
+   id="path454"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none" />
+		</g><rect
+   x="140.92171"
+   y="26.451593"
+   width="22.6772"
+   height="22.252001"
+   class="st8"
+   id="rect461"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /><text
+   x="147.28171"
+   y="39.977596"
+   class="st4"
+   v:langID="2052"
+   id="text463"
+   style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1"><v:paragraph
+   v:horizAlign="1" /><v:tabList />CSI</text><g
+   id="shape75-169"
+   v:mID="75"
+   v:groupContext="shape"
+   transform="rotate(-90,-76.969396,145.2322)"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1">
+			<title
+   id="title466">一维双向箭头.75</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<path
+   d="m 1.42,371.34 v -1.41 L 0,372.76 1.42,375.6 v -1.42 h 16.72 v 1.42 l 1.42,-2.84 -1.42,-2.83 v 1.41 z"
+   class="st7"
+   id="path468"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" />
+		</g><rect
+   x="171.78441"
+   y="26.451593"
+   width="22.6772"
+   height="22.2519"
+   class="st8"
+   id="rect475"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /><text
+   x="176.32442"
+   y="39.977596"
+   class="st4"
+   v:langID="2052"
+   id="text477"
+   style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1"><v:paragraph
+   v:horizAlign="1" /><v:tabList />DVP</text><rect
+   x="204.32341"
+   y="26.451593"
+   width="28.913401"
+   height="22.2519"
+   class="st8"
+   id="rect498"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /><text
+   x="208.7534"
+   y="39.977596"
+   class="st4"
+   v:langID="2052"
+   id="text500"
+   style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1"><v:paragraph
+   v:horizAlign="1" /><v:tabList />Codec</text><g
+   id="shape81-182"
+   v:mID="81"
+   v:groupContext="shape"
+   transform="rotate(-90,-38.004796,106.1258)"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none">
+			<title
+   id="title503">一维双向箭头.81</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<path
+   d="m 1.42,362.34 v -1.41 L 0,363.76 1.42,366.6 v -1.42 h 16.72 v 1.42 l 1.42,-2.84 -1.42,-2.83 v 1.41 z"
+   class="st7"
+   id="path505"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" />
+		</g><rect
+   x="240.4884"
+   y="26.451593"
+   width="22.6772"
+   height="22.2519"
+   class="st8"
+   id="rect512"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /><text
+   x="244.8784"
+   y="39.977596"
+   class="st4"
+   v:langID="2052"
+   id="text514"
+   style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1"><v:paragraph
+   v:horizAlign="1" /><v:tabList />OSD</text><rect
+   x="309.4534"
+   y="25.743593"
+   width="50.740101"
+   height="22.2519"
+   class="st8"
+   id="rect521"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /><text
+   x="334.8685"
+   y="34.469608"
+   class="st4"
+   v:langID="2052"
+   id="text525"
+   style="text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1"><tspan
+     sodipodi:role="line"
+     id="tspan1389"
+     x="334.8685"
+     y="34.469608"><v:paragraph
+   v:horizAlign="1" /><v:tabList />MJPEG<v:newlineChar /></tspan><tspan
+     sodipodi:role="line"
+     id="tspan1391"
+     x="334.8685"
+     y="44.46957">(Enc+Dec)</tspan></text><g
+   id="shape85-191"
+   v:mID="85"
+   v:groupContext="shape"
+   transform="rotate(-90,-26.831796,94.952796)"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1">
+			<title
+   id="title528">一维双向箭头.85</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<path
+   d="m 1.42,371.34 v -1.41 L 0,372.76 1.42,375.6 v -1.42 h 16.72 v 1.42 l 1.42,-2.84 -1.42,-2.83 v 1.41 z"
+   class="st7"
+   id="path530"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" />
+		</g><rect
+   x="161.08942"
+   y="92.286591"
+   width="29.196899"
+   height="22.252001"
+   class="st8"
+   id="rect537"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /><text
+   x="166.68941"
+   y="105.81259"
+   class="st4"
+   v:langID="2052"
+   id="text539"
+   style="fill:#000000;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1;"><v:paragraph
+   v:horizAlign="1" /><v:tabList />UART</text><g
+   id="shape88-196"
+   v:mID="88"
+   v:groupContext="shape"
+   transform="rotate(90,237.932,310.6594)"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none">
+			<title
+   id="title542">一维双向箭头.88</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<path
+   d="m 1.42,371.34 v -1.41 L 0,372.76 1.42,375.6 v -1.42 h 16.72 v 1.42 l 1.42,-2.84 -1.42,-2.83 v 1.41 z"
+   class="st7"
+   id="path544"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none" />
+		</g><rect
+   x="194.8224"
+   y="92.073593"
+   width="27.212601"
+   height="22.252001"
+   class="st8"
+   id="rect551"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /><text
+   x="203.51241"
+   y="105.59959"
+   class="st4"
+   v:langID="2052"
+   id="text553"
+   style="fill:#000000;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1;"><v:paragraph
+   v:horizAlign="1" /><v:tabList />SPI</text><g
+   id="shape92-201"
+   v:mID="92"
+   v:groupContext="shape"
+   transform="rotate(90,254.05385,326.56855)"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none">
+			<title
+   id="title556">一维双向箭头.92</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<path
+   d="m 1.42,371.34 v -1.41 L 0,372.76 1.42,375.6 v -1.42 h 16.72 v 1.42 l 1.42,-2.84 -1.42,-2.83 v 1.41 z"
+   class="st7"
+   id="path558"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none" />
+		</g><rect
+   x="227.13641"
+   y="92.073593"
+   width="31.181101"
+   height="22.252001"
+   class="st8"
+   id="rect565"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /><text
+   x="233.27641"
+   y="105.59959"
+   class="st4"
+   v:langID="2052"
+   id="text567"
+   style="fill:#000000;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1;"><v:paragraph
+   v:horizAlign="1" /><v:tabList />Timer</text><g
+   id="shape94-206"
+   v:mID="94"
+   v:groupContext="shape"
+   transform="rotate(90,271.48685,344.00155)"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none">
+			<title
+   id="title570">一维双向箭头.94</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<path
+   d="m 1.42,371.34 v -1.41 L 0,372.76 1.42,375.6 v -1.42 h 16.72 v 1.42 l 1.42,-2.84 -1.42,-2.83 v 1.41 z"
+   class="st7"
+   id="path572"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none" />
+		</g><rect
+   x="301.40442"
+   y="92.499596"
+   width="28.913401"
+   height="22.252001"
+   class="st8"
+   id="rect579"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /><text
+   x="310.65442"
+   y="106.0256"
+   class="st4"
+   v:langID="2052"
+   id="text581"
+   style="fill:#000000;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1;"><v:paragraph
+   v:horizAlign="1" /><v:tabList />IPC</text><g
+   id="shape96-211"
+   v:mID="96"
+   v:groupContext="shape"
+   transform="rotate(90,307.84125,380.78115)"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none">
+			<title
+   id="title584">一维双向箭头.96</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<path
+   d="m 1.42,371.34 v -1.41 L 0,372.76 1.42,375.6 v -1.42 h 16.72 v 1.42 l 1.42,-2.84 -1.42,-2.83 v 1.41 z"
+   class="st7"
+   id="path586"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none" />
+		</g><rect
+   x="262.5704"
+   y="92.073593"
+   width="33.7323"
+   height="22.252001"
+   class="st8"
+   id="rect593"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /><text
+   x="279.06921"
+   y="100.79961"
+   class="st4"
+   v:langID="2052"
+   id="text597"
+   style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1;text-anchor:middle;text-align:center;"><tspan
+     sodipodi:role="line"
+     id="tspan1447"
+     x="274.27042"
+     y="100.79961"><v:paragraph
+   v:horizAlign="1" /><v:tabList />I2C<v:newlineChar /></tspan><tspan
+     sodipodi:role="line"
+     id="tspan1449"
+     x="274.27042"
+     y="110.79957">(2)</tspan></text><g
+   id="shape98-217"
+   v:mID="98"
+   v:groupContext="shape"
+   transform="rotate(90,289.91235,362.42705)"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none">
+			<title
+   id="title600">一维双向箭头.98</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<path
+   d="m 1.42,371.34 v -1.41 L 0,372.76 1.42,375.6 v -1.42 h 16.72 v 1.42 l 1.42,-2.84 -1.42,-2.83 v 1.41 z"
+   class="st7"
+   id="path602"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none" />
+		</g><g
+   id="shape99-219"
+   v:mID="99"
+   v:groupContext="shape"
+   transform="matrix(1.0514671,0,0,1,90.866608,-301.0964)"
+   style="fill:none;stroke:#000000;stroke-width:0.487609;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1">
+			<title
+   id="title605">二维双向箭头.99</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<path
+   d="m 2.13,369.22 v -2.13 L 0,371.34 2.13,375.6 v -2.13 h 330.8 v 2.13 l 2.13,-4.26 -2.13,-4.25 v 2.13 z"
+   class="st6"
+   id="path607"
+   style="fill:none;stroke:#000000;stroke-width:0.487609;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" />
+		</g><g
+   id="shape100-221"
+   v:mID="100"
+   v:groupContext="shape"
+   transform="rotate(-90,-61.042296,129.1633)"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1">
+			<title
+   id="title610">一维双向箭头.100</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<path
+   d="m 1.42,371.34 v -1.41 L 0,372.76 1.42,375.6 v -1.42 h 16.72 v 1.42 l 1.42,-2.84 -1.42,-2.83 v 1.41 z"
+   class="st7"
+   id="path612"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" />
+		</g><rect
+   x="272.60242"
+   y="26.451593"
+   width="28.913401"
+   height="22.2519"
+   class="st8"
+   id="rect619"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /><text
+   x="277.31241"
+   y="39.977596"
+   class="st4"
+   v:langID="2052"
+   id="text621"
+   style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1"><v:paragraph
+   v:horizAlign="1" /><v:tabList />Scaler</text><rect
+   x="369.18842"
+   y="92.499596"
+   width="54.9921"
+   height="22.2519"
+   class="st8"
+   id="rect628"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /><text
+   x="396.87332"
+   y="101.22561"
+   class="st4"
+   v:langID="2052"
+   id="text632"
+   style="text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1"><tspan
+     sodipodi:role="line"
+     id="tspan1393"
+     x="396.87332"
+     y="101.22561"><v:paragraph
+   v:horizAlign="1" /><v:tabList />Display<v:newlineChar /></tspan><tspan
+     sodipodi:role="line"
+     id="tspan1395"
+     x="396.87332"
+     y="111.22557">(DSI+DPI+DBI)</tspan></text><rect
+   x="368.1304"
+   y="25.743593"
+   width="28.913401"
+   height="22.2519"
+   class="st8"
+   id="rect639"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /><text
+   x="375.37042"
+   y="39.269596"
+   class="st4"
+   v:langID="2052"
+   id="text641"
+   style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1"><v:paragraph
+   v:horizAlign="1" /><v:tabList />NPU</text><g
+   id="shape104-233"
+   v:mID="104"
+   v:groupContext="shape"
+   transform="rotate(-90,-9.2863959,77.549196)"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1">
+			<title
+   id="title644">一维双向箭头.104</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<path
+   d="m 1.42,371.34 v -1.41 L 0,372.76 1.42,375.6 v -1.42 h 16.72 v 1.42 l 1.42,-2.84 -1.42,-2.83 v 1.41 z"
+   class="st7"
+   id="path646"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" />
+		</g><g
+   id="shape105-235"
+   v:mID="105"
+   v:groupContext="shape"
+   transform="rotate(-90,56.900204,35.528396)"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1">
+			<title
+   id="title649">一维双向箭头.105</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<path
+   d="m 1.42,371.34 v -1.41 L 0,372.76 1.42,375.6 v -1.42 h 16.72 v 1.42 l 1.42,-2.84 -1.42,-2.83 v 1.41 z"
+   class="st7"
+   id="path651"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" />
+		</g><g
+   id="shape106-237"
+   v:mID="106"
+   v:groupContext="shape"
+   transform="rotate(-90,13.993154,53.490146)"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1">
+			<title
+   id="title654">一维双向箭头.106</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<path
+   d="m 1.42,371.34 v -1.41 L 0,372.76 1.42,375.6 v -1.42 h 16.72 v 1.42 l 1.42,-2.84 -1.42,-2.83 v 1.41 z"
+   class="st7"
+   id="path656"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" />
+		</g><g
+   id="shape107-239"
+   v:mID="107"
+   v:groupContext="shape"
+   transform="rotate(-90,38.831704,28.722396)"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1">
+			<title
+   id="title659">一维双向箭头.107</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<path
+   d="m 1.42,371.34 v -1.41 L 0,372.76 1.42,375.6 v -1.42 h 16.72 v 1.42 l 1.42,-2.84 -1.42,-2.83 v 1.41 z"
+   class="st7"
+   id="path661"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" />
+		</g><text
+   x="391.9104"
+   y="61.73159"
+   class="st11"
+   v:langID="2052"
+   id="text670"
+   style="fill:#000000;stroke:none;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none;fill-opacity:1;"><v:paragraph
+   v:horizAlign="1" /><v:tabList />Multi-Media  </text><text
+   x="321.10947"
+   y="309.62439"
+   class="st11"
+   v:langID="2052"
+   id="text679"
+   style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1"><v:paragraph
+   v:horizAlign="1" /><v:tabList />Wireless</text><g
+   id="shape115-253"
+   v:mID="115"
+   v:groupContext="shape"
+   transform="rotate(-90,115.70975,57.009846)"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1">
+			<title
+   id="title682">一维双向箭头.115</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<path
+   d="m 1.42,371.34 v -1.41 L 0,372.76 1.42,375.6 v -1.42 h 97.51 v 1.42 l 1.42,-2.84 -1.42,-2.83 v 1.41 z"
+   class="st12"
+   id="path684"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" />
+		</g><rect
+   x="364.69342"
+   y="255.56219"
+   width="66.614197"
+   height="22.252001"
+   class="st13"
+   id="rect691"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /><text
+   x="398.06113"
+   y="263.98819"
+   class="st14"
+   v:langID="2052"
+   id="text695"
+   style="text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1"><tspan
+     sodipodi:role="line"
+     id="tspan1439"
+     x="398.06113"
+     y="263.98819"><v:paragraph
+   v:horizAlign="1" /><v:tabList />PLL<v:newlineChar /></tspan><tspan
+     sodipodi:role="line"
+     id="tspan1441"
+     x="398.06113"
+     y="275.23819">(320M/400M...)</tspan></text><rect
+   x="364.69342"
+   y="224.87759"
+   width="66.614197"
+   height="22.252001"
+   class="st13"
+   id="rect702"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /><text
+   x="398.37189"
+   y="233.30359"
+   class="st14"
+   v:langID="2052"
+   id="text706"
+   style="text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1"><tspan
+     sodipodi:role="line"
+     id="tspan1435"
+     x="398.37189"
+     y="233.30359"><v:paragraph
+   v:horizAlign="1" /><v:tabList />PMU<v:newlineChar /></tspan><tspan
+     sodipodi:role="line"
+     id="tspan1437"
+     x="398.37189"
+     y="244.55359">(POR/BOR...)</tspan></text><rect
+   x="364.69342"
+   y="286.24719"
+   width="66.614197"
+   height="22.252001"
+   class="st13"
+   id="rect713"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /><text
+   x="399.31683"
+   y="294.67319"
+   class="st14"
+   v:langID="2052"
+   id="text717"
+   style="text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1"><tspan
+     sodipodi:role="line"
+     id="tspan1443"
+     x="399.31683"
+     y="294.67319"><v:paragraph
+   v:horizAlign="1" /><v:tabList />OSC<v:newlineChar /></tspan><tspan
+     sodipodi:role="line"
+     id="tspan1445"
+     x="399.31683"
+     y="305.92319">(32K/32M)</tspan></text><rect
+   x="87.955811"
+   y="92.286591"
+   width="35.433102"
+   height="22.252001"
+   class="st8"
+   id="rect724"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /><text
+   x="92.215805"
+   y="105.81259"
+   class="st4"
+   v:langID="2052"
+   id="text726"
+   style="fill:#000000;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1;"><v:paragraph
+   v:horizAlign="1" /><v:tabList />L2SRAM</text><g
+   id="shape120-270"
+   v:mID="120"
+   v:groupContext="shape"
+   transform="rotate(90,203.2075,275.9349)"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none">
+			<title
+   id="title729">一维双向箭头.120</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<path
+   d="m 1.42,371.34 v -1.41 L 0,372.76 1.42,375.6 v -1.42 h 16.72 v 1.42 l 1.42,-2.84 -1.42,-2.83 v 1.41 z"
+   class="st7"
+   id="path731"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none" />
+		</g><rect
+   x="127.64081"
+   y="92.286591"
+   width="29.196899"
+   height="22.252001"
+   class="st8"
+   id="rect738"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /><text
+   x="132.06081"
+   y="105.81259"
+   class="st4"
+   v:langID="2052"
+   id="text740"
+   style="fill:#000000;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1;"><v:paragraph
+   v:horizAlign="1" /><v:tabList />VRAM</text><g
+   id="shape122-275"
+   v:mID="122"
+   v:groupContext="shape"
+   transform="rotate(90,220.924,293.6514)"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none">
+			<title
+   id="title743">一维双向箭头.122</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<path
+   d="m 1.42,371.34 v -1.41 L 0,372.76 1.42,375.6 v -1.42 h 16.72 v 1.42 l 1.42,-2.84 -1.42,-2.83 v 1.41 z"
+   class="st7"
+   id="path745"
+   style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none" />
+		</g>
+<rect
+   style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.5000001;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1"
+   id="rect1171"
+   width="509.7363"
+   height="344.259"
+   x="0.25"
+   y="0.25" /><rect
+   x="316.11588"
+   y="298.73056"
+   width="37.365276"
+   height="16.992449"
+   class="st13"
+   id="rect713-0"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /><rect
+   x="323.97787"
+   y="131.30208"
+   width="28.913401"
+   height="22.2519"
+   class="st8"
+   id="rect129-3"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /><text
+   x="329.70786"
+   y="145.49165"
+   class="st4"
+   v:langID="2052"
+   id="text131-3"
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.99995px;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1"><v:paragraph
+   v:horizAlign="1" /><v:tabList />GLB</text><g
+   id="shape19-48-2"
+   v:mID="19"
+   v:groupContext="shape"
+   transform="rotate(-90,69.968657,103.22361)"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1"><title
+     id="title134-9">一维双向箭头.19</title><v:userDefs><v:ud
+       v:nameU="visVersion"
+       v:val="VT0(15):26" /></v:userDefs><path
+     d="m 1.42,371.34 v -1.41 L 0,372.76 1.42,375.6 v -1.42 h 16.72 v 1.42 l 1.42,-2.84 -1.42,-2.83 v 1.41 z"
+     class="st7"
+     id="path136-0"
+     style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /></g><rect
+   x="332.86124"
+   y="92.499496"
+   width="33.7323"
+   height="22.252001"
+   class="st8"
+   id="rect329"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /><text
+   x="338.14175"
+   y="106.0255"
+   class="st4"
+   v:langID="2052"
+   id="text331"
+   style="font-size:7.99995px;font-family:Calibri;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1"><v:paragraph
+   v:horizAlign="1" /><v:tabList />pSRAM</text><g
+   id="shape46-119"
+   v:mID="46"
+   v:groupContext="shape"
+   transform="rotate(90,324.64231,397.58281)"
+   style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1"><title
+     id="title334">一维双向箭头.46</title><v:userDefs><v:ud
+       v:nameU="visVersion"
+       v:val="VT0(15):26" /></v:userDefs><path
+     d="m 1.42,371.34 v -1.41 L 0,372.76 1.42,375.6 v -1.42 h 16.72 v 1.42 l 1.42,-2.84 -1.42,-2.83 v 1.41 z"
+     class="st7"
+     id="path336"
+     style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" /></g><text
+   x="106.83379"
+   y="244.28798"
+   class="st4"
+   v:langID="2052"
+   id="text259-3"
+   style="font-size:7.99995px;font-family:Calibri;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1"><tspan
+     sodipodi:role="line"
+     id="tspan1431-2"
+     x="106.83379"
+     y="244.28798"
+     style="stroke-width:0.5">UART<v:paragraph
+   v:horizAlign="1" /><v:tabList /><v:newlineChar /></tspan><tspan
+     sodipodi:role="line"
+     id="tspan1433-3"
+     x="106.83379"
+     y="254.28792"
+     style="stroke-width:0.5">(3)</tspan></text></svg>

@@ -1,0 +1,157 @@
+\section{Register description}
+\regover{
+{\hyperref[lz4-lz4-config]{lz4\_config}}&
+\\
+\hline
+{\hyperref[lz4-lz4-src-fix]{lz4\_src\_fix}}&
+\\
+\hline
+{\hyperref[lz4-lz4-dst-fix]{lz4\_dst\_fix}}&
+\\
+\hline
+{\hyperref[lz4-lz4-src-start]{lz4\_src\_start}}&
+\\
+\hline
+{\hyperref[lz4-lz4-src-end]{lz4\_src\_end}}&
+\\
+\hline
+{\hyperref[lz4-lz4-dst-start]{lz4\_dst\_start}}&
+\\
+\hline
+{\hyperref[lz4-lz4-dst-end]{lz4\_dst\_end}}&
+\\
+\hline
+{\hyperref[lz4-lz4-int-en]{lz4\_int\_en}}&
+\\
+\hline
+{\hyperref[lz4-lz4-int-sta]{lz4\_int\_sta}}&
+\\
+\hline
+{\hyperref[lz4-lz4-monitor]{lz4\_monitor}}&
+\\
+\hline
+}
+
+\subsection{lz4\_config}
+\label{lz4-lz4-config}
+Address：0x2000ad00
+ \begin{figure}[H]
+\includegraphics{lz4_lz4_config.pdf}
+\end{figure}
+
+\regdes{31:28&rsvd&rsvd&0&\\\hline
+27:5&RSVD& & & \\\hline
+4&lz4\_checksum&r/w&0&LZ4 block has checksum or not (info from frame header checksum flag)\\\hline
+3:2&RSVD& & & \\\hline
+1&lz4\_suspend&r/w&0&LZ4 blocks decode suspend (FSM idle)\\\hline
+0&lz4\_en&r/w&0&LZ4 blocks decode enable (each block has size/sequences/checksum)\\\hline
+
+}
+\subsection{lz4\_src\_fix}
+\label{lz4-lz4-src-fix}
+Address：0x2000ad04
+ \begin{figure}[H]
+\includegraphics{lz4_lz4_src_fix.pdf}
+\end{figure}
+
+\regdes{31:26&RSVD& & & \\\hline
+25:12&lz4\_src\_fix&r/w&0&LZ4 source address fix bits\\\hline
+11:0&RSVD& & & \\\hline
+
+}
+\subsection{lz4\_dst\_fix}
+\label{lz4-lz4-dst-fix}
+Address：0x2000ad08
+ \begin{figure}[H]
+\includegraphics{lz4_lz4_dst_fix.pdf}
+\end{figure}
+
+\regdes{31:26&RSVD& & & \\\hline
+25:12&lz4\_dst\_fix&r/w&0&LZ4 destination address fix bits\\\hline
+11:0&RSVD& & & \\\hline
+
+}
+\subsection{lz4\_src\_start}
+\label{lz4-lz4-src-start}
+Address：0x2000ad10
+ \begin{figure}[H]
+\includegraphics{lz4_lz4_src_start.pdf}
+\end{figure}
+
+\regdes{31:26&lz4\_src\_base&r/w&0&LZ4 source address base (fix)\\\hline
+25:0&lz4\_src\_start&r/w&0&LZ4 source address start\\\hline
+
+}
+\subsection{lz4\_src\_end}
+\label{lz4-lz4-src-end}
+Address：0x2000ad14
+ \begin{figure}[H]
+\includegraphics{lz4_lz4_src_end.pdf}
+\end{figure}
+
+\regdes{31:26&RSVD& & & \\\hline
+25:0&lz4\_src\_end&r&0&LZ4 source address end (Max. 64MB)\\\hline
+
+}
+\subsection{lz4\_dst\_start}
+\label{lz4-lz4-dst-start}
+Address：0x2000ad18
+ \begin{figure}[H]
+\includegraphics{lz4_lz4_dst_start.pdf}
+\end{figure}
+
+\regdes{31:26&lz4\_dst\_base&r/w&0&LZ4 destination address base (fix)\\\hline
+25:0&lz4\_dst\_start&r/w&0&LZ4 destination address start\\\hline
+
+}
+\subsection{lz4\_dst\_end}
+\label{lz4-lz4-dst-end}
+Address：0x2000ad1c
+ \begin{figure}[H]
+\includegraphics{lz4_lz4_dst_end.pdf}
+\end{figure}
+
+\regdes{31:26&RSVD& & & \\\hline
+25:0&lz4\_dst\_end&r&0&LZ4 destination address end (Max. 64MB)\\\hline
+
+}
+\subsection{lz4\_int\_en}
+\label{lz4-lz4-int-en}
+Address：0x2000ad20
+ \begin{figure}[H]
+\includegraphics{lz4_lz4_int_en.pdf}
+\end{figure}
+
+\regdes{31:26&lz4\_dst\_int\_inv&r/w&0&0: high int  1: low int\\\hline
+25:16&RSVD& & & \\\hline
+15:10&lz4\_dst\_int\_en&r/w&0&\\\hline
+9:2&RSVD& & & \\\hline
+1&lz4\_err\_en&r/w&1&\\\hline
+0&lz4\_done\_en&r/w&1&\\\hline
+
+}
+\subsection{lz4\_int\_sta}
+\label{lz4-lz4-int-sta}
+Address：0x2000ad24
+ \begin{figure}[H]
+\includegraphics{lz4_lz4_int_sta.pdf}
+\end{figure}
+
+\regdes{31:16&RSVD& & & \\\hline
+15:10&lz4\_dst\_int\_sta&r&0&LZ4 destination address bit change\\\hline
+9:2&RSVD& & & \\\hline
+1&lz4\_err\_sta&r&0&\\\hline
+0&lz4\_done\_sta&r&0&LZ4 done status\\\hline
+
+}
+\subsection{lz4\_monitor}
+\label{lz4-lz4-monitor}
+Address：0x2000ad28
+ \begin{figure}[H]
+\includegraphics{lz4_lz4_monitor.pdf}
+\end{figure}
+
+\regdes{31:4&RSVD& & & \\\hline
+3:0&lz4\_cs&r&0&\\\hline
+
+}

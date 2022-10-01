@@ -1,0 +1,36 @@
+\section{Register description}
+\regover{
+{\hyperref[psram-psram-configure]{psram\_configure}}&
+\\
+\hline
+}
+
+\subsection{psram\_configure}
+\label{psram-psram-configure}
+Address：0x20052000
+ \begin{figure}[H]
+\includegraphics{psram_psram_configure.pdf}
+\end{figure}
+
+\regdes{31:28&reg\_linear\_bnd\_b&r/w&4'd10&Linear burst boundary shift bit\\\hline
+27:24&RSVD& & & \\\hline
+23&reg\_clkn\_free&r/w&1'b1&Clock\# free run\\\hline
+22:20&reg\_pck\_s\_div&r/w&3'd0&EMI AXI bus clock division from psram\_ck\\\hline
+19&reg\_wb\_hyper3&r/w&1'b0&Winbond Hyper3 bus\\\hline
+18&reg\_x16\_mode&r/w&1'b0&16-bit pSRAM mode enable\\\hline
+17&reg\_config\_gnt&r&1'b0&pSRAM register configure grant\\\hline
+16&reg\_config\_req&r/w&1'b0&pSRAM register configure request\\\hline
+15&sts\_config\_r\_done&r&1'b1&pSRAM register read done\\\hline
+14&sts\_config\_w\_done&r&1'b1&pSRAM register write done\\\hline
+13&reg\_config\_r\_pusle&w1p&1'b0&pSRAM configuration read enable\\\hline
+12&reg\_config\_w\_pusle&w1p&1'b0&pSRAM configuration write enable\\\hline
+11&RSVD& & & \\\hline
+10:8&reg\_wb\_reg\_sel&r/w&2'd0&Winbond pSRAM Register R/W selection \par 3'd0 - ID0 / 3'd1 - ID1 \par 3'd2 - CR0 / 3'd3 - CR1 /3'd4 - CR2 \par 3'd5 - CR3 / 3'd6 - CR4
+\\\hline
+7&RSVD& & & \\\hline
+6:4&reg\_ap\_mr&r/w&3'd0&APMemory pSRAM Mode Register R/W selection \par 3'd0=MA0 / 3'd1=MA1 / \par 3'd2=MA2 / 3'd3=MA3 / \par 3'd4=MA4 / 3'd6=MA6 / \par 3'd7=MA8
+\\\hline
+3&RSVD& & & \\\hline
+2:0&reg\_vendor\_sel&r/w&3'b010&pSRAM vendor selection \par [0] - Winbond \par [1] - APM\_XCELLA \par [2] - APM\_HYPER
+\\\hline
+}

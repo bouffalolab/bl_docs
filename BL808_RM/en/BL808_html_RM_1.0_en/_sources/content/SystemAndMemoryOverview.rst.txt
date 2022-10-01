@@ -1,0 +1,403 @@
+==================
+System and Memory
+==================
+
+System Architecture
+==========================
+BL808 series chips mainly include wireless and multimedia subsystems.
+
+With one RISC-V 32-bit high-performance CPU and Wi-Fi/BT/Zigbee, the wireless subsystem supports wireless connection and data transmission in multiple ways, creating diversified experience.
+
+With one RISC-V 64-bit ultra-high performance CPU and DVP/CSI/
+H264/NPU, the multimedia subsystem can be widely used in AI fields like video surveillance and smart speakers.
+
+
+BL808 system architecture:
+
+.. figure:: ../../picture/SystemArch.svg
+   :align: center
+   :scale: 80%
+
+   Block Diagram of System
+
+Composition of wireless subsystem:
+
+- CPU
+  
+  * One RISC-V high-performance CPU (M0) and one RISC-V low-power CPU (LP)
+  * Wireless connection and data transmission in multiple ways, diversified user experience
+
+- Bus interface: AXI and AHB
+  
+  * CPU accesses the memory through AXI
+  * CPU accesses peripherals through AHB
+  * Low power and high performance
+
+- Peripherals
+
+  * Has 30 peripheral modules including UART/SPI/I2C/PWM/SDH/EMAC/USB, allowing connection and storage to and control of peripherals
+  * Integrates the Audio module, and supports the input of audio data, analog microphone, and digital microphone, making audio application development easy for users
+  * Suits low-power application scenarios, for example, disabling other CPUs and peripherals in low-power scenarios of smart speakers, and using LP for wake-up test of VAD
+
+Composition of multimedia subsystem:
+
+- CPU
+  
+  * One RISC-V ultra-high performance CPU (D0)
+  * For application fields like video surveillance, smart doorbell, smart cat eye, and smart speaker
+  * NPU module for various AI scenarios that accelerates neural network operators
+  
+- Peripherals
+  
+  * Conventional peripherals like UART/SPI/I2C, facilitating development of system functions
+  * CMOS Sensor connected with CSI and DVP interfaces to acquire images and videos; built-in Codec modules for video coding; OSD/Scaler/2DDMA modules for importing video data stream into the Display module
+
+
+CPU
+=================
+
+BL808 chip contains three RISC-V CPUs, namely M0, D0, and LP.
+M0 mainly processes network data stream and peripheral access.
+LP mainly implements some functions in the low-power mode.
+
+M0
+-----------------
+
+Features
+*****************
+M0, a 32-bit RISC-V CPU, uses a 5-stage pipeline: fetch, decode, execute, memory access, and write back. This high-performance embedded microprocessor has the following features:
+
+- 32-bit RISC processor
+- Supports RISC-V RV32IMAFCP instruction set
+- Supports RISC-V 32-bit/16-bit mixed instruction set
+- Supports RISC-V machine mode and user mode
+- Thirty-two 32-bit integer general purpose registers (GPR) and thirty-two 32-bit/64-bit floating-point GPRs
+- Integer (5-stage)/floating-point (7-stage), single-issue, sequentially executed pipeline
+- Supports AXI 4.0 main device interface and AHB 5.0 peripheral interface
+- 32K instruction cache, two-way set associative structure
+- 16K data cache, two-way set associative structure
+- Unaligned memory access
+- Double-cycle hardware multiplier and Radix-4 hardware divider
+- Supports BHT (8K) and BTB
+- Supports extended enhanced instruction set
+- Supports MCU feature extension technique, including interrupt processing acceleration technique and MCU extension feature
+- Compatible with RISC-V CLIC interrupt standard and interrupt nesting; 96 external interrupt sources, 4 bits for configuring interrupt priority
+- Compatible with RISC-V PMP, 8 configurable areas
+- Supports hardware performance monitor (HPM) units
+- Supports RISC-V Debug Specification
+
+Extended Functions
+*******************
+- Bit operation instruction, arithmetic operation instruction, and enhanced memory access instruction
+- CACHE operation instruction and synchronization instruction, making programming easy for software programmers
+- Interrupt speculative push technique and vector interrupt tail-biting technique, accelerated interrupt response, with interrupt response delay of 20 processor clock cycles
+- Common application requirements in MCU fields like NMI, low-power mode for deep/light sleep, low-power wake-up events, and locking
+- Supports unaligned memory access, which can be enabled/disabled by software, making programming and debugging easy for software programmers
+
+Implemented Standards
+***********************
+M0 is compatible with the following RISC-V standards:
+
+- The RISC-V Instruction Set Manual, Volume I: RISC-V User-Level ISA, Version 2.2
+- The RISC-V Instruction Set Manual, Volume II: RISC-V Privileged Architecture, Version1.10
+- RISC-V Core-Local Interrupt Controller (CLIC) Version 0.8
+- RISC-V External Debug Support Version 0.13.2
+- RISC-V “P” Extension Proposal Version 0.9
+
+D0
+-----------------
+
+Features
+*****************
+
+D0 is a 64-bit RISC-V CPU with 5-stage pipeline. This ultra-high performance embedded microprocessor suits fields like security monitoring, intelligent audio processing, and intelligent video processing, and has the following features:
+
+- 64-bit RISC processor
+- Supports RISC-V RV64IMAFCV instruction architecture
+- Five-stage single-issue sequentially executed pipeline
+- Level-1 instruction and data cache of Harvard architecture, with a size of 32 KB and a cache line of 64B
+- Sv39 memory management unit, realizing the conversion of virtual and real addresses and memory management
+- jTLB that supports 128 entries
+- Supports AXI 4.0 128-bit master interface
+- Supports core local interrupt (CLINT) and platform-level interrupt controller (PLIC)
+- With 80 external interrupt sources, 3 bits for configuring interrupt priority
+- Supports BHT (8K) and BTB
+- Compatible with RISC-V PMP, 8 configurable areas
+- Supports hardware performance monitor (HPM) units
+
+Features of the vector computing unit:
+
+- Compatible with RISC-V V vector extension standard (revision 0.7.1)
+- Supports vector execution unit (128 bits)
+- Supports INT8/INT16/INT32/FP16/FP32 vector operations
+- Supports segment load and store instructions
+
+Extended Functions
+********************
+- Bit operation instruction, arithmetic operation instruction, and enhanced memory access instruction
+- CACHE operation instruction and synchronization instruction, making programming easy for software programmers
+- Supports unaligned memory access, which can be enabled/disabled by software, making programming and debugging easy for software programmers
+
+Implemented Standards
+***********************
+D0 is compatible with the following RISC-V standards:
+
+- The RISC-V Instruction Set Manual, Volume I: RISC-V User-Level ISA, Version 2.2
+- The RISC-V Instruction Set Manual, Volume II: RISC-V Privileged Architecture, Version1.10
+- RISC-V “V” Vector Extension, Version 0.7.1-20190610-Workshop-Release.
+- RISC-V External Debug Support Version 0.13.2
+
+
+LP
+-----------------
+
+Features
+*****************
+
+LP, a 32-bit RISC-V CPU, uses a 2-stage pipeline (fetch, decode, execute, and write back), characterized by ultra-low power, ultra-low cost, high code density, and the following features:
+
+- 32-bit RISC processor
+- Supports RISC-V RV32EMC instruction set
+- Supports RISC-V 32-bit/16-bit mixed instruction set
+- Sixteen 32-bit integer GPRs
+- Two-stage sequentially executed pipeline
+- Supports RISC-V machine mode and user mode
+- Compatible with RISC-V CLIC interrupt standard and interrupt nesting, with 32 external interrupt sources
+- Supports AHBLite bus protocol, instruction bus, and system bus
+- No internal cache
+- No PMP
+- Supports 2-wire debugging interface
+
+Implemented Standards
+**********************
+LP is compatible with the following RISC-V standards:
+
+- The RISC-V Instruction Set Manual, Volume I: RISC-V User-Level ISA, Version 2.2
+- The RISC-V Instruction Set Manual, Volume II: RISC-V Privileged Architecture, Version1.10
+- RISC-V Core-Local Interrupt Controller (CLIC) Version 0.8
+
+Boot
+=================
+The system supports boot from Flash/UART/USB, as described below:
+
+.. raw:: latex
+
+   \vspace{-10pt}
+
+.. table:: Boot mode 
+    :widths: 13, 8,79
+    :width: 100%
+    :align: center
+
+    +---------------+---------------+------------------------------------------------------------------------------------------------+
+    |  Boot Pin     |  Level        |   Description                                                                                  |
+    +===============+===============+================================================================================================+
+    | GPIO39        | 1             | Boot from UART (GPIO20/21)/USB for downloading Flash or downloading image to RAM for execution |
+    +               +---------------+------------------------------------------------------------------------------------------------+
+    |               | 0             | Boot the application image from Flash                                                          |
+    +---------------+---------------+------------------------------------------------------------------------------------------------+
+
+Address Mapping
+================
+
+.. table:: Address mapping has_header
+    :widths: 11, 15,15,8,51
+    :width: 100%
+    :align: center
+
+    +---------------+---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |  Module       |  Destination  |  Start Address        | Size  |         Description                                                                                       |
+    +---------------+---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    | FLASH         | FlashA        | 0x58000000            | 64MB  | Application address space                                                                                 |
+    +---------------+---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |   PSRAM       | pSRAM         |0x54000000             | 64MB  | pSRAM memory address space                                                                                |
+    +---------------+---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    | RAM           | OCRAM(MCU)    | 0x22020000            | 64KB  | On Chip RAM address space mainly for M0 application data                                                  |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | WRAM(MCU)     | 0x22030000            | 160KB | Wireless RAM address space mainly for M0 wireless network data                                            |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | XRAM(EMI)     | 0x40000000            | 16KB  | Shared RAM mainly for data communication among M0/LP/D0                                                   |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | DRAM(MM)      | 0x3EF80000            | 512KB | Multimedia-side RAM address space used by D0 application data and modules like H264/NPU                   |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | VRAM(MM)      | 0x3F000000            | 32KB  | Multimedia-side RAM address space used by D0 application data and modules like H264/NPU                   |
+    +---------------+---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    | MMPERI        | TIMER1        | 0x30009000            | 4KB   | TIMER1 control register                                                                                   |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | SPI1          | 0x30008000            | 4KB   | SPI1 control register                                                                                     |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | MM_GLB        | 0x30007000            | 4KB   | Multimedia-side global register                                                                           |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | DMA2D         | 0x30006000            | 4KB   | DMA2D control register                                                                                    |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | I2C3          | 0x30004000            | 4KB   | I2C3 control register                                                                                     |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | I2C2          | 0x30003000            | 4KB   | I2C2 control register                                                                                     |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | UART3         | 0x30002000            | 4KB   | UART3 control register                                                                                    |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | DMA2          | 0x30001000            | 4KB   | DMA2 control register                                                                                     |
+    +---------------+---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    | MCUPERI       | DMA1          | 0x20071000            | 4KB   | DMA1 control register                                                                                     |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | EMAC          | 0x20070000            | 4KB   | EMAC control register                                                                                     |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | AUDIO         | 0x20055000            | 4KB   | Audio control register                                                                                    |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | USB           | 0x20072000            | 4KB   | USB control register                                                                                      |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | HBN           | 0x2000F000            | 4KB   | HBN register                                                                                              |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | PDS           | 0x2000E000            | 4KB   | PDS register                                                                                              |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | DMA0          | 0x2000C000            | 4KB   | DMA0 control register                                                                                     |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | I2S           | 0x2000AB00            | 256B  | I2S control register                                                                                      |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | ISO11898      | 0x2000AA00            | 256B  | ISO11898 control register                                                                                 |
+    +               +               +-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | UART2         | 0x2000AA00            | 256B  | UART2 control register                                                                                    |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | I2C1          | 0x2000A900            | 256B  | I2C1 control register                                                                                     |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | IR            | 0x2000A600            | 256B  | IR control register                                                                                       |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | TIMER0        | 0x2000A500            | 256B  | TIMER0 control register                                                                                   |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | PWM           | 0x2000A400            | 256B  | PWM control register                                                                                      |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | I2C0          | 0x2000A300            | 256B  | I2C0 control register                                                                                     |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | SPI0          | 0x2000A200            | 256B  | SPI0 control register                                                                                     |
+    +---------------+---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    | MCUPERI       | UART1         | 0x2000A100            | 256B  | UART1 control register                                                                                    |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | UART0         | 0x2000A000            | 256B  | UART0 control register                                                                                    |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | eFuse         | 0x20056000            | 4KB   | eFuse memory control register                                                                             |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | TZ            | 0x20005000            | 4KB   | TrustZone control register                                                                                |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | SEC_ENG       | 0x20004000            | 4KB   | Security engine control register                                                                          |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | GPIP          | 0x20002000            | 1KB   | General DAC / ADC / ACOMP interface control register                                                      |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | GLB           | 0x20000000            | 4KB   | Global control register                                                                                   |
+    +---------------+---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    | ROM           | ROM           | 0x90000000            | 128KB | Bootrom area address space                                                                                |
+    +---------------+---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+
+Interrupt Source
+==================
+CPU_M0 and CPU_LP contain 23 interrupt sources. The interrupt sources and interrupt numbers are shown in the following table:
+
+.. table:: Interrupt assignment has_header
+    :widths: 10, 20,25,45
+    :width: 100%
+    :align: center
+
+    +-------+------------------+------------------+---------------------------------+
+    | Interrupt source         | Interrupt Number | Description                     |
+    +-------+------------------+------------------+---------------------------------+
+    | DMA   | DMA0_ALL         | IRQ_NUM_BASE+15  | DMA0 ALL Interrupt              |
+    +       +------------------+------------------+---------------------------------+
+    |       | DMA1_ALL         | IRQ_NUM_BASE+16  | DMA1 ALL Interrupt              |
+    +-------+------------------+------------------+---------------------------------+
+    | IR    | IRTX             | IRQ_NUM_BASE+19  | IR TX Interrupt                 |
+    +       +------------------+------------------+---------------------------------+
+    |       | IRRX             | IRQ_NUM_BASE+20  | IR RX Interrupt                 |
+    +-------+------------------+------------------+---------------------------------+
+    | USB   | USB              | IRQ_NUM_BASE+21  | USB  Interrupt                  |
+    +-------+------------------+------------------+---------------------------------+
+    | EMAC  | EMAC             | IRQ_NUM_BASE+24  | EMAC  Interrupt                 |
+    +-------+------------------+------------------+---------------------------------+
+    | ADC   | GPADC_DMA        | IRQ_NUM_BASE+25  | GPADC_DMA Interrupt             |
+    +-------+------------------+------------------+---------------------------------+
+    | SPI   | SPI0             | IRQ_NUM_BASE+27  | SPI Interrupt                   |
+    +-------+------------------+------------------+---------------------------------+
+    | UART  | UART0            | IRQ_NUM_BASE+28  | UART0 Interrupt                 |
+    +       +------------------+------------------+---------------------------------+
+    |       | UART1            | IRQ_NUM_BASE+29  | UART1 Interrupt                 |
+    +       +------------------+------------------+---------------------------------+
+    |       | UART2            | IRQ_NUM_BASE+30  | UART2 Interrupt                 |
+    +-------+------------------+------------------+---------------------------------+
+    | GPIO  | GPIO_DMA         | IRQ_NUM_BASE+31  | GPIO DMA Interrupt              |
+    +-------+------------------+------------------+---------------------------------+
+    | I2C   | I2C0             | IRQ_NUM_BASE+32  | I2C0 Interrupt                  |
+    +       +------------------+------------------+---------------------------------+
+    |       | I2C1             | IRQ_NUM_BASE+39  | I2C1 Interrupt                  |
+    +-------+------------------+------------------+---------------------------------+
+    | PWM   | PWM              | IRQ_NUM_BASE+33  | PWM Interrupt                   |
+    +-------+------------------+------------------+---------------------------------+
+    | TIMER0| TIMER0_CH0       | IRQ_NUM_BASE+36  | Timer0 Channel 0 Interrupt      |
+    +       +------------------+------------------+---------------------------------+
+    |       | TIMER0_CH1       | IRQ_NUM_BASE+37  | Timer0 Channel 1 Interrupt      |
+    +       +------------------+------------------+---------------------------------+
+    |       | TIMER0_WDT       | IRQ_NUM_BASE+38  | Timer0 Watch Dog Interrupt      |
+    +-------+------------------+------------------+---------------------------------+
+    | I2S   | I2S              | IRQ_NUM_BASE+40  | I2S Interrupt                   |
+    +-------+------------------+------------------+---------------------------------+
+    | GPIO  | GPIO_INT0        | IRQ_NUM_BASE+44  | GPIO Interrupt                  |
+    +-------+------------------+------------------+---------------------------------+
+    | PDS   | PDS_WAKEUP       | IRQ_NUM_BASE+50  | PDS Wakeup Interrupt            |
+    +-------+------------------+------------------+---------------------------------+
+    | HBN   | HBN_OUT0         | IRQ_NUM_BASE+51  | Hibernate out 0 Interrupt       |
+    +       +------------------+------------------+---------------------------------+
+    |       | HBN_OUT1         | IRQ_NUM_BASE+52  | Hibernate out 1 Interrupt       |
+    +-------+------------------+------------------+---------------------------------+
+CPU_D0 contains 21 interrupt sources.
+The interrupt sources and interrupt numbers are shown in the following table:
+
+.. table:: Interrupt assignment has_header
+    :widths: 10, 20,25,45
+    :width: 100%
+    :align: center
+
+    +-------+------------------+------------------+---------------------------------+
+    | Interrupt source         | Interrupt Number | Description                     |
+    +-------+------------------+------------------+---------------------------------+
+    | UART  | UART3            | IRQ_NUM_BASE+4   | UART3 Interrupt                 |
+    +-------+------------------+------------------+---------------------------------+
+    | I2C   | I2C2             | IRQ_NUM_BASE+5   | I2C2 Interrupt                  |
+    +       +------------------+------------------+---------------------------------+
+    |       | I2C3             | IRQ_NUM_BASE+6   | I2C3 Interrupt                  |
+    +-------+------------------+------------------+---------------------------------+
+    | SPI   |  SPI1            | IRQ_NUM_BASE+7   | SPI1 Interrupt                  |
+    +-------+------------------+------------------+---------------------------------+
+    | DMA2  | DMA2_INT0        | IRQ_NUM_BASE+24  | DMA INT0 Interrupt              |
+    +       +------------------+------------------+---------------------------------+
+    |       | DMA2_INT1        | IRQ_NUM_BASE+25  | DMA INT1 Interrupt              |
+    +       +------------------+------------------+---------------------------------+
+    |       | DMA2_INT2        | IRQ_NUM_BASE+26  | DMA INT2 Interrupt              |
+    +       +------------------+------------------+---------------------------------+
+    |       | DMA2_INT3        | IRQ_NUM_BASE+27  | DMA INT3 Interrupt              |
+    +       +------------------+------------------+---------------------------------+
+    |       | DMA2_INT4        | IRQ_NUM_BASE+28  | DMA INT4 Interrupt              |
+    +       +------------------+------------------+---------------------------------+
+    |       | DMA2_INT5        | IRQ_NUM_BASE+29  | DMA INT5 Interrupt              |
+    +       +------------------+------------------+---------------------------------+
+    |       | DMA2_INT6        | IRQ_NUM_BASE+30  | DMA INT6 Interrupt              |
+    +       +------------------+------------------+---------------------------------+
+    |       | DMA2_INT7        | IRQ_NUM_BASE+31  | DMA INT7 Interrupt              |
+    +-------+------------------+------------------+---------------------------------+
+    | EMAC  | EMAC2            | IRQ_NUM_BASE+36  | EMAC2 Interrupt                 |
+    +-------+------------------+------------------+---------------------------------+
+    | DMA2D | DMA2D_INT0       | IRQ_NUM_BASE+45  | DMA2D INT0 Interrupt            |
+    +       +------------------+------------------+---------------------------------+
+    |       | DMA2D_INT1       | IRQ_NUM_BASE+46  | DMA2D INT1 Interrupt            |
+    +-------+------------------+------------------+---------------------------------+
+    | PWM   | PWM              | IRQ_NUM_BASE+48  | PWM1 Interrupt                  |
+    +-------+------------------+------------------+---------------------------------+
+    | TIMER1| TIMER0_CH0       | IRQ_NUM_BASE+61  | Timer1 Channel 0 Interrupt      |
+    +       +------------------+------------------+---------------------------------+
+    |       | TIMER0_CH1       | IRQ_NUM_BASE+62  | Timer1 Channel 1 Interrupt      |
+    +       +------------------+------------------+---------------------------------+
+    |       | TIMER0_WDT       | IRQ_NUM_BASE+63  | Timer1 Watch Dog Interrupt      |
+    +-------+------------------+------------------+---------------------------------+
+    | AUDIO | AUDIO            | IRQ_NUM_BASE+64  | Audio Interrupt                 |
+    +-------+------------------+------------------+---------------------------------+
+    | PDS   | PDS              | IRQ_NUM_BASE+66  | PDS Interrupt                   |
+    +-------+------------------+------------------+---------------------------------+
+
+.. note::
+    IRQ_NUM_BASE is 16 and the interrupt number 015 is RISC-V reserved interrupt.

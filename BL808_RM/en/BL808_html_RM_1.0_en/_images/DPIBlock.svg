@@ -1,0 +1,908 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="184.8508mm"
+   height="64.710312mm"
+   viewBox="0 0 184.8508 64.710312"
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
+   sodipodi:docname="DPIBlock_common.svg"
+   inkscape:export-filename="C:\wu\git\bl808_docs\bl808doc_rm\picture\DPIBlock_common.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96">
+  <defs
+     id="defs2">
+    <marker
+       style="overflow:visible"
+       id="marker10712"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mstart"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(0.4,0,0,0.4,4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path10710" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker4727"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path4725" />
+    </marker>
+    <marker
+       id="endMarker1"
+       markerUnits="strokeWidth"
+       orient="auto"
+       markerWidth="8"
+       markerHeight="6"
+       viewBox="0 0 10 10"
+       refX="1"
+       refY="5">
+      <polyline
+         points="0,0 10,5 0,10 1,5"
+         fill="solid"
+         id="polyline893" />
+    </marker>
+    <marker
+       id="endMarker2"
+       markerUnits="strokeWidth"
+       orient="auto"
+       markerWidth="8"
+       markerHeight="6"
+       viewBox="0 0 10 10"
+       refX="1"
+       refY="5">
+      <polyline
+         points="0,0 10,5 0,10 1,5"
+         fill="solid"
+         id="polyline900" />
+    </marker>
+    <marker
+       id="endMarker3"
+       markerUnits="strokeWidth"
+       orient="auto"
+       markerWidth="8"
+       markerHeight="6"
+       viewBox="0 0 10 10"
+       refX="1"
+       refY="5">
+      <polyline
+         points="0,0 10,5 0,10 1,5"
+         fill="solid"
+         id="polyline907" />
+    </marker>
+    <marker
+       id="endMarker4"
+       markerUnits="strokeWidth"
+       orient="auto"
+       markerWidth="8"
+       markerHeight="6"
+       viewBox="0 0 10 10"
+       refX="1"
+       refY="5">
+      <polyline
+         points="0,0 10,5 0,10 1,5"
+         fill="solid"
+         id="polyline983" />
+    </marker>
+    <marker
+       id="endMarker5"
+       markerUnits="strokeWidth"
+       orient="auto"
+       markerWidth="8"
+       markerHeight="6"
+       viewBox="0 0 10 10"
+       refX="1"
+       refY="5">
+      <polyline
+         points="0,0 10,5 0,10 1,5"
+         fill="solid"
+         id="polyline990" />
+    </marker>
+    <marker
+       id="startMarker1"
+       markerUnits="strokeWidth"
+       orient="auto"
+       markerWidth="8"
+       markerHeight="6"
+       viewBox="0 0 10 10"
+       refX="9"
+       refY="5">
+      <polyline
+         points="10,0 0,5 10,10 9,5"
+         fill="solid"
+         id="polyline997" />
+    </marker>
+    <marker
+       id="endMarker6"
+       markerUnits="strokeWidth"
+       orient="auto"
+       markerWidth="8"
+       markerHeight="6"
+       viewBox="0 0 10 10"
+       refX="1"
+       refY="5">
+      <polyline
+         points="0,0 10,5 0,10 1,5"
+         fill="solid"
+         id="polyline1002" />
+    </marker>
+    <marker
+       id="startMarker2"
+       markerUnits="strokeWidth"
+       orient="auto"
+       markerWidth="8"
+       markerHeight="6"
+       viewBox="0 0 10 10"
+       refX="9"
+       refY="5">
+      <polyline
+         points="10,0 0,5 10,10 9,5"
+         fill="solid"
+         id="polyline1041" />
+    </marker>
+    <marker
+       id="endMarker7"
+       markerUnits="strokeWidth"
+       orient="auto"
+       markerWidth="8"
+       markerHeight="6"
+       viewBox="0 0 10 10"
+       refX="1"
+       refY="5">
+      <polyline
+         points="0,0 10,5 0,10 1,5"
+         fill="solid"
+         id="polyline1046" />
+    </marker>
+    <marker
+       id="startMarker3"
+       markerUnits="strokeWidth"
+       orient="auto"
+       markerWidth="8"
+       markerHeight="6"
+       viewBox="0 0 10 10"
+       refX="9"
+       refY="5">
+      <polyline
+         points="10,0 0,5 10,10 9,5"
+         fill="solid"
+         id="polyline1058" />
+    </marker>
+    <marker
+       id="endMarker8"
+       markerUnits="strokeWidth"
+       orient="auto"
+       markerWidth="8"
+       markerHeight="6"
+       viewBox="0 0 10 10"
+       refX="1"
+       refY="5">
+      <polyline
+         points="0,0 10,5 0,10 1,5"
+         fill="solid"
+         id="polyline1063" />
+    </marker>
+    <marker
+       id="startMarker4"
+       markerUnits="strokeWidth"
+       orient="auto"
+       markerWidth="8"
+       markerHeight="6"
+       viewBox="0 0 10 10"
+       refX="9"
+       refY="5">
+      <polyline
+         points="10,0 0,5 10,10 9,5"
+         fill="solid"
+         id="polyline1087" />
+    </marker>
+    <marker
+       id="endMarker9"
+       markerUnits="strokeWidth"
+       orient="auto"
+       markerWidth="8"
+       markerHeight="6"
+       viewBox="0 0 10 10"
+       refX="1"
+       refY="5">
+      <polyline
+         points="0,0 10,5 0,10 1,5"
+         fill="solid"
+         id="polyline1092" />
+    </marker>
+    <marker
+       id="startMarker5"
+       markerUnits="strokeWidth"
+       orient="auto"
+       markerWidth="8"
+       markerHeight="6"
+       viewBox="0 0 10 10"
+       refX="9"
+       refY="5">
+      <polyline
+         points="10,0 0,5 10,10 9,5"
+         fill="solid"
+         id="polyline1099" />
+    </marker>
+    <marker
+       id="endMarker10"
+       markerUnits="strokeWidth"
+       orient="auto"
+       markerWidth="8"
+       markerHeight="6"
+       viewBox="0 0 10 10"
+       refX="1"
+       refY="5">
+      <polyline
+         points="0,0 10,5 0,10 1,5"
+         fill="solid"
+         id="polyline1104" />
+    </marker>
+    <marker
+       id="startMarker6"
+       markerUnits="strokeWidth"
+       orient="auto"
+       markerWidth="8"
+       markerHeight="6"
+       viewBox="0 0 10 10"
+       refX="9"
+       refY="5">
+      <polyline
+         points="10,0 0,5 10,10 9,5"
+         fill="solid"
+         id="polyline1121" />
+    </marker>
+    <marker
+       id="endMarker11"
+       markerUnits="strokeWidth"
+       orient="auto"
+       markerWidth="8"
+       markerHeight="6"
+       viewBox="0 0 10 10"
+       refX="1"
+       refY="5">
+      <polyline
+         points="0,0 10,5 0,10 1,5"
+         fill="solid"
+         id="polyline1126" />
+    </marker>
+    <marker
+       id="endMarker1-6"
+       markerUnits="strokeWidth"
+       orient="auto"
+       markerWidth="8"
+       markerHeight="6"
+       viewBox="0 0 10 10"
+       refX="1"
+       refY="5">
+      <polyline
+         points="0,0 10,5 0,10 1,5"
+         fill="solid"
+         id="polyline855" />
+    </marker>
+    <marker
+       id="startMarker1-2"
+       markerUnits="strokeWidth"
+       orient="auto"
+       markerWidth="8"
+       markerHeight="6"
+       viewBox="0 0 10 10"
+       refX="9"
+       refY="5">
+      <polyline
+         points="10,0 0,5 10,10 9,5"
+         fill="solid"
+         id="polyline874" />
+    </marker>
+    <marker
+       id="endMarker2-6"
+       markerUnits="strokeWidth"
+       orient="auto"
+       markerWidth="8"
+       markerHeight="6"
+       viewBox="0 0 10 10"
+       refX="1"
+       refY="5">
+      <polyline
+         points="0,0 10,5 0,10 1,5"
+         fill="solid"
+         id="polyline879" />
+    </marker>
+    <marker
+       id="endMarker3-5"
+       markerUnits="strokeWidth"
+       orient="auto"
+       markerWidth="8"
+       markerHeight="6"
+       viewBox="0 0 10 10"
+       refX="1"
+       refY="5">
+      <polyline
+         points="0,0 10,5 0,10 1,5"
+         fill="solid"
+         id="polyline896" />
+    </marker>
+    <marker
+       id="endMarker4-0"
+       markerUnits="strokeWidth"
+       orient="auto"
+       markerWidth="8"
+       markerHeight="6"
+       viewBox="0 0 10 10"
+       refX="1"
+       refY="5">
+      <polyline
+         points="0,0 10,5 0,10 1,5"
+         fill="solid"
+         id="polyline903" />
+    </marker>
+    <marker
+       id="endMarker5-0"
+       markerUnits="strokeWidth"
+       orient="auto"
+       markerWidth="8"
+       markerHeight="6"
+       viewBox="0 0 10 10"
+       refX="1"
+       refY="5">
+      <polyline
+         points="0,0 10,5 0,10 1,5"
+         fill="solid"
+         id="polyline922" />
+    </marker>
+    <marker
+       id="endMarker6-0"
+       markerUnits="strokeWidth"
+       orient="auto"
+       markerWidth="8"
+       markerHeight="6"
+       viewBox="0 0 10 10"
+       refX="1"
+       refY="5">
+      <polyline
+         points="0,0 10,5 0,10 1,5"
+         fill="solid"
+         id="polyline934" />
+    </marker>
+    <marker
+       id="endMarker7-5"
+       markerUnits="strokeWidth"
+       orient="auto"
+       markerWidth="8"
+       markerHeight="6"
+       viewBox="0 0 10 10"
+       refX="1"
+       refY="5">
+      <polyline
+         points="0,0 10,5 0,10 1,5"
+         fill="solid"
+         id="polyline946" />
+    </marker>
+    <marker
+       id="endMarker8-1"
+       markerUnits="strokeWidth"
+       orient="auto"
+       markerWidth="8"
+       markerHeight="6"
+       viewBox="0 0 10 10"
+       refX="1"
+       refY="5">
+      <polyline
+         points="0,0 10,5 0,10 1,5"
+         fill="solid"
+         id="polyline958" />
+    </marker>
+    <marker
+       id="endMarker9-6"
+       markerUnits="strokeWidth"
+       orient="auto"
+       markerWidth="8"
+       markerHeight="6"
+       viewBox="0 0 10 10"
+       refX="1"
+       refY="5">
+      <polyline
+         points="0,0 10,5 0,10 1,5"
+         fill="solid"
+         id="polyline970" />
+    </marker>
+    <marker
+       id="marker1047"
+       markerUnits="strokeWidth"
+       orient="auto"
+       markerWidth="8"
+       markerHeight="6"
+       viewBox="0 0 10 10"
+       refX="1"
+       refY="5">
+      <polyline
+         points="0,0 10,5 0,10 1,5"
+         fill="solid"
+         id="polyline1045" />
+    </marker>
+    <marker
+       id="marker1056"
+       markerUnits="strokeWidth"
+       orient="auto"
+       markerWidth="8"
+       markerHeight="6"
+       viewBox="0 0 10 10"
+       refX="1"
+       refY="5">
+      <polyline
+         points="0,0 10,5 0,10 1,5"
+         fill="solid"
+         id="polyline1054" />
+    </marker>
+    <marker
+       id="marker1065"
+       markerUnits="strokeWidth"
+       orient="auto"
+       markerWidth="8"
+       markerHeight="6"
+       viewBox="0 0 10 10"
+       refX="1"
+       refY="5">
+      <polyline
+         points="0,0 10,5 0,10 1,5"
+         fill="solid"
+         id="polyline1063-7" />
+    </marker>
+    <marker
+       id="marker1074"
+       markerUnits="strokeWidth"
+       orient="auto"
+       markerWidth="8"
+       markerHeight="6"
+       viewBox="0 0 10 10"
+       refX="1"
+       refY="5">
+      <polyline
+         points="0,0 10,5 0,10 1,5"
+         fill="solid"
+         id="polyline1072" />
+    </marker>
+    <marker
+       id="marker1083"
+       markerUnits="strokeWidth"
+       orient="auto"
+       markerWidth="8"
+       markerHeight="6"
+       viewBox="0 0 10 10"
+       refX="1"
+       refY="5">
+      <polyline
+         points="0,0 10,5 0,10 1,5"
+         fill="solid"
+         id="polyline1081" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker3036-7"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.4,0,0,0.4,4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path3034-3" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Mstart-8"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.4,0,0,0.4,4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path2650-8" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker4727-9"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path4725-9" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker3036-78"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.4,0,0,0.4,4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path3034-8" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker3036-78-8"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.4,0,0,0.4,4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path3034-8-3" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker3036-78-8-9"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.4,0,0,0.4,4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path3034-8-3-1" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker3036-78-8-9-8"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.4,0,0,0.4,4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path3034-8-3-1-8" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker3036-78-8-9-9"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.4,0,0,0.4,4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path3034-8-3-1-6" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker3036-78-8-9-5"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.4,0,0,0.4,4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path3034-8-3-1-9" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="1"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.49497475"
+     inkscape:cx="690.06885"
+     inkscape:cy="382.81412"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="图层 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-33.919958,-188.30607)">
+    <g
+       id="g15212"
+       transform="translate(21.699079,4.9942727)">
+      <g
+         id="g1839"
+         transform="translate(25.050228,-16.473719)">
+        <text
+           x="33.034462"
+           y="241.70441"
+           id="text842-1-7-8"
+           style="font-size:5.05023px;stroke-width:0.264583"
+           transform="scale(0.98291507,1.0173819)"><tspan
+             font-family="'Times New Roman'"
+             font-size="3.36682px"
+             fill="#000000"
+             fill-opacity="1"
+             stroke-opacity="1"
+             id="tspan838-3-3-5"
+             style="stroke-width:0.226402">Control Registers</tspan></text>
+        <rect
+           style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264999"
+           id="rect1676-1-5"
+           width="24.588797"
+           height="9.4880686"
+           x="31.805075"
+           y="240.34212" />
+      </g>
+      <text
+         x="41.008228"
+         y="211.0526"
+         id="text842-1-2"
+         style="font-size:5.05023px;stroke-width:0.264583"
+         transform="scale(0.98291507,1.0173819)"><tspan
+           font-family="'Times New Roman'"
+           font-size="3.36682px"
+           fill="#000000"
+           fill-opacity="1"
+           stroke-opacity="1"
+           id="tspan838-3-32"
+           style="stroke-width:0.226402">DVP</tspan></text>
+      <text
+         x="41.039463"
+         y="225.84669"
+         id="text842-1-1"
+         style="font-size:5.05023px;stroke-width:0.264583"
+         transform="scale(0.98291507,1.0173819)"><tspan
+           font-family="'Times New Roman'"
+           font-size="3.36682px"
+           fill="#000000"
+           fill-opacity="1"
+           stroke-opacity="1"
+           id="tspan838-3-8"
+           style="stroke-width:0.226402">APB</tspan></text>
+      <text
+         x="86.713966"
+         y="211.10686"
+         id="text842-1-7-8-0"
+         style="font-size:5.05023px;stroke-width:0.264583"
+         transform="scale(0.98291507,1.0173819)"><tspan
+           font-family="'Times New Roman'"
+           font-size="3.36682px"
+           fill="#000000"
+           fill-opacity="1"
+           stroke-opacity="1"
+           id="tspan838-3-3-5-1"
+           style="stroke-width:0.226402">DPI Controller</tspan></text>
+      <rect
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264999"
+         id="rect1676-1-5-7"
+         width="24.588797"
+         height="9.4880686"
+         x="82.588219"
+         y="208.869" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker3036-7)"
+         d="m 94.88261,218.85821 v 9.75422"
+         id="path2100-3-2-2-9-1-3-4" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.264585px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow1Mstart-8)"
+         d="M 82.063922,213.61304 H 48.649003"
+         id="path2100-3-2-2-9-1-3-3-7" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 81.444102,228.61243 H 94.88261"
+         id="path10129" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.265;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#marker10712);marker-end:url(#marker4727-9)"
+         d="m 56.354173,228.61243 h -7.18294"
+         id="path2100-3-2-2-9-1-3-3-0-6-4" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker3036-78)"
+         d="m 116.93123,213.61304 h -9.75422"
+         id="path2100-3-2-2-9-1-3-09" />
+    </g>
+    <g
+       id="g15104"
+       transform="translate(11.339286,16.063988)">
+      <g
+         id="g14875"
+         transform="translate(0,-7.4083337)">
+        <rect
+           style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264998"
+           id="rect1676-1-5-3-1-8"
+           width="24.588797"
+           height="39.939568"
+           x="127.87263"
+           y="188.63507" />
+        <text
+           x="137.72989"
+           y="206.15546"
+           id="text842-1-7-8-1-6-0"
+           style="font-size:5.05023px;stroke-width:0.264583"
+           transform="scale(0.98291507,1.0173819)"><tspan
+             font-family="'Times New Roman'"
+             font-size="3.36682px"
+             fill="#000000"
+             fill-opacity="1"
+             stroke-opacity="1"
+             id="tspan838-3-3-5-88-3-4"
+             style="stroke-width:0.226402">DPI IO</tspan></text>
+      </g>
+      <g
+         id="g14927"
+         transform="translate(-5.1026842,-3.0181383)">
+        <g
+           id="g14595"
+           transform="translate(0,-0.9955466)">
+          <text
+             x="163.23065"
+             y="195.09767"
+             id="text842-1-7-8-1-6-0-6"
+             style="font-size:5.05023px;stroke-width:0.264583"
+             transform="scale(0.98291507,1.0173819)"><tspan
+               font-family="'Times New Roman'"
+               font-size="3.36682px"
+               fill="#000000"
+               fill-opacity="1"
+               stroke-opacity="1"
+               id="tspan838-3-3-5-88-3-4-0"
+               style="stroke-width:0.226402">HSYNC</tspan></text>
+          <path
+             style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker3036-78-8)"
+             d="M 177.46513,199.53448 H 157.56411"
+             id="path2100-3-2-2-9-1-3-09-0" />
+        </g>
+        <g
+           id="g14618"
+           transform="translate(0,-15.635267)">
+          <text
+             x="163.25861"
+             y="202.58472"
+             id="text842-1-7-8-1-6-0-8"
+             style="font-size:5.05023px;stroke-width:0.264583"
+             transform="scale(0.98291507,1.0173819)"><tspan
+               font-family="'Times New Roman'"
+               font-size="3.36682px"
+               fill="#000000"
+               fill-opacity="1"
+               stroke-opacity="1"
+               id="tspan838-3-3-5-88-3-4-08"
+               style="stroke-width:0.226402">VSYNC</tspan></text>
+          <path
+             style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker3036-78-8-9)"
+             d="M 177.46513,207.15166 H 157.56411"
+             id="path2100-3-2-2-9-1-3-09-0-7" />
+        </g>
+        <g
+           id="g14641"
+           transform="translate(0,-1.7839028)">
+          <text
+             x="163.23065"
+             y="209.62674"
+             id="text842-1-7-8-1-6-0-7"
+             style="font-size:5.05023px;stroke-width:0.264583"
+             transform="scale(0.98291507,1.0173819)"><tspan
+               font-family="'Times New Roman'"
+               font-size="3.36682px"
+               fill="#000000"
+               fill-opacity="1"
+               stroke-opacity="1"
+               id="tspan838-3-3-5-88-3-4-8"
+               style="stroke-width:0.226402">DE</tspan></text>
+          <path
+             style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker3036-78-8-9-8)"
+             d="M 177.46513,214.36794 H 157.56411"
+             id="path2100-3-2-2-9-1-3-09-0-7-3" />
+        </g>
+        <g
+           id="g14664"
+           transform="translate(0,-16.022757)">
+          <text
+             x="163.2323"
+             y="216.77069"
+             id="text842-1-7-8-1-6-0-68"
+             style="font-size:5.05023px;stroke-width:0.264583"
+             transform="scale(0.98291507,1.0173819)"><tspan
+               font-family="'Times New Roman'"
+               font-size="3.36682px"
+               fill="#000000"
+               fill-opacity="1"
+               stroke-opacity="1"
+               id="tspan838-3-3-5-88-3-4-2"
+               style="stroke-width:0.226402">PCLK</tspan></text>
+          <path
+             style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker3036-78-8-9-9)"
+             d="M 177.46513,221.58422 H 157.56411"
+             id="path2100-3-2-2-9-1-3-09-0-7-6" />
+        </g>
+        <g
+           id="g14687"
+           transform="translate(0,-8.6593979)">
+          <text
+             x="163.23065"
+             y="223.33827"
+             id="text842-1-7-8-1-6-0-67"
+             style="font-size:5.05023px;stroke-width:0.264583"
+             transform="scale(0.98291507,1.0173819)"><tspan
+               font-family="'Times New Roman'"
+               font-size="3.36682px"
+               fill="#000000"
+               fill-opacity="1"
+               stroke-opacity="1"
+               id="tspan838-3-3-5-88-3-4-5"
+               style="stroke-width:0.226402">DB[15:0]</tspan></text>
+          <path
+             style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker3036-78-8-9-5)"
+             d="M 177.46513,228.26595 H 157.56411"
+             id="path2100-3-2-2-9-1-3-09-0-7-0" />
+        </g>
+      </g>
+    </g>
+    <rect
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.158481;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4008"
+       width="184.69232"
+       height="64.551834"
+       x="33.999199"
+       y="188.38531" />
+  </g>
+</svg>

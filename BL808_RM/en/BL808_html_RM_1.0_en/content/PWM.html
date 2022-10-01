@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>18. PWM &mdash; BL808 Reference Manual  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="19. TIMER" href="TIMER.html" />
+    <link rel="prev" title="17. I2C" href="I2C.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL808 Reference Manual
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. System and Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. Reset and Clock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPIO.html">4. GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">5. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">6. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">7. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA2D.html">8. DMA2D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lz4d.html">9. LZ4D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBI.html">10. DBI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DPI.html">11. DPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DSI.html">12. DSI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cam.html">13. CAM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">14. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">15. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">16. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">17. I2C</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">18. PWM</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">18.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#features">18.2. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#functional-description">18.3. Functional Description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#clock-and-frequency-divider">18.3.1. Clock and Frequency Divider</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#active-level">18.3.2. Active Level</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#principle-of-pulse-generation">18.3.3. Principle of Pulse Generation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#brake">18.3.4. Brake</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dead-zone">18.3.5. Dead Zone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cycle-and-duty-ratio-calculation">18.3.6. Cycle and Duty Ratio Calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pwm-interrupt">18.3.7. PWM Interrupt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adc-linkage">18.3.8. ADC Linkage</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">19. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2s.html">20. I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PDM.html">21. PDM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AUDIO.html">22. AUDIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PSRAM.html">23. PSRAM Contorller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Emac.html">24. Emac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USB.html">25. USB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ISO11898.html">26. ISO11898</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MJPEG.html">27. MJPEG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="JDEC.html">28. JDEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="VENC.html">29. VENC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NPUtoolchain.html">30. NPU toolchain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NPU.html">31. NPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IPC.html">32. IPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LowPower.html">33. LowPower</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SEC_ENG.html">34. SEC ENG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">35. Revision history</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL808 Reference Manual</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">18. </span>PWM</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pwm">
+<h1><span class="section-number">18. </span>PWM<a class="headerlink" href="#pwm" title="Permalink to this headline"></a></h1>
+<section id="overview">
+<h2><span class="section-number">18.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
+<p>Pulse Width Modulation (PWM), an efficient technique that uses the digital signal of microprocessor to control the analog circuit, is widely used in fields like measurement, communication, and power control and conversion.</p>
+</section>
+<section id="features">
+<h2><span class="section-number">18.2. </span>Features<a class="headerlink" href="#features" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p>Two PWM signals are generated, each containing 4-channel PWM signal outputs, with 2 pairs of complementary PWM per channel</p></li>
+<li><p>There are optional three clock sources (bus clock&lt;bclk&gt;, crystal oscillator clock&lt;xtal_ck&gt;, and slow clock&lt;32k&gt;), with 16-bit clock divider</p></li>
+<li><p>Each PWM can be independently set to different cycles</p></li>
+<li><p>Each PWM channel has double threshold setting, allowing different duty ratios and phases, with more flexible pulse</p></li>
+<li><p>Each PWM channel has independent dead time setting</p></li>
+<li><p>Different active levels can be set for each PWM output pin</p></li>
+<li><p>Each PWM has an independent linked switch to connect/disconnect with the internal counter, and you can set the default output level when disconnected</p></li>
+<li><p>The software and external brake signals can set the PWM output level to a preset state</p></li>
+<li><p>Up to 9 trigger sources for triggering ADC conversion</p></li>
+<li><p>Interrupts will be generated when these events occur: counter overflow, threshold comparison and matching, brake signal generation, and PWM cycles reaching the set value.</p></li>
+</ul>
+</section>
+<section id="functional-description">
+<h2><span class="section-number">18.3. </span>Functional Description<a class="headerlink" href="#functional-description" title="Permalink to this headline"></a></h2>
+<section id="clock-and-frequency-divider">
+<h3><span class="section-number">18.3.1. </span>Clock and Frequency Divider<a class="headerlink" href="#clock-and-frequency-divider" title="Permalink to this headline"></a></h3>
+<p>Each PWM counter has three optional clock sources:</p>
+<ol class="arabic simple">
+<li><p>bclk–bus clock of chip</p></li>
+<li><p>XTAL–external crystal oscillator clock</p></li>
+<li><p>f32k–RTC clock of system</p></li>
+</ol>
+<p>Each counter has its own 16-bit frequency divider, which can divide the selected clock through APB. The PWM counter will take the divided clock as the counting cycle unit, and add one every time a counting cycle ends.</p>
+</section>
+<section id="active-level">
+<h3><span class="section-number">18.3.2. </span>Active Level<a class="headerlink" href="#active-level" title="Permalink to this headline"></a></h3>
+<p>Different application scenarios require different active level states, some being active at low level and others being active at high level. The active level of each PWM output can be set independently.</p>
+<p>When the &lt;pwm_chy_ppl&gt; bit in the register pwm_mcx_config1 is set to 1, it means that the forward channel of channel y (y = 0, 1, 2, 3) of pwmx (x = 0, 1) is set to be active at high level. That is, when the PWM module outputs logical ‘1’, its corresponding pin outputs high level, and when it outputs logical ‘0’, that outputs low level. When &lt;pwm_chy_ppl&gt; is set to 0, it means that the same is set to be active at low level. That is, when the PWM module outputs logical ‘1’, its corresponding pin outputs low level, and when it outputs logical ‘0’, that outputs high level. The setting bit of the complementary channel is &lt;pwm_chy_npl&gt;, and its setting rule is the same as that of the forward channel.</p>
+</section>
+<section id="principle-of-pulse-generation">
+<h3><span class="section-number">18.3.3. </span>Principle of Pulse Generation<a class="headerlink" href="#principle-of-pulse-generation" title="Permalink to this headline"></a></h3>
+<p>When the &lt;pwm_chy_pen&gt; bit in the register pwm_mcx_config1 is set to 0, it means that the forward channel of channel y (y = 0, 1, 2, 3) of pwmx (x = 0, 1) is set to a determined logic state, and then the state is determined by the &lt;pwm_chy_psi&gt; bit. When &lt;pwm_chy_psi&gt; is 0, the corresponding forward channel pin outputs logical ‘0’, and when the same is 1, that outputs logical ‘1’. The actual output level must be jointly determined with &lt;pwm_chy_ppl&gt;. The setting bit of the complementary channel is &lt;pwm_chy_nen&gt;, and its setting rule is the same as that of the forward channel.</p>
+<p>When the &lt;pwm_chy_pen&gt; (&lt;pwm_chy_nen&gt;) bit in the register pwm_mcx_config1 is set to 1, the forward (complementary) channel output of channel y (y = 0, 1, 2, 3) of pwmx (x = 0, 1) is determined by comparing the internal counter with the two thresholds. If the counter value is between the two thresholds, the forward channel outputs logical ‘1’, while the complementary one outputs logical ‘0’. If the counter value is beyond the two thresholds, the forward channel outputs logical ‘0’, while the complementary one outputs logical ‘1’. The waveform is shown as follows.</p>
+<figure class="align-center" id="id1">
+<img alt="../_images/PWMWave.svg" src="../_images/PWMWave.svg" /><figcaption>
+<p><span class="caption-number">Fig. 18.1 </span><span class="caption-text">Waveform of PWM in different configurations</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="brake">
+<h3><span class="section-number">18.3.4. </span>Brake<a class="headerlink" href="#brake" title="Permalink to this headline"></a></h3>
+<p>When the brake function is used and the brake signal is generated, the level of the PWM output will be changed to a preset state, which is determined by the &lt;pwm_chy_pbs&gt; and &lt;pwm_chy_nbs&gt; (y = 0, 1, 2, 3) bits in the register pwm_mcx_config1 (x = 0, 1). When the bits are set to 1, PWM outputs logical ‘1’ after the brake signal is generated. When the same is set to 0, PWM outputs logical ‘0’ after the brake signal is generated.</p>
+<p>Brake signals include external brake and software brake. When the &lt;pwm_sw_break_en&gt; in pwm_mcx_config0 (x = 0, 1) is 1, the internal brake signal will be generated. When this bit is 0, the brake state will be exited and PWM will resume to its previous operation mode. When the &lt;pwm_ext_break_en&gt; bit is 1, the external brake function is enabled. If the external brake pin state matches the value set by &lt;pwm_ext_break_pl&gt;, a brake signal will be generated. If that state is opposite to the value set by &lt;pwm_ext_break_pl&gt;, PWM will exit the brake state. It should be noted that only PWM0 supports external brake, and PWM1 cannot do that.</p>
+<p>If the brake interrupt is enabled, the interrupt will be triggered when the external brake signal is generated. Software brake will not trigger an interrupt.</p>
+</section>
+<section id="dead-zone">
+<h3><span class="section-number">18.3.5. </span>Dead Zone<a class="headerlink" href="#dead-zone" title="Permalink to this headline"></a></h3>
+<p>Different dead time can be set for each PWM channel independently. When the value of dead time is not 0, the forward channel of PWM will delay the generation of jump level when it matches the threshold 1, and immediately change the level state when it matches the threshold 2. The complementary channel of PWM will change the level state immediately when it matches the threshold 1, and delay the generation of jump level when it matches the threshold 2. The length of dead zone is set by the register pwm_mcx_dead_time.</p>
+</section>
+<section id="cycle-and-duty-ratio-calculation">
+<h3><span class="section-number">18.3.6. </span>Cycle and Duty Ratio Calculation<a class="headerlink" href="#cycle-and-duty-ratio-calculation" title="Permalink to this headline"></a></h3>
+<p>The PWM cycle is determined the clock division factor and the clock duration cycle. The clock division factor is set by the register PWMx_CLK_DIV[15:0](x: 0~1) and is used to divide the source clock of PWM. The clock duration cycle is set by the register PWMx_PERIOD[15:0](x: 0~1) and is used to set how many divided clock cycles a PWM cycle consists of. That is, PWM cycle = PWM source clock/PWMx_CLK_DIV[15:0]/PWMx_PERIOD[15:0].</p>
+</section>
+<section id="pwm-interrupt">
+<h3><span class="section-number">18.3.7. </span>PWM Interrupt<a class="headerlink" href="#pwm-interrupt" title="Permalink to this headline"></a></h3>
+<p>For each PWM, the cycle count value can be set by the high 16 bits of the register pwm_mcx_period. When the number of PWM cycles reaches this value, the PWM interrupt will be generated.</p>
+<p>When the PWM count value reaches the number of cycles or it matches the threshold, the PWM interrupt will be generated.</p>
+<p>A PWM interrupt will be generated when an external brake signal is generated.</p>
+</section>
+<section id="adc-linkage">
+<h3><span class="section-number">18.3.8. </span>ADC Linkage<a class="headerlink" href="#adc-linkage" title="Permalink to this headline"></a></h3>
+<p>When the counter matches the threshold or the count value reaches the number of cycles, it will generate the signal that internally triggers ADC startup conversion. It should be noted that only PWM0 can trigger such conversion, while PWM1 cannot do that. The specific trigger source is set by the &lt;pwm_adc_trg_src&gt; bit in the register pwm_mcx_config0. This feature is commonly used in timing sampling. The following is an example.</p>
+<p>Application scenario: In BLDC application, there is such a requirement that the current flowing through the coil shall be detected while the motor speed is controlled by PWM. In a PWM cycle, after PWM controls the power device to turn on, the current becomes stable after a certain period of time. Then, it is necessary to sample the current value, which means that there is a strict phase difference between the time point of triggering ADC conversion and PWM. For example, if the channel 0 of PWM is used to drive one of the phases of the motor, and a 10 KHz square wave with a duty ratio of 20% needs to be generated, and ADC sampling needs to be performed at the middle time point of the high level of the square wave, then the PWM cycle is 100us. When the clock source is 1 MHz, the cycle count value is 100, and the two thresholds of channel 1 can be set to 0 and 20 respectively. At this time, the counter is between 0 and 20, and PWM outputs a high level, and otherwise it outputs a low level. When the threshold L of channel 2 is set to 10 and the pwm_adc_trg_src in the register pwm_mc0_config0 is set to 4, pwm_ch2l_int can trigger ADC conversion. When the counter counts to 10, ADC will start sampling conversion at the middle time point of the high level generated by channel 1. This ensures that each sampling can meet the exact time requirement without CPU intervention, thus improving the performance.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="I2C.html" class="btn btn-neutral float-left" title="17. I2C" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="TIMER.html" class="btn btn-neutral float-right" title="19. TIMER" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

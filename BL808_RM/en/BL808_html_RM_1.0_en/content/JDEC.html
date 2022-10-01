@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>28. JDEC &mdash; BL808 Reference Manual  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="29. VENC" href="VENC.html" />
+    <link rel="prev" title="27. MJPEG" href="MJPEG.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL808 Reference Manual
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. System and Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. Reset and Clock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPIO.html">4. GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">5. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">6. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">7. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA2D.html">8. DMA2D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lz4d.html">9. LZ4D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBI.html">10. DBI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DPI.html">11. DPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DSI.html">12. DSI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cam.html">13. CAM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">14. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">15. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">16. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">17. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">18. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">19. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2s.html">20. I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PDM.html">21. PDM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AUDIO.html">22. AUDIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PSRAM.html">23. PSRAM Contorller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Emac.html">24. Emac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USB.html">25. USB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ISO11898.html">26. ISO11898</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MJPEG.html">27. MJPEG</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">28. JDEC</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">28.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#features">28.2. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#functional-description">28.3. Functional Description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#output-configuration">28.3.1. Output Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#quantization-coefficient">28.3.2. Quantization Coefficient</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#swap-mode">28.3.3. Swap Mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#skip-mode">28.3.4. Skip Mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#buffer">28.3.5. Buffer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#operating-process">28.3.6. Operating Process</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#precautions">28.4. Precautions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="VENC.html">29. VENC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NPUtoolchain.html">30. NPU toolchain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NPU.html">31. NPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IPC.html">32. IPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LowPower.html">33. LowPower</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SEC_ENG.html">34. SEC ENG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">35. Revision history</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL808 Reference Manual</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">28. </span>JDEC</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="jdec">
+<h1><span class="section-number">28. </span>JDEC<a class="headerlink" href="#jdec" title="Permalink to this headline"></a></h1>
+<section id="overview">
+<h2><span class="section-number">28.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
+<p>JDEC can decode the JPG compressed images in memory into the original images, and then convert them into RGB format for display through the YUV2RGB module.</p>
+</section>
+<section id="features">
+<h2><span class="section-number">28.2. </span>Features<a class="headerlink" href="#features" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p>Supports YUV400/YUV420/YUV422 formats.</p></li>
+<li><p>Adjustable quantization coefficient: 1–75, 100.</p></li>
+<li><p>Supports swap mode</p></li>
+<li><p>Supports Skip Mode, where the JPG header is automatically skipped.</p></li>
+<li><p>Buffer with up to 16 JPG images.</p></li>
+<li><p>Supports flexible interrupt configuration mode, which can set an interrupt at the specified number of images or all complete interrupt.</p></li>
+</ul>
+</section>
+<section id="functional-description">
+<h2><span class="section-number">28.3. </span>Functional Description<a class="headerlink" href="#functional-description" title="Permalink to this headline"></a></h2>
+<section id="output-configuration">
+<h3><span class="section-number">28.3.1. </span>Output Configuration<a class="headerlink" href="#output-configuration" title="Permalink to this headline"></a></h3>
+<p>You can select the YCbCr format of output data by setting the &lt;REG_YUV_MODE&gt; bit in the register JDEC_CONTROL_1, including YCbCr4:2:2 planar format, YCbCr4:2:0 planar format, and YCbCr4:0:0 grayscale image. The start address of the output image data is determined by the registers JDEC_YY_FRAME_ADDR and JDEC_UV_FRAME_ADDR. The resolution of the output image data is determined by the register JDEC_FRAME_SIZE, in which the &lt;REG_FRAME_HBLK&gt; bit represents the number of 8×8 blocks in the vertical direction and the &lt;REG_FRAME_WBLK&gt; bit represents the number of 8×8 blocks in the horizontal direction.</p>
+</section>
+<section id="quantization-coefficient">
+<h3><span class="section-number">28.3.2. </span>Quantization Coefficient<a class="headerlink" href="#quantization-coefficient" title="Permalink to this headline"></a></h3>
+<p>The quantization coefficient can be set by the &lt;REG_Q_MODE&gt; bit in the register JDEC_CONTROL_1. When the set value does not exceed 75, the quantization coefficient is the set value. When that exceeds 75, the quantization coefficient is 100.</p>
+</section>
+<section id="swap-mode">
+<h3><span class="section-number">28.3.3. </span>Swap Mode<a class="headerlink" href="#swap-mode" title="Permalink to this headline"></a></h3>
+<p>In Swap Mode, a space with a size of two frames of output images is used as a buffer. When one frame of space is full, the decompressed image data continues to be stored in another frame of space buffer. The two frames of space are used alternately back and forth. This mode can be linked with the Display Module to improve efficiency.</p>
+</section>
+<section id="skip-mode">
+<h3><span class="section-number">28.3.4. </span>Skip Mode<a class="headerlink" href="#skip-mode" title="Permalink to this headline"></a></h3>
+<p>When the &lt;REG_HDER_SKIP&gt; bit in the register JDEC_HEADER_SKIP is set to 1, the Skip Mode is enabled. Then, the JDEC Module takes the value that equals to the start address of JPG image set by the &lt;REG_JP_ADDR&gt; bit in the register JDEC_FRAM_PUSH plus the number of byte offset set by the &lt;REG_HDER_SKIP_BYTE&gt; bit in the register JDEC_HEADER_SKIP as the final actual start address for decompressing JPG images. This applies to the scenario of skipping JPG header information.</p>
+</section>
+<section id="buffer">
+<h3><span class="section-number">28.3.5. </span>Buffer<a class="headerlink" href="#buffer" title="Permalink to this headline"></a></h3>
+<p>The JDEC input buffer can store the information of up to 16 JPG images. Every time one “1” is written to the &lt;REG_JP_PUSH&gt; bit in the register JDEC_FRAM_PUSH, the free space of the buffer decreases. Every time JDEC decompresses a JPG image, this free space increases. The number of JPG images to be decompressed in the current buffer can be obtained by reading the &lt;JP_FRAME_CNT&gt; bit in the register JDEC_FRAM_STS. The &lt;FRAME_VALID_CNT&gt; bit in the register JDEC_CONTROL_3 indicates the number of decompressed images yet not processed.</p>
+</section>
+<section id="operating-process">
+<h3><span class="section-number">28.3.6. </span>Operating Process<a class="headerlink" href="#operating-process" title="Permalink to this headline"></a></h3>
+<ul class="simple">
+<li><p>Disable the JDEC Module and clear the REG_MJ_DEC_ENABLE bit in the register JDEC_CONTROL_1.</p></li>
+<li><p>Set the formats of output image data as YUV422/YUV420/YUV400/…</p></li>
+<li><p>Choose whether to enable Swap Mode according to the application scenario.</p></li>
+<li><p>Set the quantization coefficient of images.</p></li>
+<li><p>Set the start addresses of Y and UV components of the output image in memory respectively.</p></li>
+<li><p>Set the numbers of horizontal and vertical 8×8 blocks according to the resolution of image data.</p></li>
+<li><p>If you need to enable Skip Mode, set the number of bytes to skip.</p></li>
+<li><p>Enable the JDEC Module and set the REG_MJ_DEC_ENABLE bit in the register JDEC_CONTROL_1 to “1”.</p></li>
+<li><p>Write the start address of the input JPG images and the command to cache in the buffer synchronously, that is, writing the start address of JPG images into the register JDEC_FRAM_PUSH and setting its &lt;REG_JP_PUSH&gt; bit to “1”.</p></li>
+</ul>
+</section>
+</section>
+<section id="precautions">
+<h2><span class="section-number">28.4. </span>Precautions<a class="headerlink" href="#precautions" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p>The start address of JPG image in memory shall be 8-byte aligned.</p></li>
+<li><p>The resolution of JPG images must be an integer multiple of 8.</p></li>
+<li><p>Currently, only the standard Huffman coding is supported.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="MJPEG.html" class="btn btn-neutral float-left" title="27. MJPEG" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="VENC.html" class="btn btn-neutral float-right" title="29. VENC" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

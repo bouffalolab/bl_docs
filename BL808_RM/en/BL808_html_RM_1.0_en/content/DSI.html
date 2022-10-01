@@ -1,0 +1,2842 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>12. DSI &mdash; BL808 Reference Manual  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="13. CAM" href="Cam.html" />
+    <link rel="prev" title="11. DPI" href="DPI.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL808 Reference Manual
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. System and Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. Reset and Clock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPIO.html">4. GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">5. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">6. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">7. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA2D.html">8. DMA2D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lz4d.html">9. LZ4D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBI.html">10. DBI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DPI.html">11. DPI</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">12. DSI</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">12.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#features">12.2. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#functional-description">12.3. Functional Description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dsi-protocol-layering">12.3.1. DSI Protocol Layering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#physical-layer">12.3.2. Physical Layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clock-lane">12.3.3. Clock Lane</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#low-power-mode-lpm-lp11">12.3.3.1. Low Power Mode (LPM, LP11)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ultralow-power-mode-ulpm-lp00">12.3.3.2. UltraLow Power Mode (ULPM, LP00)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#high-speed-clock-mode-hscm-hs0-1">12.3.3.3. High Speed Clock Mode (HSCM, HS0/1)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#data-lanes">12.3.4. Data Lanes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#highspeed-data-transmission-hsdt">12.3.4.1. HighSpeed Data Transmission (HSDT)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bus-turn-around-bta">12.3.4.2. Bus Turn-Around(BTA)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#escape-mode">12.3.4.3. Escape Mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#low-power-data-transmission-lpdt">12.3.4.4. Low Power Data Transmission (LPDT)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ultralow-power-state-ulps">12.3.4.5. UltraLow Power State (ULPS)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#remote-application-reset-rar">12.3.4.6. Remote Application Reset (RAR)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#acknowledgement-ack">12.3.4.7. Acknowledgement (ACK)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#lane-management-layer">12.3.5. Lane Management Layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#protocol-layer">12.3.6. Protocol Layer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#short-packet">12.3.6.1. Short Packet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#long-packet">12.3.6.2. Long Packet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#multiple-packets-per-transmission">12.3.6.3. Multiple Packets per Transmission</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bit-order-of-bytes-in-a-packet">12.3.6.4. Bit Order of Bytes in a Packet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#byte-order-in-a-packet">12.3.6.5. Byte Order in a Packet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#packet-header-ph">12.3.6.6. Packet Header (PH)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#data-identification-di">12.3.6.7. Data Identification (DI)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#virtual-channel-vc">12.3.6.8. Virtual Channel (VC)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#data-type-dt">12.3.6.9. Data Type (DT)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#packet-data-pd">12.3.6.10. Packet Data (PD)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#word-count-wc">12.3.6.11. Word Count (WC)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#error-correction-code-ecc">12.3.6.12. Error Correction Code (ECC)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#packet-footer-pf">12.3.6.13. Packet Footer (PF)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#application-layer">12.3.7. Application Layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#command-mode">12.3.8. Command Mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#video-mode">12.3.9. Video Mode</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#non-burst-mode-with-sync-pulses">12.3.9.1. Non-Burst Mode with SYNC Pulses</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#non-burst-mode-with-sync-events">12.3.9.2. Non-Burst Mode with SYNC Events</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#burst-mode">12.3.9.3. Burst Mode</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#line-buffer">12.3.10. Line Buffer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#display-data-format">12.3.11. Display Data Format</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#yuv422-8-bit">12.3.11.1. YUV422(8-bit)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rgb565">12.3.11.2. RGB565</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rgb666-loosely-packed">12.3.11.3. RGB666(loosely packed)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rgb888">12.3.11.4. RGB888</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#interrupt">12.3.12. Interrupt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma">12.3.13. DMA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#use-with-osd">12.3.14. Use with OSD</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#register-description">12.4. Register description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dsi-config">12.4.1. dsi_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dsi-esc-config">12.4.2. dsi_esc_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dsi-lpdt-tx-config">12.4.3. dsi_lpdt_tx_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dsi-hstx-config">12.4.4. dsi_hstx_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dsi-int-status">12.4.5. dsi_int_status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dsi-int-mask">12.4.6. dsi_int_mask</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dsi-int-clear">12.4.7. dsi_int_clear</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dsi-int-enable">12.4.8. dsi_int_enable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dsi-fifo-config-0">12.4.9. dsi_fifo_config_0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dsi-fifo-config-1">12.4.10. dsi_fifo_config_1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dsi-fifo-wdata">12.4.11. dsi_fifo_wdata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dsi-fifo-rdata">12.4.12. dsi_fifo_rdata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dphy-config-0">12.4.13. dphy_config_0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dphy-config-1">12.4.14. dphy_config_1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dphy-config-2">12.4.15. dphy_config_2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dphy-config-3">12.4.16. dphy_config_3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dphy-config-4">12.4.17. dphy_config_4</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dphy-config-5">12.4.18. dphy_config_5</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dphy-config-6">12.4.19. dphy_config_6</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dphy-config-7">12.4.20. dphy_config_7</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dphy-config-8">12.4.21. dphy_config_8</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dphy-config-9">12.4.22. dphy_config_9</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dphy-config-10">12.4.23. dphy_config_10</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dphy-config-11">12.4.24. dphy_config_11</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dphy-config-12">12.4.25. dphy_config_12</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dphy-config-13">12.4.26. dphy_config_13</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dphy-config-14">12.4.27. dphy_config_14</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dphy-config-15">12.4.28. dphy_config_15</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dphy-config-16">12.4.29. dphy_config_16</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dummy-reg">12.4.30. dummy_reg</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Cam.html">13. CAM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">14. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">15. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">16. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">17. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">18. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">19. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2s.html">20. I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PDM.html">21. PDM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AUDIO.html">22. AUDIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PSRAM.html">23. PSRAM Contorller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Emac.html">24. Emac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USB.html">25. USB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ISO11898.html">26. ISO11898</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MJPEG.html">27. MJPEG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="JDEC.html">28. JDEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="VENC.html">29. VENC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NPUtoolchain.html">30. NPU toolchain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NPU.html">31. NPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IPC.html">32. IPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LowPower.html">33. LowPower</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SEC_ENG.html">34. SEC ENG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">35. Revision history</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL808 Reference Manual</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">12. </span>DSI</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="dsi">
+<h1><span class="section-number">12. </span>DSI<a class="headerlink" href="#dsi" title="Permalink to this headline"></a></h1>
+<section id="overview">
+<h2><span class="section-number">12.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
+<p>The Display Serial Interface (DSI) is an interface protocol defined by MIPI Alliance for communicating with display screens. It sends pixels or commands to peripherals and can read status or pixel information from peripherals. All data lanes of DSI are unidirectional in High-Speed Mode, while in Low-Speed Mode only the first data lane is bidirectional and other lanes are unidirectional. The clock lane is dedicated to transmitting synchronous clock signals during high-speed data transmission. In addition, one master side allows communication with multiple slave sides at the same time. This chip has a built-in DSI controller and DPHY, which enable communication with DSI-compatible displays so that data can be displayed on the screen.</p>
+</section>
+<section id="features">
+<h2><span class="section-number">12.2. </span>Features<a class="headerlink" href="#features" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p>Meets MIPI® Alliance standard</p></li>
+<li><p>MIPI® DPHY interface with maximum speed of 800 Mbps</p></li>
+<li><p>One Clock Lane, up to 4 Data Lanes</p></li>
+<li><p>Four sequences for Data Lanes</p></li>
+<li><p>Supports Ultra Low Power Mode and High Speed Mode</p></li>
+<li><p>Data Lane 0 supports bidirectional communication and Escape Mode</p></li>
+<li><p>Supports LPDT/ULPS/Trigger in the Escape Mode</p></li>
+<li><p>Supports short and long packet sending in the LPDT Mode</p></li>
+<li><p>Supports error correction code (ECC) and check function</p></li>
+<li><p>Supports data length error and data overflow error interrupt</p></li>
+<li><p>Supports Command Mode and Video Mode</p></li>
+<li><p>Supports Event and Pulse Modes in the Video Mode</p></li>
+<li><p>Data formats supported by the display interface:</p>
+<ul>
+<li><p>YUV422, 8 bit</p></li>
+<li><p>RGB565</p></li>
+<li><p>RGB666, loosely packed</p></li>
+<li><p>RGB888</p></li>
+</ul>
+</li>
+<li><p>Rich and diverse interrupt mechanisms and status query</p></li>
+<li><p>Supports DMA transmission in the LPDT Mode</p></li>
+<li><p>Use with OSD</p></li>
+</ul>
+</section>
+<section id="functional-description">
+<h2><span class="section-number">12.3. </span>Functional Description<a class="headerlink" href="#functional-description" title="Permalink to this headline"></a></h2>
+<p>The block diagram of the DSI Module is shown as follows:</p>
+<figure class="align-center" id="id1">
+<img alt="../_images/DSIBlock.svg" src="../_images/DSIBlock.svg" /><figcaption>
+<p><span class="caption-number">Fig. 12.1 </span><span class="caption-text">Block Diagram of DSI</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<section id="dsi-protocol-layering">
+<h3><span class="section-number">12.3.1. </span>DSI Protocol Layering<a class="headerlink" href="#dsi-protocol-layering" title="Permalink to this headline"></a></h3>
+<p>The DSI protocol is divided into 4 layers from bottom to top, namely, physical layer, lane management layer, protocol layer, and application layer, as shown below:</p>
+<figure class="align-center" id="id2">
+<img alt="../_images/DSILayer.svg" src="../_images/DSILayer.svg" /><figcaption>
+<p><span class="caption-number">Fig. 12.2 </span><span class="caption-text">Protocol Layering</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Physical layer: It specifies the transmission medium (electrical conductor), the input/output circuit, and the clock mechanism for capturing “1” and “0” from the serial bit stream. In addition, it also specifies the signaling mechanism of start of transmission (SoT) and end of transmission (EoT) and other “out-of-band” information that can be transmitted between transmitting and receiving PHY.</p>
+<p>Lane management layer: DSI can expand lanes to improve performance. The number of data lanes can be 1, 2, 3 or 4 depending on the bandwidth requirements of the application. The lane management layer aims to transfer the to-be-sent data from the transmitter (TX) end to the corresponding data lanes by groups according to the lane order, collect the data from each lane at the receiver (RX) end, and then merge them into a recombined data stream, thus recovering the original stream sequence.</p>
+<p>Protocol layer: The DSI protocol defines packet formats, including short and long packets. The protocol layer aims to pack packets at the TX end according to the type and content of data, add the ECC and CRC codes, and transmit them to the lane management layer. At the RX end, it checks and corrects the received packet based on the ECC and CRC codes, decodes the packet header and data content, and transmits them to the application layer.</p>
+<p>Application layer: Depending on the needs of application modules, at the TX end, it initially encodes the to-be-sent commands and data and converts them into the format specified by DSI; at the RX end, it restores the received data to the data format and timing supported by application modules.</p>
+</section>
+<section id="physical-layer">
+<h3><span class="section-number">12.3.2. </span>Physical Layer<a class="headerlink" href="#physical-layer" title="Permalink to this headline"></a></h3>
+<p>According to the DPHY protocol, synchronous connection is used between the master and the slave in the physical layer. The clock lane is used to transmit high-speed clocks, and one or more data lanes are used to transmit low-power or high-speed data signals. Each lane uses two interconnected lines to connect the master and the slave, and supports both High-Speed (HS) and Low-Power (LP) Modes. In the HS Mode, TX simultaneously drives two interconnected lines of the lane to output a low-swing differential signal, such as 200 mV. In the LP Mode, TX drives the interconnected lines respectively, to output a single-ended signal with a relatively large swing respectively, such as 1.2 V. The levels of interconnected lines in the two modes are shown as follows:</p>
+<figure class="align-center" id="id3">
+<img alt="../_images/DSILevel.svg" src="../_images/DSILevel.svg" /><figcaption>
+<p><span class="caption-number">Fig. 12.3 </span><span class="caption-text">Levels in HS and LP Modes</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The two ends of the interconnected line are a driving unit and a receiving unit. The driving unit includes a differential transmitting module (HS_TX) and a low-power single-ended transmitting module (LP_TX), and the receiving unit includes a differential receiving module (HS_RX) and a low-power single-ended receiving module (LP_RX). HS_TX drives the interconnected line with differential signals, and there are two statuses on the high-speed lane: Differential0 and Differential1. LP_TX independently drives two interconnected lines, and there are four statuses on the lane: LP00, LP01, LP10, and LP11. The protocol clearly defines the line levels and configures the HS Mode, Control Mode, and Escape Mode, as shown below:</p>
+<figure class="align-center" id="id4">
+<img alt="../_images/DSILaneState.svg" src="../_images/DSILaneState.svg" /><figcaption>
+<p><span class="caption-number">Fig. 12.4 </span><span class="caption-text">Lane Status Code</span><a class="headerlink" href="#id4" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="clock-lane">
+<h3><span class="section-number">12.3.3. </span>Clock Lane<a class="headerlink" href="#clock-lane" title="Permalink to this headline"></a></h3>
+<p>The clock lane can be driven to Low Power Mode (LPM), UltraLow Power Mode (ULPM), and High Speed Clock Mode (HSCM). The flow chart of switching between different power modes of the clock lane is as follows:</p>
+<figure class="align-center" id="id5">
+<img alt="../_images/DSIClockMode.svg" src="../_images/DSIClockMode.svg" /><figcaption>
+<p><span class="caption-number">Fig. 12.5 </span><span class="caption-text">Clock Lane Mode Switching</span><a class="headerlink" href="#id5" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<section id="low-power-mode-lpm-lp11">
+<h4><span class="section-number">12.3.3.1. </span>Low Power Mode (LPM, LP11)<a class="headerlink" href="#low-power-mode-lpm-lp11" title="Permalink to this headline"></a></h4>
+<p>Three ways for switching:</p>
+<ol class="arabic simple">
+<li><p>After the software reset, hardware reset and power-on sequence, the clock lane automatically changes to LP11 (LPM).</p></li>
+<li><p>After leaving LP00 (ULPM), the clock lane changes to LP10 first and then to LP11 (LPM), as shown below:</p></li>
+</ol>
+<figure class="align-center" id="id6">
+<img alt="../_images/DSIULPM2LPM.svg" src="../_images/DSIULPM2LPM.svg" /><figcaption>
+<p><span class="caption-number">Fig. 12.6 </span><span class="caption-text">Switching from ULPM to LPM</span><a class="headerlink" href="#id6" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<ol class="arabic simple" start="3">
+<li><p>After leaving HS0 or HS1 (HSCM), the clock lane changes to HS0 first and then to LP11 (LPM), as shown below:</p></li>
+</ol>
+<figure class="align-center" id="id7">
+<img alt="../_images/DSIHSCM2LPM.svg" src="../_images/DSIHSCM2LPM.svg" /><figcaption>
+<p><span class="caption-number">Fig. 12.7 </span><span class="caption-text">Switching from HSCM to LPM</span><a class="headerlink" href="#id7" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="ultralow-power-mode-ulpm-lp00">
+<h4><span class="section-number">12.3.3.2. </span>UltraLow Power Mode (ULPM, LP00)<a class="headerlink" href="#ultralow-power-mode-ulpm-lp00" title="Permalink to this headline"></a></h4>
+<p>One way for switching: The clock lane switches from LP11 (LPM) to LP10 first and then to LP00 (ULPM), as shown below:</p>
+<figure class="align-center" id="id8">
+<img alt="../_images/DSILPM2ULPM.svg" src="../_images/DSILPM2ULPM.svg" /><figcaption>
+<p><span class="caption-number">Fig. 12.8 </span><span class="caption-text">Switching from LPM to ULPM</span><a class="headerlink" href="#id8" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="high-speed-clock-mode-hscm-hs0-1">
+<h4><span class="section-number">12.3.3.3. </span>High Speed Clock Mode (HSCM, HS0/1)<a class="headerlink" href="#high-speed-clock-mode-hscm-hs0-1" title="Permalink to this headline"></a></h4>
+<p>One way for switching: The clock lane switches from LP11 (LPM) to LP01, LP00, HS0, and HS0/1 (HSCM) in sequence, as shown below:</p>
+<figure class="align-center" id="id9">
+<img alt="../_images/DSILPM2HSCM.svg" src="../_images/DSILPM2HSCM.svg" /><figcaption>
+<p><span class="caption-number">Fig. 12.9 </span><span class="caption-text">Switching from LPM to HSCM</span><a class="headerlink" href="#id9" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="data-lanes">
+<h3><span class="section-number">12.3.4. </span>Data Lanes<a class="headerlink" href="#data-lanes" title="Permalink to this headline"></a></h3>
+<p>All data lanes (D3P/N, D2P/N, D1P/N, and D0P/N) can be driven to HighSpeed Data Transmission (HSDT) Mode, but only data lane 0 (D0P/N) can switch to the Escape Mode and Bus TurnAround Request (BTA) Mode. The entering and leaving sequences of the three modes are shown as follows:</p>
+<figure class="align-center" id="id10">
+<img alt="../_images/DSIDataMode.svg" src="../_images/DSIDataMode.svg" /><figcaption>
+<p><span class="caption-number">Fig. 12.10 </span><span class="caption-text">Entering and Leaving Sequences of Three Modes of Data Lanes</span><a class="headerlink" href="#id10" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<section id="highspeed-data-transmission-hsdt">
+<h4><span class="section-number">12.3.4.1. </span>HighSpeed Data Transmission (HSDT)<a class="headerlink" href="#highspeed-data-transmission-hsdt" title="Permalink to this headline"></a></h4>
+<p>When the clock lane of the MCU has switched to the HSCM Mode, the Display Module can switch to the HSDT Mode. The sequence of switching to the HSDT Mode is shown as follows:</p>
+<figure class="align-center" id="id11">
+<img alt="../_images/DSIHSDTStart.svg" src="../_images/DSIHSDTStart.svg" /><figcaption>
+<p><span class="caption-number">Fig. 12.11 </span><span class="caption-text">Sequence of Entering HSDT Mode</span><a class="headerlink" href="#id11" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Sequence:</p>
+<ul class="simple">
+<li><p>Start: LP-11</p></li>
+<li><p>HS request: LP01</p></li>
+<li><p>HS determination: LP-00=&gt;HS-0 (RX: enabled lane terminal)</p></li>
+<li><p>RX synchronization: 011101 (by order of transmitted bits); TX synchronization: 00011101 (by order of transmitted bits)</p></li>
+<li><p>End: HSDT, ready to receive loaded high-speed data.</p></li>
+</ul>
+<p>When the clock lane of the MCU is in the HSCM Mode, the Display Module can leave the HSDT Mode, and the clock lane must stay in HSCM until all data lanes switch to the LP11 Mode. The sequence of leaving the HSDT Mode is shown as follows:</p>
+<figure class="align-center" id="id12">
+<img alt="../_images/DSIHSDTEnd.svg" src="../_images/DSIHSDTEnd.svg" /><figcaption>
+<p><span class="caption-number">Fig. 12.12 </span><span class="caption-text">Sequence of Leaving HSDT Mode</span><a class="headerlink" href="#id12" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Sequence:</p>
+<ul class="simple">
+<li><p>Start: HSDT.</p></li>
+<li><p>Stop HSDT: If the last loading bit is HS-0, the MCU changes to HS-1; if the last loading bit is HS-1, MCU changes to HS-0.</p></li>
+<li><p>End: LP-11 (RX: disabled lane terminal).</p></li>
+</ul>
+<p>The burst operation of HSDT can be composed of one or multiple packets, which can be either short or long packets. Here are some different burst examples of HSDT:</p>
+<figure class="align-center" id="id13">
+<img alt="../_images/DSIHSDTBurst.svg" src="../_images/DSIHSDTBurst.svg" /><figcaption>
+<p><span class="caption-number">Fig. 12.13 </span><span class="caption-text">HSDT Burst Sequence</span><a class="headerlink" href="#id13" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="bus-turn-around-bta">
+<h4><span class="section-number">12.3.4.2. </span>Bus Turn-Around(BTA)<a class="headerlink" href="#bus-turn-around-bta" title="Permalink to this headline"></a></h4>
+<p>When the MCU or Display Module that is controlling the lane D0P/N wants to get information from the RX end, it can initiate a bus turnaround request to reverse the bus control. The MCU and the Display Module initiate the bus turnaround request using the same sequence, as shown below:</p>
+<figure class="align-center" id="id14">
+<img alt="../_images/DSIBTA.svg" src="../_images/DSIBTA.svg" /><figcaption>
+<p><span class="caption-number">Fig. 12.14 </span><span class="caption-text">Bus Turnaround Sequence</span><a class="headerlink" href="#id14" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Sequence:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Start: LP-11</p></li>
+<li><p>Turnaround request (MCU): LP-11=&gt;LP-10=&gt;LP-00=&gt;LP-10=&gt;LP-00</p></li>
+<li><p>MCU waits until the Display Module starts to control the lane D0P/N, while the MCU stops controlling the lane D0P/N and sets it to the high-impedance state.</p></li>
+<li><p>The Display Module changes to the Stop Mode: LP-00=&gt;LP-10=&gt;LP-11</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="escape-mode">
+<h4><span class="section-number">12.3.4.3. </span>Escape Mode<a class="headerlink" href="#escape-mode" title="Permalink to this headline"></a></h4>
+<p>The Escape Mode, a special mode under LPM, has the following features:</p>
+<ol class="arabic simple">
+<li><p>Send LPDT command from the MCU to the Display Module.</p></li>
+<li><p>Drive data lanes to the ULPS state.</p></li>
+<li><p>Send a RAR command to reset the Display Module.</p></li>
+<li><p>Send an ACK signal for transmitting non-error events from the Display Module to the MCU.</p></li>
+</ol>
+<p>The basic sequence of the Escape Mode is shown as follows:</p>
+<figure class="align-center" id="id15">
+<img alt="../_images/DSIEscape.svg" src="../_images/DSIEscape.svg" /><figcaption>
+<p><span class="caption-number">Fig. 12.15 </span><span class="caption-text">Escape Mode Sequence</span><a class="headerlink" href="#id15" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Sequence:</p>
+<ul class="simple">
+<li><p>Start: LP-11</p></li>
+<li><p>Switch to the Escape Mode (EME): LP-11=&gt;LP-10=&gt;LP-00=&gt;LP-01=&gt;LP-00</p></li>
+<li><p>Escape command (EC): When one of the data lanes changes from Low to High and then goes Low, this change shows the value of the current data bit (D0P = 1, D0N = 0)</p></li>
+<li><p>When the data lane 0 changes from Low to High and then goes Low, the receiver latches 1 bit data, that is, logic 0. The receiver takes the transmission from Low to High and then to Low</p></li>
+<li><p>as its internal clock</p></li>
+<li><p>If necessary, load the data</p></li>
+<li><p>Leave the Escape Mode: LP-00=&gt;LP-10=&gt;LP-11</p></li>
+<li><p>End: LP-11</p></li>
+</ul>
+<p>Escape command types are shown in the following table:</p>
+<figure class="align-center" id="id16">
+<img alt="../_images/DSIEscapeCommand.svg" src="../_images/DSIEscapeCommand.svg" /><figcaption>
+<p><span class="caption-number">Fig. 12.16 </span><span class="caption-text">Escape Commands</span><a class="headerlink" href="#id16" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="low-power-data-transmission-lpdt">
+<h4><span class="section-number">12.3.4.4. </span>Low Power Data Transmission (LPDT)<a class="headerlink" href="#low-power-data-transmission-lpdt" title="Permalink to this headline"></a></h4>
+<p>When the data lane changes to the Escape Mode and the MCU has sent the LPDT command to the Display Module, the MCU can send the data to the Display Module in the LPM. The Display Module also uses the same sequence when sending data to the MCU. The LPDT sequence is shown as follows:</p>
+<figure class="align-center" id="id17">
+<img alt="../_images/DSILPDT.svg" src="../_images/DSILPDT.svg" /><figcaption>
+<p><span class="caption-number">Fig. 12.17 </span><span class="caption-text">LPDT Sequence</span><a class="headerlink" href="#id17" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Sequence:</p>
+<ul class="simple">
+<li><p>Start: LP-11</p></li>
+<li><p>Switch to the Escape Mode (EME): LP-11=&gt;LP-10=&gt;LP-00=&gt;LP-01=&gt;LP-00</p></li>
+<li><p>Send the LPDT command in the Escape Mode: 0x87 (LSBfirst).</p></li>
+<li><p>Data loading: One or more bytes, which are in a suspended state when the data lane stops between bytes (all lanes are Low).</p></li>
+<li><p>Leave the Escape Mode: LP-00=&gt;LP-10=&gt;LP-11</p></li>
+<li><p>End: LP-11</p></li>
+</ul>
+</section>
+<section id="ultralow-power-state-ulps">
+<h4><span class="section-number">12.3.4.5. </span>UltraLow Power State (ULPS)<a class="headerlink" href="#ultralow-power-state-ulps" title="Permalink to this headline"></a></h4>
+<p>When the data lane switches to the Escape Mode, MCU can mandatorily change the data lane to the ULPS. The ULPS sequence is shown as follows:</p>
+<figure class="align-center" id="id18">
+<img alt="../_images/DSIULPS.svg" src="../_images/DSIULPS.svg" /><figcaption>
+<p><span class="caption-number">Fig. 12.18 </span><span class="caption-text">ULPS Sequence</span><a class="headerlink" href="#id18" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Sequence:</p>
+<ul class="simple">
+<li><p>Start: LP-11</p></li>
+<li><p>Switch to the Escape Mode (EME): LP-11=&gt;LP-10=&gt;LP-00=&gt;LP-01=&gt;LP-00</p></li>
+<li><p>Send the ULPS command in the Escape Mode: 0x78 (LSBfirst)</p></li>
+<li><p>ULPS: The MCU keeps the data lane Low</p></li>
+<li><p>Leave the Escape Mode: LP-00=&gt;LP-10=&gt;LP-11</p></li>
+<li><p>End: LP-11(after the data lane exits ULPS, wait 100 us before sending the next command)</p></li>
+</ul>
+</section>
+<section id="remote-application-reset-rar">
+<h4><span class="section-number">12.3.4.6. </span>Remote Application Reset (RAR)<a class="headerlink" href="#remote-application-reset-rar" title="Permalink to this headline"></a></h4>
+<p>RAR is one of the Trigger commands. When the data lane switches to the Escape Mode, the MCU can inform the Display Module to reset in the remote application reset trigger. The RAR sequence is shown as follows:</p>
+<figure class="align-center" id="id19">
+<img alt="../_images/DSIRAR.svg" src="../_images/DSIRAR.svg" /><figcaption>
+<p><span class="caption-number">Fig. 12.19 </span><span class="caption-text">RAR Sequence</span><a class="headerlink" href="#id19" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Sequence:</p>
+<ul class="simple">
+<li><p>Start: LP-11</p></li>
+<li><p>Switch to the Escape Mode (EME): LP-11=&gt;LP-10=&gt;LP-00=&gt;LP-01=&gt;LP-00</p></li>
+<li><p>Send the RAR command in the Escape Mode: 0x46 (LSBfirst)</p></li>
+<li><p>Leave the Escape Mode: LP-00=&gt;LP-10=&gt;LP-11</p></li>
+<li><p>End: LP-11</p></li>
+</ul>
+</section>
+<section id="acknowledgement-ack">
+<h4><span class="section-number">12.3.4.7. </span>Acknowledgement (ACK)<a class="headerlink" href="#acknowledgement-ack" title="Permalink to this headline"></a></h4>
+<p>ACK is one of the Trigger commands. The Display Module can notify the MCU of unrecognized errors through ACK. The Display Module sends ACK in a sequence shown in the following figure:</p>
+<figure class="align-center" id="id20">
+<img alt="../_images/DSIACK.svg" src="../_images/DSIACK.svg" /><figcaption>
+<p><span class="caption-number">Fig. 12.20 </span><span class="caption-text">ACK Sequence</span><a class="headerlink" href="#id20" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Sequence:</p>
+<ul class="simple">
+<li><p>Start: LP-11</p></li>
+<li><p>Switch to the Escape Mode (EME): LP-11=&gt;LP-10=&gt;LP-00=&gt;LP-01=&gt;LP-00</p></li>
+<li><p>Send the ACK command in the Escape Mode: 0x84 (LSBfirst)</p></li>
+<li><p>Leave the Escape Mode: LP-00=&gt;LP-10=&gt;LP-11</p></li>
+<li><p>End: LP-11</p></li>
+</ul>
+</section>
+</section>
+<section id="lane-management-layer">
+<h3><span class="section-number">12.3.5. </span>Lane Management Layer<a class="headerlink" href="#lane-management-layer" title="Permalink to this headline"></a></h3>
+<p>The lanes of DSI are expandable. The number of data lanes can be one, two, three, or four as expanded based on the bandwidth requirements of practical applications, and the peak bus bandwidth can gain an approximate linear increase. At the TX end, this layer aims to distribute the data from the protocol layer to each data lane in a certain order. At the RX end, this layer aims to collect transmitted bytes from each lane and merge them into a complete packet. All data lanes share a clock signal, but data transfer on each lane may not be completed simultaneously. When the number of bytes transmitted is not an integral multiple of the number of lanes, some lanes will finish data transfer before others. Except for Lane0, the order of the other three lanes can be configured by &lt;CR_LANE_MUX_SEL&gt;.</p>
+<p>There are four orders:</p>
+<ul class="simple">
+<li><p>Lane0, Lane1, Lane2, Lane3</p></li>
+<li><p>Lane0, Lane3, Lane1, Lane2</p></li>
+<li><p>Lane0, Lane2, Lane3, Lane1</p></li>
+<li><p>Lane0, Lane2, Lane1, Lane3</p></li>
+</ul>
+<p>Taking the single lane and four lanes (Lane0, Lane1, Lane2, Lane3) as examples, the TX end is shown as follows:</p>
+<figure class="align-center" id="id21">
+<img alt="../_images/DSILaneDistributor.svg" src="../_images/DSILaneDistributor.svg" /><figcaption>
+<p><span class="caption-number">Fig. 12.21 </span><span class="caption-text">TX End Distribution</span><a class="headerlink" href="#id21" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The RX end is shown as follows:</p>
+<figure class="align-center" id="id22">
+<img alt="../_images/DSILaneMerger.svg" src="../_images/DSILaneMerger.svg" /><figcaption>
+<p><span class="caption-number">Fig. 12.22 </span><span class="caption-text">RX End Merging</span><a class="headerlink" href="#id22" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The lane distributor accepts HS transmission with arbitrary byte length, buffers N bytes, where N is the number of lanes implemented in the interface, and sends N byte arrays on N lanes in parallel. Before sending data, all lanes execute the SoT sequence in parallel to indicate the start of the first byte of the packet to the corresponding receiving unit. After the SoT, the lane sends N byte arrays from the first packet in parallel through a cyclic process. For a four-lane system, Byte 0 of the packet enters Lane 0, Byte 1 enters Lane 1, Byte 2 enters Lane 2, Byte 3 enters Lane 3, Byte 4 enters Lane 0, and so on. As HS transmission involves any number of bytes, which may not be an integral multiple of the number of lanes, some lanes will finish data transfer before others. Although all lanes start transmission at the same time by executing SoT in parallel, each lane runs independently and some lanes may complete HS transmission before others and send EoT one byte in advance. It is as shown below:</p>
+<figure class="align-center" id="id23">
+<img alt="../_images/DSINotMultiple.svg" src="../_images/DSINotMultiple.svg" /><figcaption>
+<p><span class="caption-number">Fig. 12.23 </span><span class="caption-text">Transmission of Bytes (Non-integral Multiple of the Number of Lanes)</span><a class="headerlink" href="#id23" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="protocol-layer">
+<h3><span class="section-number">12.3.6. </span>Protocol Layer<a class="headerlink" href="#protocol-layer" title="Permalink to this headline"></a></h3>
+<p>DSI is a communication protocol based on packet transmission. Essentially, the commands and data are transmitted between the MCU and the Display Module in the packet format. DSI defines short packet (SPa) and long packet (LPa). The type of packet (SPa or LPa) can be identified from its header (PH).</p>
+<section id="short-packet">
+<h4><span class="section-number">12.3.6.1. </span>Short Packet<a class="headerlink" href="#short-packet" title="Permalink to this headline"></a></h4>
+<p>A short packet consists of 8-bit data identification (DI), two bytes of commands or data, and 8-bit ECC. The length of a short packet is 4 bytes including ECC. Short packets are mainly used for most command pattern commands and related parameters and also used to transmit events like H-sync and V-sync edges. Due to short length, the timing information can be accurately transmitted to the peripheral logic. The structure of a short packet is shown as follows:</p>
+<figure class="align-center" id="id24">
+<img alt="../_images/DSISpa.svg" src="../_images/DSISpa.svg" /><figcaption>
+<p><span class="caption-number">Fig. 12.24 </span><span class="caption-text">Structure of Short Packet</span><a class="headerlink" href="#id24" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<ul class="simple">
+<li><p>LP-11: low power stop state</p></li>
+<li><p>SoT: start of transmission</p></li>
+<li><p>DI: 8-bit, data identification</p></li>
+<li><p>Data 0: 8-bit, packet data 0</p></li>
+<li><p>Data 1: 8-bit, packet data 1</p></li>
+<li><p>ECC: 8-bit, error correction code</p></li>
+<li><p>EoT: end of transmission</p></li>
+</ul>
+</section>
+<section id="long-packet">
+<h4><span class="section-number">12.3.6.2. </span>Long Packet<a class="headerlink" href="#long-packet" title="Permalink to this headline"></a></h4>
+<p>The long packet consists of a 32-bit packet header (PH), a data payload with a variable number of bytes, and a 16-bit packet footer (PF). The packet header consists of 8-bit data identification, 16-bit word count (WC), and 8-bit ECC. Since the WC that records the payload length is two bytes, and the value ranges from 0 to 65,535, the length of a long packet ranges from 6 to 65,541 bytes. Long packets are mainly used to transmit a large amount of image data or some control commands. The structure of a long packet is shown as follows:</p>
+<figure class="align-center" id="id25">
+<img alt="../_images/DSILpa.svg" src="../_images/DSILpa.svg" /><figcaption>
+<p><span class="caption-number">Fig. 12.25 </span><span class="caption-text">Structure of Long Packet</span><a class="headerlink" href="#id25" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<ul class="simple">
+<li><p>LP-11: low power stop state</p></li>
+<li><p>SoT: start of transmission</p></li>
+<li><p>DI: 8-bit, data identification</p></li>
+<li><p>WC: 16-bit, word count</p></li>
+<li><p>ECC: 8-bit, error correction code</p></li>
+<li><p>Data 0, Data 1…: packet data (0–65535 bytes)</p></li>
+<li><p>CS: 16-bit, checksum</p></li>
+<li><p>EoT: end of transmission</p></li>
+</ul>
+</section>
+<section id="multiple-packets-per-transmission">
+<h4><span class="section-number">12.3.6.3. </span>Multiple Packets per Transmission<a class="headerlink" href="#multiple-packets-per-transmission" title="Permalink to this headline"></a></h4>
+<p>In the above structural diagrams of short and long packets, the transmission contains only one packet. For multiple packets, if only one packet is sent in each transmission, the overhead of frequent switching between LPS and HS Mode will greatly limit the bandwidth. DSI allows multiple packets to be concatenated and sent without SoT, EoT and LP11 between packets, as shown below:</p>
+<figure class="align-center" id="id26">
+<img alt="../_images/DSISpaLpa.svg" src="../_images/DSISpaLpa.svg" /><figcaption>
+<p><span class="caption-number">Fig. 12.26 </span><span class="caption-text">Multiple Packets per Transmission</span><a class="headerlink" href="#id26" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="bit-order-of-bytes-in-a-packet">
+<h4><span class="section-number">12.3.6.4. </span>Bit Order of Bytes in a Packet<a class="headerlink" href="#bit-order-of-bytes-in-a-packet" title="Permalink to this headline"></a></h4>
+<p>The bit order of the bytes used in a packet is that the LSB is sent first and the MSB is sent last. The following figure shows an example:</p>
+<figure class="align-center" id="id27">
+<img alt="../_images/DSIBitOrder.svg" src="../_images/DSIBitOrder.svg" /><figcaption>
+<p><span class="caption-number">Fig. 12.27 </span><span class="caption-text">Bit Order of Bytes in a Packet</span><a class="headerlink" href="#id27" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="byte-order-in-a-packet">
+<h4><span class="section-number">12.3.6.5. </span>Byte Order in a Packet<a class="headerlink" href="#byte-order-in-a-packet" title="Permalink to this headline"></a></h4>
+<p>The byte order of multi-byte information used in a packet is that the LSB is sent first and the MSB is sent last. For example, the word count (WC) consists of 2 bytes. LSB is sent before the MSB, as shown below:</p>
+<figure class="align-center" id="id28">
+<img alt="../_images/DSIByteOrder.svg" src="../_images/DSIByteOrder.svg" /><figcaption>
+<p><span class="caption-number">Fig. 12.28 </span><span class="caption-text">Byte Order in a Packet</span><a class="headerlink" href="#id28" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="packet-header-ph">
+<h4><span class="section-number">12.3.6.6. </span>Packet Header (PH)<a class="headerlink" href="#packet-header-ph" title="Permalink to this headline"></a></h4>
+<p>The packet header always consists of 4 bytes, and the contents of the 4 bytes are different for short and long packets. The short packet consists of 1-byte data identification (DI), 2-byte packet data (PD0, PD1), and 1-byte ECC. The long packet consists of 1-byte data identification (DI), 2-byte word count (WC), and 1-byte ECC.</p>
+</section>
+<section id="data-identification-di">
+<h4><span class="section-number">12.3.6.7. </span>Data Identification (DI)<a class="headerlink" href="#data-identification-di" title="Permalink to this headline"></a></h4>
+<p>DI, a part of the PH, consists of two parts:</p>
+<ul class="simple">
+<li><p>Virtual channel (VC), 2-bit, DI[7:6]</p></li>
+<li><p>Data type (DT), 6-bit, DI[5:0]</p></li>
+</ul>
+</section>
+<section id="virtual-channel-vc">
+<h4><span class="section-number">12.3.6.8. </span>Virtual Channel (VC)<a class="headerlink" href="#virtual-channel-vc" title="Permalink to this headline"></a></h4>
+<p>VC, a part of data identification (DI[7:6]) structure, is used to determine the destination to which MCU packets are sent. The virtual channel can allocate 4 different lanes to 4 different Display Modules, and each module uses the same virtual channel used by the MCU to send packets to it.</p>
+</section>
+<section id="data-type-dt">
+<h4><span class="section-number">12.3.6.9. </span>Data Type (DT)<a class="headerlink" href="#data-type-dt" title="Permalink to this headline"></a></h4>
+<p>DT, a part of data identification (DI[5:0]) structure, is used to define a short or long packet type and the packet format. The data types from the MCU to the Display Module are defined in the following table:</p>
+<figure class="align-center" id="id29">
+<img alt="../_images/DSIDTMCU.svg" src="../_images/DSIDTMCU.svg" /><figcaption>
+<p><span class="caption-number">Fig. 12.29 </span><span class="caption-text">Data Types from the MCU to the Display Module</span><a class="headerlink" href="#id29" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The data types from the Display Module to the MCU are defined in the following table:</p>
+<figure class="align-center" id="id30">
+<img alt="../_images/DSIDTDisp.svg" src="../_images/DSIDTDisp.svg" /><figcaption>
+<p><span class="caption-number">Fig. 12.30 </span><span class="caption-text">Data Types from the Display Module to the MCU</span><a class="headerlink" href="#id30" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="packet-data-pd">
+<h4><span class="section-number">12.3.6.10. </span>Packet Data (PD)<a class="headerlink" href="#packet-data-pd" title="Permalink to this headline"></a></h4>
+<p>For short packets, PD is a part of the PH, located after the data identification, and is fixed to 2 bytes, namely data 0 and data 1. The order of sending PD is sending data 0 before data 1. If the length of information is 1 byte, the value of data 1 is 0. For long packets, PD is located after the PH, and the byte length depends on the WC.</p>
+</section>
+<section id="word-count-wc">
+<h4><span class="section-number">12.3.6.11. </span>Word Count (WC)<a class="headerlink" href="#word-count-wc" title="Permalink to this headline"></a></h4>
+<p>WC is a part of the header of a long packet and located after the data identification. It is used to determine the total number of bytes in the PD of a long packet. WC is fixed to 2 bytes. The LSB is sent before the MSB.</p>
+</section>
+<section id="error-correction-code-ecc">
+<h4><span class="section-number">12.3.6.12. </span>Error Correction Code (ECC)<a class="headerlink" href="#error-correction-code-ecc" title="Permalink to this headline"></a></h4>
+<p>ECC, a part of the PH, can identify one or more errors and correct only one error. ECC protects the following fields:</p>
+<ul class="simple">
+<li><p>short packet: DI (8-bit), PD (16-bit) and ECC (8-bit)</p></li>
+<li><p>long packet: DI (8-bit), WC (16-bit) and ECC (8-bit)</p></li>
+</ul>
+<p>Taking short packets as an example, the ECC calculation method for each byte is shown as follows (”^” indicates exclusive OR operation).</p>
+<figure class="align-center" id="id31">
+<img alt="../_images/DSIECC.svg" src="../_images/DSIECC.svg" /><figcaption>
+<p><span class="caption-number">Fig. 12.31 </span><span class="caption-text">Example of ECC Calculation</span><a class="headerlink" href="#id31" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Formula:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>ECC[7] = 0</p></li>
+<li><p>ECC[6] = 0</p></li>
+<li><p>ECC[5] = D10^D11^D12^D13^D14^D15^D16^D17^D18^D19^D21^D22^D23</p></li>
+<li><p>ECC[4] = D4^D5^D6^D7^D8^D9^D16^D17^D18^D19^D20^D22^D23</p></li>
+<li><p>ECC[3] = D1^D2^D3^D7^D8^D9^D13^D14^D15^D19^D20^D21^D23</p></li>
+<li><p>ECC[2] = D0^D2^D3^D5^D6^D9^D11^D12^D15^D18^D20^D21^D22</p></li>
+<li><p>ECC[1] = D0^D1^D3^D4^D6^D8^D10^D12^D14^D17^D20^D21^D22^D23</p></li>
+<li><p>ECC[0] = D0^D1^D2^D4^D5^D7^D10^D11^D13^D16^D20^D21^D22^D23</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="packet-footer-pf">
+<h4><span class="section-number">12.3.6.13. </span>Packet Footer (PF)<a class="headerlink" href="#packet-footer-pf" title="Permalink to this headline"></a></h4>
+<p>PF, a part of a long packet, is located after the packet data. PF is a checksum calculated from the packet data of a long packet. The checksum is a 16-bit cyclic redundancy check (CRC) value generated by the polynomial X16+X12+X5+X0, as shown below:</p>
+<figure class="align-center" id="id32">
+<img alt="../_images/DSICRC.svg" src="../_images/DSICRC.svg" /><figcaption>
+<p><span class="caption-number">Fig. 12.32 </span><span class="caption-text">CRC Calculation Method</span><a class="headerlink" href="#id32" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The initial value of the 16-bit CRC generator before calculation is 0xFFFF, and the LSB of packet data is the first bit of the input CRC. The following figure illustrates the steps of CRC calculation by citing the data 0x01 as an example:</p>
+<figure class="align-center" id="id33">
+<img alt="../_images/DSICRCCal.svg" src="../_images/DSICRCCal.svg" /><figcaption>
+<p><span class="caption-number">Fig. 12.33 </span><span class="caption-text">Example of CRC Calculation</span><a class="headerlink" href="#id33" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="application-layer">
+<h3><span class="section-number">12.3.7. </span>Application Layer<a class="headerlink" href="#application-layer" title="Permalink to this headline"></a></h3>
+<p>This layer describes the higher-level encoding and interpretation of data contained in the data stream. Depending on the display subsystem architecture, it may consist of pixels or coded bit streams having a prescribed format, or of commands that are interpreted by the display controller inside a Display Module. The DSI specification describes the mapping of pixel values, bit streams, commands and command parameters to bytes in the packet assembly. (For more details, see the Display Command Set (DCS) specification, which will not be presented here).</p>
+</section>
+<section id="command-mode">
+<h3><span class="section-number">12.3.8. </span>Command Mode<a class="headerlink" href="#command-mode" title="Permalink to this headline"></a></h3>
+<p>Command Mode refers to that the interaction between MCU and peripherals including the display controller (such as Display Module) by sending commands and data. The display controller may include local registers and compressed or uncompressed frame buffers. Systems using Command Mode write to, and read from, the registers and frame buffer memory. The MCU indirectly controls the activities at peripherals by sending commands, parameters and data to the display controller. The MCU can also read Display Module status information or the contents of the frame memory. Command Mode operation requires a bidirectional interface.</p>
+</section>
+<section id="video-mode">
+<h3><span class="section-number">12.3.9. </span>Video Mode<a class="headerlink" href="#video-mode" title="Permalink to this headline"></a></h3>
+<p>Video Mode refers to operation in which the transfer from the MCU to the peripheral takes the form of a real-time pixel stream. The Display Module relies on the MCU to provide image data at sufficient bandwidth to avoid flicker or other visible artifacts in the displayed image. Video information can only be transmitted in the HS Mode. Video Mode involves three modes: NonBurst Mode with SYNC Pulses, NonBurst Mode with SYNC Events, and Burst Mode. The three modes have different packet sequences, and the timing requirements of peripherals determine which mode is appropriate.</p>
+<section id="non-burst-mode-with-sync-pulses">
+<h4><span class="section-number">12.3.9.1. </span>Non-Burst Mode with SYNC Pulses<a class="headerlink" href="#non-burst-mode-with-sync-pulses" title="Permalink to this headline"></a></h4>
+<p>It enables the peripheral to reconstruct the original video timing accurately, including sync pulse widths. In this mode, the goal is to convey DPI-type timing over the DSI serial Link. It includes matching DPI pixel-transmission rates, and widths of timing events like sync pulses. Accordingly, synchronization periods are defined using packets transmitting both start and end of sync pulses. The following figure shows an example of the mode. Periods shown as Horizontal Sync Active (HSA), Horizontal Back Porch (HBP) and Horizontal Front Porch (HFP) are filled by the timing intervals in LP Mode. DSI switches from HS to LP Mode at the beginning of HSA, HBP and HFP, stays in the LP11 state during the periods, and switches back to HS Mode at the end:</p>
+<figure class="align-center" id="id34">
+<img alt="../_images/DSIVideoPulse.svg" src="../_images/DSIVideoPulse.svg" /><figcaption>
+<p><span class="caption-number">Fig. 12.34 </span><span class="caption-text">Timing of NonBurst Mode with SYNC Pulses</span><a class="headerlink" href="#id34" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="non-burst-mode-with-sync-events">
+<h4><span class="section-number">12.3.9.2. </span>Non-Burst Mode with SYNC Events<a class="headerlink" href="#non-burst-mode-with-sync-events" title="Permalink to this headline"></a></h4>
+<p>It is similar to the NonBurst Mode with SYNC Pulses. But an accurate reconstruction of sync pulse widths is not required, and hence the sync pulse is substituted by a single sync event, which is a simplification of the above NonBurst Mode with SYNC Pulses. In this mode, only the start of each sync pulse is transmitted. The peripheral may regenerate sync pulses as needed from each Sync Event packet received. Pixels are transmitted at the same rate as they would in a corresponding parallel display interface such as DPI-2. The following figure shows an example of the mode. Periods shown as Horizontal Sync Active (HSA), Horizontal Back Porch (HBP) and Horizontal Front Porch (HFP) are filled by the timing intervals in LP Mode. DSI switches from HS to LP Mode at the beginning of HSA, HBP and HFP, stays in the LP11 state during the periods, and switches back to HS Mode at the end:</p>
+<figure class="align-center" id="id35">
+<img alt="../_images/DSIVideoEvent.svg" src="../_images/DSIVideoEvent.svg" /><figcaption>
+<p><span class="caption-number">Fig. 12.35 </span><span class="caption-text">Timing of NonBurst Mode with SYNC Events</span><a class="headerlink" href="#id35" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="burst-mode">
+<h4><span class="section-number">12.3.9.3. </span>Burst Mode<a class="headerlink" href="#burst-mode" title="Permalink to this headline"></a></h4>
+<p>In this mode, the pixel packets are time-compressed, so that transmission can be completed in a short time. This strategy reduces overall DSI power consumption and enables larger blocks of time for other data transmissions over the Link in either direction. After the transmission of HS pixel data is completed, the bus switches to LP Mode. During this period, the bus may remain idle, i.e. staying in the LP11 state, or LP transmission can be performed in either direction. If the peripheral controls the bus that sends data to the MCU, its transmission time shall be limited to ensure that data will not flow from its internal buffer memory to the display device. The following figure shows an example of the mode. Periods shown as Horizontal Sync Active (HSA), Horizontal Back Porch (HBP) and Horizontal Front Porch (HFP) are filled by the timing intervals in LP Mode. DSI switches from HS to LP Mode at the beginning of HSA, HBP and HFP, stays in the LP11 state during the periods, and switches back to HS Mode at the end:</p>
+<figure class="align-center" id="id36">
+<img alt="../_images/DSIVideoBurst.svg" src="../_images/DSIVideoBurst.svg" /><figcaption>
+<p><span class="caption-number">Fig. 12.36 </span><span class="caption-text">Timing of Burst Mode</span><a class="headerlink" href="#id36" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="line-buffer">
+<h3><span class="section-number">12.3.10. </span>Line Buffer<a class="headerlink" href="#line-buffer" title="Permalink to this headline"></a></h3>
+<p>Because the speed at which the frontend module inputs data to the DSI does not match the speed at which the DSI outputs data, it is necessary to buffer the data. Inside the DSI, there is a Line Buffer that can hold up to 1280*3 bytes and is used to cache the data input to the DSI in Video Mode. Users need to set a threshold through &lt;CR_HSTX_OUT_TH&gt;. Then, for each row (H-Sync) of image data in Video Mode, the DSI will not send the data immediately after receiving the data input from its frontend module, but will cache it in Line Buffer first. When the pixels cached in Line Buffer reach the set threshold, the DSI starts to send data to the Display Module. In this way, when the DSI’s input speed is greater than the output speed, the input data that cannot be sent out timely will be cached in Line Buffer first. When that is lower than the output speed, Line Buffer will cache some data first, and the DSI will start sending data after the pixel threshold is met. This can ensure that the time of sending the whole row of pixels by the DSI matches the time of inputting the remaining pixels. The formula for calculating the threshold is as follows:</p>
+<blockquote>
+<div><p>Threshold = ceil(Width * (1 - Fdp * BPP / Fhs / LN))</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>ceil() is rounded up.</p></li>
+<li><p>Width is the number of pixels in one row of the image.</p></li>
+<li><p>Fdp is the work clock of the previous-level module of DSI (data input module dp_dvp_tsrc of DSI).</p></li>
+<li><p>Byte Per Pixel (BPP) refers to the number of bytes in a pixel format, such as 3 for RGB888/RGB666 and 2 for RGB565/YUV422_8.</p></li>
+<li><p>Lane Number (LN) is the number of data lanes.</p></li>
+<li><p>Threshold is to be calculated and its minimum value is 6. When the calculated value is less than 6, it shall be set to 6.</p></li>
+</ul>
+</section>
+<section id="display-data-format">
+<h3><span class="section-number">12.3.11. </span>Display Data Format<a class="headerlink" href="#display-data-format" title="Permalink to this headline"></a></h3>
+<p>The display data formats support YUV422 (8-bit), RGB565, RGB666 (loosely packed), and RGB888, which are configured in &lt;CR_DT&gt;.</p>
+<section id="yuv422-8-bit">
+<h4><span class="section-number">12.3.11.1. </span>YUV422(8-bit)<a class="headerlink" href="#yuv422-8-bit" title="Permalink to this headline"></a></h4>
+<p>In YUV422 (8-bit) format, the Y, U and V components of one pixel are 8 bits each, in which two pixels share a set of UV. The long packet in YUV422 (8-bit) format consists of 1-byte DI, 2-byte non-zero WC, 1-byte ECC, payload with length in WC bytes, and 2-byte CRC. With this format, pixel boundaries are aligned with some byte boundaries, and the value in WC shall be any non-zero value divisible by 4. The structure of a long packet in YUV422 (8-bit) format is shown as follows:</p>
+<figure class="align-center" id="id37">
+<img alt="../_images/DSIYUV422.svg" src="../_images/DSIYUV422.svg" /><figcaption>
+<p><span class="caption-number">Fig. 12.37 </span><span class="caption-text">YUV422 Pixel Format</span><a class="headerlink" href="#id37" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="rgb565">
+<h4><span class="section-number">12.3.11.2. </span>RGB565<a class="headerlink" href="#rgb565" title="Permalink to this headline"></a></h4>
+<p>The R, G and B components of one pixel in RGB565 format are 5-bit, 6-bit and 5-bit respectively. The long packet in RGB565 format consists of 1-byte DI, 2-byte WC, 1-byte ECC, payload with length in WC bytes, and 2-byte CRC. With this format, the pixel boundary is aligned with the byte boundary every two bytes, and the value in WC shall be a multiple of 2. The structure of a long packet in RGB565 format is shown as follows:</p>
+<figure class="align-center" id="id38">
+<img alt="../_images/DSIRGB565.svg" src="../_images/DSIRGB565.svg" /><figcaption>
+<p><span class="caption-number">Fig. 12.38 </span><span class="caption-text">RGB565 Pixel Format</span><a class="headerlink" href="#id38" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="rgb666-loosely-packed">
+<h4><span class="section-number">12.3.11.3. </span>RGB666(loosely packed)<a class="headerlink" href="#rgb666-loosely-packed" title="Permalink to this headline"></a></h4>
+<p>The R, G and B components of one pixel in RGB666 (loosely packed) format are 6 bits each, but they will move to the high bit of the byte, so that the significant BPP occupies the bits [7:2] of each byte, while the bits [1:0] will be ignored. Accordingly, it takes three bytes for each pixel to be transmitted on the channel. The long packet in RGB666 format consists of 1-byte DI, 2-byte WC, 1-byte ECC, payload with length in WC bytes, and 2-byte CRC. With this format, the pixel boundary is aligned with the byte boundary every three bytes, and the value in WC shall be a multiple of 3. The structure of a long packet in RGB666 (loosely packed) format is shown as follows:</p>
+<figure class="align-center" id="id39">
+<img alt="../_images/DSIRGB666.svg" src="../_images/DSIRGB666.svg" /><figcaption>
+<p><span class="caption-number">Fig. 12.39 </span><span class="caption-text">RGB666 Pixel Format</span><a class="headerlink" href="#id39" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="rgb888">
+<h4><span class="section-number">12.3.11.4. </span>RGB888<a class="headerlink" href="#rgb888" title="Permalink to this headline"></a></h4>
+<p>The R, G and B components of one pixel in RGB888 format are 8 bits each. The long packet in RGB888 format consists of 1-byte DI, 2-byte WC, 1-byte ECC, payload with length in WC bytes, and 2-byte CRC. With this format, the pixel boundary is aligned with the byte boundary every three bytes, and the value in WC shall be a multiple of 3. The structure of a long packet in RGB888 format is shown as follows:</p>
+<figure class="align-center" id="id40">
+<img alt="../_images/DSIRGB888.svg" src="../_images/DSIRGB888.svg" /><figcaption>
+<p><span class="caption-number">Fig. 12.40 </span><span class="caption-text">RGB888 Pixel Format</span><a class="headerlink" href="#id40" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="interrupt">
+<h3><span class="section-number">12.3.12. </span>Interrupt<a class="headerlink" href="#interrupt" title="Permalink to this headline"></a></h3>
+<p>DSI supports the following interrupts:</p>
+<ul class="simple">
+<li><p>TX Escape command end interrupt</p></li>
+<li><p>RX LPDT end interrupt</p></li>
+<li><p>RX ULPS command interrupt</p></li>
+<li><p>RX Trigger 0 command interrupt</p></li>
+<li><p>RX Trigger 1 command interrupt</p></li>
+<li><p>RX Trigger 2 command interrupt</p></li>
+<li><p>RX Trigger 3 command interrupt</p></li>
+<li><p>TX LPDT FIFO request interrupt</p></li>
+<li><p>RX LPDT FIFO request interrupt</p></li>
+<li><p>Buffer Overrun error interrupt</p></li>
+<li><p>Buffer Underrun error interrupt</p></li>
+<li><p>Too few pixel error interrupt</p></li>
+<li><p>Excessive pixel error interrupt</p></li>
+<li><p>FIFO overflow error interrupt</p></li>
+</ul>
+<p>The TX Escape command end interrupt is triggered when any Escape command is sent.</p>
+<p>RX LPDT end interrupt, RX ULPS command interrupt, RX Trigger 0 command interrupt, RX Trigger 1 command interrupt, RX Trigger 2 command interrupt, and RX Trigger 3 command interrupt will be triggered after the corresponding command is sent out and the ACK replied by the other side is received.</p>
+<p>When TFICNT in DSI_FIFO_CONFIG_1 is greater than TFITH, the TX FIFO request interrupt will be generated, and the interrupt flag will be automatically cleared when the condition is not met.</p>
+<p>When RFICNT in DSI_FIFO_CONFIG_1 is greater than RFITH, the RX FIFO request interrupt will be generated, and the interrupt flag will be automatically cleared when the condition is not met.</p>
+<p>The Buffer Overrun error interrupt will be generated at Line Buffer Overrun, which means that the data cached in Line Buffer cannot be sent out timely and Line Buffer is full.</p>
+<p>The Buffer Underrun error interrupt will be generated at Line Buffer Underrun, which means that the data in Line Buffer is completely read out and no new data is filled in timely.</p>
+<p>The “too few pixel error interrupt” is be generated when the number of pixels sent during HSync is smaller than the value configured by &lt;CR_HSTX_PC&gt;.</p>
+<p>The “excessive pixel error interrupt” is generated when the number of pixels sent during HSync is greater than the value configured by &lt;CR_HSTX_PC&gt;.</p>
+<p>The FIFO overflow error interrupt is be generated in the case of Overflow or Underflow of TX or RX.</p>
+</section>
+<section id="dma">
+<h3><span class="section-number">12.3.13. </span>DMA<a class="headerlink" href="#dma" title="Permalink to this headline"></a></h3>
+<p>DSI LPDT supports the DMA transfer mode, which requires to set the thresholds of TX FIFO and RX FIFO respectively by configuring the &lt;TFITH&gt; and &lt;RFITH&gt; bits in the register DSI_FIFO_CONFIG_1. When this mode is enabled, if &lt;TFICNT&gt; is greater than &lt;TFITH&gt;, the DMA TX request is triggered. After DMA is configured, when receiving this request, DMA transfers data from memory to TX FIFO as configured. If &lt;RFICNT&gt; is greater than &lt;RFITH&gt;, the DMA RX request will be triggered. After DMA is configured, when receiving this request, DMA transfers the data in RX FIFO to the memory as configured.</p>
+</section>
+<section id="use-with-osd">
+<h3><span class="section-number">12.3.14. </span>Use with OSD<a class="headerlink" href="#use-with-osd" title="Permalink to this headline"></a></h3>
+<p>The input data of DSI can be configured to be processed by the OSD first. See the OSD Module section for functional description.</p>
+</section>
+</section>
+<section id="register-description">
+<h2><span class="section-number">12.4. </span>Register description<a class="headerlink" href="#register-description" title="Permalink to this headline"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 64%" />
+<col style="width: 36%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Name</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dsi-config">dsi_config</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dsi-esc-config">dsi_esc_config</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dsi-lpdt-tx-config">dsi_lpdt_tx_config</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dsi-hstx-config">dsi_hstx_config</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dsi-int-status">dsi_int_status</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dsi-int-mask">dsi_int_mask</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dsi-int-clear">dsi_int_clear</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dsi-int-enable">dsi_int_enable</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dsi-fifo-config-0">dsi_fifo_config_0</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dsi-fifo-config-1">dsi_fifo_config_1</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dsi-fifo-wdata">dsi_fifo_wdata</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dsi-fifo-rdata">dsi_fifo_rdata</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dphy-config-0">dphy_config_0</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dphy-config-1">dphy_config_1</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dphy-config-2">dphy_config_2</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dphy-config-3">dphy_config_3</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dphy-config-4">dphy_config_4</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dphy-config-5">dphy_config_5</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dphy-config-6">dphy_config_6</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dphy-config-7">dphy_config_7</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dphy-config-8">dphy_config_8</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dphy-config-9">dphy_config_9</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dphy-config-10">dphy_config_10</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dphy-config-11">dphy_config_11</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dphy-config-12">dphy_config_12</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dphy-config-13">dphy_config_13</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dphy-config-14">dphy_config_14</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dphy-config-15">dphy_config_15</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dphy-config-16">dphy_config_16</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dummy-reg">dummy_reg</a></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<section id="dsi-config">
+<h3><span class="section-number">12.4.1. </span>dsi_config<a class="headerlink" href="#dsi-config" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x3001a100</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dsi_config.svg" src="../_images/dsi_dsi_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:24</p></td>
+<td><p>cr_hstx_vsa</p></td>
+<td><p>r/w</p></td>
+<td><p>8’d2</p></td>
+<td><p>HSTX Vertical Sync Active width</p></td>
+</tr>
+<tr class="row-odd"><td><p>23:16</p></td>
+<td><p>cr_hstx_vfp</p></td>
+<td><p>r/w</p></td>
+<td><p>8’d2</p></td>
+<td><p>HSTX Vertical Front Porch width</p></td>
+</tr>
+<tr class="row-even"><td><p>15:14</p></td>
+<td><p>cr_vc</p></td>
+<td><p>r/w</p></td>
+<td><p>2’d0</p></td>
+<td><p>Virtual Channel number</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="6"><p>13:8</p></td>
+<td rowspan="6"><p>cr_dt</p></td>
+<td rowspan="6"><p>r/w</p></td>
+<td rowspan="6"><p>6’h3E</p></td>
+<td rowspan="6"><p>Data Type</p>
+<p>6’h2C: YUV422, 8-bit</p>
+<p>6’h0E: RGB565</p>
+<p>6’h2E: RGB666, loosely packed</p>
+<p>6’h3E: RGB888</p>
+<p>Others: Reserved</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="5"><p>7:6</p></td>
+<td rowspan="5"><p>cr_lane_mux_sel</p></td>
+<td rowspan="5"><p>r/w</p></td>
+<td rowspan="5"><p>2’d0</p></td>
+<td rowspan="5"><p>Controls lane order</p>
+<p>2’d0: {lane3, lane2, lane1, lane0} (no lane is switched)</p>
+<p>2’d1: {lane2, lane1, lane3, lane0}</p>
+<p>2’d2: {lane1, lane3, lane2, lane0}</p>
+<p>2’d3: {lane3, lane1, lane2, lane0}</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><p>4</p></td>
+<td rowspan="3"><p>cr_hstx_mode</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b1</p></td>
+<td rowspan="3"><p>HSTX mode select</p>
+<p>1’b0: Sync Event mode</p>
+<p>1’b1: Sync Pulse mode</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="5"><p>2:1</p></td>
+<td rowspan="5"><p>cr_lane_num</p></td>
+<td rowspan="5"><p>r/w</p></td>
+<td rowspan="5"><p>2’d0</p></td>
+<td rowspan="5"><p>Lane number configuration</p>
+<p>2’d0: 1-lane MIPI TX</p>
+<p>2’d1: 2-lane MIPI TX</p>
+<p>2’d2: 4-lane MIPI TX</p>
+<p>2’d3: Reserved</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>cr_hstx_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>HSTX function enable signal</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dsi-esc-config">
+<h3><span class="section-number">12.4.2. </span>dsi_esc_config<a class="headerlink" href="#dsi-esc-config" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x3001a104</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dsi_esc_config.svg" src="../_images/dsi_dsi_esc_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:24</p></td>
+<td><p>st_esc_rx_len</p></td>
+<td><p>r</p></td>
+<td><p>8’d0</p></td>
+<td><p>Escape RX length received (Include packet header/data/footer) (unit: byte)</p></td>
+</tr>
+<tr class="row-odd"><td><p>23:17</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>16</p></td>
+<td><p>cr_esc_rx_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Escape RX enable signal</p></td>
+</tr>
+<tr class="row-odd"><td><p>15:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>7:4</p></td>
+<td><p>cr_esc_tx_trig</p></td>
+<td><p>r/w</p></td>
+<td><p>4’h0</p></td>
+<td><p>Escape TX trigger command</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>cr_esc_tx_ulps_exit</p></td>
+<td><p>w1p</p></td>
+<td><p>1’b0</p></td>
+<td><p>Escape TX ULPS exit signal trigger</p></td>
+</tr>
+<tr class="row-even"><td rowspan="5"><p>2:1</p></td>
+<td rowspan="5"><p>cr_esc_tx_mode</p></td>
+<td rowspan="5"><p>r/w</p></td>
+<td rowspan="5"><p>2’d0</p></td>
+<td rowspan="5"><p>Escape TX mode select</p>
+<p>2’d0: LPDT</p>
+<p>2’d1: Trigger command</p>
+<p>2’d2: ULPS Enable</p>
+<p>2’d3: ULPS Disable</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>cr_esc_tx_en</p></td>
+<td><p>w1p</p></td>
+<td><p>1’b0</p></td>
+<td><p>Escape TX enable signal</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dsi-lpdt-tx-config">
+<h3><span class="section-number">12.4.3. </span>dsi_lpdt_tx_config<a class="headerlink" href="#dsi-lpdt-tx-config" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x3001a108</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dsi_lpdt_tx_config.svg" src="../_images/dsi_dsi_lpdt_tx_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:24</p></td>
+<td><p>cr_lpdt_word1</p></td>
+<td><p>r/w</p></td>
+<td><p>8’h0</p></td>
+<td><p>LPDT TX word 1</p></td>
+</tr>
+<tr class="row-odd"><td><p>23:16</p></td>
+<td><p>cr_lpdt_word0</p></td>
+<td><p>r/w</p></td>
+<td><p>8’h0</p></td>
+<td><p>LPDT TX word 0</p></td>
+</tr>
+<tr class="row-even"><td><p>15:10</p></td>
+<td><p>cr_lpdt_di</p></td>
+<td><p>r/w</p></td>
+<td><p>6’h0</p></td>
+<td><p>LPDT TX data identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>9:8</p></td>
+<td><p>cr_lpdt_vc</p></td>
+<td><p>r/w</p></td>
+<td><p>2’h0</p></td>
+<td><p>LPDT TX virtual channel</p></td>
+</tr>
+<tr class="row-even"><td><p>7:0</p></td>
+<td><p>cr_lpdt_pdlen</p></td>
+<td><p>r/w</p></td>
+<td><p>8’d0</p></td>
+<td><p>LPDT TX packet data length (exclude packet header &amp; footer) (unit: byte)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dsi-hstx-config">
+<h3><span class="section-number">12.4.4. </span>dsi_hstx_config<a class="headerlink" href="#dsi-hstx-config" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x3001a10c</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dsi_hstx_config.svg" src="../_images/dsi_dsi_hstx_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:27</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="9"><p>26:16</p></td>
+<td rowspan="9"><p>cr_hstx_out_th</p></td>
+<td rowspan="9"><p>r/w</p></td>
+<td rowspan="9"><p>11’d840</p></td>
+<td rowspan="9"><p>Line buffer threshold for controller to start transmitting each line (unit: pixel)</p>
+<p>Formula: th = ceil( W * (1 - Fdp*BPP/Fhs/Ln) )</p>
+<p>th: cr_hstx_out_th</p>
+<p>W: Frame width</p>
+<p>Fdp: Display (dp_dvp_tsrc) clock rate</p>
+<p>Fhs: DSI byte clock rate (dsi_bit_clk/8 or mipipll_clk/8)</p>
+<p>BPP: Byte-per-pixel (equals 3 for RGB888 &amp; RGB666; equals 2 for RGB565 &amp; YUV422_8)</p>
+<p>Ln: DSI lane number (controlled by cr_lane_num)</p>
+<p>Note: The minimum value is 6 for synchronization concern (Set to 6 if the formula result is negative or less than 6)</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>15:11</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><p>10:0</p></td>
+<td rowspan="2"><p>cr_hstx_pc</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>11’d1280</p></td>
+<td rowspan="2"><p>Pixel count of each line (frame width) (unit:pixel)</p>
+<p>Note: Pixel count should not exceed 1280 (720p) and should be a multiple of 4</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+</tbody>
+</table>
+</section>
+<section id="dsi-int-status">
+<h3><span class="section-number">12.4.5. </span>dsi_int_status<a class="headerlink" href="#dsi-int-status" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x3001a110</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dsi_int_status.svg" src="../_images/dsi_dsi_int_status.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:14</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="12"><p>13:0</p></td>
+<td rowspan="12"><p>dsi_int_status</p></td>
+<td rowspan="12"><p>r</p></td>
+<td rowspan="12"><p>14’h0</p></td>
+<td rowspan="12"><p>[13]: FIFO Error (check 0x60[7:4] for detail)</p>
+<p>[12]: Pixel Count Too Large Error</p>
+<p>[11]: Pixel Count Too Small Error</p>
+<p>[10]: Buffer Underrun Error</p>
+<p>[9]: Buffer Overrun Error</p>
+<p>[8]: RX LPDT FIFO ready</p>
+<p>[7]: TX LPDT FIFO ready</p>
+<p>[6:3]: RX Trigger Command</p>
+<p>[2]: RX ULPS Command</p>
+<p>[1]: RX LPDT End</p>
+<p>[0]: TX Escape Command End</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+</tbody>
+</table>
+</section>
+<section id="dsi-int-mask">
+<h3><span class="section-number">12.4.6. </span>dsi_int_mask<a class="headerlink" href="#dsi-int-mask" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x3001a114</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dsi_int_mask.svg" src="../_images/dsi_dsi_int_mask.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:14</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="12"><p>13:0</p></td>
+<td rowspan="12"><p>dsi_int_mask</p></td>
+<td rowspan="12"><p>r/w</p></td>
+<td rowspan="12"><p>14’h3FFF</p></td>
+<td rowspan="12"><p>[13]: FIFO Error (check 0x60[7:4] for detail)</p>
+<p>[12]: Pixel Count Too Large Error</p>
+<p>[11]: Pixel Count Too Small Error</p>
+<p>[10]: Buffer Underrun Error</p>
+<p>[9]: Buffer Overrun Error</p>
+<p>[8]: RX LPDT FIFO ready</p>
+<p>[7]: TX LPDT FIFO ready</p>
+<p>[6:3]: RX Trigger Command</p>
+<p>[2]: RX ULPS Command</p>
+<p>[1]: RX LPDT End</p>
+<p>[0]: TX Escape Command End</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+</tbody>
+</table>
+</section>
+<section id="dsi-int-clear">
+<h3><span class="section-number">12.4.7. </span>dsi_int_clear<a class="headerlink" href="#dsi-int-clear" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x3001a118</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dsi_int_clear.svg" src="../_images/dsi_dsi_int_clear.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:14</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="12"><p>13:0</p></td>
+<td rowspan="12"><p>dsi_int_clear</p></td>
+<td rowspan="12"><p>w1p</p></td>
+<td rowspan="12"><p>14’h0</p></td>
+<td rowspan="12"><p>[13]: FIFO Error (check 0x60[7:4] for detail)</p>
+<p>[12]: Pixel Count Too Large Error</p>
+<p>[11]: Pixel Count Too Small Error</p>
+<p>[10]: Buffer Underrun Error</p>
+<p>[9]: Buffer Overrun Error</p>
+<p>[8]: RX LPDT FIFO ready</p>
+<p>[7]: TX LPDT FIFO ready</p>
+<p>[6:3]: RX Trigger Command</p>
+<p>[2]: RX ULPS Command</p>
+<p>[1]: RX LPDT End</p>
+<p>[0]: TX Escape Command End</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+</tbody>
+</table>
+</section>
+<section id="dsi-int-enable">
+<h3><span class="section-number">12.4.8. </span>dsi_int_enable<a class="headerlink" href="#dsi-int-enable" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x3001a11c</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dsi_int_enable.svg" src="../_images/dsi_dsi_int_enable.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:14</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="12"><p>13:0</p></td>
+<td rowspan="12"><p>dsi_int_enable</p></td>
+<td rowspan="12"><p>r/w</p></td>
+<td rowspan="12"><p>14’h3FFF</p></td>
+<td rowspan="12"><p>[13]: FIFO Error (check 0x60[7:4] for detail)</p>
+<p>[12]: Pixel Count Too Large Error</p>
+<p>[11]: Pixel Count Too Small Error</p>
+<p>[10]: Buffer Underrun Error</p>
+<p>[9]: Buffer Overrun Error</p>
+<p>[8]: RX LPDT FIFO ready</p>
+<p>[7]: TX LPDT FIFO ready</p>
+<p>[6:3]: RX Trigger Command</p>
+<p>[2]: RX ULPS Command</p>
+<p>[1]: RX LPDT End</p>
+<p>[0]: TX Escape Command End</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+</tbody>
+</table>
+</section>
+<section id="dsi-fifo-config-0">
+<h3><span class="section-number">12.4.9. </span>dsi_fifo_config_0<a class="headerlink" href="#dsi-fifo-config-0" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x3001a160</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dsi_fifo_config_0.svg" src="../_images/dsi_dsi_fifo_config_0.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>rx_fifo_underflow</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>Underflow flag of RX FIFO, can be cleared by rx_fifo_clr</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>rx_fifo_overflow</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>Overflow flag of RX FIFO, can be cleared by rx_fifo_clr</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>tx_fifo_underflow</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>Underflow flag of TX FIFO, can be cleared by tx_fifo_clr</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>tx_fifo_overflow</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>Overflow flag of TX FIFO, can be cleared by tx_fifo_clr</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>rx_fifo_clr</p></td>
+<td><p>w1p</p></td>
+<td><p>1’b0</p></td>
+<td><p>Clear signal of RX FIFO</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>tx_fifo_clr</p></td>
+<td><p>w1p</p></td>
+<td><p>1’b0</p></td>
+<td><p>Clear signal of TX FIFO</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>dsi_dma_rx_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Enable signal of dma_rx_req/ack interface</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>dsi_dma_tx_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Enable signal of dma_tx_req/ack interface</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dsi-fifo-config-1">
+<h3><span class="section-number">12.4.10. </span>dsi_fifo_config_1<a class="headerlink" href="#dsi-fifo-config-1" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x3001a164</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dsi_fifo_config_1.svg" src="../_images/dsi_dsi_fifo_config_1.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:26</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>25:24</p></td>
+<td><p>rx_fifo_th</p></td>
+<td><p>r/w</p></td>
+<td><p>2’d0</p></td>
+<td><p>RX FIFO threshold, dma_rx_req will not be asserted if tx_fifo_cnt is less than this value</p></td>
+</tr>
+<tr class="row-even"><td><p>23:18</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>17:16</p></td>
+<td><p>tx_fifo_th</p></td>
+<td><p>r/w</p></td>
+<td><p>2’d0</p></td>
+<td><p>TX FIFO threshold, dma_tx_req will not be asserted if tx_fifo_cnt is less than this value</p></td>
+</tr>
+<tr class="row-even"><td><p>15:11</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>10:8</p></td>
+<td><p>rx_fifo_cnt</p></td>
+<td><p>r</p></td>
+<td><p>3’d0</p></td>
+<td><p>RX FIFO available count</p></td>
+</tr>
+<tr class="row-even"><td><p>7:3</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>2:0</p></td>
+<td><p>tx_fifo_cnt</p></td>
+<td><p>r</p></td>
+<td><p>3’d4</p></td>
+<td><p>TX FIFO available count</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dsi-fifo-wdata">
+<h3><span class="section-number">12.4.11. </span>dsi_fifo_wdata<a class="headerlink" href="#dsi-fifo-wdata" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x3001a168</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dsi_fifo_wdata.svg" src="../_images/dsi_dsi_fifo_wdata.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>dsi_fifo_wdata</p></td>
+<td><p>w</p></td>
+<td><p>x</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dsi-fifo-rdata">
+<h3><span class="section-number">12.4.12. </span>dsi_fifo_rdata<a class="headerlink" href="#dsi-fifo-rdata" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x3001a16c</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dsi_fifo_rdata.svg" src="../_images/dsi_dsi_fifo_rdata.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>dsi_fifo_rdata</p></td>
+<td><p>r</p></td>
+<td><p>32’h0</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-0">
+<h3><span class="section-number">12.4.13. </span>dphy_config_0<a class="headerlink" href="#dphy-config-0" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x3001a180</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_0.svg" src="../_images/dsi_dphy_config_0.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31</p></td>
+<td><p>dsi_reset_n</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>MIPI DSI D-PHY reset pin</p></td>
+</tr>
+<tr class="row-odd"><td><p>30</p></td>
+<td><p>dl0_turnesc</p></td>
+<td><p>w1p</p></td>
+<td><p>1’b0</p></td>
+<td><p>Data lane0 Bus Turnaround</p></td>
+</tr>
+<tr class="row-even"><td><p>29:28</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>27</p></td>
+<td><p>dl3_forcetxstopmode</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Force Lane3 to Generate Stop State</p></td>
+</tr>
+<tr class="row-even"><td><p>26</p></td>
+<td><p>dl2_forcetxstopmode</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Force Lane2 to Generate Stop State</p></td>
+</tr>
+<tr class="row-odd"><td><p>25</p></td>
+<td><p>dl1_forcetxstopmode</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Force Lane1 to Generate Stop State</p></td>
+</tr>
+<tr class="row-even"><td><p>24</p></td>
+<td><p>dl0_forcetxstopmode</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Force Lane0 to Generate Stop State</p></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>dl3_forcerxmode</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Enables the reverse escape LP receiver. Lane3 immediately transitions to receive mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>22</p></td>
+<td><p>dl2_forcerxmode</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Enables the reverse escape LP receiver. Lane2 immediately transitions to receive mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>21</p></td>
+<td><p>dl1_forcerxmode</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Enables the reverse escape LP receiver. Lane1 immediately transitions to receive mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>20</p></td>
+<td><p>dl0_forcerxmode</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Enables the reverse escape LP receiver. Lane0 immediately transitions to receive mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>19</p></td>
+<td><p>dl3_ulpsactivenot</p></td>
+<td><p>r</p></td>
+<td><p>1’b1</p></td>
+<td><p>Data lane3 is NOT in the ULP state</p></td>
+</tr>
+<tr class="row-even"><td><p>18</p></td>
+<td><p>dl2_ulpsactivenot</p></td>
+<td><p>r</p></td>
+<td><p>1’b1</p></td>
+<td><p>Data lane2 is NOT in the ULP state</p></td>
+</tr>
+<tr class="row-odd"><td><p>17</p></td>
+<td><p>dl1_ulpsactivenot</p></td>
+<td><p>r</p></td>
+<td><p>1’b1</p></td>
+<td><p>Data lane1 is NOT in the ULP state</p></td>
+</tr>
+<tr class="row-even"><td><p>16</p></td>
+<td><p>dl0_ulpsactivenot</p></td>
+<td><p>r</p></td>
+<td><p>1’b1</p></td>
+<td><p>Data lane0 is NOT in the ULP state</p></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>dl3_stopstate</p></td>
+<td><p>r</p></td>
+<td><p>1’b1</p></td>
+<td><p>Data lane3 is in Stop state</p></td>
+</tr>
+<tr class="row-even"><td><p>14</p></td>
+<td><p>dl2_stopstate</p></td>
+<td><p>r</p></td>
+<td><p>1’b1</p></td>
+<td><p>Data lane2 is in Stop state</p></td>
+</tr>
+<tr class="row-odd"><td><p>13</p></td>
+<td><p>dl1_stopstate</p></td>
+<td><p>r</p></td>
+<td><p>1’b1</p></td>
+<td><p>Data lane1 is in Stop state</p></td>
+</tr>
+<tr class="row-even"><td><p>12</p></td>
+<td><p>dl0_stopstate</p></td>
+<td><p>r</p></td>
+<td><p>1’b1</p></td>
+<td><p>Data lane0 is in Stop state</p></td>
+</tr>
+<tr class="row-odd"><td><p>11</p></td>
+<td><p>dl3_enable</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Data lane3 enable</p></td>
+</tr>
+<tr class="row-even"><td><p>10</p></td>
+<td><p>dl2_enable</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Data lane2 enable</p></td>
+</tr>
+<tr class="row-odd"><td><p>9</p></td>
+<td><p>dl1_enable</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Data lane1 enable</p></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>dl0_enable</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Data lane0 enable</p></td>
+</tr>
+<tr class="row-odd"><td><p>7:6</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>cl_ulpsactivenot</p></td>
+<td><p>r</p></td>
+<td><p>1’b1</p></td>
+<td><p>Clock lane is NOT in the ULP state</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>cl_stopstate</p></td>
+<td><p>r</p></td>
+<td><p>1’b1</p></td>
+<td><p>Clock lane is in Stop state</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>cl_txulpsexit</p></td>
+<td><p>w1p</p></td>
+<td><p>1’b0</p></td>
+<td><p>Clock lane Transmit ULP Exit Sequence</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>cl_txulpsclk</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Clock lane Transmit Ultra-Low Power State</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>cl_txrequesths</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Clock lane High-Speed Transmit Request</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>cl_enable</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Clock lane enable</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-1">
+<h3><span class="section-number">12.4.14. </span>dphy_config_1<a class="headerlink" href="#dphy-config-1" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x3001a184</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_1.svg" src="../_images/dsi_dphy_config_1.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:25</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>24</p></td>
+<td><p>reg_en_lprx_at_ulps</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_en_lprx_at_ulps</p></td>
+</tr>
+<tr class="row-even"><td><p>23:16</p></td>
+<td><p>reg_time_ck_exit</p></td>
+<td><p>r/w</p></td>
+<td><p>8’h5</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_time_ck_exit (tx_clk_esc) txclkesc: 40M, datarate: 800Mbps</p></td>
+</tr>
+<tr class="row-odd"><td><p>15:8</p></td>
+<td><p>reg_time_ck_trail</p></td>
+<td><p>r/w</p></td>
+<td><p>8’h3</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_time_ck_trail (tx_clk_esc)</p></td>
+</tr>
+<tr class="row-even"><td><p>7:0</p></td>
+<td><p>reg_time_ck_zero</p></td>
+<td><p>r/w</p></td>
+<td><p>8’hF</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_time_ck_zero (tx_clk_esc)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-2">
+<h3><span class="section-number">12.4.15. </span>dphy_config_2<a class="headerlink" href="#dphy-config-2" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x3001a188</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_2.svg" src="../_images/dsi_dphy_config_2.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:24</p></td>
+<td><p>reg_time_hs_exit</p></td>
+<td><p>r/w</p></td>
+<td><p>8’h5</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_time_hs_exit (tx_clk_esc)</p></td>
+</tr>
+<tr class="row-odd"><td><p>23:16</p></td>
+<td><p>reg_time_hs_prep</p></td>
+<td><p>r/w</p></td>
+<td><p>8’h2</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_time_hs_prep (tx_clk_esc)</p></td>
+</tr>
+<tr class="row-even"><td><p>15:8</p></td>
+<td><p>reg_time_hs_trail</p></td>
+<td><p>r/w</p></td>
+<td><p>8’h3</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_time_hs_trail (tx_clk_esc)</p></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>reg_time_hs_zero</p></td>
+<td><p>r/w</p></td>
+<td><p>8’h5</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_time_hs_zero (tx_clk_esc)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-3">
+<h3><span class="section-number">12.4.16. </span>dphy_config_3<a class="headerlink" href="#dphy-config-3" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x3001a18c</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_3.svg" src="../_images/dsi_dphy_config_3.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:24</p></td>
+<td><p>reg_time_lpx</p></td>
+<td><p>r/w</p></td>
+<td><p>8’h3</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_time_lpx (tx_clk_esc)</p></td>
+</tr>
+<tr class="row-odd"><td><p>23:16</p></td>
+<td><p>reg_time_reqrdy</p></td>
+<td><p>r/w</p></td>
+<td><p>8’h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_time_reqrdy</p></td>
+</tr>
+<tr class="row-even"><td><p>15:8</p></td>
+<td><p>reg_time_ta_get</p></td>
+<td><p>r/w</p></td>
+<td><p>8’hF</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_time_ta_get (tx_clk_esc)</p></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>reg_time_ta_go</p></td>
+<td><p>r/w</p></td>
+<td><p>8’hC</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_time_ta_go (tx_clk_esc)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-4">
+<h3><span class="section-number">12.4.17. </span>dphy_config_4<a class="headerlink" href="#dphy-config-4" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x3001a190</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_4.svg" src="../_images/dsi_dphy_config_4.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15:0</p></td>
+<td><p>reg_time_wakeup</p></td>
+<td><p>r/w</p></td>
+<td><p>16’h9C41</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_time_wakeup (tx_clk_esc)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-5">
+<h3><span class="section-number">12.4.18. </span>dphy_config_5<a class="headerlink" href="#dphy-config-5" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x3001a194</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_5.svg" src="../_images/dsi_dphy_config_5.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:24</p></td>
+<td><p>reg_trig0_code</p></td>
+<td><p>r/w</p></td>
+<td><p>8’b0100_0110</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_trig0_code</p></td>
+</tr>
+<tr class="row-odd"><td><p>23:16</p></td>
+<td><p>reg_trig1_code</p></td>
+<td><p>r/w</p></td>
+<td><p>8’b1011_1010</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_trig1_code</p></td>
+</tr>
+<tr class="row-even"><td><p>15:8</p></td>
+<td><p>reg_trig2_code</p></td>
+<td><p>r/w</p></td>
+<td><p>8’b1000_0100</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_trig2_code</p></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>reg_trig3_code</p></td>
+<td><p>r/w</p></td>
+<td><p>8’b0000_0101</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_trig3_code</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-6">
+<h3><span class="section-number">12.4.19. </span>dphy_config_6<a class="headerlink" href="#dphy-config-6" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x3001a198</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_6.svg" src="../_images/dsi_dphy_config_6.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15:8</p></td>
+<td><p>reg_lpdt_code</p></td>
+<td><p>r/w</p></td>
+<td><p>8’b1000_0111</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_lpdt_code</p></td>
+</tr>
+<tr class="row-even"><td><p>7:0</p></td>
+<td><p>reg_ulps_code</p></td>
+<td><p>r/w</p></td>
+<td><p>8’b0111_1000</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ulps_code</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-7">
+<h3><span class="section-number">12.4.20. </span>dphy_config_7<a class="headerlink" href="#dphy-config-7" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x3001a19c</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_7.svg" src="../_images/dsi_dphy_config_7.svg" /></figure>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 6%" />
+<col style="width: 28%" />
+<col style="width: 5%" />
+<col style="width: 6%" />
+<col style="width: 56%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:20</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>19</p></td>
+<td><p>reg_ana_byte_rev</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_byte_rev</p></td>
+</tr>
+<tr class="row-even"><td><p>18</p></td>
+<td><p>reg_ana_clk_en_esc</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_clk_en_esc</p></td>
+</tr>
+<tr class="row-odd"><td><p>17</p></td>
+<td><p>reg_ana_hs_txen_clklane_esc</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_hs_txen_clklane_esc</p></td>
+</tr>
+<tr class="row-even"><td><p>16</p></td>
+<td><p>reg_ana_lp_dntxdata_clklane_esc</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_lp_dntxdata_clklane_esc</p></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>reg_ana_lp_dptxdata_clklane_esc</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_lp_dptxdata_clklane_esc</p></td>
+</tr>
+<tr class="row-even"><td><p>14</p></td>
+<td><p>reg_ana_lp_txen_clklane_esc</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_lp_txen_clklane_esc</p></td>
+</tr>
+<tr class="row-odd"><td><p>13</p></td>
+<td><p>reg_force_clk_hiz_hs</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_force_clk_hiz_hs</p></td>
+</tr>
+<tr class="row-even"><td><p>12</p></td>
+<td><p>reg_force_clk_hiz_lp</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_force_clk_hiz_lp</p></td>
+</tr>
+<tr class="row-odd"><td><p>11:8</p></td>
+<td><p>reg_force_hiz_hs</p></td>
+<td><p>r/w</p></td>
+<td><p>4’h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_force_hiz_hs</p></td>
+</tr>
+<tr class="row-even"><td><p>7:4</p></td>
+<td><p>reg_force_hiz_lp</p></td>
+<td><p>r/w</p></td>
+<td><p>4’h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_force_hiz_lp</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>reg_pt_prbs_or_jitt</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_pt_prbs_or_jitt</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>reg_pt_lp_mode</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_pt_lp_mode</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>reg_pt_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_pt_en</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>reg_ana_test_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_test_en</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-8">
+<h3><span class="section-number">12.4.21. </span>dphy_config_8<a class="headerlink" href="#dphy-config-8" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x3001a1a0</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_8.svg" src="../_images/dsi_dphy_config_8.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:28</p></td>
+<td><p>reg_ana_hs_p2s_sel_byte</p></td>
+<td><p>r/w</p></td>
+<td><p>4’h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_hs_p2s_sel_byte</p></td>
+</tr>
+<tr class="row-odd"><td><p>27:24</p></td>
+<td><p>reg_ana_hs_sync_ld_byte</p></td>
+<td><p>r/w</p></td>
+<td><p>4’h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_hs_sync_ld_byte</p></td>
+</tr>
+<tr class="row-even"><td><p>23:20</p></td>
+<td><p>reg_ana_hs_trail_byte</p></td>
+<td><p>r/w</p></td>
+<td><p>4’h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_hs_trail_byte</p></td>
+</tr>
+<tr class="row-odd"><td><p>19:16</p></td>
+<td><p>reg_ana_hstxen</p></td>
+<td><p>r/w</p></td>
+<td><p>4’h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_hstxen</p></td>
+</tr>
+<tr class="row-even"><td><p>15:12</p></td>
+<td><p>reg_ana_lprxen</p></td>
+<td><p>r/w</p></td>
+<td><p>4’h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_lprxen</p></td>
+</tr>
+<tr class="row-odd"><td><p>11:8</p></td>
+<td><p>reg_ana_lptxen</p></td>
+<td><p>r/w</p></td>
+<td><p>4’h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_lptxen</p></td>
+</tr>
+<tr class="row-even"><td><p>7:4</p></td>
+<td><p>reg_ana_lptxn_data</p></td>
+<td><p>r/w</p></td>
+<td><p>4’h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_lptxn_data</p></td>
+</tr>
+<tr class="row-odd"><td><p>3:0</p></td>
+<td><p>reg_ana_lptxp_data</p></td>
+<td><p>r/w</p></td>
+<td><p>4’h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_lptxp_data</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-9">
+<h3><span class="section-number">12.4.22. </span>dphy_config_9<a class="headerlink" href="#dphy-config-9" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x3001a1a4</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_9.svg" src="../_images/dsi_dphy_config_9.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>reg_ana_hs_data_out_byte</p></td>
+<td><p>r/w</p></td>
+<td><p>32’h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_hs_data_out_byte</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-10">
+<h3><span class="section-number">12.4.23. </span>dphy_config_10<a class="headerlink" href="#dphy-config-10" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x3001a1a8</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_10.svg" src="../_images/dsi_dphy_config_10.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:28</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>27</p></td>
+<td><p>reg_ana_vref_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_vref_en</p></td>
+</tr>
+<tr class="row-even"><td><p>26:24</p></td>
+<td><p>reg_ana_vreg400mv_trim</p></td>
+<td><p>r/w</p></td>
+<td><p>3’h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_vreg400mv_trim</p></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>reg_ana_bg_vref_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_bg_vref_en</p></td>
+</tr>
+<tr class="row-even"><td><p>22</p></td>
+<td><p>reg_dphy_bg_vref_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_dphy_bg_vref_en</p></td>
+</tr>
+<tr class="row-odd"><td><p>21:19</p></td>
+<td><p>reg_dphy_vreg400mv_trim</p></td>
+<td><p>r/w</p></td>
+<td><p>3’h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_dphy_vreg400mv_trim</p></td>
+</tr>
+<tr class="row-even"><td><p>18:14</p></td>
+<td><p>reg_imp_pd_code</p></td>
+<td><p>r/w</p></td>
+<td><p>5’h9</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_imp_pd_code</p></td>
+</tr>
+<tr class="row-odd"><td><p>13:9</p></td>
+<td><p>reg_imp_pu_code</p></td>
+<td><p>r/w</p></td>
+<td><p>5’h8</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_imp_pu_code</p></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>reg_testbus_hi8bsel_8bmode</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_testbus_hi8bsel_8bmode</p></td>
+</tr>
+<tr class="row-odd"><td><p>7:4</p></td>
+<td><p>reg_testbus_sel_hi</p></td>
+<td><p>r/w</p></td>
+<td><p>4’h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_testbus_sel_hi</p></td>
+</tr>
+<tr class="row-even"><td><p>3:0</p></td>
+<td><p>reg_testbus_sel_lo</p></td>
+<td><p>r/w</p></td>
+<td><p>4’h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_testbus_sel_lo</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-11">
+<h3><span class="section-number">12.4.24. </span>dphy_config_11<a class="headerlink" href="#dphy-config-11" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x3001a1ac</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_11.svg" src="../_images/dsi_dphy_config_11.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>reg_dsi_ana_1</p></td>
+<td><p>r/w</p></td>
+<td><p>16’h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_dsi_ana_1</p></td>
+</tr>
+<tr class="row-odd"><td><p>15:0</p></td>
+<td><p>reg_dsi_ana_0</p></td>
+<td><p>r/w</p></td>
+<td><p>16’hc14</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_dsi_ana_0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-12">
+<h3><span class="section-number">12.4.25. </span>dphy_config_12<a class="headerlink" href="#dphy-config-12" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x3001a1b0</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_12.svg" src="../_images/dsi_dphy_config_12.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15:0</p></td>
+<td><p>reg_dsi_ana_2</p></td>
+<td><p>r/w</p></td>
+<td><p>16’h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_dsi_ana_2</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-13">
+<h3><span class="section-number">12.4.26. </span>dphy_config_13<a class="headerlink" href="#dphy-config-13" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x3001a1b4</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_13.svg" src="../_images/dsi_dphy_config_13.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15:0</p></td>
+<td><p>reg_rd_dig_test_bus</p></td>
+<td><p>r</p></td>
+<td><p>16’h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_rd_dig_test_bus</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-14">
+<h3><span class="section-number">12.4.27. </span>dphy_config_14<a class="headerlink" href="#dphy-config-14" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x3001a1b8</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_14.svg" src="../_images/dsi_dphy_config_14.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>reg_pt_free_rep_pat</p></td>
+<td><p>r/w</p></td>
+<td><p>32’h87654321</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_pt_free_rep_pat</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-15">
+<h3><span class="section-number">12.4.28. </span>dphy_config_15<a class="headerlink" href="#dphy-config-15" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x3001a1bc</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_15.svg" src="../_images/dsi_dphy_config_15.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:30</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>29</p></td>
+<td><p>reg_csi_rst_n_pre</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Note: reg_csi_rst_n_pre should be released at least 2 us BEFORE releasing csi_reset_n</p></td>
+</tr>
+<tr class="row-even"><td><p>28</p></td>
+<td><p>reg_dsi_rst_n_pre</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Note: reg_dsi_rst_n_pre should be released at least 2 us BEFORE releasing dsi_reset_n</p></td>
+</tr>
+<tr class="row-odd"><td><p>27:25</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>24</p></td>
+<td><p>reg_mipi_ldo_fast</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>23:21</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>20</p></td>
+<td><p>reg_ten_dsi_ldo</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>19</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>18:16</p></td>
+<td><p>reg_dphy_ldo11_rfb_sw</p></td>
+<td><p>r/w</p></td>
+<td><p>3’d4</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15:13</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>12</p></td>
+<td><p>reg_dphy_short_ldo11</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>11:9</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>reg_dphy_pu_ldo11</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>enable LDO11 for both dsi and csi</p></td>
+</tr>
+<tr class="row-odd"><td><p>7:5</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>reg_dsi_pw_avdd1815</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>0: power switch on</p></td>
+</tr>
+<tr class="row-odd"><td><p>3:1</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>reg_dsi_dc_tp_out_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-16">
+<h3><span class="section-number">12.4.29. </span>dphy_config_16<a class="headerlink" href="#dphy-config-16" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x3001a1c0</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_16.svg" src="../_images/dsi_dphy_config_16.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:2</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>reg_dsi_lprx_clk_inv</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>reg_dsi_byte_clk_inv</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dummy-reg">
+<h3><span class="section-number">12.4.30. </span>dummy_reg<a class="headerlink" href="#dummy-reg" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x3001a1fc</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dummy_reg.svg" src="../_images/dsi_dummy_reg.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>dummy_reg</p></td>
+<td><p>r/w</p></td>
+<td><p>32’h0</p></td>
+<td><p>Dummy registers</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="DPI.html" class="btn btn-neutral float-left" title="11. DPI" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Cam.html" class="btn btn-neutral float-right" title="13. CAM" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

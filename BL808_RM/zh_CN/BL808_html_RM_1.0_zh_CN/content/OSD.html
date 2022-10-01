@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OSD &mdash; BL808 参考手册  文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL808 参考手册
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. 系统和存储器概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. 复位和时钟</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPIO.html">4. GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">5. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">6. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">7. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA2D.html">8. DMA2D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lz4d.html">9. LZ4D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBI.html">10. DBI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DPI.html">11. DPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DSI.html">12. DSI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cam.html">13. CAM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">14. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">15. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">16. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">17. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">18. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">19. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2s.html">20. I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PDM.html">21. PDM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AUDIO.html">22. AUDIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PSRAM.html">23. PSRAM Contorller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Emac.html">24. Emac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USB.html">25. USB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ISO11898.html">26. ISO11898</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MJPEG.html">27. MJPEG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="JDEC.html">28. JDEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="VENC.html">29. VENC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NPUtoolchain.html">30. NPU toolchain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NPU.html">31. NPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IPC.html">32. IPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LowPower.html">33. LowPower</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SEC_ENG.html">34. SEC ENG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">35. 版本信息</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL808 参考手册</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>OSD</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="osd">
+<h1>OSD<a class="headerlink" href="#osd" title="永久链接至标题"></a></h1>
+<section id="id1">
+<h2>简介<a class="headerlink" href="#id1" title="永久链接至标题"></a></h2>
+<p>On-Screen Display(OSD)模块，是用于实现画面图层叠加的一种硬件模块。
+OSD模块根据软件的设置，将一个指定的图形，通过一定的模式，叠加显示在底层图像之上。
+OSD被广泛应用在电视、视频等领域，比如电视台的台标，播放时的进度显示等等。
+OSD模块可以分为三个部分：OSD Blend、OSD Draw和OSD Probe。</p>
+</section>
+<section id="id2">
+<h2>主要特征<a class="headerlink" href="#id2" title="永久链接至标题"></a></h2>
+<ul>
+<li><p>支持码流OSD及显示OSD</p></li>
+<li><p>码流及显示OSD模块都包含子模块：OSD Blend，OSD Draw</p></li>
+<li><p>OSD Blend特征如下</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>支持4个Blend模块，大小模块各两个</p></li>
+<li><p>每个图层均支持一个全局透明度(global alpha)</p></li>
+<li><p>每个图层均支持一个全局颜色(global color)</p></li>
+<li><p>支持多种不同的颜色格式：ARGB,AYUV,RGB,YUV,palette模式等</p></li>
+<li><p>可以设置颜色元素排列的顺序，比如ARGB，BGRA等</p></li>
+<li><p>调色板(palette)模式支持1/2/4/8bpp(bits per pixel),实际颜色查找表元素可选yuv或RGB</p></li>
+<li><p>支持color keying，将在一个范围内(或不在此范围内，根据设置)的颜色替换为一个指定的颜色</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>OSD Draw特征如下</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>仅支持矩形图案的绘制，个数根据模块大小，可以是16或者32</p></li>
+<li><p>可以指定矩形的颜色(通过yuv的值指定)</p></li>
+<li><p>支持两种不同的绘制风格：填充或非填充</p></li>
+<li><p>对于非填充矩形，可以指定其边框宽度(必须是偶数)</p></li>
+<li><p>根据固定的优先级进行矩形的叠加显示</p></li>
+<li><p>不支持图形透明</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>码流OSD支持一个OSD Probe模块</p></li>
+<li><p>OSD Probe特征如下</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>支持最大32组自定义坐标位置寄存器</p></li>
+<li><p>支持一个全局的亮度阈值</p></li>
+<li><p>两个输出结果寄存器，可以ping pong模式读取</p></li>
+<li><p>可对输出结果进行统计</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>OSD模块的时钟依赖于对应的功能模块</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2>功能描述<a class="headerlink" href="#id3" title="永久链接至标题"></a></h2>
+<section id="osd-blend">
+<h3>OSD Blend<a class="headerlink" href="#osd-blend" title="永久链接至标题"></a></h3>
+<p>OSD Blend模块(以下简称Blend模块)是OSD模块的一部分，此模块用于在ISP输出的画面中进行一些高级的图层叠加。
+一个图层是一个可以独立设置的，叠加在底层画面之上的一个2D区域。可以在此区域实现alpha blending, color keying等。
+Blend模块根据实现的差异，分为大、小模块。区别在于，大的模块可以操作4个独立的图层，而小的模块只有2个独立图层。
+同一个Blend模块的不同图层有固定的优先级，不同Blend模块之间的优先级可以设置，这取决于他们在pipeline上的位置。
+图层的内容需要放置在内存中，由Blend模块进行读取并进行叠加操作。
+Blend模块位于ISP的后方，与scaler模块的位置可以编程设置，这会对坐标位置的设置产生影响。</p>
+<p>Blend模块用于在ISP的输出画面上的指定矩形区域进行画面的叠加显示，最直接的应用就是时间、位置等传统OSD信息显示。
+结合Probe模块及Blend模块的透明功能，可以实现OSD字符显示的自动反白，背景透明的功能。
+通过color keying的功能，可以实现简单的画面去背景的效果，比如用来显示一个非矩形的Logo等。
+通过指定范围的color keying，可以实现渐变色进度条的自动更新显示。
+为节省内存消耗及带宽消耗，对于简单的显示，可以使用调试板模式，甚至直接使用全局颜色及透明度。</p>
+<section id="id4">
+<h4>时钟<a class="headerlink" href="#id4" title="永久链接至标题"></a></h4>
+<p>Blend模块依赖于ISP的时钟。</p>
+</section>
+<section id="id5">
+<h4>设置流程<a class="headerlink" href="#id5" title="永久链接至标题"></a></h4>
+<ul class="simple">
+<li><p>确认模块有工作时钟(ISP开启)</p></li>
+<li><p>设计需要显示内容的位置参数：x/y轴尺寸及起始位置</p></li>
+<li><p>根据需要显示的内容选择适合的颜色模式，对于简单、面积小的显示推荐选择调色板模式</p></li>
+<li><p>在内存中，准备好显示需要用到的数据</p></li>
+<li><p>编程Blend模块读取数据的位置，长度，以及读取数据的时机</p></li>
+<li><p>设置颜色格式等相关的寄存器，如果是调色板模式，还需要加载相应的调色板数据</p></li>
+<li><p>如果使用了keying模式，需要设置keying的范围，模式，以及替换的颜色</p></li>
+<li><p>使能Blend模块的对应图层</p></li>
+</ul>
+</section>
+</section>
+<section id="osd-draw">
+<h3>OSD Draw<a class="headerlink" href="#osd-draw" title="永久链接至标题"></a></h3>
+<p>OSD Draw模块(以下简称Draw模块)是OSD模块的一部分。此模块用于在ISP输出的画面之上叠加矩形(框)。
+Draw模块位于ISP的后方，与scaler模块的位置可以交换。
+Draw模块分为大、小两种功能实现。小的模块可支持画16个矩形(框)，而大的模块支持32个。
+大的模块可以看作是两个小模块组合而成。</p>
+<p>Draw模块在ISP的输出中根据指定的坐标及设置的风格(填充/非填充)、颜色、边框宽度，进行矩形的绘制。
+如果有不同的矩形绘制在同一位置，则根据一个固定的优先级(图层编号)进行叠加。</p>
+<section id="id6">
+<h4>时钟<a class="headerlink" href="#id6" title="永久链接至标题"></a></h4>
+<p>Draw模块依赖于ISP的时钟。</p>
+</section>
+<section id="id7">
+<h4>设置流程<a class="headerlink" href="#id7" title="永久链接至标题"></a></h4>
+<ul class="simple">
+<li><p>确认模块有工作时钟(ISP开启)</p></li>
+<li><p>设置矩形的坐标(x/y任意方向均需满足起始坐标设置为偶数，结束坐标设置为奇数)</p></li>
+<li><p>设置矩形的颜色(yuv)，如果是非填充矩形，还需要设置线框的宽度</p></li>
+<li><p>在模块控制寄存器中置位对应的矩形编号所对应的bit</p></li>
+</ul>
+</section>
+</section>
+<section id="osd-probe">
+<h3>OSD Probe<a class="headerlink" href="#osd-probe" title="永久链接至标题"></a></h3>
+<p>OSD Probe模块(以下简称Probe模块)是OSD模块的一部分。此模块用于对ISP输出中的部分位置进行亮度对比。
+Probe模块位于ISP的后方，没有经过scaler模块。因此当后级画面经过了scaler，那么相应的坐标需要软件进行调整。</p>
+<p>Probe模块从ISP的输出中获取指定位置处的像素的亮度值，并与给定的阈值进行比较。
+如果该位置的亮度值大于或等于亮度阈值，则将对应像素点位置的比较输出置1。此功能可用于根据背景进行OSD的自动反白显示。</p>
+<section id="id8">
+<h4>时钟<a class="headerlink" href="#id8" title="永久链接至标题"></a></h4>
+<p>Probe模块依赖于ISP的时钟。</p>
+</section>
+<section id="id9">
+<h4>设置流程<a class="headerlink" href="#id9" title="永久链接至标题"></a></h4>
+<ul class="simple">
+<li><p>确认模块有工作时钟(ISP开启)</p></li>
+<li><p>设置亮度阈值</p></li>
+<li><p>根据项目需要，设置0 ~ 31这32组位置寄存器，编程入采样点的x、y轴坐标</p></li>
+<li><p>此模块将根据设置进行比较并更新相关的结果寄存器</p></li>
+<li><p>通过控制器寄存器可以获取检测结果数量及当前使用的结果寄存器</p></li>
+<li><p>从结果寄存器可以获取模块输出，根据每个bit的值就可以获取对应坐标的亮度比较结果</p></li>
+</ul>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2021.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

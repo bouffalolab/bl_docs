@@ -1,0 +1,244 @@
+===========
+DBI
+===========
+
+简介
+=====
+DBI是显示总线接口(Display Bus Interface)的简称，也被称为MCU接口，是MIPI联盟定义的用于与显示屏通信的接口协议。DBI协议的数据线和控制线是复用的，驱动的显示模块需要带有GRAM。
+DBI又可以细分为MIPI DBI Type A、MIPI DBI Type B和MIPI DBI Type C三种不同的模式，不同模式下的硬件接口以及数据采样都有所不同。如MIPI DBI Type A是下降沿采样(基于Motorola 6800总线)，而MIPI DBI Type B是上升沿采样(基于Intel 8080总线)。
+
+主要特点
+===========
+
+ - 符合 MIPI® 联盟标准
+ - 支持Type B和Type C模式
+ - Type B为8位数据接口
+ - Type C支持3-Line和4-Line
+ - 输入像素格式支持以下八种：
+
+     + RGBA8888
+     + BGRA8888
+     + ARGB8888
+     + ABGR8888
+     + RGB888
+     + BGR888
+     + RGB565
+     + BGR565
+
+ - 输出像素格式支持RGB565、RGB666和RGB888
+ - 多种中断控制
+ - 支持DMA传输模式
+
+功能描述
+===========
+
+DBI模块基本框图如图所示。
+
+.. figure:: ../../picture/DBIBlock.svg
+   :align: center
+
+   DBI基本框图
+
+DBI Type B
+-------------
+
+写时序
+*********
+DBI Type B模式拥有8位并行数据线，MCU向显示模块写入数据的时序如下图所示：
+
+.. figure:: ../../picture/DBITypeBWrite.svg
+   :align: center
+
+   写时序
+
+其中：
+
+ - CSX：片选信号。当该信号为低时显示模块被选中，为高时显示模块将忽略其他所有的接口信号；
+ - RESX：外部复位信号。当该信号为低时显示模块被复位；
+ - D/CX：数据/命令选择信号。当该信号为0时，DB[7:0]位为命令；当该信号为1时，DB[7:0]位为RAM数据或命令参数；
+ - WRX：并行数据写入选通信号。该信号在写入周期内从高到低驱动，然后拉回到高。显示模块在该信号的上升沿读取MCU传输的信息。该信号是一种非同步信号，可在不使用时终止；
+ - RDX：并行数据读取选通信号。该信号从高到低被驱动，然后在读取周期中被拉回到高。MCU在该信号的上升沿读取显示模块传输的信息。该信号是一种非同步信号，可在不使用时终止；
+ - DB[7:0]：8位数据信号。用于传输命令、命令参数或数据。
+
+读时序
+*********
+MCU从显示模块读取数据的时序如下图所示：
+
+.. figure:: ../../picture/DBITypeBRead.svg
+   :align: center
+
+   读时序
+
+输出RGB565
+*************
+RGB565格式数据输出如下图所示：
+
+.. figure:: ../../picture/DBITypeBRGB565.svg
+   :align: center
+
+   RGB565输出
+
+输出RGB666
+*************
+RGB666格式数据输出如下图所示：
+
+.. figure:: ../../picture/DBITypeBRGB666.svg
+   :align: center
+   :scale: 80%
+
+   RGB666输出
+
+输出RGB888
+*************
+RGB888格式数据输出如下图所示：
+
+.. figure:: ../../picture/DBITypeBRGB888.svg
+   :align: center
+   :scale: 80%
+
+   RGB888输出
+
+DBI Type C 3-Line
+-------------------
+
+写时序
+*********
+DBI Type C模式是3线9位串行接口，MCU向显示模块写入数据的时序如下图所示：
+
+.. figure:: ../../picture/DBITypeC3Write.svg
+   :align: center
+
+   写时序
+
+其中：
+
+ - CSX：片选信号。当该信号为低时显示模块被选中，为高时显示模块将忽略其他所有的接口信号；
+ - SCL：串行时钟输入信号。用于为数据传输提供时钟信号。
+ - SDA：串行数据输入/输出信号。在写操作中，串行数据包包含一个D/CX(数据/命令)选择位和一个传输字节。如果D/CX位为低，则传输字节为命令；如果D/CX位为高，则传输字节为显示数据或命令参数。
+
+读时序
+*********
+MCU从显示模块读取数据的时序如下图所示：
+
+.. figure:: ../../picture/DBITypeC3Read.svg
+   :align: center
+
+   读时序
+
+输出RGB565
+*************
+RGB565格式数据输出如下图所示：
+
+.. figure:: ../../picture/DBITypeC3RGB565.svg
+   :align: center
+
+   RGB565输出
+
+输出RGB666
+*************
+RGB666格式数据输出如下图所示：
+
+.. figure:: ../../picture/DBITypeC3RGB666.svg
+   :align: center
+
+   RGB666输出
+
+输出RGB888
+*************
+RGB888格式数据输出如下图所示：
+
+.. figure:: ../../picture/DBITypeC3RGB888.svg
+   :align: center
+
+   RGB888输出
+
+DBI Type C 4-Line
+-------------------
+
+写时序
+*********
+DBI Type C模式是4线8位串行接口，MCU向显示模块写入数据的时序如下图所示：
+
+.. figure:: ../../picture/DBITypeC4Write.svg
+   :align: center
+
+   写时序
+
+其中：
+
+ - CSX：片选信号。当该信号为低时显示模块被选中，为高时显示模块将忽略其他所有的接口信号；
+ - D/CX：数据/命令选择信号。如果该信号为低，则SDA传输的信息为命令；如果该信号为高，则SDA传输的信息为显示数据或命令参数。
+ - SCL：串行时钟输入信号。用于为数据传输提供时钟信号。
+ - SDA：串行数据输入/输出信号。用于传输命令、命令参数或数据。
+
+读时序
+*********
+MCU从显示模块读取数据的时序如下图所示：
+
+.. figure:: ../../picture/DBITypeC4Read.svg
+   :align: center
+
+   读时序
+
+输出RGB565
+*************
+RGB565格式数据输出如下图所示：
+
+.. figure:: ../../picture/DBITypeC4RGB565.svg
+   :align: center
+
+   RGB565输出
+
+输出RGB666
+*************
+RGB666格式数据输出如下图所示：
+
+.. figure:: ../../picture/DBITypeC4RGB666.svg
+   :align: center
+
+   RGB666输出
+
+输出RGB888
+*************
+RGB888格式数据输出如下图所示：
+
+.. figure:: ../../picture/DBITypeC4RGB888.svg
+   :align: center
+
+   RGB888输出
+
+输入像素格式
+-------------------
+DBI模块支持8种不同的输入像素格式，各种格式在内存中的排布如下图所示：
+
+.. figure:: ../../picture/DBIMemory.svg
+   :align: center
+
+   输入像素格式
+
+中断
+--------
+DBI具有以下几种中断：
+
+ - 传输结束中断
+ - TX FIFO请求中断
+ - FIFO溢出错误中断
+
+通过设置一个像素计数值，传输结束中断会在传输的像素数据达到计数值时产生，Type B和Type C都会产生该中断；
+
+当DBI_FIFO_CONFIG_1中TFICNT大于TFITH时,产生TX FIFO请求中断，当条件不满足时该中断标志会自动清除；
+
+FIFO溢出错误中断会在TX发生Overflow或者Underflow时产生。
+
+DMA
+--------
+DBI TX支持DMA传输模式，使用该模式需要通过寄存器DBI_FIFO_CONFIG_1的位<TFITH>设置TX FIFO的阈值。
+当该模式启用后，如果TFICNT大于TFITH，则会触发DMA TX请求，配置好DMA后，DMA在收到该请求时，会按照设定从内存中将数据搬运到TX FIFO。
+
+.. only:: html
+
+   .. include:: dbi_register.rst
+
+.. raw:: latex
+
+   \input{../../zh_CN/content/dbi}
