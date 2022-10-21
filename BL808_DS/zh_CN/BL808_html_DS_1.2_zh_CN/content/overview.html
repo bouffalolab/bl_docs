@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1. Overview &mdash; BL808 Datasheet  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2. Functional Description" href="Functional.html" />
+    <link rel="prev" title="Features" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL808 Datasheet
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Functional.html">2. Functional Description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Pindefinition.html">3. Pin Definition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="RFCharacteristic.html">4. RF Characteristsic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AudioCharacteristic.html">5. Audio characteristic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PowerConsumption.html">6. Power Consumption</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Electricalcharacteristics.html">7. Electrical Specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ProductUse.html">8. Product use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Referencedesign.html">9. Reference Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PackagingQFN88.html">10. Package Information(QFN88)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TopMarkingDefinition.html">11. Top Marking Definition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OrderingInformation.html">12. Ordering Information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">13. Revision history</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL808 Datasheet</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">1. </span>Overview</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="overview">
+<h1><span class="section-number">1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h1>
+<p>BL808 is a highly integrated AIoT chipset with
+Wi-Fi/BT/BLE/Zigbee,
+Multi-Core CPUs, Audio Codec
+, Video Codec and AI HW accelerator
+for high-performance &amp; low-power application.</p>
+<p>BL808 mainly includes two subsystems, wireless and multimedia.</p>
+<p>The wireless subsystem includes a RISC-V 32-bit high-performance CPU, integrated Wi-Fi /BT/Zigbee wireless subsystem, which can realize a variety of wireless connections and data transmission, and provide a variety of connection and transmission experiences.</p>
+<p>The multimedia subsystem includes a RISC-V 64-bit ultra-high-performance CPU and integrates video processing modules such as
+DVP/CSI/
+H264/NPU,
+which can be widely used in various AI fields such as video surveillance/smart speakers.</p>
+<p>The components of the multimedia subsystem are as follows:</p>
+<ul class="simple">
+<li><p>NPU HW NN co-processor (BLAI-100) generally used for AI applications</p></li>
+<li><p>Camera interface</p></li>
+<li><p>Audio Codec</p></li>
+<li><p>Video Codec</p></li>
+<li><p>Sensor</p></li>
+<li><p>Display interfaces</p></li>
+</ul>
+<p>Power Management Unit provides low-power modes. Moreover, variety of security features are supported.</p>
+<p>Peripheral interfaces include USB2.0, Ethernet, SD/MMC, SPI, UART, I2C, I2S, PWM, GPDAC, GPADC, ACOMP, PIR, Touch, IR remote, Display and GPIOs.</p>
+<p>Flexible GPIO configurations are supported. BL808 has total 36 or 40 GPIOs.</p>
+<figure class="align-center" id="id1">
+<img alt="../_images/Functionalblockdiagram.svg" src="../_images/Functionalblockdiagram.svg" /><figcaption>
+<p><span class="caption-number">Fig. 1.1 </span><span class="caption-text">Block Diagram</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="Features" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Functional.html" class="btn btn-neutral float-right" title="2. Functional Description" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

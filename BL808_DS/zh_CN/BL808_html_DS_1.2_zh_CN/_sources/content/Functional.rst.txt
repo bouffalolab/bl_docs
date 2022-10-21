@@ -40,6 +40,9 @@ Peripherals supported by DMA include UART, I2C, SPI, ADC, IR, GPIO, Audio, I2S, 
 Memory Map
 ============
 .. table:: Memory Map 
+    :widths: 17, 15, 17, 17, 17, 17
+    :width: 100%
+    :align: center
 
     +-----------------+-------+-------------+----------------+-------------+----------------+
     |  Module         | Size  |  Base Address(M0)            |  Base Address(D0)            |
@@ -57,7 +60,10 @@ Memory Map
 
 OCRAM and WRAM can be accessed either through AHB bus or through AXI. When the CPU accesses OCRAM using the address of 0x62020000, it will go through the internal cache and transfer AXI to AHB to achieve access to OCRAM. When the CPU uses the 0x22020000 address to access OCRAM, it does not go through the internal cache and directly accesses OCRAM through the AHB bus.
 
-.. table:: Memory Map 
+.. table:: Memory Map has_header
+    :widths: 11, 13,13,8,55
+    :width: 100%
+    :align: center
 
     +---------------+---------------+-----------------------+-------+------------------------------------------------------------------------------------------------------------------------+
     |  Module       |  Target       |  Base Address         | Size  |         Description                                                                                                    |
@@ -134,6 +140,9 @@ OCRAM and WRAM can be accessed either through AHB bus or through AXI. When the C
     +---------------+---------------+-----------------------+-------+------------------------------------------------------------------------------------------------------------------------+
 
 .. table:: MRAM/VRAM address space
+    :widths: 7, 13, 10, 10, 10, 10, 10, 10, 10, 10
+    :width: 100%
+    :align: center
 
     +---------------+------------------------------+---------------+----------------+-------------+-------------+-------------+-------------+-------------+-------------+
     |  MRAM/VRAM                                   |  Configure(reg_h2pf_sram_rel，reg_vram_sram_sel，reg_ispl_sram_rel，reg_blai_sram_rel)                             |
@@ -174,7 +183,11 @@ Boot
 =========
 BL808 supports multiple boot options: UART, USB, and Flash.
 
+
 .. table:: Boot mode 
+    :widths: 13, 8,79
+    :width: 100%
+    :align: center
 
     +---------------+---------------+--------------------------------------------------------------------------------------------------------+
     |  Boot pin     |  Level        |   Description                                                                                          |
@@ -183,7 +196,6 @@ BL808 supports multiple boot options: UART, USB, and Flash.
     +               +---------------+--------------------------------------------------------------------------------------------------------+
     |               | 0             |  Launch application image from Flash                                                                   |
     +---------------+---------------+--------------------------------------------------------------------------------------------------------+
-
 
 Power
 =============
@@ -307,6 +319,9 @@ The EMAC timing diagram is shown below:
    EMAC Timing Diagram
 
 .. table:: Timing conditions for using RX Clock
+    :width: 100%
+    :widths: 10, 20, 10, 10, 10, 10, 30
+    :align: center
 
     +-----------------+--------------------+--------+--------+---------------------+--------+----------------------------------+
     | Set the corresponding bit of register eth_cfg0:cfg_inv_eth_rx_clk = 1,cfg_inv_eth_tx_clk = 0,cfg_sel_eth_ref_clk_o = 0   |
@@ -323,6 +338,9 @@ The EMAC timing diagram is shown below:
     +-----------------+--------------------+--------+--------+---------------------+--------+----------------------------------+
 
 .. table:: Timing conditions without using RX Clock
+    :width: 100%
+    :widths: 10, 20, 10, 10, 10, 10, 30
+    :align: center
 
     +-----------------+--------------------+--------+--------+---------------------+--------+----------------------------------+
     | Set the corresponding bit of register eth_cfg0:cfg_inv_eth_rx_clk = 0,cfg_inv_eth_tx_clk = 0,cfg_sel_eth_ref_clk_o = 0   |
