@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>27. ISO11898 &mdash; BL808 参考手册  文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="28. MJPEG" href="MJPEG.html" />
+    <link rel="prev" title="26. SDH" href="SDH.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL808 参考手册
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. 系统和存储器概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. 复位和时钟</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPIO.html">4. GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">5. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">6. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">7. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA2D.html">8. DMA2D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lz4d.html">9. LZ4D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBI.html">10. DBI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DPI.html">11. DPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DSI.html">12. DSI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cam.html">13. CAM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">14. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">15. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">16. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">17. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">18. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">19. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2s.html">20. I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PDM.html">21. PDM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AUDIO.html">22. AUDIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PSRAM.html">23. PSRAM Contorller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Emac.html">24. Emac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USB.html">25. USB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SDH.html">26. SDH</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">27. ISO11898</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">27.1. 简介</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">27.2. 主要特征</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">27.3. 功能介绍</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#txb">27.3.1. 发送缓冲区（TXB）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rxb-rxfifo">27.3.2. 接收缓冲区（RXB， RXFIFO）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#acf">27.3.3. 接收过滤器 （ACF）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bsp">27.3.4. 位流处理器 （BSP）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#btl">27.3.5. 位时序逻辑 （BTL）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#eml">27.3.6. 错误管理逻辑 （EML）</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">27.4. 功能描述</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id5">27.4.1. 模式</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id6">27.4.1.1. 自测模式</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">27.4.1.2. 静默模式</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">27.4.1.3. 复位模式</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">27.4.2. 发送处理</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id10">27.4.2.1. 发送流程</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id11">27.4.2.2. 终止发送</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id12">27.4.2.3. 自发自收</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id13">27.4.2.4. 注意点</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id14">27.4.3. 接收处理</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id15">27.4.3.1. 接收流程</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id16">27.4.3.2. 消息数量</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id17">27.4.3.3. 接收缓冲区</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id18">27.4.4. 标识符过滤</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id19">27.4.4.1. 单滤波器配置</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id20">27.4.4.2. 双滤波器配置</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id21">27.4.5. 出错管理</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id22">27.4.5.1. 仲裁失败</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id23">27.4.5.2. 错误捕获</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rxerr">27.4.5.3. 接收错误计数器（RXERR）</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#txerr">27.4.5.4. 发送错误计数器（TXERR）</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id24">27.4.5.5. 错误限值设定</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id25">27.4.6. 位时序</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#brp">27.4.6.1. 波特率分频器（BRP）</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sjw">27.4.6.2. 同步跳转宽度（SJW）</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sam">27.4.6.3. 采样（SAM）</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tseg">27.4.6.4. 时间段（TSEG）</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="MJPEG.html">28. MJPEG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="JDEC.html">29. JDEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="VENC.html">30. VENC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NPUtoolchain.html">31. NPU toolchain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NPU.html">32. NPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IPC.html">33. IPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LowPower.html">34. LowPower</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SEC_ENG.html">35. SEC ENG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">36. 版本信息</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL808 参考手册</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">27. </span>ISO11898</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="iso11898">
+<h1><span class="section-number">27. </span>ISO11898<a class="headerlink" href="#iso11898" title="永久链接至标题"></a></h1>
+<section id="id1">
+<h2><span class="section-number">27.1. </span>简介<a class="headerlink" href="#id1" title="永久链接至标题"></a></h2>
+<p>ISO11898是一种国际标准，是目前工业和汽车领域中应用最广泛的现场总线之一。</p>
+</section>
+<section id="id2">
+<h2><span class="section-number">27.2. </span>主要特征<a class="headerlink" href="#id2" title="永久链接至标题"></a></h2>
+<ul class="simple">
+<li><p>支持自定义位速率</p></li>
+<li><p>支持ISO11898协议2.0A和2.0B</p></li>
+<li><p>支持自测模式（自发自收）</p></li>
+<li><p>支持帧过滤</p></li>
+<li><p>支持静默模式（不应答，没有有效的错误标志）</p></li>
+<li><p>支持不重发的单次传输</p></li>
+<li><p>支持查询仲裁失败的bit位</p></li>
+<li><p>任何总线错误都可以触发中断</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2><span class="section-number">27.3. </span>功能介绍<a class="headerlink" href="#id3" title="永久链接至标题"></a></h2>
+<section id="txb">
+<h3><span class="section-number">27.3.1. </span>发送缓冲区（TXB）<a class="headerlink" href="#txb" title="永久链接至标题"></a></h3>
+<p>发送缓冲区是CPU和位流处理器之间的接口，能够存储完整的消息，以便通过ISO11898网络传输。缓冲区长度为13字节，由CPU写入，由位流处理器读取。</p>
+</section>
+<section id="rxb-rxfifo">
+<h3><span class="section-number">27.3.2. </span>接收缓冲区（RXB， RXFIFO）<a class="headerlink" href="#rxb-rxfifo" title="永久链接至标题"></a></h3>
+<p>接收缓冲区是接收滤波器和CPU之间的接口，用于储存从ISO11898总线接收并且经过滤波的消息。接收缓冲区（RXB）表示接收FIFO（RXFIFO）中可由CPU访问的13字节窗口，其总长度为64字节。
+接收FIFO使得CPU可以在处理一帧消息的同时接收其他消息。</p>
+</section>
+<section id="acf">
+<h3><span class="section-number">27.3.3. </span>接收过滤器 （ACF）<a class="headerlink" href="#acf" title="永久链接至标题"></a></h3>
+<p>接收过滤器将收到的标识符和接收过滤寄存器中的内容进行比较，并决定是否应该接受此消息。如果接受此消息，则将完整的消息储存在RXFIFO中。</p>
+</section>
+<section id="bsp">
+<h3><span class="section-number">27.3.4. </span>位流处理器 （BSP）<a class="headerlink" href="#bsp" title="永久链接至标题"></a></h3>
+<p>位流处理器是一个序列发生器，用于处理发送缓冲区、接收缓冲区和ISO11898总线之间的数据。它还在ISO11898总线上执行错误侦测、仲裁、位填充和错误处理。</p>
+</section>
+<section id="btl">
+<h3><span class="section-number">27.3.5. </span>位时序逻辑 （BTL）<a class="headerlink" href="#btl" title="永久链接至标题"></a></h3>
+<p>位时序逻辑监控串行ISO11898总线并处理与总线相关的位时序。它在消息开始时总线由&quot;隐形到显性&quot;的转换时进行位同步（硬同步），也在后续的消息接收期间再次进行位同步（软同步）。BTL还提供可编程的时间段用来补偿传播延时与相移（例如由于振荡器漂移），并可定义采样点和在一个位时间内的采样次数。</p>
+</section>
+<section id="eml">
+<h3><span class="section-number">27.3.6. </span>错误管理逻辑 （EML）<a class="headerlink" href="#eml" title="永久链接至标题"></a></h3>
+<p>错误管理逻辑负责传输层模块的错误界定。它从BSP接收错误声明然后将错误的统计信息通知给BSP和IML（中断管理逻辑）</p>
+</section>
+</section>
+<section id="id4">
+<h2><span class="section-number">27.4. </span>功能描述<a class="headerlink" href="#id4" title="永久链接至标题"></a></h2>
+<section id="id5">
+<h3><span class="section-number">27.4.1. </span>模式<a class="headerlink" href="#id5" title="永久链接至标题"></a></h3>
+<section id="id6">
+<h4><span class="section-number">27.4.1.1. </span>自测模式<a class="headerlink" href="#id6" title="永久链接至标题"></a></h4>
+<p>通过对MOD寄存器的STM位置'1'来选择自测模式。在这种模式下，可以使用接收请求命令在总线上无其他活跃节点的情况下进行全节点测试，并且即使没有收到应答ISO11898控制器也将执行成功的传输。</p>
+</section>
+<section id="id7">
+<h4><span class="section-number">27.4.1.2. </span>静默模式<a class="headerlink" href="#id7" title="永久链接至标题"></a></h4>
+<p>通过对MOD寄存器的LOM位置'1'来选择进入静默模式。在这种模式下，ISO11898控制器即使成功收到消息也不会对ISO11898总线做出应答，并且错误计数器也会停留在当前值。这种操作模式会强制ISO11898控制器成为被动错误，此时也不可以传输消息。在软件驱动的位速率检测和热插拔等场景中可以使用这种静默模式，其他所有功能都可以和正常模式一样使用。</p>
+</section>
+<section id="id8">
+<h4><span class="section-number">27.4.1.3. </span>复位模式<a class="headerlink" href="#id8" title="永久链接至标题"></a></h4>
+<p>MOD寄存器中的RM位一旦由'0'变成'1'，将导致当前的发送和接收消息都被终止并进入复位模式。当RM位从'1'到'0'转变时，ISO11898控制器将返回到操作模式。</p>
+<p>在不同模式下的不同操作含义如下表所示。</p>
+<table class="colwidths-given docutils align-center" id="id26" style="width: 80%">
+<caption><span class="caption-number">表 27.1 </span><span class="caption-text">不同模式下各寄存器含义说明</span><a class="headerlink" href="#id26" title="永久链接至表格"></a></caption>
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head" rowspan="2"><p>ADDRESS</p>
+<p>OFFSET</p>
+</th>
+<th class="head" colspan="4"><p>OPERATING MODE</p></th>
+<th class="head" colspan="2"><p>RESET MODE</p></th>
+</tr>
+<tr class="row-even"><th class="head" colspan="2"><p>READ</p></th>
+<th class="head" colspan="2"><p>WRITE</p></th>
+<th class="head"><p>READ</p></th>
+<th class="head"><p>WRITE</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-odd"><td><p>0x00</p></td>
+<td colspan="2"><p>mode</p></td>
+<td colspan="2"><p>mode</p></td>
+<td><p>mode</p></td>
+<td><p>mode</p></td>
+</tr>
+<tr class="row-even"><td><p>0x04</p></td>
+<td colspan="2"><p>(00H)</p></td>
+<td colspan="2"><p>command</p></td>
+<td><p>(00H)</p></td>
+<td><p>command</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x08</p></td>
+<td colspan="2"><p>status</p></td>
+<td colspan="2"><p>reserved</p></td>
+<td><p>status</p></td>
+<td><p>reserved</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0C</p></td>
+<td colspan="2"><p>interrupt</p></td>
+<td colspan="2"><p>reserved</p></td>
+<td><p>interrupt</p></td>
+<td><p>reserved</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x10</p></td>
+<td colspan="2"><p>interrupt enable</p></td>
+<td colspan="2"><p>interrupt enable</p></td>
+<td><p>interrupt
+enable</p></td>
+<td><p>interrupt
+enable</p></td>
+</tr>
+<tr class="row-even"><td><p>0x14</p></td>
+<td colspan="2"><p>reserved</p></td>
+<td colspan="2"><p>reserved</p></td>
+<td><p>reserved</p></td>
+<td><p>reserved</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x18</p></td>
+<td colspan="2"><p>bus timing 0</p></td>
+<td colspan="2"><p>reserved</p></td>
+<td><p>bus timing 0</p></td>
+<td><p>bus timing 0</p></td>
+</tr>
+<tr class="row-even"><td><p>0x1C</p></td>
+<td colspan="2"><p>bus timing 1</p></td>
+<td colspan="2"><p>reserved</p></td>
+<td><p>bus timing 1</p></td>
+<td><p>bus timing 1</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x20</p></td>
+<td colspan="2"><p>reserved</p></td>
+<td colspan="2"><p>reserved</p></td>
+<td><p>reserved</p></td>
+<td><p>reserved</p></td>
+</tr>
+<tr class="row-even"><td><p>0x24</p></td>
+<td colspan="2"><p>reserved</p></td>
+<td colspan="2"><p>reserved</p></td>
+<td><p>reserved</p></td>
+<td><p>reserved</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x28</p></td>
+<td colspan="2"><p>reserved</p></td>
+<td colspan="2"><p>reserved</p></td>
+<td><p>reserved</p></td>
+<td><p>reserved</p></td>
+</tr>
+<tr class="row-even"><td><p>0x2C</p></td>
+<td colspan="2"><p>arbitration lost capture</p></td>
+<td colspan="2"><p>reserved</p></td>
+<td><p>arbitration
+lost capture</p></td>
+<td><p>reserved</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x30</p></td>
+<td colspan="2"><p>error code capture</p></td>
+<td colspan="2"><p>reserved</p></td>
+<td><p>error code
+capture</p></td>
+<td><p>reserved</p></td>
+</tr>
+<tr class="row-even"><td><p>0x34</p></td>
+<td colspan="2"><p>error warning limit</p></td>
+<td colspan="2"><p>reserved</p></td>
+<td><p>error warning
+limit</p></td>
+<td><p>error warning
+limit</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x38</p></td>
+<td colspan="2"><p>RX error counter</p></td>
+<td colspan="2"><p>reserved</p></td>
+<td><p>RX error
+counter</p></td>
+<td><p>RX error
+counter</p></td>
+</tr>
+<tr class="row-even"><td><p>0x3C</p></td>
+<td colspan="2"><p>TX error counter</p></td>
+<td colspan="2"><p>reserved</p></td>
+<td><p>TX error
+counter</p></td>
+<td><p>TX error
+counter</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x40</p></td>
+<td><p>SFF RX frame
+information</p></td>
+<td><p>EFF RX frame
+information</p></td>
+<td><p>SFF TX frame
+information</p></td>
+<td><p>EFF TX frame
+information</p></td>
+<td><p>acceptance
+code 0</p></td>
+<td><p>acceptance
+code 0</p></td>
+</tr>
+<tr class="row-even"><td><p>0x44</p></td>
+<td><p>RX identifier 1</p></td>
+<td><p>RX identifier 1</p></td>
+<td><p>TX identifier 1</p></td>
+<td><p>TX identifier 1</p></td>
+<td><p>acceptance
+code 1</p></td>
+<td><p>acceptance
+code 1</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x48</p></td>
+<td><p>RX identifier 2</p></td>
+<td><p>RX identifier 2</p></td>
+<td><p>TX identifier 2</p></td>
+<td><p>TX identifier 2</p></td>
+<td><p>acceptance
+code 2</p></td>
+<td><p>acceptance
+code 2</p></td>
+</tr>
+<tr class="row-even"><td><p>0x4C</p></td>
+<td><p>RX data 1</p></td>
+<td><p>RX identifier 3</p></td>
+<td><p>TX data 1</p></td>
+<td><p>TX identifier 3</p></td>
+<td><p>acceptance
+code 3</p></td>
+<td><p>acceptance
+code 3</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x50</p></td>
+<td><p>RX data 2</p></td>
+<td><p>RX identifier 4</p></td>
+<td><p>TX data 2</p></td>
+<td><p>TX identifier 4</p></td>
+<td><p>acceptance
+mask 0</p></td>
+<td><p>acceptance
+mask 0</p></td>
+</tr>
+<tr class="row-even"><td><p>0x54</p></td>
+<td><p>RX data 3</p></td>
+<td><p>RX data 1</p></td>
+<td><p>TX data 3</p></td>
+<td><p>TX data 1</p></td>
+<td><p>acceptance
+mask 1</p></td>
+<td><p>acceptance
+mask 1</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x58</p></td>
+<td><p>RX data 4</p></td>
+<td><p>RX data 2</p></td>
+<td><p>TX data 4</p></td>
+<td><p>TX data 2</p></td>
+<td><p>acceptance
+mask 2</p></td>
+<td><p>acceptance
+mask 2</p></td>
+</tr>
+<tr class="row-even"><td><p>0x5C</p></td>
+<td><p>RX data 5</p></td>
+<td><p>RX data 3</p></td>
+<td><p>TX data 5</p></td>
+<td><p>TX data 3</p></td>
+<td><p>acceptance
+mask 3</p></td>
+<td><p>acceptance
+mask 3</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x60</p></td>
+<td><p>RX data 6</p></td>
+<td><p>RX data 4</p></td>
+<td><p>TX data 6</p></td>
+<td><p>TX data 4</p></td>
+<td><p>reserved</p></td>
+<td><p>reserved</p></td>
+</tr>
+<tr class="row-even"><td><p>0x64</p></td>
+<td><p>RX data 7</p></td>
+<td><p>RX data 5</p></td>
+<td><p>TX data 7</p></td>
+<td><p>TX data 5</p></td>
+<td><p>reserved</p></td>
+<td><p>reserved</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x68</p></td>
+<td><p>RX data 8</p></td>
+<td><p>RX data 6</p></td>
+<td><p>TX data 8</p></td>
+<td><p>TX data 6</p></td>
+<td><p>reserved</p></td>
+<td><p>reserved</p></td>
+</tr>
+<tr class="row-even"><td><p>0x6C</p></td>
+<td><p>(FIFO RAM)</p></td>
+<td><p>RX data 7</p></td>
+<td><p>reserved</p></td>
+<td><p>TX data 7</p></td>
+<td><p>reserved</p></td>
+<td><p>reserved</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x70</p></td>
+<td><p>(FIFO RAM)</p></td>
+<td><p>RX data 8</p></td>
+<td><p>reserved</p></td>
+<td><p>TX data 8</p></td>
+<td><p>reserved</p></td>
+<td><p>reserved</p></td>
+</tr>
+<tr class="row-even"><td><p>0x74</p></td>
+<td colspan="2"><p>RX message counter</p></td>
+<td colspan="2"><p>reserved</p></td>
+<td><p>RX message
+counter</p></td>
+<td><p>reserved</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x78</p></td>
+<td colspan="2"><p>RX buffer start address</p></td>
+<td colspan="2"><p>reserved</p></td>
+<td><p>RX buffer
+start address</p></td>
+<td><p>RX buffer
+start address</p></td>
+</tr>
+<tr class="row-even"><td><p>0x7C</p></td>
+<td colspan="2"><p>clock divider</p></td>
+<td colspan="2"><p>clock divider</p></td>
+<td><p>clock divider</p></td>
+<td><p>clock divider</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="id9">
+<h3><span class="section-number">27.4.2. </span>发送处理<a class="headerlink" href="#id9" title="永久链接至标题"></a></h3>
+<section id="id10">
+<h4><span class="section-number">27.4.2.1. </span>发送流程<a class="headerlink" href="#id10" title="永久链接至标题"></a></h4>
+<ol class="arabic simple">
+<li><p>检查SR寄存器的TBS位来确保发送缓冲区是空的。</p></li>
+<li><p>配置帧信息、ID号和数据。</p></li>
+<li><p>通过置位CMR寄存器中的TR位来请求发送。</p></li>
+</ol>
+</section>
+<section id="id11">
+<h4><span class="section-number">27.4.2.2. </span>终止发送<a class="headerlink" href="#id11" title="永久链接至标题"></a></h4>
+<p>当CPU要求暂停先前的发送时，可以使用终止发送的功能，例如需要先发送更紧急的消息。已经在发送过程中的消息不受此功能影响不会停止。为了查看之前的消息是否发送成功，应该检查SR寄存器中的发送完成标志位（TCS）。应用软件可以通过对CMR寄存器中的AT位置'1'来使用该功能，这应该在SR寄存器中的TBS位为'1'或者发送中断产生后执行。</p>
+<p>有一点需要注意的是，即使消息被终止，也会产生发送中断，因为发送缓冲区的状态位已经指示为“已释放”状态。</p>
+</section>
+<section id="id12">
+<h4><span class="section-number">27.4.2.3. </span>自发自收<a class="headerlink" href="#id12" title="永久链接至标题"></a></h4>
+<p>应用软件可以通过置位CMR寄存器中的SRR位实现自发自收，此时发送和接收是同步进行的。其他操作与普通发送流程一样。</p>
+</section>
+<section id="id13">
+<h4><span class="section-number">27.4.2.4. </span>注意点<a class="headerlink" href="#id13" title="永久链接至标题"></a></h4>
+<ol class="arabic simple">
+<li><p>如果同时置位CMA寄存器中的TR和AT位，消息将会只发送一次。此时即使出现错误事件或者仲裁失败也不会再次发送。</p></li>
+<li><p>如果同时置位CMA寄存器中的SRR和AT位，消息将使用自发自收的方式只发送一次。此时即使出现错误事件或者仲裁失败也不会再次发送。</p></li>
+<li><p>如果同时置位CMA寄存器中的SRR、TR和AT位，消息将以同时置位TR和AT位的方式发送。</p></li>
+<li><p>一旦状态寄存器中的发送状态位被置位，内部的发送请求位就被自动清零。</p></li>
+<li><p>如果CMA寄存器中的TR和SRR被同时置位，SRR位将被忽略。</p></li>
+</ol>
+</section>
+</section>
+<section id="id14">
+<h3><span class="section-number">27.4.3. </span>接收处理<a class="headerlink" href="#id14" title="永久链接至标题"></a></h3>
+<section id="id15">
+<h4><span class="section-number">27.4.3.1. </span>接收流程<a class="headerlink" href="#id15" title="永久链接至标题"></a></h4>
+<p>接收到的消息被储存在64字节深度的内部FIFO中，FIFO完全由硬件管理，从而节省了CPU的处理负荷，简化了软件并保证了数据的一致性。应用程序可以通过FIFO的输出接口来读取收到的消息。当SR寄存器中的RBS置位时，RXFIFO中则有一帧或多帧消息可读，软件获取消息后，将CMR寄存器中的RRB置位可释放当前消息占用的RXFIFO。</p>
+</section>
+<section id="id16">
+<h4><span class="section-number">27.4.3.2. </span>消息数量<a class="headerlink" href="#id16" title="永久链接至标题"></a></h4>
+<p>RMC寄存器表示RXFIFO中的可读消息的数量，该值随每一次的接收事件递增，并随每一次的释放缓冲区递减。复位后该值是0。</p>
+</section>
+<section id="id17">
+<h4><span class="section-number">27.4.3.3. </span>接收缓冲区<a class="headerlink" href="#id17" title="永久链接至标题"></a></h4>
+<p>RBSA寄存器表示当前内部RAM中储存的接收到的消息的第一个字节的地址，其映射到接收缓冲区窗口。借助该信息可以解读内部RAM中的内容。这部分的内部RAM区域可以由CPU进行读取和写入（仅在复位模式下可写入）。</p>
+<p><strong>示例</strong>：如果RBSA的值为18H，则接收缓冲区窗口（偏移地址为10H到12H）的当前可读消息也被存储在RAM地址从18H开始的位置。由于RAM地址是直接映射到ISO11898偏移地址20H（对应RAM地址0H）开始的位置，所以消息也可以从ISO11898偏移地址38H和后面的字节中读出。（ISO11898地址 = RBSA + 20H = 18H + 20H = 38H）。如果消息地址超过RAM地址3FH则它将从RAM地址0继续。</p>
+<p>当FIFO中至少还有一条消息时，应该发出释放接收缓冲区的命令，此时RBSA就被更新到下一条消息的开始位置。</p>
+<p>在硬件复位时，RBSA寄存器的值被初始化为‘00H’，在软件复位（设置为复位模式）时该寄存器值不会变化，但FIFO被清除，这意味着RAM内容不会改变，但是下一个接收（或发送）的消息将覆盖接收缓冲区窗口中的可见消息。</p>
+</section>
+</section>
+<section id="id18">
+<h3><span class="section-number">27.4.4. </span>标识符过滤<a class="headerlink" href="#id18" title="永久链接至标题"></a></h3>
+<p>在接收过滤器的协助下，只有当接收到的消息的标识符位与接收过滤器寄存器中的预定义位相同时，ISO11898 控制器才能允许将接收到的消息传递到 RXFIFO。接收过滤器由接收码寄存器（ACRn）和接收屏蔽寄存器（AMRn）组成。可被接收的消息中的匹配位的值由接收码寄存器设定，哪些位可以屏蔽由接收屏蔽寄存器设定。</p>
+<p>有两种不同的滤波模式可以选择（MOD寄存器中的AFM位设定）:</p>
+<ul class="simple">
+<li><p>单滤波器模式 (AFM = 1).</p></li>
+<li><p>双滤波器模式 (AFM = 0).</p></li>
+</ul>
+<section id="id19">
+<h4><span class="section-number">27.4.4.1. </span>单滤波器配置<a class="headerlink" href="#id19" title="永久链接至标题"></a></h4>
+<p>在这种配置中，可以定义一个长达4字节的滤波器。过滤字节和消息字节之间的位对应关系取决于当前接收的帧格式。</p>
+<p><strong>标准帧</strong>：如果接收到标准帧格式的消息，包括RTR位和前两个数据字节在内的完整标识符用于接受过滤。如果由于设置了RTR位而没有数据字节存在，或者由于设定了相应的数据长度而没有数据字节或只有一个数据字节，也可以接收到消息。</p>
+<p>所有滤波位之间是逻辑与的关系，必须所有位都通过滤波器，一条消息才能被接收到。请注意AMR1和ACR1的低4位没有使用，为了与将来产品兼容这几位应该被设置为屏蔽位，即AMR1的3~0位都为1。</p>
+<figure class="align-center" id="id27">
+<img alt="../_images/ISO11898FilterSingleStandard.svg" src="../_images/ISO11898FilterSingleStandard.svg" /><figcaption>
+<p><span class="caption-number">图 27.1 </span><span class="caption-text">Single filter configuration, receiving standard frame messages</span><a class="headerlink" href="#id27" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p><strong>扩展帧</strong>:如果接收到扩展帧格式的消息，包括RTR位在内的完整标识符用于接受过滤。</p>
+<p>所有滤波位之间是逻辑与的关系，必须所有位都通过滤波器，一条消息才能被接收到。请注意AMR3和ACR3的低2位没有使用，为了与将来产品兼容这几位应该被设置为屏蔽位，即AMR3的1~0位都为1。</p>
+<figure class="align-center" id="id28">
+<img alt="../_images/ISO11898FilterSingleExtended.svg" src="../_images/ISO11898FilterSingleExtended.svg" /><figcaption>
+<p><span class="caption-number">图 27.2 </span><span class="caption-text">Single filter configuration, receiving extended frame messages</span><a class="headerlink" href="#id28" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id20">
+<h4><span class="section-number">27.4.4.2. </span>双滤波器配置<a class="headerlink" href="#id20" title="永久链接至标题"></a></h4>
+<p>可以在这种配置中定义两个短滤波器，收到的消息会与这两个滤波器都进行比较，以决定是否将该消息复制到接收缓冲区。只要有一个滤波器接收该消息，则收到的消息就是有效的。过滤字节和消息字节之间的位对应关系取决于当前接收的帧格式。</p>
+<p><strong>标准帧</strong>：如果接收到标准帧格式的消息，则定义的这两个滤波器看起来有点不一样，第一个滤波器比较包括RTR和第一个数据字节在内的完整的标识符，第二个滤波器则只比较包括RTR位在内的标准标识符。</p>
+<p>为了成功接收消息，至少一个完整过滤器的所有单个位比较都表示接受。在RTR被置位或者数据长度为0的情况下是没有数据的。然而，如果直到RTR位之前的第一部分都表示接受，则消息也是可以通过滤波器1的。</p>
+<p>如果第一个滤波器不需要过滤数据字节，则AMR1和AMR3的低4位必须设置为逻辑1（无关紧要），然后这两个滤波器使用包括RTR在内的标准标识符一样地运行。</p>
+<figure class="align-center" id="id29">
+<img alt="../_images/ISO11898FilterDualStandard.svg" src="../_images/ISO11898FilterDualStandard.svg" /><figcaption>
+<p><span class="caption-number">图 27.3 </span><span class="caption-text">Dual filter configuration, receiving standard frame messages</span><a class="headerlink" href="#id29" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p><strong>扩展帧</strong>：如果接收到扩展帧格式的消息，则定义的这两个滤波器看起来是一样的。这两个滤波器都只比较扩展标识符的前两个字节。</p>
+<p>至少一个完整的滤波器的所有单个位比较都表明接受，消息才能被成功接收。</p>
+<figure class="align-center" id="id30">
+<img alt="../_images/ISO11898FilterDualExtended.svg" src="../_images/ISO11898FilterDualExtended.svg" /><figcaption>
+<p><span class="caption-number">图 27.4 </span><span class="caption-text">Dual filter configuration, receiving extended frame messages</span><a class="headerlink" href="#id30" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="id21">
+<h3><span class="section-number">27.4.5. </span>出错管理<a class="headerlink" href="#id21" title="永久链接至标题"></a></h3>
+<section id="id22">
+<h4><span class="section-number">27.4.5.1. </span>仲裁失败<a class="headerlink" href="#id22" title="永久链接至标题"></a></h4>
+<p>仲裁失败捕获寄存器（ALC）包含仲裁失败的位置，该寄存器只能被CPU读取不能写入。如果使能了仲裁失败的中断，则一旦仲裁失败将产生中断。同时，位流处理器中的当前位的位置将被捕获到ALC中。在用户软件读取ALC的内容之前，该寄存器的值将一直固定不变。读取该寄存器值后，捕获机制就会再次激活。在中断寄存器被读出的时候，相应的中断标志也是被清除的，在中断失败寄存器被读出之前是不会再次产生仲裁失败中断的。</p>
+<figure class="align-center" id="id31">
+<img alt="../_images/ISO11898ArbitrationLostBitNumberInterpretation.svg" src="../_images/ISO11898ArbitrationLostBitNumberInterpretation.svg" /><figcaption>
+<p><span class="caption-number">图 27.5 </span><span class="caption-text">Arbitration lost bit number interpretation</span><a class="headerlink" href="#id31" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id32">
+<img alt="../_images/ISO11898ExampleOfArbitrationLost.svg" src="../_images/ISO11898ExampleOfArbitrationLost.svg" /><figcaption>
+<p><span class="caption-number">图 27.6 </span><span class="caption-text">Example of arbitration lost bit number interpretation; result: ALC = 08</span><a class="headerlink" href="#id32" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<table class="colwidths-given docutils align-center" id="id33" style="width: 80%">
+<caption><span class="caption-number">表 27.2 </span><span class="caption-text">仲裁失败捕获的位置</span><a class="headerlink" href="#id33" title="永久链接至表格"></a></caption>
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 35%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head" colspan="5"><p>BITS</p></th>
+<th class="head" rowspan="2"><p>DECIMAL</p>
+<p>VALUE</p>
+</th>
+<th class="head" rowspan="2"><p>FUNCTION</p></th>
+</tr>
+<tr class="row-even"><th class="head"><p>ALC.4</p></th>
+<th class="head"><p>ALC.3</p></th>
+<th class="head"><p>ALC.2</p></th>
+<th class="head"><p>ALC.1</p></th>
+<th class="head"><p>ALC.0</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>00</p></td>
+<td><p>arbitration lost in bit 1 of identifier</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>01</p></td>
+<td><p>arbitration lost in bit 2 of identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>02</p></td>
+<td><p>arbitration lost in bit 3 of identifier</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>03</p></td>
+<td><p>arbitration lost in bit 4 of identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>04</p></td>
+<td><p>arbitration lost in bit 5 of identifier</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>05</p></td>
+<td><p>arbitration lost in bit 6 of identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>06</p></td>
+<td><p>arbitration lost in bit 7 of identifier</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>07</p></td>
+<td><p>arbitration lost in bit 8 of identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>08</p></td>
+<td><p>arbitration lost in bit 9 of identifier</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>09</p></td>
+<td><p>arbitration lost in bit 10 of identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>10</p></td>
+<td><p>arbitration lost in bit 11 of identifier</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>11</p></td>
+<td><p>arbitration lost in bit SRTR</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>12</p></td>
+<td><p>arbitration lost in bit IDE</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>13</p></td>
+<td><p>arbitration lost in bit 12 of identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>14</p></td>
+<td><p>arbitration lost in bit 13 of identifier</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>15</p></td>
+<td><p>arbitration lost in bit 14 of identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>16</p></td>
+<td><p>arbitration lost in bit 15 of identifier</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>17</p></td>
+<td><p>arbitration lost in bit 16 of identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>18</p></td>
+<td><p>arbitration lost in bit 17 of identifier</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>19</p></td>
+<td><p>arbitration lost in bit 18 of identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>20</p></td>
+<td><p>arbitration lost in bit 19 of identifier</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>21</p></td>
+<td><p>arbitration lost in bit 20 of identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>22</p></td>
+<td><p>arbitration lost in bit 21 of identifier</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>23</p></td>
+<td><p>arbitration lost in bit 22 of identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>24</p></td>
+<td><p>arbitration lost in bit 23 of identifier</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>25</p></td>
+<td><p>arbitration lost in bit 24 of identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>26</p></td>
+<td><p>arbitration lost in bit 25 of identifier</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>27</p></td>
+<td><p>arbitration lost in bit 26 of identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>28</p></td>
+<td><p>arbitration lost in bit 27 of identifier</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>29</p></td>
+<td><p>arbitration lost in bit 28 of identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>30</p></td>
+<td><p>arbitration lost in bit 29 of identifier</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>31</p></td>
+<td><p>arbitration lost in bit RTR</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id23">
+<h4><span class="section-number">27.4.5.2. </span>错误捕获<a class="headerlink" href="#id23" title="永久链接至标题"></a></h4>
+<p>错误捕获寄存器（ECC）包含总线错误的类型和位置，该寄存器只能被CPU读取不能写入。如果使能了总线错误中断，则一旦总线发生错误将产生总线错误中断。同时，位流处理器中的当前位的位置将被捕获到ECC中。在用户软件读取ECC的内容之前，该寄存器的值将一直固定不变。读取该寄存器值后，捕获机制就会再次激活。对中断寄存器中相应位的读取操作会清除该位，在读取捕获寄存器之前，不会再次产生总线错误中断。</p>
+<p>错误捕获寄存器中值代表的错误类型和种类如下所示。</p>
+<table class="colwidths-given docutils align-center" id="id34" style="width: 80%">
+<caption><span class="caption-number">表 27.3 </span><span class="caption-text">错误捕获的类型</span><a class="headerlink" href="#id34" title="永久链接至表格"></a></caption>
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 30%" />
+<col style="width: 40%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>BIT ECC.7</p></th>
+<th class="head"><p>BIT ECC.6</p></th>
+<th class="head"><p>FUNCTION</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>bit error</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>form error</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>stuff error</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>other type of error</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-center" id="id35" style="width: 80%">
+<caption><span class="caption-number">表 27.4 </span><span class="caption-text">错误捕获的位置</span><a class="headerlink" href="#id35" title="永久链接至表格"></a></caption>
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>BIT ECC.4</p></th>
+<th class="head"><p>BIT ECC.3</p></th>
+<th class="head"><p>BIT ECC.2</p></th>
+<th class="head"><p>BIT ECC.1</p></th>
+<th class="head"><p>BIT ECC.0</p></th>
+<th class="head"><p>FUNCTION</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>start of frame</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>ID.28 to ID.21</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>ID.20 to ID.18</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>bit SRTR</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>bit IDE</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>ID.17 to ID.13</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>ID.12 to ID.5</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>ID.4 to ID.0</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>bit RTR</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>reserved bit 1</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>reserved bit 0</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>data length code</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>data field</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>CRC sequence</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>CRC delimiter</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>acknowledge slot</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>acknowledge delimiter</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>end of frame</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>intermission</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>active error flag</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>passive error flag</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>tolerate dominant bits</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>error delimiter</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>overload flag</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="rxerr">
+<h4><span class="section-number">27.4.5.3. </span>接收错误计数器（RXERR）<a class="headerlink" href="#rxerr" title="永久链接至标题"></a></h4>
+<p>接收错误计数寄存器的值代表当前接收错误的数量，在硬件复位后该寄存器被初始化为逻辑0。在操作模式下该寄存器只能被CPU执行读取操作，对该寄存器的写操作只能在复位模式下执行。如果发生总线关闭事件，RXERR被设置为逻辑0。此时，总线处于关闭状态，对该寄存器的写操作不起作用。</p>
+<p>需要注意的是，只有先进入复位模式，CPU才可以对RXERR的值进行修改，在这样的情况下，错误状态可能会改变，错误警告中断和错误被动中断不会发生，除非再取消复位模式。</p>
+</section>
+<section id="txerr">
+<h4><span class="section-number">27.4.5.4. </span>发送错误计数器（TXERR）<a class="headerlink" href="#txerr" title="永久链接至标题"></a></h4>
+<p>发送错误计数寄存器的值代表当前发送错误的数量，在操作模式下该寄存器只能被CPU执行读取操作，对该寄存器的写操作只能在复位模式下执行。在硬件复位后该寄存器的值被初始化为逻辑0。如果发生总线关闭事件，TXERR值就被设定为127，这样就可以计算协议定义的最短时间（出现128次总线空闲信号）。在此期间读取该寄存器的值可以获取总线关闭恢复的状态信息。如果总线处于关闭状态，则对TXERR的范围从0到254的写操作会清除总线关闭状态标志，并且控制器将在清除复位模式后等待11个连续隐形位（总线空闲）出现一次。</p>
+<p>通过CPU将255写入TXERR将产生总线关闭事件，需要注意的是只有先进入复位模式才可以进行CPU强制修改该寄存器值的操作，这样的情况下，错误状态或者总线状态将可能改变，错误警告中断或错误被动中断不会受新值影响，除非再退出复位模式。退出复位模式后，TXERR的值还好像和发生总线错误导致总线关闭那样一样的机制运行，这意味着会再次进入复位模式，TXERR的值又被初始化为127，RXERR的值被初始化为0，并且相关的状态和中断寄存器都被重新设置。此时退出复位模式将执行协议定义的总线关闭恢复流程（等待128个总线空闲信号的发生）。如果在总线关闭并恢复前（TXERR&gt;0）再次进入复位模式，总线将继续保持关闭状态并且TXERR的值被冻结。</p>
+</section>
+<section id="id24">
+<h4><span class="section-number">27.4.5.5. </span>错误限值设定<a class="headerlink" href="#id24" title="永久链接至标题"></a></h4>
+<p>错误警告限制可以由EWLR寄存器设定，该寄存器默认值（硬件复位后）是96。在复位模式下，这个寄存器可被CPU读取或写入，在操作模式下，该寄存器只能被读取。当RXERR和TXERR两个错误计数值至少一个大于等于EWLR寄存器设定的值时，SR寄存器中的ES位将被置位，否则被清零，此时如果IER寄存器中的EIE位被置位，则将产生错误警告中断。需要注意的是该寄存器只有在先进入复位模式后才能才操作。对该寄存器的操作可能会引起错误状态的改变，并且不会让错误警告中断产生，除非再退出复位模式。</p>
+</section>
+</section>
+<section id="id25">
+<h3><span class="section-number">27.4.6. </span>位时序<a class="headerlink" href="#id25" title="永久链接至标题"></a></h3>
+<p>时序图如下:</p>
+<figure class="align-center" id="id36">
+<img alt="../_images/ISO11898Timing.svg" src="../_images/ISO11898Timing.svg" /><figcaption>
+<p><span class="caption-number">图 27.7 </span><span class="caption-text">General structure of a bit period</span><a class="headerlink" href="#id36" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<section id="brp">
+<h4><span class="section-number">27.4.6.1. </span>波特率分频器（BRP）<a class="headerlink" href="#brp" title="永久链接至标题"></a></h4>
+<p>ISO11898控制器的系统时钟tscl的周期是可以设定的，并且这确定了各个位的时序。ISO11898系统时钟的计算公式如下：</p>
+<p>tscl = 2 * tCLK * (32 * BRP.5 + 16 * BRP.4 + 8 * BRP.3 + 4 * BRP.2 + 2 * BRP.1 + BRP.0 + 1)</p>
+</section>
+<section id="sjw">
+<h4><span class="section-number">27.4.6.2. </span>同步跳转宽度（SJW）<a class="headerlink" href="#sjw" title="永久链接至标题"></a></h4>
+<p>为了补偿不同总线控制器的时钟振荡器之间的相移，任何总线控制器都必须在当前传输的任何相关信号边缘重新同步。 同步跳转宽度定义了一个位周期可以通过一次重新同步缩短或延长的最大时钟周期数：</p>
+<p>tSJW = tscl * (2 * SJW.1 + SJW.0 + 1)</p>
+</section>
+<section id="sam">
+<h4><span class="section-number">27.4.6.3. </span>采样（SAM）<a class="headerlink" href="#sam" title="永久链接至标题"></a></h4>
+<p>当BTR1寄存器中的SAM位为1时，总线将采样三次，这种模式推荐在中低速总线中使用，此时总线中的滤波器将有好处。如果SAM位为0，则总线只采样一次，这种模式推荐在高速模式中使用。</p>
+</section>
+<section id="tseg">
+<h4><span class="section-number">27.4.6.4. </span>时间段（TSEG）<a class="headerlink" href="#tseg" title="永久链接至标题"></a></h4>
+<p>TSEG包含BTR1寄存器中TSEG1和TSEG2两部分，它决定了每一个位的时钟数和采样点位置，计算公式如下：</p>
+<p>tSYNCSEG = 1 * tscl</p>
+<p>tTSEG1 = tscl * (8 * TSEG1.3 + 4 * TSEG1.2 + 2 * TSEG1.1 + TSEG1.0 + 1)</p>
+<p>tTSEG2 = tscl * (4 * TSEG2.2 + 2 * TSEG2.1 + TSEG2.0 + 1)</p>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="SDH.html" class="btn btn-neutral float-left" title="26. SDH" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="MJPEG.html" class="btn btn-neutral float-right" title="28. MJPEG" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2021.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BL808 Reference Manual &mdash; BL808 Reference Manual  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="1. System and Memory" href="content/SystemAndMemoryOverview.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="#" class="icon icon-home"> BL808 Reference Manual
+            <img src="_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="content/SystemAndMemoryOverview.html">1. System and Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/ResetAndClock.html">2. Reset and Clock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/GPIO.html">4. GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/ADC.html">5. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/DAC.html">6. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/DMA.html">7. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/DMA2D.html">8. DMA2D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/Lz4d.html">9. LZ4D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/DBI.html">10. DBI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/DPI.html">11. DPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/DSI.html">12. DSI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/Cam.html">13. CAM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/IR.html">14. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/SPI.html">15. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/UART.html">16. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/I2C.html">17. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/PWM.html">18. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/TIMER.html">19. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/I2s.html">20. I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/PDM.html">21. PDM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/AUDIO.html">22. AUDIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/PSRAM.html">23. PSRAM Contorller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/Emac.html">24. Emac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/USB.html">25. USB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/SDH.html">26. SDH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/ISO11898.html">27. ISO11898</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/MJPEG.html">28. MJPEG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/JDEC.html">29. JDEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/VENC.html">30. VENC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/NPUtoolchain.html">31. NPU toolchain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/NPU.html">32. NPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/IPC.html">33. IPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/LowPower.html">34. LowPower</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/SEC_ENG.html">35. SEC ENG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/version.html">36. Revision history</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">BL808 Reference Manual</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
+      <li>BL808 Reference Manual</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="bl808-reference-manual">
+<h1>BL808 Reference Manual<a class="headerlink" href="#bl808-reference-manual" title="Permalink to this headline"></a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="content/SystemAndMemoryOverview.html">1. System and Memory</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="content/SystemAndMemoryOverview.html#system-architecture">1.1. System Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/SystemAndMemoryOverview.html#cpu">1.2. CPU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/SystemAndMemoryOverview.html#boot">1.3. Boot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/SystemAndMemoryOverview.html#address-mapping">1.4. Address Mapping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/SystemAndMemoryOverview.html#interrupt-source">1.5. Interrupt Source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="content/ResetAndClock.html">2. Reset and Clock</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="content/ResetAndClock.html#overview">2.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/ResetAndClock.html#reset-management">2.2. Reset Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/ResetAndClock.html#clock-source">2.3. Clock Source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="content/GLB.html">3. GLB</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="content/GLB.html#overview">3.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/GLB.html#functional-description">3.2. Functional Description</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="content/GPIO.html">4. GPIO</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="content/GPIO.html#overview">4.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/GPIO.html#features">4.2. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/GPIO.html#gpio-input-settings">4.3. GPIO Input Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/GPIO.html#gpio-output-settings">4.4. GPIO Output Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/GPIO.html#i-o-fifo">4.5. I/O FIFO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/GPIO.html#i-o-interrupt">4.6. I/O Interrupt</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="content/ADC.html">5. ADC</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="content/ADC.html#overview">5.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/ADC.html#features">5.2. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/ADC.html#functional-description">5.3. Functional Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/ADC.html#register-description">5.4. Register description</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="content/DAC.html">6. DAC</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="content/DAC.html#overview">6.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/DAC.html#features">6.2. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/DAC.html#functional-description">6.3. Functional Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/DAC.html#register-description">6.4. Register description</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="content/DMA.html">7. DMA</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="content/DMA.html#overview">7.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/DMA.html#features">7.2. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/DMA.html#functional-description">7.3. Functional Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/DMA.html#transfer-mode">7.4. Transfer Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/DMA.html#register-description">7.5. Register description</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="content/DMA2D.html">8. DMA2D</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="content/DMA2D.html#overview">8.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/DMA2D.html#features">8.2. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/DMA2D.html#functional-description">8.3. Functional Description</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="content/Lz4d.html">9. LZ4D</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="content/Lz4d.html#overview">9.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/Lz4d.html#features">9.2. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/Lz4d.html#functional-description">9.3. Functional Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/Lz4d.html#clock">9.4. Clock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/Lz4d.html#programming-flow">9.5. Programming Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/Lz4d.html#register-description">9.6. Register description</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="content/DBI.html">10. DBI</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="content/DBI.html#overview">10.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/DBI.html#features">10.2. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/DBI.html#functional-description">10.3. Functional Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/DBI.html#register-description">10.4. Register description</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="content/DPI.html">11. DPI</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="content/DPI.html#overview">11.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/DPI.html#features">11.2. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/DPI.html#functional-description">11.3. Functional Description</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="content/DSI.html">12. DSI</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="content/DSI.html#overview">12.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/DSI.html#features">12.2. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/DSI.html#functional-description">12.3. Functional Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/DSI.html#register-description">12.4. Register description</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="content/Cam.html">13. CAM</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="content/Cam.html#overview">13.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/Cam.html#features">13.2. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/Cam.html#functional-description">13.3. Functional Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/Cam.html#register-description">13.4. Register description</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="content/IR.html">14. IR</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="content/IR.html#overview">14.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/IR.html#features">14.2. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/IR.html#functional-description">14.3. Functional Description</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="content/SPI.html">15. SPI</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="content/SPI.html#overview">15.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/SPI.html#features">15.2. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/SPI.html#functional-description">15.3. Functional Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/SPI.html#register-description">15.4. Register description</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="content/UART.html">16. UART</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="content/UART.html#overview">16.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/UART.html#features">16.2. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/UART.html#functional-description">16.3. Functional Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/UART.html#register-description">16.4. Register description</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="content/I2C.html">17. I2C</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="content/I2C.html#overview">17.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/I2C.html#features">17.2. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/I2C.html#functional-description">17.3. Functional Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/I2C.html#i2c-clock-setting">17.4. I2C Clock Setting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/I2C.html#i2c-configuration-flow">17.5. I2C Configuration Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/I2C.html#fifo-management">17.6. FIFO Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/I2C.html#use-with-dma">17.7. Use with DMA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/I2C.html#interrupt">17.8. Interrupt</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="content/PWM.html">18. PWM</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="content/PWM.html#overview">18.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/PWM.html#features">18.2. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/PWM.html#functional-description">18.3. Functional Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/PWM.html#register-description">18.4. Register description</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="content/TIMER.html">19. TIMER</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="content/TIMER.html#overview">19.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/TIMER.html#features">19.2. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/TIMER.html#functional-description">19.3. Functional Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/TIMER.html#register-description">19.4. Register description</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="content/I2s.html">20. I2S</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="content/I2s.html#overview">20.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/I2s.html#features">20.2. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/I2s.html#functional-description">20.3. Functional Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/I2s.html#id1">20.4. Functional Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/I2s.html#register-description">20.5. Register description</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="content/PDM.html">21. PDM</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="content/PDM.html#overview">21.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/PDM.html#features">21.2. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/PDM.html#functional-description">21.3. Functional Description</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="content/AUDIO.html">22. AUDIO</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="content/AUDIO.html#overview">22.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/AUDIO.html#features">22.2. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/AUDIO.html#functional-description">22.3. Functional Description</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="content/PSRAM.html">23. PSRAM Contorller</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="content/PSRAM.html#overview">23.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/PSRAM.html#features">23.2. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/PSRAM.html#functional-description">23.3. Functional Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/PSRAM.html#register-description">23.4. Register description</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="content/Emac.html">24. Emac</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="content/Emac.html#overview">24.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/Emac.html#features">24.2. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/Emac.html#functional-description">24.3. Functional Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/Emac.html#clock">24.4. Clock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/Emac.html#rx-tx-bd">24.5. RX/TX BD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/Emac.html#phy-interaction">24.6. PHY Interaction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/Emac.html#programming-flow">24.7. Programming Flow</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="content/USB.html">25. USB</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="content/USB.html#overview">25.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/USB.html#features">25.2. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/USB.html#functional-description">25.3. Functional Description</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="content/SDH.html">26. SDH</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="content/SDH.html#overview">26.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/SDH.html#features">26.2. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/SDH.html#functional-description">26.3. Functional Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/SDH.html#register-description">26.4. Register description</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="content/ISO11898.html">27. ISO11898</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="content/ISO11898.html#overview">27.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/ISO11898.html#features">27.2. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/ISO11898.html#functional-description">27.3. Functional Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/ISO11898.html#id1">27.4. Functional Description</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="content/MJPEG.html">28. MJPEG</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="content/MJPEG.html#overview">28.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/MJPEG.html#features">28.2. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/MJPEG.html#functional-description">28.3. Functional Description</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="content/JDEC.html">29. JDEC</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="content/JDEC.html#overview">29.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/JDEC.html#features">29.2. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/JDEC.html#functional-description">29.3. Functional Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/JDEC.html#precautions">29.4. Precautions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="content/VENC.html">30. VENC</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="content/VENC.html#overview">30.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/VENC.html#features">30.2. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/VENC.html#functional-description">30.3. Functional Description</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="content/NPUtoolchain.html">31. NPU toolchain</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="content/NPUtoolchain.html#gui-flow-chart">31.1. GUI Flow chart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/NPUtoolchain.html#network-structure">31.2. Network Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/NPUtoolchain.html#onnx-converter">31.3. ONNX Converter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/NPUtoolchain.html#optimizer">31.4. Optimizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/NPUtoolchain.html#generator-simulator">31.5. Generator &amp; Simulator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="content/NPU.html">32. NPU</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="content/NPU.html#overview">32.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/NPU.html#features">32.2. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/NPU.html#feature-list">32.3. Feature List</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/NPU.html#api-reference">32.4. API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/NPU.html#data-structure-reference">32.5. Data Structure Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="content/IPC.html">33. IPC</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="content/IPC.html#overview">33.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/IPC.html#features">33.2. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/IPC.html#functional-description">33.3. Functional Description</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="content/LowPower.html">34. LowPower</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="content/LowPower.html#overview">34.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/LowPower.html#features">34.2. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/LowPower.html#functional-description">34.3. Functional Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/LowPower.html#register-description">34.4. Register description</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="content/SEC_ENG.html">35. SEC ENG</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="content/SEC_ENG.html#overview">35.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/SEC_ENG.html#features">35.2. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/SEC_ENG.html#principle">35.3. Principle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/SEC_ENG.html#functional-description">35.4. Functional Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/SEC_ENG.html#register-description">35.5. Register description</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="content/version.html">36. Revision history</a></li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="content/SystemAndMemoryOverview.html" class="btn btn-neutral float-right" title="1. System and Memory" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

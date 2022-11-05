@@ -1,0 +1,1658 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>寄存器描述 &mdash; BL808 参考手册  文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL808 参考手册
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. 系统和存储器概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. 复位和时钟</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPIO.html">4. GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">5. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">6. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">7. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA2D.html">8. DMA2D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lz4d.html">9. LZ4D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBI.html">10. DBI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DPI.html">11. DPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DSI.html">12. DSI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cam.html">13. CAM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">14. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">15. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">16. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">17. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">18. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">19. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2s.html">20. I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PDM.html">21. PDM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AUDIO.html">22. AUDIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PSRAM.html">23. PSRAM Contorller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Emac.html">24. Emac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USB.html">25. USB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SDH.html">26. SDH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ISO11898.html">27. ISO11898</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MJPEG.html">28. MJPEG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="JDEC.html">29. JDEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="VENC.html">30. VENC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NPUtoolchain.html">31. NPU toolchain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NPU.html">32. NPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IPC.html">33. IPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LowPower.html">34. LowPower</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SEC_ENG.html">35. SEC ENG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">36. 版本信息</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL808 参考手册</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>寄存器描述</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>寄存器描述<a class="headerlink" href="#id1" title="永久链接至标题"></a></h1>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 79%" />
+<col style="width: 21%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>名称</p></td>
+<td><p>描述</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#audpdm-top">audpdm_top</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#audpdm-itf">audpdm_itf</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pdm-adc-0">pdm_adc_0</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pdm-adc-1">pdm_adc_1</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pdm-dac-0">pdm_dac_0</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pdm-pdm-0">pdm_pdm_0</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pdm-rsvd0">pdm_rsvd0</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pdm-dbg-0">pdm_dbg_0</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pdm-dbg-1">pdm_dbg_1</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pdm-dbg-2">pdm_dbg_2</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pdm-dbg-3">pdm_dbg_3</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pdm-dbg-4">pdm_dbg_4</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pdm-adc-s0">pdm_adc_s0</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pdm-adc-s1">pdm_adc_s1</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pdm-adc-s2">pdm_adc_s2</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pdm-rx-fifo-ctrl">pdm_rx_fifo_ctrl</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pdm-rx-fifo-status">pdm_rx_fifo_status</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pdm-rx-fifo-data">pdm_rx_fifo_data</a></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<section id="audpdm-top">
+<h2>audpdm_top<a class="headerlink" href="#audpdm-top" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x2000ac00</p>
+<figure class="align-center">
+<img alt="../_images/pdm_audpdm_top.svg" src="../_images/pdm_audpdm_top.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>30:28</p></td>
+<td><p>adc_rate</p></td>
+<td><p>r/w</p></td>
+<td><p>3'd1</p></td>
+<td><p>adc fs 0:8kHz,1:16kHz, 2:24kHz(22.05k), 3:32kHz, 4:48kHz(44.1k), 5:96kHz, 6:reserved, 7:manual</p></td>
+</tr>
+<tr class="row-even"><td><p>27</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>26:24</p></td>
+<td><p>dac_rate</p></td>
+<td><p>r/w</p></td>
+<td><p>3'd4</p></td>
+<td><p>dac fs 0:8kHz,1:16kHz, 2:24kHz(22.05k), 3:32kHz, 4:48kHz(44.1k), 5:96kHz, 6:192kHz, 7:manual</p></td>
+</tr>
+<tr class="row-even"><td><p>23:4</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>pdm_itf_inv_sel</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>1:invert clk_pdm_inf</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>adc_itf_inv_sel</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>1:invert clk_adc_itf</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>dac_itf_inv_sel</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd1</p></td>
+<td><p>1:invert clk_dac_itf</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>audio_ckg_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>1:enable audio clock generator</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="audpdm-itf">
+<h2>audpdm_itf<a class="headerlink" href="#audpdm-itf" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x2000ac04</p>
+<figure class="align-center">
+<img alt="../_images/pdm_audpdm_itf.svg" src="../_images/pdm_audpdm_itf.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31</p></td>
+<td><p>dac_itf_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>1:enable dac to audio dma interface</p></td>
+</tr>
+<tr class="row-odd"><td><p>30</p></td>
+<td><p>adc_itf_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>1:enable adc to audio dma interface</p></td>
+</tr>
+<tr class="row-even"><td><p>29</p></td>
+<td><p>aud_tx1_sel</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd1</p></td>
+<td><p>audio tx1 source select; 0:dac ch0, 1:dac ch1</p></td>
+</tr>
+<tr class="row-odd"><td><p>28</p></td>
+<td><p>aud_tx0_sel</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>audio tx0 source select; 0:dac ch0, 1:dac ch1</p></td>
+</tr>
+<tr class="row-even"><td><p>27:25</p></td>
+<td><p>aud_rx4_sel</p></td>
+<td><p>r/w</p></td>
+<td><p>3'd4</p></td>
+<td><p>audio rx4 source select; 0:adc ch0, 1:adc ch1, 2:adc ch2, 3:aec ch0, 4:aec ch1</p></td>
+</tr>
+<tr class="row-odd"><td><p>24:22</p></td>
+<td><p>aud_rx3_sel</p></td>
+<td><p>r/w</p></td>
+<td><p>3'd3</p></td>
+<td><p>audio rx3 source select; 0:adc ch0, 1:adc ch1, 2:adc ch2, 3:aec ch0, 4:aec ch1</p></td>
+</tr>
+<tr class="row-even"><td><p>21:19</p></td>
+<td><p>aud_rx2_sel</p></td>
+<td><p>r/w</p></td>
+<td><p>3'd2</p></td>
+<td><p>audio rx2 source select; 0:adc ch0, 1:adc ch1, 2:adc ch2, 3:aec ch0, 4:aec ch1</p></td>
+</tr>
+<tr class="row-odd"><td><p>18:16</p></td>
+<td><p>aud_rx1_sel</p></td>
+<td><p>r/w</p></td>
+<td><p>3'd1</p></td>
+<td><p>audio rx1 source select; 0:adc ch0, 1:adc ch1, 2:adc ch2, 3:aec ch0, 4:aec ch1</p></td>
+</tr>
+<tr class="row-even"><td><p>15:13</p></td>
+<td><p>aud_rx0_sel</p></td>
+<td><p>r/w</p></td>
+<td><p>3'd0</p></td>
+<td><p>audio rx0 source select; 0:adc ch0, 1:adc ch1, 2:adc ch2, 3:aec ch0, 4:aec ch1</p></td>
+</tr>
+<tr class="row-odd"><td><p>12:7</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>aec_1_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>1:enable aec ch1</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>aec_0_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>1:enable aec ch0</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>dac_1_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>1:enable dac ch1</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>dac_0_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>1:enable dac ch0</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>adc_2_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>1:enable adc ch2</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>adc_1_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>1:enable adc ch1</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>adc_0_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>1:enable adc ch0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="pdm-adc-0">
+<h2>pdm_adc_0<a class="headerlink" href="#pdm-adc-0" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x2000ac08</p>
+<figure class="align-center">
+<img alt="../_images/pdm_pdm_adc_0.svg" src="../_images/pdm_pdm_adc_0.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:30</p></td>
+<td><p>adc_lfsr_mode</p></td>
+<td><p>r/w</p></td>
+<td><p>2'd0</p></td>
+<td><p>0:LFSR32, 1:LFSR24, 2:LFSR16, 3:LFSR12</p></td>
+</tr>
+<tr class="row-odd"><td><p>29</p></td>
+<td><p>adc_dither_data</p></td>
+<td><p>r</p></td>
+<td><p>1'd1</p></td>
+<td><p>read LFSR out</p></td>
+</tr>
+<tr class="row-even"><td><p>28:21</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>20:15</p></td>
+<td><p>adc_2_scal</p></td>
+<td><p>r/w</p></td>
+<td><p>6'd32</p></td>
+<td><p>adc ch2 scaling value; u6.5</p></td>
+</tr>
+<tr class="row-even"><td><p>14:9</p></td>
+<td><p>adc_1_scal</p></td>
+<td><p>r/w</p></td>
+<td><p>6'd32</p></td>
+<td><p>adc ch1 scaling value; u6.5</p></td>
+</tr>
+<tr class="row-odd"><td><p>8:3</p></td>
+<td><p>adc_0_scal</p></td>
+<td><p>r/w</p></td>
+<td><p>6'd32</p></td>
+<td><p>adc ch0 scaling value; u6.5</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>adc_2_fir_mode</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>adc fir mode</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>adc_1_fir_mode</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>adc fir mode</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>adc_0_fir_mode</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>adc fir mode</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="pdm-adc-1">
+<h2>pdm_adc_1<a class="headerlink" href="#pdm-adc-1" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x2000ac0c</p>
+<figure class="align-center">
+<img alt="../_images/pdm_pdm_adc_1.svg" src="../_images/pdm_pdm_adc_1.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:30</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>29</p></td>
+<td><p>adc_2_k2_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>adc ch2 hpf parameter k2 enable</p></td>
+</tr>
+<tr class="row-even"><td><p>28:25</p></td>
+<td><p>adc_2_k2</p></td>
+<td><p>r/w</p></td>
+<td><p>4'd13</p></td>
+<td><p>adc ch2 hpf parameter k2</p></td>
+</tr>
+<tr class="row-odd"><td><p>24</p></td>
+<td><p>adc_2_k1_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd1</p></td>
+<td><p>adc ch2 hpf parameter k1 enable</p></td>
+</tr>
+<tr class="row-even"><td><p>23:20</p></td>
+<td><p>adc_2_k1</p></td>
+<td><p>r/w</p></td>
+<td><p>4'd8</p></td>
+<td><p>adc ch2 hpf parameter k1</p></td>
+</tr>
+<tr class="row-odd"><td><p>19</p></td>
+<td><p>adc_1_k2_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>adc ch1 hpf parameter k2 enable</p></td>
+</tr>
+<tr class="row-even"><td><p>18:15</p></td>
+<td><p>adc_1_k2</p></td>
+<td><p>r/w</p></td>
+<td><p>4'd13</p></td>
+<td><p>adc ch1 hpf parameter k2</p></td>
+</tr>
+<tr class="row-odd"><td><p>14</p></td>
+<td><p>adc_1_k1_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd1</p></td>
+<td><p>adc ch1 hpf parameter k1 enable</p></td>
+</tr>
+<tr class="row-even"><td><p>13:10</p></td>
+<td><p>adc_1_k1</p></td>
+<td><p>r/w</p></td>
+<td><p>4'd8</p></td>
+<td><p>adc ch1 hpf parameter k1</p></td>
+</tr>
+<tr class="row-odd"><td><p>9</p></td>
+<td><p>adc_0_k2_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>adc ch0 hpf parameter k2 enable</p></td>
+</tr>
+<tr class="row-even"><td><p>8:5</p></td>
+<td><p>adc_0_k2</p></td>
+<td><p>r/w</p></td>
+<td><p>4'd13</p></td>
+<td><p>adc ch0 hpf parameter k2</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>adc_0_k1_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd1</p></td>
+<td><p>adc ch0 hpf parameter k1 enable</p></td>
+</tr>
+<tr class="row-even"><td><p>3:0</p></td>
+<td><p>adc_0_k1</p></td>
+<td><p>r/w</p></td>
+<td><p>4'd8</p></td>
+<td><p>adc ch0 hpf parameter k1</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="pdm-dac-0">
+<h2>pdm_dac_0<a class="headerlink" href="#pdm-dac-0" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x2000ac10</p>
+<figure class="align-center">
+<img alt="../_images/pdm_pdm_dac_0.svg" src="../_images/pdm_pdm_dac_0.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>30:28</p></td>
+<td><p>mix_0_att_mode2</p></td>
+<td><p>r/w</p></td>
+<td><p>3'd0</p></td>
+<td><p>0: 0db,1:6db, 2:12db, 3:18db, 4:36db, 5:54db, 6:72db, 7:mute</p></td>
+</tr>
+<tr class="row-even"><td><p>27:25</p></td>
+<td><p>mix_0_att_mode1</p></td>
+<td><p>r/w</p></td>
+<td><p>3'd0</p></td>
+<td><p>0: 0db,1:6db, 2:12db, 3:18db, 4:36db, 5:54db, 6:72db, 7:mute</p></td>
+</tr>
+<tr class="row-odd"><td><p>24:23</p></td>
+<td><p>mix_0_mode</p></td>
+<td><p>r/w</p></td>
+<td><p>2'd0</p></td>
+<td><p>0: no mix, 1: mix second input, 2: mix sidetone/loopback</p></td>
+</tr>
+<tr class="row-even"><td><p>22:21</p></td>
+<td><p>mix_0_sel</p></td>
+<td><p>r/w</p></td>
+<td><p>2'd0</p></td>
+<td><p>0: 0, 1:adc ch0, 2: adc ch1, 3:adc ch2</p></td>
+</tr>
+<tr class="row-odd"><td><p>20</p></td>
+<td><p>adc_2_mash_bit_swap</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>1:swap adc1_do1 and adc1_do2</p></td>
+</tr>
+<tr class="row-even"><td><p>19</p></td>
+<td><p>adc_2_pdm_lvl_swap</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>1:invert pdm input data</p></td>
+</tr>
+<tr class="row-odd"><td><p>18</p></td>
+<td><p>adc_2_src</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>0:adc, 1:pdm</p></td>
+</tr>
+<tr class="row-even"><td><p>17</p></td>
+<td><p>adc_1_mash_bit_swap</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>1:swap adc2_do1 and adc2_do2</p></td>
+</tr>
+<tr class="row-odd"><td><p>16</p></td>
+<td><p>adc_1_pdm_lvl_swap</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>1:invert pdm input data</p></td>
+</tr>
+<tr class="row-even"><td><p>15</p></td>
+<td><p>adc_1_src</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>0:adc, 1:pdm</p></td>
+</tr>
+<tr class="row-odd"><td><p>14</p></td>
+<td><p>adc_0_mash_bit_swap</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>1:swap adc3_do1 and adc3_do2</p></td>
+</tr>
+<tr class="row-even"><td><p>13</p></td>
+<td><p>adc_0_pdm_lvl_swap</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>1:invert pdm input data</p></td>
+</tr>
+<tr class="row-odd"><td><p>12</p></td>
+<td><p>adc_0_src</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>0:adc, 1:pdm</p></td>
+</tr>
+<tr class="row-even"><td><p>11:6</p></td>
+<td><p>adc_pdm_l</p></td>
+<td><p>r/w</p></td>
+<td><p>6'h3f</p></td>
+<td><p>pdm low value</p></td>
+</tr>
+<tr class="row-odd"><td><p>5:0</p></td>
+<td><p>adc_pdm_h</p></td>
+<td><p>r/w</p></td>
+<td><p>6'h1</p></td>
+<td><p>pdm high value</p></td>
+</tr>
+<tr class="row-even"><td><p>-1:31</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>30:28</p></td>
+<td><p>mix_1_att_mode2</p></td>
+<td><p>r/w</p></td>
+<td><p>3'd0</p></td>
+<td><p>0: 0db,1:6db, 2:12db, 3:18db, 4:36db, 5:54db, 6:72db, 7:mute</p></td>
+</tr>
+<tr class="row-even"><td><p>27:25</p></td>
+<td><p>mix_1_att_mode1</p></td>
+<td><p>r/w</p></td>
+<td><p>3'd0</p></td>
+<td><p>0: 0db,1:6db, 2:12db, 3:18db, 4:36db, 5:54db, 6:72db, 7:mute</p></td>
+</tr>
+<tr class="row-odd"><td><p>24:23</p></td>
+<td><p>mix_1_mode</p></td>
+<td><p>r/w</p></td>
+<td><p>2'd0</p></td>
+<td><p>0: no mix, 1: mix second input, 2: mix sidetone/loopback</p></td>
+</tr>
+<tr class="row-even"><td><p>22:21</p></td>
+<td><p>mix_1_sel</p></td>
+<td><p>r/w</p></td>
+<td><p>2'd0</p></td>
+<td><p>0: 0, 1:adc ch0, 2: adc ch1, 3:adc ch2</p></td>
+</tr>
+<tr class="row-odd"><td><p>20:17</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>16:15</p></td>
+<td><p>dac_dsm_dither_prbs_mode</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>dac dsm dither lfsr mode:0:LFSR32, 1:LFSR24, 2:LFSR16, 3:LFSR12</p></td>
+</tr>
+<tr class="row-odd"><td><p>14</p></td>
+<td><p>dac_dsm_dither_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd1</p></td>
+<td><p>1:enable dac dsm dither</p></td>
+</tr>
+<tr class="row-even"><td><p>13:11</p></td>
+<td><p>dac_dsm_dither_amp</p></td>
+<td><p>r/w</p></td>
+<td><p>3'd0</p></td>
+<td><p>dac dsm dither amplitue</p></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>dac_dsm_scaling_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd1</p></td>
+<td><p>1:enable dac dsm scaling</p></td>
+</tr>
+<tr class="row-even"><td><p>9:6</p></td>
+<td><p>dac_dsm_scaling_factor</p></td>
+<td><p>r/w</p></td>
+<td><p>4'd15</p></td>
+<td><p>dac dsm scaling value;  u4.4</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>dac_dsm_order</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>0: 2-order, 1: 3-order</p></td>
+</tr>
+<tr class="row-even"><td><p>4:2</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>dac_dem_out_swap</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>1:swap dacldata and dacrdata</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>dac_dem_bypass</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>1:bypass dac dwa</p></td>
+</tr>
+<tr class="row-odd"><td><p>-1:14</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>13</p></td>
+<td><p>aec_record_vld_4s_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>0:aec record vld auto controlled by dac_rate, 1:enable aec record vld manual mode</p></td>
+</tr>
+<tr class="row-odd"><td><p>12:11</p></td>
+<td><p>aec_record_vld_4s_div</p></td>
+<td><p>r/w</p></td>
+<td><p>2'd0</p></td>
+<td><p>aec record vld manual divide rate</p></td>
+</tr>
+<tr class="row-even"><td><p>10:8</p></td>
+<td><p>aec_1_atten_mode</p></td>
+<td><p>r/w</p></td>
+<td><p>3'd0</p></td>
+<td><p>aec ch1 attenuation mode: 0:no attenuation, 1:drop 1LSB, 2:drop 2LSB, 3:drop 3LSB, 4:drop 6LSB, 5:drop 9LSB, 6:drop 12LSB</p></td>
+</tr>
+<tr class="row-odd"><td><p>7:5</p></td>
+<td><p>aec_0_atten_mode</p></td>
+<td><p>r/w</p></td>
+<td><p>3'd0</p></td>
+<td><p>aec ch0 attenuation mode: 0:no attenuation, 1:drop 1LSB, 2:drop 2LSB, 3:drop 3LSB, 4:drop 6LSB, 5:drop 9LSB, 6:drop 12LSB</p></td>
+</tr>
+<tr class="row-even"><td><p>4:0</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="pdm-pdm-0">
+<h2>pdm_pdm_0<a class="headerlink" href="#pdm-pdm-0" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x2000ac1c</p>
+<figure class="align-center">
+<img alt="../_images/pdm_pdm_pdm_0.svg" src="../_images/pdm_pdm_pdm_0.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:12</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>11:9</p></td>
+<td><p>adc_2_pdm_sel</p></td>
+<td><p>r/w</p></td>
+<td><p>3'd2</p></td>
+<td><p>adc ch2 source select: 0:pdm_0_l, 1:pdm_0_r, 2:pdm_1_l, 3:pdm_1_r, 4:pdm_2_l, 5:pdm_2_r</p></td>
+</tr>
+<tr class="row-even"><td><p>8:6</p></td>
+<td><p>adc_1_pdm_sel</p></td>
+<td><p>r/w</p></td>
+<td><p>3'd1</p></td>
+<td><p>adc ch1 source select: 0:pdm_0_l, 1:pdm_0_r, 2:pdm_1_l, 3:pdm_1_r, 4:pdm_2_l, 5:pdm_2_r</p></td>
+</tr>
+<tr class="row-odd"><td><p>5:3</p></td>
+<td><p>adc_0_pdm_sel</p></td>
+<td><p>r/w</p></td>
+<td><p>3'd0</p></td>
+<td><p>adc ch0 source select: 0:pdm_0_l, 1:pdm_0_r, 2:pdm_1_l, 3:pdm_1_r, 4:pdm_2_l, 5:pdm_2_r</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>pdm_2_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>1:enable pdm_2</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>pdm_1_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>1:enable pdm_1</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>pdm_0_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>1:enable pdm_0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="pdm-rsvd0">
+<h2>pdm_rsvd0<a class="headerlink" href="#pdm-rsvd0" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x2000ac20</p>
+<figure class="align-center">
+<img alt="../_images/pdm_pdm_rsvd0.svg" src="../_images/pdm_pdm_rsvd0.svg" /></figure>
+</section>
+<section id="pdm-dbg-0">
+<h2>pdm_dbg_0<a class="headerlink" href="#pdm-dbg-0" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x2000ac24</p>
+<figure class="align-center">
+<img alt="../_images/pdm_pdm_dbg_0.svg" src="../_images/pdm_pdm_dbg_0.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:30</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>29:24</p></td>
+<td><p>aud_test_read_sel</p></td>
+<td><p>r/w</p></td>
+<td><p>6'd0</p></td>
+<td><p>select aud_test_read(0x28) test point</p></td>
+</tr>
+<tr class="row-even"><td><p>23</p></td>
+<td><p>adc_test_din_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>1:enable adc test data input from GPIO</p></td>
+</tr>
+<tr class="row-odd"><td><p>22</p></td>
+<td><p>dac_test_din_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>1:enable dac test data input from GPIO</p></td>
+</tr>
+<tr class="row-even"><td><p>21</p></td>
+<td><p>adc_test_clkin_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>1:enable adc test clcok input from GPIO</p></td>
+</tr>
+<tr class="row-odd"><td><p>20</p></td>
+<td><p>dac_test_clkin_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>1:enable dac test clcok input from GPIO</p></td>
+</tr>
+<tr class="row-even"><td><p>19:18</p></td>
+<td><p>audio_test_out_sel</p></td>
+<td><p>r/w</p></td>
+<td><p>2'd0</p></td>
+<td><p>audio test data to GPIO select: 0:no data, 1:adc ch0/1/2, 2:dac ch0 dwa, 2:dac ch1 dwa</p></td>
+</tr>
+<tr class="row-odd"><td><p>17:4</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td rowspan="2"><p>3:1</p></td>
+<td rowspan="2"><p>aud_sin_step</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>3'd2</p></td>
+<td rowspan="2"><p>step of dac audio sin table &#64;FS=192k</p>
+<p>0:div1, 1:div2, 2:div4, 3:div6, 4:div8, 5:div12, 6:div24</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>aud_sin_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>1:enable audio dac sin generator</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="pdm-dbg-1">
+<h2>pdm_dbg_1<a class="headerlink" href="#pdm-dbg-1" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x2000ac28</p>
+<figure class="align-center">
+<img alt="../_images/pdm_pdm_dbg_1.svg" src="../_images/pdm_pdm_dbg_1.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>aud_test_read</p></td>
+<td><p>r</p></td>
+<td><p>32'd0</p></td>
+<td><p>audio test read value</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="pdm-dbg-2">
+<h2>pdm_dbg_2<a class="headerlink" href="#pdm-dbg-2" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x2000ac2c</p>
+<figure class="align-center">
+<img alt="../_images/pdm_pdm_dbg_2.svg" src="../_images/pdm_pdm_dbg_2.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:26</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>25</p></td>
+<td><p>adc_in_2_test_sel</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>adc ch2 test data select; 1:from adc sin generator, 0:from fir force value</p></td>
+</tr>
+<tr class="row-even"><td><p>24</p></td>
+<td><p>adc_in_1_test_sel</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>adc ch1 test data select; 1:from adc sin generator, 0:from fir force value</p></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>adc_in_0_test_sel</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>adc ch0 test data select; 1:from adc sin generator, 0:from fir force value</p></td>
+</tr>
+<tr class="row-even"><td><p>22</p></td>
+<td><p>adc_2_fir_4s_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>1:force adc ch2 fir output</p></td>
+</tr>
+<tr class="row-odd"><td><p>21</p></td>
+<td><p>adc_1_fir_4s_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>1:force adc ch1 fir output</p></td>
+</tr>
+<tr class="row-even"><td><p>20</p></td>
+<td><p>adc_0_fir_4s_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>1:force adc ch0 fir output</p></td>
+</tr>
+<tr class="row-odd"><td><p>19:0</p></td>
+<td><p>adc_fir_4s_val</p></td>
+<td><p>r/w</p></td>
+<td><p>20'd0</p></td>
+<td><p>force value of adc fir output</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="pdm-dbg-3">
+<h2>pdm_dbg_3<a class="headerlink" href="#pdm-dbg-3" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x2000ac30</p>
+<figure class="align-center">
+<img alt="../_images/pdm_pdm_dbg_3.svg" src="../_images/pdm_pdm_dbg_3.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:24</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>dac_in_1_test_sel</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>dac ch1 test data select; 0:from dac sin generator, 1:from dac force value</p></td>
+</tr>
+<tr class="row-even"><td><p>22</p></td>
+<td><p>dac_in_0_test_sel</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>dac ch0 test data select; 0:from dac sin generator, 1:from dac force value</p></td>
+</tr>
+<tr class="row-odd"><td><p>21</p></td>
+<td><p>dac_dwa_1_4s_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>1:force dac ch1 dwa data from dac_4s_val[6:0]</p></td>
+</tr>
+<tr class="row-even"><td><p>20</p></td>
+<td><p>dac_dwa_0_4s_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'd0</p></td>
+<td><p>1:force dac ch0 dwa data from dac_4s_val[6:0]</p></td>
+</tr>
+<tr class="row-odd"><td><p>19:0</p></td>
+<td><p>dac_4s_val</p></td>
+<td><p>r/w</p></td>
+<td><p>20'd0</p></td>
+<td><p>dac force value</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="pdm-dbg-4">
+<h2>pdm_dbg_4<a class="headerlink" href="#pdm-dbg-4" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x2000ac34</p>
+<figure class="align-center">
+<img alt="../_images/pdm_pdm_dbg_4.svg" src="../_images/pdm_pdm_dbg_4.svg" /></figure>
+</section>
+<section id="pdm-adc-s0">
+<h2>pdm_adc_s0<a class="headerlink" href="#pdm-adc-s0" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x2000ac38</p>
+<figure class="align-center">
+<img alt="../_images/pdm_pdm_adc_s0.svg" src="../_images/pdm_pdm_adc_s0.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:9</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>8:0</p></td>
+<td><p>adc_s0_volume</p></td>
+<td><p>r/w</p></td>
+<td><p>9'd0</p></td>
+<td><p>volume s9.1, -95.5dB ~ +18dB in 0.5dB step</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="pdm-adc-s1">
+<h2>pdm_adc_s1<a class="headerlink" href="#pdm-adc-s1" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x2000ac3c</p>
+<figure class="align-center">
+<img alt="../_images/pdm_pdm_adc_s1.svg" src="../_images/pdm_pdm_adc_s1.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:9</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>8:0</p></td>
+<td><p>adc_s1_volume</p></td>
+<td><p>r/w</p></td>
+<td><p>9'd0</p></td>
+<td><p>volume s9.1, -95.5dB ~ +18dB in 0.5dB step</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="pdm-adc-s2">
+<h2>pdm_adc_s2<a class="headerlink" href="#pdm-adc-s2" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x2000ac40</p>
+<figure class="align-center">
+<img alt="../_images/pdm_pdm_adc_s2.svg" src="../_images/pdm_pdm_adc_s2.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:9</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>8:0</p></td>
+<td><p>adc_s2_volume</p></td>
+<td><p>r/w</p></td>
+<td><p>9'd0</p></td>
+<td><p>volume s9.1, -95.5dB ~ +18dB in 0.5dB step</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="pdm-rx-fifo-ctrl">
+<h2>pdm_rx_fifo_ctrl<a class="headerlink" href="#pdm-rx-fifo-ctrl" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x2000ac80</p>
+<figure class="align-center">
+<img alt="../_images/pdm_pdm_rx_fifo_ctrl.svg" src="../_images/pdm_pdm_rx_fifo_ctrl.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:26</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="18"><p>25:24</p></td>
+<td rowspan="18"><p>rx_data_mode</p></td>
+<td rowspan="18"><p>r/w</p></td>
+<td rowspan="18"><p>2'b0</p></td>
+<td rowspan="18"><p>RX_FIFO_DATOUT_MODE.</p>
+<p>RX FIFO DATA Output Mode (Mode 0, 1, 2, 3)</p>
+<p>Mode 0: Valid data's MSB is at [31] of RX_FIFO register</p>
+<p>Mode 1: Valid data's MSB is at [23] of RX_FIFO register</p>
+<p>Mode 2: Valid data's MSB is at [19] of RX_FIFO register</p>
+<p>Mode 3: Valid data's MSB is at [15] of RX_FIFO register</p>
+<p>Note: Expanding ‘0’ at LSB of RX FIFO register (data invalid region)</p>
+<blockquote>
+<div><p>Expanding sign bit at MSB of RX FIFO register (data invalid region)</p>
+</div></blockquote>
+<p>For 20-bit received audio sample resolution:</p>
+<p>Mode 0: RXDATA[31:0] = {FIFO_O[19:0], 12’h0}</p>
+<p>Mode 1: RXDATA[31:0] = {8{FIFO_O[19]}, FIFO_O[19:0], 4’h0}</p>
+<p>Mode 2: RXDATA[31:0] = {12{FIFO_O[19]}, FIFO_O[19:0]}</p>
+<p>Mode 3: RXDATA[31:0] = {16{FIFO_O[19]}, FIFO_O[19:4]}</p>
+<p>For 16-bit received audio sample resolution:</p>
+<p>Mode 0: RXDATA[31:0] = {FIFO_O[19:4], 16’h0}</p>
+<p>Mode 1: RXDATA[31:0] = {8{FIFO_O[19]}, FIFO_O[19:4], 8’h0}</p>
+<p>Mode 2: RXDATA[31:0] = {12{FIFO_O[19]}, FIFO_O[19:4], 4'h0}</p>
+<p>Mode 3: RXDATA[31:0] = {16{FIFO_O[19]}, FIFO_O[19:4]}</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>23:22</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td rowspan="6"><p>21:16</p></td>
+<td rowspan="6"><p>rx_trg_level</p></td>
+<td rowspan="6"><p>r/w</p></td>
+<td rowspan="6"><p>6'd23</p></td>
+<td rowspan="6"><p>RX_FIFO_TRG_LEVEL.</p>
+<p>RX FIFO Trigger Level (RXTL[5:0])</p>
+<p>Interrupt and DMA request trigger level for RX FIFO Data Available condition</p>
+<p>IRQ/DRQ Generated when WLEVEL &gt; RXTL[5:0]</p>
+<p>Notes:</p>
+<p>WLEVEL represents the number of valid samples in the RX FIFO</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="7"><p>15:14</p></td>
+<td rowspan="7"><p>rx_drq_cnt</p></td>
+<td rowspan="7"><p>r/w</p></td>
+<td rowspan="7"><p>2'b0</p></td>
+<td rowspan="7"><p>RX_DRQ_CLR_CNT.</p>
+<p>When RX FIFO available data less than or equal N, DRQ Request will be de-asserted. N is defined here:</p>
+<p>00: IRQ/DRQ de-asserted when WLEVEL &lt;= RXTL[5:0]</p>
+<p>01: IRQ/DRQ de-asserted when WLEVEL &lt; 8</p>
+<p>10: IRQ/DRQ de-asserted when WLEVEL &lt; 16</p>
+<p>11: IRQ/DRQ de-asserted when WLEVEL &lt; 32</p>
+<p>WLEVEL represents the number of valid samples in the RX FIFO</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>13:11</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td rowspan="7"><p>10:8</p></td>
+<td rowspan="7"><p>rx_ch_en</p></td>
+<td rowspan="7"><p>r/w</p></td>
+<td rowspan="7"><p>3'b0</p></td>
+<td rowspan="7"><p>RX_FIFO_DATIN_SRC.</p>
+<p>RX FIFO Data Input Source Select.</p>
+<p>0: Disable 1: Enable</p>
+<p>Bit10: ADC3 data</p>
+<p>Bit9: ADC2 data</p>
+<p>Bit8: ADC1 data</p>
+<p>When some of the above bits set to ’1’, these data are always arranged in order from low-bit to high-bit.(bit8-&gt;bit10)</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>7:6</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td rowspan="4"><p>5</p></td>
+<td rowspan="4"><p>rx_data_res</p></td>
+<td rowspan="4"><p>r/w</p></td>
+<td rowspan="4"><p>1'b0</p></td>
+<td rowspan="4"><p>RX_SAMPLE_BITS.</p>
+<p>Receiving Audio Sample Resolution</p>
+<p>0: 16 bits</p>
+<p>1: 20 bits</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="4"><p>4</p></td>
+<td rowspan="4"><p>rx_drq_en</p></td>
+<td rowspan="4"><p>r/w</p></td>
+<td rowspan="4"><p>1'b0</p></td>
+<td rowspan="4"><p>ADC_DRQ_EN.</p>
+<p>ADC FIFO Data Available DRQ Enable.</p>
+<p>0: Disable</p>
+<p>1: Enable</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="4"><p>3</p></td>
+<td rowspan="4"><p>rxa_int_en</p></td>
+<td rowspan="4"><p>r/w</p></td>
+<td rowspan="4"><p>1'b0</p></td>
+<td rowspan="4"><p>ADC_IRQ_EN.</p>
+<p>ADC FIFO Data Available IRQ Enable.</p>
+<p>0: Disable</p>
+<p>1: Enable</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="4"><p>2</p></td>
+<td rowspan="4"><p>rxu_int_en</p></td>
+<td rowspan="4"><p>r/w</p></td>
+<td rowspan="4"><p>1'b0</p></td>
+<td rowspan="4"><p>ADC_UNDERRUN_IRQ_EN.</p>
+<p>ADC FIFO Under Run IRQ Enable</p>
+<p>0: Disable</p>
+<p>1: Enable</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="4"><p>1</p></td>
+<td rowspan="4"><p>rxo_int_en</p></td>
+<td rowspan="4"><p>r/w</p></td>
+<td rowspan="4"><p>1'b0</p></td>
+<td rowspan="4"><p>ADC_OVERRUN_IRQ_EN.</p>
+<p>ADC FIFO Over Run IRQ Enable</p>
+<p>0: Disable</p>
+<p>1: Enable</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3"><p>0</p></td>
+<td rowspan="3"><p>rx_fifo_flush</p></td>
+<td rowspan="3"><p>w1c</p></td>
+<td rowspan="3"><p>1'b0</p></td>
+<td rowspan="3"><p>ADC_FIFO_FLUSH.</p>
+<p>ADC FIFO Flush.</p>
+<p>Write ‘1’ to flush TX FIFO, self clear to ‘0’.</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+</tbody>
+</table>
+</section>
+<section id="pdm-rx-fifo-status">
+<h2>pdm_rx_fifo_status<a class="headerlink" href="#pdm-rx-fifo-status" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x2000ac84</p>
+<figure class="align-center">
+<img alt="../_images/pdm_pdm_rx_fifo_status.svg" src="../_images/pdm_pdm_rx_fifo_status.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:25</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="4"><p>24</p></td>
+<td rowspan="4"><p>rxa</p></td>
+<td rowspan="4"><p>r</p></td>
+<td rowspan="4"><p>1'b0</p></td>
+<td rowspan="4"><p>RXA.</p>
+<p>RX FIFO Available</p>
+<p>0: No available data in RX FIFO</p>
+<p>1: More than one sample in RX FIFO (&gt;= 1 word)</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>23:22</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td rowspan="2"><p>21:16</p></td>
+<td rowspan="2"><p>rxa_cnt</p></td>
+<td rowspan="2"><p>r</p></td>
+<td rowspan="2"><p>6'h0</p></td>
+<td rowspan="2"><p>RXA_CNT.</p>
+<p>RX FIFO Available Sample Word Counter</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>15:5</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="5"><p>4</p></td>
+<td rowspan="5"><p>rxa_int</p></td>
+<td rowspan="5"><p>r</p></td>
+<td rowspan="5"><p>1'b0</p></td>
+<td rowspan="5"><p>RXA_INT.</p>
+<p>RX FIFO Data Available Pending Interrupt</p>
+<p>0: No Pending IRQ</p>
+<p>1: Data Available Pending IRQ</p>
+<p>Automatic clear if interrupt condition fails.</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="5"><p>2</p></td>
+<td rowspan="5"><p>rxu_int</p></td>
+<td rowspan="5"><p>r</p></td>
+<td rowspan="5"><p>1'b0</p></td>
+<td rowspan="5"><p>RXU_INT.</p>
+<p>RX FIFO Underrun Pending Interrupt</p>
+<p>0: No Pending IRQ</p>
+<p>1: FIFO Underrun Pending IRQ</p>
+<p>Write ‘1’ to clear this interrupt</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="5"><p>1</p></td>
+<td rowspan="5"><p>rxo_int</p></td>
+<td rowspan="5"><p>r</p></td>
+<td rowspan="5"><p>1'b0</p></td>
+<td rowspan="5"><p>RXO_INT.</p>
+<p>RX FIFO Overrun Pending Interrupt</p>
+<p>0: No Pending IRQ</p>
+<p>1: FIFO Overrun Pending IRQ</p>
+<p>Write ‘1’ to clear this interrupt</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="pdm-rx-fifo-data">
+<h2>pdm_rx_fifo_data<a class="headerlink" href="#pdm-rx-fifo-data" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x2000ac88</p>
+<figure class="align-center">
+<img alt="../_images/pdm_pdm_rx_fifo_data.svg" src="../_images/pdm_pdm_rx_fifo_data.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td rowspan="3"><p>31:0</p></td>
+<td rowspan="3"><p>rx_data</p></td>
+<td rowspan="3"><p>r</p></td>
+<td rowspan="3"><p>32'h0</p></td>
+<td rowspan="3"><p>RX_DATA.</p>
+<p>RX Sample</p>
+<p>Host can get one sample by reading this register. The left channel sample data is first and then the right channel sample.</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2021.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

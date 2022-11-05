@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>30. VENC &mdash; BL808 参考手册  文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="31. NPU toolchain" href="NPUtoolchain.html" />
+    <link rel="prev" title="29. JDEC" href="JDEC.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL808 参考手册
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. 系统和存储器概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. 复位和时钟</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPIO.html">4. GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">5. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">6. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">7. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA2D.html">8. DMA2D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lz4d.html">9. LZ4D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBI.html">10. DBI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DPI.html">11. DPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DSI.html">12. DSI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cam.html">13. CAM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">14. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">15. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">16. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">17. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">18. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">19. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2s.html">20. I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PDM.html">21. PDM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AUDIO.html">22. AUDIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PSRAM.html">23. PSRAM Contorller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Emac.html">24. Emac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USB.html">25. USB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SDH.html">26. SDH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ISO11898.html">27. ISO11898</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MJPEG.html">28. MJPEG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="JDEC.html">29. JDEC</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">30. VENC</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">30.1. 简介</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">30.2. 主要特点</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">30.3. 功能描述</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">30.3.1. 软件模式和连动模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cbr-vbr">30.3.2. CBR/VBR模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">30.3.3. 双码流</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#roi-region-of-interest">30.3.4. ROI(Region of Interest)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#osd-on-screen-display">30.3.5. OSD(On-Screen Display)编码区域</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">30.3.6. 动态配置最大/最小量化參数</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#i-p">30.3.7. 动态配置I/P幀目标位元</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#i">30.3.8. 动态配置I帧距离</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">30.3.9. 视频序列中断</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">30.3.10. 帧中断</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">30.3.11. 输入缓存溢出状态警示</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="NPUtoolchain.html">31. NPU toolchain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NPU.html">32. NPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IPC.html">33. IPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LowPower.html">34. LowPower</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SEC_ENG.html">35. SEC ENG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">36. 版本信息</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL808 参考手册</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">30. </span>VENC</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="venc">
+<h1><span class="section-number">30. </span>VENC<a class="headerlink" href="#venc" title="永久链接至标题"></a></h1>
+<section id="id1">
+<h2><span class="section-number">30.1. </span>简介<a class="headerlink" href="#id1" title="永久链接至标题"></a></h2>
+<p>VENC采用H264视频编码标准, 主要是以预测及运动补偿等方式进行压缩, 並以环路滤波提升画质, 兼顾码流传输和图像品质要求</p>
+</section>
+<section id="id2">
+<h2><span class="section-number">30.2. </span>主要特点<a class="headerlink" href="#id2" title="永久链接至标题"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="mailto:1920x1080p&#37;&#52;&#48;30fps">1920x1080p<span>&#64;</span>30fps</a> + <a class="reference external" href="mailto:640x480&#37;&#52;&#48;30fps">640x480<span>&#64;</span>30fps</a>, BP/MP</p></li>
+<li><p>输入: Semi-Planar YCbCr 4:2:0</p></li>
+<li><p>输出: NALU(Network Abstract Layer Uint) in byte stream format</p></li>
+<li><p>CBR/VBR mode</p></li>
+<li><p>最大8个ROI</p></li>
+<li><p>最大16个OSD编码区域</p></li>
+<li><p>支持软件模式和连动模式</p></li>
+<li><p>可动态配置最大/最小量化參数</p></li>
+<li><p>可动态配置I/P帧目标位元</p></li>
+<li><p>可动态配置I帧距离</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2><span class="section-number">30.3. </span>功能描述<a class="headerlink" href="#id3" title="永久链接至标题"></a></h2>
+<section id="id4">
+<h3><span class="section-number">30.3.1. </span>软件模式和连动模式<a class="headerlink" href="#id4" title="永久链接至标题"></a></h3>
+<p>软件模式: 硬件以帧为单位和软件进行交互, 软件设定一个帧启动後硬件才压缩一帧, 完成後回传帧中断。输入帧內存需至少一帧。
+连动模式: 软件设定H264_ENCODER_CTRL的位&lt;CFG_S_ENC_SEQ_EN&gt;或&lt;CFG_ENC_SEQ_EN&gt;來使能序列(sequence)編碼, 硬件自行侦测输入帧状态并进行压缩, 直到软件拉低序列使能, 硬件才停止压缩(结束於完整的一帧)並且回传序列中断。序列中每帧做完也会回传帧中断。</p>
+</section>
+<section id="cbr-vbr">
+<h3><span class="section-number">30.3.2. </span>CBR/VBR模式<a class="headerlink" href="#cbr-vbr" title="永久链接至标题"></a></h3>
+<p>CORE_REG23的&lt;NUM_IMB_BITS&gt;或&lt;S_NUM_IMB_BITS&gt;设0, 则该码流为VBR模式, 非0则为CBR模式; 在VBR模式需设定I/P帧固定量化参数(CORE_REG3/CORE_REG5), 不建议在硬件工作时切换模式。</p>
+</section>
+<section id="id5">
+<h3><span class="section-number">30.3.3. </span>双码流<a class="headerlink" href="#id5" title="永久链接至标题"></a></h3>
+<p>兩个码流的帧使能,帧中断,序列使能,序列中断是独立配置, 双流的帧率基本上需要一致, 但分辨率和其他压缩参数可以不同。</p>
+</section>
+<section id="roi-region-of-interest">
+<h3><span class="section-number">30.3.4. </span>ROI(Region of Interest)<a class="headerlink" href="#roi-region-of-interest" title="永久链接至标题"></a></h3>
+<p>单一码流最多可支援8个ROI区域,每个区域有各自的使能和起始/结束宏块位置设定, 需将H264_ROI_MODE的位&lt;CFG_ROI_UPD&gt;或H264_S_ROI_MODE的位&lt;CFG_S_ROI_UPD&gt;设1使新設定生效; 硬件則会每帧同步ROI设定。</p>
+</section>
+<section id="osd-on-screen-display">
+<h3><span class="section-number">30.3.5. </span>OSD(On-Screen Display)编码区域<a class="headerlink" href="#osd-on-screen-display" title="永久链接至标题"></a></h3>
+<p>硬件最多支持16个OSD区域, 软件设定H264_OSD_EN来决定每个码流OSD区域, OSD区域是以起始/结束宏块位置来表示。</p>
+</section>
+<section id="id6">
+<h3><span class="section-number">30.3.6. </span>动态配置最大/最小量化參数<a class="headerlink" href="#id6" title="永久链接至标题"></a></h3>
+<p>为提供更好的调控码率,软件设定CORE_REG31之後, 需设H264_ENCODER_CTRL(位&lt;CFG_QR_UPD&gt;或&lt;CFG_S_QR_UPD&gt;分别设定两个码流)使新设定值生效, 硬件会以GOP为单位来同步新设定值, 达成动态调整量化参数的范围。</p>
+</section>
+<section id="i-p">
+<h3><span class="section-number">30.3.7. </span>动态配置I/P幀目标位元<a class="headerlink" href="#i-p" title="永久链接至标题"></a></h3>
+<p>软件可以设定CORE_REG23/CORE_REG24来调整I/P帧的目标位元; CORE_REG23/CORE_REG24设定後需要再设H264_ENCODER_CTRL(位&lt;CFG_QR_UPD&gt;或&lt;CFG_S_QR_UPD&gt;]分别设定两个码流)让新的设定值生效, 硬件会以GOP为单位来同步新的设定值(CBR模式)。</p>
+</section>
+<section id="i">
+<h3><span class="section-number">30.3.8. </span>动态配置I帧距离<a class="headerlink" href="#i" title="永久链接至标题"></a></h3>
+<p>软件设定CORE_REG8之後再设定H264_ENCODER_CTRL(位&lt;CFG_QR_UPD&gt;或&lt;CFG_S_QR_UPD&gt;分别设定两个码流)让新的设定值生效, 硬件会以GOP为单位来同步新的设定值(CBR/VBR可用)。</p>
+</section>
+<section id="id7">
+<h3><span class="section-number">30.3.9. </span>视频序列中断<a class="headerlink" href="#id7" title="永久链接至标题"></a></h3>
+<p>在连动模式时使用, 当软件拉低序列使能後, 硬件处理当下该帧後发出序列中断(VDO_INT的位&lt;S_SEQ_DONE_INT&gt;或&lt;SEQ_DONE_INT&gt;), 此中断需要软件设定中断清除(VDO_INT_CLR的位&lt;S_SEQ_DONE_INT_CLR&gt;或&lt;SEQ_DONE_INT_CLR&gt;); 此中断可以使用遮挡(VDO_INT_MASK的位&lt;S_SEQ_DONE_INT_MASK&gt;或&lt;SEQ_DONE_INT_MASK&gt;)来忽略。</p>
+</section>
+<section id="id8">
+<h3><span class="section-number">30.3.10. </span>帧中断<a class="headerlink" href="#id8" title="永久链接至标题"></a></h3>
+<p>在软件模式和连动模式下只要硬件完成一帧压缩就会发出帧中断(VDO_INT的位&lt;S_FRM_DONE_INT&gt;或&lt;FRM_DONE_INT&gt;), 此中断需要软件设定中断清除(VDO_INT_CLR的位&lt;S_FRM_DONE_INT_CLR&gt;或&lt;FRM_DONE_INT_CLR&gt;); 此中断可以使用遮挡(VDO_INT_MASK的位&lt;S_FRM_DONE_INT_MASK&gt;或&lt;FRM_DONE_INT_MASK&gt;)来忽略。</p>
+</section>
+<section id="id9">
+<h3><span class="section-number">30.3.11. </span>输入缓存溢出状态警示<a class="headerlink" href="#id9" title="永久链接至标题"></a></h3>
+<p>如果发生视频压缩速度远低於Camera pixel输出时会发生缓存溢出情形, 软件可透过VDO_SRC_R_DBG(位&lt;SRC_WR_OV_RD&gt;)或VDO_S_SRC_R_DBG(位&lt;S_SRC_WR_OV_RD&gt;)的状态寄存器得知。</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="JDEC.html" class="btn btn-neutral float-left" title="29. JDEC" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="NPUtoolchain.html" class="btn btn-neutral float-right" title="31. NPU toolchain" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2021.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

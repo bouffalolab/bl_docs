@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>30. VENC &mdash; BL808 Reference Manual  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="31. NPU toolchain" href="NPUtoolchain.html" />
+    <link rel="prev" title="29. JDEC" href="JDEC.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL808 Reference Manual
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. System and Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. Reset and Clock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPIO.html">4. GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">5. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">6. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">7. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA2D.html">8. DMA2D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lz4d.html">9. LZ4D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBI.html">10. DBI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DPI.html">11. DPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DSI.html">12. DSI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cam.html">13. CAM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">14. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">15. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">16. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">17. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">18. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">19. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2s.html">20. I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PDM.html">21. PDM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AUDIO.html">22. AUDIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PSRAM.html">23. PSRAM Contorller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Emac.html">24. Emac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USB.html">25. USB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SDH.html">26. SDH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ISO11898.html">27. ISO11898</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MJPEG.html">28. MJPEG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="JDEC.html">29. JDEC</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">30. VENC</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">30.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#features">30.2. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#functional-description">30.3. Functional Description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#software-mode-and-linked-mode">30.3.1. Software Mode and Linked Mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cbr-vbr-mode">30.3.2. CBR/VBR Mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dual-stream">30.3.3. Dual-Stream</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#region-of-interest-roi">30.3.4. Region of Interest (ROI)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#osd-coding-area">30.3.5. OSD Coding Area</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dynamically-configurable-max-min-quantization-parameters">30.3.6. Dynamically Configurable Max/Min Quantization Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dynamically-configurable-i-p-frame-target-bit">30.3.7. Dynamically Configurable I/P-Frame Target Bit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dynamically-configurable-i-frame-distance">30.3.8. Dynamically Configurable I-Frame Distance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#video-sequence-interrupt">30.3.9. Video Sequence Interrupt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#frame-interrupt">30.3.10. Frame Interrupt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#input-cache-overflow-alert">30.3.11. Input Cache Overflow Alert</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="NPUtoolchain.html">31. NPU toolchain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NPU.html">32. NPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IPC.html">33. IPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LowPower.html">34. LowPower</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SEC_ENG.html">35. SEC ENG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">36. Revision history</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL808 Reference Manual</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">30. </span>VENC</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="venc">
+<h1><span class="section-number">30. </span>VENC<a class="headerlink" href="#venc" title="Permalink to this headline"></a></h1>
+<section id="overview">
+<h2><span class="section-number">30.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
+<p>VENC follows the H264 video coding standard, which mainly compresses objects by prediction and motion compensation, and improves image quality by a loop filter, while meeting the requirements of stream transmission and image quality.</p>
+</section>
+<section id="features">
+<h2><span class="section-number">30.2. </span>Features<a class="headerlink" href="#features" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="mailto:1920x1080p&#37;&#52;&#48;30fps">1920x1080p<span>&#64;</span>30fps</a> + <a class="reference external" href="mailto:640x480&#37;&#52;&#48;30fps">640x480<span>&#64;</span>30fps</a>, BP/MP</p></li>
+<li><p>Input: Semi-Planar YCbCr 4:2:0</p></li>
+<li><p>Output: NALU(Network Abstract Layer Uint) in byte stream format</p></li>
+<li><p>CBR/VBR mode</p></li>
+<li><p>Up to 8 ROI</p></li>
+<li><p>Up to 16 OSD coding areas</p></li>
+<li><p>Supports software and linked modes</p></li>
+<li><p>Dynamically configurable max/min quantization parameters</p></li>
+<li><p>Dynamically configurable I/P-frame target bit</p></li>
+<li><p>Dynamically configurable I-frame distance</p></li>
+</ul>
+</section>
+<section id="functional-description">
+<h2><span class="section-number">30.3. </span>Functional Description<a class="headerlink" href="#functional-description" title="Permalink to this headline"></a></h2>
+<section id="software-mode-and-linked-mode">
+<h3><span class="section-number">30.3.1. </span>Software Mode and Linked Mode<a class="headerlink" href="#software-mode-and-linked-mode" title="Permalink to this headline"></a></h3>
+<p>Software Mode: The hardware interacts with the software in the unit of frame. The software sets that the hardware compresses one frame only after one frame is started, and a frame interrupt is returned after compression is completed. The input frame memory shall contain at least one frame.</p>
+<p>Linked Mode: The software sets the &lt;CFG_S_ENC_SEQ_EN&gt; or &lt;CFG_ENC_SEQ_EN&gt; bit in H264_ENCODER_CTRL to enable sequence encoding. The hardware automatically detects the state of the input frame and compresses it. Until software pulls down Sequence Enable, the hardware stops compression (ending at a complete frame) and the sequence interrupt is returned. When each frame in the sequence is finished, a frame interrupt is returned.</p>
+</section>
+<section id="cbr-vbr-mode">
+<h3><span class="section-number">30.3.2. </span>CBR/VBR Mode<a class="headerlink" href="#cbr-vbr-mode" title="Permalink to this headline"></a></h3>
+<p>If &lt;NUM_IMB_BITS&gt; or &lt;S_NUM_IMB_BITS&gt; in CORE_REG23 is set to 0, the stream is in VBR Mode. If it is not 0, it is in CBR Mode. In VBR Mode, I/P-frame fixed quantization parameters (CORE_REG3/CORE_REG5) shall be set. It is not recommended to switch modes when hardware is working.</p>
+</section>
+<section id="dual-stream">
+<h3><span class="section-number">30.3.3. </span>Dual-Stream<a class="headerlink" href="#dual-stream" title="Permalink to this headline"></a></h3>
+<p>The frame enable, frame interrupt, sequence enable, and sequence interrupt of the two streams are configured separately. Essentially, the frame rate of two streams shall be the same, but the resolution and other compression parameters can be different.</p>
+</section>
+<section id="region-of-interest-roi">
+<h3><span class="section-number">30.3.4. </span>Region of Interest (ROI)<a class="headerlink" href="#region-of-interest-roi" title="Permalink to this headline"></a></h3>
+<p>A single stream supports up to 8 ROI areas, and each area has its own enabling and start/end macroblock position settings. It is necessary to set the &lt;CFG_ROI_UPD&gt; bit in H264_ROI_MODE or the &lt;CFG_S_ROI_UPD&gt; bit in H264_S_ROI_MODE to “1”, to make the new settings take effect. The hardware synchronizes ROI settings for each frame.</p>
+</section>
+<section id="osd-coding-area">
+<h3><span class="section-number">30.3.5. </span>OSD Coding Area<a class="headerlink" href="#osd-coding-area" title="Permalink to this headline"></a></h3>
+<p>The hardware supports up to 16 OSD areas, and H264_OSD_EN decides the OSD area of each stream as configured in the software. The OSD area is represented by the start/end macroblock position.</p>
+</section>
+<section id="dynamically-configurable-max-min-quantization-parameters">
+<h3><span class="section-number">30.3.6. </span>Dynamically Configurable Max/Min Quantization Parameters<a class="headerlink" href="#dynamically-configurable-max-min-quantization-parameters" title="Permalink to this headline"></a></h3>
+<p>To provide a better control stream, after the software sets CORE_REG31, it is necessary to set H264_ENCODER_CTRL (the &lt;CFG_QR_UPD&gt; and &lt;CFG_S_QR_UPD&gt; bits set two streams respectively) to make the new setting value take effect. The hardware will synchronize the new setting value in the unit of GOP to adjust the quantization parameters dynamically.</p>
+</section>
+<section id="dynamically-configurable-i-p-frame-target-bit">
+<h3><span class="section-number">30.3.7. </span>Dynamically Configurable I/P-Frame Target Bit<a class="headerlink" href="#dynamically-configurable-i-p-frame-target-bit" title="Permalink to this headline"></a></h3>
+<p>The software can set CORE_REG23/CORE_REG24 to adjust the target bit of I/P-frame. After CORE_REG23/CORE_REG24 is set, it is necessary to set H264_ENCODER_CTRL (the &lt;CFG_QR_UPD&gt; and &lt;CFG_S_QR_UPD&gt; bits set two streams respectively) to make the new setting value take effect. The hardware will synchronize the new setting value in the unit of GOP (CBR Mode).</p>
+</section>
+<section id="dynamically-configurable-i-frame-distance">
+<h3><span class="section-number">30.3.8. </span>Dynamically Configurable I-Frame Distance<a class="headerlink" href="#dynamically-configurable-i-frame-distance" title="Permalink to this headline"></a></h3>
+<p>After the software sets CORE_REG8, it is necessary to set H264_ENCODER_CTRL (the &lt;CFG_QR_UPD&gt; and &lt;CFG_S_QR_UPD&gt; bits set two streams respectively) to make the new setting value take effect. The hardware will synchronize the new setting value in the unit of GOP (CBR/VBR available).</p>
+</section>
+<section id="video-sequence-interrupt">
+<h3><span class="section-number">30.3.9. </span>Video Sequence Interrupt<a class="headerlink" href="#video-sequence-interrupt" title="Permalink to this headline"></a></h3>
+<p>In Linked Mode, when software pulls down Sequence Enable, the hardware generates sequence interrupt after processing the current frame (&lt;S_SEQ_DONE_INT&gt; or &lt;SEQ_DONE_INT&gt; bit in VDO_INT), and this interrupt requires the software to set the interrupt clear (&lt;S_SEQ_DONE_INT_CLR&gt; or &lt;SEQ_DONE_INT_CLR&gt; bit in VDO_INT_CLR). This interrupt can be ignored by masking (&lt;S_SEQ_DONE_INT_MASK&gt; or &lt;SEQ_DONE_INT_MASK&gt; bit in VDO_INT_MASK).</p>
+</section>
+<section id="frame-interrupt">
+<h3><span class="section-number">30.3.10. </span>Frame Interrupt<a class="headerlink" href="#frame-interrupt" title="Permalink to this headline"></a></h3>
+<p>In Software Mode and Linked Mode, the frame interrupt (&lt;S_FRM_DONE_INT&gt; or &lt;FRM_DONE_INT&gt; in VDO_INT) will be generated as soon as the hardware compresses one frame. This interrupt requires the software to set the interrupt clear (&lt;S_FRM_DONE_INT_CLR&gt; or &lt;FRM_DONE_INT_CLR&gt; bit in VDO_INT_CLR). This interrupt can be ignored by masking (&lt;S_FRM_DONE_INT_MASK&gt; or &lt;FRM_DONE_INT_MASK&gt; bit in VDO_INT_MASK).</p>
+</section>
+<section id="input-cache-overflow-alert">
+<h3><span class="section-number">30.3.11. </span>Input Cache Overflow Alert<a class="headerlink" href="#input-cache-overflow-alert" title="Permalink to this headline"></a></h3>
+<p>If the video compression speed is much lower than the camera pixel, buffer overflow will occur at output. The software can detect that through the status register VDO_SRC_R_DBG (&lt;SRC_WR_OV_RD&gt; bit) or VDO_S_SRC_R_DBG (&lt;S_SRC_WR_OV_RD&gt; bit).</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="JDEC.html" class="btn btn-neutral float-left" title="29. JDEC" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="NPUtoolchain.html" class="btn btn-neutral float-right" title="31. NPU toolchain" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
