@@ -1,0 +1,494 @@
+========
+ISO11898
+========
+
+Overview
+=====
+ISO11898 was developed by German BOSCH Company, which is famous for R&D and production of automotive electronic products. It is one of the most widely used fieldbuses in the world.
+
+Features
+=========
+
+- Supports 1Mbps and custom bit rate
+
+- ISO11898 2.0A and 2.0B
+
+- Self-test mode (self-sending and self-receiving)
+
+- Frame filtering
+
+- Silent mode (no reply, no valid error flag)
+
+- Single transmission without retransmission
+
+- Query of bits that lose the arbitration
+
+- Any bus error can trigger an interrupt
+
+Functional Description
+=========
+TX Buffer (TXB)
+-----------------
+TXB, an interface between CPU and BSP, can store complete messages for transmission over the ISO11898 network. The buffer length is 13 bytes, written by CPU and read by the BSP.
+
+RX Buffer (RXB, RXFIFO)
+--------------------------
+RXB, an interface between access control filter and CPU, is used to store the filtered messages received from the ISO11898 bus. RXB represents a 13-byte window in the RX FIFO that can be accessed by CPU, with a total length of 64 bytes.
+RX FIFO allows CPU to receive other messages while processing one frame of message.
+
+Access Control Filter (ACF)
+------------------
+ACF compares the received identifier with the contents of the ACF register and decides whether the message should be accepted. If accepted, the complete message will be stored in RX FIFO.
+
+Bit Stream Processor (BSP)
+------------------
+BSP, a sequence generator, is used to process the data between TXB, RXB, and ISO11898 bus. It also performs error detection, arbitration, bit padding, and error handling on the ISO11898 bus.
+
+Bit Timing Logic (BTL)
+------------------
+BTL monitors the serial ISO11898 bus and processes the bus related bit timing. It performs hard synchronization on the recessive-to-dominant transition of the bus at the beginning of the message, and soft synchronization again during subsequent message reception. BTL also provides a programmable time period to compensate propagation delay and phase shift (for example, due to oscillator drift), and can define sampling points and sampling times in a bit time.
+
+Error Management Logic (EML)
+--------------------
+EML determines the errors of the transport layer module. It receives the error statement from BSP and then informs BSP and interrupt management logic (IML) of error statistics.
+
+Functional Description
+=========
+Mode
+-----
+Self-test Mode
+^^^^^^^^^
+You can select the self-test mode by setting the STM bit in the MOD register to '1'. In this mode, the RX request command can be used to conduct a full-node test without other active nodes on the bus, and even if no response is received, the ISO11898 controller will perform successful transmission.
+
+Silent Mode
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+You can select the silent mode by setting the LOM bit in the MOD register to "1". In this mode, the ISO11898 controller will not respond to the ISO11898 bus even if it successfully receives the message, and the error counter will stay at the current value. This mode will force the ISO11898 controller to become a passive error, and no message can be transmitted at this time. This mode can be used in software-driven bit rate detection and hot swap scenarios, and all other functions work normally as the normal mode.
+
+Reset Mode
+^^^^^^^^^
+Once the RM bit in the MOD register changes from '0' to '1', it will cause the current TX and RX messages to be terminated and enter the reset mode. When the RM bit changes from '1' to '0', the ISO11898 controller will return to the operating mode.
+
+The meanings of different operations in different modes are as follows.
+
+.. table:: The meaning of each register in different modes 
+    :widths: 10, 15, 15, 15, 15, 15, 15
+    :width: 80%
+    :align: center
+
+    +---------+-----------------------------------+-----------------------------------+-------------------------------+
+    | ADDRESS |                            OPERATING MODE                             |           RESET MODE          |
+    |         +-----------------------------------+-----------------------------------+---------------+---------------+
+    | OFFSET  |                 READ              |                WRITE              | READ          | WRITE         |
+    +=========+===================================+===================================+===============+===============+
+    |  0x00   | mode                              | mode                              | mode          | mode          |
+    +---------+-----------------------------------+-----------------------------------+---------------+---------------+
+    |  0x04   | (00H)                             | command                           |(00H)          | command       |
+    +---------+-----------------------------------+-----------------------------------+---------------+---------------+
+    |  0x08   | status                            | reserved                          | status        | reserved      |
+    +---------+-----------------------------------+-----------------------------------+---------------+---------------+
+    |  0x0C   | interrupt                         | reserved                          |interrupt      | reserved      |
+    +---------+-----------------------------------+-----------------------------------+---------------+---------------+
+    |  0x10   | interrupt enable                  | interrupt enable                  | interrupt     | interrupt     |
+    |         |                                   |                                   | enable        | enable        |
+    +---------+-----------------------------------+-----------------------------------+---------------+---------------+
+    |  0x14   | reserved                          | reserved                          | reserved      | reserved      |
+    +---------+-----------------------------------+-----------------------------------+---------------+---------------+
+    |  0x18   | bus timing 0                      | reserved                          | bus timing 0  | bus timing 0  |
+    +---------+-----------------------------------+-----------------------------------+---------------+---------------+
+    |  0x1C   | bus timing 1                      | reserved                          | bus timing 1  | bus timing 1  |
+    +---------+-----------------------------------+-----------------------------------+---------------+---------------+
+    |  0x20   | reserved                          | reserved                          |  reserved     | reserved      |
+    +---------+-----------------------------------+-----------------------------------+---------------+---------------+
+    |  0x24   | reserved                          | reserved                          |  reserved     | reserved      |
+    +---------+-----------------------------------+-----------------------------------+---------------+---------------+
+    |  0x28   | reserved                          | reserved                          |  reserved     | reserved      |
+    +---------+-----------------------------------+-----------------------------------+---------------+---------------+
+    |  0x2C   | arbitration lost capture          | reserved                          | arbitration   | reserved      |
+    |         |                                   |                                   | lost capture  |               |
+    +---------+-----------------------------------+-----------------------------------+---------------+---------------+
+    |  0x30   | error code capture                | reserved                          | error code    | reserved      |
+    |         |                                   |                                   | capture       |               |
+    +---------+-----------------------------------+-----------------------------------+---------------+---------------+
+    |  0x34   | error warning limit               | reserved                          | error warning | error warning |
+    |         |                                   |                                   | limit         | limit         |
+    +---------+-----------------------------------+-----------------------------------+---------------+---------------+
+    |  0x38   | RX error counter                  | reserved                          | RX error      | RX error      |
+    |         |                                   |                                   | counter       | counter       |
+    +---------+-----------------------------------+-----------------------------------+---------------+---------------+
+    |  0x3C   | TX error counter                  | reserved                          | TX error      | TX error      |
+    |         |                                   |                                   | counter       | counter       |
+    +---------+-----------------+-----------------+-----------------+-----------------+---------------+---------------+
+    |  0x40   | SFF RX frame    | EFF RX frame    | SFF TX frame    | EFF TX frame    | acceptance    | acceptance    |
+    |         | information     | information     | information     | information     | code 0        | code 0        |
+    +---------+-----------------+-----------------+-----------------+-----------------+---------------+---------------+
+    |  0x44   | RX identifier 1 | RX identifier 1 | TX identifier 1 | TX identifier 1 | acceptance    | acceptance    |
+    |         |                 |                 |                 |                 | code 1        | code 1        |
+    +---------+-----------------+-----------------+-----------------+-----------------+---------------+---------------+
+    |  0x48   | RX identifier 2 | RX identifier 2 | TX identifier 2 | TX identifier 2 | acceptance    | acceptance    |
+    |         |                 |                 |                 |                 | code 2        | code 2        |
+    +---------+-----------------+-----------------+-----------------+-----------------+---------------+---------------+
+    |  0x4C   | RX data 1       | RX identifier 3 | TX data 1       | TX identifier 3 | acceptance    | acceptance    |
+    |         |                 |                 |                 |                 | code 3        | code 3        |
+    +---------+-----------------+-----------------+-----------------+-----------------+---------------+---------------+
+    |  0x50   | RX data 2       | RX identifier 4 | TX data 2       | TX identifier 4 | acceptance    | acceptance    |
+    |         |                 |                 |                 |                 | mask 0        | mask 0        |
+    +---------+-----------------+-----------------+-----------------+-----------------+---------------+---------------+
+    |  0x54   | RX data 3       | RX data 1       | TX data 3       | TX data 1       | acceptance    | acceptance    |
+    |         |                 |                 |                 |                 | mask 1        | mask 1        |
+    +---------+-----------------+-----------------+-----------------+-----------------+---------------+---------------+
+    |  0x58   | RX data 4       | RX data 2       | TX data 4       | TX data 2       | acceptance    | acceptance    |
+    |         |                 |                 |                 |                 | mask 2        | mask 2        |
+    +---------+-----------------+-----------------+-----------------+-----------------+---------------+---------------+
+    |  0x5C   | RX data 5       | RX data 3       | TX data 5       | TX data 3       | acceptance    | acceptance    |
+    |         |                 |                 |                 |                 | mask 3        | mask 3        |
+    +---------+-----------------+-----------------+-----------------+-----------------+---------------+---------------+
+    |  0x60   | RX data 6       | RX data 4       | TX data 6       | TX data 4       | reserved      | reserved      |
+    +---------+-----------------+-----------------+-----------------+-----------------+---------------+---------------+
+    |  0x64   | RX data 7       | RX data 5       | TX data 7       | TX data 5       | reserved      | reserved      |
+    +---------+-----------------+-----------------+-----------------+-----------------+---------------+---------------+
+    |  0x68   | RX data 8       | RX data 6       | TX data 8       | TX data 6       | reserved      | reserved      |
+    +---------+-----------------+-----------------+-----------------+-----------------+---------------+---------------+
+    |  0x6C   | (FIFO RAM)      | RX data 7       | reserved        | TX data 7       | reserved      | reserved      |
+    +---------+-----------------+-----------------+-----------------+-----------------+---------------+---------------+
+    |  0x70   | (FIFO RAM)      | RX data 8       | reserved        | TX data 8       | reserved      | reserved      |
+    +---------+-----------------+-----------------+-----------------+-----------------+---------------+---------------+
+    |  0x74   | RX message counter                | reserved                          | RX message    | reserved      |
+    |         |                                   |                                   | counter       |               |
+    +---------+-----------------------------------+-----------------------------------+---------------+---------------+
+    |  0x78   | RX buffer start address           | reserved                          | RX buffer     | RX buffer     |
+    |         |                                   |                                   | start address | start address |
+    +---------+-----------------------------------+-----------------------------------+---------------+---------------+
+    |  0x7C   | clock divider                     | clock divider                     | clock divider | clock divider |
+    +---------+-----------------------------------+-----------------------------------+---------------+---------------+
+
+Sending Process
+---------
+Process
+^^^^^^^^^
+1. Check the TBS bit in the SR register to ensure that TXB is empty.
+
+2. Configure frame information, ID number, and data.
+
+3. Request transmission by setting the TR bit in the CMR register.
+
+Termination of Sending
+^^^^^^^^^
+When CPU requests to suspend the previous transmission, you can use this function. For example, you need to send a more urgent message first. Messages that are sending now are not affected by this function and sending will not stop. To check whether the previous message was successfully sent, you should check the TCS bit in the SR register. The application software can use this function by setting the AT bit in the CMR register to '1', which should be executed after the TBS bit in the SR register is set to '1' or the TX interrupt is generated.
+
+It should be noted that even if the message is terminated, a TX interrupt will occur, because the status bit of the TXB has indicated the "released" status.
+
+Self-sending and Self-receiving
+^^^^^^^^^
+The application software can realize self-sending and self-receiving by setting the SRR bit in the CMR register. At that time, sending and receiving are synchronized. Other operations are the same as the normal sending process.
+
+Precautions
+^^^^^^^
+1. If the TR and AT bits of the CMA register are set simultaneously, the message will be sent only once. Even if there is an error event or arbitration lost, it will not be sent again.
+
+2. If the SRR and AT bits of the CMA register are set simultaneously, the message will be sent only once by self-sending and self-receiving. Even if there is an error event or arbitration lost, it will not be sent again.
+
+3. If SRR, TR, and AT bits of the CMA register are set simultaneously, the message will be sent by setting TR and AT bits simultaneously.
+
+4. Once the TX status bit in the status register is set, the internal TX request bit will be cleared automatically.
+
+5. If the TR and SRR bits of the CMA register are set simultaneously, the SRR bit will be ignored.
+
+Receiving Process
+---------
+Process
+^^^^^^^^^
+The received messages are stored in an internal FIFO with a depth of 64 bytes. The FIFO is completely managed by hardware, which saves CPU's processing load, simplifies software, and ensures data consistency. The application can read the received messages through the FIFO's output interface. When the RBS bit in the SR register is set, one or more frames of messages can be read in RX FIFO. After the software gets the message, setting the RRB bit in the CMR register can release the RX FIFO occupied by the current message.
+
+Number of Messages
+^^^^^^^^^
+The RMC register indicates the number of readable messages in RX FIFO, which increases with each RX event and decreases with each buffer release. The value is 0 after reset.
+
+RXB
+^^^^^^^^^^^
+The RBSA register indicates the address of the first byte of the received message stored in the current internal RAM, which is mapped to the RXB window. The contents of the internal RAM can be interpreted on this basis. This part of the internal RAM can be read and written by CPU (written only in the reset mode).
+
+Example: If the value of RBSA is 18H, the current readable message of the RXB window (offset address: 10H to 12H) is also stored in the RAM address starting from 18H. As the RAM address is directly mapped to the starting position of ISO11898 offset address 20H (corresponding to RAM address 0H), the message can also be read from ISO11898 offset address 38H and the following bytes (ISO11898 address = RBSA + 20H = 18H + 20H = 38H). If the message address exceeds the RAM address 3FH, it will continue from the RAM address 0.
+
+When there is at least one message in FIFO, the command to release the RXB should be issued, and then RBSA will be updated to the starting position of the next message.
+
+When the hardware is reset, the value of RBSA register is initialized to '00H'. When the software is reset in the reset mode, the value of this register will not change, but the FIFO will be cleared. This means that the contents of RAM will not change, but the next received (or sent) message will overwrite the visible message in the RXB window.
+
+Identifier Filtering
+-----------
+With the help of ACF, the ISO11898 controller will allow the received message to be delivered to RX FIFO only when the identifier bit of the received message is the same as the predefined bit in the ACF register. ACF consists of the acceptance code registers (ACRn) and acceptance mask registers (AMRn). The values of matching bits in the receivable message are set by the ACRn, and which bits can be masked is set by the AMRn.
+
+There are two different filtering modes (set by the AFM bit in the MOD register):
+
+- Single filter mode (AFM = 1).
+
+- Double filter mode (AFM = 0).
+
+Single Filter Configuration
+^^^^^^^^^^^^^
+In this configuration, a 4-byte long filter can be defined. The bit correspondence between filter bytes and message bytes depends on the currently received frame format.
+
+Standard frame: If a message in a standard frame format is received, the complete identifier including the RTR bit and the first two data bytes is used to accept filtering. If there is no data byte because RTR bit is set, or there is no data byte or only one data byte because a data length is set, the message can also be received.
+
+As all the filter bits are logically AND, only when all the bits pass through the filter, can a message be received. It should be noted that the low 4 bits of AMR1 and ACR1 are unused, and these bits should be set as mask bits for compatibility with future products. That is, all 3–0 bits of AMR1 are '1'.
+
+.. figure:: ../../picture/ISO11898FilterSingleStandard.svg
+   :align: center
+
+   Single filter configuration, receiving standard frame messages
+
+Extended frame: If a message in an extended frame format is received, the complete identifier including the RTR bit is used to accept filtering.
+
+As all the filter bits are logically AND, only when all the bits pass through the filter, can a message be received. It should be noted that the low 2 bits of AMR3 and ACR3 are unused, and these bits should be set as mask bits for compatibility with future products. That is, all 1–0 bits of AMR3 are '1'.
+
+.. figure:: ../../picture/ISO11898FilterSingleExtended.svg
+   :align: center
+
+   Single filter configuration, receiving extended frame messages
+
+Double Filter Configuration
+^^^^^^^^^^^^^
+Two short filters can be defined in this configuration, and the received message will be compared with both filters to decide whether to copy the message to the RXB. As long as a filter receives the message, the received message is valid. The bit correspondence between filter bytes and message bytes depends on the currently received frame format.
+
+Standard frame: If a message in a standard frame format is received, the two filters defined look a little different. The first filter compares the complete identifier including RTR and the first data byte, while the second one only compares the standard identifier including RTR.
+
+To successfully receive the message, the comparison result of all single bits in at least one complete filter indicates "accept". There is no data when RTR is set or the data length is 0. However, if the first part up to the RTR bit indicates "accept", the message can also pass through the filter 1.
+
+If the first filter does not need to filter data bytes, the low 4 bits of AMR1 and AMR3 must be set to logical '1' (insignificant), and the two filters run identically using standard identifiers including RTR.
+
+.. figure:: ../../picture/ISO11898FilterDualStandard.svg
+   :align: center
+
+   Dual filter configuration, receiving standard frame messages
+
+Extended frame: If a message in an extended frame format is received, the two filters defined look the same. Both filters only compare the first two bytes of the extended identifier.
+
+Only when all single bit comparisons of at least one complete filter indicate acceptance, can the message be successfully received.
+
+.. figure:: ../../picture/ISO11898FilterDualExtended.svg
+   :align: center
+
+   Dual filter configuration, receiving extended frame messages
+
+Error Management
+---------
+Arbitration Lost
+^^^^^^^^^
+The arbitration lost capture (ALC) register contains the position that encounters arbitration lost and can only be read by CPU but not written by it. If the arbitration lost interrupt is enabled, an interrupt will be generated once arbitration loses. The position of the current bit in BSP is captured into the ALC. This register's value is fixed until the user software reads the contents of the ALC. After this value is read, the capture mechanism is activated again. When the interrupt register is read, the corresponding interrupt flag will also be cleared. No arbitration lost interrupt will be generated again before the ALC register is read.
+
+.. figure:: ../../picture/ISO11898ArbitrationLostBitNumberInterpretation.svg
+   :align: center
+
+   Arbitration lost bit number interpretation
+
+.. figure:: ../../picture/ISO11898ExampleOfArbitrationLost.svg
+   :align: center
+
+   Example of arbitration lost bit number interpretation; result: ALC = 08
+
+.. table:: Arbitration loss capture location 
+    :widths: 10, 10, 10, 10, 10, 15, 35
+    :width: 80%
+    :align: center
+
+    +-----------------------------+-------+----------------------------------------+
+    |             BITS            |DECIMAL|                                        |
+    +-----+-----+-----+-----+-----+       |                FUNCTION                |
+    |ALC.4|ALC.3|ALC.2|ALC.1|ALC.0|VALUE  |                                        |
+    +=====+=====+=====+=====+=====+=======+========================================+
+    |  0  |  0  |  0  |  0  |  0  |  00   |arbitration lost in bit 1 of identifier |
+    +-----+-----+-----+-----+-----+-------+----------------------------------------+
+    |  0  |  0  |  0  |  0  |  1  |  01   |arbitration lost in bit 2 of identifier |
+    +-----+-----+-----+-----+-----+-------+----------------------------------------+
+    |  0  |  0  |  0  |  1  |  0  |  02   |arbitration lost in bit 3 of identifier |
+    +-----+-----+-----+-----+-----+-------+----------------------------------------+
+    |  0  |  0  |  0  |  1  |  1  |  03   |arbitration lost in bit 4 of identifier |
+    +-----+-----+-----+-----+-----+-------+----------------------------------------+
+    |  0  |  0  |  1  |  0  |  0  |  04   |arbitration lost in bit 5 of identifier |
+    +-----+-----+-----+-----+-----+-------+----------------------------------------+
+    |  0  |  0  |  1  |  0  |  1  |  05   |arbitration lost in bit 6 of identifier |
+    +-----+-----+-----+-----+-----+-------+----------------------------------------+
+    |  0  |  0  |  1  |  1  |  0  |  06   |arbitration lost in bit 7 of identifier |
+    +-----+-----+-----+-----+-----+-------+----------------------------------------+
+    |  0  |  0  |  1  |  1  |  1  |  07   |arbitration lost in bit 8 of identifier |
+    +-----+-----+-----+-----+-----+-------+----------------------------------------+
+    |  0  |  1  |  0  |  0  |  0  |  08   |arbitration lost in bit 9 of identifier |
+    +-----+-----+-----+-----+-----+-------+----------------------------------------+
+    |  0  |  1  |  0  |  0  |  1  |  09   |arbitration lost in bit 10 of identifier|
+    +-----+-----+-----+-----+-----+-------+----------------------------------------+
+    |  0  |  1  |  0  |  1  |  0  |  10   |arbitration lost in bit 11 of identifier|
+    +-----+-----+-----+-----+-----+-------+----------------------------------------+
+    |  0  |  1  |  0  |  1  |  1  |  11   |arbitration lost in bit SRTR            |
+    +-----+-----+-----+-----+-----+-------+----------------------------------------+
+    |  0  |  1  |  1  |  0  |  0  |  12   |arbitration lost in bit IDE             |
+    +-----+-----+-----+-----+-----+-------+----------------------------------------+
+    |  0  |  1  |  1  |  0  |  1  |  13   |arbitration lost in bit 12 of identifier|
+    +-----+-----+-----+-----+-----+-------+----------------------------------------+
+    |  0  |  1  |  1  |  1  |  0  |  14   |arbitration lost in bit 13 of identifier|
+    +-----+-----+-----+-----+-----+-------+----------------------------------------+
+    |  0  |  1  |  1  |  1  |  1  |  15   |arbitration lost in bit 14 of identifier|
+    +-----+-----+-----+-----+-----+-------+----------------------------------------+
+    |  1  |  0  |  0  |  0  |  0  |  16   |arbitration lost in bit 15 of identifier|
+    +-----+-----+-----+-----+-----+-------+----------------------------------------+
+    |  1  |  0  |  0  |  0  |  1  |  17   |arbitration lost in bit 16 of identifier|
+    +-----+-----+-----+-----+-----+-------+----------------------------------------+
+    |  1  |  0  |  0  |  1  |  0  |  18   |arbitration lost in bit 17 of identifier|
+    +-----+-----+-----+-----+-----+-------+----------------------------------------+
+    |  1  |  0  |  0  |  1  |  1  |  19   |arbitration lost in bit 18 of identifier|
+    +-----+-----+-----+-----+-----+-------+----------------------------------------+
+    |  1  |  0  |  1  |  0  |  0  |  20   |arbitration lost in bit 19 of identifier|
+    +-----+-----+-----+-----+-----+-------+----------------------------------------+
+    |  1  |  0  |  1  |  0  |  1  |  21   |arbitration lost in bit 20 of identifier|
+    +-----+-----+-----+-----+-----+-------+----------------------------------------+
+    |  1  |  0  |  1  |  1  |  0  |  22   |arbitration lost in bit 21 of identifier|
+    +-----+-----+-----+-----+-----+-------+----------------------------------------+
+    |  1  |  0  |  1  |  1  |  1  |  23   |arbitration lost in bit 22 of identifier|
+    +-----+-----+-----+-----+-----+-------+----------------------------------------+
+    |  1  |  1  |  0  |  0  |  0  |  24   |arbitration lost in bit 23 of identifier|
+    +-----+-----+-----+-----+-----+-------+----------------------------------------+
+    |  1  |  1  |  0  |  0  |  1  |  25   |arbitration lost in bit 24 of identifier|
+    +-----+-----+-----+-----+-----+-------+----------------------------------------+
+    |  1  |  1  |  0  |  1  |  0  |  26   |arbitration lost in bit 25 of identifier|
+    +-----+-----+-----+-----+-----+-------+----------------------------------------+
+    |  1  |  1  |  0  |  1  |  1  |  27   |arbitration lost in bit 26 of identifier|
+    +-----+-----+-----+-----+-----+-------+----------------------------------------+
+    |  0  |  1  |  1  |  0  |  0  |  28   |arbitration lost in bit 27 of identifier|
+    +-----+-----+-----+-----+-----+-------+----------------------------------------+
+    |  1  |  1  |  1  |  0  |  1  |  29   |arbitration lost in bit 28 of identifier|
+    +-----+-----+-----+-----+-----+-------+----------------------------------------+
+    |  1  |  1  |  1  |  1  |  0  |  30   |arbitration lost in bit 29 of identifier|
+    +-----+-----+-----+-----+-----+-------+----------------------------------------+
+    |  1  |  1  |  1  |  1  |  1  |  31   |arbitration lost in bit RTR             |
+    +-----+-----+-----+-----+-----+-------+----------------------------------------+
+
+Error Capture
+^^^^^^^^^
+The error code capture (ECC) register contains the type and location of bus errors and can only be read by CPU but not written by it. If the bus error interrupt is enabled, a bus error interrupt will be generated once a bus error occurs. The position of the current bit in BSP is captured into the ECC. This register's value is fixed until the user software reads the contents of the ECC. After this value is read, the capture mechanism is activated again. Reading the corresponding bit in the interrupt register will clear this bit, and no bus error interrupt will be generated before the ECC register is read.
+
+The error types represented by the values in the ECC register are shown as follows.
+
+.. table:: Type of error catch 
+    :widths: 30, 30, 40
+    :width: 80%
+    :align: center
+
+    +-----------+-----------+--------------------+
+    | BIT ECC.7 | BIT ECC.6 |     FUNCTION       |
+    +===========+===========+====================+
+    |     0     |     0     | bit error          |
+    +-----------+-----------+--------------------+
+    |     0     |     1     |form error          |
+    +-----------+-----------+--------------------+
+    |     1     |     0     |stuff error         |
+    +-----------+-----------+--------------------+
+    |     1     |     1     |other type of error |
+    +-----------+-----------+--------------------+
+
+.. table:: Error catch location 
+    :widths: 15, 15, 15, 15, 15, 25
+    :width: 80%
+    :align: center
+
+    +-----------+-----------+-----------+-----------+-----------+----------------------+
+    | BIT ECC.4 | BIT ECC.3 | BIT ECC.2 | BIT ECC.1 | BIT ECC.0 |       FUNCTION       |
+    +===========+===========+===========+===========+===========+======================+
+    |     0     |     0     |     0     |     1     |     1     |start of frame        |
+    +-----------+-----------+-----------+-----------+-----------+----------------------+
+    |     0     |     0     |     0     |     1     |     0     |ID.28 to ID.21        |
+    +-----------+-----------+-----------+-----------+-----------+----------------------+
+    |     0     |     0     |     1     |     1     |     0     |ID.20 to ID.18        |
+    +-----------+-----------+-----------+-----------+-----------+----------------------+
+    |     0     |     0     |     1     |     0     |     0     |bit SRTR              |
+    +-----------+-----------+-----------+-----------+-----------+----------------------+
+    |     0     |     0     |     1     |     0     |     1     |bit IDE               |
+    +-----------+-----------+-----------+-----------+-----------+----------------------+
+    |     0     |     0     |     1     |     1     |     1     |ID.17 to ID.13        |
+    +-----------+-----------+-----------+-----------+-----------+----------------------+
+    |     0     |     1     |     1     |     1     |     1     |ID.12 to ID.5         |
+    +-----------+-----------+-----------+-----------+-----------+----------------------+
+    |     0     |     1     |     1     |     1     |     0     |ID.4 to ID.0          |
+    +-----------+-----------+-----------+-----------+-----------+----------------------+
+    |     0     |     1     |     1     |     0     |     0     |bit RTR               |
+    +-----------+-----------+-----------+-----------+-----------+----------------------+
+    |     0     |     1     |     1     |     0     |     1     |reserved bit 1        |
+    +-----------+-----------+-----------+-----------+-----------+----------------------+
+    |     0     |     1     |     0     |     0     |     1     |reserved bit 0        |
+    +-----------+-----------+-----------+-----------+-----------+----------------------+
+    |     0     |     1     |     0     |     1     |     1     |data length code      |
+    +-----------+-----------+-----------+-----------+-----------+----------------------+
+    |     0     |     1     |     0     |     1     |     0     |data field            |
+    +-----------+-----------+-----------+-----------+-----------+----------------------+
+    |     0     |     1     |     0     |     0     |     0     |CRC sequence          |
+    +-----------+-----------+-----------+-----------+-----------+----------------------+
+    |     1     |     1     |     0     |     0     |     0     |CRC delimiter         |
+    +-----------+-----------+-----------+-----------+-----------+----------------------+
+    |     1     |     1     |     0     |     0     |     1     |acknowledge slot      |
+    +-----------+-----------+-----------+-----------+-----------+----------------------+
+    |     1     |     1     |     0     |     1     |     1     |acknowledge delimiter |
+    +-----------+-----------+-----------+-----------+-----------+----------------------+
+    |     1     |     1     |     0     |     1     |     0     |end of frame          |
+    +-----------+-----------+-----------+-----------+-----------+----------------------+
+    |     1     |     0     |     0     |     1     |     0     |intermission          |
+    +-----------+-----------+-----------+-----------+-----------+----------------------+
+    |     1     |     0     |     0     |     0     |     1     |active error flag     |
+    +-----------+-----------+-----------+-----------+-----------+----------------------+
+    |     1     |     0     |     1     |     1     |     0     |passive error flag    |
+    +-----------+-----------+-----------+-----------+-----------+----------------------+
+    |     1     |     0     |     0     |     1     |     1     |tolerate dominant bits|
+    +-----------+-----------+-----------+-----------+-----------+----------------------+
+    |     1     |     0     |     1     |     1     |     1     |error delimiter       |
+    +-----------+-----------+-----------+-----------+-----------+----------------------+
+    |     1     |     1     |     1     |     0     |     0     |overload flag         |
+    +-----------+-----------+-----------+-----------+-----------+----------------------+
+
+RX Error Counter Register (RXERR)
+^^^^^^^^^^^^^^^^^^^^^^^
+The RXERR's value represents the current number of received errors, and this register is initialized to logical '0' after hardware reset. In the operating mode, this register can only be read by CPU and write in the reset mode. RXERR is set to logical '0' if a bus shutdown event occurs. At this time, the bus is OFF, and the write operation to this register does not work.
+
+It should be noted that CPU can modify the value of RXERR only in the reset mode. In this case, the error state may change, and the error warning interrupt and error passive interrupt will not occur unless the reset mode is exited.
+
+TX Error Counter Register (TXERR)
+^^^^^^^^^^^^^^^^^^^^^^^
+The TXERR's value represents the current number of send errors. In the operating mode, this register can only be read by CPU and write in the reset mode. This register's value is initialized to logical '0' after hardware reset. If a bus shutdown event occurs, the TXERR's value is set to 127, so that the shortest time (128 bus idle signals) defined by the protocol can be calculated. Reading the TXERR's value during this period can obtain the status information of bus shutdown recovery. If the bus is OFF, a write to TXERR ranging from 0 to 254 will clear the Bus Off flag, and the controller will wait for 11 consecutive recessive bits (Bus Idle) to appear once after clearing the reset mode.
+
+Writing 255 into TXERR by CPU will generate a bus shutdown event. It should be noted that CPU can only change the value of this register by force in the reset mode. In this case, the error or bus state may change, and the error warning interrupt or error passive interrupt will not be affected by the new value unless the reset mode is exited again. After the reset mode is exited, the TXERR's value still operates as if the bus was shut down due to a bus error, which means that the register will enter the reset mode again, the TXERR's value is initialized to 127, the RXRERR's value is initialized to 0, and related statuses and interrupt registers are reset. At this time, exiting the reset mode will execute the bus shutdown recovery process defined by the protocol (waiting for 128 bus idle signals). If the reset mode is enabled again before the bus is turned off and restored (TXERR\>0), the bus will remain OFF and the TXERR's value will be frozen.
+
+Error Limit Setting
+^^^^^^^^^^^^^
+The error warning limit can be set by the EWLR register, whose default value is 96 (after hardware reset). This register can be read or written by CPU in the reset mode, while it can only be read in the operating mode. When at least one of the two error count values from RXERR and TXERR is greater than or equal to the value set in the EWLR register, the ES bit in the SR register will be set, and otherwise it will be cleared. Then, if the EIE bit in the IER register is set, an error warning interrupt will be generated. It is worth noting that this register can only be operated in the reset mode. The operation of this register may cause the error state to change, and the error warning interrupt will not be generated unless the reset mode is exited again.
+
+Bit Timing
+-------
+The timing diagram is as follows:
+
+.. figure:: ../../picture/ISO11898Timing.svg
+   :align: center
+
+   General structure of a bit period
+
+Baud Rate Prescaler (BRP)
+^^^^^^^^^^^^^^^^^^^
+The cycle of the system clock tscl of the ISO11898 controller can be set, and this determines the timing of each bit. The calculation formula of ISO11898 system clock is as follows:
+
+tscl = 2 * tCLK * (32 * BRP.5 + 16 * BRP.4 + 8 * BRP.3 + 4 * BRP.2 + 2 * BRP.1 + BRP.0 + 1)
+
+Synchronization Jump Width (SJW)
+^^^^^^^^^^^^^^^^^^^
+To compensate the phase shift between the clock oscillators of different bus controllers, any bus controller must resynchronize at the edge of any related signal currently being transmitted.
+SJW defines the maximum number of clock cycles that a bit cycle can shorten or extend through one resynchronization:
+
+tSJW = tscl * (2 * SJW.1 + SJW.0 + 1) 
+
+Sampling (SAM)
+^^^^^^^^^^^
+When the SAM bit in the BTR1 register is 1, the bus will be sampled three times. This mode suits medium and low speed buses, and this is beneficial to the filter in the bus. If the SAM bit is 0, the bus will only be sampled once. This mode suits the high-speed bus.
+
+Time Segment (TSEG)
+^^^^^^^^^^^^^^
+TSEG, consisting of TSEG1 and TSEG2 in the BTR1 register, determines the number of clocks and sampling point position of each bit, with calculation formula as follows:
+
+tSYNCSEG = 1 * tscl
+
+tTSEG1 = tscl * (8 * TSEG1.3 + 4 * TSEG1.2 + 2 * TSEG1.1 + TSEG1.0 + 1)
+
+tTSEG2 = tscl * (4 * TSEG2.2 + 2 * TSEG2.1 + TSEG2.0 + 1)
+

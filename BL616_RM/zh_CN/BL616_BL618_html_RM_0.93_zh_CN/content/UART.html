@@ -1,0 +1,2051 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>10. UART &mdash; BL616/BL618 参考手册  文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="11. I2C" href="I2C.html" />
+    <link rel="prev" title="9. SPI" href="SPI.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL616/BL618 参考手册
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. 系统和存储器概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. 复位和时钟</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPIO.html">4. GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">5. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">6. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">7. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">8. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">9. SPI</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">10. UART</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">10.1. 简介</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">10.2. 主要特征</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">10.3. 功能描述</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">10.3.1. 数据格式描述</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">10.3.2. 基本架构</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">10.3.3. 发送器</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">10.3.4. 接收器</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">10.3.5. 波特率设定</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">10.3.6. 滤波</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">10.3.7. 自动波特率检测</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">10.3.8. 硬件流控</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma">10.3.9. DMA 传输</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lin">10.3.10. LIN总线支持</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rs485">10.3.11. RS485模式</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id12">10.4. UART中断</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#tx-rx">10.4.1. TX/RX传输完成中断</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tx-rx-fifo">10.4.2. TX/RX FIFO请求中断</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rx">10.4.3. RX超时中断</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id13">10.4.4. RX奇偶校验错误中断</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id14">10.4.5. TX/RX FIFO溢出中断</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rx-bcr">10.4.6. RX BCR中断</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id15">10.4.7. LIN 同步错误中断</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id16">10.4.8. 通用/固定字符模式自动波特率检测中断</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id17">10.5. 寄存器描述</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#utx-config">10.5.1. utx_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#urx-config">10.5.2. urx_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uart-bit-prd">10.5.3. uart_bit_prd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data-config">10.5.4. data_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#utx-ir-position">10.5.5. utx_ir_position</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#urx-ir-position">10.5.6. urx_ir_position</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#urx-rto-timer">10.5.7. urx_rto_timer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uart-sw-mode">10.5.8. uart_sw_mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uart-int-sts">10.5.9. uart_int_sts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uart-int-mask">10.5.10. uart_int_mask</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uart-int-clear">10.5.11. uart_int_clear</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uart-int-en">10.5.12. uart_int_en</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uart-status">10.5.13. uart_status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sts-urx-abr-prd">10.5.14. sts_urx_abr_prd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#urx-abr-prd-b01">10.5.15. urx_abr_prd_b01</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#urx-abr-prd-b23">10.5.16. urx_abr_prd_b23</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#urx-abr-prd-b45">10.5.17. urx_abr_prd_b45</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#urx-abr-prd-b67">10.5.18. urx_abr_prd_b67</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#urx-abr-pw-tol">10.5.19. urx_abr_pw_tol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#urx-bcr-int-cfg">10.5.20. urx_bcr_int_cfg</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#utx-rs485-cfg">10.5.21. utx_rs485_cfg</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uart-fifo-config-0">10.5.22. uart_fifo_config_0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uart-fifo-config-1">10.5.23. uart_fifo_config_1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uart-fifo-wdata">10.5.24. uart_fifo_wdata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uart-fifo-rdata">10.5.25. uart_fifo_rdata</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">11. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">12. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">13. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2S.html">14. I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AudioDAC.html">15. AudioDAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AudioADC.html">16. AudioADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EMAC.html">17. Emac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USB.html">18. USB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ISO11898.html">19. ISO11898</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cam.html">20. CAM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MJPEG.html">21. MJPEG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBI.html">22. DBI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SDH.html">23. SDH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SDIO.html">24. SDIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LowPower.html">25. LowPower</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SEC_ENG.html">26. SEC ENG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">27. 版本信息</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL616/BL618 参考手册</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">10. </span>UART</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="uart">
+<h1><span class="section-number">10. </span>UART<a class="headerlink" href="#uart" title="永久链接至标题"></a></h1>
+<section id="id1">
+<h2><span class="section-number">10.1. </span>简介<a class="headerlink" href="#id1" title="永久链接至标题"></a></h2>
+<p>通用异步收发传输器（Universal Asynchronous Receiver/Transmitter，通常称为UART）是一种异步收发传输器，提供了与外部设备进行全双工数据交换的灵活方式。
+BL616/BL618共有2组UART，配合DMA使用，可以实现高效的数据通信。</p>
+</section>
+<section id="id2">
+<h2><span class="section-number">10.2. </span>主要特征<a class="headerlink" href="#id2" title="永久链接至标题"></a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>全双工异步通信</p></li>
+<li><p>数据位长度可选择5/6/7/8比特</p></li>
+<li><p>停止位长度可选择0.5/1/1.5/2比特</p></li>
+<li><p>支持奇/偶/无校验比特</p></li>
+<li><p>可侦测错误的起始比特</p></li>
+<li><p>丰富的中断控制</p></li>
+<li><p>支持硬件流控（RTS/CTS）</p></li>
+<li><p>便捷的波特率编程</p></li>
+<li><p>可配置MSB/LSB优先传输</p></li>
+<li><p>普通/固定字符的自动波特率检测</p></li>
+<li><p>32字节发送/接收FIFO</p></li>
+<li><p>支持DMA传输模式</p></li>
+<li><p>支持10Mbps及其以下波特率</p></li>
+<li><p>支持LIN总线协议</p></li>
+<li><p>支持RS485模式</p></li>
+<li><p>时钟源可以选择160M/BCLK/XCLK</p></li>
+<li><p>支持滤波功能</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="id3">
+<h2><span class="section-number">10.3. </span>功能描述<a class="headerlink" href="#id3" title="永久链接至标题"></a></h2>
+<section id="id4">
+<h3><span class="section-number">10.3.1. </span>数据格式描述<a class="headerlink" href="#id4" title="永久链接至标题"></a></h3>
+<p>正常的UART通信数据是由起始位、数据位、奇偶校验位、停止位组成的。BL616/BL618的UART支持可配置的数据位、奇偶校验位和停止位，这些都在寄存器utx_config和urx_config中设置。一帧数据的波形如下图所示：</p>
+<figure class="align-center" id="id18">
+<img alt="../_images/UARTData.svg" src="../_images/UARTData.svg" /><figcaption>
+<p><span class="caption-number">图 10.1 </span><span class="caption-text">UART数据格式</span><a class="headerlink" href="#id18" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>数据帧的起始位占用1-bit，停止位可以通过配置寄存器utx_config中的cr_utx_bit_cnt_p实现0.5/1/1.5/2位宽。起始位为低电平，停止位为高电平。
+数据位宽可以通过寄存器utx_config中的cr_utx_bit_cnt_d配置为5/6/7/8位宽。
+当置位寄存器utx_config中的cr_utx_prt_en和寄存器urx_config中的cr_urx_prt_en时，数据帧会在数据之后添加一位奇偶校验位。寄存器utx_config中的cr_utx_prt_sel和寄存器urx_config中的cr_urx_prt_sel用于选择奇校验还是偶校验。当接收器检测到输入数据的校验位错误时会产生校验错误中断。但是接收的数据仍然会进入FIFO。
+奇校验的计算方法：如果当前数据位1的个数是奇数个，奇校验位为0；反之为1。
+偶校验的计算方法：如果当前数据位1的个数是奇数个，偶校验位为1；反之为0。</p>
+</section>
+<section id="id5">
+<h3><span class="section-number">10.3.2. </span>基本架构<a class="headerlink" href="#id5" title="永久链接至标题"></a></h3>
+<figure class="align-center" id="id19">
+<img alt="../_images/UARTFramework.svg" src="../_images/UARTFramework.svg" /><figcaption>
+<p><span class="caption-number">图 10.2 </span><span class="caption-text">UART基本架构图</span><a class="headerlink" href="#id19" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>UART有3个时钟源：XCLK，160MHz CLK以及BCLK。时钟中的分频器用于对时钟源进行分频，然后产生时钟信号来驱动UART模块。</p>
+<p>UART 控制器分为两个功能模块：发送器和接收器。</p>
+</section>
+<section id="id6">
+<h3><span class="section-number">10.3.3. </span>发送器<a class="headerlink" href="#id6" title="永久链接至标题"></a></h3>
+<p>发送器包含一个 32 字节的发送 FIFO，用来存放待发送的数据。软件可以通过 APB 总线写 TX FIFO，也可以通过 DMA 将数据搬入TX FIFO。当发送使能位被设置时，FIFO 中存放的数据会从 TX 引脚输出。
+软件可以通过寄存器 uart_fifo_config_1 中的 tx_fifo_cnt 查询 TX FIFO 剩余可用空间计数值来检查发送器的状态。</p>
+<p>发送器的自由运行（FreeRun）模式如下：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>如果没有开启自由运行（FreeRun）模式，则当发送字节达到指定长度时发送行为终止并产生中断，如果要继续发送则需重新关闭再使能发送使能位。</p></li>
+<li><p>如果开启自由运行（FreeRun）模式，则当TX FIFO里存在数据时，发送器就会进行发送，不会因为发送字节达到指定长度而终止。</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="id7">
+<h3><span class="section-number">10.3.4. </span>接收器<a class="headerlink" href="#id7" title="永久链接至标题"></a></h3>
+<p>接收器包含一个 32 字节的接收 FIFO，用来存放接收到的数据。
+软件可以通过寄存器 uart_fifo_config_1 中的 rx_fifo_cnt 查询 RX FIFO 可用数据计数值来检查接收器的状态。
+寄存器 URX_RTO_TIMER 的低 8 位用于设定一个接收超时门限，当接收器超过该时间值未收到数据时，会触发中断。具体中断触发条件请参考 RX 超时中断小节。
+寄存器 urx_config 中的 cr_urx_deg_en 和 cr_urx_deg_cnt 用于使能去毛刺功能和设置门限值，其控制的是 UART 采样之前的滤波部分，
+UART 会将波形当中宽度低于门限值的毛刺滤掉，然后在将其送去采样。</p>
+</section>
+<section id="id8">
+<h3><span class="section-number">10.3.5. </span>波特率设定<a class="headerlink" href="#id8" title="永久链接至标题"></a></h3>
+<div class="math">
+<p><img src="../_images/math/0a37d96e4b093c0535725d32a43cf3d39f9751a4.png" alt="Baudrate = \frac{UART\_clk}{uart\_prd + 1}"/></p>
+</div><p>用户可单独设置 RX 与 TX 的波特率，以 TX 为例：uart_prd 的数值为寄存器 UART_BIT_PRD 的低 16 位 cr_utx_bit_prd 数值，由于 16 位位宽系数最大值为 65535，所以 UART 支持的最小波特率为：UART_clk/65536。</p>
+<p>在UART对数据进行采样之前，会先对数据进行滤波，将波形当中的毛刺滤掉。然后会在上述16位系数的中间值时刻进行采样，这样根据不同的波特率调整不同的采样时刻，以保持其采到的始终是中间值，大大提高了灵活性与精度。采样过程如下图所示：</p>
+<figure class="align-center" id="id20">
+<img alt="../_images/UARTSample.svg" src="../_images/UARTSample.svg" /><figcaption>
+<p><span class="caption-number">图 10.3 </span><span class="caption-text">UART采样波形图</span><a class="headerlink" href="#id20" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id9">
+<h3><span class="section-number">10.3.6. </span>滤波<a class="headerlink" href="#id9" title="永久链接至标题"></a></h3>
+<figure class="align-center" id="id21">
+<img alt="../_images/UARTDeg.svg" src="../_images/UARTDeg.svg" /><figcaption>
+<p><span class="caption-number">图 10.4 </span><span class="caption-text">UART滤波波形图</span><a class="headerlink" href="#id21" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>通过配置寄存器 urx_config 中的 cr_urx_deg_en 使能该功能，配置 cr_urx_deg_cnt 设置门限值，UART会将达不到门限值宽度的数据过滤掉。</p>
+<p>如上图所示，若想滤去数据宽度小于4的数据，需要将 cr_urx_deg_cnt 的值设置为4。input为初始数据，output为滤波后的数据。</p>
+<p>滤波逻辑过程：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>tgl为input和output的异或结果。</p></li>
+<li><p>deg_cnt从0开始计数，计数条件为tgl为高电平，并且reached为低电平。</p></li>
+<li><p>若deg_cnt计数值达到cr_urx_deg_cnt设置的值时，reached为高电平。</p></li>
+<li><p>当reached为高电平时，将input输出到output。</p></li>
+<li><p>注释:deg_cnt自加的条件：tgl为高电平且reached为低电平，其余情况下deg_cnt会被清0。</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="id10">
+<h3><span class="section-number">10.3.7. </span>自动波特率检测<a class="headerlink" href="#id10" title="永久链接至标题"></a></h3>
+<p>UART模块支持自动波特率检测，该检测分为两种，一种是通用模式，一种是固定字符(方波)模式。
+由寄存器 urx_config 中的 cr_urx_abr_en 控制，每次开启时，这两种检测模式都会启用。</p>
+<p><strong>通用模式</strong></p>
+<p>对于接收到的任意字符数据，UART 模块会以 UART 的时钟周期为单位去计数起使位的位宽，该计数值被写入寄存器 STS_URX_ABR_PRD 的低 16 位 sts_urx_abr_prd_start 中用以计算波特率，因此当起始位之后的第一个数据位为 1 时即可得到正确的波特率，如LSB-FIRST下的'0x01'。</p>
+<p><strong>固定字符(方波)模式</strong></p>
+<p>该模式下，UART 模块在用时钟周期去计数起使位的位宽后，会继续计数后续数据位的位宽，并与起始位相比较，如果连续7个计数值之间的上下浮动在最大允许误差范围内，则通过检测，否则计数值会被丢弃。最大允许误差可以通过寄存器 urx_abr_pw_tol 中的 cr_urx_abr_pw_tol 位来设置，以 UART 的时钟周期为单位。
+因此，只有在 LSB-FIRST 下接收到固定字符 '0x55'/'0xD5' 或 MSB-FIRST 下的 '0xAA'/'0xAB' 时，UART 模块才会将满足最大允许误差范围的连续7个计数值的第一个计数值写入寄存器 STS_URX_ABR_PRD 的高 16 位 sts_urx_abr_prd_0x55 中。</p>
+<figure class="align-center" id="id22">
+<img alt="../_images/UARTAbr.svg" src="../_images/UARTAbr.svg" /><figcaption>
+<p><span class="caption-number">图 10.5 </span><span class="caption-text">UART固定字符模式波形图</span><a class="headerlink" href="#id22" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>如上图所示，假设设置的最大允许误差为4，则对于接收到的某一波特率未知的数据，UART用UART_CLK去计数起始位的位宽为1000，第二位的位宽为1001，与前一位宽上下浮动不超过4个UART_CLK，则UART会继续计数第三位，第三位为1005，与起始位相差超过4，则检测不通过，数据丢弃。UART会依次将数据位的前6位位宽与起始位进行比较。</p>
+<p>计算检测到的波特率的公式如下：</p>
+<div class="math">
+<p><img src="../_images/math/5cf6d48d2ebc4c3f93f501b5170e2c2a63a0f210.png" alt="Baudrate = \frac{UART\_clk}{Count + 1}"/></p>
+</div></section>
+<section id="id11">
+<h3><span class="section-number">10.3.8. </span>硬件流控<a class="headerlink" href="#id11" title="永久链接至标题"></a></h3>
+<p>UART支持CTS/RTS方式的硬件流控，以防止FIFO里的数据由于来不及处理而丢失。硬件流控连接如下图所示：</p>
+<figure class="align-center" id="id23">
+<img alt="../_images/UARTCTSRTS.svg" src="../_images/UARTCTSRTS.svg" /><figcaption>
+<p><span class="caption-number">图 10.6 </span><span class="caption-text">UART硬件流控图</span><a class="headerlink" href="#id23" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>RTS （Require To Send，发送请求）为输出信号，用于指示芯片准备好可接收对方数据，低电平有效，低电平说明芯片可以接收数据。</p>
+<p>CTS （Clear To Send，清除发送）为输入信号，用于判断芯片是否可以向对方发送数据，低电平有效，低电平说明芯片可以向对方发送数据。</p>
+<p>当使用硬件流控功能时，芯片端输出信号RTS为低电平表示请求对方发送数据，RTS为高电平表示通知对方中止数据发送。
+当芯片检测到输入信号CTS拉高时，TX会停止发送数据，直到检测到CTS拉低时再继续发送。CTS在通信过程中的任意时刻拉高或者拉低，不影响TX发送数据的连续性，对方收到的数据也是连续的。</p>
+<p>发送器的硬件流控有两种方式:</p>
+<ul class="simple">
+<li><p>硬件控制方式（寄存器 uart_sw_mode 中的 cr_urx_rts_sw_mode 等于 0） ：接收未使能（寄存器 urx_config 中的 cr_urx_en 为 0）或 RX FIFO 剩余可用空间为一个字节时 RTS 拉高。</p></li>
+<li><p>软件控制方式（寄存器 uart_sw_mode 中的 cr_urx_rts_sw_mode 等于 1） ：软件可以通过配置寄存器 urx_sw_mode 中的 cr_urx_rts_sw_val 改变 RTS 的电平。</p></li>
+</ul>
+</section>
+<section id="dma">
+<h3><span class="section-number">10.3.9. </span>DMA 传输<a class="headerlink" href="#dma" title="永久链接至标题"></a></h3>
+<p>UART支持DMA传输。使用 DMA 传输，需要通过寄存器 uart_fifo_config_1 中的 tx_fifo_th 和 rx_fifo_th 分别设置 TX 和 RX FIFO 的阈值。当该模式使能后，
+如果 uart_fifo_config_1 中的 tx_fifo_cnt 大于 tx_fifo_th，则会触发DMA TX请求，配置好DMA后，DMA在收到该请求时，会按照设定从内存中将数据搬运到TX FIFO；
+如果 uart_fifo_config_1 中的 rx_fifo_cnt 大于 rx_fifo_th，则会触发DMA RX请求，配置好DMA后，DMA在收到该请求时，会按照设定将RX FIFO的数据搬运到内存。</p>
+<p>为了保证芯片 DMA TX Channel 搬运数据的正确性，Channel 配置中需要满足以下条件：(transferWidth * burstSize) ≤ (tx_fifo_th + 1)。</p>
+<p>为了保证芯片 DMA RX Channel 搬运数据的完整性，Channel 配置中需要满足以下条件：(transferWidth * burstSize) = (rx_fifo_th + 1)。</p>
+</section>
+<section id="lin">
+<h3><span class="section-number">10.3.10. </span>LIN总线支持<a class="headerlink" href="#lin" title="永久链接至标题"></a></h3>
+<p>本地互联网络（LIN）协议基于Volvo衍生公司Volcano通信技术公司（VCT）开发的Volcano-Lite技术。
+LIN是CAN和SAE J1850协议的补充性协议，针对时间要求不高或不需要精确容错的应用（因为LIN没有CAN协议那样可靠）。
+LIN的目标是易于使用，作为CAN协议的低成本替代品。LIN在车辆中可以使用的场合包括车窗升降器、后视镜、雨刷和雨量传感器。</p>
+<p>UART模块支持 LIN 总线模式，LIN 总线采用主从模式，数据总是由主节点发起，主节点发送的帧（头）包含三个部分：同步间隔字段、同步字节字段和一个标识符字段。
+一个典型的LIN数据传输如图所示:</p>
+<figure class="align-center" id="id24">
+<img alt="../_images/UARTLinFrame.svg" src="../_images/UARTLinFrame.svg" /><figcaption>
+<p><span class="caption-number">图 10.7 </span><span class="caption-text">一个典型的LIN帧</span><a class="headerlink" href="#id24" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<ol class="arabic simple">
+<li><p>LIN的Break域</p></li>
+</ol>
+<figure class="align-center" id="id25">
+<img alt="../_images/UARTLinBreak.svg" src="../_images/UARTLinBreak.svg" /><figcaption>
+<p><span class="caption-number">图 10.8 </span><span class="caption-text">LIN的Break域</span><a class="headerlink" href="#id25" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>同步间隔字段表示报文的开始，至少13个显性位（包括起始位）。同步间隔以一个“间隔分隔符”结束，该分隔符至少包含一个隐性位。
+LIN帧中的Break长度可以通过utx_config中的cr_utx_bit_cnt_b来设定。</p>
+<ol class="arabic simple" start="2">
+<li><p>LIN的Sync域</p></li>
+</ol>
+<p>发送同步字节字段来确定两个下降沿之间的时间，从而确定主节点使用的传输速率。位模式是0x55（01010101，最大下降沿数量）。</p>
+<figure class="align-center" id="id26">
+<img alt="../_images/UARTLinSync.svg" src="../_images/UARTLinSync.svg" /><figcaption>
+<p><span class="caption-number">图 10.9 </span><span class="caption-text">LIN的Sync域</span><a class="headerlink" href="#id26" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<ol class="arabic simple" start="3">
+<li><p>LIN的ID域</p></li>
+</ol>
+<p>标识符字段包含6位长的标识符和两个奇偶校验位。6位标识符包含关于发送方和接收方的信息，以及响应中要求的字节数。奇偶校验位如下进行计算：校验位P0是ID0、ID1、ID2和ID4之间进行逻辑“或”运算的结果。校验位P1是ID1、ID3、ID4和ID5之间逻辑“或”运算后再进行反转的结果。</p>
+<figure class="align-center" id="id27">
+<img alt="../_images/UARTLinId.svg" src="../_images/UARTLinId.svg" /><figcaption>
+<p><span class="caption-number">图 10.10 </span><span class="caption-text">LIN的ID域</span><a class="headerlink" href="#id27" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>从节点等待同步间隔字段，然后通过同步字节字段开始主从节点之间的同步。根据主节点发送的标识符，从节点将进行接收、发送或什么都不做。应该进行发送的从节点发送主节点请求的字节数，然后以一个检验和字段结束传输。</p>
+<p>使用 LIN 模式需要设置寄存器utx_config中的cr_utx_lin_en。通过配置cr_utx_bit_cnt_b，应确保同步间隔段至少是由13位的显性电平组成。</p>
+</section>
+<section id="rs485">
+<h3><span class="section-number">10.3.11. </span>RS485模式<a class="headerlink" href="#rs485" title="永久链接至标题"></a></h3>
+<p>UART模块支持RS485模式，通过设置寄存器UTX_RS485_CFG中的cr_utx_rs485_en可以让UART模块工作在RS485模式下，此时，可以通过外接一个RS485的收发器连接到RS485总线上，
+在该模式下，模块中的RTS引脚，会转为RS485收发器的Dir功能，
+当UART模块有数据需要发送时，会自动控制RTS引脚为高电平，让RS485收发器把数据发送到总线上，反之，当UART模块没有数据需要发送时，
+会自动控制RTS为低电平，让RS485收发器处在接收状态。</p>
+<p>使用该模式需要设置寄存器UTX_RS485_CFG中的cr_utx_rs485_pol和cr_utx_rs485_en。</p>
+</section>
+</section>
+<section id="id12">
+<h2><span class="section-number">10.4. </span>UART中断<a class="headerlink" href="#id12" title="永久链接至标题"></a></h2>
+<p>UART有着丰富的中断控制，包括以下几种中断模式：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>TX 传输完成中断</p></li>
+<li><p>RX 接收完成中断</p></li>
+<li><p>TX FIFO 请求中断</p></li>
+<li><p>RX FIFO 请求中断</p></li>
+<li><p>RX 超时中断</p></li>
+<li><p>RX 奇偶校验错误中断</p></li>
+<li><p>TX FIFO 溢出中断</p></li>
+<li><p>RX FIFO 溢出中断</p></li>
+<li><p>RX BCR 中断</p></li>
+<li><p>LIN 同步错误中断</p></li>
+<li><p>通用模式自动波特率检测中断</p></li>
+<li><p>固定字符模式自动波特率检测中断</p></li>
+</ul>
+</div></blockquote>
+<section id="tx-rx">
+<h3><span class="section-number">10.4.1. </span>TX/RX传输完成中断<a class="headerlink" href="#tx-rx" title="永久链接至标题"></a></h3>
+<p>TX 和 RX 可以通过寄存器 utx_config 和 urx_config 的高 16 位分别设置传输长度值，当传输的字节数达到这个数值时，就会触发对应的 TX/RX 传输完成中断，如果启用了 TX 自由运行（FreeRun）模式，则不会产生TX传输完成中断，TX 功能也不会停止。
+如果未启用 TX 自由运行（FreeRun）模式，则产生该中断的同时，TX 功能也会停止，用户如果需要继续使用 TX，必须重新启用 TX 功能。与 TX 不同，RX 功能在产生 RX 传输完成中断后仍可以正常使用。</p>
+<p>对于 TX 而言，如果连续向 TX FIFO 中填入的数据大于设置的传输长度值，则TX引脚上只会传输设定长度值的数据，多余的数据会留存在 TX FIFO 中，重新启用 TX 功能后，TX FIFO 中剩余的数据将会发出。</p>
+<p>例如：设置 TX 传输长度值为 64，启用 TX 功能，先向 TX FIFO 中填入 63 个字节，这 63 个字节会在引脚上传输，但是没有 TX 传输完成中断产生，再向 TX FIFO 中填入 1 字节，此时发送的长度达到 TX 设置的传输长度值，会产生发送完成中断，并且 TX 功能会停止。
+继续向 TX FIFO 中填入 1 字节，会发现引脚上没有数据传输，该字节还保留在 TX FIFO 中，将 TX 功能关闭后重新启用，该字节在引脚上发出。</p>
+<p>对于 RX 而言，如果对方发送的数据长度超过了设置的传输长度，RX 在产生 RX 传输完成中断后依旧可以继续接收数据。</p>
+<p>例如：设置 RX 传输长度值为 16，对方发送了 32 个字节数据，RX 会在收到 16 个字节数据时产生 RX 传输完成中断，并继续接收剩下的 16 个字节数据，全部保存在 RX FIFO 中。</p>
+</section>
+<section id="tx-rx-fifo">
+<h3><span class="section-number">10.4.2. </span>TX/RX FIFO请求中断<a class="headerlink" href="#tx-rx-fifo" title="永久链接至标题"></a></h3>
+<p>当uart_fifo_config_1中的tx_fifo_cnt大于tx_fifo_th时，产生TX FIFO请求中断，当条件不满足时该中断标志会自动清除。
+当uart_fifo_config_1中的rx_fifo_cnt大于rx_fifo_th时，产生RX FIFO请求中断，当条件不满足时该中断标志会自动清除。
+TX/RX均可支持多次发送/接收，并非一次性达到tx_fifo_th/rx_fifo_th设置的值。</p>
+<p>例如：</p>
+<ol class="arabic simple">
+<li><p>设置寄存器 uart_fifo_config_1 中的 tx_fifo_th/rx_fifo_th 为 16。</p></li>
+<li><p>置位寄存器 utx_config 中的 cr_utx_frm_en，使能free run mode。</p></li>
+<li><p>设置寄存器 uart_int_mask 中的 cr_utx_frdy_mask/cr_urx_frdy_mask为0，将TX/RX的FIFO中断打开。</p></li>
+<li><p>设置寄存器 utx_config/urx_config 中的 cr_utx_en/cr_urx_en，使能TX/RX。</p></li>
+<li><p>TX FIFO中断：TX会一直进入FIFO中断，当芯片发送128字节后，将cr_utx_frdy_mask置1屏蔽该中断。如果想再次进入TX FIFO中断，cr_utx_frdy_mask置0即可。</p></li>
+<li><p>RX FIFO中断：对方先发送15字节数，无中断产生，此时获取rx_fifo_cnt值为15，再次发送1个字节达到rx_fifo_th设置的值时产生中断。产生发送中断后，对方再次发送数据，芯片可以收到数据。</p></li>
+</ol>
+</section>
+<section id="rx">
+<h3><span class="section-number">10.4.3. </span>RX超时中断<a class="headerlink" href="#rx" title="永久链接至标题"></a></h3>
+<p>RX超时中断产生条件是：在上一次接收数据之后，接收器会开始计时，当计时值超过超时门限值仍未收到下一个数据时触发中断。超时门限值以通信的bit为单位。</p>
+<p>当对方给芯片发送数据时，达到设置的超时时长后，会产生一次超时中断。</p>
+</section>
+<section id="id13">
+<h3><span class="section-number">10.4.4. </span>RX奇偶校验错误中断<a class="headerlink" href="#id13" title="永久链接至标题"></a></h3>
+<p>RX奇偶校验错误中断会发生在奇偶校验出错时。但是不影响RX正确接收并解析对方发来的数据。RX在接收数据的时候，会取前8bit作为数据位，忽略奇偶校验位，因此数据一致性完整。</p>
+<p>例如设置寄存器utx_config/urx_config中的cr_utx_prt_en/cr_urx_prt_en使能奇偶校验；设置寄存器utx_config/urx_config中的cr_utx_prt_sel/cr_urx_prt_sel选择奇偶校验种类；
+当对方使用奇校验/偶校验给芯片发送数据时，芯片的RX不开启奇偶校验，RX仍能收到正确的数据。</p>
+</section>
+<section id="id14">
+<h3><span class="section-number">10.4.5. </span>TX/RX FIFO溢出中断<a class="headerlink" href="#id14" title="永久链接至标题"></a></h3>
+<p>如果TX/RX FIFO发生了上溢或者下溢，会触发对应的溢出中断，当FIFO清除位:寄存器UART_FIFO_CONFIG_0中的tx_fifo_clr和rx_fifo_clr被置1时，对应的FIFO会被清空，同时溢出中断标志会自动清除。
+可以通过寄存器UART_INT_STS查询溢出的具体中断状态，通过向寄存器UART_INT_CLEAR相应的位写1清除中断。</p>
+</section>
+<section id="rx-bcr">
+<h3><span class="section-number">10.4.6. </span>RX BCR中断<a class="headerlink" href="#rx-bcr" title="永久链接至标题"></a></h3>
+<p>当RX接收到的数据字节数达到寄存器urx_bcr_int_cfg中的cr_urx_bcr_value设置的值时，会产生Byte Count Reached(BCR)中断。</p>
+<p>RX BCR中断与RX END中断都可以重复产生，两者的区别在于：
+RX END中断内部的计数器在每次产生该中断时清零并重新开始计数，所以无法通过查询该计数器的状态得知当前总共收到了多少数据；而RX BCR中断内部的计数器在产生该中断时不会清零，而是继续累加，所以可以通过查询寄存器urx_bcr_int_cfg中的sts_urx_bcr_count位来获取当前接收的数据总量。
+如果想清除RX BCR中断内部的计数器，只需要向寄存器uart_int_clear中的cr_urx_bcr_clr位写1。</p>
+</section>
+<section id="id15">
+<h3><span class="section-number">10.4.7. </span>LIN 同步错误中断<a class="headerlink" href="#id15" title="永久链接至标题"></a></h3>
+<p>当utx_config中的cr_utx_lin_en使能后，进入LIN模式，在LIN模式下，如果接收数据时，没有检测到LIN总线的同步段，则产生LIN同步错误中断。</p>
+</section>
+<section id="id16">
+<h3><span class="section-number">10.4.8. </span>通用/固定字符模式自动波特率检测中断<a class="headerlink" href="#id16" title="永久链接至标题"></a></h3>
+<p>在自动波特率模式下，根据配置对应的中断，在自动波特率检测通过时，可以产生通用模式自动波特率检测中断或者固定字符模式自动波特率检测中断。</p>
+</section>
+</section>
+<section id="id17">
+<h2><span class="section-number">10.5. </span>寄存器描述<a class="headerlink" href="#id17" title="永久链接至标题"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 39%" />
+<col style="width: 61%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>名称</p></td>
+<td><p>描述</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#utx-config">utx_config</a></p></td>
+<td><p>TX configure</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#urx-config">urx_config</a></p></td>
+<td><p>RX configure</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#uart-bit-prd">uart_bit_prd</a></p></td>
+<td><p>Baud rate setting</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#data-config">data_config</a></p></td>
+<td><p>LSB/MSB-first select</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#utx-ir-position">utx_ir_position</a></p></td>
+<td><p>IR mode TX setting</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#urx-ir-position">urx_ir_position</a></p></td>
+<td><p>IR mode RX setting</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#urx-rto-timer">urx_rto_timer</a></p></td>
+<td><p>Time-out value setting</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#uart-sw-mode">uart_sw_mode</a></p></td>
+<td><p>software mode</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#uart-int-sts">uart_int_sts</a></p></td>
+<td><p>UART interrupt status</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#uart-int-mask">uart_int_mask</a></p></td>
+<td><p>UART interrupt mask</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#uart-int-clear">uart_int_clear</a></p></td>
+<td><p>UART interrupt clear</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#uart-int-en">uart_int_en</a></p></td>
+<td><p>UART interrupt enable</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#uart-status">uart_status</a></p></td>
+<td><p>Bus busy status</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#sts-urx-abr-prd">sts_urx_abr_prd</a></p></td>
+<td><p>Aute baud rate detection</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#urx-abr-prd-b01">urx_abr_prd_b01</a></p></td>
+<td><p>ABR detection bit 0/1</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#urx-abr-prd-b23">urx_abr_prd_b23</a></p></td>
+<td><p>ABR detection bit 2/3</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#urx-abr-prd-b45">urx_abr_prd_b45</a></p></td>
+<td><p>ABR detection bit 4/5</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#urx-abr-prd-b67">urx_abr_prd_b67</a></p></td>
+<td><p>ABR detection bit 6/7</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#urx-abr-pw-tol">urx_abr_pw_tol</a></p></td>
+<td><p>0x55 ABR max allowable error</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#urx-bcr-int-cfg">urx_bcr_int_cfg</a></p></td>
+<td><p>BCR interrupt counter</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#utx-rs485-cfg">utx_rs485_cfg</a></p></td>
+<td><p>RS-485 configure</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#uart-fifo-config-0">uart_fifo_config_0</a></p></td>
+<td><p>FIFO status and DMA mode</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#uart-fifo-config-1">uart_fifo_config_1</a></p></td>
+<td><p>FIFO threshold and available count</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#uart-fifo-wdata">uart_fifo_wdata</a></p></td>
+<td><p>TX FIFO</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#uart-fifo-rdata">uart_fifo_rdata</a></p></td>
+<td><p>RX FIFO</p></td>
+</tr>
+</tbody>
+</table>
+<section id="utx-config">
+<h3><span class="section-number">10.5.1. </span>utx_config<a class="headerlink" href="#utx-config" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x40010000</p>
+<figure class="align-center">
+<img alt="../_images/uart_utx_config.svg" src="../_images/uart_utx_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>cr_utx_len</p></td>
+<td><p>r/w</p></td>
+<td><p>16'd0</p></td>
+<td><p>Length of UART TX data transfer (Unit: character/byte), TX end interrupt will be triggered when TX send cr_utx_len+1 bytes data (Don't-care if cr_utx_frm_en is enabled)</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="5"><p>15:13</p></td>
+<td rowspan="5"><p>cr_utx_bit_cnt_b</p></td>
+<td rowspan="5"><p>r/w</p></td>
+<td rowspan="5"><p>3'd4</p></td>
+<td rowspan="5"><p>UART TX BREAK bit count (for LIN protocol)</p>
+<p>Note: Additional 8 bit times will be added since LIN Break field requires at least 13 bit times</p>
+<p>4: 4+1+8=13 bit</p>
+<p>5: 5+1+8=14 bit</p>
+<p>···</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="5"><p>12:11</p></td>
+<td rowspan="5"><p>cr_utx_bit_cnt_p</p></td>
+<td rowspan="5"><p>r/w</p></td>
+<td rowspan="5"><p>2'd1</p></td>
+<td rowspan="5"><p>UART TX STOP bit count (unit: 0.5 bit)</p>
+<p>0: 0.5 bit</p>
+<p>1: 1 bit</p>
+<p>2: 1.5 bit</p>
+<p>3: 2 bit</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="5"><p>10:8</p></td>
+<td rowspan="5"><p>cr_utx_bit_cnt_d</p></td>
+<td rowspan="5"><p>r/w</p></td>
+<td rowspan="5"><p>3'd7</p></td>
+<td rowspan="5"><p>UART TX DATA bit count for each character</p>
+<p>4: 5 bit</p>
+<p>5: 6 bit</p>
+<p>6: 7 bit</p>
+<p>7: 8 bit</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>cr_utx_ir_inv</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Inverse signal of UART TX output in IR mode</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>cr_utx_ir_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Enable signal of UART TX IR mode</p></td>
+</tr>
+<tr class="row-even"><td rowspan="3"><p>5</p></td>
+<td rowspan="3"><p>cr_utx_prt_sel</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b0</p></td>
+<td rowspan="3"><p>Select signal of UART TX parity bit</p>
+<p>1: Odd parity</p>
+<p>0: Even parity</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>cr_utx_prt_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Enable signal of UART TX parity bit</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>cr_utx_lin_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Enable signal of UART TX LIN mode (LIN header will be sent before sending data)</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>cr_utx_frm_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Enable signal of UART TX freerun mode (utx_end_int will be disabled)</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>cr_utx_cts_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Enable signal of UART TX CTS flow control function</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><p>0</p></td>
+<td rowspan="2"><p>cr_utx_en</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>1'b0</p></td>
+<td rowspan="2"><p>Enable signal of UART TX function</p>
+<p>Asserting this bit will trigger the transaction, and should be de-asserted after finish</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+</tbody>
+</table>
+</section>
+<section id="urx-config">
+<h3><span class="section-number">10.5.2. </span>urx_config<a class="headerlink" href="#urx-config" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x40010004</p>
+<figure class="align-center">
+<img alt="../_images/uart_urx_config.svg" src="../_images/uart_urx_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td rowspan="2"><p>31:16</p></td>
+<td rowspan="2"><p>cr_urx_len</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>16'd0</p></td>
+<td rowspan="2"><p>Length of UART RX data transfer (Unit: character/byte)</p>
+<p>urx_end_int will assert when this length is reached</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>15:12</p></td>
+<td><p>cr_urx_deg_cnt</p></td>
+<td><p>r/w</p></td>
+<td><p>4'd0</p></td>
+<td><p>De-glitch function cycle count</p></td>
+</tr>
+<tr class="row-odd"><td><p>11</p></td>
+<td><p>cr_urx_deg_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Enable signal of RXD input de-glitch function</p></td>
+</tr>
+<tr class="row-even"><td><p>10:8</p></td>
+<td><p>cr_urx_bit_cnt_d</p></td>
+<td><p>r/w</p></td>
+<td><p>3'd7</p></td>
+<td><p>UART RX DATA bit count for each character, like cr_utx_bit_cnt_d</p></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>cr_urx_ir_inv</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Inverse signal of UART RX input in IR mode</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>cr_urx_ir_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Enable signal of UART RX IR mode</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><p>5</p></td>
+<td rowspan="3"><p>cr_urx_prt_sel</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b0</p></td>
+<td rowspan="3"><p>Select signal of UART RX parity bit</p>
+<p>1: Odd parity</p>
+<p>0: Even parity</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>cr_urx_prt_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Enable signal of UART RX parity bit</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>cr_urx_lin_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Enable signal of UART RX LIN mode (LIN header will be required and checked before receiving data)</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>cr_urx_abr_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Enable signal of UART RX Auto Baud Rate detection function</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>cr_urx_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Enable signal of UART RX function</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="uart-bit-prd">
+<h3><span class="section-number">10.5.3. </span>uart_bit_prd<a class="headerlink" href="#uart-bit-prd" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x40010008</p>
+<figure class="align-center">
+<img alt="../_images/uart_uart_bit_prd.svg" src="../_images/uart_uart_bit_prd.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>cr_urx_bit_prd</p></td>
+<td><p>r/w</p></td>
+<td><p>16'd255</p></td>
+<td><p>Period of each UART RX bit, RX baud rate = uart clock / (cr_urx_bit_prd + 1)</p></td>
+</tr>
+<tr class="row-odd"><td><p>15:0</p></td>
+<td><p>cr_utx_bit_prd</p></td>
+<td><p>r/w</p></td>
+<td><p>16'd255</p></td>
+<td><p>Period of each UART TX bit, TX baud rate = uart clock / (cr_utx_bit_prd + 1)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="data-config">
+<h3><span class="section-number">10.5.4. </span>data_config<a class="headerlink" href="#data-config" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x4001000c</p>
+<figure class="align-center">
+<img alt="../_images/uart_data_config.svg" src="../_images/uart_data_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:1</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><p>0</p></td>
+<td rowspan="3"><p>cr_uart_bit_inv</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b0</p></td>
+<td rowspan="3"><p>Bit-inverse signal for each data byte</p>
+<p>0: Each byte is sent out LSB-first</p>
+<p>1: Each byte is sent out MSB-first</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</section>
+<section id="utx-ir-position">
+<h3><span class="section-number">10.5.5. </span>utx_ir_position<a class="headerlink" href="#utx-ir-position" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x40010010</p>
+<figure class="align-center">
+<img alt="../_images/uart_utx_ir_position.svg" src="../_images/uart_utx_ir_position.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>cr_utx_ir_pos_p</p></td>
+<td><p>r/w</p></td>
+<td><p>16'd159</p></td>
+<td><p>STOP position of UART TX IR pulse</p></td>
+</tr>
+<tr class="row-odd"><td><p>15:0</p></td>
+<td><p>cr_utx_ir_pos_s</p></td>
+<td><p>r/w</p></td>
+<td><p>16'd112</p></td>
+<td><p>START position of UART TX IR pulse</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="urx-ir-position">
+<h3><span class="section-number">10.5.6. </span>urx_ir_position<a class="headerlink" href="#urx-ir-position" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x40010014</p>
+<figure class="align-center">
+<img alt="../_images/uart_urx_ir_position.svg" src="../_images/uart_urx_ir_position.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15:0</p></td>
+<td><p>cr_urx_ir_pos_s</p></td>
+<td><p>r/w</p></td>
+<td><p>16'd111</p></td>
+<td><p>START position of UART RXD pulse recovered from IR signal</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="urx-rto-timer">
+<h3><span class="section-number">10.5.7. </span>urx_rto_timer<a class="headerlink" href="#urx-rto-timer" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x40010018</p>
+<figure class="align-center">
+<img alt="../_images/uart_urx_rto_timer.svg" src="../_images/uart_urx_rto_timer.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>cr_urx_rto_value</p></td>
+<td><p>r/w</p></td>
+<td><p>8'd15</p></td>
+<td><p>Time-out value for triggering RTO interrupt (unit: bit time)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="uart-sw-mode">
+<h3><span class="section-number">10.5.8. </span>uart_sw_mode<a class="headerlink" href="#uart-sw-mode" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x4001001c</p>
+<figure class="align-center">
+<img alt="../_images/uart_uart_sw_mode.svg" src="../_images/uart_uart_sw_mode.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:4</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><p>3</p></td>
+<td rowspan="3"><p>cr_urx_rts_sw_val</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b0</p></td>
+<td rowspan="3"><p>UART RX RTS output SW control value</p>
+<p>0: Low level</p>
+<p>1: High level</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>cr_urx_rts_sw_mode</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>UART RX RTS output SW control mode enable</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><p>1</p></td>
+<td rowspan="3"><p>cr_utx_txd_sw_val</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b0</p></td>
+<td rowspan="3"><p>UART TX TXD output SW control value</p>
+<p>0: Low level</p>
+<p>1: High level</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>cr_utx_txd_sw_mode</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>UART TX TXD output SW control mode enable</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="uart-int-sts">
+<h3><span class="section-number">10.5.9. </span>uart_int_sts<a class="headerlink" href="#uart-int-sts" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x40010020</p>
+<figure class="align-center">
+<img alt="../_images/uart_uart_int_sts.svg" src="../_images/uart_uart_int_sts.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:12</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>11</p></td>
+<td><p>urx_ad5_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>UART RX ABR Detection finish interrupt using codeword 0x55</p></td>
+</tr>
+<tr class="row-even"><td><p>10</p></td>
+<td><p>urx_ads_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>UART RX ABR Detection finish interrupt using START bit</p></td>
+</tr>
+<tr class="row-odd"><td><p>9</p></td>
+<td><p>urx_bcr_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>UART RX byte count reached interrupt</p></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>urx_lse_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>UART RX LIN mode sync field error interrupt</p></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>urx_fer_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>UART RX FIFO error interrupt, auto-cleared when FIFO overflow/underflow error flag is cleared</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>utx_fer_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>UART TX FIFO error interrupt, auto-cleared when FIFO overflow/underflow error flag is cleared</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>urx_pce_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>UART RX parity check error interrupt</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>urx_rto_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>UART RX Time-out interrupt</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>urx_frdy_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>UART RX FIFO ready (rx_fifo_cnt &gt; rx_fifo_th) interrupt, auto-cleared when data is popped</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>utx_frdy_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b1</p></td>
+<td><p>UART TX FIFO ready (tx_fifo_cnt &gt; tx_fifo_th) interrupt, auto-cleared when data is pushed</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>urx_end_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>UART RX transfer end interrupt (set according to cr_urx_len)</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>utx_end_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>UART TX transfer end interrupt (set according to cr_utx_len)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="uart-int-mask">
+<h3><span class="section-number">10.5.10. </span>uart_int_mask<a class="headerlink" href="#uart-int-mask" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x40010024</p>
+<figure class="align-center">
+<img alt="../_images/uart_uart_int_mask.svg" src="../_images/uart_uart_int_mask.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:12</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>11</p></td>
+<td><p>cr_urx_ad5_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of urx_ad5_int</p></td>
+</tr>
+<tr class="row-even"><td><p>10</p></td>
+<td><p>cr_urx_ads_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of urx_ads_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>9</p></td>
+<td><p>cr_urx_bcr_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of urx_bcr_int</p></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>cr_urx_lse_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of urx_lse_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>cr_urx_fer_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of urx_fer_int</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>cr_utx_fer_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of utx_fer_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>cr_urx_pce_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of urx_pce_int</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>cr_urx_rto_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of urx_rto_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>cr_urx_frdy_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of urx_frdy_int</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>cr_utx_frdy_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of utx_frdy_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>cr_urx_end_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of urx_end_int</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>cr_utx_end_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of utx_end_int</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="uart-int-clear">
+<h3><span class="section-number">10.5.11. </span>uart_int_clear<a class="headerlink" href="#uart-int-clear" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x40010028</p>
+<figure class="align-center">
+<img alt="../_images/uart_uart_int_clear.svg" src="../_images/uart_uart_int_clear.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:12</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>11</p></td>
+<td><p>cr_urx_ad5_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Interrupt clear of urx_ad5_int</p></td>
+</tr>
+<tr class="row-even"><td><p>10</p></td>
+<td><p>cr_urx_ads_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Interrupt clear of urx_ads_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>9</p></td>
+<td><p>cr_urx_bcr_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Interrupt clear of urx_bcr_int</p></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>cr_urx_lse_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Interrupt clear of urx_lse_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>rsvd</p></td>
+<td><p>rsvd</p></td>
+<td><p>1'b0</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>rsvd</p></td>
+<td><p>rsvd</p></td>
+<td><p>1'b0</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>cr_urx_pce_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Interrupt clear of urx_pce_int</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>cr_urx_rto_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Interrupt clear of urx_rto_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>rsvd</p></td>
+<td><p>rsvd</p></td>
+<td><p>1'b0</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>rsvd</p></td>
+<td><p>rsvd</p></td>
+<td><p>1'b0</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>cr_urx_end_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Interrupt clear of urx_end_int</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>cr_utx_end_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Interrupt clear of utx_end_int</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="uart-int-en">
+<h3><span class="section-number">10.5.12. </span>uart_int_en<a class="headerlink" href="#uart-int-en" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x4001002c</p>
+<figure class="align-center">
+<img alt="../_images/uart_uart_int_en.svg" src="../_images/uart_uart_int_en.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:12</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>11</p></td>
+<td><p>cr_urx_ad5_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt enable of urx_ad5_int</p></td>
+</tr>
+<tr class="row-even"><td><p>10</p></td>
+<td><p>cr_urx_ads_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt enable of urx_ads_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>9</p></td>
+<td><p>cr_urx_bcr_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt enable of urx_bcr_int</p></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>cr_urx_lse_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt enable of urx_lse_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>cr_urx_fer_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt enable of urx_fer_int</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>cr_utx_fer_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt enable of utx_fer_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>cr_urx_pce_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt enable of urx_pce_int</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>cr_urx_rto_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt enable of urx_rto_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>cr_urx_frdy_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt enable of urx_frdy_int</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>cr_utx_frdy_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt enable of utx_frdy_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>cr_urx_end_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt enable of urx_end_int</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>cr_utx_end_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt enable of utx_end_int</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="uart-status">
+<h3><span class="section-number">10.5.13. </span>uart_status<a class="headerlink" href="#uart-status" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x40010030</p>
+<figure class="align-center">
+<img alt="../_images/uart_uart_status.svg" src="../_images/uart_uart_status.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:2</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><p>1</p></td>
+<td rowspan="3"><p>sts_urx_bus_busy</p></td>
+<td rowspan="3"><p>r</p></td>
+<td rowspan="3"><p>1'b0</p></td>
+<td rowspan="3"><p>Indicator of UART RX bus busy</p>
+<p>0: Idle</p>
+<p>1: Busy</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3"><p>0</p></td>
+<td rowspan="3"><p>sts_utx_bus_busy</p></td>
+<td rowspan="3"><p>r</p></td>
+<td rowspan="3"><p>1'b0</p></td>
+<td rowspan="3"><p>Indicator of UART TX bus busy</p>
+<p>0: Idle</p>
+<p>1: Busy</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+</tbody>
+</table>
+</section>
+<section id="sts-urx-abr-prd">
+<h3><span class="section-number">10.5.14. </span>sts_urx_abr_prd<a class="headerlink" href="#sts-urx-abr-prd" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x40010034</p>
+<figure class="align-center">
+<img alt="../_images/uart_sts_urx_abr_prd.svg" src="../_images/uart_sts_urx_abr_prd.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>sts_urx_abr_prd_0x55</p></td>
+<td><p>r</p></td>
+<td><p>16'd0</p></td>
+<td><p>Bit period of Auto Baud Rate detection using codeword 0x55, baud rate = uart clock / (sts_urx_abr_prd_0x55 + 1)</p></td>
+</tr>
+<tr class="row-odd"><td><p>15:0</p></td>
+<td><p>sts_urx_abr_prd_start</p></td>
+<td><p>r</p></td>
+<td><p>16'd0</p></td>
+<td><p>Bit period of Auto Baud Rate detection using START bit, baud rate = uart clock / (sts_urx_abr_prd_start + 1)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="urx-abr-prd-b01">
+<h3><span class="section-number">10.5.15. </span>urx_abr_prd_b01<a class="headerlink" href="#urx-abr-prd-b01" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x40010038</p>
+<figure class="align-center">
+<img alt="../_images/uart_urx_abr_prd_b01.svg" src="../_images/uart_urx_abr_prd_b01.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>sts_urx_abr_prd_bit1</p></td>
+<td><p>r</p></td>
+<td><p>16'd0</p></td>
+<td><p>Bit period of Auto Baud Rate detection - bit[1]</p></td>
+</tr>
+<tr class="row-odd"><td><p>15:0</p></td>
+<td><p>sts_urx_abr_prd_bit0</p></td>
+<td><p>r</p></td>
+<td><p>16'd0</p></td>
+<td><p>Bit period of Auto Baud Rate detection - bit[0]</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="urx-abr-prd-b23">
+<h3><span class="section-number">10.5.16. </span>urx_abr_prd_b23<a class="headerlink" href="#urx-abr-prd-b23" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x4001003c</p>
+<figure class="align-center">
+<img alt="../_images/uart_urx_abr_prd_b23.svg" src="../_images/uart_urx_abr_prd_b23.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>sts_urx_abr_prd_bit3</p></td>
+<td><p>r</p></td>
+<td><p>16'd0</p></td>
+<td><p>Bit period of Auto Baud Rate detection - bit[3]</p></td>
+</tr>
+<tr class="row-odd"><td><p>15:0</p></td>
+<td><p>sts_urx_abr_prd_bit2</p></td>
+<td><p>r</p></td>
+<td><p>16'd0</p></td>
+<td><p>Bit period of Auto Baud Rate detection - bit[2]</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="urx-abr-prd-b45">
+<h3><span class="section-number">10.5.17. </span>urx_abr_prd_b45<a class="headerlink" href="#urx-abr-prd-b45" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x40010040</p>
+<figure class="align-center">
+<img alt="../_images/uart_urx_abr_prd_b45.svg" src="../_images/uart_urx_abr_prd_b45.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>sts_urx_abr_prd_bit5</p></td>
+<td><p>r</p></td>
+<td><p>16'd0</p></td>
+<td><p>Bit period of Auto Baud Rate detection - bit[5]</p></td>
+</tr>
+<tr class="row-odd"><td><p>15:0</p></td>
+<td><p>sts_urx_abr_prd_bit4</p></td>
+<td><p>r</p></td>
+<td><p>16'd0</p></td>
+<td><p>Bit period of Auto Baud Rate detection - bit[4]</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="urx-abr-prd-b67">
+<h3><span class="section-number">10.5.18. </span>urx_abr_prd_b67<a class="headerlink" href="#urx-abr-prd-b67" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x40010044</p>
+<figure class="align-center">
+<img alt="../_images/uart_urx_abr_prd_b67.svg" src="../_images/uart_urx_abr_prd_b67.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>sts_urx_abr_prd_bit7</p></td>
+<td><p>r</p></td>
+<td><p>16'd0</p></td>
+<td><p>Bit period of Auto Baud Rate detection - bit[7]</p></td>
+</tr>
+<tr class="row-odd"><td><p>15:0</p></td>
+<td><p>sts_urx_abr_prd_bit6</p></td>
+<td><p>r</p></td>
+<td><p>16'd0</p></td>
+<td><p>Bit period of Auto Baud Rate detection - bit[6]</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="urx-abr-pw-tol">
+<h3><span class="section-number">10.5.19. </span>urx_abr_pw_tol<a class="headerlink" href="#urx-abr-pw-tol" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x40010048</p>
+<figure class="align-center">
+<img alt="../_images/uart_urx_abr_pw_tol.svg" src="../_images/uart_urx_abr_pw_tol.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>cr_urx_abr_pw_tol</p></td>
+<td><p>r/w</p></td>
+<td><p>8'd3</p></td>
+<td><p>Auto Baud Rate detection pulse-width tolerance for using codeword 0x55</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="urx-bcr-int-cfg">
+<h3><span class="section-number">10.5.20. </span>urx_bcr_int_cfg<a class="headerlink" href="#urx-bcr-int-cfg" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x40010050</p>
+<figure class="align-center">
+<img alt="../_images/uart_urx_bcr_int_cfg.svg" src="../_images/uart_urx_bcr_int_cfg.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>sts_urx_bcr_count</p></td>
+<td><p>r</p></td>
+<td><p>16'd0</p></td>
+<td><p>Current byte count of urx_bcr_int counter, auto-cleared bt cr_urx_bcr_clr</p></td>
+</tr>
+<tr class="row-odd"><td><p>15:0</p></td>
+<td><p>cr_urx_bcr_value</p></td>
+<td><p>r/w</p></td>
+<td><p>16'hFFFF</p></td>
+<td><p>Byte count setting for urx_bcr_int counter</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="utx-rs485-cfg">
+<h3><span class="section-number">10.5.21. </span>utx_rs485_cfg<a class="headerlink" href="#utx-rs485-cfg" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x40010054</p>
+<figure class="align-center">
+<img alt="../_images/uart_utx_rs485_cfg.svg" src="../_images/uart_utx_rs485_cfg.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:2</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><p>1</p></td>
+<td rowspan="3"><p>cr_utx_rs485_pol</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b1</p></td>
+<td rowspan="3"><p>DE pin polarity in RS-485 transceiver mode</p>
+<p>1'b0: DE is active-low</p>
+<p>1'b1: DE is active-high</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3"><p>0</p></td>
+<td rowspan="3"><p>cr_utx_rs485_en</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b0</p></td>
+<td rowspan="3"><p>Enable signal for RS-485 transceiver mode</p>
+<p>1'b0: Disabled, normal UART</p>
+<p>1'b1: Enabled, IO is connected to RS-485 transceiver and RTS_O becomes DE function</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+</tbody>
+</table>
+</section>
+<section id="uart-fifo-config-0">
+<h3><span class="section-number">10.5.22. </span>uart_fifo_config_0<a class="headerlink" href="#uart-fifo-config-0" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x40010080</p>
+<figure class="align-center">
+<img alt="../_images/uart_uart_fifo_config_0.svg" src="../_images/uart_uart_fifo_config_0.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>rx_fifo_underflow</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Underflow flag of RX FIFO, can be cleared by rx_fifo_clr</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>rx_fifo_overflow</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Overflow flag of RX FIFO, can be cleared by rx_fifo_clr</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>tx_fifo_underflow</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Underflow flag of TX FIFO, can be cleared by tx_fifo_clr</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>tx_fifo_overflow</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Overflow flag of TX FIFO, can be cleared by tx_fifo_clr</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>rx_fifo_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Clear signal of RX FIFO, RX FIFO will be empty when write 1 to this bit</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>tx_fifo_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Clear signal of TX FIFO, TX FIFO will be empty when write 1 to this bit</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>uart_dma_rx_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Enable signal of dma_rx_req/ack interface</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>uart_dma_tx_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Enable signal of dma_tx_req/ack interface</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="uart-fifo-config-1">
+<h3><span class="section-number">10.5.23. </span>uart_fifo_config_1<a class="headerlink" href="#uart-fifo-config-1" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x40010084</p>
+<figure class="align-center">
+<img alt="../_images/uart_uart_fifo_config_1.svg" src="../_images/uart_uart_fifo_config_1.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:29</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>28:24</p></td>
+<td><p>rx_fifo_th</p></td>
+<td><p>r/w</p></td>
+<td><p>5'd0</p></td>
+<td><p>RX FIFO threshold, dma_rx_req and rx_fifo_int will not be asserted if rx_fifo_cnt is less than this value</p></td>
+</tr>
+<tr class="row-even"><td><p>23:21</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>20:16</p></td>
+<td><p>tx_fifo_th</p></td>
+<td><p>r/w</p></td>
+<td><p>5'd0</p></td>
+<td><p>TX FIFO threshold, dma_tx_req and tx_fifo_int will not be asserted if tx_fifo_cnt is less than this value</p></td>
+</tr>
+<tr class="row-even"><td><p>15:14</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>13:8</p></td>
+<td><p>rx_fifo_cnt</p></td>
+<td><p>r</p></td>
+<td><p>6'd0</p></td>
+<td><p>RX FIFO available count, means byte count of data received in RX FIFO</p></td>
+</tr>
+<tr class="row-even"><td><p>7:6</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>5:0</p></td>
+<td><p>tx_fifo_cnt</p></td>
+<td><p>r</p></td>
+<td><p>6'd32</p></td>
+<td><p>TX FIFO available count, means empty space remained in TX FIFO</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="uart-fifo-wdata">
+<h3><span class="section-number">10.5.24. </span>uart_fifo_wdata<a class="headerlink" href="#uart-fifo-wdata" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x40010088</p>
+<figure class="align-center">
+<img alt="../_images/uart_uart_fifo_wdata.svg" src="../_images/uart_uart_fifo_wdata.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>uart_fifo_wdata</p></td>
+<td><p>w</p></td>
+<td><p>x</p></td>
+<td><p>TX FIFO, size is 32*1=32-byte</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="uart-fifo-rdata">
+<h3><span class="section-number">10.5.25. </span>uart_fifo_rdata<a class="headerlink" href="#uart-fifo-rdata" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x4001008c</p>
+<figure class="align-center">
+<img alt="../_images/uart_uart_fifo_rdata.svg" src="../_images/uart_uart_fifo_rdata.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>uart_fifo_rdata</p></td>
+<td><p>r</p></td>
+<td><p>8'h0</p></td>
+<td><p>RX FIFO, size is 32*1=32-byte</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="SPI.html" class="btn btn-neutral float-left" title="9. SPI" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="I2C.html" class="btn btn-neutral float-right" title="11. I2C" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2022.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,1836 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:v="http://schemas.microsoft.com/visio/2003/SVGExtensions/"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="6.8324127in"
+   height="2.4433522in"
+   viewBox="0 0 491.93556 175.92092"
+   xml:space="preserve"
+   color-interpolation-filters="sRGB"
+   class="st18"
+   version="1.1"
+   id="svg447"
+   sodipodi:docname="AudioPWM_Arc_common.svg"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"><metadata
+   id="metadata451"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title></dc:title></cc:Work></rdf:RDF></metadata><sodipodi:namedview
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="0"
+   inkscape:pageshadow="2"
+   inkscape:window-width="1920"
+   inkscape:window-height="1017"
+   id="namedview449"
+   showgrid="false"
+   inkscape:zoom="1.9740799"
+   inkscape:cx="373.24432"
+   inkscape:cy="122.08311"
+   inkscape:window-x="-8"
+   inkscape:window-y="-8"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="svg447" />
+	<v:documentProperties
+   v:langID="2052"
+   v:metric="true"
+   v:viewMarkup="false">
+		<v:userDefs>
+			<v:ud
+   v:nameU="msvSubprocessMaster"
+   v:prompt=""
+   v:val="VT4(Rectangle)" />
+			<v:ud
+   v:nameU="msvNoAutoConnect"
+   v:val="VT0(1):26" />
+		</v:userDefs>
+	</v:documentProperties>
+
+	<style
+   type="text/css"
+   id="style2">
+	<![CDATA[
+		.st1 {fill:#ffffff;stroke:#000000;stroke-width:0.5}
+		.st2 {fill:#ffffff;stroke:#000000;stroke-dasharray:3.5,2.5;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.5}
+		.st3 {fill:#ffffff;stroke:#000000;stroke-width:1}
+		.st4 {fill:#000000;font-family:Calibri;font-size:0.833336em}
+		.st5 {font-size:1em}
+		.st6 {marker-end:url(#mrkr2-15);stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.5}
+		.st7 {fill:#000000;fill-opacity:1;stroke:#000000;stroke-opacity:1;stroke-width:0.25773195876289}
+		.st8 {marker-start:url(#mrkr1-32);stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.5}
+		.st9 {fill:#000000;fill-opacity:1;stroke:#000000;stroke-opacity:1;stroke-width:0.21739130434783}
+		.st10 {stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.5}
+		.st11 {fill:#ffffff;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.5}
+		.st12 {fill:none;stroke:none;stroke-width:0.25}
+		.st13 {fill:#000000;font-family:Calibri;font-size:0.666664em}
+		.st14 {fill:#ffffff;stroke:#000000;stroke-width:0.25}
+		.st15 {stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.25}
+		.st16 {fill:#000000;font-family:Calibri;font-size:1.33333em}
+		.st17 {fill:#000000;font-family:Calibri;font-size:0.499992em}
+		.st18 {fill:none;fill-rule:evenodd;font-size:12px;overflow:visible;stroke-linecap:square;stroke-miterlimit:3}
+	]]>
+	</style>
+
+	<g
+   id="shape64-1"
+   v:mID="64"
+   v:groupContext="shape"
+   transform="matrix(0.7599042,0,0,0.88341137,35.003471,-462.95391)"
+   style="stroke-width:1.22051">
+			<title
+   id="title19">矩形.64</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<rect
+   x="0"
+   y="524.409"
+   width="600.94501"
+   height="198.425"
+   class="st1"
+   id="rect21" />
+		</g><defs
+   id="Markers">
+		<g
+   id="lend2">
+			<path
+   d="M 1,1 0,0 1,-1 v 2"
+   style="stroke:none"
+   id="path4" />
+		</g>
+		<marker
+   id="mrkr2-15"
+   class="st7"
+   v:arrowType="2"
+   v:arrowSize="0"
+   v:setback="3.88"
+   refX="-3.8800001"
+   orient="auto"
+   markerUnits="strokeWidth"
+   overflow="visible">
+			<use
+   xlink:href="#lend2"
+   transform="scale(-3.88)"
+   id="use7"
+   x="0"
+   y="0"
+   width="100%"
+   height="100%" />
+		</marker>
+		<g
+   id="lend1">
+			<path
+   d="M 1,-1 0,0 1,1"
+   style="fill:none;stroke-linecap:round;stroke-linejoin:round"
+   id="path10" />
+		</g>
+		<marker
+   id="mrkr1-32"
+   class="st9"
+   v:arrowType="1"
+   v:arrowSize="1"
+   orient="auto"
+   markerUnits="strokeWidth"
+   overflow="visible">
+			<use
+   xlink:href="#lend1"
+   transform="scale(4.6)"
+   id="use13"
+   x="0"
+   y="0"
+   width="100%"
+   height="100%" />
+		</marker>
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	<marker
+   id="mrkr2-15-8"
+   class="st7"
+   v:arrowType="2"
+   v:arrowSize="0"
+   v:setback="3.88"
+   refX="-3.8800001"
+   orient="auto"
+   markerUnits="strokeWidth"
+   overflow="visible"><use
+     xlink:href="#lend2"
+     transform="scale(-3.88)"
+     id="use7-8"
+     x="0"
+     y="0"
+     width="100%"
+     height="100%" /></marker><marker
+   id="mrkr2-15-9"
+   class="st7"
+   v:arrowType="2"
+   v:arrowSize="0"
+   v:setback="3.88"
+   refX="-3.8800001"
+   orient="auto"
+   markerUnits="strokeWidth"
+   overflow="visible"><use
+     xlink:href="#lend2"
+     transform="scale(-3.88)"
+     id="use7-87"
+     x="0"
+     y="0"
+     width="100%"
+     height="100%" /></marker><marker
+   id="mrkr2-15-4"
+   class="st7"
+   v:arrowType="2"
+   v:arrowSize="0"
+   v:setback="3.88"
+   refX="-3.8800001"
+   orient="auto"
+   markerUnits="strokeWidth"
+   overflow="visible"><use
+     xlink:href="#lend2"
+     transform="scale(-3.88)"
+     id="use7-1"
+     x="0"
+     y="0"
+     width="100%"
+     height="100%" /></marker><marker
+   id="mrkr2-15-42"
+   class="st7"
+   v:arrowType="2"
+   v:arrowSize="0"
+   v:setback="3.88"
+   refX="-3.8800001"
+   orient="auto"
+   markerUnits="strokeWidth"
+   overflow="visible"><use
+     xlink:href="#lend2"
+     transform="scale(-3.88)"
+     id="use7-6"
+     x="0"
+     y="0"
+     width="100%"
+     height="100%" /></marker><marker
+   id="marker1871"
+   class="st7"
+   v:arrowType="2"
+   v:arrowSize="0"
+   v:setback="3.88"
+   refX="-3.8800001"
+   orient="auto"
+   markerUnits="strokeWidth"
+   overflow="visible"><use
+     xlink:href="#lend2"
+     transform="scale(-3.88)"
+     id="use1869"
+     x="0"
+     y="0"
+     width="100%"
+     height="100%" /></marker>
+			
+			
+			
+			
+			
+					
+			
+			
+			
+			
+			
+					
+			
+			
+			
+			
+			
+					<marker
+   id="mrkr2-15-7"
+   class="st7"
+   v:arrowType="2"
+   v:arrowSize="0"
+   v:setback="3.88"
+   refX="-3.8800001"
+   orient="auto"
+   markerUnits="strokeWidth"
+   overflow="visible"><use
+     xlink:href="#lend2"
+     transform="scale(-3.88)"
+     id="use7-0"
+     x="0"
+     y="0"
+     width="100%"
+     height="100%" /></marker><marker
+   id="mrkr2-15-5"
+   class="st7"
+   v:arrowType="2"
+   v:arrowSize="0"
+   v:setback="3.88"
+   refX="-3.8800001"
+   orient="auto"
+   markerUnits="strokeWidth"
+   overflow="visible"><use
+     xlink:href="#lend2"
+     transform="scale(-3.88)"
+     id="use7-19"
+     x="0"
+     y="0"
+     width="100%"
+     height="100%" /></marker></defs>
+	<g
+   id="shape1-5"
+   v:mID="1"
+   v:groupContext="shape"
+   transform="matrix(0.7599042,0,0,0.75937533,442.12214,-438.80315)"
+   style="stroke-width:1.31641">
+			<title
+   id="title29">圆角矩形</title>
+			<desc
+   id="desc31">Playback Memory Interface</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="CTypeTopLeftSnip"
+   v:prompt=""
+   v:val="VT0(0):5" />
+				<v:ud
+   v:nameU="CTypeTopRightSnip"
+   v:prompt=""
+   v:val="VT0(0):5" />
+				<v:ud
+   v:nameU="CTypeBotLeftSnip"
+   v:prompt=""
+   v:val="VT0(0):5" />
+				<v:ud
+   v:nameU="CTypeBotRightSnip"
+   v:prompt=""
+   v:val="VT0(0):5" />
+				<v:ud
+   v:nameU="CornerLockHoriz"
+   v:prompt=""
+   v:val="VT0(1):5" />
+				<v:ud
+   v:nameU="CornerLockVert"
+   v:prompt=""
+   v:val="VT0(1):5" />
+				<v:ud
+   v:nameU="CornerLockDiag"
+   v:prompt=""
+   v:val="VT0(0):5" />
+				<v:ud
+   v:nameU="TopLeftOffset"
+   v:prompt=""
+   v:val="VT0(0.15748031496063):24" />
+				<v:ud
+   v:nameU="TopRightOffset"
+   v:prompt=""
+   v:val="VT0(0.15748031496063):24" />
+				<v:ud
+   v:nameU="BotLeftOffset"
+   v:prompt=""
+   v:val="VT0(0.15748031496063):24" />
+				<v:ud
+   v:nameU="BotRightOffset"
+   v:prompt=""
+   v:val="VT0(0.15748031496063):24" />
+				<v:ud
+   v:nameU="visVersion"
+   v:prompt=""
+   v:val="VT0(15):26" />
+				<v:ud
+   v:nameU="TopLeftOffset"
+   v:prompt=""
+   v:val="VT0(0.070866141732283):1" />
+				<v:ud
+   v:nameU="TopRightOffset"
+   v:prompt=""
+   v:val="VT0(0.070866141732283):1" />
+				<v:ud
+   v:nameU="BotLeftOffset"
+   v:prompt=""
+   v:val="VT0(0.070866141732283):1" />
+				<v:ud
+   v:nameU="BotRightOffset"
+   v:prompt=""
+   v:val="VT0(0.070866141732283):1" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,4,4,4)"
+   v:tabSpace="42.5197" />
+			<v:textRect
+   cx="25.5118"
+   cy="680.315"
+   width="51.03"
+   height="85.0394" />
+			<path
+   d="m 5.1,722.83 h 40.82 a 5.10228,5.10228 -180 0 0 5.1,-5.1 V 642.9 a 5.10228,5.10228 -180 0 0 -5.1,-5.1 H 5.1 A 5.10228,5.10228 -180 0 0 0,642.9 v 74.83 a 5.10228,5.10228 -180 0 0 5.1,5.1 z"
+   class="st3"
+   id="path33" />
+			<text
+   x="7.71"
+   y="671.32001"
+   class="st4"
+   v:langID="2052"
+   id="text39"
+   style="stroke-width:1.31641"><v:paragraph
+   v:horizAlign="1" /><v:tabList />Playback<v:newlineChar /><tspan
+   x="8.1099997"
+   dy="1.2em"
+   class="st5"
+   id="tspan35"
+   style="stroke-width:1.31641">Memory<v:newlineChar /></tspan><tspan
+   x="7.1999998"
+   dy="1.2em"
+   class="st5"
+   id="tspan37"
+   style="stroke-width:1.31641">Interface</tspan></text>		</g><g
+   id="shape3-10"
+   v:mID="3"
+   v:groupContext="shape"
+   transform="matrix(-0.7599042,0,0,-0.75937533,442.12214,637.4754)"
+   style="stroke-width:1.31641">
+			<title
+   id="title42">工作表.3</title>
+			<path
+   d="M 0,722.83 H 32.08"
+   class="st6"
+   id="path44" />
+		</g><g
+   id="shape4-16"
+   v:mID="4"
+   v:groupContext="shape"
+   transform="matrix(-0.7599042,0,0,-0.75937533,442.12214,620.2529)"
+   style="stroke-width:1.31641">
+			<title
+   id="title47">工作表.4</title>
+			<path
+   d="M 0,722.83 H 32.08"
+   class="st6"
+   id="path49" />
+		</g><g
+   id="shape7-21"
+   v:mID="7"
+   v:groupContext="shape"
+   transform="matrix(0.7599042,0,0,0.75937533,353.80456,-448.48974)"
+   style="stroke-width:1.31641">
+			<title
+   id="title52">矩形</title>
+			<desc
+   id="desc54">L/R Mixer</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,4,4,4)"
+   v:tabSpace="42.5197" />
+			<v:textRect
+   cx="25.5118"
+   cy="695.906"
+   width="51.03"
+   height="53.8583" />
+			<rect
+   x="0"
+   y="668.97601"
+   width="51.023602"
+   height="53.858299"
+   class="st1"
+   id="rect56" />
+			<text
+   x="5.8099999"
+   y="698.90997"
+   class="st4"
+   v:langID="2052"
+   id="text58"
+   style="stroke-width:1.31641"><v:paragraph
+   v:horizAlign="1" /><v:tabList />L/R Mixer</text>		</g><g
+   id="group11-24"
+   transform="matrix(0.7599042,0,0,0.75937533,403.34803,-471.09179)"
+   v:mID="11"
+   v:groupContext="group"
+   style="stroke-width:1.31641">
+			<title
+   id="title61">工作表.11</title>
+			<g
+   id="shape9-25"
+   v:mID="9"
+   v:groupContext="shape"
+   transform="rotate(-90,8.504,714.331)"
+   style="stroke-width:1.31641">
+				<title
+   id="title63">三角形</title>
+				<v:userDefs>
+					<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+				</v:userDefs>
+				<path
+   d="m 17.01,722.83 -8.51,-17 -8.5,17 z"
+   class="st1"
+   id="path65" />
+			</g>
+			<g
+   id="shape10-27"
+   v:mID="10"
+   v:groupContext="shape"
+   transform="rotate(102.529,12.927269,717.99343)"
+   style="stroke-width:1.31641">
+				<title
+   id="title68">工作表.10</title>
+				<path
+   d="M 0,722.83 H 18.45"
+   class="st8"
+   id="path70" />
+			</g>
+		</g><g
+   id="group12-33"
+   transform="matrix(0.7599042,0,0,0.75937533,403.34803,-471.09179)"
+   v:mID="12"
+   v:groupContext="group"
+   style="stroke-width:1.31641">
+			<title
+   id="title74">工作表.12</title>
+			<g
+   id="shape13-34"
+   v:mID="13"
+   v:groupContext="shape"
+   transform="rotate(-90,8.504,714.331)"
+   style="stroke-width:1.31641">
+				<title
+   id="title76">三角形</title>
+				<v:userDefs>
+					<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+				</v:userDefs>
+				<path
+   d="m 17.01,722.83 -8.51,-17 -8.5,17 z"
+   class="st1"
+   id="path78" />
+			</g>
+			<g
+   id="shape14-36"
+   v:mID="14"
+   v:groupContext="shape"
+   transform="rotate(102.529,12.927269,717.99343)"
+   style="stroke-width:1.31641">
+				<title
+   id="title81">工作表.14</title>
+				<path
+   d="M 0,722.83 H 18.45"
+   class="st8"
+   id="path83" />
+			</g>
+		</g><g
+   id="group15-41"
+   transform="matrix(0.7599042,0,0,0.75937533,403.34803,-453.87143)"
+   v:mID="15"
+   v:groupContext="group"
+   style="stroke-width:1.31641">
+			<title
+   id="title87">工作表.15</title>
+			<g
+   id="shape16-42"
+   v:mID="16"
+   v:groupContext="shape"
+   transform="rotate(-90,8.504,714.331)"
+   style="stroke-width:1.31641">
+				<title
+   id="title89">三角形</title>
+				<v:userDefs>
+					<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+				</v:userDefs>
+				<path
+   d="m 17.01,722.83 -8.51,-17 -8.5,17 z"
+   class="st1"
+   id="path91" />
+			</g>
+			<g
+   id="shape17-44"
+   v:mID="17"
+   v:groupContext="shape"
+   transform="rotate(102.529,12.927269,717.99343)"
+   style="stroke-width:1.31641">
+				<title
+   id="title94">工作表.17</title>
+				<path
+   d="M 0,722.83 H 18.45"
+   class="st8"
+   id="path96" />
+			</g>
+		</g><g
+   id="shape18-49"
+   v:mID="18"
+   v:groupContext="shape"
+   transform="matrix(-0.7599042,0,0,-0.75937533,403.34803,620.2529)"
+   style="stroke-width:1.31641">
+			<title
+   id="title100">工作表.18</title>
+			<path
+   d="M 0,722.83 H 14.17"
+   class="st10"
+   id="path102" />
+		</g><g
+   id="shape19-52"
+   v:mID="19"
+   v:groupContext="shape"
+   transform="matrix(-0.7599042,0,0,-0.75937533,403.34803,637.4754)"
+   style="stroke-width:1.31641">
+			<title
+   id="title105">工作表.19</title>
+			<path
+   d="M 0,722.83 H 14.17"
+   class="st10"
+   id="path107" />
+		</g><g
+   id="shape20-55"
+   v:mID="20"
+   v:groupContext="shape"
+   transform="matrix(0.7599042,0,0,0.75937533,292.41418,-448.48974)"
+   style="stroke-width:1.31641">
+			<title
+   id="title110">矩形.20</title>
+			<desc
+   id="desc112">Digital Volume</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,4,4,4)"
+   v:tabSpace="42.5197" />
+			<v:textRect
+   cx="25.5118"
+   cy="695.906"
+   width="51.03"
+   height="53.8583" />
+			<rect
+   x="0"
+   y="668.97601"
+   width="51.023602"
+   height="53.858299"
+   class="st1"
+   id="rect114" />
+			<text
+   x="12.57"
+   y="692.90997"
+   class="st4"
+   v:langID="2052"
+   id="text118"
+   style="stroke-width:1.31641"><v:paragraph
+   v:horizAlign="1" /><v:tabList />Digital<v:newlineChar /><tspan
+   x="9.7799997"
+   dy="1.2em"
+   class="st5"
+   id="tspan116"
+   style="stroke-width:1.31641">Volume</tspan></text>		</g><g
+   id="shape21-59"
+   v:mID="21"
+   v:groupContext="shape"
+   transform="matrix(-0.7599042,0,0,-0.75937533,353.80456,628.8642)"
+   style="stroke-width:1.31641">
+			<title
+   id="title121">工作表.21</title>
+			<path
+   d="M 0,722.83 H 27.82"
+   class="st6"
+   id="path123" />
+		</g><g
+   id="shape22-64"
+   v:mID="22"
+   v:groupContext="shape"
+   transform="matrix(0.7599042,0,0,0.75937533,222.40724,-448.48974)"
+   style="stroke-width:1.31641">
+			<title
+   id="title126">矩形.22</title>
+			<desc
+   id="desc128">Digital Interpolation Filter</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,4,4,4)"
+   v:tabSpace="42.5197" />
+			<v:textRect
+   cx="31.1811"
+   cy="695.906"
+   width="62.37"
+   height="53.8583" />
+			<rect
+   x="0"
+   y="668.97601"
+   width="62.362202"
+   height="53.858299"
+   rx="7.4605327"
+   ry="7.4657283"
+   class="st11"
+   id="rect130" />
+			<text
+   x="18.24"
+   y="686.90997"
+   class="st4"
+   v:langID="2052"
+   id="text136"
+   style="stroke-width:1.31641"><v:paragraph
+   v:horizAlign="1" /><v:tabList />Digital<v:newlineChar /><tspan
+   x="4.5"
+   dy="1.2em"
+   class="st5"
+   id="tspan132"
+   style="stroke-width:1.31641">Interpolation<v:newlineChar /></tspan><tspan
+   x="20.68"
+   dy="1.2em"
+   class="st5"
+   id="tspan134"
+   style="stroke-width:1.31641">Filter</tspan></text>		</g><g
+   id="shape23-69"
+   v:mID="23"
+   v:groupContext="shape"
+   transform="matrix(-0.7599042,0,0,-0.75937533,292.41418,628.8642)"
+   style="stroke-width:1.31641">
+			<title
+   id="title139">工作表.23</title>
+			<path
+   d="M 0,722.83 H 27.82"
+   class="st6"
+   id="path141" />
+		</g><g
+   id="shape24-74"
+   v:mID="24"
+   v:groupContext="shape"
+   transform="matrix(0.7599042,0,0,0.75937533,168.55587,-448.48974)"
+   style="stroke-width:1.31641">
+			<title
+   id="title144">矩形.24</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<rect
+   x="0"
+   y="668.97601"
+   width="41.102402"
+   height="53.858299"
+   rx="7.4605327"
+   ry="7.4657283"
+   class="st11"
+   id="rect146" />
+		</g><g
+   id="shape26-76"
+   v:mID="26"
+   v:groupContext="shape"
+   transform="matrix(0.7599042,0,0,0.75937533,171.24822,-459.70419)"
+   style="stroke-width:1.31641">
+			<title
+   id="title149">工作表.26</title>
+			<path
+   d="M 0,722.83 H 7.09"
+   class="st10"
+   id="path151" />
+		</g><g
+   id="shape27-79"
+   v:mID="27"
+   v:groupContext="shape"
+   transform="matrix(0,-0.75937533,0.7599042,0,-372.65185,89.198866)"
+   style="stroke-width:1.31641">
+			<title
+   id="title154">工作表.27</title>
+			<path
+   d="M 0,722.83 H 21.26"
+   class="st10"
+   id="path156" />
+		</g><g
+   id="shape28-82"
+   v:mID="28"
+   v:groupContext="shape"
+   transform="matrix(0,-0.75937533,0.7599042,0,-372.65185,73.054546)"
+   style="stroke-width:1.31641">
+			<title
+   id="title159">工作表.28</title>
+			<path
+   d="M 0,722.83 H 8"
+   class="st10"
+   id="path161" />
+		</g><g
+   id="shape29-85"
+   v:mID="29"
+   v:groupContext="shape"
+   transform="matrix(0.7599042,0,0,0.75937533,176.63289,-481.22945)"
+   style="stroke-width:1.31641">
+			<title
+   id="title164">工作表.29</title>
+			<path
+   d="M 0,722.83 H 14.17"
+   class="st10"
+   id="path166" />
+		</g><g
+   id="shape30-88"
+   v:mID="30"
+   v:groupContext="shape"
+   transform="matrix(0,0.75937533,-0.7599042,0,736.69135,67.673616)"
+   style="stroke-width:1.31641">
+			<title
+   id="title169">工作表.30</title>
+			<path
+   d="M 0,722.83 H 14.17"
+   class="st10"
+   id="path171" />
+		</g><g
+   id="shape31-91"
+   v:mID="31"
+   v:groupContext="shape"
+   transform="matrix(0.7599042,0,0,0.75937533,187.40378,-470.46682)"
+   style="stroke-width:1.31641">
+			<title
+   id="title174">工作表.31</title>
+			<path
+   d="M 0,722.83 H 10.63"
+   class="st10"
+   id="path176" />
+		</g><g
+   id="shape35-94"
+   v:mID="35"
+   v:groupContext="shape"
+   transform="matrix(-0.7599042,0,0,-0.75937533,222.40724,628.8642)"
+   style="stroke-width:1.31641">
+			<title
+   id="title179">工作表.35</title>
+			<path
+   d="M 0,722.83 H 27.82"
+   class="st6"
+   id="path181" />
+		</g><g
+   id="shape36-99"
+   v:mID="36"
+   v:groupContext="shape"
+   transform="matrix(0.7599042,0,0,0.75937533,107.7035,-448.48974)"
+   style="stroke-width:1.31641">
+			<title
+   id="title184">矩形.36</title>
+			<desc
+   id="desc186">SDM</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,4,4,4)"
+   v:tabSpace="42.5197" />
+			<v:textRect
+   cx="20.5512"
+   cy="695.906"
+   width="41.11"
+   height="53.8583" />
+			<rect
+   x="0"
+   y="668.97601"
+   width="41.102402"
+   height="53.858299"
+   rx="7.4605327"
+   ry="7.4657283"
+   class="st11"
+   id="rect188" />
+			<text
+   x="10.9"
+   y="698.90997"
+   class="st4"
+   v:langID="2052"
+   id="text190"
+   style="stroke-width:1.31641"><v:paragraph
+   v:horizAlign="1" /><v:tabList />SDM</text>		</g><g
+   id="shape37-102"
+   v:mID="37"
+   v:groupContext="shape"
+   transform="matrix(-0.7599042,0,0,-0.75937533,168.55587,628.8642)"
+   style="stroke-width:1.31641">
+			<title
+   id="title193">工作表.37</title>
+			<path
+   d="M 0,722.83 H 37.04"
+   class="st6"
+   id="path195" />
+		</g><g
+   id="shape38-107"
+   v:mID="38"
+   v:groupContext="shape"
+   transform="matrix(0.7599042,0,0,0.75937533,50.082251,-448.48974)"
+   style="stroke-width:1.31641">
+			<title
+   id="title198">矩形.38</title>
+			<desc
+   id="desc200">PWM Generator</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,4,4,4)"
+   v:tabSpace="42.5197" />
+			<v:textRect
+   cx="25.5118"
+   cy="695.906"
+   width="51.03"
+   height="53.8583" />
+			<rect
+   x="0"
+   y="668.97601"
+   width="51.023602"
+   height="53.858299"
+   rx="7.4605327"
+   ry="7.4657283"
+   class="st11"
+   id="rect202" />
+			<text
+   x="14.21"
+   y="692.90997"
+   class="st4"
+   v:langID="2052"
+   id="text206"
+   style="stroke-width:1.31641"><v:paragraph
+   v:horizAlign="1" /><v:tabList />PWM<v:newlineChar /><tspan
+   x="4.5599999"
+   dy="1.2em"
+   class="st5"
+   id="tspan204"
+   style="stroke-width:1.31641">Generator</tspan></text>		</g><g
+   id="shape39-111"
+   v:mID="39"
+   v:groupContext="shape"
+   transform="matrix(-0.7599042,0,0,-0.75937533,107.7035,628.8642)"
+   style="stroke-width:1.31641">
+			<title
+   id="title209">工作表.39</title>
+			<path
+   d="M 0,722.83 H 22.86"
+   class="st6"
+   id="path211" />
+		</g><g
+   id="shape40-116"
+   v:mID="40"
+   v:groupContext="shape"
+   transform="matrix(0.7599042,0,0,0.75937533,396.88581,-488.31214)"
+   style="stroke-width:1.31641">
+			<title
+   id="title214">工作表.40</title>
+			<desc
+   id="desc216">-6dB/ 0dB</desc>
+			<v:textBlock
+   v:margins="rect(4,4,4,4)"
+   v:tabSpace="42.5197" />
+			<v:textRect
+   cx="20.5512"
+   cy="717.165"
+   width="41.11"
+   height="11.3386" />
+			<rect
+   x="0"
+   y="711.49597"
+   width="41.102402"
+   height="11.3386"
+   class="st12"
+   id="rect218" />
+			<text
+   x="11.48"
+   y="714.77002"
+   class="st13"
+   v:langID="2052"
+   id="text222"
+   style="stroke-width:1.31641"><v:paragraph
+   v:horizAlign="1" /><v:tabList />-6dB/<v:newlineChar /><tspan
+   x="14.25"
+   dy="1.2em"
+   class="st5"
+   id="tspan220"
+   style="stroke-width:1.31641">0</tspan>dB</text>		</g><g
+   id="shape42-120"
+   v:mID="42"
+   v:groupContext="shape"
+   transform="matrix(0.7599042,0,0,0.75937533,413.57938,-476.53651)"
+   style="stroke-width:1.31641">
+			<title
+   id="title225">工作表.42</title>
+			<desc
+   id="desc227">L 16bit</desc>
+			<v:textBlock
+   v:margins="rect(4,4,4,4)"
+   v:tabSpace="42.5197" />
+			<v:textRect
+   cx="20.5512"
+   cy="717.165"
+   width="41.11"
+   height="11.3386" />
+			<rect
+   x="0"
+   y="711.49597"
+   width="41.102402"
+   height="11.3386"
+   class="st12"
+   id="rect229" />
+			<text
+   x="7.7399998"
+   y="719.57001"
+   class="st13"
+   v:langID="2052"
+   id="text231"
+   style="stroke-width:1.31641"><v:paragraph
+   v:horizAlign="1" /><v:tabList />L   16bit</text>		</g><g
+   id="shape43-123"
+   v:mID="43"
+   v:groupContext="shape"
+   transform="matrix(0.7599042,0,0,0.75937533,413.57938,-459.31615)"
+   style="stroke-width:1.31641">
+			<title
+   id="title234">工作表.43</title>
+			<desc
+   id="desc236">R 16bit</desc>
+			<v:textBlock
+   v:margins="rect(4,4,4,4)"
+   v:tabSpace="42.5197" />
+			<v:textRect
+   cx="20.5512"
+   cy="717.165"
+   width="41.11"
+   height="11.3386" />
+			<rect
+   x="0"
+   y="711.49597"
+   width="41.102402"
+   height="11.3386"
+   class="st12"
+   id="rect238" />
+			<text
+   x="7.25"
+   y="719.57001"
+   class="st13"
+   v:langID="2052"
+   id="text240"
+   style="stroke-width:1.31641"><v:paragraph
+   v:horizAlign="1" /><v:tabList />R   16bit</text>		</g><g
+   id="shape45-126"
+   v:mID="45"
+   v:groupContext="shape"
+   transform="matrix(0.7599042,0,0,0.75937533,288.10552,-448.48974)"
+   style="stroke-width:1.31641">
+			<title
+   id="title243">工作表.45</title>
+			<desc
+   id="desc245">-95.5dB~31.5dB</desc>
+			<v:textBlock
+   v:margins="rect(4,4,4,4)"
+   v:tabSpace="42.5197" />
+			<v:textRect
+   cx="31.1811"
+   cy="717.165"
+   width="62.37"
+   height="11.3386" />
+			<rect
+   x="0"
+   y="711.49597"
+   width="62.362202"
+   height="11.3386"
+   class="st12"
+   id="rect247" />
+			<text
+   x="5.23"
+   y="719.57001"
+   class="st13"
+   v:langID="2052"
+   id="text249"
+   style="stroke-width:1.31641"><v:paragraph
+   v:horizAlign="1" /><v:tabList />-95.5dB~31.5dB</text>		</g><g
+   id="shape46-129"
+   v:mID="46"
+   v:groupContext="shape"
+   transform="matrix(0.7599042,0,0,0.75937533,332.80233,-467.86292)"
+   style="stroke-width:1.31641">
+			<title
+   id="title252">工作表.46</title>
+			<desc
+   id="desc254">fs</desc>
+			<v:textBlock
+   v:margins="rect(4,4,4,4)"
+   v:tabSpace="42.5197" />
+			<v:textRect
+   cx="10.6299"
+   cy="717.165"
+   width="21.26"
+   height="11.3386" />
+			<rect
+   x="0"
+   y="711.49597"
+   width="21.2598"
+   height="11.3386"
+   class="st12"
+   id="rect256" />
+			<text
+   x="7.8400002"
+   y="719.57001"
+   class="st13"
+   v:langID="2052"
+   id="text258"
+   style="stroke-width:1.31641"><v:paragraph
+   v:horizAlign="1" /><v:tabList />fs</text>		</g><g
+   id="shape47-132"
+   v:mID="47"
+   v:groupContext="shape"
+   transform="matrix(0.7599042,0,0,0.75937533,274.64306,-467.86292)"
+   style="stroke-width:1.31641">
+			<title
+   id="title261">工作表.47</title>
+			<desc
+   id="desc263">fs</desc>
+			<v:textBlock
+   v:margins="rect(4,4,4,4)"
+   v:tabSpace="42.5197" />
+			<v:textRect
+   cx="10.6299"
+   cy="717.165"
+   width="21.26"
+   height="11.3386" />
+			<rect
+   x="0"
+   y="711.49597"
+   width="21.2598"
+   height="11.3386"
+   class="st12"
+   id="rect265" />
+			<text
+   x="7.8400002"
+   y="719.57001"
+   class="st13"
+   v:langID="2052"
+   id="text267"
+   style="stroke-width:1.31641"><v:paragraph
+   v:horizAlign="1" /><v:tabList />fs</text>		</g><g
+   id="shape48-135"
+   v:mID="48"
+   v:groupContext="shape"
+   transform="matrix(0.7599042,0,0,0.75937533,203.02057,-467.64726)"
+   style="stroke-width:1.31641">
+			<title
+   id="title270">工作表.48</title>
+			<desc
+   id="desc272">16xfs</desc>
+			<v:textBlock
+   v:margins="rect(4,4,4,4)"
+   v:tabSpace="42.5197" />
+			<v:textRect
+   cx="12.7559"
+   cy="717.165"
+   width="25.52"
+   height="11.3386" />
+			<rect
+   x="0"
+   y="711.49597"
+   width="25.511801"
+   height="11.3386"
+   class="st12"
+   id="rect274" />
+			<text
+   x="4.1799998"
+   y="719.57001"
+   class="st13"
+   v:langID="2052"
+   id="text276"
+   style="stroke-width:1.31641"><v:paragraph
+   v:horizAlign="1" /><v:tabList />16xfs</text>		</g><g
+   id="shape49-138"
+   v:mID="49"
+   v:groupContext="shape"
+   transform="matrix(0.7599042,0,0,0.75937533,222.40724,-440.95598)"
+   style="stroke-width:1.31641">
+			<title
+   id="title279">工作表.49</title>
+			<desc
+   id="desc281">↑x16</desc>
+			<v:textBlock
+   v:margins="rect(4,4,4,4)"
+   v:tabSpace="42.5197" />
+			<v:textRect
+   cx="31.1811"
+   cy="717.165"
+   width="62.37"
+   height="11.3386" />
+			<rect
+   x="0"
+   y="711.49597"
+   width="62.362202"
+   height="11.3386"
+   class="st12"
+   id="rect283" />
+			<text
+   x="22.68"
+   y="719.57001"
+   class="st13"
+   v:langID="2052"
+   id="text285"
+   style="stroke-width:1.31641"><v:paragraph
+   v:horizAlign="1" /><v:tabList />↑x16</text>		</g><g
+   id="shape51-141"
+   v:mID="51"
+   v:groupContext="shape"
+   transform="matrix(0.7599042,0,0,0.75937533,160.47809,-448.48974)"
+   style="stroke-width:1.31641">
+			<title
+   id="title288">工作表.51</title>
+			<desc
+   id="desc290">ZoH</desc>
+			<v:textBlock
+   v:margins="rect(4,4,4,4)"
+   v:tabSpace="42.5197" />
+			<v:textRect
+   cx="31.1811"
+   cy="717.165"
+   width="62.37"
+   height="11.3386" />
+			<rect
+   x="0"
+   y="711.49597"
+   width="62.362202"
+   height="11.3386"
+   class="st12"
+   id="rect292" />
+			<text
+   x="24.709999"
+   y="719.57001"
+   class="st13"
+   v:langID="2052"
+   id="text294"
+   style="stroke-width:1.31641"><v:paragraph
+   v:horizAlign="1" /><v:tabList />ZoH</text>		</g><g
+   id="shape52-144"
+   v:mID="52"
+   v:groupContext="shape"
+   transform="matrix(0.7599042,0,0,0.75937533,319.33987,-502.30363)"
+   style="stroke-width:1.31641">
+			<title
+   id="title297">工作表.52</title>
+			<desc
+   id="desc299">fs = 48k/32k/24k/16k/8k 44.1k/22.05k</desc>
+			<v:textBlock
+   v:margins="rect(4,4,4,4)"
+   v:tabSpace="42.5197" />
+			<v:textRect
+   cx="50.5984"
+   cy="717.165"
+   width="101.2"
+   height="11.3386" />
+			<rect
+   x="0"
+   y="711.49597"
+   width="101.197"
+   height="11.3386"
+   class="st12"
+   id="rect301" />
+			<text
+   x="10.49"
+   y="714.77002"
+   class="st13"
+   v:langID="2052"
+   id="text305"
+   style="stroke-width:1.31641"><v:paragraph
+   v:horizAlign="1" /><v:tabList />fs = 48k/32k/24k/16k/8k<v:newlineChar /><tspan
+   x="27.4"
+   dy="1.2em"
+   class="st5"
+   id="tspan303"
+   style="stroke-width:1.31641">  </tspan>44.1k/22.05k</text>		</g><g
+   id="shape56-148"
+   v:mID="56"
+   v:groupContext="shape"
+   transform="matrix(0.7599042,0,0,0.75937533,141.62943,-473.24462)"
+   style="stroke-width:1.31641">
+			<title
+   id="title308">工作表.56</title>
+			<desc
+   id="desc310">Fixedfreq</desc>
+			<v:textBlock
+   v:margins="rect(4,4,4,4)"
+   v:tabSpace="42.5197" />
+			<v:textRect
+   cx="12.7559"
+   cy="717.165"
+   width="25.52"
+   height="11.3386" />
+			<rect
+   x="0"
+   y="711.49597"
+   width="25.511801"
+   height="11.3386"
+   class="st12"
+   id="rect312" />
+			<text
+   x="4.1799998"
+   y="714.77002"
+   class="st13"
+   v:langID="2052"
+   id="text316"
+   style="stroke-width:1.31641"><v:paragraph
+   v:horizAlign="1" /><v:tabList />Fixed<tspan
+   x="6.0500002"
+   dy="1.2em"
+   class="st5"
+   id="tspan314"
+   style="stroke-width:1.31641">freq</tspan></text>		</g><g
+   id="shape58-152"
+   v:mID="58"
+   v:groupContext="shape"
+   transform="matrix(-0.53733342,0.53695944,-0.53733342,-0.53695944,488.028,465.94775)"
+   style="stroke-width:1.31641">
+			<title
+   id="title319">工作表.58</title>
+			<path
+   d="M 0,722.83 H 7.22"
+   class="st10"
+   id="path321" />
+		</g><g
+   id="shape62-155"
+   v:mID="62"
+   v:groupContext="shape"
+   transform="matrix(0.7599042,0,0,0.75937533,83.470161,-468.93896)"
+   style="stroke-width:1.31641">
+			<title
+   id="title324">工作表.62</title>
+			<desc
+   id="desc326">6bit</desc>
+			<v:textBlock
+   v:margins="rect(4,4,4,4)"
+   v:tabSpace="42.5197" />
+			<v:textRect
+   cx="20.5512"
+   cy="717.165"
+   width="41.11"
+   height="11.3386" />
+			<rect
+   x="0"
+   y="711.49597"
+   width="41.102402"
+   height="11.3386"
+   class="st12"
+   id="rect328" />
+			<text
+   x="14.16"
+   y="719.57001"
+   class="st13"
+   v:langID="2052"
+   id="text330"
+   style="stroke-width:1.31641"><v:paragraph
+   v:horizAlign="1" /><v:tabList />6bit</text>		</g><g
+   id="group69-158"
+   transform="matrix(0.7599042,0,0,0.75937533,30.695571,-471.09179)"
+   v:mID="69"
+   v:groupContext="group"
+   style="stroke-width:1.31641">
+			<title
+   id="title333">工作表.69</title>
+			<g
+   id="shape65-159"
+   v:mID="65"
+   v:groupContext="shape"
+   style="stroke-width:1.31641">
+				<title
+   id="title335">正方形</title>
+				<v:userDefs>
+					<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+				</v:userDefs>
+				<rect
+   x="0"
+   y="711.49597"
+   width="11.3386"
+   height="11.3386"
+   class="st14"
+   id="rect337" />
+			</g>
+			<g
+   id="shape67-161"
+   v:mID="67"
+   v:groupContext="shape"
+   transform="rotate(45.339,13.391303,717.24209)"
+   style="stroke-width:1.31641">
+				<title
+   id="title340">工作表.67</title>
+				<path
+   d="M 0,722.83 H 15.73"
+   class="st15"
+   id="path342" />
+			</g>
+			<g
+   id="shape68-164"
+   v:mID="68"
+   v:groupContext="shape"
+   transform="rotate(135,8.0171072,719.51501)"
+   style="stroke-width:1.31641">
+				<title
+   id="title345">工作表.68</title>
+				<path
+   d="M 0,722.83 H 16.04"
+   class="st15"
+   id="path347" />
+			</g>
+		</g><g
+   id="group70-167"
+   transform="matrix(0.7599042,0,0,0.75937533,30.695571,-453.87143)"
+   v:mID="70"
+   v:groupContext="group"
+   style="stroke-width:1.31641">
+			<title
+   id="title351">工作表.70</title>
+			<g
+   id="shape71-168"
+   v:mID="71"
+   v:groupContext="shape"
+   style="stroke-width:1.31641">
+				<title
+   id="title353">正方形</title>
+				<v:userDefs>
+					<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+				</v:userDefs>
+				<rect
+   x="0"
+   y="711.49597"
+   width="11.3386"
+   height="11.3386"
+   class="st14"
+   id="rect355" />
+			</g>
+			<g
+   id="shape72-170"
+   v:mID="72"
+   v:groupContext="shape"
+   transform="rotate(45.339,13.391303,717.24209)"
+   style="stroke-width:1.31641">
+				<title
+   id="title358">工作表.72</title>
+				<path
+   d="M 0,722.83 H 15.73"
+   class="st15"
+   id="path360" />
+			</g>
+			<g
+   id="shape73-173"
+   v:mID="73"
+   v:groupContext="shape"
+   transform="rotate(135,8.0171072,719.51501)"
+   style="stroke-width:1.31641">
+				<title
+   id="title363">工作表.73</title>
+				<path
+   d="M 0,722.83 H 16.04"
+   class="st15"
+   id="path365" />
+			</g>
+		</g><g
+   id="shape74-176"
+   v:mID="74"
+   v:groupContext="shape"
+   transform="matrix(-0.7599042,0,0,-0.75937533,50.082251,622.4095)"
+   style="stroke-width:1.31641">
+			<title
+   id="title369">工作表.74</title>
+			<path
+   d="M 0,722.83 H 12.23"
+   class="st6"
+   id="path371" />
+		</g><g
+   id="shape75-181"
+   v:mID="75"
+   v:groupContext="shape"
+   transform="matrix(-0.7599042,0,0,-0.75937533,50.082251,639.6321)"
+   style="stroke-width:1.31641">
+			<title
+   id="title374">工作表.75</title>
+			<path
+   d="M 0,722.83 H 12.23"
+   class="st6"
+   id="path376" />
+		</g><g
+   id="shape76-186"
+   v:mID="76"
+   v:groupContext="shape"
+   transform="matrix(0.7599042,0,0,0.75937533,205.25491,-530.28737)"
+   style="stroke-width:1.31641">
+			<title
+   id="title379">工作表.76</title>
+			<desc
+   id="desc381">PWM</desc>
+			<v:textBlock
+   v:margins="rect(4,4,4,4)"
+   v:tabSpace="42.5197" />
+			<v:textRect
+   cx="40.3937"
+   cy="717.165"
+   width="80.79"
+   height="11.3386" />
+			<rect
+   x="0"
+   y="711.49597"
+   width="80.787399"
+   height="11.3386"
+   class="st12"
+   id="rect383" />
+			<text
+   x="22.299999"
+   y="721.96997"
+   class="st16"
+   v:langID="2052"
+   id="text385"
+   style="stroke-width:1.31641"><v:paragraph
+   v:horizAlign="1" /><v:tabList />PWM</text>		</g><rect
+   x="0"
+   y="69.200729"
+   width="31.233887"
+   height="8.6102533"
+   class="st12"
+   id="rect392" /><text
+   x="5.659339"
+   y="75.358131"
+   class="st13"
+   v:langID="2052"
+   id="text394"
+   transform="scale(1.0003482,0.99965193)"
+   style="stroke-width:1"><v:paragraph
+   v:horizAlign="1" /><v:tabList />PWM_P</text><rect
+   x="0"
+   y="86.421066"
+   width="31.233887"
+   height="8.6102533"
+   class="st12"
+   id="rect401" /><text
+   x="5.2643194"
+   y="92.584511"
+   class="st13"
+   v:langID="2052"
+   id="text403"
+   transform="scale(1.0003482,0.99965193)"
+   style="stroke-width:1"><v:paragraph
+   v:horizAlign="1" /><v:tabList />PWM_N</text><rect
+   x="12.386444"
+   y="57.362038"
+   width="31.233887"
+   height="8.6102533"
+   class="st12"
+   id="rect410" /><text
+   x="23.298134"
+   y="63.059547"
+   class="st17"
+   v:langID="2052"
+   id="text412"
+   transform="scale(1.0003482,0.99965193)"
+   style="stroke-width:1"><v:paragraph
+   v:horizAlign="1" /><v:tabList />GPIO</text><g
+   id="shape80-198"
+   v:mID="80"
+   v:groupContext="shape"
+   transform="matrix(-0.2822163,-0.70506431,0.70555536,-0.28201987,-476.37938,272.75052)"
+   style="stroke-width:1.31641">
+			<title
+   id="title415">工作表.80</title>
+			<path
+   d="m 0,721.74 a 7.08661,2.83465 -158.2 0 0 7.63,0"
+   class="st15"
+   id="path417" />
+		</g>
+<path
+   style="fill:none;stroke:#000000;stroke-width:0.500002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1"
+   d="m 121.39683,125.17856 v -24.27674 h 0.23499 v 0"
+   id="path727" /><g
+   id="group70-167-3"
+   transform="matrix(0.7599042,0,0,0.75937533,30.835831,-425.29697)"
+   v:mID="70"
+   v:groupContext="group"
+   style="stroke-width:1.31641"><title
+     id="title351-5">工作表.70</title><g
+     id="shape71-168-6"
+     v:mID="71"
+     v:groupContext="shape"
+     style="stroke-width:1.31641"><title
+       id="title353-6">正方形</title><v:userDefs><v:ud
+         v:nameU="visVersion"
+         v:val="VT0(15):26" /></v:userDefs><rect
+       x="0"
+       y="711.49597"
+       width="11.3386"
+       height="11.3386"
+       class="st14"
+       id="rect355-2" /></g><g
+     id="shape72-170-6"
+     v:mID="72"
+     v:groupContext="shape"
+     transform="rotate(45.339,13.391303,717.24209)"
+     style="stroke-width:1.31641"><title
+       id="title358-9">工作表.72</title><path
+       d="M 0,722.83 H 15.73"
+       class="st15"
+       id="path360-0" /></g><g
+     id="shape73-173-8"
+     v:mID="73"
+     v:groupContext="shape"
+     transform="rotate(135,8.0171072,719.51501)"
+     style="stroke-width:1.31641"><title
+       id="title363-9">工作表.73</title><path
+       d="M 0,722.83 H 16.04"
+       class="st15"
+       id="path365-8" /></g></g><rect
+   x="10.545807"
+   y="114.9644"
+   width="31.233887"
+   height="8.6102533"
+   class="st12"
+   id="rect401-5" /><text
+   x="16.527931"
+   y="121.42643"
+   class="st13"
+   v:langID="2052"
+   id="text403-7"
+   transform="scale(1.0003482,0.99965193)"
+   style="stroke-width:1">CHA<v:paragraph
+   v:horizAlign="1" /><v:tabList /></text><g
+   id="shape39-111-5"
+   v:mID="39"
+   v:groupContext="shape"
+   transform="matrix(-1.3374694,0,0,-1.2424821,121.16259,1023.0629)"
+   style="stroke-width:0.775735"><title
+     id="title209-6">工作表.39</title><path
+     d="M 0,722.83 H 22.86"
+     class="st6"
+     id="path211-6" /></g><g
+   id="shape58-152-5"
+   v:mID="58"
+   v:groupContext="shape"
+   transform="matrix(-0.53733342,0.53695944,-0.53733342,-0.53695944,494.96465,510.903)"
+   style="stroke-width:1.31641"><title
+     id="title319-6">工作表.58</title><path
+     d="M 0,722.83 H 7.22"
+     class="st10"
+     id="path321-4" /></g><g
+   id="shape62-155-6"
+   v:mID="62"
+   v:groupContext="shape"
+   transform="matrix(0.7599042,0,0,0.75937533,89.265951,-424.24406)"
+   style="stroke-width:1.31641"><title
+     id="title324-2">工作表.62</title><desc
+     id="desc326-3">6bit</desc><v:textBlock
+     v:margins="rect(4,4,4,4)"
+     v:tabSpace="42.5197" /><v:textRect
+     cx="20.5512"
+     cy="717.165"
+     width="41.11"
+     height="11.3386" /><rect
+     x="0"
+     y="711.49597"
+     width="41.102402"
+     height="11.3386"
+     class="st12"
+     id="rect328-6" /><text
+     x="14.16"
+     y="719.57001"
+     class="st13"
+     v:langID="2052"
+     id="text330-3"
+     style="stroke-width:1.31641"><v:paragraph
+   v:horizAlign="1" /><v:tabList />12bit</text></g><g
+   id="shape38-107-8"
+   v:mID="38"
+   v:groupContext="shape"
+   transform="matrix(0.7599042,0,0,0.75937533,50.274151,-404.67715)"
+   style="stroke-width:1.31641"><title
+     id="title198-0">矩形.38</title><desc
+     id="desc200-6">PWM Generator</desc><v:userDefs><v:ud
+       v:nameU="visVersion"
+       v:val="VT0(15):26" /></v:userDefs><v:textBlock
+     v:margins="rect(4,4,4,4)"
+     v:tabSpace="42.5197" /><v:textRect
+     cx="25.5118"
+     cy="695.906"
+     width="51.03"
+     height="53.8583" /><rect
+     x="0"
+     y="668.97601"
+     width="51.023602"
+     height="53.858299"
+     rx="7.4605327"
+     ry="7.4657283"
+     class="st11"
+     id="rect202-8" /><text
+     x="57.154457"
+     y="692.90997"
+     class="st4"
+     v:langID="2052"
+     id="text206-0"
+     style="text-align:center;text-anchor:middle;stroke-width:1.31641"><tspan
+       sodipodi:role="line"
+       id="tspan1853"
+       x="27.060085"
+       y="692.90997"
+       style="stroke-width:1.31641"><v:paragraph
+         v:horizAlign="1" /><v:tabList /><v:newlineChar /><tspan
+         x="27.060085"
+         dy="0 0 0 0 0"
+         class="st5"
+         id="tspan204-0"
+         style="text-align:center;text-anchor:middle;stroke-width:1.31641">GPDAC</tspan></tspan><tspan
+       sodipodi:role="line"
+       id="tspan1855"
+       x="27.060085"
+       y="705.41003"
+       style="stroke-width:1.31641"><tspan
+         x="27.060085"
+         class="st5"
+         id="tspan1857"
+         style="text-align:center;text-anchor:middle;stroke-width:1.31641">Generator</tspan></tspan></text></g><g
+   id="shape74-176-6"
+   v:mID="74"
+   v:groupContext="shape"
+   transform="matrix(-0.7599042,0,0,-0.75937533,50.379591,667.7846)"
+   style="stroke-width:1.31641"><title
+     id="title369-5">工作表.74</title><path
+     d="M 0,722.83 H 12.23"
+     class="st6"
+     id="path371-7" /></g><g
+   id="shape75-181-1"
+   v:mID="75"
+   v:groupContext="shape"
+   transform="matrix(-0.7599042,0,0,-0.75937533,50.379591,685.0073)"
+   style="stroke-width:1.31641"><title
+     id="title374-1">工作表.75</title><path
+     d="M 0,722.83 H 12.23"
+     class="st6"
+     id="path376-5" /></g><g
+   id="group70-167-3-4"
+   transform="matrix(0.7599042,0,0,0.75937533,30.850791,-408.56363)"
+   v:mID="70"
+   v:groupContext="group"
+   style="stroke-width:1.31641"><title
+     id="title351-5-0">工作表.70</title><g
+     id="shape71-168-6-4"
+     v:mID="71"
+     v:groupContext="shape"
+     style="stroke-width:1.31641"><title
+       id="title353-6-8">正方形</title><v:userDefs><v:ud
+         v:nameU="visVersion"
+         v:val="VT0(15):26" /></v:userDefs><rect
+       x="0"
+       y="711.49597"
+       width="11.3386"
+       height="11.3386"
+       class="st14"
+       id="rect355-2-2" /></g><g
+     id="shape72-170-6-2"
+     v:mID="72"
+     v:groupContext="shape"
+     transform="rotate(45.339,13.391303,717.24209)"
+     style="stroke-width:1.31641"><title
+       id="title358-9-5">工作表.72</title><path
+       d="M 0,722.83 H 15.73"
+       class="st15"
+       id="path360-0-0" /></g><g
+     id="shape73-173-8-3"
+     v:mID="73"
+     v:groupContext="shape"
+     transform="rotate(135,8.0171072,719.51501)"
+     style="stroke-width:1.31641"><title
+       id="title363-9-9">工作表.73</title><path
+       d="M 0,722.83 H 16.04"
+       class="st15"
+       id="path365-8-4" /></g></g><text
+   x="17.375771"
+   y="138.30833"
+   class="st13"
+   v:langID="2052"
+   id="text403-7-8"
+   style="font-size:6.0771px;font-family:Calibri;fill:#000000;stroke-width:1"
+   transform="scale(1.0003482,0.99965193)">CHB<v:paragraph
+   v:horizAlign="1" /><v:tabList /></text><text
+   x="23.28849"
+   y="108.55326"
+   class="st17"
+   v:langID="2052"
+   id="text412-0"
+   style="font-size:4.55776px;font-family:Calibri;fill:#000000;stroke-width:1"
+   transform="scale(1.0003482,0.99965193)"><v:paragraph
+   v:horizAlign="1" /><v:tabList />GPIO</text><g
+   id="shape80-198-6"
+   v:mID="80"
+   v:groupContext="shape"
+   transform="matrix(-0.2822163,-0.70506431,0.70555536,-0.28201987,-476.3891,318.22837)"
+   style="stroke-width:1.31641"><title
+     id="title415-5">工作表.80</title><path
+     d="m 0,721.74 a 7.08661,2.83465 -158.2 0 0 7.63,0"
+     class="st15"
+     id="path417-4" /></g></svg>

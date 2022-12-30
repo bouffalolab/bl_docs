@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TZC &mdash; BL616/BL618 Reference Manual  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL616/BL618 Reference Manual
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. System and Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. Reset and Clock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPIO.html">4. GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">5. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">6. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">7. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">8. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">9. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">10. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">11. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">12. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">13. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2S.html">14. I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AudioDAC.html">15. AudioDAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AudioADC.html">16. AudioADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EMAC.html">17. Emac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USB.html">18. USB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ISO11898.html">19. ISO11898</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cam.html">20. CAM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MJPEG.html">21. MJPEG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBI.html">22. DBI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SDH.html">23. SDH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SDIO.html">24. SDIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LowPower.html">25. LowPower</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SEC_ENG.html">26. SEC ENG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">27. Revision history</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL616/BL618 Reference Manual</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>TZC</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="tzc">
+<h1>TZC<a class="headerlink" href="#tzc" title="Permalink to this headline"></a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
+<p>The Trust Zone Control (TZC) module built in the chip is used to control the access domains of different Masters. Access to each Master is restricted from the internal bus within the chip, and all invalid accesses are blocked. It ensures that the chip has a trusted secure execution environment and thus helps build a more robust security system.</p>
+<figure class="align-center" id="id1">
+<img alt="../_images/TzcArch.svg" src="../_images/TzcArch.svg" /><figcaption>
+<p><span class="caption-text">TZC Overall Framework</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="features">
+<h2>Features<a class="headerlink" href="#features" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p>Master supports groups 0 and 1.</p></li>
+<li><p>ROM, OCRAM, WRAM, FLASH, and PSRAM support the division of four sections (each region section is 1K Byte aligned).</p></li>
+<li><p>The read-write permission of each configuration peripheral register can be set independently.</p></li>
+<li><p>The TZC register supports the Lock function, and the related configuration of TZC cannot be changed after locking.</p></li>
+<li><p>The TZC module has a set of mirror read-only registers.</p></li>
+</ul>
+</section>
+<section id="functional-description">
+<h2>Functional Description<a class="headerlink" href="#functional-description" title="Permalink to this headline"></a></h2>
+<p>The TZC module may assign each Master inside of the chip system to 0 group or 1 group for access control, and all Masters are assigned to 0 group by default. The TZC module can also classify Slaves into 0 or 1 group. Through the setting of different groups, it can ensure that trusted areas are accessed by trusted devices.</p>
+<p>For data storage modules such as ROM, OCRAM, WARM, PSRAM, and FLASH, each storage module supports the division of 4 region sections, and each region supports the independent access control for IBUS and DBUS. The section division per region needs to be 1K byte aligned.</p>
+<p>Important registers related to system within GLB can also be protected and controlled by TZC. Setting the GLB control bit in TZC can ensure that the control over the system comes from a trusted operation group.</p>
+<p>Security-related engines can also control the access permissions of different groups, mainly including SHA, AES, TRNG, PKA, CDET and GMAC modules.</p>
+<p>All TZC registers have corresponding Lock control bits. Once the Lock bit is enabled, the related configuration and enable register bits cannot be changed.</p>
+<p>If the configuration of TZC peripheral register is also protected from reading, it can be accessed through the mirror register of TZC group.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

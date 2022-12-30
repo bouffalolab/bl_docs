@@ -1,0 +1,2492 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>7. DMA &mdash; BL616/BL618 Reference Manual  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="8. IR" href="IR.html" />
+    <link rel="prev" title="6. DAC" href="DAC.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL616/BL618 Reference Manual
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. System and Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. Reset and Clock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPIO.html">4. GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">5. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">6. DAC</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">7. DMA</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">7.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#features">7.2. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#functional-description">7.3. Functional Description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#operating-principle">7.3.1. Operating Principle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-channel-configuration">7.3.2. DMA Channel Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#supported-peripherals">7.3.3. Supported Peripherals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#linked-list-mode">7.3.4. Linked List Mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-interrupt">7.3.5. DMA Interrupt</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#transfer-mode">7.4. Transfer Mode</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#memory-to-memory">7.4.1. Memory to Memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#memory-to-peripherals">7.4.2. Memory to Peripherals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#peripheral-to-memory">7.4.3. Peripheral to Memory</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#register-description">7.5. Register description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dma-intstatus">7.5.1. DMA_IntStatus</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-inttcstatus">7.5.2. DMA_IntTCStatus</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-inttcclear">7.5.3. DMA_IntTCClear</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-interrorstatus">7.5.4. DMA_IntErrorStatus</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-interrclr">7.5.5. DMA_IntErrClr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-rawinttcstatus">7.5.6. DMA_RawIntTCStatus</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-rawinterrorstatus">7.5.7. DMA_RawIntErrorStatus</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-enbldchns">7.5.8. DMA_EnbldChns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-softbreq">7.5.9. DMA_SoftBReq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-softsreq">7.5.10. DMA_SoftSReq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-softlbreq">7.5.11. DMA_SoftLBReq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-softlsreq">7.5.12. DMA_SoftLSReq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-config">7.5.13. DMA_Config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-sync">7.5.14. DMA_Sync</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-c0srcaddr">7.5.15. DMA_C0SrcAddr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-c0dstaddr">7.5.16. DMA_C0DstAddr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-c0lli">7.5.17. DMA_C0LLI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-c0control">7.5.18. DMA_C0Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-c0config">7.5.19. DMA_C0Config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-c0rsvd">7.5.20. DMA_C0RSVD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-c1srcaddr">7.5.21. DMA_C1SrcAddr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-c1dstaddr">7.5.22. DMA_C1DstAddr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-c1lli">7.5.23. DMA_C1LLI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-c1control">7.5.24. DMA_C1Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-c1config">7.5.25. DMA_C1Config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-c1rsvd">7.5.26. DMA_C1RSVD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-c2srcaddr">7.5.27. DMA_C2SrcAddr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-c2dstaddr">7.5.28. DMA_C2DstAddr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-c2lli">7.5.29. DMA_C2LLI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-c2control">7.5.30. DMA_C2Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-c2config">7.5.31. DMA_C2Config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-c2rsvd">7.5.32. DMA_C2RSVD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-c3srcaddr">7.5.33. DMA_C3SrcAddr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-c3dstaddr">7.5.34. DMA_C3DstAddr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-c3lli">7.5.35. DMA_C3LLI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-c3control">7.5.36. DMA_C3Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-c3config">7.5.37. DMA_C3Config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-c3rsvd">7.5.38. DMA_C3RSVD</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">8. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">9. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">10. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">11. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">12. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">13. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2S.html">14. I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AudioDAC.html">15. AudioDAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AudioADC.html">16. AudioADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EMAC.html">17. Emac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USB.html">18. USB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ISO11898.html">19. ISO11898</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cam.html">20. CAM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MJPEG.html">21. MJPEG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBI.html">22. DBI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SDH.html">23. SDH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SDIO.html">24. SDIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LowPower.html">25. LowPower</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SEC_ENG.html">26. SEC ENG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">27. Revision history</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL616/BL618 Reference Manual</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">7. </span>DMA</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="dma">
+<h1><span class="section-number">7. </span>DMA<a class="headerlink" href="#dma" title="Permalink to this headline"></a></h1>
+<section id="overview">
+<h2><span class="section-number">7.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
+<p>Direct Memory Access (DMA), a kind of memory access technique, can directly read and write system memory independently without relying on processor.
+Under the same processor load, DMA is a fast way to transfer data.</p>
+<p>It is provided with 1 independent DMA controllers, of which DMA0 and DMA2 have 8 independent dedicated channels, and DMA1 has 4 such channels, managing data transmission between peripherals and memory to enhance bus efficiency.
+DMA supports the transfer from memory to memory, memory to peripherals, and peripheral to memory, and provides the LLI linked list function.
+The software configures the data transfer size, data source address, and destination address.</p>
+</section>
+<section id="features">
+<h2><span class="section-number">7.2. </span>Features<a class="headerlink" href="#features" title="Permalink to this headline"></a></h2>
+<ul>
+<li><p>1 DMA controller with 4 independent dedicated channels</p></li>
+<li><p>Independent control source and destination access width (single byte, double bytes, and four bytes)</p></li>
+<li><p>Each channel acts as a read-write cache independently</p></li>
+<li><p>Each channel can be triggered by independent peripheral hardware or software</p></li>
+<li><p>Eight kinds of process control</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>DMA process control, source memory, destination memory</p></li>
+<li><p>DMA process control, source memory, destination peripherals</p></li>
+<li><p>DMA process control, source peripherals, destination memory</p></li>
+<li><p>DMA process control, source peripherals, destination peripherals</p></li>
+<li><p>Destination peripheral process control, source peripherals, destination peripherals</p></li>
+<li><p>Destination peripheral process control, source memory, destination peripherals</p></li>
+<li><p>Source peripheral process control, source peripherals, destination memory</p></li>
+<li><p>Source peripheral process control, source peripherals, destination peripherals</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Supports the LLI linked list function to improve DMA efficiency</p></li>
+</ul>
+</section>
+<section id="functional-description">
+<h2><span class="section-number">7.3. </span>Functional Description<a class="headerlink" href="#functional-description" title="Permalink to this headline"></a></h2>
+<section id="operating-principle">
+<h3><span class="section-number">7.3.1. </span>Operating Principle<a class="headerlink" href="#operating-principle" title="Permalink to this headline"></a></h3>
+<p>When a device tries to directly transfer data to another device through the bus, it will first send a DMA request signal to CPU. The peripheral submits a request through DMA to take over control of the bus from CPU. After receiving this signal, CPU will respond to the DMA signal according to the priority of signal and the order of the DMA request after the current bus cycle is over.
+When CPU responds to a DMA request for a device interface, it will give up control of the bus.</p>
+<p>Under the control of DMA controllers, peripherals and memory exchange data directly without CPU intervention. After data is transferred, the device will send a DMA end signal to CPU and return the control of the bus.</p>
+<figure class="align-center" id="id1">
+<img alt="../_images/DmaArch.svg" src="../_images/DmaArch.svg" /><figcaption>
+<p><span class="caption-number">Fig. 7.1 </span><span class="caption-text">Block Diagram of DMA</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>DMA has one AHB Master interfaces and one AHB Slave interface. Based on the current configuration requirements, the AHB Master interface actively accesses the memory or peripherals through system bus, and serves as a data transfer port. The AHB Slave interface for configuring DMA only supports 32bit access.</p>
+</section>
+<section id="dma-channel-configuration">
+<h3><span class="section-number">7.3.2. </span>DMA Channel Configuration<a class="headerlink" href="#dma-channel-configuration" title="Permalink to this headline"></a></h3>
+<p>DMA support 4 channels. All channels can run simultaneously without interference. Here is the configuration process of DMA channel x:</p>
+<ol class="arabic simple">
+<li><p>Set the 32-bit source address in the register DMA_C0SrcAddr.</p></li>
+<li><p>Set the 32-bit destination address in the register DMA_C0DstAddr.</p></li>
+<li><p>Automatic address accumulation: You can set to enable/disable the automatic address accumulation mode by configuring the SI (source) and DI (destination) in the register DMA_C0Control. When it is set to 1, this mode is enabled.</p></li>
+<li><p>You can set the width of transferred data by configuring the SWidth (source) and DWidth (destination) bits in the register DMA_C0Control, including single byte, double bytes and four bytes options.</p></li>
+<li><p>You can set the Burst type by configuring the SBSize (source) and DBSize (destination) bits in the register DMA_C0Control, including INCR1, INCR4, INCR8, and INCR16 options.</p></li>
+<li><p>It is worth noting that in the configured combination, the single burst of DMA must not exceed 16 bytes.</p></li>
+<li><p>Range of data transfer length:0-4095</p></li>
+</ol>
+</section>
+<section id="supported-peripherals">
+<h3><span class="section-number">7.3.3. </span>Supported Peripherals<a class="headerlink" href="#supported-peripherals" title="Permalink to this headline"></a></h3>
+<p>You can determine the peripherals supported by the current DMA by configuring the SrcPeripheral (source) and DstPeripheral (destination). The relationship between peripheral types and configuration values is shown as follows:</p>
+<figure class="align-center" id="id2">
+<img alt="../_images/DmaPeripheral.svg" src="../_images/DmaPeripheral.svg" /><figcaption>
+<p><span class="caption-number">Fig. 7.2 </span><span class="caption-text">Peripheral Type Selection</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Partial peripheral configuration examples:</p>
+<p><strong>UART uses DMA to transfer data</strong></p>
+<p>When UART sends data packets, DMA can greatly shorten the CPU’s processing time, so that CPU resources will not be highly wasted, especially when UART sends and receives a large number of data packets (such as sending and receiving instructions frequently).</p>
+<p>For example, the UART0 transfer is configured as follows:</p>
+<ol class="arabic simple">
+<li><p>Set the value of the SrcPeripheral bit in the register DMA_C0Config to 1. That is, set Source peripheral to UART0_TX</p></li>
+<li><p>Set the value of the DstPeripheral in the register DMA_C0Config to 0. That is, set Destination peripheral to UART0_RX</p></li>
+</ol>
+<p><strong>I2C uses DMA to transfer data</strong></p>
+<p>Configuration process:</p>
+<ol class="arabic simple">
+<li><p>Set the value of the SrcPeripheral bit in the register DMA_C0Config to 7. That is, set Source peripheral to I2C0_TX</p></li>
+<li><p>Set the value of the DstPeripheral in the register DMA_C0Config to 6. That is, set Destination peripheral to I2C0_RX</p></li>
+</ol>
+<p><strong>SPI uses DMA to transfer data</strong></p>
+<p>Configuration process:</p>
+<ol class="arabic simple">
+<li><p>Set the value of the SrcPeripheral bit in the register DMA_C0Config to 11. That is, set Source peripheral to SPI0_TX</p></li>
+<li><p>Set the value of the DstPeripheral in the register DMA_C0Config to 10. That is, set Destination peripheral to SPI0_RX</p></li>
+</ol>
+<p><strong>ADC0/1 use DMA to transfer data</strong></p>
+<p>Configuration process:</p>
+<ol class="arabic simple">
+<li><p>Set the value of the SrcPeripheral bit in the register DMA_C0Config to 22/23. That is, set Source peripheral to GPADC0/GPADC1.</p></li>
+</ol>
+</section>
+<section id="linked-list-mode">
+<h3><span class="section-number">7.3.4. </span>Linked List Mode<a class="headerlink" href="#linked-list-mode" title="Permalink to this headline"></a></h3>
+<p>DMA supports the linked list working mode. During a DMA read or write operation, data can be filled in the next linked list. After the data transfer of the current linked list is completed, the start address of the next linked list can be obtained by reading the value of the register DMA_C0LLI, to directly transfer the data of the next linked list. This ensures continuous and uninterrupted work during DMA transfer, and improves the efficiency of CPU and DMA.</p>
+<figure class="align-center" id="id3">
+<img alt="../_images/DMALLI.svg" src="../_images/DMALLI.svg" /><figcaption>
+<p><span class="caption-number">Fig. 7.3 </span><span class="caption-text">LLI Framework</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="dma-interrupt">
+<h3><span class="section-number">7.3.5. </span>DMA Interrupt<a class="headerlink" href="#dma-interrupt" title="Permalink to this headline"></a></h3>
+<ul>
+<li><p>DMA_INT_TCOMPLETED</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Data transfer complete interrupt: This interrupt will be generated when a data transfer is completed</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>DMA_INT_ERR</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Data transfer error interrupt: This interrupt will be generated when an error occurs during data transfer</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</section>
+</section>
+<section id="transfer-mode">
+<h2><span class="section-number">7.4. </span>Transfer Mode<a class="headerlink" href="#transfer-mode" title="Permalink to this headline"></a></h2>
+<section id="memory-to-memory">
+<h3><span class="section-number">7.4.1. </span>Memory to Memory<a class="headerlink" href="#memory-to-memory" title="Permalink to this headline"></a></h3>
+<p>After this mode is enabled, DMA will transfer the data from the source address to the destination address based on the preset TransferSize. Upon transfer completed, the DMA controller will automatically return to the idle state and wait for the next transfer.</p>
+<p>Configuration process:</p>
+<ol class="arabic simple">
+<li><p>Set the DMA_C0SrcAddr value of the register to the source memory address</p></li>
+<li><p>Set the DMA_C0DstAddr value of the register to the destination memory address</p></li>
+<li><p>Select a transfer mode, and set the value of the FlowCntrl bit in the register DMA_C0Config to 0, namely selecting the memorytomemory mode</p></li>
+<li><p>Set the values of the corresponding bits in the register DMA_C0Control: the SI bit is set to 1, the DI bit is set to 0, the source address automatic accumulation mode is enabled; set the transfer width of the source and destination through SWidth and DWidth respectively; and set the burst type of the source and the destination through SBSize and DBSize respectively</p></li>
+<li><p>Select a proper channel, enable DMA, and complete data transfer</p></li>
+</ol>
+</section>
+<section id="memory-to-peripherals">
+<h3><span class="section-number">7.4.2. </span>Memory to Peripherals<a class="headerlink" href="#memory-to-peripherals" title="Permalink to this headline"></a></h3>
+<p>In this mode, DMA will transfer the data from the source to the internal cache according to the preset TransferSize. The transfer will automatically pause when the cache space is insufficient and continue when there is enough cache space until the preset TransferSize is met.</p>
+<p>Moreover, when the destination peripheral request is triggered, the target configuration will be burst to the destination address, and it will automatically return to the idle state until the preset TransferSize is met and wait for the next transfer.</p>
+<p>Configuration process:</p>
+<ol class="arabic simple">
+<li><p>Set the DMA_C0SrcAddr value of the register to the source memory address</p></li>
+<li><p>Set the DMA_C0DstAddr value of the register to the destination peripheral address</p></li>
+<li><p>Select a transfer mode, and set the value of the FlowCntrl bit in the register DMA_C0Config to 1, namely selecting the Memorytoperipheral mode</p></li>
+<li><p>Set the values of the corresponding bits in the register DMA_C0Control: the SI bit is set to 1, the DI bit is set to 0, the source address automatic accumulation mode is enabled; set the transfer width of the source and destination through SWidth and DWidth respectively; and set the burst type of the source and the destination through SBSize and DBSize respectively</p></li>
+<li><p>Select a proper channel, enable DMA, and complete data transfer</p></li>
+</ol>
+</section>
+<section id="peripheral-to-memory">
+<h3><span class="section-number">7.4.3. </span>Peripheral to Memory<a class="headerlink" href="#peripheral-to-memory" title="Permalink to this headline"></a></h3>
+<p>In this mode, when the source peripheral request is triggered, the source configuration will be burst into the cache until the preset TransferSize is met. Moreover, when the internal cache is enough for one burst to the destination, DMA will automatically transfer the cached content to the destination address, automatically return to the idle state until the preset TransferSize is met, and wait for the next transfer.</p>
+<p>Configuration process:</p>
+<ol class="arabic simple">
+<li><p>Set the DMA_C0SrcAddr value of the register to the source peripheral address</p></li>
+<li><p>Set the DMA_C0DstAddr value of the register to the destination memory address</p></li>
+<li><p>Select a transfer mode, and set the value of the FlowCntrl bit in the register DMA_C0Config to 2, namely selecting the Peripheraltomemory mode</p></li>
+<li><p>Set the values of the corresponding bits in the register DMA_C0Control: Set the DI and SI bits to 1 to enable the automatic address accumulation mode; set the transfer width of the source and destination through SWidth and DWidth respectively; and set the burst type of the source and the destination through SBSize and DBSize respectively</p></li>
+<li><p>Select a proper channel, enable DMA, and complete data transfer</p></li>
+</ol>
+</section>
+</section>
+<section id="register-description">
+<h2><span class="section-number">7.5. </span>Register description<a class="headerlink" href="#register-description" title="Permalink to this headline"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 67%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Name</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dma-intstatus">DMA_IntStatus</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dma-inttcstatus">DMA_IntTCStatus</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dma-inttcclear">DMA_IntTCClear</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dma-interrorstatus">DMA_IntErrorStatus</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dma-interrclr">DMA_IntErrClr</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dma-rawinttcstatus">DMA_RawIntTCStatus</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dma-rawinterrorstatus">DMA_RawIntErrorStatus</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dma-enbldchns">DMA_EnbldChns</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dma-softbreq">DMA_SoftBReq</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dma-softsreq">DMA_SoftSReq</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dma-softlbreq">DMA_SoftLBReq</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dma-softlsreq">DMA_SoftLSReq</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dma-config">DMA_Config</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dma-sync">DMA_Sync</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dma-c0srcaddr">DMA_C0SrcAddr</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dma-c0dstaddr">DMA_C0DstAddr</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dma-c0lli">DMA_C0LLI</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dma-c0control">DMA_C0Control</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dma-c0config">DMA_C0Config</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dma-c0rsvd">DMA_C0RSVD</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dma-c1srcaddr">DMA_C1SrcAddr</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dma-c1dstaddr">DMA_C1DstAddr</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dma-c1lli">DMA_C1LLI</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dma-c1control">DMA_C1Control</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dma-c1config">DMA_C1Config</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dma-c1rsvd">DMA_C1RSVD</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dma-c2srcaddr">DMA_C2SrcAddr</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dma-c2dstaddr">DMA_C2DstAddr</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dma-c2lli">DMA_C2LLI</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dma-c2control">DMA_C2Control</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dma-c2config">DMA_C2Config</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dma-c2rsvd">DMA_C2RSVD</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dma-c3srcaddr">DMA_C3SrcAddr</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dma-c3dstaddr">DMA_C3DstAddr</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dma-c3lli">DMA_C3LLI</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dma-c3control">DMA_C3Control</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dma-c3config">DMA_C3Config</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dma-c3rsvd">DMA_C3RSVD</a></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<section id="dma-intstatus">
+<h3><span class="section-number">7.5.1. </span>DMA_IntStatus<a class="headerlink" href="#dma-intstatus" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000c000</p>
+<figure class="align-center">
+<img alt="../_images/dma_DMA_IntStatus.svg" src="../_images/dma_DMA_IntStatus.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>IntStatus</p></td>
+<td><p>r</p></td>
+<td><p>0</p></td>
+<td><p>Status of the DMA interrupts after masking</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dma-inttcstatus">
+<h3><span class="section-number">7.5.2. </span>DMA_IntTCStatus<a class="headerlink" href="#dma-inttcstatus" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000c004</p>
+<figure class="align-center">
+<img alt="../_images/dma_DMA_IntTCStatus.svg" src="../_images/dma_DMA_IntTCStatus.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>IntTCStatus</p></td>
+<td><p>r</p></td>
+<td><p>0</p></td>
+<td><p>Interrupt terminal count request status</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dma-inttcclear">
+<h3><span class="section-number">7.5.3. </span>DMA_IntTCClear<a class="headerlink" href="#dma-inttcclear" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000c008</p>
+<figure class="align-center">
+<img alt="../_images/dma_DMA_IntTCClear.svg" src="../_images/dma_DMA_IntTCClear.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>IntTCClear</p></td>
+<td><p>w</p></td>
+<td><p>0</p></td>
+<td><p>Terminal count request clear</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dma-interrorstatus">
+<h3><span class="section-number">7.5.4. </span>DMA_IntErrorStatus<a class="headerlink" href="#dma-interrorstatus" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000c00c</p>
+<figure class="align-center">
+<img alt="../_images/dma_DMA_IntErrorStatus.svg" src="../_images/dma_DMA_IntErrorStatus.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>IntErrorStatus</p></td>
+<td><p>r</p></td>
+<td><p>0</p></td>
+<td><p>Interrupt error status</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dma-interrclr">
+<h3><span class="section-number">7.5.5. </span>DMA_IntErrClr<a class="headerlink" href="#dma-interrclr" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000c010</p>
+<figure class="align-center">
+<img alt="../_images/dma_DMA_IntErrClr.svg" src="../_images/dma_DMA_IntErrClr.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>IntErrClr</p></td>
+<td><p>w</p></td>
+<td><p>0</p></td>
+<td><p>Interrupt error clear</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dma-rawinttcstatus">
+<h3><span class="section-number">7.5.6. </span>DMA_RawIntTCStatus<a class="headerlink" href="#dma-rawinttcstatus" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000c014</p>
+<figure class="align-center">
+<img alt="../_images/dma_DMA_RawIntTCStatus.svg" src="../_images/dma_DMA_RawIntTCStatus.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>RawIntTCStatus</p></td>
+<td><p>r</p></td>
+<td><p>0</p></td>
+<td><p>Status of the terminal count interrupt prior to masking</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dma-rawinterrorstatus">
+<h3><span class="section-number">7.5.7. </span>DMA_RawIntErrorStatus<a class="headerlink" href="#dma-rawinterrorstatus" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000c018</p>
+<figure class="align-center">
+<img alt="../_images/dma_DMA_RawIntErrorStatus.svg" src="../_images/dma_DMA_RawIntErrorStatus.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>RawIntErrorStatus</p></td>
+<td><p>r</p></td>
+<td><p>0</p></td>
+<td><p>Status of the error interrupt prior to masking</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dma-enbldchns">
+<h3><span class="section-number">7.5.8. </span>DMA_EnbldChns<a class="headerlink" href="#dma-enbldchns" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000c01c</p>
+<figure class="align-center">
+<img alt="../_images/dma_DMA_EnbldChns.svg" src="../_images/dma_DMA_EnbldChns.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>EnabledChannels</p></td>
+<td><p>r</p></td>
+<td><p>0</p></td>
+<td><p>Channel enable status</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dma-softbreq">
+<h3><span class="section-number">7.5.9. </span>DMA_SoftBReq<a class="headerlink" href="#dma-softbreq" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000c020</p>
+<figure class="align-center">
+<img alt="../_images/dma_DMA_SoftBReq.svg" src="../_images/dma_DMA_SoftBReq.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>SoftBReq</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>Software burst request</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dma-softsreq">
+<h3><span class="section-number">7.5.10. </span>DMA_SoftSReq<a class="headerlink" href="#dma-softsreq" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000c024</p>
+<figure class="align-center">
+<img alt="../_images/dma_DMA_SoftSReq.svg" src="../_images/dma_DMA_SoftSReq.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>SoftSReq</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>Software single request</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dma-softlbreq">
+<h3><span class="section-number">7.5.11. </span>DMA_SoftLBReq<a class="headerlink" href="#dma-softlbreq" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000c028</p>
+<figure class="align-center">
+<img alt="../_images/dma_DMA_SoftLBReq.svg" src="../_images/dma_DMA_SoftLBReq.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>SoftLBReq</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>Software last burst request</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dma-softlsreq">
+<h3><span class="section-number">7.5.12. </span>DMA_SoftLSReq<a class="headerlink" href="#dma-softlsreq" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000c02c</p>
+<figure class="align-center">
+<img alt="../_images/dma_DMA_SoftLSReq.svg" src="../_images/dma_DMA_SoftLSReq.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>SoftLSReq</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>Software last single request</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dma-config">
+<h3><span class="section-number">7.5.13. </span>DMA_Config<a class="headerlink" href="#dma-config" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000c030</p>
+<figure class="align-center">
+<img alt="../_images/dma_DMA_Config.svg" src="../_images/dma_DMA_Config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:2</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>M</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>AHB Master endianness configuration: 0 = little-endian, 1 = big-endian</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>E</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>SMDMA Enable.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dma-sync">
+<h3><span class="section-number">7.5.14. </span>DMA_Sync<a class="headerlink" href="#dma-sync" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000c034</p>
+<figure class="align-center">
+<img alt="../_images/dma_DMA_Sync.svg" src="../_images/dma_DMA_Sync.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>DMA_Sync</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>DMA synchronization logic for DMA request signals: 0 = enable, 1 = disable</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dma-c0srcaddr">
+<h3><span class="section-number">7.5.15. </span>DMA_C0SrcAddr<a class="headerlink" href="#dma-c0srcaddr" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000c100</p>
+<figure class="align-center">
+<img alt="../_images/dma_DMA_C0SrcAddr.svg" src="../_images/dma_DMA_C0SrcAddr.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>SrcAddr</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>DMA source address</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dma-c0dstaddr">
+<h3><span class="section-number">7.5.16. </span>DMA_C0DstAddr<a class="headerlink" href="#dma-c0dstaddr" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000c104</p>
+<figure class="align-center">
+<img alt="../_images/dma_DMA_C0DstAddr.svg" src="../_images/dma_DMA_C0DstAddr.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>DstAddr</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>DMA Destination address</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dma-c0lli">
+<h3><span class="section-number">7.5.17. </span>DMA_C0LLI<a class="headerlink" href="#dma-c0lli" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000c108</p>
+<figure class="align-center">
+<img alt="../_images/dma_DMA_C0LLI.svg" src="../_images/dma_DMA_C0LLI.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>LLI</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>First linked list item. Bits [1:0] must be 0.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dma-c0control">
+<h3><span class="section-number">7.5.18. </span>DMA_C0Control<a class="headerlink" href="#dma-c0control" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000c10c</p>
+<figure class="align-center">
+<img alt="../_images/dma_DMA_C0Control.svg" src="../_images/dma_DMA_C0Control.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31</p></td>
+<td><p>I</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>Terminal count interrupt enable bit. It controls whether the current LLI is expected to trigger the terminal count interrupt.</p></td>
+</tr>
+<tr class="row-odd"><td><p>30:28</p></td>
+<td><p>Prot</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>No use for currently</p></td>
+</tr>
+<tr class="row-even"><td><p>27</p></td>
+<td><p>DI</p></td>
+<td><p>r/w</p></td>
+<td><p>1</p></td>
+<td><p>Destination increment. When set, the Destination address is incremented after each transfer.</p></td>
+</tr>
+<tr class="row-odd"><td><p>26</p></td>
+<td><p>SI</p></td>
+<td><p>r/w</p></td>
+<td><p>1</p></td>
+<td><p>Source increment. When set, the source address is incremented after each transfer.</p></td>
+</tr>
+<tr class="row-even"><td rowspan="2"><p>25:23</p></td>
+<td rowspan="2"><p>fix_cnt</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>3’d0</p></td>
+<td rowspan="2"><p>Only effect when dst_min_mode = 1</p>
+<p>Destination transfer cnt = (total src byte cnt - (fix_cnt&lt;&lt;DWidth))&lt;&lt;DWidth</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="5"><p>22:21</p></td>
+<td rowspan="5"><p>DWidth</p></td>
+<td rowspan="5"><p>r/w</p></td>
+<td rowspan="5"><p>2’b10</p></td>
+<td rowspan="5"><p>Destination transfer width:</p>
+<p>2’b00 : byte</p>
+<p>2’b01 : half-word</p>
+<p>2’b10 : word</p>
+<p>2’b11 : double-word</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>20</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td rowspan="5"><p>19:18</p></td>
+<td rowspan="5"><p>SWidth</p></td>
+<td rowspan="5"><p>r/w</p></td>
+<td rowspan="5"><p>2’b10</p></td>
+<td rowspan="5"><p>Source transfer width</p>
+<p>2’b00 : byte</p>
+<p>2’b01 : half-word</p>
+<p>2’b10 : word</p>
+<p>2’b11 : double-word</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>17</p></td>
+<td><p>dst_add_mode</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Add mode : issue remain destination traffic</p></td>
+</tr>
+<tr class="row-even"><td rowspan="6"><p>16:15</p></td>
+<td rowspan="6"><p>DBSize</p></td>
+<td rowspan="6"><p>r/w</p></td>
+<td rowspan="6"><p>2’b01</p></td>
+<td rowspan="6"><p>Destination burst size</p>
+<p>2’b00 : INCR1</p>
+<p>2’b01 : INCR4</p>
+<p>2’b10 : INCR8</p>
+<p>2’b11 : INCR16</p>
+<p>Note : SBSize*Swidth should &lt;= CH FIFO Size</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>14</p></td>
+<td><p>dst_min_mode</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Minus mode : Not issue all destination traffic</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="6"><p>13:12</p></td>
+<td rowspan="6"><p>SBSize</p></td>
+<td rowspan="6"><p>r/w</p></td>
+<td rowspan="6"><p>2’b01</p></td>
+<td rowspan="6"><p>Source burst size:</p>
+<p>2’b00 : INCR1</p>
+<p>2’b01 : INCR4</p>
+<p>2’b10 : INCR8</p>
+<p>2’b11 : INCR16</p>
+<p>Note : SBSize*Swidth should &lt;= CH FIFO Size</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>11:0</p></td>
+<td><p>TransferSize</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>Transfer size: 0~4095. Number of data transfers left to complete when the SMDMA is the flow controller.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dma-c0config">
+<h3><span class="section-number">7.5.19. </span>DMA_C0Config<a class="headerlink" href="#dma-c0config" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000c110</p>
+<figure class="align-center">
+<img alt="../_images/dma_DMA_C0Config.svg" src="../_images/dma_DMA_C0Config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:30</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>29:20</p></td>
+<td><p>LLICounter</p></td>
+<td><p>r</p></td>
+<td><p>0</p></td>
+<td><p>LLI counter. Increased 1 each LLI run. Cleared 0 when config Control.</p></td>
+</tr>
+<tr class="row-even"><td><p>19</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>18</p></td>
+<td><p>H</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>Halt: 0 = enable DMA requests, 1 = ignore subsequent source DMA requests.</p></td>
+</tr>
+<tr class="row-even"><td><p>17</p></td>
+<td><p>A</p></td>
+<td><p>r</p></td>
+<td><p>0</p></td>
+<td><p>Active: 0 = no data in FIFO of the channel, 1 = FIFO of the channel has data.</p></td>
+</tr>
+<tr class="row-odd"><td><p>16</p></td>
+<td><p>L</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>Lock.</p></td>
+</tr>
+<tr class="row-even"><td><p>15</p></td>
+<td><p>ITC</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>Terminal count interrupt mask.</p></td>
+</tr>
+<tr class="row-odd"><td><p>14</p></td>
+<td><p>IE</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>Interrupt error mask.</p></td>
+</tr>
+<tr class="row-even"><td rowspan="8"><p>13:11</p></td>
+<td rowspan="8"><p>FlowCntrl</p></td>
+<td rowspan="8"><p>r/w</p></td>
+<td rowspan="8"><p>0</p></td>
+<td rowspan="8"><p>000: Memory-to-memory (DMA)</p>
+<p>001: Memory-to-peripheral (DMA)</p>
+<p>010: Peripheral-to-memory (DMA)</p>
+<p>011: Source peripheral-to-Destination peripheral (DMA)</p>
+<p>100: Source peripheral-to-Destination peripheral (Destination peripheral)</p>
+<p>101: Memory-to-peripheral (peripheral)</p>
+<p>110: Peripheral-to-memory (peripheral)</p>
+<p>111: Source peripheral-to-Destination peripheral (Source peripheral)</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>10:6</p></td>
+<td><p>DstPeripheral</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>Destination peripheral.</p></td>
+</tr>
+<tr class="row-odd"><td><p>5:1</p></td>
+<td><p>SrcPeripheral</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>Source peripheral.</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>E</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>Channel enable.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dma-c0rsvd">
+<h3><span class="section-number">7.5.20. </span>DMA_C0RSVD<a class="headerlink" href="#dma-c0rsvd" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000c11c</p>
+<figure class="align-center">
+<img alt="../_images/dma_DMA_C0RSVD.svg" src="../_images/dma_DMA_C0RSVD.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:5</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>SrcRemnSgle</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>Source remain single issue mode</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>DstRemnSgle</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>Destination remain single issue mode</p></td>
+</tr>
+<tr class="row-odd"><td><p>2:0</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dma-c1srcaddr">
+<h3><span class="section-number">7.5.21. </span>DMA_C1SrcAddr<a class="headerlink" href="#dma-c1srcaddr" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000c200</p>
+<figure class="align-center">
+<img alt="../_images/dma_DMA_C1SrcAddr.svg" src="../_images/dma_DMA_C1SrcAddr.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>SrcAddr</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dma-c1dstaddr">
+<h3><span class="section-number">7.5.22. </span>DMA_C1DstAddr<a class="headerlink" href="#dma-c1dstaddr" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000c204</p>
+<figure class="align-center">
+<img alt="../_images/dma_DMA_C1DstAddr.svg" src="../_images/dma_DMA_C1DstAddr.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>DstAddr</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dma-c1lli">
+<h3><span class="section-number">7.5.23. </span>DMA_C1LLI<a class="headerlink" href="#dma-c1lli" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000c208</p>
+<figure class="align-center">
+<img alt="../_images/dma_DMA_C1LLI.svg" src="../_images/dma_DMA_C1LLI.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>LLI</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dma-c1control">
+<h3><span class="section-number">7.5.24. </span>DMA_C1Control<a class="headerlink" href="#dma-c1control" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000c20c</p>
+<figure class="align-center">
+<img alt="../_images/dma_DMA_C1Control.svg" src="../_images/dma_DMA_C1Control.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31</p></td>
+<td><p>I</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>Terminal count interrupt enable bit. It controls whether the current LLI is expected to trigger the terminal count interrupt.</p></td>
+</tr>
+<tr class="row-odd"><td><p>30:28</p></td>
+<td><p>Prot</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>No use for currently</p></td>
+</tr>
+<tr class="row-even"><td><p>27</p></td>
+<td><p>DI</p></td>
+<td><p>r/w</p></td>
+<td><p>1</p></td>
+<td><p>Destination increment. When set, the Destination address is incremented after each transfer.</p></td>
+</tr>
+<tr class="row-odd"><td><p>26</p></td>
+<td><p>SI</p></td>
+<td><p>r/w</p></td>
+<td><p>1</p></td>
+<td><p>Source increment. When set, the source address is incremented after each transfer.</p></td>
+</tr>
+<tr class="row-even"><td rowspan="2"><p>25:23</p></td>
+<td rowspan="2"><p>fix_cnt</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>3’d0</p></td>
+<td rowspan="2"><p>Only effect when dst_min_mode = 1</p>
+<p>Destination transfer cnt = (total src byte cnt - (fix_cnt&lt;&lt;DWidth))&lt;&lt;DWidth</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="5"><p>22:21</p></td>
+<td rowspan="5"><p>DWidth</p></td>
+<td rowspan="5"><p>r/w</p></td>
+<td rowspan="5"><p>2’b10</p></td>
+<td rowspan="5"><p>Destination transfer width:</p>
+<p>2’b00 : byte</p>
+<p>2’b01 : half-word</p>
+<p>2’b10 : word</p>
+<p>2’b11 : double-word</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>20</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td rowspan="5"><p>19:18</p></td>
+<td rowspan="5"><p>SWidth</p></td>
+<td rowspan="5"><p>r/w</p></td>
+<td rowspan="5"><p>2’b10</p></td>
+<td rowspan="5"><p>Source transfer width</p>
+<p>2’b00 : byte</p>
+<p>2’b01 : half-word</p>
+<p>2’b10 : word</p>
+<p>2’b11 : double-word</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>17</p></td>
+<td><p>dst_add_mode</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Add mode : issue remain destination traffic</p></td>
+</tr>
+<tr class="row-even"><td rowspan="6"><p>16:15</p></td>
+<td rowspan="6"><p>DBSize</p></td>
+<td rowspan="6"><p>r/w</p></td>
+<td rowspan="6"><p>2’b01</p></td>
+<td rowspan="6"><p>Destination burst size</p>
+<p>2’b00 : INCR1</p>
+<p>2’b01 : INCR4</p>
+<p>2’b10 : INCR8</p>
+<p>2’b11 : INCR16</p>
+<p>Note : SBSize*Swidth should &lt;= CH FIFO Size</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>14</p></td>
+<td><p>dst_min_mode</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Minus mode : Not issue all destination traffic</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="6"><p>13:12</p></td>
+<td rowspan="6"><p>SBSize</p></td>
+<td rowspan="6"><p>r/w</p></td>
+<td rowspan="6"><p>2’b01</p></td>
+<td rowspan="6"><p>Source burst size:</p>
+<p>2’b00 : INCR1</p>
+<p>2’b01 : INCR4</p>
+<p>2’b10 : INCR8</p>
+<p>2’b11 : INCR16</p>
+<p>Note : SBSize*Swidth should &lt;= CH FIFO Size</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>11:0</p></td>
+<td><p>TransferSize</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>Transfer size: 0~4095. Number of data transfers left to complete when the SMDMA is the flow controller.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dma-c1config">
+<h3><span class="section-number">7.5.25. </span>DMA_C1Config<a class="headerlink" href="#dma-c1config" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000c210</p>
+<figure class="align-center">
+<img alt="../_images/dma_DMA_C1Config.svg" src="../_images/dma_DMA_C1Config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:19</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>18</p></td>
+<td><p>H</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>17</p></td>
+<td><p>A</p></td>
+<td><p>r</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>16</p></td>
+<td><p>L</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>15</p></td>
+<td><p>ITC</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>14</p></td>
+<td><p>IE</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>13:11</p></td>
+<td><p>FlowCntrl</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>10:6</p></td>
+<td><p>DstPeripheral</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>5:1</p></td>
+<td><p>SrcPeripheral</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>E</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dma-c1rsvd">
+<h3><span class="section-number">7.5.26. </span>DMA_C1RSVD<a class="headerlink" href="#dma-c1rsvd" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000c21c</p>
+<figure class="align-center">
+<img alt="../_images/dma_DMA_C1RSVD.svg" src="../_images/dma_DMA_C1RSVD.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:5</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>SrcRemnSgle</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>Source remain single issue mode</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>DstRemnSgle</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>Destination remain single issue mode</p></td>
+</tr>
+<tr class="row-odd"><td><p>2:0</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dma-c2srcaddr">
+<h3><span class="section-number">7.5.27. </span>DMA_C2SrcAddr<a class="headerlink" href="#dma-c2srcaddr" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000c300</p>
+<figure class="align-center">
+<img alt="../_images/dma_DMA_C2SrcAddr.svg" src="../_images/dma_DMA_C2SrcAddr.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>SrcAddr</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dma-c2dstaddr">
+<h3><span class="section-number">7.5.28. </span>DMA_C2DstAddr<a class="headerlink" href="#dma-c2dstaddr" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000c304</p>
+<figure class="align-center">
+<img alt="../_images/dma_DMA_C2DstAddr.svg" src="../_images/dma_DMA_C2DstAddr.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>DstAddr</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dma-c2lli">
+<h3><span class="section-number">7.5.29. </span>DMA_C2LLI<a class="headerlink" href="#dma-c2lli" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000c308</p>
+<figure class="align-center">
+<img alt="../_images/dma_DMA_C2LLI.svg" src="../_images/dma_DMA_C2LLI.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>LLI</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dma-c2control">
+<h3><span class="section-number">7.5.30. </span>DMA_C2Control<a class="headerlink" href="#dma-c2control" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000c30c</p>
+<figure class="align-center">
+<img alt="../_images/dma_DMA_C2Control.svg" src="../_images/dma_DMA_C2Control.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31</p></td>
+<td><p>I</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>Terminal count interrupt enable bit. It controls whether the current LLI is expected to trigger the terminal count interrupt.</p></td>
+</tr>
+<tr class="row-odd"><td><p>30:28</p></td>
+<td><p>Prot</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>No use for currently</p></td>
+</tr>
+<tr class="row-even"><td><p>27</p></td>
+<td><p>DI</p></td>
+<td><p>r/w</p></td>
+<td><p>1</p></td>
+<td><p>Destination increment. When set, the Destination address is incremented after each transfer.</p></td>
+</tr>
+<tr class="row-odd"><td><p>26</p></td>
+<td><p>SI</p></td>
+<td><p>r/w</p></td>
+<td><p>1</p></td>
+<td><p>Source increment. When set, the source address is incremented after each transfer.</p></td>
+</tr>
+<tr class="row-even"><td rowspan="2"><p>25:23</p></td>
+<td rowspan="2"><p>fix_cnt</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>3’d0</p></td>
+<td rowspan="2"><p>Only effect when dst_min_mode = 1</p>
+<p>Destination transfer cnt = (total src byte cnt - (fix_cnt&lt;&lt;DWidth))&lt;&lt;DWidth</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="5"><p>22:21</p></td>
+<td rowspan="5"><p>DWidth</p></td>
+<td rowspan="5"><p>r/w</p></td>
+<td rowspan="5"><p>2’b10</p></td>
+<td rowspan="5"><p>Destination transfer width:</p>
+<p>2’b00 : byte</p>
+<p>2’b01 : half-word</p>
+<p>2’b10 : word</p>
+<p>2’b11 : double-word</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>20</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td rowspan="5"><p>19:18</p></td>
+<td rowspan="5"><p>SWidth</p></td>
+<td rowspan="5"><p>r/w</p></td>
+<td rowspan="5"><p>2’b10</p></td>
+<td rowspan="5"><p>Source transfer width</p>
+<p>2’b00 : byte</p>
+<p>2’b01 : half-word</p>
+<p>2’b10 : word</p>
+<p>2’b11 : double-word</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>17</p></td>
+<td><p>dst_add_mode</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Add mode : issue remain destination traffic</p></td>
+</tr>
+<tr class="row-even"><td rowspan="6"><p>16:15</p></td>
+<td rowspan="6"><p>DBSize</p></td>
+<td rowspan="6"><p>r/w</p></td>
+<td rowspan="6"><p>2’b01</p></td>
+<td rowspan="6"><p>Destination burst size</p>
+<p>2’b00 : INCR1</p>
+<p>2’b01 : INCR4</p>
+<p>2’b10 : INCR8</p>
+<p>2’b11 : INCR16</p>
+<p>Note : SBSize*Swidth should &lt;= CH FIFO Size</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>14</p></td>
+<td><p>dst_min_mode</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Minus mode : Not issue all destination traffic</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="6"><p>13:12</p></td>
+<td rowspan="6"><p>SBSize</p></td>
+<td rowspan="6"><p>r/w</p></td>
+<td rowspan="6"><p>2’b01</p></td>
+<td rowspan="6"><p>Source burst size:</p>
+<p>2’b00 : INCR1</p>
+<p>2’b01 : INCR4</p>
+<p>2’b10 : INCR8</p>
+<p>2’b11 : INCR16</p>
+<p>Note : SBSize*Swidth should &lt;= CH FIFO Size</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>11:0</p></td>
+<td><p>TransferSize</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>Transfer size: 0~4095. Number of data transfers left to complete when the SMDMA is the flow controller.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dma-c2config">
+<h3><span class="section-number">7.5.31. </span>DMA_C2Config<a class="headerlink" href="#dma-c2config" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000c310</p>
+<figure class="align-center">
+<img alt="../_images/dma_DMA_C2Config.svg" src="../_images/dma_DMA_C2Config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:19</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>18</p></td>
+<td><p>H</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>17</p></td>
+<td><p>A</p></td>
+<td><p>r</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>16</p></td>
+<td><p>L</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>15</p></td>
+<td><p>ITC</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>14</p></td>
+<td><p>IE</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>13:11</p></td>
+<td><p>FlowCntrl</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>10:6</p></td>
+<td><p>DstPeripheral</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>5:1</p></td>
+<td><p>SrcPeripheral</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>E</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dma-c2rsvd">
+<h3><span class="section-number">7.5.32. </span>DMA_C2RSVD<a class="headerlink" href="#dma-c2rsvd" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000c31c</p>
+<figure class="align-center">
+<img alt="../_images/dma_DMA_C2RSVD.svg" src="../_images/dma_DMA_C2RSVD.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:5</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>SrcRemnSgle</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>Source remain single issue mode</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>DstRemnSgle</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>Destination remain single issue mode</p></td>
+</tr>
+<tr class="row-odd"><td><p>2:0</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dma-c3srcaddr">
+<h3><span class="section-number">7.5.33. </span>DMA_C3SrcAddr<a class="headerlink" href="#dma-c3srcaddr" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000c400</p>
+<figure class="align-center">
+<img alt="../_images/dma_DMA_C3SrcAddr.svg" src="../_images/dma_DMA_C3SrcAddr.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>SrcAddr</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dma-c3dstaddr">
+<h3><span class="section-number">7.5.34. </span>DMA_C3DstAddr<a class="headerlink" href="#dma-c3dstaddr" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000c404</p>
+<figure class="align-center">
+<img alt="../_images/dma_DMA_C3DstAddr.svg" src="../_images/dma_DMA_C3DstAddr.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>DstAddr</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dma-c3lli">
+<h3><span class="section-number">7.5.35. </span>DMA_C3LLI<a class="headerlink" href="#dma-c3lli" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000c408</p>
+<figure class="align-center">
+<img alt="../_images/dma_DMA_C3LLI.svg" src="../_images/dma_DMA_C3LLI.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>LLI</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dma-c3control">
+<h3><span class="section-number">7.5.36. </span>DMA_C3Control<a class="headerlink" href="#dma-c3control" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000c40c</p>
+<figure class="align-center">
+<img alt="../_images/dma_DMA_C3Control.svg" src="../_images/dma_DMA_C3Control.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31</p></td>
+<td><p>I</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>Terminal count interrupt enable bit. It controls whether the current LLI is expected to trigger the terminal count interrupt.</p></td>
+</tr>
+<tr class="row-odd"><td><p>30:28</p></td>
+<td><p>Prot</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>No use for currently</p></td>
+</tr>
+<tr class="row-even"><td><p>27</p></td>
+<td><p>DI</p></td>
+<td><p>r/w</p></td>
+<td><p>1</p></td>
+<td><p>Destination increment. When set, the Destination address is incremented after each transfer.</p></td>
+</tr>
+<tr class="row-odd"><td><p>26</p></td>
+<td><p>SI</p></td>
+<td><p>r/w</p></td>
+<td><p>1</p></td>
+<td><p>Source increment. When set, the source address is incremented after each transfer.</p></td>
+</tr>
+<tr class="row-even"><td rowspan="2"><p>25:23</p></td>
+<td rowspan="2"><p>fix_cnt</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>3’d0</p></td>
+<td rowspan="2"><p>Only effect when dst_min_mode = 1</p>
+<p>Destination transfer cnt = (total src byte cnt - (fix_cnt&lt;&lt;DWidth))&lt;&lt;DWidth</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="5"><p>22:21</p></td>
+<td rowspan="5"><p>DWidth</p></td>
+<td rowspan="5"><p>r/w</p></td>
+<td rowspan="5"><p>2’b10</p></td>
+<td rowspan="5"><p>Destination transfer width:</p>
+<p>2’b00 : byte</p>
+<p>2’b01 : half-word</p>
+<p>2’b10 : word</p>
+<p>2’b11 : double-word</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>20</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td rowspan="5"><p>19:18</p></td>
+<td rowspan="5"><p>SWidth</p></td>
+<td rowspan="5"><p>r/w</p></td>
+<td rowspan="5"><p>2’b10</p></td>
+<td rowspan="5"><p>Source transfer width</p>
+<p>2’b00 : byte</p>
+<p>2’b01 : half-word</p>
+<p>2’b10 : word</p>
+<p>2’b11 : double-word</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>17</p></td>
+<td><p>dst_add_mode</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Add mode : issue remain destination traffic</p></td>
+</tr>
+<tr class="row-even"><td rowspan="6"><p>16:15</p></td>
+<td rowspan="6"><p>DBSize</p></td>
+<td rowspan="6"><p>r/w</p></td>
+<td rowspan="6"><p>2’b01</p></td>
+<td rowspan="6"><p>Destination burst size</p>
+<p>2’b00 : INCR1</p>
+<p>2’b01 : INCR4</p>
+<p>2’b10 : INCR8</p>
+<p>2’b11 : INCR16</p>
+<p>Note : SBSize*Swidth should &lt;= CH FIFO Size</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>14</p></td>
+<td><p>dst_min_mode</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Minus mode : Not issue all destination traffic</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="6"><p>13:12</p></td>
+<td rowspan="6"><p>SBSize</p></td>
+<td rowspan="6"><p>r/w</p></td>
+<td rowspan="6"><p>2’b01</p></td>
+<td rowspan="6"><p>Source burst size:</p>
+<p>2’b00 : INCR1</p>
+<p>2’b01 : INCR4</p>
+<p>2’b10 : INCR8</p>
+<p>2’b11 : INCR16</p>
+<p>Note : SBSize*Swidth should &lt;= CH FIFO Size</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>11:0</p></td>
+<td><p>TransferSize</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>Transfer size: 0~4095. Number of data transfers left to complete when the SMDMA is the flow controller.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dma-c3config">
+<h3><span class="section-number">7.5.37. </span>DMA_C3Config<a class="headerlink" href="#dma-c3config" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000c410</p>
+<figure class="align-center">
+<img alt="../_images/dma_DMA_C3Config.svg" src="../_images/dma_DMA_C3Config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:19</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>18</p></td>
+<td><p>H</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>17</p></td>
+<td><p>A</p></td>
+<td><p>r</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>16</p></td>
+<td><p>L</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>15</p></td>
+<td><p>ITC</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>14</p></td>
+<td><p>IE</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>13:11</p></td>
+<td><p>FlowCntrl</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>10:6</p></td>
+<td><p>DstPeripheral</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>5:1</p></td>
+<td><p>SrcPeripheral</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>E</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dma-c3rsvd">
+<h3><span class="section-number">7.5.38. </span>DMA_C3RSVD<a class="headerlink" href="#dma-c3rsvd" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000c41c</p>
+<figure class="align-center">
+<img alt="../_images/dma_DMA_C3RSVD.svg" src="../_images/dma_DMA_C3RSVD.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:5</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>SrcRemnSgle</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>Source remain single issue mode</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>DstRemnSgle</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>Destination remain single issue mode</p></td>
+</tr>
+<tr class="row-odd"><td><p>2:0</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="DAC.html" class="btn btn-neutral float-left" title="6. DAC" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="IR.html" class="btn btn-neutral float-right" title="8. IR" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

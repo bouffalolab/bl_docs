@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5. Audio characteristic &mdash; BL616/BL618 Datasheet  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6. Power Consumption" href="PowerConsumption.html" />
+    <link rel="prev" title="4. RF Characteristsic" href="RFCharacteristic.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL616/BL618 Datasheet
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">1. Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Functional.html">2. Functional Description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Pindefinition.html">3. Pin Definition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="RFCharacteristic.html">4. RF Characteristsic</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">5. Audio characteristic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PowerConsumption.html">6. Power Consumption</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Electricalcharacteristics.html">7. Electrical Specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ProductUse.html">8. Product use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Referencedesign.html">9. Reference Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PackagingQFN40.html">10. Package Information(QFN40)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PackagingQFN56.html">11. Package Information(QFN56)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TopMarkingDefinition.html">12. Top Marking Definition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OrderingInformation.html">13. Ordering Information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">14. Revision history</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL616/BL618 Datasheet</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">5. </span>Audio characteristic</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="audio-characteristic">
+<h1><span class="section-number">5. </span>Audio characteristic<a class="headerlink" href="#audio-characteristic" title="Permalink to this headline"></a></h1>
+<table class="colwidths-given docutils align-center" id="id1" style="width: 100%">
+<caption><span class="caption-number">Table 5.1 </span><span class="caption-text">Analog-to-Digital performance</span><a class="headerlink" href="#id1" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 25%" />
+<col style="width: 32%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 6%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head" colspan="7"><p>At 25°C, VDDIO= 3.3 V, f<sub>S</sub>= 48kHz, 16-bit audio data (unless otherwise noted)</p></th>
+</tr>
+<tr class="row-even"><th class="head" colspan="2"><p>Parameter</p></th>
+<th class="head"><p>Conditions</p></th>
+<th class="head"><p>Min.</p></th>
+<th class="head"><p>Typ</p></th>
+<th class="head"><p>Max.</p></th>
+<th class="head"><p>Unit</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-odd"><td rowspan="3"><p>AUDIO ADC</p></td>
+<td rowspan="2"><p>Input signal full-scale level</p></td>
+<td><p>differential input，6dB PGA gain</p></td>
+<td></td>
+<td><p>1.16</p></td>
+<td></td>
+<td rowspan="2"><p>Vrms</p></td>
+</tr>
+<tr class="row-even"><td><p>Single-ended input，6dB PGA gain</p></td>
+<td></td>
+<td><p>0.8</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Input common-mode voltage</p></td>
+<td><p>differential/Single-ended input</p></td>
+<td></td>
+<td><p>1.57</p></td>
+<td></td>
+<td><p>V</p></td>
+</tr>
+<tr class="row-even"><td rowspan="2"><p>SNR</p></td>
+<td rowspan="2"><p>Signal-to-noise ratio, A-weighted</p></td>
+<td rowspan="2"><p>f<sub>S</sub>= 48 kHz, 0 dB PGA gain, 1kHz full-scale</p>
+<p>sine-wave input</p>
+</td>
+<td rowspan="2"></td>
+<td rowspan="2"><p>96</p></td>
+<td rowspan="2"></td>
+<td rowspan="9"><p>dB</p></td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="2"><p>DR</p></td>
+<td rowspan="2"><p>Dynamic range, A-weighted</p></td>
+<td rowspan="2"><p>f<sub>S</sub>= 48 kHz, 0 dB PGA gain, 1kHz -60dB</p>
+<p>sine-wave input</p>
+</td>
+<td rowspan="2"></td>
+<td rowspan="2"><p>95</p></td>
+<td rowspan="2"></td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="2"><p>THD</p></td>
+<td rowspan="2"><p>Total harmonic distortion</p></td>
+<td rowspan="2"><p>f<sub>S</sub>= 48 kHz, 0 dB PGA gain, 1kHz -5dB</p>
+<p>sine-wave input</p>
+</td>
+<td rowspan="2"></td>
+<td rowspan="2"><p>-90</p></td>
+<td rowspan="2"></td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td colspan="2"><p>Freq. Response(20Hz~16kHz)</p></td>
+<td><p>-5dB sine-wave input</p></td>
+<td></td>
+<td><p>±0.13</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td colspan="2"><p>ADC programmable analogue amplifier gain range</p></td>
+<td><p>Analogue gain resolution = 3dB</p></td>
+<td><p>6</p></td>
+<td></td>
+<td><p>42</p></td>
+</tr>
+<tr class="row-even"><td colspan="2"><p>ADC programmable digital gain range</p></td>
+<td><p>Digital gain resolution = 0.5dB</p></td>
+<td><p>-95.5</p></td>
+<td></td>
+<td><p>31.5</p></td>
+</tr>
+<tr class="row-odd"><td colspan="2"><p>Input resistance</p></td>
+<td><p>Analogue gain 6dB~42dB</p></td>
+<td><p>160K</p></td>
+<td></td>
+<td><p>480</p></td>
+<td><p>kΩ</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-center" id="id2" style="width: 100%">
+<caption><span class="caption-number">Table 5.2 </span><span class="caption-text">AUPWM performance</span><a class="headerlink" href="#id2" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 25%" />
+<col style="width: 32%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 6%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head" colspan="7"><p>At 25°C, VDDIO= 3.3 V, f<sub>S</sub>= 48kHz, &#64;AUPWM_P/N with RC filter( R=1KΩ，C=470pF) (unless otherwise noted)</p></th>
+</tr>
+<tr class="row-even"><th class="head" colspan="2"><p>Parameter</p></th>
+<th class="head"><p>Conditions</p></th>
+<th class="head"><p>Min.</p></th>
+<th class="head"><p>Typ</p></th>
+<th class="head"><p>Max.</p></th>
+<th class="head"><p>Unit</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-odd"><td><p>AUDIO PWM</p></td>
+<td><p>Input signal full-scale level</p></td>
+<td><p>Differential output，0 dB line-out gain</p></td>
+<td></td>
+<td><p>1.8</p></td>
+<td></td>
+<td><p>Vrms</p></td>
+</tr>
+<tr class="row-even"><td rowspan="2"><p>SNR</p></td>
+<td rowspan="2"><p>Signal-to-noise ratio, A-Weighted</p></td>
+<td rowspan="2"><p>f<sub>S</sub>= 48 kHz,</p>
+<p>1kHz full-scale sine-wave output</p>
+</td>
+<td rowspan="2"></td>
+<td rowspan="2"><p>95</p></td>
+<td rowspan="2"></td>
+<td rowspan="6"><p>dB</p></td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="2"><p>DR</p></td>
+<td rowspan="2"><p>Dynamic range, A-weighted</p></td>
+<td rowspan="2"><p>f<sub>S</sub>= 48 kHz,</p>
+<p>1kHz -60dB sine-wave output</p>
+</td>
+<td rowspan="2"></td>
+<td rowspan="2"><p>95</p></td>
+<td rowspan="2"></td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="2"><p>THD</p></td>
+<td rowspan="2"><p>Total harmonic distortion</p></td>
+<td rowspan="2"><p>f<sub>S</sub>= 48 kHz,</p>
+<p>1kHz -5dB sine-wave output</p>
+</td>
+<td rowspan="2"></td>
+<td rowspan="2"><p>-80</p></td>
+<td rowspan="2"></td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td colspan="2"><p>Noise Floor</p></td>
+<td><p>Play 0data &#64; No A-weighted</p></td>
+<td></td>
+<td><p>26</p></td>
+<td></td>
+<td><p>Vrms</p></td>
+</tr>
+<tr class="row-odd"><td colspan="2"><p>Freq. Response(20Hz~16kHz)</p></td>
+<td><p>-5dB sine-wave input</p></td>
+<td></td>
+<td><p>±0.25</p></td>
+<td></td>
+<td rowspan="2"><p>dB</p></td>
+</tr>
+<tr class="row-even"><td colspan="2"><p>programmable digital gain range</p></td>
+<td><p>Digital gain resolution = 0.5dB</p></td>
+<td><p>-95.5</p></td>
+<td></td>
+<td><p>31.5</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="RFCharacteristic.html" class="btn btn-neutral float-left" title="4. RF Characteristsic" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="PowerConsumption.html" class="btn btn-neutral float-right" title="6. Power Consumption" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

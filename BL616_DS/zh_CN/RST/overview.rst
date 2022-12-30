@@ -1,0 +1,23 @@
+==========
+概述
+==========
+BL616/BL618 是一款适用于超低功耗应用的 Wi-Fi 6 + 蓝牙 5.3 + 802.15.4(Zigbee/Thread) 组合芯片。主要包含无线和微控制器两个子系统。
+
+无线子系统包含 2.4G 无线电、Wi-Fi 802.11b/g/n/ax、BT/BLE 和 802.15.4 基带/MAC 设计。
+
+微控制器子系统包含一个带有浮点单元、DSP 单元、高速缓存和存储器的低功耗 32 位 RISC-V CPU，最高主频可达320M。
+
+此外，芯片具有丰富的外设接口，具体包括DVP、MJPEG、Dispaly、Audio Codec、USB2.0、SDU、以太网(EMAC)、SD/MMC(SDH)、SPI、UART、I2C、I2S、PWM、GPDAC、GPADC、ACOMP等，
+可以应用于音视频等多媒体领域和工业领域。
+
+BL616/BL618 电源管理单元控制低功耗模式，支持PDS(Power Down Sleep)和HBN(Hibernate)两种低功耗模式，支持多种唤醒源以满足不同的低功耗场景。Sec Eng 模块支持AES/SHA/PKA/TRNG
+等功能，支持镜像加密和签名启动，满足物联网领域的各种安全应用需求。
+BL616 共有 19 个 GPIO， BL618 共有 35 个 GPIO，其系统功能框图如下所示。
+
+
+.. figure:: ../../picture/Functionalblockdiagram.svg
+   :align: center
+   :scale: 60%
+
+   功能框图
+

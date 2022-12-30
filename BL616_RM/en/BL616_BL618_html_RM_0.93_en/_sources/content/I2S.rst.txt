@@ -1,0 +1,119 @@
+==========
+I2S
+==========
+
+Overview
+=====
+InterIC Sound (I2S), also Integrated Interchip Sound (IIS), is a digital audio transmission specification defined by Philips in 1986 (revised in 1996) for transmitting digital audio data between internal devices of a system.
+
+I2S transmits clock signals and data signals separately, so that the receiver does not need to restore the clock from the data signal, reducing the design difficulty of the receiver.
+
+Features
+=========
+
+- Supports master and slave modes
+
+- Supported data formats: LeftJustified/RightJustified/Normal I2S/DSP
+
+- Supports 8/16/24/32-bit data width
+
+- Supports data MSB/LSB switching
+
+- Supports DMA transfer mode
+
+- Supports 4-channel and 6-channel modes in addition to mono/2-channel mode
+
+- Supports playing of mono audio in the 2-channel mode and channel mode swapping
+
+- The 2-channel recording data with less than 16 bits can be merged into FIFO data with less than 32 bits
+
+- Supports 16/32/48/64-bit frame size
+
+- Supports dynamic mute switch function
+
+- TX FIFO has a width of 32 bits and a depth of 16
+
+- RX FIFO has a width of 32 bits and a depth of 16
+
+Functional Description
+==========
+
+.. table:: I2S pin list
+    :widths: 30, 30, 40
+    :width: 80%
+    :align: center
+
+    +-----------+--------------+------------------------------------------------------------------------+
+    | Name      | Type         | Description                                                            |
+    +===========+==============+========================================================================+
+    | I2Sx_DI   | Input        | Serial data input                                                      |
+    +-----------+--------------+------------------------------------------------------------------------+
+    | I2Sx_DO   | Output       | Serial data output                                                     |
+    +-----------+--------------+------------------------------------------------------------------------+
+    | I2Sx_BCLK | Input/output | Synchronous transmission clock: output (master)/input (slave)          |
+    +-----------+--------------+------------------------------------------------------------------------+
+    | I2Sx_FS   | Input/output | Data start/end signal: output (master)/input (slave)                   |
+    +-----------+--------------+------------------------------------------------------------------------+
+
+Functional Description
+===========
+Data Formats
+-------------
+I2S supports Normal I2S/LeftJustified/RightJustified modes. Normal I2S is a special case of the LeftJustified mode. The mode is set by I2S_CONFIG[17:16].
+
+.. figure:: ../../picture/I2sNormal.svg
+   :align: center
+
+   Normal I2S
+
+OFFET is configured by I2S_CONFIG[25:20]. The only difference between LeftJustified and Normal I2S modes is the different configuration of I2S_CONFIG[25:20].
+
+.. figure:: ../../picture/I2sLeftRight.svg
+   :align: center
+
+   I2S LeftJustified/RightJustified
+
+.. figure:: ../../picture/I2sTDM64.svg
+   :align: center
+
+   I2S TDM64 Mode—6-Channel Recording
+
+The width of a single pulse is controlled by I2S_CONFIG\[6\]. When it is set to 0, the width of high-level pulse of FS signal line is the width of data size, and when it is set to 1, that width is 1. Generally, this register is set to 1 in the multi-channel TDM64 mode.
+
+Basic architecture
+-------------
+
+Clock source
+-------------
+The clock source of I2S is provided by audio PLL, and the clock divider is used to divide the clock source and then generate the clock signal to drive I2S, as shown below:
+
+.. figure:: ../../picture/I2SClk.svg
+   :align: center
+
+   I2S clock
+
+I2S Interrupt
+-------------
+I2S supports the following interrupt control modes:
+
+- TX FIFO request interrupt
+
+- RX FIFO request interrupt
+
+- Overrun/undderun error interrupt
+
+A TX FIFO request interrupt will be generated when TX_FIFO_CNT in I2S_FIFO_CONFIG_1 is greater than TX_FIFO_TH. When the condition is not met, the interrupt flag will be cleared automatically.
+
+A RX FIFO request interrupt will be generated when RX_FIFO_CNT in I2S_FIFO_CONFIG_1 is greater than RX_FIFO_TH. When the condition is not met, the interrupt flag will be cleared automatically.
+
+If the TX/RX FIFO overflows or underflows, it will trigger the error interrupt. When the error disappears, the flag bit will be cleared automatically.
+
+All the interrupt enable bits and interrupt flag bits of I2S are in the I2S_INT_STS register.
+
+.. only:: html
+
+   .. include:: i2s_register.rst
+
+.. raw:: latex
+
+   \input{../../en/content/i2s}

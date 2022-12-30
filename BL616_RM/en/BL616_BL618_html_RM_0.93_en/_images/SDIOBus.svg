@@ -1,0 +1,864 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="179.17926mm"
+   height="177.08386mm"
+   viewBox="0 0 179.17926 177.08387"
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
+   sodipodi:docname="SDIOBus_common.svg">
+  <defs
+     id="defs2">
+    <marker
+       style="overflow:visible"
+       id="marker17471"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path17469" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker16191"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path16189" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker16113"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path16111" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker1431"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path1429" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Mend"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path1104" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker1431-7"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path1429-7" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Lstart-3"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path1095-3" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker13748-7"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path13746-8" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker13748-1"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path13746-87" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker1431-5"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path1429-3" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker1431-78"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path1429-1" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker1431-9"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path1429-8" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker1431-78-7"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path1429-1-5" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker1431-78-7-6"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path1429-1-5-8" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker1431-78-6"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path1429-1-2" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker16113-8"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path16111-7" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker16113-8-2"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path16111-7-5" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.90509668"
+     inkscape:cx="298.76894"
+     inkscape:cy="341.78046"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:snap-intersection-paths="true"
+     inkscape:object-paths="true" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="图层 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(32.34309,-8.6905896)">
+    <rect
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.265;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect2141"
+       width="178.91426"
+       height="176.81886"
+       x="-32.21059"
+       y="8.8230896" />
+    <g
+       id="g18424"
+       transform="translate(1.561695,-1.0530533)">
+      <g
+         id="g15941"
+         transform="translate(-1.4750202,-0.78629956)">
+        <g
+           id="g15676"
+           transform="translate(-53.487581,33.004776)">
+          <text
+             xml:space="preserve"
+             style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+             x="64.180611"
+             y="50.537331"
+             id="text869-2-5-4-1-3-7"><tspan
+               sodipodi:role="line"
+               id="tspan867-8-3-9-1-2-5"
+               x="64.180611"
+               y="50.537331"
+               style="font-size:4.23333px;stroke-width:0.264583">Standby</tspan><tspan
+               sodipodi:role="line"
+               x="64.180611"
+               y="55.828995"
+               style="font-size:4.23333px;stroke-width:0.264583"
+               id="tspan15537-3">  State</tspan></text>
+          <ellipse
+             style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+             id="path15323-7-7-1"
+             cx="72.894287"
+             cy="51.077866"
+             rx="19.688721"
+             ry="9.3017578" />
+        </g>
+        <g
+           id="g15847"
+           transform="translate(-46.517041,36.288312)">
+          <text
+             xml:space="preserve"
+             style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+             x="20.336912"
+             y="63.720829"
+             id="text869-2-5-4-1-3-6-6"><tspan
+               sodipodi:role="line"
+               x="20.336912"
+               y="63.720829"
+               style="font-size:4.23333px;stroke-width:0.264583"
+               id="tspan15537-59-9">    Commands</tspan><tspan
+               sodipodi:role="line"
+               x="20.336912"
+               y="69.012489"
+               style="font-size:4.23333px;stroke-width:0.264583"
+               id="tspan15738-0">accepted in &quot;STB&quot;</tspan><tspan
+               sodipodi:role="line"
+               x="20.336912"
+               y="74.304153"
+               style="font-size:4.23333px;stroke-width:0.264583"
+               id="tspan15740-6">   CMD3,CMD7,</tspan><tspan
+               sodipodi:role="line"
+               x="20.336912"
+               y="79.595818"
+               style="font-size:4.23333px;stroke-width:0.264583"
+               id="tspan15742-5">       CMD15</tspan></text>
+          <rect
+             style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+             id="rect15707-3"
+             width="41.656464"
+             height="21.77829"
+             x="17.522038"
+             y="59.193047" />
+        </g>
+      </g>
+      <g
+         id="g15695"
+         transform="translate(22.554066,5.842832)">
+        <ellipse
+           style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+           id="path15323-7-2"
+           cx="30.799335"
+           cy="113.78181"
+           rx="19.688721"
+           ry="9.3017578" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+           x="13.701686"
+           y="111.65378"
+           id="text869-2-5-4-1-3-2-5"><tspan
+             sodipodi:role="line"
+             x="13.701686"
+             y="111.65378"
+             style="font-size:4.23333px;stroke-width:0.264583"
+             id="tspan15537-5-0">Command State</tspan><tspan
+             sodipodi:role="line"
+             x="13.701686"
+             y="116.94544"
+             style="font-size:4.23333px;stroke-width:0.264583"
+             id="tspan15565-6">(Data Bus Free)</tspan><tspan
+             sodipodi:role="line"
+             x="13.701686"
+             y="122.23711"
+             style="font-size:4.23333px;stroke-width:0.264583"
+             id="tspan15567-1">       BS = 0</tspan></text>
+      </g>
+      <g
+         id="g15839"
+         transform="translate(-3.0193281,-12.035882)">
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+           x="9.3008957"
+           y="147.29298"
+           id="text869-2-5-4-1-3-6-3"><tspan
+             sodipodi:role="line"
+             x="9.3008957"
+             y="147.29298"
+             style="font-size:4.23333px;stroke-width:0.264583"
+             id="tspan15537-59-7">    Commands</tspan><tspan
+             sodipodi:role="line"
+             x="9.3008957"
+             y="152.58464"
+             style="font-size:4.23333px;stroke-width:0.264583"
+             id="tspan15738-2">accepted in &quot;CMD&quot;</tspan><tspan
+             sodipodi:role="line"
+             x="9.3008957"
+             y="157.87631"
+             style="font-size:4.23333px;stroke-width:0.264583"
+             id="tspan15740-1">   CMD7,CMD52,</tspan><tspan
+             sodipodi:role="line"
+             x="9.3008957"
+             y="163.16797"
+             style="font-size:4.23333px;stroke-width:0.264583"
+             id="tspan15742-2">  CMD53,CMD15</tspan></text>
+        <rect
+           style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+           id="rect15707-5"
+           width="41.656464"
+           height="21.77829"
+           x="8.0135736"
+           y="143.11557" />
+      </g>
+      <g
+         id="g15688"
+         transform="translate(21.215279,36.343362)">
+        <ellipse
+           style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+           id="path15323-7"
+           cx="67.559837"
+           cy="46.95298"
+           rx="19.688721"
+           ry="9.3017578" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+           x="48.975975"
+           y="43.781086"
+           id="text869-2-5-4-1-3-2"><tspan
+             sodipodi:role="line"
+             x="48.975975"
+             y="43.781086"
+             style="font-size:4.23333px;stroke-width:0.264583"
+             id="tspan15537-5">   Transfer State</tspan><tspan
+             sodipodi:role="line"
+             x="48.975975"
+             y="49.072746"
+             style="font-size:4.23333px;stroke-width:0.264583"
+             id="tspan15565">(Data Bus Active)</tspan><tspan
+             sodipodi:role="line"
+             x="48.975975"
+             y="54.36441"
+             style="font-size:4.23333px;stroke-width:0.264583"
+             id="tspan15567">        BS = 1</tspan></text>
+      </g>
+      <g
+         id="g15831"
+         transform="translate(3.2862089,-77.744299)">
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+           x="98.717667"
+           y="136.02649"
+           id="text869-2-5-4-1-3-6-5"><tspan
+             sodipodi:role="line"
+             x="98.717667"
+             y="136.02649"
+             style="font-size:4.23333px;stroke-width:0.264583"
+             id="tspan15537-59-8">    Commands</tspan><tspan
+             sodipodi:role="line"
+             x="98.717667"
+             y="141.31815"
+             style="font-size:4.23333px;stroke-width:0.264583"
+             id="tspan15738-3">accepted in &quot;TRN&quot;</tspan><tspan
+             sodipodi:role="line"
+             x="98.717667"
+             y="146.60982"
+             style="font-size:4.23333px;stroke-width:0.264583"
+             id="tspan15742-6">       CMD52</tspan></text>
+        <rect
+           style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+           id="rect15707-35"
+           width="41.656464"
+           height="21.77829"
+           x="96.897041"
+           y="128.85287" />
+      </g>
+      <g
+         id="g15734"
+         transform="translate(27.085121,-11.029535)">
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+           x="13.369853"
+           y="57.406994"
+           id="text869-2-5-4-1-3"><tspan
+             sodipodi:role="line"
+             id="tspan867-8-3-9-1-2"
+             x="13.369853"
+             y="57.406994"
+             style="font-size:4.23333px;stroke-width:0.264583">Initialization</tspan><tspan
+             sodipodi:role="line"
+             x="13.369853"
+             y="62.698654"
+             style="font-size:4.23333px;stroke-width:0.264583"
+             id="tspan15537">     State</tspan></text>
+        <ellipse
+           style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+           id="path15323-7-7"
+           cx="26.26828"
+           cy="57.947529"
+           rx="19.688721"
+           ry="9.3017578" />
+      </g>
+      <g
+         id="g15822"
+         transform="translate(-1.818693,-10.409618)">
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+           x="69.277985"
+           y="29.734789"
+           id="text869-2-5-4-1-3-6"><tspan
+             sodipodi:role="line"
+             x="69.277985"
+             y="29.734789"
+             style="font-size:4.23333px;stroke-width:0.264583"
+             id="tspan15537-59">    Commands</tspan><tspan
+             sodipodi:role="line"
+             x="69.277985"
+             y="35.026451"
+             style="font-size:4.23333px;stroke-width:0.264583"
+             id="tspan15738">accepted in &quot;INI&quot;</tspan><tspan
+             sodipodi:role="line"
+             x="69.277985"
+             y="40.318115"
+             style="font-size:4.23333px;stroke-width:0.264583"
+             id="tspan15740">   CMD5,CMD3,</tspan><tspan
+             sodipodi:role="line"
+             x="69.277985"
+             y="45.609776"
+             style="font-size:4.23333px;stroke-width:0.264583"
+             id="tspan15742">       CMD15</tspan></text>
+        <rect
+           style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+           id="rect15707"
+           width="41.656464"
+           height="21.77829"
+           x="66.463112"
+           y="25.207008" />
+      </g>
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.265;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#marker16113)"
+         d="M 53.353401,56.745717 V 110.37293"
+         id="path15984-0-3" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker1431)"
+         d="M 81.911354,74.574973 64.090712,55.191698"
+         id="path16187" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker1431-5)"
+         d="M 43.130585,54.867643 25.309941,74.250918"
+         id="path16187-2" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker1431-78)"
+         d="M 84.41786,92.365199 66.312817,112.03253"
+         id="path16187-5" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker1431-78-7)"
+         d="M 57.891894,110.57338 75.996938,90.906056"
+         id="path16187-5-8" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker1431-78-6)"
+         d="m 22.280197,92.366188 18.10504,19.667322"
+         id="path16187-5-7" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker1431-78-7-6)"
+         d="M 48.806157,110.57436 30.701117,90.907048"
+         id="path16187-5-8-1" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.264999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#marker16113-8)"
+         d="M 33.130834,46.917994 H 17.711263"
+         id="path15984-0-3-0" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+         x="-3.4642289"
+         y="48.456917"
+         id="text869-2-5-4-1-5"><tspan
+           sodipodi:role="line"
+           id="tspan867-8-3-9-1-9"
+           x="-3.4642289"
+           y="48.456917"
+           style="font-size:4.23333px;stroke-width:0.264583">Power On</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:3.52778px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+         x="25.312057"
+         y="61.500694"
+         id="text869-2-5-4-1-1"><tspan
+           sodipodi:role="line"
+           id="tspan867-8-3-9-1-60"
+           x="25.312057"
+           y="61.500694"
+           style="font-size:3.52778px;stroke-width:0.264583">CMD3</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:3.52778px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+         x="70.554497"
+         y="61.500694"
+         id="text869-2-5-4-1-9"><tspan
+           sodipodi:role="line"
+           id="tspan867-8-3-9-1-3"
+           x="70.554497"
+           y="61.500694"
+           style="font-size:3.52778px;stroke-width:0.264583">CMD52 Reset</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:3.52778px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+         x="36.808434"
+         y="87.676414"
+         id="text869-2-5-4-1-6"><tspan
+           sodipodi:role="line"
+           id="tspan867-8-3-9-1-5"
+           x="36.808434"
+           y="87.676414"
+           style="font-size:3.52778px;stroke-width:0.264583">  CMD7</tspan><tspan
+           sodipodi:role="line"
+           x="36.808434"
+           y="92.086136"
+           style="font-size:3.52778px;stroke-width:0.264583"
+           id="tspan17389">   with</tspan><tspan
+           sodipodi:role="line"
+           x="36.808434"
+           y="96.495865"
+           style="font-size:3.52778px;stroke-width:0.264583"
+           id="tspan17349">incorrect</tspan><tspan
+           sodipodi:role="line"
+           x="36.808434"
+           y="100.90559"
+           style="font-size:3.52778px;stroke-width:0.264583"
+           id="tspan17391">   RCA</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:3.52778px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+         x="13.586755"
+         y="108.016"
+         id="text869-2-5-4-1-70"><tspan
+           sodipodi:role="line"
+           id="tspan867-8-3-9-1-4"
+           x="13.586755"
+           y="108.016"
+           style="font-size:3.52778px;stroke-width:0.264583"> CMD7 with</tspan><tspan
+           sodipodi:role="line"
+           x="13.586755"
+           y="112.42572"
+           style="font-size:3.52778px;stroke-width:0.264583"
+           id="tspan17351">correct RCA</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:3.52778px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+         x="53.891922"
+         y="80.884895"
+         id="text869-2-5-4-1-4"><tspan
+           sodipodi:role="line"
+           id="tspan867-8-3-9-1-76"
+           x="53.891922"
+           y="80.884895"
+           style="font-size:3.52778px;stroke-width:0.264583"> CMD53</tspan><tspan
+           sodipodi:role="line"
+           x="53.891922"
+           y="85.294617"
+           style="font-size:3.52778px;stroke-width:0.264583"
+           id="tspan17459">(to valid</tspan><tspan
+           sodipodi:role="line"
+           x="53.891922"
+           y="89.704346"
+           style="font-size:3.52778px;stroke-width:0.264583"
+           id="tspan17353">function)</tspan><tspan
+           sodipodi:role="line"
+           x="53.891922"
+           y="94.114067"
+           style="font-size:3.52778px;stroke-width:0.264583"
+           id="tspan17355">Function</tspan><tspan
+           sodipodi:role="line"
+           x="53.891922"
+           y="98.523796"
+           style="font-size:3.52778px;stroke-width:0.264583"
+           id="tspan17357">Resume</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:3.52778px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+         x="77.278"
+         y="103.59565"
+         id="text869-2-5-4-1-68"><tspan
+           sodipodi:role="line"
+           id="tspan867-8-3-9-1-66"
+           x="77.278"
+           y="103.59565"
+           style="font-size:3.52778px;stroke-width:0.264583">Execution complete</tspan><tspan
+           sodipodi:role="line"
+           x="77.278"
+           y="108.00537"
+           style="font-size:3.52778px;stroke-width:0.264583"
+           id="tspan17359"> Function Suspend</tspan><tspan
+           sodipodi:role="line"
+           x="77.278"
+           y="112.4151"
+           style="font-size:3.52778px;stroke-width:0.264583"
+           id="tspan17361">    CMD52 Abort</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:3.52778px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+         x="70.700661"
+         y="128.29718"
+         id="text869-2-5-4-1-57"><tspan
+           sodipodi:role="line"
+           id="tspan867-8-3-9-1-0"
+           x="70.700661"
+           y="128.29718"
+           style="font-size:3.52778px;stroke-width:0.264583">CMD7 with correct</tspan><tspan
+           sodipodi:role="line"
+           x="70.700661"
+           y="132.70691"
+           style="font-size:3.52778px;stroke-width:0.264583"
+           id="tspan17363">          RCA</tspan><tspan
+           sodipodi:role="line"
+           x="70.700661"
+           y="137.11662"
+           style="font-size:3.52778px;stroke-width:0.264583"
+           id="tspan17365"> CMD53 to invalid</tspan><tspan
+           sodipodi:role="line"
+           x="70.700661"
+           y="141.52635"
+           style="font-size:3.52778px;stroke-width:0.264583"
+           id="tspan17367">        function</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:3.52778px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+         x="40.261005"
+         y="70.7911"
+         id="text869-2-5-4-1-1-3"><tspan
+           sodipodi:role="line"
+           id="tspan867-8-3-9-1-60-6"
+           x="40.261005"
+           y="70.7911"
+           style="font-size:3.52778px;stroke-width:0.264583">CMD52 Reset</tspan></text>
+      <ellipse
+         style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.264999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;marker-end:url(#marker17471)"
+         id="path17461"
+         sodipodi:type="arc"
+         sodipodi:cx="28.967194"
+         sodipodi:cy="134.09276"
+         sodipodi:rx="8.1874247"
+         sodipodi:ry="14.564887"
+         sodipodi:start="0.27723092"
+         sodipodi:end="2.7961034"
+         sodipodi:arc-type="arc"
+         d="m 36.841998,138.07907 a 8.1874247,14.564887 0 0 1 -7.595429,10.57009 8.1874247,14.564887 0 0 1 -7.983004,-9.6239"
+         sodipodi:open="true"
+         transform="rotate(-14.388508)" />
+      <g
+         id="g17821"
+         transform="translate(3.3407449,-3.5139979)">
+        <g
+           id="g15705"
+           transform="translate(17.121848,69.203826)">
+          <text
+             xml:space="preserve"
+             style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+             x="93.27755"
+             y="86.288368"
+             id="text869-2-5-4-1-3-7-2"><tspan
+               sodipodi:role="line"
+               x="93.27755"
+               y="86.288368"
+               style="font-size:4.23333px;stroke-width:0.264583"
+               id="tspan15537-3-8">Inactive</tspan><tspan
+               sodipodi:role="line"
+               x="93.27755"
+               y="91.580032"
+               style="font-size:4.23333px;stroke-width:0.264583"
+               id="tspan15699">  State</tspan></text>
+          <ellipse
+             style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+             id="path15323-7-7-1-2"
+             cx="101.6884"
+             cy="86.88781"
+             rx="19.688721"
+             ry="9.3017578" />
+        </g>
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-weight:normal;font-size:3.52778px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+           x="59.87899"
+           y="154.60652"
+           id="text869-2-5-4-1-75"><tspan
+             sodipodi:role="line"
+             id="tspan867-8-3-9-1-8"
+             x="59.87899"
+             y="154.60652"
+             style="font-size:3.52778px;stroke-width:0.264583">CMD15 or OCR</tspan><tspan
+             sodipodi:role="line"
+             x="59.87899"
+             y="159.01625"
+             style="font-size:3.52778px;stroke-width:0.264583"
+             id="tspan17369">    mismatch</tspan></text>
+        <path
+           style="fill:none;stroke:#000000;stroke-width:0.264999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#marker16113-8-2)"
+           d="M 98.59787,156.09164 H 83.178303"
+           id="path15984-0-3-0-7" />
+      </g>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:3.52777px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+         x="62.128651"
+         y="167.96722"
+         id="text869-2-5-4-1-57-9"><tspan
+           sodipodi:role="line"
+           x="62.128651"
+           y="167.96722"
+           style="font-size:3.52777px;stroke-width:0.264583"
+           id="tspan17367-4">CMD53 to invalid function can be:</tspan><tspan
+           sodipodi:role="line"
+           x="62.128651"
+           y="172.37694"
+           style="font-size:3.52777px;stroke-width:0.264583"
+           id="tspan18123">·    I/O Disable or I/O Not Ready(IORDY = 0)</tspan><tspan
+           sodipodi:role="line"
+           x="62.128651"
+           y="176.78665"
+           style="font-size:3.52777px;stroke-width:0.264583"
+           id="tspan18129">·    I/O Function number error in response</tspan><tspan
+           sodipodi:role="line"
+           x="62.128651"
+           y="181.19637"
+           style="font-size:3.52777px;stroke-width:0.264583"
+           id="tspan18131">·    I/O Function already Suspended</tspan></text>
+    </g>
+  </g>
+</svg>

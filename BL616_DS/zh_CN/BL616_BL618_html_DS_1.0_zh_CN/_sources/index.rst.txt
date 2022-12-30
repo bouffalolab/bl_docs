@@ -1,0 +1,135 @@
+Features
+============
+.. raw:: latex
+
+   \section*{Features}
+   \begin{multicols}{2}
+
+- 无线（业内顶尖射频性能）
+  
+   * 2.4 GHz 射频收发器
+   * Wi-Fi 6 (IEEE 802.11 b/g/n/ax)
+   * 蓝牙® 5.3 双模 (BT+BLE)
+   * IEEE 802.15.4(Zigbee/Thread)
+   * 支持 BLE 的 Wi-Fi 快速连接
+   * Wi-Fi/蓝牙/802.15.4 共存
+   * Wi-Fi 安全 WPS/WEP/WPA/WPA2/WPA3
+   * Wi-Fi 20/40MHz 带宽，1T1R，高达 229.4 Mbps
+   * 支持 LDPC、 STBC、 Beamformee、 DL/UL OFDMA、 MU-MIMO、 TWT（目标唤醒时间）、 SR（空分复用）、 DCM（双载波调制）、 ER（扩展范围）
+   * 支持聚合（AMPDU、AMSDU）、立即块确认、分片和碎片整理
+   * 支持 RX 分集
+   * 支持 IEEE 802.11e QoS WMM（Wi-Fi 多媒体）、IEEE 802.11w PMF（管理帧保护）
+   * STA、SoftAP、STA+SoftAP 和 sniffer 模式
+   * 多云连接
+   * 集成射频 balun、PA/LNA
+   * 支持外部 PA/LNA  
+
+- 微控制器子系统
+
+   * 带 FPU 和 DSP 的 32 位 RISC-V CPU
+   * 一级缓存
+   * RTC 定时器最长计数周期为 1 年
+   * 2 个 32 位通用定时器
+   * 4 个 DMA 通道
+   * 动态频率可配置为 1MHz 至 320MHz
+   * JTAG 开发支持
+   * XIP QSPI 闪存支持
+
+- 音频编码译码器
+
+  * Audio ADC*1 (MIC, SNR>92dB)
+  * Audio DAC*1 (Speaker, SNR>95dB)
+  * 支持 8/12/16/22.05/24/32/44.1/48KHz
+
+- Memory
+  
+  * 532KB SRAM [0101]_
+  * 128KB ROM
+  * 4Kb eFuse
+  * 内嵌 2/4/8MB Flash (选配)
+  * 内嵌 4/8MB pSRAM (选配)
+
+.. [0101] 532K SRAM 包含 4K HBN RAM ，16K Dcache RAM 和 32K Icache RAM。
+
+- Video/Image
+
+  * Camera Sensor DVP 接口
+  * Video Codec MJPEG encoding
+  * LCD 显示 (QSPI, DBI 和 RGB)
+
+- 安全
+   
+   * 安全启动; 安全调试
+   * XIP QSPI On-The-Fly AES 解密 (OTFAD)
+   * 支持 TrustZone
+   * AES-CBC/CCM/GCM/XTS 模式
+   * MD5、SHA-1/224/256/384/512
+   * TRNG（真随机数生成器）
+   * 用于 RSA/ECC 的 PKA（公钥加速器）
+
+- 外设
+ 
+   * USB 2.0 HS OTG (High-Speed 480MHz) 
+   * SDIO 2.0 从机
+   * SD卡接口
+   * 2 个UART（支持5V IO）
+   * 2 个 I2C ，支持主机模式
+   * SPI主/从
+   * I2S 主/从
+   * 1 个 PWM 控制器（带互补输出的 4 通道）
+   * 12-bit~16-bit 通用 ADC
+   * 12-bit 通用 DAC
+   * 通用模拟比较器 (ACOMP)
+   * 可配置的 19 (BL616) 或 35 (BL618) 个 GPIO
+
+- 功耗模式（超低功耗模式）
+
+   * 关闭; 休眠 (<1uA)
+   * 掉电睡眠（灵活）
+
+- 时钟
+
+  * 支持 XTAL 24/26/32/38.4/40MHz
+  * 支持 XTAL 32.768KHz
+  * 内部 RC 32KHz /32MHz 振荡器
+  * 内部 System /Audio PLL
+
+- 封装类型
+
+  * 40 pin QFN (BL616)
+  * 56 pin QFN (BL618)
+
+.. raw:: latex
+
+   \end{multicols}
+   \tableofcontents
+   %\begingroup
+  % \renewcommand*{\addvspace}[1]{ }
+   %\newcommand{\loflabel}{图}
+   %\renewcommand{\numberline}[1]{\loflabel~#1\hspace*{1em}}
+   \listoffigures
+
+   %\newcommand{\lotlabel}{表}
+   %\renewcommand{\numberline}[1]{\lotlabel~#1\hspace*{1em}}
+   \listoftables
+   %\endgroup
+
+
+.. toctree::
+   :maxdepth: 2
+   :numbered:
+   
+   content/overview
+   content/Functional
+   content/Pindefinition
+   content/RFCharacteristic
+   content/AudioCharacteristic
+   content/PowerConsumption
+   content/Electricalcharacteristics
+   content/ProductUse
+   content/Referencedesign
+   content/PackagingQFN40
+   content/PackagingQFN56
+   content/TopMarkingDefinition
+   content/OrderingInformation
+   content/version

@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>17. Emac &mdash; BL616/BL618 Reference Manual  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="18. USB" href="USB.html" />
+    <link rel="prev" title="16. AudioADC" href="AudioADC.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL616/BL618 Reference Manual
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. System and Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. Reset and Clock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPIO.html">4. GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">5. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">6. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">7. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">8. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">9. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">10. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">11. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">12. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">13. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2S.html">14. I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AudioDAC.html">15. AudioDAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AudioADC.html">16. AudioADC</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">17. Emac</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">17.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#features">17.2. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#functional-description">17.3. Functional Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#clock">17.4. Clock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rx-tx-bd">17.5. RX/TX BD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#phy-interaction">17.6. PHY Interaction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#programming-flow">17.7. Programming Flow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#phy-initialization">17.7.1. PHY initialization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#send-data-frame">17.7.2. Send Data Frame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#receive-data-frame">17.7.3. Receive Data Frame</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="USB.html">18. USB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ISO11898.html">19. ISO11898</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cam.html">20. CAM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MJPEG.html">21. MJPEG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBI.html">22. DBI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SDH.html">23. SDH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SDIO.html">24. SDIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LowPower.html">25. LowPower</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SEC_ENG.html">26. SEC ENG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">27. Revision history</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL616/BL618 Reference Manual</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">17. </span>Emac</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="emac">
+<h1><span class="section-number">17. </span>Emac<a class="headerlink" href="#emac" title="Permalink to this headline"></a></h1>
+<section id="overview">
+<h2><span class="section-number">17.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
+<p>The EMAC module is a 10/100Mbps Ethernet Media Access Controller (Ethernet MAC) compatible with IEEE 802.3.
+It consists of status and control register set, RX/TX module, RX/TX buffer descriptor (BD) set, master interface, MDIO interface, and physical layer chip (PHY) interface.</p>
+<p>The status and control register set contains the status and control bits of EMAC. As the interface with the user program, it controls data sending and receiving and reports the status.</p>
+<p>The RX/TX module obtains data frames from the specified memory according to the control words in the RX/TX descriptor, adds preamble and CRC, and expands short frames to send them through PHY. Or, it receives data from PHY, and puts them into the specified memory according to the RX/TX BD. Relevant event flags are set after sending and receiving are completed. If the event interrupt is enabled, an interrupt request will be sent to the master for processing.</p>
+<p>MDIO and MII/RMII interfaces communicate with PHY, including reading and writing the registers of PHY and sending and receiving data packets.</p>
+</section>
+<section id="features">
+<h2><span class="section-number">17.2. </span>Features<a class="headerlink" href="#features" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p>Compatible with the MAC layer defined by IEEE 802.3</p></li>
+<li><p>PHY supporting MII/RMII interface defined by IEEE 802.3</p></li>
+<li><p>Interacts with PHY through MDIO interface</p></li>
+<li><p>Supports 10 Mbps and 100 Mbps Ethernet</p></li>
+<li><p>Supports half-duplex and full-duplex</p></li>
+<li><p>Supports automatic flow control and control frame generation in the full-duplex mode</p></li>
+<li><p>Supports collision detection and retransmission in the half-duplex mode</p></li>
+<li><p>Supports the generation and verification of CRC</p></li>
+<li><p>Generates and removes data frame preamble</p></li>
+<li><p>Supports automatic extension of short data frames when sending</p></li>
+<li><p>Detects too long/short data frames (length limit)</p></li>
+<li><p>Transmits long data frames (&gt; standard Ethernet frame length)</p></li>
+<li><p>Automatically discards data packets with over-limit retransmission times or too small frame gap</p></li>
+<li><p>Broadcast packet filtering</p></li>
+<li><p>Internal RAM for storing up to 128 BDs</p></li>
+<li><p>Splits and configures a data packet to multiple consecutive Bds when sending</p></li>
+<li><p>Various event flags sent or received</p></li>
+<li><p>Generates a corresponding interrupt when an event occurs</p></li>
+</ul>
+</section>
+<section id="functional-description">
+<h2><span class="section-number">17.3. </span>Functional Description<a class="headerlink" href="#functional-description" title="Permalink to this headline"></a></h2>
+<p>The composition of EMAC module is as follows.</p>
+<figure class="align-center" id="id1">
+<img alt="../_images/EMAC.svg" src="../_images/EMAC.svg" /><figcaption>
+<p><span class="caption-number">Fig. 17.1 </span><span class="caption-text">Block diagram of EMAC</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Through MDIO interface, the control register can read and write PHY’s registers, to perform configuration, mode selection (half/full duplex), negotiation, and other operations.
+The RX module filters and checks the received data frames for a valid preamble, FCS, and length, and stores the data in the specified memory address according to the BD.
+The TX module gets data from the memory according to the data BD, adds preamble, FCS, and pad, and then sends them out using the CSMA/CD protocol.
+If CRS is detected, retry will be delayed.
+The RX/TX BD set is connected to the system RAM, which is used to store the sent and received Ethernet data frames. Each descriptor contains the corresponding control status word and buffer memory address. There are 128 descriptors for RX/TX, and can be allocated flexibly.</p>
+</section>
+<section id="clock">
+<h2><span class="section-number">17.4. </span>Clock<a class="headerlink" href="#clock" title="Permalink to this headline"></a></h2>
+<p>EMAC needs a clock for synchronous transmission and reception (25 MHz (MII) or 50 MHz (RMII) at 100 Mbps, and 2.5 MHz at 10 Mbps).
+The clock must be synchronized between EMAC and PHY.</p>
+</section>
+<section id="rx-tx-bd">
+<h2><span class="section-number">17.5. </span>RX/TX BD<a class="headerlink" href="#rx-tx-bd" title="Permalink to this headline"></a></h2>
+<p>The RX/TX BD provides the association between EAMC and data frame cache address information, controls RX/TX data frames, and gives RX/TX status prompt.
+Each descriptor consists of two consecutive words (1 word = 32 bits). The word0 with low address provides the length, control bits, and status bits of the data frames contained in this buffer. The word1 with high address is the memory pointer.</p>
+<p>Specific description of word0 in TX BD:</p>
+<blockquote>
+<div><p>[31:16]: TX packet length (LEN).</p>
+<p>[15]: TX BD Ready (RD) flag. The software writes “1” to inform EMAC that this BD contains data to be sent, and the hardware writes “0” to indicate that the BD data has been sent or an error has occurred.</p>
+<p>[14]: Interrupt Request (IRQ) flag bit. When set, this BD can request TXE or TXB interrupt.</p>
+<p>[13]: Wraparound (WR) flag. When set, it indicates that this BD is the last TX BD, and the hardware sends it again from the starting BD.</p>
+<p>[12]: Padding (PAD). When it is set and a padding permission is set in EMAC, TX BD automatically fills the too short packet.</p>
+<p>[11]: Cyclic Redundancy Check (CRC). When set, EMAC automatically calculates the CRC of the sent packet and attach it to the packet.</p>
+<p>[10]: End of Frame (EoF) flag. If a frame of data occupies multiple BDs, this bit marks the end of this frame of data.</p>
+<p>[8]: Underrun (UR) flag. When set, it indicates that the FIFO underrun error occurred during BD transmission.</p>
+<p>[7:4]: Retry (RTRY) times counter. It counts the retry times.</p>
+<p>[3]: Retry Limit (RL) flag. When set, it indicates that the retry times exceed the maximum retry times (MAXRET) configured in COLLCONF.</p>
+<p>[2]: Late Collision (LC) flag. When set, it indicates that late collision occurred when this BD is sent.</p>
+<p>[1]: Defer Indication (DF) flag. When set, it indicates that this packet is delayed.</p>
+<p>[0]: Carrier Sense (CS) failure. If no carrier is detected during sending, it is set.</p>
+</div></blockquote>
+<p>Specific description of word0 in RX BD:</p>
+<blockquote>
+<div><p>[31:16]: TX packet length (LEN).</p>
+<p>[15]: RX BD (RD) empty flag. When set, it indicates that this BD is empty (no received data is saved). “Clearing” indicates that this BD has received data or an error occurred during receiving.</p>
+<p>[14]: Interrupt Request (IRQ) flag bit. When set, this BD can request RXE or RXB interrupt.</p>
+<p>[13]: Wraparound (WR) flag. When set, it indicates that the BD is the last RX BD, and the hardware sends it again from the starting BD.</p>
+<p>[8]: Control Frame (CF) flag. When set, it indicates that this BD has received one Control Frame.</p>
+<p>[7]: Miss (M) flag. If a packet is received in promiscuous mode but it is marked as Miss by the internal address logic, EMAC sets this flag bit.</p>
+<p>[6]: Overrun (OR) flag. When set, it indicates that the FIFO overrun error occurred during receiving.</p>
+<p>[5]: Receive Error (RE) flag. When set, it indicates that the RX ERR signal sent by PHY is received during receiving.</p>
+<p>[4]: Dribble Nibble (DN) flag. When set, it indicates that an odd number of nibbles have been received.</p>
+<p>[3]: Too Long (TL) packet flag. When set, it indicates that the received packet is too long, exceeding the setting value.</p>
+<p>[2]: Too Short (SF) packet flag. When set, it indicates that the received packet is shorter than the minimum allowable length.</p>
+<p>[1]: CRC (CRC) error flag. When set, it indicates that the CRC of the received packet fails.</p>
+<p>[0]: Late Collision (LC) flag. When set, it indicates that Late Collision occurred when data is received to this BD.</p>
+</div></blockquote>
+<p>It should be noted that BD must be written by word.
+EMAC supports 128 BDs, which are shared by the RX/TX logic and can be freely combined. But the TX BD always occupies the preceding contiguous area. The number of BD is specified by the TXBDNUM field in the register MAC_TX_BD_NUM.
+EMAC circularly processes the RX/TX BDs according to their order, until it finds the BDs marked WR, and goes back to the first RX/TX BD respectively.</p>
+</section>
+<section id="phy-interaction">
+<h2><span class="section-number">17.6. </span>PHY Interaction<a class="headerlink" href="#phy-interaction" title="Permalink to this headline"></a></h2>
+<p>The interactive register set of PHY provides a way to communicate commands and data needed for interaction with PHY. EMAC controls the working mode of PHY through MDIO interface, and ensures the matching of both working modes (such as rate, full/half-duplex).
+Data packets interact between EMAC and PHY through MII/RMII interface, which is selected by the RMII_EN bit in the EMAC’s mode register (EMAC_MODE): When this bit is 1, RMII mode is selected, and otherwise the MII mode is selected.
+Both MII and RMII modes support the transmission rates of 10 Mbps and 100 Mbps specified in IEEE 802.3u. The transmission signals of MII and RMII are described as follows.</p>
+<table class="colwidths-given docutils align-center" id="id2" style="width: 80%">
+<caption><span class="caption-number">Table 17.1 </span><span class="caption-text">Transmission signal</span><a class="headerlink" href="#id2" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 30%" />
+<col style="width: 40%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>MII</p></th>
+<th class="head"><p>RMII</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>EXTCK_EREFCK</p></td>
+<td><p>ETXCK: Send clock signal</p></td>
+<td><p>EREFCK:reference clock</p></td>
+</tr>
+<tr class="row-odd"><td><p>ECRS</p></td>
+<td><p>ECRS: carrier detection</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>ECOL</p></td>
+<td><p>ECOL: collision detection</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>ERXDV</p></td>
+<td><p>ERXDV: valid data</p></td>
+<td><p>ECRSDV: carrier detection/valid data</p></td>
+</tr>
+<tr class="row-even"><td><p>ERX0-ERX3</p></td>
+<td><p>ERX0ERX3: 4-bit received data</p></td>
+<td><p>ERX0ERX1: 2-bit received data</p></td>
+</tr>
+<tr class="row-odd"><td><p>ERXER</p></td>
+<td><p>ERXER: Receive error indication</p></td>
+<td><p>ERXER: Receive error indication</p></td>
+</tr>
+<tr class="row-even"><td><p>ERXCK</p></td>
+<td><p>ERXCK: Receive clock signal</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>ETXEN</p></td>
+<td><p>ETXEN: TX enable</p></td>
+<td><p>ETXEN: TX enable</p></td>
+</tr>
+<tr class="row-even"><td><p>ETX0-ETX3</p></td>
+<td><p>ETX0ETX3: 4-bit sent data</p></td>
+<td><p>ETX0ETX1: 2-bit sent data</p></td>
+</tr>
+<tr class="row-odd"><td><p>ETXER</p></td>
+<td><p>ETXER: Send error indication</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>EMDC</p></td>
+<td><p>MDIO Clock</p></td>
+<td><p>MDIO Clock</p></td>
+</tr>
+<tr class="row-odd"><td><p>EMDIO</p></td>
+<td><p>MDIO Data Input Output</p></td>
+<td><p>MDIO Data Input Output</p></td>
+</tr>
+</tbody>
+</table>
+<p>The RMII interface has fewer pins, and 2-bit data lines are used for transmission and reception. At 100 Mbps, a reference clock of 50 MHz is required.</p>
+</section>
+<section id="programming-flow">
+<h2><span class="section-number">17.7. </span>Programming Flow<a class="headerlink" href="#programming-flow" title="Permalink to this headline"></a></h2>
+<section id="phy-initialization">
+<h3><span class="section-number">17.7.1. </span>PHY initialization<a class="headerlink" href="#phy-initialization" title="Permalink to this headline"></a></h3>
+<ul class="simple">
+<li><p>Select a proper connection mode by setting the RMII_EN bit in the register EMAC_MODE according to the PHY type.</p></li>
+<li><p>Set the MAC address of EMAC to EMAC_MAC_ADDR0 and EMAC_MAC_ADDR1</p></li>
+<li><p>Set an appropriate clock for the MDIO part by programming the CLKDIV field in the register EMAC_MIIMODE</p></li>
+<li><p>Set the address of the corresponding PHY to the FIAD field of the register EMAC_MIIADDRESS</p></li>
+<li><p>According to PHY’s manual, send commands through registers EMAC_MIICOMMAND and EMAC_MIITX_DATA</p></li>
+<li><p>Store the data read from PHY in the register EMAC_MIIRX_DATA</p></li>
+<li><p>Query the status of interaction with PHY commands through the register EMAC_MIISTATUS</p></li>
+</ul>
+<p>After basic interaction is completed, PHY shall be switched to the auto-negotiation state. Upon negotiation completed, the mode must be programmed to the FULLD bit in the EMAC_MODE register based on the negotiation result.</p>
+</section>
+<section id="send-data-frame">
+<h3><span class="section-number">17.7.2. </span>Send Data Frame<a class="headerlink" href="#send-data-frame" title="Permalink to this headline"></a></h3>
+<ul class="simple">
+<li><p>Configure data frame format and interval bit fields in the register EMAC_MODE</p></li>
+<li><p>Specify the number of TX BDs by setting the TXBDNUM field in the register EMAC_TX_BD_NUM, so that the rest is the number of RX BDs</p></li>
+<li><p>Prepare the data frames to be sent in the memory</p></li>
+<li><p>Fill in the address of data frames in the data pointer field (word 1) corresponding to the TX BDs</p></li>
+<li><p>Clear the status flag in the control and status fields (word 0) corresponding to the TX BDs, and set the control field (CRC enable, PAD enable, and interrupt enable)</p></li>
+<li><p>Write the data frame length, and set the RD field to inform EMAC that this BD data needs to be sent. If necessary, set the upper IRQ bit to enable interrupt</p></li>
+<li><p>Especially, if it is the last TX BD, the upper WR bit must be set. EMAC will &quot;go back&quot; to the first TX BD after this BD is processed</p></li>
+<li><p>If there are multiple BDs to be sent, repeat the steps of setting BD to pad all the TX BDs</p></li>
+<li><p>If one packet is contained in only one BD, set its EOF bit to 1</p></li>
+<li><p>If one packet is sent in multiple BDs, just mark the last BD it occupies as the end of the packet by setting the EOF bit</p></li>
+<li><p>To enable the TX interrupt, configure the TX-related bits in the register EMAC_INT_MASK</p></li>
+<li><p>Configure the TXEN bit in the register EMAC_MODE to enable TX</p></li>
+<li><p>If an interrupt is enabled, in the TX interrupt, obtain the current BD through the TXBDNUM field in the register EMAC_TX_BD_NUM</p></li>
+<li><p>Complete processing based on the status word of the current BD</p></li>
+<li><p>For BDs whose data has been sent, the RD bit in its control field will be cleared by hardware and BDs will not be used for TX again. Only after new data is padded and RD is set, can this BD be used for TX again</p></li>
+</ul>
+</section>
+<section id="receive-data-frame">
+<h3><span class="section-number">17.7.3. </span>Receive Data Frame<a class="headerlink" href="#receive-data-frame" title="Permalink to this headline"></a></h3>
+<ul class="simple">
+<li><p>Configure data frame format and interval bit fields in the register EMAC_MODE</p></li>
+<li><p>Specify the number of TX BDs by setting the TXBDNUM field in the register EMAC_TX_BD_NUM, so that the rest is the number of RX BDs</p></li>
+<li><p>Prepare an area in memory for receiving data</p></li>
+<li><p>Fill in the address of data frames in the data pointer field (word 1) corresponding to the RX BDs</p></li>
+<li><p>Clear the status flag in the control and status fields (word 0) corresponding to the RX BDs, and set the control field (interrupt enable)</p></li>
+<li><p>Write the receivable data frame length, and set the E-bit field to inform EMAC that this BD is free and can receive data. If necessary, set the upper IRQ bit to enable the interrupt</p></li>
+<li><p>Especially, if it is the last valid RX BD, the upper WR bit must be set. EMAC will &quot;go back&quot; to the first RX BD after this BD is processed</p></li>
+<li><p>If there are multiple BDs for receiving data, repeat the steps of setting BD to pad all the BDs</p></li>
+<li><p>To enable the RX interrupt, configure the RX-related bits in the register EMAC_INT_MASK</p></li>
+<li><p>Configure the RXEN bit in the register EMAC_MODE to enable RX</p></li>
+<li><p>If an interrupt is enabled, in the RX interrupt, obtain the current BD through the RXBDNUM field in the register EMAC_TX_BD_NUM</p></li>
+<li><p>Complete processing based on the status word of the current BD</p></li>
+<li><p>For BDs whose data has been received, the E bit in its control field will be cleared by hardware and BDs will not be used for RX again. Only after you take out the data and set the E bit, can this BD be used for RX again</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="AudioADC.html" class="btn btn-neutral float-left" title="16. AudioADC" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="USB.html" class="btn btn-neutral float-right" title="18. USB" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>8. 产品使用 &mdash; BL616/BL618 数据手册  文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="9. 参考设计" href="Referencedesign.html" />
+    <link rel="prev" title="7. 电气特性" href="Electricalcharacteristics.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL616/BL618 数据手册
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">1. 概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Functional.html">2. 功能描述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Pindefinition.html">3. 管脚定义</a></li>
+<li class="toctree-l1"><a class="reference internal" href="RFCharacteristic.html">4. 射频特性</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AudioCharacteristic.html">5. 音频特性</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PowerConsumption.html">6. 功耗</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Electricalcharacteristics.html">7. 电气特性</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">8. 产品使用</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#msl">8.1. 湿敏等级(MSL)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#esd">8.2. 静电放电（ESD）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#reflow-profile">8.3. 回流焊接曲线(Reflow Profile)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Referencedesign.html">9. 参考设计</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PackagingQFN40.html">10. 封装信息QFN40</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PackagingQFN56.html">11. 封装信息QFN56</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TopMarkingDefinition.html">12. 标志定义</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OrderingInformation.html">13. 订购信息</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">14. 版本信息</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL616/BL618 数据手册</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">8. </span>产品使用</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1><span class="section-number">8. </span>产品使用<a class="headerlink" href="#id1" title="永久链接至标题"></a></h1>
+<section id="msl">
+<h2><span class="section-number">8.1. </span>湿敏等级(MSL)<a class="headerlink" href="#msl" title="永久链接至标题"></a></h2>
+<p>芯片的湿敏等级为：MSL3。真空包装打开后，在≤30°C/60%RH下，需要在168小时（7天）内使用完毕，否则需要烘烤后上线。
+烘烤温度和时间可参考IPC/JEDECJ-STD-033B01。</p>
+<table class="docutils align-default" id="id2">
+<caption><span class="caption-number">表 8.1 </span><span class="caption-text">Reference Conditions for Drying Mounted or Unmounted SMD Packages
+        (User Bake: Floor life begins counting at time = 0 after bake)</span><a class="headerlink" href="#id2" title="永久链接至表格"></a></caption>
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 9%" />
+<col style="width: 12%" />
+<col style="width: 13%" />
+<col style="width: 12%" />
+<col style="width: 13%" />
+<col style="width: 12%" />
+<col style="width: 13%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head" rowspan="5"><p>Package</p>
+<p>Body</p>
+</th>
+<th class="head" rowspan="5"><p>Level</p></th>
+<th class="head" colspan="2" rowspan="2"><p>Bake &#64; 125°C</p></th>
+<th class="head" colspan="2" rowspan="2"><blockquote>
+<div><p>Bake &#64; 90°C</p>
+</div></blockquote>
+<p>≤5% RH</p>
+</th>
+<th class="head" colspan="2" rowspan="2"><blockquote>
+<div><p>Bake &#64; 40°C</p>
+</div></blockquote>
+<p>≤5% RH</p>
+</th>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><th class="head" rowspan="3"><p>Exceeding</p>
+<p>Floor Life</p>
+<p>by &gt;72 h</p>
+</th>
+<th class="head" rowspan="3"><p>Exceeding</p>
+<p>Floor Life</p>
+<p>by ≤72 h</p>
+</th>
+<th class="head" rowspan="3"><p>Exceeding</p>
+<p>Floor Life</p>
+<p>by &gt;72 h</p>
+</th>
+<th class="head" rowspan="3"><p>Exceeding</p>
+<p>Floor Life</p>
+<p>by ≤72 h</p>
+</th>
+<th class="head" rowspan="3"><p>Exceeding</p>
+<p>Floor Life</p>
+<p>by &gt;72 h</p>
+</th>
+<th class="head" rowspan="3"><p>Exceeding</p>
+<p>Floor Life</p>
+<p>by ≤72 h</p>
+</th>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+</thead>
+<tbody>
+<tr class="row-even"><td rowspan="6"><p>Thickness</p>
+<p>≤1.4 mm</p>
+</td>
+<td><p>2</p></td>
+<td><p>5 hours</p></td>
+<td><p>3 hours</p></td>
+<td><p>17 hours</p></td>
+<td><p>11 hours</p></td>
+<td><p>8 days</p></td>
+<td><p>5 days</p></td>
+</tr>
+<tr class="row-odd"><td><p>2a</p></td>
+<td><p>7 hours</p></td>
+<td><p>5 hours</p></td>
+<td><p>23 hours</p></td>
+<td><p>13 hours</p></td>
+<td><p>9 days</p></td>
+<td><p>7 days</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>9 hours</p></td>
+<td><p>7 hours</p></td>
+<td><p>33 hours</p></td>
+<td><p>23 hours</p></td>
+<td><p>13 days</p></td>
+<td><p>9 days</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>11 hours</p></td>
+<td><p>7 hours</p></td>
+<td><p>37 hours</p></td>
+<td><p>23 hours</p></td>
+<td><p>15 days</p></td>
+<td><p>9 days</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>12 hours</p></td>
+<td><p>7 hours</p></td>
+<td><p>41 hours</p></td>
+<td><p>24 hours</p></td>
+<td><p>17 days</p></td>
+<td><p>10 days</p></td>
+</tr>
+<tr class="row-odd"><td><p>5a</p></td>
+<td><p>16 hours</p></td>
+<td><p>10 hours</p></td>
+<td><p>54 hours</p></td>
+<td><p>24 hours</p></td>
+<td><p>22 days</p></td>
+<td><p>10 days</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="esd">
+<h2><span class="section-number">8.2. </span>静电放电（ESD）<a class="headerlink" href="#esd" title="永久链接至标题"></a></h2>
+<ul class="simple">
+<li><p>人体放电模式(HBM): 2000V</p></li>
+<li><p>组件充电模式(CDM): 500V</p></li>
+</ul>
+</section>
+<section id="reflow-profile">
+<h2><span class="section-number">8.3. </span>回流焊接曲线(Reflow Profile)<a class="headerlink" href="#reflow-profile" title="永久链接至标题"></a></h2>
+<figure class="align-center" id="id3">
+<img alt="../_images/ClassificationProfile.svg" src="../_images/ClassificationProfile.svg" /><figcaption>
+<p><span class="caption-number">图 8.1 </span><span class="caption-text">Classification Profile (Not to scale)</span><a class="headerlink" href="#id3" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<table class="docutils align-default" id="id4">
+<caption><span class="caption-number">表 8.2 </span><span class="caption-text">Classification Reflow Profiles</span><a class="headerlink" href="#id4" title="永久链接至表格"></a></caption>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 25%" />
+<col style="width: 26%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Profile Feature</p></th>
+<th class="head"><p>Sn-Pb Eutectic Assembly</p></th>
+<th class="head"><p>Pb-Free Assembly</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td rowspan="4"><p>Preheat/Soak</p>
+<p>Temperature Min (T<sub>smin</sub>)</p>
+<p>Temperature Max (T<sub>smax</sub>)</p>
+<p>Time (t<sub>s</sub>) from (T<sub>smin</sub>to T<sub>smax</sub>)</p>
+</td>
+<td rowspan="4"><p>100 °C</p>
+<p>150 °C</p>
+<p>60-120 seconds</p>
+</td>
+<td rowspan="4"><p>150 °C</p>
+<p>200 °C</p>
+<p>60-120 seconds</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>Ramp-up rate (T<sub>L</sub>to T<sub>p</sub>)</p></td>
+<td><p>3 °C/second max.</p></td>
+<td><p>3 °C/second max.</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><p>Liquidous temperature (T<sub>L</sub>)</p>
+<p>Time (t<sub>L</sub>) maintained above T<sub>L</sub></p>
+</td>
+<td rowspan="2"><p>183 °C</p>
+<p>60-150 seconds</p>
+</td>
+<td rowspan="2"><p>217 °C</p>
+<p>60-150 seconds</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>Peak package body temperature (T<sub>p</sub>)</p></td>
+<td><p>240 °C+0/-5 °C</p></td>
+<td><p>250 °C+0/-5 °C</p></td>
+</tr>
+<tr class="row-even"><td rowspan="2"><p>Time (t<sub>p</sub>)* within 5 °C of the specified</p>
+<p>classification temperature (T<sub>c</sub>)</p>
+</td>
+<td rowspan="2"><p>10-30 seconds</p></td>
+<td rowspan="2"><p>20-40 seconds</p></td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>Ramp-down rate (T<sub>p</sub>to T<sub>L</sub>)</p></td>
+<td><p>6 °C/second max</p></td>
+<td><p>6 °C/second max</p></td>
+</tr>
+<tr class="row-odd"><td><p>Time 25 °C to peak temperature</p></td>
+<td><p>6 minutes max</p></td>
+<td><p>8 minutes max</p></td>
+</tr>
+<tr class="row-even"><td colspan="3"><p>- Tolerance for peak profile temperature (Tp) is defined as a supplier minimum and a user maximum.</p></td>
+</tr>
+</tbody>
+</table>
+<p>具体可参考IPC/JEDEC J-STD-020E。</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Electricalcharacteristics.html" class="btn btn-neutral float-left" title="7. 电气特性" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="Referencedesign.html" class="btn btn-neutral float-right" title="9. 参考设计" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2022.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

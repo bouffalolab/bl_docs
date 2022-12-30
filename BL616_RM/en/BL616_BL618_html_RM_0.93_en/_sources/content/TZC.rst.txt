@@ -1,0 +1,41 @@
+==========
+TZC
+==========
+
+Overview
+=====
+
+The Trust Zone Control (TZC) module built in the chip is used to control the access domains of different Masters. Access to each Master is restricted from the internal bus within the chip, and all invalid accesses are blocked. It ensures that the chip has a trusted secure execution environment and thus helps build a more robust security system.
+
+.. figure:: ../../picture/TzcArch.svg
+   :align: center
+
+   TZC Overall Framework
+
+Features
+=========
+
+- Master supports groups 0 and 1.
+
+- ROM, OCRAM, WRAM, FLASH, and PSRAM support the division of four sections (each region section is 1K Byte aligned).
+
+- The read-write permission of each configuration peripheral register can be set independently.
+
+- The TZC register supports the Lock function, and the related configuration of TZC cannot be changed after locking.
+
+- The TZC module has a set of mirror read-only registers.
+
+Functional Description
+==========
+
+The TZC module may assign each Master inside of the chip system to 0 group or 1 group for access control, and all Masters are assigned to 0 group by default. The TZC module can also classify Slaves into 0 or 1 group. Through the setting of different groups, it can ensure that trusted areas are accessed by trusted devices.
+
+For data storage modules such as ROM, OCRAM, WARM, PSRAM, and FLASH, each storage module supports the division of 4 region sections, and each region supports the independent access control for IBUS and DBUS. The section division per region needs to be 1K byte aligned.
+
+Important registers related to system within GLB can also be protected and controlled by TZC. Setting the GLB control bit in TZC can ensure that the control over the system comes from a trusted operation group.
+
+Security-related engines can also control the access permissions of different groups, mainly including SHA, AES, TRNG, PKA, CDET and GMAC modules.
+
+All TZC registers have corresponding Lock control bits. Once the Lock bit is enabled, the related configuration and enable register bits cannot be changed.
+
+If the configuration of TZC peripheral register is also protected from reading, it can be accessed through the mirror register of TZC group.

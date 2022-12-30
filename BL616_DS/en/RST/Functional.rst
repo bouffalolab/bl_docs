@@ -1,0 +1,335 @@
+===============================
+Functional Description
+===============================
+BL616/BL618  main functions described as follows:
+
+.. figure:: ../../picture/SystemArch.svg
+   :align: center
+
+   System Architecture
+
+CPU
+====
+BL616/BL618 has a built-in 32-bit RISC-V CPU, which adopts a 5-stage pipeline structure: 
+fetch, decode, execute, memory access, write back, support RISC-V 32/16-bit mixed instruction set, 
+including 64 external Interrupt source, there are 4 bits that can be used to configure the interrupt priority.
+
+Cache
+=============
+The cache of BL616/BL618 improves the performance of CPU accessing external memory, 
+including 32K instruction cache and 16K data cache.
+
+Memory
+=============
+BL616/BL618 memory includes: on-chip zero-delay SRAM memory, read-only memory, write-once memory,
+Embedded flash (optional), embedded pSRAM (optional).
+
+DMA
+==========
+The DMA controller has 4 dedicated channels to manage data transfers between peripherals and memory to improve CPU/bus efficiency. DMA has four transfer types, memory-to-memory, memory-to-peripheral, peripheral-to-memory, and peripheral-to-peripheral modes.
+
+The DMA also supports the LLI (Linked List Item) feature, which consists of a series of linked lists that predefine multiple transfers, and then the hardware automatically completes all transfers based on the size and address of each LLI.
+
+Peripherals supported by DMA include UART、I2C、SPI、Audio(Audio ADC and Audio DAC)、GPIO、I2S、DBI、
+GPADC、GPDAC.
+
+Memory Map
+============
+.. table:: Memory address map 
+
+    +-----------------+-------+-------------+----------------+
+    |  Module         | Size  |  Base Address                |
+    +                 +       +-------------+----------------+
+    |                 |       | Cache       | Non-cache      |
+    +=================+=======+=============+================+
+    | OCRAM           | 320KB | 0x62FC0000  | 0x22FC0000     |
+    +-----------------+-------+-------------+----------------+
+    | WRAM            | 160KB | 0x63010000  | 0x23010000     |
+    +-----------------+-------+-------------+----------------+
+
+OCRAM and WRAM can be accessed either through the AHB bus or through AXI. When the CPU uses the 0x62FC0000 address to access the OCRAM, it will go through the internal cache and access the OCRAM through AXI to AHB. When the CPU uses the 0x22FC0000 address to access the OCRAM, it will directly access the OCRAM through the AHB bus.
+
+.. table:: Memory Map has_header
+
+    +---------------+---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    | Module        |  Target       |  Base Address         | Size  |         Description                                                                                       |
+    +===============+===============+=======================+=======+===========================================================================================================+
+    | FLASH         | Flash         | 0xA0000000            | 128MB | Application address space                                                                                 |
+    +---------------+---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    | PSRAM         | pSRAM         | 0xA8000000            | 128MB | pSRAM memory address space (optional, depends on the specific chip model)                                 |
+    +---------------+---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    | RAM           | HBN RAM       | 0x20010000            | 4KB   |HBN RAM,mainly used for data saving in ultra-low power mode                                                |
+    +---------------+---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    | Peripheral    | USB           | 0x20072000            | 4KB   | USB High Speed OTG Control Register                                                                       |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | EMAC          | 0x20070000            | 4KB   | EMAC Control Register                                                                                     |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | SDH           | 0x20060000            | 4KB   | SDH Control Register                                                                                      |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | MJPEG         | 0x20059000            | 4KB   | MJPEG Control Register                                                                                    |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | DVP           | 0x20057000            | 4KB   | DVP camera interface Control Register                                                                     |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | Efuse         | 0x20056000            | 4KB   | Efuse storage Control Register                                                                            |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | AUDIO PWM     | 0x20055000            | 4KB   | Audio PWM Control Register                                                                                |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | PSRAM_Ctrl    | 0x20052000            | 4KB   | PSRAM Control Register                                                                                    |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | HBN           | 0x2000F000            | 4KB   | Hibernate register                                                                                        |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | PDS           | 0x2000E000            | 4KB   | Power-down sleep register                                                                                 |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | SDU           | 0x2000D000            | 4KB   | SDU Control Register                                                                                      |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | DMA           | 0x2000C000            | 4KB   | DMA Control Register                                                                                      |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | SF_Ctrl       | 0x2000B000            | 4KB   | Serial Flash Control Register                                                                             |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | Audio ADC     | 0x2000AC00            | 256B  | Audio ADC Control Register                                                                                |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | I2S           | 0x2000AB00            | 256B  | I2S Control Register                                                                                      |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | ISO 17987     | 0x2000AA00            | 256B  | ISO 17987 Control Register                                                                                |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | I2C1          | 0x2000A900            | 256B  | I2C1 Control Register                                                                                     |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | Display       | 0x2000A800            | 256B  | Display Control Register                                                                                  |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | IRR           | 0x2000A600            | 256B  | IR Receiver Control Register                                                                              |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | TIMER         | 0x2000A500            | 256B  | TIMER Control Register                                                                                    |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | PWM           | 0x2000A400            | 256B  | PWM Control Register                                                                                      |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | I2C0          | 0x2000A300            | 256B  | I2C0 Control Register                                                                                     |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | SPI           | 0x2000A200            | 256B  | SPI Control Register                                                                                      |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | UART1         | 0x2000A100            | 256B  | UART1 Control Register                                                                                    |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | UART0         | 0x2000A000            | 256B  | UART0 Control Register                                                                                    |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | TZ            | 0x20005000            | 4KB   | TrustZone Control Register                                                                                |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | SEC_ENG       | 0x20004000            | 4KB   | Security Engine Control Register                                                                          |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | GPIP          | 0x20002000            | 1KB   | General Purpose DAC/ADC/ACOMP Interface Control Register                                                  |
+    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    |               | GLB           | 0x20000000            | 4KB   | Global control register                                                                                   |
+    +---------------+---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+    | ROM           | ROM           | 0x90000000            | 128KB | Bootrom address space                                                                                     |
+    +---------------+---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
+
+
+Interrupt
+===========
+BL616/BL618 supports internal RTC clock wake-up and external interrupt wake-up to realize low-power sleep wake-up function.
+
+The CPU interrupt controller supports a total of 64 maskable interrupt trigger sources including UART interrupt, I2C interrupt, SPI interrupt, timer interrupt, DMA interrupt, etc.
+
+All I/O pins can be configured as external interrupt input mode, the external interrupt supports nine trigger types: synchronous high/low level trigger, synchronous rising/falling edge trigger, asynchronous high/low level trigger, asynchronous rising edge /Falling edge trigger and synchronous double edge trigger.
+
+
+Boot
+=========
+BL616/BL618 supports multiple boot options: UART,USB,SDU and Flash.
+
+.. table:: Boot mode 
+
+    +---------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    |    Boot pin   |  Level        |   Description                                                                                                                                                             |
+    +---------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | GPIO2         | 1             |  Boot from UART(GPIO21/22)/USB/SDU, this mode is mainly used for flash programming or downloading image to RAM for execution (wireless transparent transmission scenario) |
+    +               +---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    |               | 0             |  Launch application image from Flash                                                                                                                                      |
+    +---------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+Power
+=============
+PMU (power management unit) manages the power of the entire chip and is divided into running, idle, sleep, hibernation and power off modes. The software can be configured to enter sleep mode and wake-up via RTC timer or EINT to achieve low-power sleep and accurate wake-up management.
+
+Power down sleep modes are flexible for applications to configure as the lowest power consumption.
+
+Clock
+=========
+Clock control unit generates clocks to the core MCU and the peripheral SOC devices. The root clock source can be XTAL, PLL or RC oscillator.
+Dynamic power-saved by proper configurations such as sel, div, en, etc.
+
+.. figure:: ../../picture/SystemClock.svg
+   :align: center
+
+   System Clock Architecture
+   
+.. figure:: ../../picture/MoudleClock.svg
+   :align: center
+
+   Moudle Clock Architecture
+   
+.. figure:: ../../picture/PeripheralClock.svg
+   :align: center
+   :scale: 95%
+
+   Peripheral Clock Architecture
+
+
+Peripheral
+==================
+
+Peripherals include GPIO, UART, SPI, I2C, PWM, Timer, IR(RX), Display(DBI/QSPI), ISO 17987, 
+I2S, Audio(Audio ADC+Audio DAC), SDU, DVP, MJPEG,
+SD/MMC(SDH), Ethernet MAC, GPDAC, GPADC, ACOMP, 
+USB2.0.
+
+GPIO
+------
+BL616 can have up to 19 GPIOs, BL618 can have up to 35 GPIOs, with the following features:
+
+- Each GPIO can be used as general-purpose input and output function, pull-up/pull-down/float can be configured by software
+- Each GPIO supports interrupt function, the interrupt supports synchronous high/low level trigger, synchronous rising/falling edge trigger, asynchronous high/low level trigger, asynchronous rising/falling edge trigger and synchronous double edge trigger
+- Each GPIO can be set to high-impedance state for low-power modes
+
+UART
+------
+The chip has two built-in universal asynchronous serial transceivers (UART0/1) with the following features:
+
+- Supports CTS and RTS flow control in hardware
+- Support LIN master/slave function
+- Configurable data bits, stop bits and parity bits
+- Supports automatic baud rate detection for common/fixed characters
+- The working clock can be selected as FCLK, XCLK or 160MHz, the maximum baud rate supports 10Mbps
+- TX and RX have independent FIFO, FIFO depth is 32 bytes, support DMA function
+
+SPI
+---------
+The chip has a built-in SPI, which can be configured as master mode or slave mode. The SPI module clock is XCLK or 160MHz, and has the following characteristics:
+
+- In master mode, clock frequency up to 80 MHz
+- In slave mode, the maximum allowed master clock frequency is 80 MHz
+- The bit width of each frame can be configured as 8-bit / 16-bit / 24-bit / 32-bit
+- Adaptive FIFO depth change characteristics, suitable for high-performance scene applications
+   
+   * When the bit width is 32 bits, the depth of the FIFO is 8
+   * When the bit width is 24 bits, the depth of the FIFO is 8
+   * When the bit width is 16 bits, the depth of the FIFO is 16
+   * When the bit width is 8 bits, the depth of the FIFO is 32
+- Support DMA transfer mode
+
+I2C
+---------
+The chip has two built-in I2C interfaces with the following features:
+
+- Supports multi-master mode and arbitration function
+- The working clock can be selected as BCLK or XCLK
+- With device address register, register address register, register address length can be set to 1 byte/ 2 bytes/ 3 bytes/ 4 bytes
+- I2C has independent transceiver FIFO, FIFO depth is 2 word
+- Support DMA function
+
+EMAC
+--------------------
+The EMAC module is a 10/100Mbps Ethernet Media Access Controller (EMAC) compatible with IEEE 802.3, with the following features:
+
+- Compatible with the MAC layer defined by IEEE 802.3
+- PHY supporting MII/RMII interface defined by IEEE 802.3
+- Interacts with PHY through MDIO interface
+- Supports 10 Mbps and 100 Mbps Ethernet
+- Supports half-duplex and full-duplex
+- Supports automatic flow control and control frame generation in the full-duplex mode
+- Supports collision detection and retransmission in the half-duplex mode
+- Supports the generation and verification of CRC
+- Generates and removes data frame preamble
+- Supports automatic extension of short data frames when sending
+- Detects too long/short data frames (length limit)
+- Transmits long data frames (> standard Ethernet frame length)
+- Automatically discards data packets with over-limit retransmission times or too small frame gap
+- Broadcast packet filtering
+- Internal RAM for storing up to 128 BDs
+- Splits and configures a data packet to multiple consecutive Bds when sending
+- Various event flags sent or received
+- Generates a corresponding interrupt when an event occurs
+
+The EMAC timing diagram is shown below:
+
+.. figure:: ../../picture/EMACTiming.svg
+   :align: center
+
+   EMAC Timing Diagram
+
+.. table:: Timing conditions for using RX Clock
+
+    +-----------------+--------------------+--------+--------+---------------------+--------+----------------------------------+
+    | Set the corresponding bit of register eth_cfg0:cfg_inv_eth_rx_clk = 1，cfg_inv_eth_tx_clk = 0，cfg_sel_eth_ref_clk_o = 0 |
+    +-----------------+--------------------+--------+--------+---------------------+--------+----------------------------------+
+    | Timing parameters(1.8V, Load = 20PF) | Min.   | Typ    |  Max.               | Unit   | Note                             |
+    +=================+====================+========+========+=====================+========+==================================+
+    | T\ :sub:`cyc`\  |Clock Cycle         | \-     | 20     | \-                  | ns     | Clock From ETH PHY               |
+    +-----------------+--------------------+--------+--------+---------------------+--------+----------------------------------+
+    | T\ :sub:`vld`\  |Output Valid Delay  | 6.98   | \-     | 15.63               | ns     | TXD/TX_EN                        |
+    +-----------------+--------------------+--------+--------+---------------------+--------+----------------------------------+
+    | T\ :sub:`su`\   |Input Setup Time    | 11.64  | \-     | \-                  | ns     | RXD/RX_DV/RXERR                  |
+    +-----------------+--------------------+--------+--------+---------------------+--------+----------------------------------+
+    | T\ :sub:`h`\    |Input Hold Time     | 0      | \-     | \-                  | ns     | RXD/RX_DV/RXERR                  |
+    +-----------------+--------------------+--------+--------+---------------------+--------+----------------------------------+
+
+.. table:: Timing conditions without using RX Clock
+
+    +-----------------+--------------------+--------+--------+---------------------+--------+------------------------------------+
+    | Set the corresponding bit of register eth_cfg0:cfg_inv_eth_rx_clk = 0，cfg_inv_eth_tx_clk = 0，cfg_sel_eth_ref_clk_o = 0   |
+    +-----------------+--------------------+--------+--------+---------------------+--------+------------------------------------+
+    | Timing parameters(1.8V, Load = 20PF) | Min.   | Typ    |  Max.               | Unit   | Note                               |
+    +=================+====================+========+========+=====================+========+====================================+
+    | T\ :sub:`cyc`\  |Clock Cycle         | \-     | 20     | \-                  | ns     | Clock From ETH PHY                 |
+    +-----------------+--------------------+--------+--------+---------------------+--------+------------------------------------+
+    | T\ :sub:`vld`\  |Output Valid Delay  | 6.98   | \-     | 15.63               | ns     | TXD/TX_EN                          |
+    +-----------------+--------------------+--------+--------+---------------------+--------+------------------------------------+
+    | T\ :sub:`su`\   |Input Setup Time    | 3.5    | \-     | \-                  | ns     | RXD/RX_DV/RXERR                    |
+    +-----------------+--------------------+--------+--------+---------------------+--------+------------------------------------+
+    | T\ :sub:`h`\    |Input Hold Time     | 2      | \-     | \-                  | ns     | RXD/RX_DV/RXERR                    |
+    +-----------------+--------------------+--------+--------+---------------------+--------+------------------------------------+
+
+I2S
+---------
+The chip has a built-in I2S interface with the following features:
+
+- Supports master mode as well as slave mode
+- Support Left-justified/ Right-justified/ DSP and other data formats, the data width can be configured as 8/16/24/32 bits
+- The working clock is Audio PLL
+- Supports both four-channel and six-channel modes in addition to mono/dual-channel mode
+- Supports playback of mono audio dubbing to binaural mode
+- Support dynamic mute switching function
+- I2S has independent transceiver FIFO, FIFO depth is 16 word
+- Support DMA function
+
+TIMER
+------------
+The chip has two built-in 32-bit general-purpose timers and a watchdog timer with the following features:
+
+- The clock source of the general timer can be selected from FCLK/32K/XTAL, and the clock source of the watchdog timer can be selected from FCLK/32K/XTAL
+- 8-bit divider for each counter
+- Each group of general-purpose timers includes three compare registers, supports compare interrupts, and supports FreeRun mode and PreLoad mode in counting mode
+- 16-bit watchdog timer, supports two watchdog overflow modes: interrupt or reset
+
+PWM
+---------
+The chip has a built-in group of PWM signals, each group contains 4-channel PWM signal output, and each channel can be set to 2-channel complementary PWM, with the following characteristics:
+
+- Three clock sources BCLK/XCLK/32K to choose from, with 16-bit clock divider
+- Each group of PWM can be independently set to a different period
+- Each channel PWM has dual threshold settings, which can set different duty cycles and phases to increase pulse elasticity
+- Each channel PWM has independent dead time setting
+- Each PWM output pin can be set to a different active level
+- Each PWM has an independent connection switch to select whether to connect to the internal counter, and to set the default output level when not connected
+- Brake signal can put the PWM output level into a preset state
+- Up to 11 trigger sources that can be used to trigger ADC conversions
+- Supports multiple interrupt types: counter overflow interrupt, threshold value comparison interrupt, cycle count interrupt
+
+IR(IR-remote)
+------------------
+The chip has a built-in infrared remote control with the following features:
+
+- Supports receiving data with fixed protocols NEC, RC-5, and receiving data in any format with pulse width counting
+- The clock source is XCLK, the maximum operating frequency is 40MHz
+- Receive supports up to 64-bit data bits
+- Receive FIFO depth of 128 bytes
+- Support receive end interrupt
+

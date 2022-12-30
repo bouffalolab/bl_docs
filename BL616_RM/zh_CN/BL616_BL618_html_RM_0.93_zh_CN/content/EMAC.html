@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>17. Emac &mdash; BL616/BL618 参考手册  文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="18. USB" href="USB.html" />
+    <link rel="prev" title="16. AudioADC" href="AudioADC.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL616/BL618 参考手册
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. 系统和存储器概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. 复位和时钟</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPIO.html">4. GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">5. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">6. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">7. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">8. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">9. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">10. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">11. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">12. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">13. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2S.html">14. I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AudioDAC.html">15. AudioDAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AudioADC.html">16. AudioADC</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">17. Emac</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">17.1. 简介</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">17.2. 主要特征</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">17.3. 功能描述</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">17.4. 时钟</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bd-buffer-descriptor">17.5. 收发缓冲描述符(BD, Buffer Descriptor)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#phy">17.6. PHY交互</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">17.7. 编程流程</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id6">17.7.1. PHY初始化</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">17.7.2. 发送数据帧</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">17.7.3. 接收数据帧</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="USB.html">18. USB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ISO11898.html">19. ISO11898</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cam.html">20. CAM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MJPEG.html">21. MJPEG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBI.html">22. DBI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SDH.html">23. SDH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SDIO.html">24. SDIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LowPower.html">25. LowPower</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SEC_ENG.html">26. SEC ENG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">27. 版本信息</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL616/BL618 参考手册</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">17. </span>Emac</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="emac">
+<h1><span class="section-number">17. </span>Emac<a class="headerlink" href="#emac" title="永久链接至标题"></a></h1>
+<section id="id1">
+<h2><span class="section-number">17.1. </span>简介<a class="headerlink" href="#id1" title="永久链接至标题"></a></h2>
+<p>EMAC模块是一个兼容 IEEE 802.3 的10/100Mbps 以太网MAC(Ethernet Media Access Controller)。
+其包含状态及控制寄存器组，收发模块，收发缓冲描述符组，主机接口，MDIO接口，物理层芯片(PHY)接口。</p>
+<p>状态及控制寄存器组包含了EMAC的状态位及控制位，是与用户程序的接口，负责控制数据收发，并汇报状态。</p>
+<p>收发模块负责根据收发描述符内的控制字，从指定内存位置取得数据帧，添加前导，CRC，并扩充短的帧后通过PHY发出；
+或是从PHY接收数据，并根据收发缓冲描述符，将数据放入指定内存。收发完成后设置相关的事件标志。如果使能了事件中断，
+将通过中断请求到主机进行处理。</p>
+<p>MDIO及MII/RMII接口负责与PHY进行通信，包括读写PHY的寄存器，以及数据包的收发。</p>
+</section>
+<section id="id2">
+<h2><span class="section-number">17.2. </span>主要特征<a class="headerlink" href="#id2" title="永久链接至标题"></a></h2>
+<ul class="simple">
+<li><p>兼容 IEEE 802.3 定义的MAC层功能</p></li>
+<li><p>支持 IEEE 802.3 定义的MII/RMII接口的PHY</p></li>
+<li><p>通过MDIO接口与PHY交互</p></li>
+<li><p>支持10Mbps与100Mbps以太网</p></li>
+<li><p>支持半双工与全双工</p></li>
+<li><p>在全双工模式下，支持自动流控及生成控制帧</p></li>
+<li><p>在半双工模式下，支持碰撞检测及重传</p></li>
+<li><p>支持CRC的生成及校验</p></li>
+<li><p>数据帧前导生成及移除</p></li>
+<li><p>发送时，自动扩展短的数据帧</p></li>
+<li><p>检测过长或过短的数据帧(长度限制)</p></li>
+<li><p>可传输长数据帧(&gt; 标准以太帧长度)</p></li>
+<li><p>自动丢弃重发次数超限或帧间隙过小的数据包</p></li>
+<li><p>广播包过滤</p></li>
+<li><p>用于保存多达128个BD(Buffer Descriptor)的内部RAM</p></li>
+<li><p>在发送时，支持将一个数据包分拆配置到多个连续的BD</p></li>
+<li><p>发送/接收的各种事件标志</p></li>
+<li><p>在事件发生时产生对应中断</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2><span class="section-number">17.3. </span>功能描述<a class="headerlink" href="#id3" title="永久链接至标题"></a></h2>
+<p>EMAC模块的组成如下图。</p>
+<figure class="align-center" id="id9">
+<a class="reference internal image-reference" href="../_images/EMAC.svg"><img alt="../_images/EMAC.svg" src="../_images/EMAC.svg" /></a>
+<figcaption>
+<p><span class="caption-number">图 17.1 </span><span class="caption-text">EMAC框图</span><a class="headerlink" href="#id9" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>模块的控制寄存器通过MDIO接口，可以读写PHY的寄存器，从而实现配置、选择模式(半/全双工)、发起协商等操作。
+接收模块过滤并检查收到的数据帧：是否有合法的前导，FCS，长度等，并根据缓冲描述符(BD)，将数据存放到指定内存地址。
+发送模块根据数据缓冲描述符，从内存中取得数据，添加前导，FCS，pad等，然后根据CSMA/CD协议，将数据发出。
+如果检测到CRS，将会延迟重试。
+收发缓冲描述符组连接到系统RAM，此RAM用于保存发送和接收的以太网数据帧。每个描述符包含相应的控制状态字以及对应的
+缓冲内存地址。描述符一共有128组，用于发送或者接收，可以灵活分配。</p>
+</section>
+<section id="id4">
+<h2><span class="section-number">17.4. </span>时钟<a class="headerlink" href="#id4" title="永久链接至标题"></a></h2>
+<p>EMAC模块需要一路时钟用于同步收发(100Mbps时，25MHz(MII)或50MHz(RMII)；10Mbps时，2.5MHz)。
+此时钟必须在EMAC与PHY之间同步。</p>
+</section>
+<section id="bd-buffer-descriptor">
+<h2><span class="section-number">17.5. </span>收发缓冲描述符(BD, Buffer Descriptor)<a class="headerlink" href="#bd-buffer-descriptor" title="永久链接至标题"></a></h2>
+<p>收发缓冲描述符，用于提供EAMC与数据帧缓存地址信息之间的关联，对收发数据帧进行控制，以及提供收发状态提示。
+每个描述符由两个连续的word(32bit)构成，低地址的word0提供了本buffer包含的数据帧的长度，控制及状态位；高地址的word1是对应的数据帧缓存的32位内存地址(指针)。</p>
+<p>发送BD中的word0具体描述：</p>
+<blockquote>
+<div><p>[31:16]: 发送数据包长度(LEN)。</p>
+<p>[15]: 发送BD准备好标志(RD)。软件写1告知EMAC此BD包含需要发送的数据，硬件写0说明此BD数据已发送完成或有错误发生。</p>
+<p>[14]: 中断使能标志位(IRQ)。置位则此BD可以申请TXE或TXB中断。</p>
+<p>[13]：回绕标记(WR)。置位标志着此BD是最后一个发送BD，硬件将从起始BD开始重新循环发送。</p>
+<p>[12]: 填充标志(PAD)。若置位，则在EMAC中设置了填充允许的话，发送BD将会自动填充过短的数据包。</p>
+<p>[11]：校验标志(CRC)。若置位，则EMAC会自动计算发送数据包的CRC，并附在数据包中。</p>
+<p>[10]：帧结束标志(EoF)。如果一帧数据占用多个BD，则此位标志着这帧数据的结束。</p>
+<p>[8]： underfun标志(UR)。置位则说明BD的发送过程中发生了FIFO underrun的错误。</p>
+<p>[7:4]：重发次数计数器(RTRY)。记录了重发次数。</p>
+<p>[3]： 重发次数超限标志(RL)。置位则表明重发次数超过了COLLCONF中配置的最大重发次数MAXRET。</p>
+<p>[2]： Late Collision标志(LC)。置位则表明在发送此BD时发生了Late Collision。</p>
+<p>[1]： Defer Indication标志(DF)。置位则表明此包被延迟发送。</p>
+<p>[0]： 载波检测失效(CS)。如果在发送过程中检测不到载波，则置位。</p>
+</div></blockquote>
+<p>接收BD中的word0具体描述：</p>
+<blockquote>
+<div><p>[31:16]: 发送数据包长度(LEN)。</p>
+<p>[15]: 接收BD空标志(RD)。置位说明此BD为空(没保存收到的数据)，清零说明此BD有接收到的数据，或接收过程中有错误发生。</p>
+<p>[14]: 中断使能标志位(IRQ)。置位则此BD可以申请RXE或RXB中断。</p>
+<p>[13]：回绕标记(WR)。置位标志着此BD是最后一个接收BD，硬件将从接收起始BD开始重新循环发送。</p>
+<p>[8]： 控制帧标志(CF)。置位则说明此BD接收到了一个Control Frame。</p>
+<p>[7]： miss标志(M)。若在混杂模式收到了数据包，但被内部地址逻辑标记为miss，则EMAC设置此标志位。</p>
+<p>[6]： overrun标志(OR)。置位则说明接收过程中发生了FIFO overrun错误。</p>
+<p>[5]： 接收错误标志(RE)。置位则说明接收过程中收到了PHY发出的RX ERR信号。</p>
+<p>[4]： Dribble Nibble标志(DN)。置位则说明接收到了奇数个nibbles。</p>
+<p>[3]： 数据包过长标志(TL)。置位则说明接收的数据包太长，超过了设置。</p>
+<p>[2]： 数据表过短标志(SF)。置位则表明接收到的数据包长度小于最小的允许值。</p>
+<p>[1]： CRC错误标志(CRC)。置位则表明接收到的数据包CRC校验失败。</p>
+<p>[0]： Late Collision标志(LC)。置位则表明在接收数据到此BD时发生了Late Collision。</p>
+</div></blockquote>
+<p>需要注意的是：对于BD，需要按word写入。</p>
+<p>EMAC模块支持128个BD，由发送/接收逻辑共享，可自由组合。但发送BD总是占据前面的连续区域(个数由MAC_TX_BD_NUM寄存器中的TXBDNUM域来指定)。</p>
+<p>EMAC按照BD的顺序，循环处理发送/接收BD，直到遇到标记为WR的BD就回绕到发送/接收各自的首个BD。</p>
+</section>
+<section id="phy">
+<h2><span class="section-number">17.6. </span>PHY交互<a class="headerlink" href="#phy" title="永久链接至标题"></a></h2>
+<p>PHY交互寄存器组提供了与PHY交互需要的命令及数据通信的方式。EMAC通过MDIO接口控制PHY的工作模式，并保证两者的工作模式匹配(速率，全/半双工等)。</p>
+<p>数据包通过MII/RMII接口在EMAC与PHY之间交互，可以通过EMAC的模式寄存器(EMAC_MODE)中的RMII_EN位选择：当此bit为1，则选择RMII模式，否则就是MII模式。</p>
+<p>MII及RMII模式均支持 IEEE 802.3u 标准中指定的 10Mbps 与 100Mbps的传输速率。</p>
+<p>MII及RMII的传输信号描述与下表。</p>
+<table class="colwidths-given docutils align-center" id="id10" style="width: 100%">
+<caption><span class="caption-number">表 17.1 </span><span class="caption-text">传输信号</span><a class="headerlink" href="#id10" title="永久链接至表格"></a></caption>
+<colgroup>
+<col style="width: 24%" />
+<col style="width: 38%" />
+<col style="width: 38%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>名称</p></td>
+<td><p>MII</p></td>
+<td><p>RMII</p></td>
+</tr>
+<tr class="row-even"><td><p>EXTCK_EREFCK</p></td>
+<td><p>ETXCK: 发送时钟信号</p></td>
+<td><p>EREFCK：参考时钟</p></td>
+</tr>
+<tr class="row-odd"><td><p>ECRS</p></td>
+<td><p>ECRS: 载波探测</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>ECOL</p></td>
+<td><p>ECOL：碰撞检测</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>ERXDV</p></td>
+<td><p>ERXDV：数据valid</p></td>
+<td><p>ECRSDV: 载波检测/数据valid</p></td>
+</tr>
+<tr class="row-even"><td><p>ERX0-ERX3</p></td>
+<td><p>ERX0-ERX3：4-bit接收数据</p></td>
+<td><p>ERX0-ERX1：2-bit接收数据</p></td>
+</tr>
+<tr class="row-odd"><td><p>ERXER</p></td>
+<td><p>ERXER：接收错误指示</p></td>
+<td><p>ERXER：接收错误指示</p></td>
+</tr>
+<tr class="row-even"><td><p>ERXCK</p></td>
+<td><p>ERXCK：接收时钟信号</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>ETXEN</p></td>
+<td><p>ETXEN：发送使能</p></td>
+<td><p>ETXEN：发送使能</p></td>
+</tr>
+<tr class="row-even"><td><p>ETX0-ETX3</p></td>
+<td><p>ETX0-ETX3：4-bit发送数据</p></td>
+<td><p>ETX0-ETX1：2-bit发送数据</p></td>
+</tr>
+<tr class="row-odd"><td><p>ETXER</p></td>
+<td><p>ETXER：发送错误指示</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>EMDC</p></td>
+<td><p>MDIO Clock</p></td>
+<td><p>MDIO Clock</p></td>
+</tr>
+<tr class="row-odd"><td><p>EMDIO</p></td>
+<td><p>MDIO Data Input Output</p></td>
+<td><p>MDIO Data Input Output</p></td>
+</tr>
+</tbody>
+</table>
+<p>RMII接口引脚较少，使用2-bit数据线用于收发，在100Mbps速率时，需要提供50MHz的参考时钟。</p>
+</section>
+<section id="id5">
+<h2><span class="section-number">17.7. </span>编程流程<a class="headerlink" href="#id5" title="永久链接至标题"></a></h2>
+<section id="id6">
+<h3><span class="section-number">17.7.1. </span>PHY初始化<a class="headerlink" href="#id6" title="永久链接至标题"></a></h3>
+<ul class="simple">
+<li><p>根据PHY类型，设置EMAC_MODE寄存器中的RMII_EN位来选择合适的连接方式</p></li>
+<li><p>设置EMAC的MAC地址到EMAC_MAC_ADDR0与EMAC_MAC_ADDR1中</p></li>
+<li><p>通过编程EMAC_MIIMODE寄存器中的域CLKDIV，为MDIO部分设置合适的时钟</p></li>
+<li><p>设置对应PHY的地址到寄存器EMAC_MIIADDRESS的域FIAD中</p></li>
+<li><p>根据PHY的手册，通过EMAC_MIICOMMAND与EMAC_MIITX_DATA寄存器发送命令</p></li>
+<li><p>读取PHY的数据会保存在EMAC_MIIRX_DATA寄存器中</p></li>
+<li><p>通过EMAC_MIISTATUS寄存器可以查询与PHY命令交互的状态</p></li>
+</ul>
+<p>基础的交互完成后，应当使PHY进入自动协商状态。协商完成之后，根据协商结果编程模式到EMAC_MODE寄存器中的FULLD位。</p>
+</section>
+<section id="id7">
+<h3><span class="section-number">17.7.2. </span>发送数据帧<a class="headerlink" href="#id7" title="永久链接至标题"></a></h3>
+<ul class="simple">
+<li><p>配置EMAC_MODE寄存器中数据帧格式、间隔等位域</p></li>
+<li><p>通过配置EMAC_TX_BD_NUM寄存器中的TXBDNUM域来指定发送所使用的BD的个数，那么剩余的就是RX的BD</p></li>
+<li><p>在内存中准备好需要发送的数据帧</p></li>
+<li><p>将数据帧的地址填写到对应发送BD的数据指针域(word 1)中</p></li>
+<li><p>清空对应发送BD的控制与状态域(wrod 0)中的状态标记，并设置控制域(CRC使能，PAD使能，中断使能等)</p></li>
+<li><p>写入数据帧长度，并设置好RD域，告知EMAC此BD数据需要发送；如需要，设置上IRQ位，以使能中断</p></li>
+<li><p>特别的，如果是最后一个发送的BD，需要设置上WR位，EMAC会在处理完这个BD之后&quot;回绕&quot;到第一个发送BD进行处理</p></li>
+<li><p>如果有多个BD需要发送，则重复设置BD的步骤以填充所有的发送BD</p></li>
+<li><p>如果一个数据包只包含在一个BD中，那么需要设置其EOF位为1</p></li>
+<li><p>如果一个数据包分在多个BD里进行发送，那么只需要将其占用的最后一个BD标记为数据包结束(设置EOF位)</p></li>
+<li><p>如果需要使能发送中断，还需要配置EMAC_INT_MASK寄存器中的TX相关位</p></li>
+<li><p>配置EMAC_MODE寄存器中的TXEN位，以使能发送</p></li>
+<li><p>如果使能了中断，在发送的中断中，可用通过EMAC_TX_BD_NUM寄存器中的TXBDNUM域获取当前的BD</p></li>
+<li><p>根据当前BD的状态字进行相应的处理</p></li>
+<li><p>数据已被发送出去的BD，其控制域中的RD位会被硬件清零，且不会被再次发送；需要填充新数据后，置位RD，此BD即可再次用于发送</p></li>
+</ul>
+</section>
+<section id="id8">
+<h3><span class="section-number">17.7.3. </span>接收数据帧<a class="headerlink" href="#id8" title="永久链接至标题"></a></h3>
+<ul class="simple">
+<li><p>配置EMAC_MODE寄存器中数据帧格式、间隔等位域</p></li>
+<li><p>通过配置EMAC_TX_BD_NUM寄存器中的TXBDNUM域来指定发送所使用的BD的个数，那么剩余的就是RX的BD</p></li>
+<li><p>在内存中准备好接收数据的区域</p></li>
+<li><p>将数据帧的地址填写到对应接收BD的数据指针域(word 1)中</p></li>
+<li><p>清空对应发送BD的控制与状态域(wrod 0)中的状态标记，并设置控制域(中断使能等)</p></li>
+<li><p>写入可接收的数据帧长度，并设置好E位域，告知EMAC此BD空闲，可以用于数据接收；如需要，设置上IRQ位，以使能中断</p></li>
+<li><p>特别的，如果是最后一个有效接收BD，需要设置上WR位，EMAC会在处理完这个BD之后&quot;回绕&quot;到第一个接收BD进行处理</p></li>
+<li><p>如果有多个BD可供接收数据，则重复设置BD的步骤以填充所有的BD</p></li>
+<li><p>如果需要使能接收中断，还需要配置EMAC_INT_MASK寄存器中的RX相关位</p></li>
+<li><p>配置EMAC_MODE寄存器中的RXEN位，以使能接收</p></li>
+<li><p>如果使能了中断，在接收的中断中，可用通过EMAC_TX_BD_NUM寄存器中的RXBDNUM域获取当前的BD</p></li>
+<li><p>根据当前BD的状态字进行相应的处理</p></li>
+<li><p>接收完成的BD，其控制域中的E位会被硬件清零，且不会被再次用于接收；需要取走数据，置位E，此BD即可再次用于接收</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="AudioADC.html" class="btn btn-neutral float-left" title="16. AudioADC" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="USB.html" class="btn btn-neutral float-right" title="18. USB" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2022.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

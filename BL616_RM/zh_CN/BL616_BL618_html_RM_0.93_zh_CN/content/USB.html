@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>18. USB &mdash; BL616/BL618 参考手册  文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="19. ISO11898" href="ISO11898.html" />
+    <link rel="prev" title="17. Emac" href="EMAC.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL616/BL618 参考手册
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. 系统和存储器概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. 复位和时钟</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPIO.html">4. GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">5. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">6. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">7. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">8. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">9. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">10. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">11. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">12. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">13. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2S.html">14. I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AudioDAC.html">15. AudioDAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AudioADC.html">16. AudioADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EMAC.html">17. Emac</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">18. USB</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">18.1. 简介</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">18.2. 主要特征</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">18.3. 功能描述</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">18.3.1. USB使用步骤</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">18.3.2. 部分寄存器配置及功能描述</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">18.3.3. USB枚举阶段中断处理流程</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ISO11898.html">19. ISO11898</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cam.html">20. CAM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MJPEG.html">21. MJPEG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBI.html">22. DBI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SDH.html">23. SDH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SDIO.html">24. SDIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LowPower.html">25. LowPower</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SEC_ENG.html">26. SEC ENG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">27. 版本信息</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL616/BL618 参考手册</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">18. </span>USB</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="usb">
+<h1><span class="section-number">18. </span>USB<a class="headerlink" href="#usb" title="永久链接至标题"></a></h1>
+<section id="id1">
+<h2><span class="section-number">18.1. </span>简介<a class="headerlink" href="#id1" title="永久链接至标题"></a></h2>
+<p>USB(Universal Serial Bus)通用串行总线，是一个外部总线标准，用于规范电脑与外部设备的连接和通讯。BL616/BL618 支持USB2.0（HighSpeed + FullSpeed），可作为主机控制器(Host)或者外围控制器(Device)。
+作为主机控制器时，它包含一个支持所有速度事务的 USB 主机控制器。在没有软件干预的情况下，主机控制器可以自行处理基于事务的数据结构以减轻CPU的负载并自动在 USB 总线上发送和接收数据。 当作为外围控制器时，除端点 0 外的每个端点都支持USB规范的传输类型，以适配各种应用类型。此外，BL616/BL618 的USB控制器符合 OTG 标准，支持会话请求协议(SRP)和主机协商协议(HNP)。</p>
+</section>
+<section id="id2">
+<h2><span class="section-number">18.2. </span>主要特征<a class="headerlink" href="#id2" title="永久链接至标题"></a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>兼容USB2.0（HighSpeed + FullSpeed）</p></li>
+<li><p>兼容OTG revision1.3</p></li>
+<li><p>支持UTMI+ Level 3</p></li>
+<li><p>支持OTG SRP和HNP协议</p></li>
+<li><p>支持Host、OTG、Device模式</p></li>
+<li><p>支持LPM</p></li>
+<li><p>兼容EHCI数据结构（不支持FSTN和SITD）</p></li>
+<li><p>支持9个端点（EP0：control endpoint    EP1-EP8：interrupt/isolation/bulk endpoint）</p></li>
+<li><p>支持1个控制传输专用FIFO和4个一般FIFO（控制FIFO：64字节    一般FIFO：512字节）</p></li>
+<li><p>支持双FIFO、三FIFO模式工作</p></li>
+<li><p>支持DMA</p></li>
+<li><p>支持VDMA</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="id3">
+<h2><span class="section-number">18.3. </span>功能描述<a class="headerlink" href="#id3" title="永久链接至标题"></a></h2>
+<section id="id4">
+<h3><span class="section-number">18.3.1. </span>USB使用步骤<a class="headerlink" href="#id4" title="永久链接至标题"></a></h3>
+<p>1.配置内部transceiver</p>
+<p>2.配置usb controller</p>
+<p>3.配置usb中断</p>
+<p>4.配置usb dma/vdma（不支持cpu直接读写fifo）</p>
+<p>5.完成</p>
+</section>
+<section id="id5">
+<h3><span class="section-number">18.3.2. </span>部分寄存器配置及功能描述<a class="headerlink" href="#id5" title="永久链接至标题"></a></h3>
+</section>
+<section id="id6">
+<h3><span class="section-number">18.3.3. </span>USB枚举阶段中断处理流程<a class="headerlink" href="#id6" title="永久链接至标题"></a></h3>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="EMAC.html" class="btn btn-neutral float-left" title="17. Emac" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="ISO11898.html" class="btn btn-neutral float-right" title="19. ISO11898" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2022.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

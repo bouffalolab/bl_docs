@@ -1,0 +1,332 @@
+\section{寄存器描述}
+\regover{
+{\hyperref[dvp2axi-dvp2axi-configue]{dvp2axi\_configue}}&
+\\
+\hline
+{\hyperref[dvp2axi-dvp2axi-addr-start]{dvp2axi\_addr\_start}}&
+\\
+\hline
+{\hyperref[dvp2axi-dvp2axi-mem-bcnt]{dvp2axi\_mem\_bcnt}}&
+\\
+\hline
+{\hyperref[dvp2axi-dvp-status-and-error]{dvp\_status\_and\_error}}&
+\\
+\hline
+{\hyperref[dvp2axi-dvp2axi-frame-bcnt]{dvp2axi\_frame\_bcnt}}&
+\\
+\hline
+{\hyperref[dvp2axi-dvp-frame-fifo-pop]{dvp\_frame\_fifo\_pop}}&
+\\
+\hline
+{\hyperref[dvp2axi-dvp2axi-frame-vld]{dvp2axi\_frame\_vld}}&
+\\
+\hline
+{\hyperref[dvp2axi-dvp2axi-frame-period]{dvp2axi\_frame\_period}}&
+\\
+\hline
+{\hyperref[dvp2axi-dvp2axi-misc]{dvp2axi\_misc}}&
+\\
+\hline
+{\hyperref[dvp2axi-dvp2axi-hsync-crop]{dvp2axi\_hsync\_crop}}&
+\\
+\hline
+{\hyperref[dvp2axi-dvp2axi-vsync-crop]{dvp2axi\_vsync\_crop}}&
+\\
+\hline
+{\hyperref[dvp2axi-dvp2axi-fram-exm]{dvp2axi\_fram\_exm}}&
+\\
+\hline
+{\hyperref[dvp2axi-frame-start-addr0]{frame\_start\_addr0}}&
+\\
+\hline
+{\hyperref[dvp2axi-frame-start-addr1]{frame\_start\_addr1}}&
+\\
+\hline
+{\hyperref[dvp2axi-frame-start-addr2]{frame\_start\_addr2}}&
+\\
+\hline
+{\hyperref[dvp2axi-frame-start-addr3]{frame\_start\_addr3}}&
+\\
+\hline
+{\hyperref[dvp2axi-frame-id-sts01]{frame\_id\_sts01}}&
+\\
+\hline
+{\hyperref[dvp2axi-frame-id-sts23]{frame\_id\_sts23}}&
+\\
+\hline
+{\hyperref[dvp2axi-dvp-debug]{dvp\_debug}}&
+\\
+\hline
+{\hyperref[dvp2axi-dvp-dummy-reg]{dvp\_dummy\_reg}}&
+\\
+\hline
+}
+
+\subsection{dvp2axi\_configue}
+\label{dvp2axi-dvp2axi-configue}
+地址：0x30015000
+ \begin{figure}[H]
+\includegraphics{dvp2axi_dvp2axi_configue.pdf}
+\end{figure}
+
+\regdes{31:24&reg\_dvp\_wait\_cycle&r/w&8'h40&Cycles in FSM Wait mode\\\hline
+23&reg\_v\_subsample\_pol&r/w&1'b0&DVP2BUS vertical sub-sampling polarity \par 1'b0: Odd lines are masked \par 1'b1: Even lines are masked
+\\\hline
+22&reg\_v\_subsample\_en&r/w&1'b0&DVP2BUS vertical sub-sampling enable\\\hline
+21&RSVD& & & \\\hline
+20&reg\_dvp\_pix\_clk\_cg&r/w&1'b0&DVP pix clk gate\\\hline
+19&reg\_dvp\_data\_bsel&r/w&1'b0&Byte select signal for DVP 8-bit mode, don't care if reg\_dvp\_data\_8bit is disabled \par 1'b0: Select the lower byte of pix\_data \par 1'b1: Select the upper byte of pix\_data
+\\\hline
+18:16&reg\_dvp\_data\_mode&r/w&3'b0&DVP 8-bit mode enable \par 3'd0: DVP pix\_data is 16-bit wide \par 3'd1: DVP pix\_data is 24-bit mode \par 3'd2: DVP pix\_data is 24-comp-16-bit mode \par 3'd3: DVP pix\_data is 24-exp-32-bit mode \par 3'd4: DVP pix\_data is 8-bit wide \par Others - Reserved
+\\\hline
+15&reg\_qos\_sw&r/w&1'b0&AXI Qos software mode value\\\hline
+14&reg\_qos\_sw\_mode&r/w&1'b0&AXI QoS software mode enable\\\hline
+13&reg\_drop\_even&r/w&1'b0&Only effect when reg\_drop\_en=1 :  \par 1'b1 : Drop all even bytes \par 1'b0 : Drop all odd bytes
+\\\hline
+12&reg\_drop\_en&r/w&1'b0&Drop mode Enable\\\hline
+11&reg\_hw\_mode\_fwrap&r/w&1'b1&DVP2BUS HW mode with frame start address wrap to reg\_addr\_start\\\hline
+10:8&reg\_dvp\_mode&r/w&3'd0&Image senosr mode selection:  \par 3'd0-Vsync\&Hsync \par 3'd1-Vsync|Hsync \par 3'd2-Vsync \par 3'd3-Hsync
+\\\hline
+7&RSVD& & & \\\hline
+6:4&reg\_xlen&r/w&3'd3&burst length setting  \par 3'd0 - Single / 3'd1 - INCR4 / 3'd2 - INCR8 \par 3'd3 - INCR16 / 3'd5 - INCR32 / 3'd6 - INCR64
+\\\hline
+3&reg\_line\_vld\_pol&r/w&1'b1&Image sensor line valid polarity, 1'b0 - Activel low, 1'b1 - Active high\\\hline
+2&reg\_fram\_vld\_pol&r/w&1'b1&Image sensor frame valid polarity, 1'b0 - Activel low, 1'b1 - Active high\\\hline
+1&reg\_sw\_mode&r/w&1'b0&DVP2BUS SW manual mode (don't care if reg\_swap\_mode is enabled)\\\hline
+0&reg\_dvp\_enable&r/w&1'b0&module enable\\\hline
+
+}
+\subsection{dvp2axi\_addr\_start}
+\label{dvp2axi-dvp2axi-addr-start}
+地址：0x30015004
+ \begin{figure}[H]
+\includegraphics{dvp2axi_dvp2axi_addr_start.pdf}
+\end{figure}
+
+\regdes{31:0&reg\_addr\_start&r/w&32'h80000000&AXI start address\\\hline
+
+}
+\subsection{dvp2axi\_mem\_bcnt}
+\label{dvp2axi-dvp2axi-mem-bcnt}
+地址：0x30015008
+ \begin{figure}[H]
+\includegraphics{dvp2axi_dvp2axi_mem_bcnt.pdf}
+\end{figure}
+
+\regdes{31:0&reg\_mem\_burst\_cnt&r/w&32'hC000&AXI burst cnt before wrap to "reg\_addr\_start"\\\hline
+
+}
+\subsection{dvp\_status\_and\_error}
+\label{dvp2axi-dvp-status-and-error}
+地址：0x3001500c
+ \begin{figure}[H]
+\includegraphics{dvp2axi_dvp_status_and_error.pdf}
+\end{figure}
+
+\regdes{31:30&RSVD& & & \\\hline
+29&st\_dvp\_idle&r&1'b1&DVP2BUS asynchronous fifo idle status\\\hline
+28&axi\_idle&r&1'b1&DVP2BUS AHB idle status\\\hline
+27&st\_bus\_flsh&r&1'b0&DVP in flush state\\\hline
+26&st\_bus\_wait&r&1'b0&DVP in wait state\\\hline
+25&st\_bus\_func&r&1'b0&DVP in functional state\\\hline
+24&st\_bus\_idle&r&1'b1&DVP in idle state\\\hline
+23&RSVD& & & \\\hline
+22&sts\_vcnt\_int&r&1'b0&Vsync valid line count non-match interrupt status\\\hline
+21&sts\_hcnt\_int&r&1'b0&Hsync valid pixel count non-match interrupt status\\\hline
+20:16&frame\_valid\_cnt&r&5'd0&Frame counts in memory before read out in SW mode\\\hline
+15&sts\_fifo\_int&r&1'b0&FIFO OverWrite interrupt status\\\hline
+14&sts\_frame\_int&r&1'b0&Frame OverWrite interrupt status\\\hline
+13&sts\_mem\_int&r&1'b0&Memory OverWrite interrupt status\\\hline
+12&sts\_normal\_int&r&1'b0&Normal Write interrupt status\\\hline
+11&reg\_int\_fifo\_en&r/w&1'b1&FIFO OverWrite interrupt enable\\\hline
+10&reg\_int\_frame\_en&r/w&1'b0&Frame OverWrite interrupt enable\\\hline
+9&reg\_int\_mem\_en&r/w&1'b0&Memory OverWrite interrupt enable\\\hline
+8&reg\_int\_normal\_en&r/w&1'b0&Normal Write interrupt enable\\\hline
+7&reg\_int\_vcnt\_en&r/w&1'b0&Vsync valid line count match interrupt enable\\\hline
+6&reg\_int\_hcnt\_en&r/w&1'b0&Hsync valid pixel count match interrupt enable\\\hline
+5&RSVD& & & \\\hline
+4:0&reg\_frame\_cnt\_trgr\_int&r/w&5'd0&Frame to issue interrupt at SW Mode\\\hline
+
+}
+\subsection{dvp2axi\_frame\_bcnt}
+\label{dvp2axi-dvp2axi-frame-bcnt}
+地址：0x30015010
+ \begin{figure}[H]
+\includegraphics{dvp2axi_dvp2axi_frame_bcnt.pdf}
+\end{figure}
+
+\regdes{31:0&reg\_frame\_byte\_cnt&r/w&32'h7e90&Single Frame byte cnt(Need pre-calculation)\\\hline
+
+}
+\subsection{dvp\_frame\_fifo\_pop}
+\label{dvp2axi-dvp-frame-fifo-pop}
+地址：0x30015014
+ \begin{figure}[H]
+\includegraphics{dvp2axi_dvp_frame_fifo_pop.pdf}
+\end{figure}
+
+\regdes{31:10&RSVD& & & \\\hline
+9&reg\_int\_vcnt\_clr&w1p&1'd0&Interrupt clear\\\hline
+8&reg\_int\_hcnt\_clr&w1p&1'd0&Interrupt clear\\\hline
+7&reg\_int\_fifo\_clr&w1p&1'd0&Interrupt clear\\\hline
+6&reg\_int\_frame\_clr&w1p&1'd0&Interrupt clear\\\hline
+5&reg\_int\_mem\_clr&w1p&1'd0&Interrupt clear\\\hline
+4&reg\_int\_normal\_clr&w1p&1'd0&Interrupt clear\\\hline
+3:1&RSVD& & & \\\hline
+0&rfifo\_pop&w1p&1'b0&Write this bit will trigger fifo pop\\\hline
+
+}
+\subsection{dvp2axi\_frame\_vld}
+\label{dvp2axi-dvp2axi-frame-vld}
+地址：0x30015018
+ \begin{figure}[H]
+\includegraphics{dvp2axi_dvp2axi_frame_vld.pdf}
+\end{figure}
+
+\regdes{31:0&reg\_frame\_n\_vld&r/w&32'hffff\_ffff&Bitwise frame valid in period\\\hline
+
+}
+\subsection{dvp2axi\_frame\_period}
+\label{dvp2axi-dvp2axi-frame-period}
+地址：0x3001501c
+ \begin{figure}[H]
+\includegraphics{dvp2axi_dvp2axi_frame_period.pdf}
+\end{figure}
+
+\regdes{31:5&RSVD& & & \\\hline
+4:0&reg\_frame\_period&r/w&5'h0&Frame period cnt. (EX. Set this register 0, the period is 1)\\\hline
+
+}
+\subsection{dvp2axi\_misc}
+\label{dvp2axi-dvp2axi-misc}
+地址：0x30015020
+ \begin{figure}[H]
+\includegraphics{dvp2axi_dvp2axi_misc.pdf}
+\end{figure}
+
+\regdes{31:11&RSVD& & & \\\hline
+10:8&reg\_format\_565&r/w&3'd0&Only work when reg\_dvp\_data\_mode=2 (24-comp-16-bit mode) \par 3'd0: B2(5)B1(6)B0(5) \par 3'd1: B1(5)B2(6)B0(5) \par 3'd2: B2(5)B0(6)B1(5) \par 3'd3: B0(5)B2(6)B1(5) \par 3'd4: B1(5)B0(6)B2(5) \par 3'd5: B0(5)B1(6)B2(5)
+\\\hline
+7:0&reg\_alpha&r/w&8'h0&Only work when "reg\_dvp\_data\_mode==2'd3(DVP pix\_data is 24-exp-32-bit mode)" \par The value of [31:24]
+\\\hline
+
+}
+\subsection{dvp2axi\_hsync\_crop}
+\label{dvp2axi-dvp2axi-hsync-crop}
+地址：0x30015030
+ \begin{figure}[H]
+\includegraphics{dvp2axi_dvp2axi_hsync_crop.pdf}
+\end{figure}
+
+\regdes{31:16&reg\_hsync\_act\_start&r/w&16'h0&Valid hsync start cnt\\\hline
+15:0&reg\_hsync\_act\_end&r/w&16'hFFFF&Valid hsync end cnt\\\hline
+
+}
+\subsection{dvp2axi\_vsync\_crop}
+\label{dvp2axi-dvp2axi-vsync-crop}
+地址：0x30015034
+ \begin{figure}[H]
+\includegraphics{dvp2axi_dvp2axi_vsync_crop.pdf}
+\end{figure}
+
+\regdes{31:16&reg\_vsync\_act\_start&r/w&16'h0&Valid vsync start cnt\\\hline
+15:0&reg\_vsync\_act\_end&r/w&16'hFFFF&Valid vsync end cnt\\\hline
+
+}
+\subsection{dvp2axi\_fram\_exm}
+\label{dvp2axi-dvp2axi-fram-exm}
+地址：0x30015038
+ \begin{figure}[H]
+\includegraphics{dvp2axi_dvp2axi_fram_exm.pdf}
+\end{figure}
+
+\regdes{31:16&reg\_total\_vcnt&r/w&16'h0&Total valid line count in a frame\\\hline
+15:0&reg\_total\_hcnt&r/w&16'h0&Total valid pix count in a line\\\hline
+
+}
+\subsection{frame\_start\_addr0}
+\label{dvp2axi-frame-start-addr0}
+地址：0x30015040
+ \begin{figure}[H]
+\includegraphics{dvp2axi_frame_start_addr0.pdf}
+\end{figure}
+
+\regdes{31:0&frame\_start\_addr\_0&r&32'd0&DVP2BUS PIC 0 Start address\\\hline
+
+}
+\subsection{frame\_start\_addr1}
+\label{dvp2axi-frame-start-addr1}
+地址：0x30015048
+ \begin{figure}[H]
+\includegraphics{dvp2axi_frame_start_addr1.pdf}
+\end{figure}
+
+\regdes{31:0&frame\_start\_addr\_1&r&32'd0&DVP2BUS PIC 1 Start address\\\hline
+
+}
+\subsection{frame\_start\_addr2}
+\label{dvp2axi-frame-start-addr2}
+地址：0x30015050
+ \begin{figure}[H]
+\includegraphics{dvp2axi_frame_start_addr2.pdf}
+\end{figure}
+
+\regdes{31:0&frame\_start\_addr\_2&r&32'd0&DVP2BUS PIC 2 Start address\\\hline
+
+}
+\subsection{frame\_start\_addr3}
+\label{dvp2axi-frame-start-addr3}
+地址：0x30015058
+ \begin{figure}[H]
+\includegraphics{dvp2axi_frame_start_addr3.pdf}
+\end{figure}
+
+\regdes{31:0&frame\_start\_addr\_3&r&32'd0&DVP2BUS PIC 3 Start address\\\hline
+
+}
+\subsection{frame\_id\_sts01}
+\label{dvp2axi-frame-id-sts01}
+地址：0x30015060
+ \begin{figure}[H]
+\includegraphics{dvp2axi_frame_id_sts01.pdf}
+\end{figure}
+
+\regdes{31:16&frame\_id\_1&r&16'd0&DVP2BUS PIC 1 ID\\\hline
+15:0&frame\_id\_0&r&16'd0&DVP2BUS PIC 0 ID\\\hline
+
+}
+\subsection{frame\_id\_sts23}
+\label{dvp2axi-frame-id-sts23}
+地址：0x30015064
+ \begin{figure}[H]
+\includegraphics{dvp2axi_frame_id_sts23.pdf}
+\end{figure}
+
+\regdes{31:16&frame\_id\_3&r&16'd0&DVP2BUS PIC 3 ID\\\hline
+15:0&frame\_id\_2&r&16'd0&DVP2BUS PIC 2 ID\\\hline
+
+}
+\subsection{dvp\_debug}
+\label{dvp2axi-dvp-debug}
+地址：0x300150f0
+ \begin{figure}[H]
+\includegraphics{dvp2axi_dvp_debug.pdf}
+\end{figure}
+
+\regdes{31:12&RSVD& & & \\\hline
+11:8&reg\_id\_latch\_line&r/w&4'd5&ID latch timing (line count)\\\hline
+7:4&RSVD& & & \\\hline
+3:1&reg\_dvp\_dbg\_sel&r/w&3'd0&DVP2BUS debgu flag selection\\\hline
+0&reg\_dvp\_dbg\_en&r/w&1'b0&DVP2BUS debgu flag enable\\\hline
+
+}
+\subsection{dvp\_dummy\_reg}
+\label{dvp2axi-dvp-dummy-reg}
+地址：0x300150fc
+ \begin{figure}[H]
+\includegraphics{dvp2axi_dvp_dummy_reg.pdf}
+\end{figure}
+
+\regdes{31:0&RESERVED&rsvd&32'hf0f0f0f0&RESERVED\\\hline
+
+}

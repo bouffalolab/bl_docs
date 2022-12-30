@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>26. SEC ENG &mdash; BL616/BL618 Reference Manual  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="27. Revision history" href="version.html" />
+    <link rel="prev" title="25. LowPower" href="LowPower.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL616/BL618 Reference Manual
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. System and Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. Reset and Clock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPIO.html">4. GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">5. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">6. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">7. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">8. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">9. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">10. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">11. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">12. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">13. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2S.html">14. I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AudioDAC.html">15. AudioDAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AudioADC.html">16. AudioADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EMAC.html">17. Emac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USB.html">18. USB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ISO11898.html">19. ISO11898</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cam.html">20. CAM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MJPEG.html">21. MJPEG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBI.html">22. DBI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SDH.html">23. SDH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SDIO.html">24. SDIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LowPower.html">25. LowPower</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">26. SEC ENG</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">26.1. Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#aes">26.1.1. AES</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sha">26.1.2. SHA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#crc">26.1.3. CRC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gmac">26.1.4. GMAC</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#features">26.2. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#principle">26.3. Principle</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#aes-encryption-and-decryption-process">26.3.1. AES encryption and decryption process</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#implementation-of-sha256">26.3.2. Implementation of SHA256</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#principle-of-gmac">26.3.3. Principle of GMAC</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#functional-description">26.4. Functional Description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#aes-accelerator">26.4.1. AES Accelerator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sha-accelerator">26.4.2. SHA Accelerator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">26.4.3. SHA Accelerator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gmac-link-mode">26.4.4. GMAC(link Mode)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#random-number-generator-rng">26.4.5. Random Number Generator (RNG)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">27. Revision history</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL616/BL618 Reference Manual</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">26. </span>SEC ENG</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="sec-eng">
+<h1><span class="section-number">26. </span>SEC ENG<a class="headerlink" href="#sec-eng" title="Permalink to this headline"></a></h1>
+<section id="overview">
+<h2><span class="section-number">26.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
+<section id="aes">
+<h3><span class="section-number">26.1.1. </span>AES<a class="headerlink" href="#aes" title="Permalink to this headline"></a></h3>
+<p>Advanced Encryption Standard (AES) is the most common type of symmetric encryption algorithm. Also known as Rijndael encryption algorithm in cryptography, it is a block encryption standard adopted by the U.S. federal government.</p>
+</section>
+<section id="sha">
+<h3><span class="section-number">26.1.2. </span>SHA<a class="headerlink" href="#sha" title="Permalink to this headline"></a></h3>
+<p>SHA256 is a variant of Secure Hash Algorithm 2 (SHA2). SHA2, the successor of SHA1, is a cryptographic hash function algorithm standard designed by the United States National Security Agency.
+SHA2 has six different variants: SHA224, SHA256, SHA384, SHA512, SHA512/224, and SHA512/256.SHA-512/224 means that the result takes the first 224 bits of SHA-512, and SHA-512/256 means that the result takes the first 256 bits of SHA-512.</p>
+</section>
+<section id="crc">
+<h3><span class="section-number">26.1.3. </span>CRC<a class="headerlink" href="#crc" title="Permalink to this headline"></a></h3>
+<p>Cyclic Redundancy Check (CRC) is a channel coding technique that generates short fixed-digit check codes based on data including network packets or computer files. It is mainly used to detect or check possible errors after data transfer or storage. It detects errors based on the principle of division and remainder.</p>
+</section>
+<section id="gmac">
+<h3><span class="section-number">26.1.4. </span>GMAC<a class="headerlink" href="#gmac" title="Permalink to this headline"></a></h3>
+<p>GMAC is to use Galois Field (GF, finite field) multiplication to calculate the MAC value of a message.</p>
+</section>
+</section>
+<section id="features">
+<h2><span class="section-number">26.2. </span>Features<a class="headerlink" href="#features" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p>Support AES-128, AES-192, AES-256 encryption and decryption</p></li>
+<li><p>Support SHA-256, SHA-512</p></li>
+<li><p>Support CRC-16, CRC-32</p></li>
+<li><p>Support GMAC</p></li>
+<li><p>Support True Random Number Generator(TRNG)</p></li>
+</ul>
+</section>
+<section id="principle">
+<h2><span class="section-number">26.3. </span>Principle<a class="headerlink" href="#principle" title="Permalink to this headline"></a></h2>
+<section id="aes-encryption-and-decryption-process">
+<h3><span class="section-number">26.3.1. </span>AES encryption and decryption process<a class="headerlink" href="#aes-encryption-and-decryption-process" title="Permalink to this headline"></a></h3>
+<p>AES means that the same key is used for encryption and decryption, with encryption process as follows:</p>
+<figure class="align-center" id="id2">
+<img alt="../_images/SecEngAes.svg" src="../_images/SecEngAes.svg" /><figcaption>
+<p><span class="caption-number">Fig. 26.1 </span><span class="caption-text">AES Encryption Process</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The following briefs the functions and significance of each part:</p>
+<ul class="simple">
+<li><p>Plaintext (P): unencrypted data.</p></li>
+<li><p>Key (K): The key used to encrypt plaintext. In symmetric encryption algorithm, encryption and decryption share one key. The key is generated by negotiation between the receiver and the sender, but it cannot be directly transmitted over network. Otherwise it will leak the key. Usually, the key is encrypted by an asymmetric encryption algorithm, and then transmitted to the other side over network, or the key is discussed face to face. The key must not be leaked. Otherwise the attacker will restore the ciphertext and steal confidential data.</p></li>
+<li><p>AES encryption function: Let this function be E, then C = E(K, P), where P, K and C denote plaintext, key, and ciphertext, respectively. That is, if plaintext (P) and key (K) are input as the parameters of function, this function will output ciphertext (C).</p></li>
+<li><p>Ciphertext (C): data processed by encryption function.</p></li>
+<li><p>AES decryption function: Let this function be D, then P = D(K, C), where C, K, and P denote ciphertext, key, and plaintext, respectively. That is, if ciphertext (C) and key (K) are input as the parameters of function, this function will output plaintext (P).</p></li>
+</ul>
+</section>
+<section id="implementation-of-sha256">
+<h3><span class="section-number">26.3.2. </span>Implementation of SHA256<a class="headerlink" href="#implementation-of-sha256" title="Permalink to this headline"></a></h3>
+<p>Its rule of data padding is the same as that of MD5. SHA256 uses 8 initial hash values and 64 hash constants.</p>
+<p>The 8 initial hash values are as follows:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>h0 = 0x6a09e667</p></li>
+<li><p>h1 = 0xbb67ae85</p></li>
+<li><p>h2 = 0x3c6ef372</p></li>
+<li><p>h3 = 0xa54ff53a</p></li>
+<li><p>h4 = 0x510e527f</p></li>
+<li><p>h5 = 0x9b05688c</p></li>
+<li><p>h6 = 0x1f83d9ab</p></li>
+<li><p>h7 = 0x5be0cd19</p></li>
+</ul>
+</div></blockquote>
+<p>These initial values are obtained by taking the first 32 bits from the decimal part of the square root of the first 8 prime numbers (2, 3, 5, 7, 11, 13, 17, and 19) in natural numbers.</p>
+<p>The 64 constants are as follows:</p>
+<ul class="simple">
+<li><p>428a2f98 71374491 b5c0fbcf e9b5dba5</p></li>
+<li><p>3956c25b 59f111f1 923f82a4 ab1c5ed5</p></li>
+<li><p>d807aa98 12835b01 243185be 550c7dc3</p></li>
+<li><p>72be5d74 80deb1fe 9bdc06a7 c19bf174</p></li>
+<li><p>e49b69c1 efbe4786 0fc19dc6 240ca1cc</p></li>
+<li><p>2de92c6f 4a7484aa 5cb0a9dc 76f988da</p></li>
+<li><p>983e5152 a831c66d b00327c8 bf597fc7</p></li>
+<li><p>c6e00bf3 d5a79147 06ca6351 14292967</p></li>
+<li><p>27b70a85 2e1b2138 4d2c6dfc 53380d13</p></li>
+<li><p>650a7354 766a0abb 81c2c92e 92722c85</p></li>
+<li><p>a2bfe8a1 a81a664b c24b8b70 c76c51a3</p></li>
+<li><p>d192e819 d6990624 f40e3585 106aa070</p></li>
+<li><p>19a4c116 1e376c08 2748774c 34b0bcb5</p></li>
+<li><p>391c0cb3 4ed8aa4a 5b9cca4f 682e6ff3</p></li>
+<li><p>748f82ee 78a5636f 84c87814 8cc70208</p></li>
+<li><p>90befffa a4506ceb bef9a3f7 c67178f2</p></li>
+</ul>
+<p>Similarly, these constants are obtained by taking the first 32 bits from the decimal part of the cube root of the first 64 prime numbers (2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97…) in natural numbers.</p>
+<p>SHA256 hash function:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Ch(x,y,z)=(x∧y)⊕(¬x∧z)</p></li>
+<li><p>Ma(x,y,z)=(x∧y)⊕(x∧z)⊕(y∧z)</p></li>
+<li><p>Σ0(x)=S <sup>2</sup> (x)⊕S <sup>13</sup> (x)⊕S <sup>22</sup> (x)</p></li>
+<li><p>Σ1(x)=S <sup>6</sup> (x)⊕S <sup>11</sup> (x)⊕S <sup>25</sup> (x)</p></li>
+<li><p>σ0(x)=S <sup>7</sup> (x)⊕S <sup>18</sup> (x)⊕R <sup>3</sup> (x)</p></li>
+<li><p>σ1(x)=S <sup>17</sup> (x)⊕S <sup>19</sup> (x)⊕R <sup>10</sup> (x)</p></li>
+<li><p>∧: bitwise “AND”</p></li>
+<li><p>¬: bitwise “Padding”</p></li>
+<li><p>⊕: bitwise “Exclusive OR”</p></li>
+<li><p>S <sup>n</sup> : Circularly shift right by n bits</p></li>
+<li><p>R <sup>n</sup> : Shift right by n bits</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="principle-of-gmac">
+<h3><span class="section-number">26.3.3. </span>Principle of GMAC<a class="headerlink" href="#principle-of-gmac" title="Permalink to this headline"></a></h3>
+<p>Authentication is actually a redundant message generated against the message itself, that is, the message authentication code (MAC). MAC is a technique for authenticating the integrity of a message. In cryptography, MAC refers to a verification mechanism used by both communication entities and a tool to ensure the integrity of message data.
+MAC is a hash function with a key. But why does it need a key? The reason is that the message can be tampered with during transmission, so can the hash value. Therefore, to ensure a valid hash value, the hash value is protected by encryption, so that the receiver can judge the integrity of the whole message through the hash value upon reception, thus completing information transfer.</p>
+<p>The MAC process is shown as follows:</p>
+<figure class="align-center" id="id3">
+<img alt="../_images/SecEngMac.svg" src="../_images/SecEngMac.svg" /><figcaption>
+<p><span class="caption-number">Fig. 26.2 </span><span class="caption-text">MAC Flow Chart</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<ol class="arabic simple">
+<li><p>The sender and the receiver share the key K in advance (keep KEY1 and KEY2 values in the above figure consistent).</p></li>
+<li><p>The sender calculates the MAC value based on the message (KEY1 is used to calculate the MAC1 for the original message).</p></li>
+<li><p>The sender sends the original message and MAC1 to the receiver.</p></li>
+<li><p>The receiver calculates MAC2 using KEY2 based on the received original message .</p></li>
+<li><p>The receiver compares the calculated MAC2 with the MAC1 received from the sender.</p></li>
+<li><p>If the MAC is consistent, the receiver can judge that the message is indeed from the sender (authentication succeeded) and has not been tampered with or there is a transmission error. If not, the message is not from the sender (authentication failed).</p></li>
+</ol>
+<p>Note: It is recommended that the sender and the receiver store the KEY in the hardware security module, and the MAC value also shall be calculated in that module, to ensure the security of KEY, for example, in the encrypted chip.</p>
+<p>GMAC is to use Galois Field (GF, finite field) multiplication to calculate the MAC value of a message.</p>
+</section>
+</section>
+<section id="functional-description">
+<h2><span class="section-number">26.4. </span>Functional Description<a class="headerlink" href="#functional-description" title="Permalink to this headline"></a></h2>
+<section id="aes-accelerator">
+<h3><span class="section-number">26.4.1. </span>AES Accelerator<a class="headerlink" href="#aes-accelerator" title="Permalink to this headline"></a></h3>
+<ol class="arabic simple">
+<li><p>AES accelerator supports AES128/192/256 encryption and decryption.</p></li>
+</ol>
+<ul class="simple">
+<li><p>Configure se_aes_0_mode and se_aes_0_dec_en in the register se_aes_0_ctrlL, as shown below:</p></li>
+</ul>
+<figure class="align-center" id="id4">
+<img alt="../_images/SecEngAesMode.svg" src="../_images/SecEngAesMode.svg" /><figcaption>
+<p><span class="caption-number">Fig. 26.3 </span><span class="caption-text">AES Operation Modes</span><a class="headerlink" href="#id4" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Configure se_aes_0_block_mode in the register se_aes_0_ctrlL to select among different encryption modes including ECB, CTR, CBC, and XTS.</p>
+<ol class="arabic simple" start="2">
+<li><p>Key, plaintext, ciphertext, and initialization vector</p></li>
+</ol>
+<ul class="simple">
+<li><p>The register se_aes_0_msa stores the address of plaintext or ciphertext.</p></li>
+<li><p>The register se_aes_0_msa stores the address of ciphertext or plaintext.</p></li>
+<li><p>The register se_aes_0_iv_0~se_aes_0_iv_3 stores IV.</p></li>
+<li><p>The register se_aes_0_key_0~se_aes_0_key_7 stores the key.</p></li>
+</ul>
+<ol class="arabic simple" start="3">
+<li><p>Software and hardware encryption process</p></li>
+</ol>
+<ul class="simple">
+<li><p>Configure the register se_aes_0_endian, including se_aes_0_dout_endian, se_aes_0_din_endian, se_aes_0_key_endian, se_aes_0_iv_endian, and se_aes_0_twk_endian; the value of 0 indicates “littleendian” and the value of 1 indicates “bigendian”</p></li>
+<li><p>Configure se_aes_0_block_mode in the register se_aes_0_ctrl</p></li>
+<li><p>Configure se_aes_0_mode in the register se_aes_0_ctrl</p></li>
+<li><p>Configure se_aes_0_dec_en in the register se_aes_0_ctrl</p></li>
+<li><p>Configure se_aes_0_dec_key_sel in the register se_aes_0_ctrl; 0 means using a new key, and 1 means using the same key as the last time</p></li>
+<li><p>Configure se_aes_0_iv_sel in the register se_aes_0_ctrl; 0 means using a new iv, and 1 means using the same iv as the last time</p></li>
+<li><p>Enable AES by configuring se_aes_0_en in the register se_aes_0_ctrl</p></li>
+<li><p>Configure the register se_aes_0_iv_0~se_aes_0_iv_3 to set IV; the sequence of filling for MSB is se_aes_0_iv_0~se_aes_0_iv_3 and that for LSB is se_aes_0_iv_3~se_aes_0_iv_0</p></li>
+<li><p>Configure the register se_aes_0_key_0~se_aes_0_key_7 to set key; the sequence of filling for MSB is se_aes_0_key_0~se_aes_0_key_7 and that for LSB is se_aes_0_key_7~se_aes_0_key_0. Take first 4 bits for AES128, first 6 bits for AES196, and first 8 bits for AES256</p></li>
+<li><p>Configure the register se_aes_0_msa to set the source address of the data to be processed</p></li>
+<li><p>Configure the register se_aes_0_mda to set the destination address where the processing results are stored</p></li>
+<li><p>Configure se_aes_0_msg_len in the register se_aes_0_ctrl to set the length of the data to be processed, in units of 128 bit</p></li>
+<li><p>Configure se_aes_0_trig_1t in the register se_aes_0_ctrl to trigger AES</p></li>
+<li><p>The output result is stored in the address corresponding to the register se_aes_0_mda</p></li>
+</ul>
+</section>
+<section id="sha-accelerator">
+<h3><span class="section-number">26.4.2. </span>SHA Accelerator<a class="headerlink" href="#sha-accelerator" title="Permalink to this headline"></a></h3>
+</section>
+<section id="id1">
+<h3><span class="section-number">26.4.3. </span>SHA Accelerator<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h3>
+<ol class="arabic simple">
+<li><p>SHA accelerator supports 7 standard operations:</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>SHA-1、SHA-224、SHA-256、SHA-512、SHA-384、SHA-512/224、SHA-512/256，同时还支持MD5、CRC16、CRC32。</p></li>
+</ul>
+</div></blockquote>
+<p>The se_sha_0_mode in the register se_sha_0_ctrl:   0:SHA-256 1:SHA-224 2:SHA-1 3:SHA-1 4:SHA-512 5:SHA-384 6:SHA-512/224 7:SHA-512/256</p>
+<p>The se_sha_0_mode_ext in the register se_sha_0_ctrl: hash mode extention; 0:SHA 1:MD5 2:CRC-16 3:CRC-32</p>
+<p>Configure se_sha_0_mode in the register se_sha_0_ctrl to select among different SHA operations, and configure se_sha_0_mode_ext in the register se_sha_0_ctrl to select among MD5, CRC16, and CRC32</p>
+<ul class="simple">
+<li><p>The se_sha_0_mode is valid when se_sha_0_mode_ext is 0.</p></li>
+<li><p>The se_sha_0_mode is invalid when se_sha_0_mode_ext is not 0.</p></li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p>Plaintext and ciphertext</p></li>
+</ol>
+<ul class="simple">
+<li><p>The register se_sha_0_msa stores the plaintext address.</p></li>
+<li><p>The register se_sha_0_hash_l_0~se_sha_0_hash_l_7 stores the ciphertext.</p></li>
+</ul>
+<p>Sequence: MSB: se_sha_0_hash_l_0~se_sha_0_hash_l_7; LSB: se_sha_0_hash_l_7~se_sha_0_hash_l_0</p>
+<ol class="arabic simple" start="3">
+<li><p>Operation flow</p></li>
+</ol>
+<ul class="simple">
+<li><p>Configure se_sha_0_mode in the register se_sha_0_ctrl to set the specific mode of SHA</p></li>
+<li><p>Enable SHA by configuring se_sha_0_en in the register se_sha_0_ctrl</p></li>
+<li><p>Configure se_sha_0_hash_sel in the register se_sha_0_ctrl; 0 means starting a new HASH calculation, and 1 means using the last result for HASH calculation</p></li>
+<li><p>Configure the register se_sha_0_msa to set the source address of the data to be processed</p></li>
+<li><p>Configure se_sha_0_msg_len in the register se_sha_0_ctrl to set the length of the data to be processed (512 bits for SHA1, SHA224 and SHA256, while 1024 bits for SHA512, SHA384, SHA512/224, and SHA512/256)</p></li>
+<li><p>Configure se_sha_0_trig_1t in the register se_sha_0_ctrl to trigger SHA</p></li>
+<li><p>The output result is stored in se_sha_0_hash_l_0~se_sha_0_hash_l_7, MSB:se_sha_0_hash_l_0~se_sha_0_hash_l_7, LSB:se_sha_0_hash_l_7~se_sha_0_hash_l_0</p></li>
+</ul>
+</section>
+<section id="gmac-link-mode">
+<h3><span class="section-number">26.4.4. </span>GMAC(link Mode)<a class="headerlink" href="#gmac-link-mode" title="Permalink to this headline"></a></h3>
+<ol class="arabic simple">
+<li><p>Definition of GMAC_link_Table Structure</p></li>
+</ol>
+<blockquote>
+<div><ul>
+<li><p>Word0:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>[9]:se_gmac_0_int_clr_1t</p></li>
+<li><p>[10]:se_gmac_0_int_set_1t</p></li>
+<li><p>[31:16]:se_gmac_0_msg_len</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Word1:se_gmac_0_msa</p></li>
+<li><p>Word2、Word3、Word4、Word5：se_gmac_0_h</p></li>
+<li><p>Word6、Word7、Word8、Word9：se_gmac_0_tag</p></li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><p>Usage process</p></li>
+</ol>
+<ul class="simple">
+<li><p>Configure se_gmac_0_x_endian, se_gmac_0_h_endian, and se_gmac_0_t_endian 0:littleendian 1:bigendian in the register se_gmac_0_ctrl_0</p></li>
+<li><p>Write the start address of the GMAC_link_Table structure into the register se_gmac_0_lca</p></li>
+<li><p>Assign the original message address to se_gmac_0_msa in Word1 in GMAC_link_Table structure</p></li>
+<li><p>Assign the original message length to se_gmac_0_msg_len in Word0 in GMAC_link_Table structure, where the 128-bit message length corresponds to 1 in se_gmac_0_msg_len</p></li>
+<li><p>Configure se_gmac_0_trig_1t trigger gmac engine in the register se_gmac_0_ctrl_0</p></li>
+<li><p>The output result is stored in Word6–Word9 in the GMAC_link_Table structure</p></li>
+</ul>
+</section>
+<section id="random-number-generator-rng">
+<h3><span class="section-number">26.4.5. </span>Random Number Generator (RNG)<a class="headerlink" href="#random-number-generator-rng" title="Permalink to this headline"></a></h3>
+<ol class="arabic simple">
+<li><p>The random numbers generated by the built-in true RNG can be used as the basis for encryption and other operations.</p></li>
+</ol>
+<ul class="simple">
+<li><p>True random numbers: They are generated through physical phenomena, such as coin tossup, dicing, wheel rotation, noise from using electronic components, and nuclear fission. Such RNGs are called physical RNGs, and their weaknesses are high technical requirements.</p></li>
+<li><p>Pseudo-random numbers: Truly random numbers (or random events) are randomly generated in a generation process according to the distribution probability shown in the experimental process, and the result is unpredictable and invisible. The random function in the computer is simulated according to a specified algorithm, and its result is deterministic and visible. We may consider that the probability of this foreseeable result is 100%. Hence the “random number” generated by computer random function is not truly random, but pseudo-random.</p></li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p>Output</p></li>
+</ol>
+<ul class="simple">
+<li><p>The register SE_TRNG_0_DOUT_0~SE_TRNG_0_DOUT_7 stores the output random numbers.</p></li>
+</ul>
+<ol class="arabic simple" start="3">
+<li><p>Usage process</p></li>
+</ol>
+<ul class="simple">
+<li><p>Enable TRNG by configuring se_trng_0_en in the register se_trng_0_ctrl_0</p></li>
+<li><p>Configure se_trng_0_trig_1t in the register se_trng_0_ctrl_0 to trigger TRNG</p></li>
+<li><p>The output result is stored in se_trng_0_dout_0~se_trng_0_dout_7</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="LowPower.html" class="btn btn-neutral float-left" title="25. LowPower" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="version.html" class="btn btn-neutral float-right" title="27. Revision history" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

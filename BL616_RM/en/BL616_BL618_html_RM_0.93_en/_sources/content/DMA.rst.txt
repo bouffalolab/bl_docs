@@ -1,0 +1,194 @@
+==========
+DMA
+==========
+
+Overview
+==========
+Direct Memory Access (DMA), a kind of memory access technique, can directly read and write system memory independently without relying on processor.
+Under the same processor load, DMA is a fast way to transfer data.
+
+It is provided with 1 independent DMA controllers, of which DMA0 and DMA2 have 8 independent dedicated channels, and DMA1 has 4 such channels, managing data transmission between peripherals and memory to enhance bus efficiency.
+DMA supports the transfer from memory to memory, memory to peripherals, and peripheral to memory, and provides the LLI linked list function.
+The software configures the data transfer size, data source address, and destination address.
+
+Features
+=========
+- 1 DMA controller with 4 independent dedicated channels
+- Independent control source and destination access width (single byte, double bytes, and four bytes)
+- Each channel acts as a read-write cache independently
+- Each channel can be triggered by independent peripheral hardware or software
+- Eight kinds of process control
+
+   - DMA process control, source memory, destination memory
+
+   - DMA process control, source memory, destination peripherals
+
+   - DMA process control, source peripherals, destination memory
+
+   - DMA process control, source peripherals, destination peripherals
+
+   - Destination peripheral process control, source peripherals, destination peripherals
+
+   - Destination peripheral process control, source memory, destination peripherals
+
+   - Source peripheral process control, source peripherals, destination memory
+
+   - Source peripheral process control, source peripherals, destination peripherals
+- Supports the LLI linked list function to improve DMA efficiency
+
+Functional Description
+========================
+Operating Principle
+-----------------------------
+When a device tries to directly transfer data to another device through the bus, it will first send a DMA request signal to CPU. The peripheral submits a request through DMA to take over control of the bus from CPU. After receiving this signal, CPU will respond to the DMA signal according to the priority of signal and the order of the DMA request after the current bus cycle is over.
+When CPU responds to a DMA request for a device interface, it will give up control of the bus.
+
+Under the control of DMA controllers, peripherals and memory exchange data directly without CPU intervention. After data is transferred, the device will send a DMA end signal to CPU and return the control of the bus.
+
+.. figure:: ../../picture/DmaArch.svg
+   :align: center
+
+   Block Diagram of DMA
+
+DMA has one AHB Master interfaces and one AHB Slave interface. Based on the current configuration requirements, the AHB Master interface actively accesses the memory or peripherals through system bus, and serves as a data transfer port. The AHB Slave interface for configuring DMA only supports 32bit access.
+
+DMA Channel Configuration
+--------------------------
+DMA support 4 channels. All channels can run simultaneously without interference. Here is the configuration process of DMA channel x:
+
+1. Set the 32-bit source address in the register DMA_C0SrcAddr.
+
+2. Set the 32-bit destination address in the register DMA_C0DstAddr.
+
+3. Automatic address accumulation: You can set to enable/disable the automatic address accumulation mode by configuring the SI (source) and DI (destination) in the register DMA_C0Control. When it is set to 1, this mode is enabled.
+
+4. You can set the width of transferred data by configuring the SWidth (source) and DWidth (destination) bits in the register DMA_C0Control, including single byte, double bytes and four bytes options.
+
+5. You can set the Burst type by configuring the SBSize (source) and DBSize (destination) bits in the register DMA_C0Control, including INCR1, INCR4, INCR8, and INCR16 options.
+
+6. It is worth noting that in the configured combination, the single burst of DMA must not exceed 16 bytes.
+
+7. Range of data transfer length:0-4095
+
+Supported Peripherals
+-------------
+You can determine the peripherals supported by the current DMA by configuring the SrcPeripheral (source) and DstPeripheral (destination). The relationship between peripheral types and configuration values is shown as follows:
+
+.. figure:: ../../picture/DmaPeripheral.svg
+   :align: center
+
+   Peripheral Type Selection
+
+Partial peripheral configuration examples:
+
+**UART uses DMA to transfer data**
+
+When UART sends data packets, DMA can greatly shorten the CPU's processing time, so that CPU resources will not be highly wasted, especially when UART sends and receives a large number of data packets (such as sending and receiving instructions frequently).
+
+For example, the UART0 transfer is configured as follows:
+
+1. Set the value of the SrcPeripheral bit in the register DMA_C0Config to 1. That is, set Source peripheral to UART0_TX
+
+2. Set the value of the DstPeripheral in the register DMA_C0Config to 0. That is, set Destination peripheral to UART0_RX
+
+**I2C uses DMA to transfer data**
+
+Configuration process:
+
+1. Set the value of the SrcPeripheral bit in the register DMA_C0Config to 7. That is, set Source peripheral to I2C0_TX
+
+2. Set the value of the DstPeripheral in the register DMA_C0Config to 6. That is, set Destination peripheral to I2C0_RX
+
+**SPI uses DMA to transfer data**
+
+Configuration process:
+
+1. Set the value of the SrcPeripheral bit in the register DMA_C0Config to 11. That is, set Source peripheral to SPI0_TX
+
+2. Set the value of the DstPeripheral in the register DMA_C0Config to 10. That is, set Destination peripheral to SPI0_RX
+
+**ADC0/1 use DMA to transfer data**
+
+Configuration process:
+
+1. Set the value of the SrcPeripheral bit in the register DMA_C0Config to 22/23. That is, set Source peripheral to GPADC0/GPADC1.
+
+Linked List Mode
+-----------
+DMA supports the linked list working mode. During a DMA read or write operation, data can be filled in the next linked list. After the data transfer of the current linked list is completed, the start address of the next linked list can be obtained by reading the value of the register DMA_C0LLI, to directly transfer the data of the next linked list. This ensures continuous and uninterrupted work during DMA transfer, and improves the efficiency of CPU and DMA.
+
+.. figure:: ../../picture/DMALLI.svg
+   :align: center
+
+   LLI Framework
+
+DMA Interrupt
+------------------
+
+- DMA_INT_TCOMPLETED
+
+   * Data transfer complete interrupt: This interrupt will be generated when a data transfer is completed
+ 
+- DMA_INT_ERR
+ 
+   * Data transfer error interrupt: This interrupt will be generated when an error occurs during data transfer
+
+Transfer Mode
+==========
+Memory to Memory
+------------
+After this mode is enabled, DMA will transfer the data from the source address to the destination address based on the preset TransferSize. Upon transfer completed, the DMA controller will automatically return to the idle state and wait for the next transfer.
+
+Configuration process:
+
+1. Set the DMA_C0SrcAddr value of the register to the source memory address
+
+2. Set the DMA_C0DstAddr value of the register to the destination memory address
+
+3. Select a transfer mode, and set the value of the FlowCntrl bit in the register DMA_C0Config to 0, namely selecting the memorytomemory mode
+
+4. Set the values of the corresponding bits in the register DMA_C0Control: the SI bit is set to 1, the DI bit is set to 0, the source address automatic accumulation mode is enabled; set the transfer width of the source and destination through SWidth and DWidth respectively; and set the burst type of the source and the destination through SBSize and DBSize respectively
+
+5. Select a proper channel, enable DMA, and complete data transfer
+
+Memory to Peripherals
+------------
+In this mode, DMA will transfer the data from the source to the internal cache according to the preset TransferSize. The transfer will automatically pause when the cache space is insufficient and continue when there is enough cache space until the preset TransferSize is met.
+
+Moreover, when the destination peripheral request is triggered, the target configuration will be burst to the destination address, and it will automatically return to the idle state until the preset TransferSize is met and wait for the next transfer.
+
+Configuration process:
+
+1. Set the DMA_C0SrcAddr value of the register to the source memory address
+
+2. Set the DMA_C0DstAddr value of the register to the destination peripheral address
+
+3. Select a transfer mode, and set the value of the FlowCntrl bit in the register DMA_C0Config to 1, namely selecting the Memorytoperipheral mode
+
+4. Set the values of the corresponding bits in the register DMA_C0Control: the SI bit is set to 1, the DI bit is set to 0, the source address automatic accumulation mode is enabled; set the transfer width of the source and destination through SWidth and DWidth respectively; and set the burst type of the source and the destination through SBSize and DBSize respectively
+
+5. Select a proper channel, enable DMA, and complete data transfer
+
+Peripheral to Memory
+------------
+In this mode, when the source peripheral request is triggered, the source configuration will be burst into the cache until the preset TransferSize is met. Moreover, when the internal cache is enough for one burst to the destination, DMA will automatically transfer the cached content to the destination address, automatically return to the idle state until the preset TransferSize is met, and wait for the next transfer.
+
+Configuration process:
+
+1. Set the DMA_C0SrcAddr value of the register to the source peripheral address
+
+2. Set the DMA_C0DstAddr value of the register to the destination memory address
+
+3. Select a transfer mode, and set the value of the FlowCntrl bit in the register DMA_C0Config to 2, namely selecting the Peripheraltomemory mode
+
+4. Set the values of the corresponding bits in the register DMA_C0Control: Set the DI and SI bits to 1 to enable the automatic address accumulation mode; set the transfer width of the source and destination through SWidth and DWidth respectively; and set the burst type of the source and the destination through SBSize and DBSize respectively
+
+5. Select a proper channel, enable DMA, and complete data transfer
+
+.. only:: html
+
+   .. include:: dma_register.rst
+
+.. raw:: latex
+
+   \input{../../en/content/dma}

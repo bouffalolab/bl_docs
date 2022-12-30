@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>19. ISO11898 &mdash; BL616/BL618 Reference Manual  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="20. CAM" href="Cam.html" />
+    <link rel="prev" title="18. USB" href="USB.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL616/BL618 Reference Manual
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. System and Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. Reset and Clock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPIO.html">4. GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">5. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">6. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">7. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">8. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">9. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">10. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">11. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">12. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">13. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2S.html">14. I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AudioDAC.html">15. AudioDAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AudioADC.html">16. AudioADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EMAC.html">17. Emac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USB.html">18. USB</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">19. ISO11898</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">19.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#features">19.2. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#functional-description">19.3. Functional Description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#tx-buffer-txb">19.3.1. TX Buffer (TXB)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rx-buffer-rxb-rxfifo">19.3.2. RX Buffer (RXB, RXFIFO)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#access-control-filter-acf">19.3.3. Access Control Filter (ACF)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bit-stream-processor-bsp">19.3.4. Bit Stream Processor (BSP)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bit-timing-logic-btl">19.3.5. Bit Timing Logic (BTL)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#error-management-logic-eml">19.3.6. Error Management Logic (EML)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">19.4. Functional Description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mode">19.4.1. Mode</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#self-test-mode">19.4.1.1. Self-test Mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#silent-mode">19.4.1.2. Silent Mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#reset-mode">19.4.1.3. Reset Mode</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#sending-process">19.4.2. Sending Process</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#process">19.4.2.1. Process</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#termination-of-sending">19.4.2.2. Termination of Sending</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#self-sending-and-self-receiving">19.4.2.3. Self-sending and Self-receiving</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#precautions">19.4.2.4. Precautions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#receiving-process">19.4.3. Receiving Process</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">19.4.3.1. Process</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#number-of-messages">19.4.3.2. Number of Messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rxb">19.4.3.3. RXB</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#identifier-filtering">19.4.4. Identifier Filtering</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#single-filter-configuration">19.4.4.1. Single Filter Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#double-filter-configuration">19.4.4.2. Double Filter Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#error-management">19.4.5. Error Management</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#arbitration-lost">19.4.5.1. Arbitration Lost</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#error-capture">19.4.5.2. Error Capture</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rx-error-counter-register-rxerr">19.4.5.3. RX Error Counter Register (RXERR)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tx-error-counter-register-txerr">19.4.5.4. TX Error Counter Register (TXERR)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#error-limit-setting">19.4.5.5. Error Limit Setting</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#bit-timing">19.4.6. Bit Timing</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#baud-rate-prescaler-brp">19.4.6.1. Baud Rate Prescaler (BRP)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#synchronization-jump-width-sjw">19.4.6.2. Synchronization Jump Width (SJW)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sampling-sam">19.4.6.3. Sampling (SAM)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#time-segment-tseg">19.4.6.4. Time Segment (TSEG)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Cam.html">20. CAM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MJPEG.html">21. MJPEG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBI.html">22. DBI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SDH.html">23. SDH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SDIO.html">24. SDIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LowPower.html">25. LowPower</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SEC_ENG.html">26. SEC ENG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">27. Revision history</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL616/BL618 Reference Manual</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">19. </span>ISO11898</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="iso11898">
+<h1><span class="section-number">19. </span>ISO11898<a class="headerlink" href="#iso11898" title="Permalink to this headline"></a></h1>
+<section id="overview">
+<h2><span class="section-number">19.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
+<p>ISO11898 was developed by German BOSCH Company, which is famous for R&amp;D and production of automotive electronic products. It is one of the most widely used fieldbuses in the world.</p>
+</section>
+<section id="features">
+<h2><span class="section-number">19.2. </span>Features<a class="headerlink" href="#features" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p>Supports 1Mbps and custom bit rate</p></li>
+<li><p>ISO11898 2.0A and 2.0B</p></li>
+<li><p>Self-test mode (self-sending and self-receiving)</p></li>
+<li><p>Frame filtering</p></li>
+<li><p>Silent mode (no reply, no valid error flag)</p></li>
+<li><p>Single transmission without retransmission</p></li>
+<li><p>Query of bits that lose the arbitration</p></li>
+<li><p>Any bus error can trigger an interrupt</p></li>
+</ul>
+</section>
+<section id="functional-description">
+<h2><span class="section-number">19.3. </span>Functional Description<a class="headerlink" href="#functional-description" title="Permalink to this headline"></a></h2>
+<section id="tx-buffer-txb">
+<h3><span class="section-number">19.3.1. </span>TX Buffer (TXB)<a class="headerlink" href="#tx-buffer-txb" title="Permalink to this headline"></a></h3>
+<p>TXB, an interface between CPU and BSP, can store complete messages for transmission over the ISO11898 network. The buffer length is 13 bytes, written by CPU and read by the BSP.</p>
+</section>
+<section id="rx-buffer-rxb-rxfifo">
+<h3><span class="section-number">19.3.2. </span>RX Buffer (RXB, RXFIFO)<a class="headerlink" href="#rx-buffer-rxb-rxfifo" title="Permalink to this headline"></a></h3>
+<p>RXB, an interface between access control filter and CPU, is used to store the filtered messages received from the ISO11898 bus. RXB represents a 13-byte window in the RX FIFO that can be accessed by CPU, with a total length of 64 bytes.
+RX FIFO allows CPU to receive other messages while processing one frame of message.</p>
+</section>
+<section id="access-control-filter-acf">
+<h3><span class="section-number">19.3.3. </span>Access Control Filter (ACF)<a class="headerlink" href="#access-control-filter-acf" title="Permalink to this headline"></a></h3>
+<p>ACF compares the received identifier with the contents of the ACF register and decides whether the message should be accepted. If accepted, the complete message will be stored in RX FIFO.</p>
+</section>
+<section id="bit-stream-processor-bsp">
+<h3><span class="section-number">19.3.4. </span>Bit Stream Processor (BSP)<a class="headerlink" href="#bit-stream-processor-bsp" title="Permalink to this headline"></a></h3>
+<p>BSP, a sequence generator, is used to process the data between TXB, RXB, and ISO11898 bus. It also performs error detection, arbitration, bit padding, and error handling on the ISO11898 bus.</p>
+</section>
+<section id="bit-timing-logic-btl">
+<h3><span class="section-number">19.3.5. </span>Bit Timing Logic (BTL)<a class="headerlink" href="#bit-timing-logic-btl" title="Permalink to this headline"></a></h3>
+<p>BTL monitors the serial ISO11898 bus and processes the bus related bit timing. It performs hard synchronization on the recessive-to-dominant transition of the bus at the beginning of the message, and soft synchronization again during subsequent message reception. BTL also provides a programmable time period to compensate propagation delay and phase shift (for example, due to oscillator drift), and can define sampling points and sampling times in a bit time.</p>
+</section>
+<section id="error-management-logic-eml">
+<h3><span class="section-number">19.3.6. </span>Error Management Logic (EML)<a class="headerlink" href="#error-management-logic-eml" title="Permalink to this headline"></a></h3>
+<p>EML determines the errors of the transport layer module. It receives the error statement from BSP and then informs BSP and interrupt management logic (IML) of error statistics.</p>
+</section>
+</section>
+<section id="id1">
+<h2><span class="section-number">19.4. </span>Functional Description<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h2>
+<section id="mode">
+<h3><span class="section-number">19.4.1. </span>Mode<a class="headerlink" href="#mode" title="Permalink to this headline"></a></h3>
+<section id="self-test-mode">
+<h4><span class="section-number">19.4.1.1. </span>Self-test Mode<a class="headerlink" href="#self-test-mode" title="Permalink to this headline"></a></h4>
+<p>You can select the self-test mode by setting the STM bit in the MOD register to ‘1’. In this mode, the RX request command can be used to conduct a full-node test without other active nodes on the bus, and even if no response is received, the ISO11898 controller will perform successful transmission.</p>
+</section>
+<section id="silent-mode">
+<h4><span class="section-number">19.4.1.2. </span>Silent Mode<a class="headerlink" href="#silent-mode" title="Permalink to this headline"></a></h4>
+<p>You can select the silent mode by setting the LOM bit in the MOD register to “1”. In this mode, the ISO11898 controller will not respond to the ISO11898 bus even if it successfully receives the message, and the error counter will stay at the current value. This mode will force the ISO11898 controller to become a passive error, and no message can be transmitted at this time. This mode can be used in software-driven bit rate detection and hot swap scenarios, and all other functions work normally as the normal mode.</p>
+</section>
+<section id="reset-mode">
+<h4><span class="section-number">19.4.1.3. </span>Reset Mode<a class="headerlink" href="#reset-mode" title="Permalink to this headline"></a></h4>
+<p>Once the RM bit in the MOD register changes from ‘0’ to ‘1’, it will cause the current TX and RX messages to be terminated and enter the reset mode. When the RM bit changes from ‘1’ to ‘0’, the ISO11898 controller will return to the operating mode.</p>
+<p>The meanings of different operations in different modes are as follows.</p>
+<table class="colwidths-given docutils align-center" id="id3" style="width: 80%">
+<caption><span class="caption-number">Table 19.1 </span><span class="caption-text">The meaning of each register in different modes</span><a class="headerlink" href="#id3" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head" rowspan="2"><p>ADDRESS</p>
+<p>OFFSET</p>
+</th>
+<th class="head" colspan="4"><p>OPERATING MODE</p></th>
+<th class="head" colspan="2"><p>RESET MODE</p></th>
+</tr>
+<tr class="row-even"><th class="head" colspan="2"><p>READ</p></th>
+<th class="head" colspan="2"><p>WRITE</p></th>
+<th class="head"><p>READ</p></th>
+<th class="head"><p>WRITE</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-odd"><td><p>0x00</p></td>
+<td colspan="2"><p>mode</p></td>
+<td colspan="2"><p>mode</p></td>
+<td><p>mode</p></td>
+<td><p>mode</p></td>
+</tr>
+<tr class="row-even"><td><p>0x04</p></td>
+<td colspan="2"><p>(00H)</p></td>
+<td colspan="2"><p>command</p></td>
+<td><p>(00H)</p></td>
+<td><p>command</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x08</p></td>
+<td colspan="2"><p>status</p></td>
+<td colspan="2"><p>reserved</p></td>
+<td><p>status</p></td>
+<td><p>reserved</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0C</p></td>
+<td colspan="2"><p>interrupt</p></td>
+<td colspan="2"><p>reserved</p></td>
+<td><p>interrupt</p></td>
+<td><p>reserved</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x10</p></td>
+<td colspan="2"><p>interrupt enable</p></td>
+<td colspan="2"><p>interrupt enable</p></td>
+<td><p>interrupt
+enable</p></td>
+<td><p>interrupt
+enable</p></td>
+</tr>
+<tr class="row-even"><td><p>0x14</p></td>
+<td colspan="2"><p>reserved</p></td>
+<td colspan="2"><p>reserved</p></td>
+<td><p>reserved</p></td>
+<td><p>reserved</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x18</p></td>
+<td colspan="2"><p>bus timing 0</p></td>
+<td colspan="2"><p>reserved</p></td>
+<td><p>bus timing 0</p></td>
+<td><p>bus timing 0</p></td>
+</tr>
+<tr class="row-even"><td><p>0x1C</p></td>
+<td colspan="2"><p>bus timing 1</p></td>
+<td colspan="2"><p>reserved</p></td>
+<td><p>bus timing 1</p></td>
+<td><p>bus timing 1</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x20</p></td>
+<td colspan="2"><p>reserved</p></td>
+<td colspan="2"><p>reserved</p></td>
+<td><p>reserved</p></td>
+<td><p>reserved</p></td>
+</tr>
+<tr class="row-even"><td><p>0x24</p></td>
+<td colspan="2"><p>reserved</p></td>
+<td colspan="2"><p>reserved</p></td>
+<td><p>reserved</p></td>
+<td><p>reserved</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x28</p></td>
+<td colspan="2"><p>reserved</p></td>
+<td colspan="2"><p>reserved</p></td>
+<td><p>reserved</p></td>
+<td><p>reserved</p></td>
+</tr>
+<tr class="row-even"><td><p>0x2C</p></td>
+<td colspan="2"><p>arbitration lost capture</p></td>
+<td colspan="2"><p>reserved</p></td>
+<td><p>arbitration
+lost capture</p></td>
+<td><p>reserved</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x30</p></td>
+<td colspan="2"><p>error code capture</p></td>
+<td colspan="2"><p>reserved</p></td>
+<td><p>error code
+capture</p></td>
+<td><p>reserved</p></td>
+</tr>
+<tr class="row-even"><td><p>0x34</p></td>
+<td colspan="2"><p>error warning limit</p></td>
+<td colspan="2"><p>reserved</p></td>
+<td><p>error warning
+limit</p></td>
+<td><p>error warning
+limit</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x38</p></td>
+<td colspan="2"><p>RX error counter</p></td>
+<td colspan="2"><p>reserved</p></td>
+<td><p>RX error
+counter</p></td>
+<td><p>RX error
+counter</p></td>
+</tr>
+<tr class="row-even"><td><p>0x3C</p></td>
+<td colspan="2"><p>TX error counter</p></td>
+<td colspan="2"><p>reserved</p></td>
+<td><p>TX error
+counter</p></td>
+<td><p>TX error
+counter</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x40</p></td>
+<td><p>SFF RX frame
+information</p></td>
+<td><p>EFF RX frame
+information</p></td>
+<td><p>SFF TX frame
+information</p></td>
+<td><p>EFF TX frame
+information</p></td>
+<td><p>acceptance
+code 0</p></td>
+<td><p>acceptance
+code 0</p></td>
+</tr>
+<tr class="row-even"><td><p>0x44</p></td>
+<td><p>RX identifier 1</p></td>
+<td><p>RX identifier 1</p></td>
+<td><p>TX identifier 1</p></td>
+<td><p>TX identifier 1</p></td>
+<td><p>acceptance
+code 1</p></td>
+<td><p>acceptance
+code 1</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x48</p></td>
+<td><p>RX identifier 2</p></td>
+<td><p>RX identifier 2</p></td>
+<td><p>TX identifier 2</p></td>
+<td><p>TX identifier 2</p></td>
+<td><p>acceptance
+code 2</p></td>
+<td><p>acceptance
+code 2</p></td>
+</tr>
+<tr class="row-even"><td><p>0x4C</p></td>
+<td><p>RX data 1</p></td>
+<td><p>RX identifier 3</p></td>
+<td><p>TX data 1</p></td>
+<td><p>TX identifier 3</p></td>
+<td><p>acceptance
+code 3</p></td>
+<td><p>acceptance
+code 3</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x50</p></td>
+<td><p>RX data 2</p></td>
+<td><p>RX identifier 4</p></td>
+<td><p>TX data 2</p></td>
+<td><p>TX identifier 4</p></td>
+<td><p>acceptance
+mask 0</p></td>
+<td><p>acceptance
+mask 0</p></td>
+</tr>
+<tr class="row-even"><td><p>0x54</p></td>
+<td><p>RX data 3</p></td>
+<td><p>RX data 1</p></td>
+<td><p>TX data 3</p></td>
+<td><p>TX data 1</p></td>
+<td><p>acceptance
+mask 1</p></td>
+<td><p>acceptance
+mask 1</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x58</p></td>
+<td><p>RX data 4</p></td>
+<td><p>RX data 2</p></td>
+<td><p>TX data 4</p></td>
+<td><p>TX data 2</p></td>
+<td><p>acceptance
+mask 2</p></td>
+<td><p>acceptance
+mask 2</p></td>
+</tr>
+<tr class="row-even"><td><p>0x5C</p></td>
+<td><p>RX data 5</p></td>
+<td><p>RX data 3</p></td>
+<td><p>TX data 5</p></td>
+<td><p>TX data 3</p></td>
+<td><p>acceptance
+mask 3</p></td>
+<td><p>acceptance
+mask 3</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x60</p></td>
+<td><p>RX data 6</p></td>
+<td><p>RX data 4</p></td>
+<td><p>TX data 6</p></td>
+<td><p>TX data 4</p></td>
+<td><p>reserved</p></td>
+<td><p>reserved</p></td>
+</tr>
+<tr class="row-even"><td><p>0x64</p></td>
+<td><p>RX data 7</p></td>
+<td><p>RX data 5</p></td>
+<td><p>TX data 7</p></td>
+<td><p>TX data 5</p></td>
+<td><p>reserved</p></td>
+<td><p>reserved</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x68</p></td>
+<td><p>RX data 8</p></td>
+<td><p>RX data 6</p></td>
+<td><p>TX data 8</p></td>
+<td><p>TX data 6</p></td>
+<td><p>reserved</p></td>
+<td><p>reserved</p></td>
+</tr>
+<tr class="row-even"><td><p>0x6C</p></td>
+<td><p>(FIFO RAM)</p></td>
+<td><p>RX data 7</p></td>
+<td><p>reserved</p></td>
+<td><p>TX data 7</p></td>
+<td><p>reserved</p></td>
+<td><p>reserved</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x70</p></td>
+<td><p>(FIFO RAM)</p></td>
+<td><p>RX data 8</p></td>
+<td><p>reserved</p></td>
+<td><p>TX data 8</p></td>
+<td><p>reserved</p></td>
+<td><p>reserved</p></td>
+</tr>
+<tr class="row-even"><td><p>0x74</p></td>
+<td colspan="2"><p>RX message counter</p></td>
+<td colspan="2"><p>reserved</p></td>
+<td><p>RX message
+counter</p></td>
+<td><p>reserved</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x78</p></td>
+<td colspan="2"><p>RX buffer start address</p></td>
+<td colspan="2"><p>reserved</p></td>
+<td><p>RX buffer
+start address</p></td>
+<td><p>RX buffer
+start address</p></td>
+</tr>
+<tr class="row-even"><td><p>0x7C</p></td>
+<td colspan="2"><p>clock divider</p></td>
+<td colspan="2"><p>clock divider</p></td>
+<td><p>clock divider</p></td>
+<td><p>clock divider</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="sending-process">
+<h3><span class="section-number">19.4.2. </span>Sending Process<a class="headerlink" href="#sending-process" title="Permalink to this headline"></a></h3>
+<section id="process">
+<h4><span class="section-number">19.4.2.1. </span>Process<a class="headerlink" href="#process" title="Permalink to this headline"></a></h4>
+<ol class="arabic simple">
+<li><p>Check the TBS bit in the SR register to ensure that TXB is empty.</p></li>
+<li><p>Configure frame information, ID number, and data.</p></li>
+<li><p>Request transmission by setting the TR bit in the CMR register.</p></li>
+</ol>
+</section>
+<section id="termination-of-sending">
+<h4><span class="section-number">19.4.2.2. </span>Termination of Sending<a class="headerlink" href="#termination-of-sending" title="Permalink to this headline"></a></h4>
+<p>When CPU requests to suspend the previous transmission, you can use this function. For example, you need to send a more urgent message first. Messages that are sending now are not affected by this function and sending will not stop. To check whether the previous message was successfully sent, you should check the TCS bit in the SR register. The application software can use this function by setting the AT bit in the CMR register to ‘1’, which should be executed after the TBS bit in the SR register is set to ‘1’ or the TX interrupt is generated.</p>
+<p>It should be noted that even if the message is terminated, a TX interrupt will occur, because the status bit of the TXB has indicated the “released” status.</p>
+</section>
+<section id="self-sending-and-self-receiving">
+<h4><span class="section-number">19.4.2.3. </span>Self-sending and Self-receiving<a class="headerlink" href="#self-sending-and-self-receiving" title="Permalink to this headline"></a></h4>
+<p>The application software can realize self-sending and self-receiving by setting the SRR bit in the CMR register. At that time, sending and receiving are synchronized. Other operations are the same as the normal sending process.</p>
+</section>
+<section id="precautions">
+<h4><span class="section-number">19.4.2.4. </span>Precautions<a class="headerlink" href="#precautions" title="Permalink to this headline"></a></h4>
+<ol class="arabic simple">
+<li><p>If the TR and AT bits of the CMA register are set simultaneously, the message will be sent only once. Even if there is an error event or arbitration lost, it will not be sent again.</p></li>
+<li><p>If the SRR and AT bits of the CMA register are set simultaneously, the message will be sent only once by self-sending and self-receiving. Even if there is an error event or arbitration lost, it will not be sent again.</p></li>
+<li><p>If SRR, TR, and AT bits of the CMA register are set simultaneously, the message will be sent by setting TR and AT bits simultaneously.</p></li>
+<li><p>Once the TX status bit in the status register is set, the internal TX request bit will be cleared automatically.</p></li>
+<li><p>If the TR and SRR bits of the CMA register are set simultaneously, the SRR bit will be ignored.</p></li>
+</ol>
+</section>
+</section>
+<section id="receiving-process">
+<h3><span class="section-number">19.4.3. </span>Receiving Process<a class="headerlink" href="#receiving-process" title="Permalink to this headline"></a></h3>
+<section id="id2">
+<h4><span class="section-number">19.4.3.1. </span>Process<a class="headerlink" href="#id2" title="Permalink to this headline"></a></h4>
+<p>The received messages are stored in an internal FIFO with a depth of 64 bytes. The FIFO is completely managed by hardware, which saves CPU’s processing load, simplifies software, and ensures data consistency. The application can read the received messages through the FIFO’s output interface. When the RBS bit in the SR register is set, one or more frames of messages can be read in RX FIFO. After the software gets the message, setting the RRB bit in the CMR register can release the RX FIFO occupied by the current message.</p>
+</section>
+<section id="number-of-messages">
+<h4><span class="section-number">19.4.3.2. </span>Number of Messages<a class="headerlink" href="#number-of-messages" title="Permalink to this headline"></a></h4>
+<p>The RMC register indicates the number of readable messages in RX FIFO, which increases with each RX event and decreases with each buffer release. The value is 0 after reset.</p>
+</section>
+<section id="rxb">
+<h4><span class="section-number">19.4.3.3. </span>RXB<a class="headerlink" href="#rxb" title="Permalink to this headline"></a></h4>
+<p>The RBSA register indicates the address of the first byte of the received message stored in the current internal RAM, which is mapped to the RXB window. The contents of the internal RAM can be interpreted on this basis. This part of the internal RAM can be read and written by CPU (written only in the reset mode).</p>
+<p>Example: If the value of RBSA is 18H, the current readable message of the RXB window (offset address: 10H to 12H) is also stored in the RAM address starting from 18H. As the RAM address is directly mapped to the starting position of ISO11898 offset address 20H (corresponding to RAM address 0H), the message can also be read from ISO11898 offset address 38H and the following bytes (ISO11898 address = RBSA + 20H = 18H + 20H = 38H). If the message address exceeds the RAM address 3FH, it will continue from the RAM address 0.</p>
+<p>When there is at least one message in FIFO, the command to release the RXB should be issued, and then RBSA will be updated to the starting position of the next message.</p>
+<p>When the hardware is reset, the value of RBSA register is initialized to ‘00H’. When the software is reset in the reset mode, the value of this register will not change, but the FIFO will be cleared. This means that the contents of RAM will not change, but the next received (or sent) message will overwrite the visible message in the RXB window.</p>
+</section>
+</section>
+<section id="identifier-filtering">
+<h3><span class="section-number">19.4.4. </span>Identifier Filtering<a class="headerlink" href="#identifier-filtering" title="Permalink to this headline"></a></h3>
+<p>With the help of ACF, the ISO11898 controller will allow the received message to be delivered to RX FIFO only when the identifier bit of the received message is the same as the predefined bit in the ACF register. ACF consists of the acceptance code registers (ACRn) and acceptance mask registers (AMRn). The values of matching bits in the receivable message are set by the ACRn, and which bits can be masked is set by the AMRn.</p>
+<p>There are two different filtering modes (set by the AFM bit in the MOD register):</p>
+<ul class="simple">
+<li><p>Single filter mode (AFM = 1).</p></li>
+<li><p>Double filter mode (AFM = 0).</p></li>
+</ul>
+<section id="single-filter-configuration">
+<h4><span class="section-number">19.4.4.1. </span>Single Filter Configuration<a class="headerlink" href="#single-filter-configuration" title="Permalink to this headline"></a></h4>
+<p>In this configuration, a 4-byte long filter can be defined. The bit correspondence between filter bytes and message bytes depends on the currently received frame format.</p>
+<p>Standard frame: If a message in a standard frame format is received, the complete identifier including the RTR bit and the first two data bytes is used to accept filtering. If there is no data byte because RTR bit is set, or there is no data byte or only one data byte because a data length is set, the message can also be received.</p>
+<p>As all the filter bits are logically AND, only when all the bits pass through the filter, can a message be received. It should be noted that the low 4 bits of AMR1 and ACR1 are unused, and these bits should be set as mask bits for compatibility with future products. That is, all 3–0 bits of AMR1 are ‘1’.</p>
+<figure class="align-center" id="id4">
+<img alt="../_images/ISO11898FilterSingleStandard.svg" src="../_images/ISO11898FilterSingleStandard.svg" /><figcaption>
+<p><span class="caption-number">Fig. 19.1 </span><span class="caption-text">Single filter configuration, receiving standard frame messages</span><a class="headerlink" href="#id4" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Extended frame: If a message in an extended frame format is received, the complete identifier including the RTR bit is used to accept filtering.</p>
+<p>As all the filter bits are logically AND, only when all the bits pass through the filter, can a message be received. It should be noted that the low 2 bits of AMR3 and ACR3 are unused, and these bits should be set as mask bits for compatibility with future products. That is, all 1–0 bits of AMR3 are ‘1’.</p>
+<figure class="align-center" id="id5">
+<img alt="../_images/ISO11898FilterSingleExtended.svg" src="../_images/ISO11898FilterSingleExtended.svg" /><figcaption>
+<p><span class="caption-number">Fig. 19.2 </span><span class="caption-text">Single filter configuration, receiving extended frame messages</span><a class="headerlink" href="#id5" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="double-filter-configuration">
+<h4><span class="section-number">19.4.4.2. </span>Double Filter Configuration<a class="headerlink" href="#double-filter-configuration" title="Permalink to this headline"></a></h4>
+<p>Two short filters can be defined in this configuration, and the received message will be compared with both filters to decide whether to copy the message to the RXB. As long as a filter receives the message, the received message is valid. The bit correspondence between filter bytes and message bytes depends on the currently received frame format.</p>
+<p>Standard frame: If a message in a standard frame format is received, the two filters defined look a little different. The first filter compares the complete identifier including RTR and the first data byte, while the second one only compares the standard identifier including RTR.</p>
+<p>To successfully receive the message, the comparison result of all single bits in at least one complete filter indicates “accept”. There is no data when RTR is set or the data length is 0. However, if the first part up to the RTR bit indicates “accept”, the message can also pass through the filter 1.</p>
+<p>If the first filter does not need to filter data bytes, the low 4 bits of AMR1 and AMR3 must be set to logical ‘1’ (insignificant), and the two filters run identically using standard identifiers including RTR.</p>
+<figure class="align-center" id="id6">
+<img alt="../_images/ISO11898FilterDualStandard.svg" src="../_images/ISO11898FilterDualStandard.svg" /><figcaption>
+<p><span class="caption-number">Fig. 19.3 </span><span class="caption-text">Dual filter configuration, receiving standard frame messages</span><a class="headerlink" href="#id6" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Extended frame: If a message in an extended frame format is received, the two filters defined look the same. Both filters only compare the first two bytes of the extended identifier.</p>
+<p>Only when all single bit comparisons of at least one complete filter indicate acceptance, can the message be successfully received.</p>
+<figure class="align-center" id="id7">
+<img alt="../_images/ISO11898FilterDualExtended.svg" src="../_images/ISO11898FilterDualExtended.svg" /><figcaption>
+<p><span class="caption-number">Fig. 19.4 </span><span class="caption-text">Dual filter configuration, receiving extended frame messages</span><a class="headerlink" href="#id7" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="error-management">
+<h3><span class="section-number">19.4.5. </span>Error Management<a class="headerlink" href="#error-management" title="Permalink to this headline"></a></h3>
+<section id="arbitration-lost">
+<h4><span class="section-number">19.4.5.1. </span>Arbitration Lost<a class="headerlink" href="#arbitration-lost" title="Permalink to this headline"></a></h4>
+<p>The arbitration lost capture (ALC) register contains the position that encounters arbitration lost and can only be read by CPU but not written by it. If the arbitration lost interrupt is enabled, an interrupt will be generated once arbitration loses. The position of the current bit in BSP is captured into the ALC. This register’s value is fixed until the user software reads the contents of the ALC. After this value is read, the capture mechanism is activated again. When the interrupt register is read, the corresponding interrupt flag will also be cleared. No arbitration lost interrupt will be generated again before the ALC register is read.</p>
+<figure class="align-center" id="id8">
+<img alt="../_images/ISO11898ArbitrationLostBitNumberInterpretation.svg" src="../_images/ISO11898ArbitrationLostBitNumberInterpretation.svg" /><figcaption>
+<p><span class="caption-number">Fig. 19.5 </span><span class="caption-text">Arbitration lost bit number interpretation</span><a class="headerlink" href="#id8" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id9">
+<img alt="../_images/ISO11898ExampleOfArbitrationLost.svg" src="../_images/ISO11898ExampleOfArbitrationLost.svg" /><figcaption>
+<p><span class="caption-number">Fig. 19.6 </span><span class="caption-text">Example of arbitration lost bit number interpretation; result: ALC = 08</span><a class="headerlink" href="#id9" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<table class="colwidths-given docutils align-center" id="id10" style="width: 80%">
+<caption><span class="caption-number">Table 19.2 </span><span class="caption-text">Arbitration loss capture location</span><a class="headerlink" href="#id10" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 35%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head" colspan="5"><p>BITS</p></th>
+<th class="head" rowspan="2"><p>DECIMAL</p>
+<p>VALUE</p>
+</th>
+<th class="head" rowspan="2"><p>FUNCTION</p></th>
+</tr>
+<tr class="row-even"><th class="head"><p>ALC.4</p></th>
+<th class="head"><p>ALC.3</p></th>
+<th class="head"><p>ALC.2</p></th>
+<th class="head"><p>ALC.1</p></th>
+<th class="head"><p>ALC.0</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>00</p></td>
+<td><p>arbitration lost in bit 1 of identifier</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>01</p></td>
+<td><p>arbitration lost in bit 2 of identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>02</p></td>
+<td><p>arbitration lost in bit 3 of identifier</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>03</p></td>
+<td><p>arbitration lost in bit 4 of identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>04</p></td>
+<td><p>arbitration lost in bit 5 of identifier</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>05</p></td>
+<td><p>arbitration lost in bit 6 of identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>06</p></td>
+<td><p>arbitration lost in bit 7 of identifier</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>07</p></td>
+<td><p>arbitration lost in bit 8 of identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>08</p></td>
+<td><p>arbitration lost in bit 9 of identifier</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>09</p></td>
+<td><p>arbitration lost in bit 10 of identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>10</p></td>
+<td><p>arbitration lost in bit 11 of identifier</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>11</p></td>
+<td><p>arbitration lost in bit SRTR</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>12</p></td>
+<td><p>arbitration lost in bit IDE</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>13</p></td>
+<td><p>arbitration lost in bit 12 of identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>14</p></td>
+<td><p>arbitration lost in bit 13 of identifier</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>15</p></td>
+<td><p>arbitration lost in bit 14 of identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>16</p></td>
+<td><p>arbitration lost in bit 15 of identifier</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>17</p></td>
+<td><p>arbitration lost in bit 16 of identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>18</p></td>
+<td><p>arbitration lost in bit 17 of identifier</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>19</p></td>
+<td><p>arbitration lost in bit 18 of identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>20</p></td>
+<td><p>arbitration lost in bit 19 of identifier</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>21</p></td>
+<td><p>arbitration lost in bit 20 of identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>22</p></td>
+<td><p>arbitration lost in bit 21 of identifier</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>23</p></td>
+<td><p>arbitration lost in bit 22 of identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>24</p></td>
+<td><p>arbitration lost in bit 23 of identifier</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>25</p></td>
+<td><p>arbitration lost in bit 24 of identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>26</p></td>
+<td><p>arbitration lost in bit 25 of identifier</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>27</p></td>
+<td><p>arbitration lost in bit 26 of identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>28</p></td>
+<td><p>arbitration lost in bit 27 of identifier</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>29</p></td>
+<td><p>arbitration lost in bit 28 of identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>30</p></td>
+<td><p>arbitration lost in bit 29 of identifier</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>31</p></td>
+<td><p>arbitration lost in bit RTR</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="error-capture">
+<h4><span class="section-number">19.4.5.2. </span>Error Capture<a class="headerlink" href="#error-capture" title="Permalink to this headline"></a></h4>
+<p>The error code capture (ECC) register contains the type and location of bus errors and can only be read by CPU but not written by it. If the bus error interrupt is enabled, a bus error interrupt will be generated once a bus error occurs. The position of the current bit in BSP is captured into the ECC. This register’s value is fixed until the user software reads the contents of the ECC. After this value is read, the capture mechanism is activated again. Reading the corresponding bit in the interrupt register will clear this bit, and no bus error interrupt will be generated before the ECC register is read.</p>
+<p>The error types represented by the values in the ECC register are shown as follows.</p>
+<table class="colwidths-given docutils align-center" id="id11" style="width: 80%">
+<caption><span class="caption-number">Table 19.3 </span><span class="caption-text">Type of error catch</span><a class="headerlink" href="#id11" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 30%" />
+<col style="width: 40%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>BIT ECC.7</p></th>
+<th class="head"><p>BIT ECC.6</p></th>
+<th class="head"><p>FUNCTION</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>bit error</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>form error</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>stuff error</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>other type of error</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-center" id="id12" style="width: 80%">
+<caption><span class="caption-number">Table 19.4 </span><span class="caption-text">Error catch location</span><a class="headerlink" href="#id12" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>BIT ECC.4</p></th>
+<th class="head"><p>BIT ECC.3</p></th>
+<th class="head"><p>BIT ECC.2</p></th>
+<th class="head"><p>BIT ECC.1</p></th>
+<th class="head"><p>BIT ECC.0</p></th>
+<th class="head"><p>FUNCTION</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>start of frame</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>ID.28 to ID.21</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>ID.20 to ID.18</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>bit SRTR</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>bit IDE</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>ID.17 to ID.13</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>ID.12 to ID.5</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>ID.4 to ID.0</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>bit RTR</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>reserved bit 1</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>reserved bit 0</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>data length code</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>data field</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>CRC sequence</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>CRC delimiter</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>acknowledge slot</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>acknowledge delimiter</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>end of frame</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>intermission</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>active error flag</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>passive error flag</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>tolerate dominant bits</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>error delimiter</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>overload flag</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="rx-error-counter-register-rxerr">
+<h4><span class="section-number">19.4.5.3. </span>RX Error Counter Register (RXERR)<a class="headerlink" href="#rx-error-counter-register-rxerr" title="Permalink to this headline"></a></h4>
+<p>The RXERR’s value represents the current number of received errors, and this register is initialized to logical ‘0’ after hardware reset. In the operating mode, this register can only be read by CPU and write in the reset mode. RXERR is set to logical ‘0’ if a bus shutdown event occurs. At this time, the bus is OFF, and the write operation to this register does not work.</p>
+<p>It should be noted that CPU can modify the value of RXERR only in the reset mode. In this case, the error state may change, and the error warning interrupt and error passive interrupt will not occur unless the reset mode is exited.</p>
+</section>
+<section id="tx-error-counter-register-txerr">
+<h4><span class="section-number">19.4.5.4. </span>TX Error Counter Register (TXERR)<a class="headerlink" href="#tx-error-counter-register-txerr" title="Permalink to this headline"></a></h4>
+<p>The TXERR’s value represents the current number of send errors. In the operating mode, this register can only be read by CPU and write in the reset mode. This register’s value is initialized to logical ‘0’ after hardware reset. If a bus shutdown event occurs, the TXERR’s value is set to 127, so that the shortest time (128 bus idle signals) defined by the protocol can be calculated. Reading the TXERR’s value during this period can obtain the status information of bus shutdown recovery. If the bus is OFF, a write to TXERR ranging from 0 to 254 will clear the Bus Off flag, and the controller will wait for 11 consecutive recessive bits (Bus Idle) to appear once after clearing the reset mode.</p>
+<p>Writing 255 into TXERR by CPU will generate a bus shutdown event. It should be noted that CPU can only change the value of this register by force in the reset mode. In this case, the error or bus state may change, and the error warning interrupt or error passive interrupt will not be affected by the new value unless the reset mode is exited again. After the reset mode is exited, the TXERR’s value still operates as if the bus was shut down due to a bus error, which means that the register will enter the reset mode again, the TXERR’s value is initialized to 127, the RXRERR’s value is initialized to 0, and related statuses and interrupt registers are reset. At this time, exiting the reset mode will execute the bus shutdown recovery process defined by the protocol (waiting for 128 bus idle signals). If the reset mode is enabled again before the bus is turned off and restored (TXERR&gt;0), the bus will remain OFF and the TXERR’s value will be frozen.</p>
+</section>
+<section id="error-limit-setting">
+<h4><span class="section-number">19.4.5.5. </span>Error Limit Setting<a class="headerlink" href="#error-limit-setting" title="Permalink to this headline"></a></h4>
+<p>The error warning limit can be set by the EWLR register, whose default value is 96 (after hardware reset). This register can be read or written by CPU in the reset mode, while it can only be read in the operating mode. When at least one of the two error count values from RXERR and TXERR is greater than or equal to the value set in the EWLR register, the ES bit in the SR register will be set, and otherwise it will be cleared. Then, if the EIE bit in the IER register is set, an error warning interrupt will be generated. It is worth noting that this register can only be operated in the reset mode. The operation of this register may cause the error state to change, and the error warning interrupt will not be generated unless the reset mode is exited again.</p>
+</section>
+</section>
+<section id="bit-timing">
+<h3><span class="section-number">19.4.6. </span>Bit Timing<a class="headerlink" href="#bit-timing" title="Permalink to this headline"></a></h3>
+<p>The timing diagram is as follows:</p>
+<figure class="align-center" id="id13">
+<img alt="../_images/ISO11898Timing.svg" src="../_images/ISO11898Timing.svg" /><figcaption>
+<p><span class="caption-number">Fig. 19.7 </span><span class="caption-text">General structure of a bit period</span><a class="headerlink" href="#id13" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<section id="baud-rate-prescaler-brp">
+<h4><span class="section-number">19.4.6.1. </span>Baud Rate Prescaler (BRP)<a class="headerlink" href="#baud-rate-prescaler-brp" title="Permalink to this headline"></a></h4>
+<p>The cycle of the system clock tscl of the ISO11898 controller can be set, and this determines the timing of each bit. The calculation formula of ISO11898 system clock is as follows:</p>
+<p>tscl = 2 * tCLK * (32 * BRP.5 + 16 * BRP.4 + 8 * BRP.3 + 4 * BRP.2 + 2 * BRP.1 + BRP.0 + 1)</p>
+</section>
+<section id="synchronization-jump-width-sjw">
+<h4><span class="section-number">19.4.6.2. </span>Synchronization Jump Width (SJW)<a class="headerlink" href="#synchronization-jump-width-sjw" title="Permalink to this headline"></a></h4>
+<p>To compensate the phase shift between the clock oscillators of different bus controllers, any bus controller must resynchronize at the edge of any related signal currently being transmitted.
+SJW defines the maximum number of clock cycles that a bit cycle can shorten or extend through one resynchronization:</p>
+<p>tSJW = tscl * (2 * SJW.1 + SJW.0 + 1)</p>
+</section>
+<section id="sampling-sam">
+<h4><span class="section-number">19.4.6.3. </span>Sampling (SAM)<a class="headerlink" href="#sampling-sam" title="Permalink to this headline"></a></h4>
+<p>When the SAM bit in the BTR1 register is 1, the bus will be sampled three times. This mode suits medium and low speed buses, and this is beneficial to the filter in the bus. If the SAM bit is 0, the bus will only be sampled once. This mode suits the high-speed bus.</p>
+</section>
+<section id="time-segment-tseg">
+<h4><span class="section-number">19.4.6.4. </span>Time Segment (TSEG)<a class="headerlink" href="#time-segment-tseg" title="Permalink to this headline"></a></h4>
+<p>TSEG, consisting of TSEG1 and TSEG2 in the BTR1 register, determines the number of clocks and sampling point position of each bit, with calculation formula as follows:</p>
+<p>tSYNCSEG = 1 * tscl</p>
+<p>tTSEG1 = tscl * (8 * TSEG1.3 + 4 * TSEG1.2 + 2 * TSEG1.1 + TSEG1.0 + 1)</p>
+<p>tTSEG2 = tscl * (4 * TSEG2.2 + 2 * TSEG2.1 + TSEG2.0 + 1)</p>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="USB.html" class="btn btn-neutral float-left" title="18. USB" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Cam.html" class="btn btn-neutral float-right" title="20. CAM" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,343 @@
+\section{Register description}
+\regover{
+{\hyperref[dbi-dbi-config]{dbi\_config}}&
+\\
+\hline
+{\hyperref[dbi-qspi-config]{qspi\_config}}&
+\\
+\hline
+{\hyperref[dbi-dbi-pix-cnt]{dbi\_pix\_cnt}}&
+\\
+\hline
+{\hyperref[dbi-dbi-prd]{dbi\_prd}}&
+\\
+\hline
+{\hyperref[dbi-dbi-cmd]{dbi\_cmd}}&
+\\
+\hline
+{\hyperref[dbi-dbi-qspi-adr]{dbi\_qspi\_adr}}&
+\\
+\hline
+{\hyperref[dbi-dbi-rdata-0]{dbi\_rdata\_0}}&
+\\
+\hline
+{\hyperref[dbi-dbi-rdata-1]{dbi\_rdata\_1}}&
+\\
+\hline
+{\hyperref[dbi-dbi-int-sts]{dbi\_int\_sts}}&
+\\
+\hline
+{\hyperref[dbi-dbi-yuv-rgb-config-0]{dbi\_yuv\_rgb\_config\_0}}&
+\\
+\hline
+{\hyperref[dbi-dbi-yuv-rgb-config-1]{dbi\_yuv\_rgb\_config\_1}}&
+\\
+\hline
+{\hyperref[dbi-dbi-yuv-rgb-config-2]{dbi\_yuv\_rgb\_config\_2}}&
+\\
+\hline
+{\hyperref[dbi-dbi-yuv-rgb-config-3]{dbi\_yuv\_rgb\_config\_3}}&
+\\
+\hline
+{\hyperref[dbi-dbi-yuv-rgb-config-4]{dbi\_yuv\_rgb\_config\_4}}&
+\\
+\hline
+{\hyperref[dbi-dbi-yuv-rgb-config-5]{dbi\_yuv\_rgb\_config\_5}}&
+\\
+\hline
+{\hyperref[dbi-dbi-fifo-config-0]{dbi\_fifo\_config\_0}}&
+\\
+\hline
+{\hyperref[dbi-dbi-fifo-config-1]{dbi\_fifo\_config\_1}}&
+\\
+\hline
+{\hyperref[dbi-dbi-fifo-wdata]{dbi\_fifo\_wdata}}&
+\\
+\hline
+{\hyperref[dbi-dbi-dummy]{dbi\_dummy}}&
+\\
+\hline
+}
+
+\subsection{dbi\_config}
+\label{dbi-dbi-config}
+Address：0x3001b000
+ \begin{figure}[H]
+\includegraphics{dbi_dbi_config.pdf}
+\end{figure}
+
+\regdes{31&sts\_dbi\_bus\_busy&r&1'b0&Indicator of dbi bus busy\\\hline
+30:25&RSVD& & & \\\hline
+24&cr\_dbi\_cs\_stretch&r/w&1'b0&Enable signal of CS-low stretch mode \par 1'b0: Disabled, if FIFO is empty during a pixel data transfer, CS will de-assert before FIFO is filled again and new transfer starts \par 1'b1: Enabled, if FIFO is empty during a pixel data transfer, CS will stay asserted while waiting for FIFO to be filled again
+\\\hline
+23:20&cr\_dbi\_dmy\_cnt&r/w&4'd0&Dummy cycle count, unit: period defined by dbi\_prd\_d \par Effective only in Type C (Fixed to 1 dbi\_prd\_d  period in Type B)
+\\\hline
+19&cr\_dbi\_dmy\_en&r/w&1'b0&Enable signal of dummy cycle(s) \par 1'b0: Disabled, no dummy cycle(s) between command phase and data phase \par 1'b1: Enabled, dummy cycle(s) will be inserted between command phase and data phase \par Note: Don't-care if QSPI mode is selected (no dummy cycle)
+\\\hline
+18&cr\_dbi\_cont\_en&r/w&1'b1&Enable signal of pixel data continuous transfer mode \par 1'b0: Disabled, CS\_n will de-assert between each pixel \par 1'b1: Enabled, CS\_n will stay asserted between each consecutive pixel \par Note: Don't-care if QSPI mode is selected (always in continuous mode)
+\\\hline
+17&cr\_dbi\_scl\_ph&r/w&1'b0&SCL clock phase inverse signal\\\hline
+16&cr\_dbi\_scl\_pol&r/w&1'b1&SCL clock polarity \par 0: SCL output LOW at IDLE state \par 1: SCL output HIGH at IDLE state
+\\\hline
+15:8&cr\_dbi\_dat\_bc&r/w&8'd0&Data byte count of normal data (pixel data count is determined by cr\_dbi\_pix\_cnt) \par Note: Normal read data can only be up to 8-byte (8'd7). No limit for normal write data (can be up to 256-byte using FIFO)
+\\\hline
+7&cr\_dbi\_dat\_tp&r/w&1'b0&Data type select \par 1'b0: Normal data (parameter) \par 1'b1: Pixel data \par Note: Read command supports normal data only
+\\\hline
+6&cr\_dbi\_dat\_wr&r/w&1'b1&Data phase Read/Write select \par 1'b0: Read data \par 1'b1: Write data
+\\\hline
+5&cr\_dbi\_dat\_en&r/w&1'b1&Data enable signal \par 1'b0: Data phase disabled \par 1'b1: Data phase enabled
+\\\hline
+4&cr\_dbi\_cmd\_en&r/w&1'b1&Command enable signal \par 1'b0: No command phase \par 1'b1: Command will be sent \par Note: Don't-care if QSPI mode is selected (Command always enabled)
+\\\hline
+3&RSVD& & & \\\hline
+2:1&cr\_dbi\_sel&r/w&2'd0&DBI mode select \par 2'd0: DBI Type B \par 2'd1: DBI Type C, 4-wire mode \par 2'd2: DBI Type C, 3-wire mode \par 2'd3: QSPI mode
+\\\hline
+0&cr\_dbi\_en&r/w&1'b0&Enable signal of DBI function \par Asserting this bit will trigger the transaction, and should be de-asserted after finish
+\\\hline
+
+}
+\subsection{qspi\_config}
+\label{dbi-qspi-config}
+Address：0x3001b004
+ \begin{figure}[H]
+\includegraphics{dbi_qspi_config.pdf}
+\end{figure}
+
+\regdes{31:6&RSVD& & & \\\hline
+5:4&cr\_qspi\_adr\_bc&r/w&2'd2&QSPI Address byte count\\\hline
+3&RSVD& & & \\\hline
+2&cr\_qspi\_dat\_4b&r/w&1'b1&QSPI Data 4-bit (quad) mode \par 1'b0: Data sent/received in 1-bit mode \par 1'b1: Data sent/received in 4-bit mode
+\\\hline
+1&cr\_qspi\_adr\_4b&r/w&1'b1&QSPI Address (display command) 4-bit (quad) mode \par 1'b0: Address sent in 1-bit mode \par 1'b1: Address sent in 4-bit mode
+\\\hline
+0&cr\_qspi\_cmd\_4b&r/w&1'b0&QSPI Command 4-bit (quad) mode \par 1'b0: Command sent in 1-bit mode \par 1'b1: Command sent in 4-bit mode
+\\\hline
+
+}
+\subsection{dbi\_pix\_cnt}
+\label{dbi-dbi-pix-cnt}
+Address：0x3001b008
+ \begin{figure}[H]
+\includegraphics{dbi_dbi_pix_cnt.pdf}
+\end{figure}
+
+\regdes{31&cr\_dbi\_pix\_format&r/w&1'b0&Pixel format \par 1'b0: RGB565 \par 1'b1: RGB888/RGB666
+\\\hline
+30:24&RSVD& & & \\\hline
+23:0&cr\_dbi\_pix\_cnt&r/w&24'h0&Pixel count \par Note: Should be a multiple of 2 if RGB565 is selected and a multiple of 4 if RGB888/RGB666 mode is selected
+\\\hline
+
+}
+\subsection{dbi\_prd}
+\label{dbi-dbi-prd}
+Address：0x3001b00c
+ \begin{figure}[H]
+\includegraphics{dbi_dbi_prd.pdf}
+\end{figure}
+
+\regdes{31:24&cr\_dbi\_prd\_d\_ph\_1&r/w&8'd15&Length of DATA phase 1 (please refer to "Timing" tab)\\\hline
+23:16&cr\_dbi\_prd\_d\_ph\_0&r/w&8'd15&Length of DATA phase 0 (please refer to "Timing" tab)\\\hline
+15:8&cr\_dbi\_prd\_i&r/w&8'd15&Length of INTERVAL between pixel data (please refer to "Timing" tab)\\\hline
+7:0&cr\_dbi\_prd\_s&r/w&8'd15&Length of START/STOP condition (please refer to "Timing" tab)\\\hline
+
+}
+\subsection{dbi\_cmd}
+\label{dbi-dbi-cmd}
+Address：0x3001b010
+ \begin{figure}[H]
+\includegraphics{dbi_dbi_cmd.pdf}
+\end{figure}
+
+\regdes{31:8&RSVD& & & \\\hline
+7:0&cr\_dbi\_cmd&r/w&8'h2C&DBI Command\\\hline
+
+}
+\subsection{dbi\_qspi\_adr}
+\label{dbi-dbi-qspi-adr}
+Address：0x3001b014
+ \begin{figure}[H]
+\includegraphics{dbi_dbi_qspi_adr.pdf}
+\end{figure}
+
+\regdes{31:0&cr\_qspi\_adr&r/w&32'h00002C00&QSPI Address (display command) \par Note: LSB is sent first
+\\\hline
+
+}
+\subsection{dbi\_rdata\_0}
+\label{dbi-dbi-rdata-0}
+Address：0x3001b018
+ \begin{figure}[H]
+\includegraphics{dbi_dbi_rdata_0.pdf}
+\end{figure}
+
+\regdes{31:0&sts\_dbi\_rdata\_0&r&32'h0&Data read from display IC using read command\\\hline
+
+}
+\subsection{dbi\_rdata\_1}
+\label{dbi-dbi-rdata-1}
+Address：0x3001b01c
+ \begin{figure}[H]
+\includegraphics{dbi_dbi_rdata_1.pdf}
+\end{figure}
+
+\regdes{31:0&sts\_dbi\_rdata\_1&r&32'h0&Data read from display IC using read command\\\hline
+
+}
+\subsection{dbi\_int\_sts}
+\label{dbi-dbi-int-sts}
+Address：0x3001b030
+ \begin{figure}[H]
+\includegraphics{dbi_dbi_int_sts.pdf}
+\end{figure}
+
+\regdes{31:27&RSVD& & & \\\hline
+26&cr\_dbi\_fer\_en&r/w&1'b1&Interrupt enable of dbi\_fer\_int\\\hline
+25&cr\_dbi\_txf\_en&r/w&1'b1&Interrupt enable of dbi\_txe\_int\\\hline
+24&cr\_dbi\_end\_en&r/w&1'b1&Interrupt enable of dbi\_end\_int\\\hline
+23:19&RSVD& & & \\\hline
+18&rsvd&rsvd&1'b0&\\\hline
+17&rsvd&rsvd&1'b0&\\\hline
+16&cr\_dbi\_end\_clr&w1c&1'b0&Interrupt clear of dbi\_end\_int\\\hline
+15:11&RSVD& & & \\\hline
+10&cr\_dbi\_fer\_mask&r/w&1'b1&Interrupt mask of dbi\_fer\_int\\\hline
+9&cr\_dbi\_txf\_mask&r/w&1'b1&Interrupt mask of dbi\_txe\_int\\\hline
+8&cr\_dbi\_end\_mask&r/w&1'b1&Interrupt mask of dbi\_end\_int\\\hline
+7:3&RSVD& & & \\\hline
+2&dbi\_fer\_int&r&1'b0&TX/RX FIFO error interrupt, auto-cleared when FIFO overflow/underflow error flag is cleared\\\hline
+1&dbi\_txf\_int&r&1'b1&TX FIFO ready (tx\_fifo\_cnt > tx\_fifo\_th) interrupt, auto-cleared when data is pushed\\\hline
+0&dbi\_end\_int&r&1'b0&Transfer end interrupt, shared by both Type B and C mode\\\hline
+
+}
+\subsection{dbi\_yuv\_rgb\_config\_0}
+\label{dbi-dbi-yuv-rgb-config-0}
+Address：0x3001b060
+ \begin{figure}[H]
+\includegraphics{dbi_dbi_yuv_rgb_config_0.pdf}
+\end{figure}
+
+\regdes{31&cr\_y2r\_en&r/w&1'b1&Display module YUV2RGB enable signal\\\hline
+30:29&RSVD& & & \\\hline
+28:20&cr\_y2r\_pre\_2&r/w&9'd0&Display module YUV2RGB "pre\_offset\_2" parameter\\\hline
+19&RSVD& & & \\\hline
+18:10&cr\_y2r\_pre\_1&r/w&9'd0&Display module YUV2RGB "pre\_offset\_1" parameter\\\hline
+9&RSVD& & & \\\hline
+8:0&cr\_y2r\_pre\_0&r/w&9'd0&Display module YUV2RGB "pre\_offset\_0" parameter\\\hline
+
+}
+\subsection{dbi\_yuv\_rgb\_config\_1}
+\label{dbi-dbi-yuv-rgb-config-1}
+Address：0x3001b064
+ \begin{figure}[H]
+\includegraphics{dbi_dbi_yuv_rgb_config_1.pdf}
+\end{figure}
+
+\regdes{31:29&RSVD& & & \\\hline
+28:20&cr\_y2r\_pos\_2&r/w&9'd0&Display module YUV2RGB "post\_offset\_2" parameter\\\hline
+19&RSVD& & & \\\hline
+18:10&cr\_y2r\_pos\_1&r/w&9'd0&Display module YUV2RGB "post\_offset\_1" parameter\\\hline
+9&RSVD& & & \\\hline
+8:0&cr\_y2r\_pos\_0&r/w&9'd0&Display module YUV2RGB "post\_offset\_0" parameter\\\hline
+
+}
+\subsection{dbi\_yuv\_rgb\_config\_2}
+\label{dbi-dbi-yuv-rgb-config-2}
+Address：0x3001b068
+ \begin{figure}[H]
+\includegraphics{dbi_dbi_yuv_rgb_config_2.pdf}
+\end{figure}
+
+\regdes{31:24&cr\_y2r\_mtx\_02\_l&r/w&8'h0&Display module YUV2RGB "matrix\_02" parameter lower bits\\\hline
+23:12&cr\_y2r\_mtx\_01&r/w&12'h0&Display module YUV2RGB "matrix\_01" parameter\\\hline
+11:0&cr\_y2r\_mtx\_00&r/w&12'h0&Display module YUV2RGB "matrix\_00" parameter\\\hline
+
+}
+\subsection{dbi\_yuv\_rgb\_config\_3}
+\label{dbi-dbi-yuv-rgb-config-3}
+Address：0x3001b06c
+ \begin{figure}[H]
+\includegraphics{dbi_dbi_yuv_rgb_config_3.pdf}
+\end{figure}
+
+\regdes{31:28&cr\_y2r\_mtx\_12\_l&r/w&4'h0&Display module YUV2RGB "matrix\_12" parameter lower bits\\\hline
+27:16&cr\_y2r\_mtx\_11&r/w&12'h0&Display module YUV2RGB "matrix\_11" parameter\\\hline
+15:4&cr\_y2r\_mtx\_10&r/w&12'h0&Display module YUV2RGB "matrix\_10" parameter\\\hline
+3:0&cr\_y2r\_mtx\_02\_u&r/w&4'h0&Display module YUV2RGB "matrix\_02" parameter upper bits\\\hline
+
+}
+\subsection{dbi\_yuv\_rgb\_config\_4}
+\label{dbi-dbi-yuv-rgb-config-4}
+Address：0x3001b070
+ \begin{figure}[H]
+\includegraphics{dbi_dbi_yuv_rgb_config_4.pdf}
+\end{figure}
+
+\regdes{31:20&cr\_y2r\_mtx\_21&r/w&12'h0&Display module YUV2RGB "matrix\_21" parameter\\\hline
+19:8&cr\_y2r\_mtx\_20&r/w&12'h0&Display module YUV2RGB "matrix\_20" parameter\\\hline
+7:0&cr\_y2r\_mtx\_12\_u&r/w&8'h0&Display module YUV2RGB "matrix\_12" parameter upper bits\\\hline
+
+}
+\subsection{dbi\_yuv\_rgb\_config\_5}
+\label{dbi-dbi-yuv-rgb-config-5}
+Address：0x3001b074
+ \begin{figure}[H]
+\includegraphics{dbi_dbi_yuv_rgb_config_5.pdf}
+\end{figure}
+
+\regdes{31:12&RSVD& & & \\\hline
+11:0&cr\_y2r\_mtx\_22&r/w&12'h0&Display module YUV2RGB "matrix\_22" parameter\\\hline
+
+}
+\subsection{dbi\_fifo\_config\_0}
+\label{dbi-dbi-fifo-config-0}
+Address：0x3001b080
+ \begin{figure}[H]
+\includegraphics{dbi_dbi_fifo_config_0.pdf}
+\end{figure}
+
+\regdes{31:29&fifo\_format&r/w&3'd0&FIFO pixel data format (see Tab 'FIFO Format' for details) \par 3'd0: {8'h0, B[7:0], G[7:0], R[7:0]} \par 3'd1: {8'h0, R[7:0], G[7:0], B[7:0]} \par 3'd2: {B[7:0], G[7:0], R[7:0], 8'h0} \par 3'd3: {R[7:0], G[7:0], B[7:0], 8'h0} \par 3'd4: {R\_n[7:0], B[7:0], G[7:0], R[7:0]} \par 3'd5: {B\_n[7:0], R[7:0], G[7:0], B[7:0]} \par 3'd6: {2{B[7:3], G[7:2], R[7:3]}} \par 3'd7: {2{R[7:3], G[7:2], B[7:3]}} \par Note: FIFO data format does not affect normal data, which is fixed to LSB sent first {Byte3[7:0], Byte2[7:0], Byte1[7:0], Byte0[7:0]}
+\\\hline
+28&fifo\_yuv\_mode&r/w&1'b0&FIFO data YUV mode \par R <-> Y \par G <-> U/Cb \par B <-> V/Cr
+\\\hline
+27:6&RSVD& & & \\\hline
+5&tx\_fifo\_underflow&r&1'b0&Underflow flag of TX FIFO, can be cleared by tx\_fifo\_clr\\\hline
+4&tx\_fifo\_overflow&r&1'b0&Overflow flag of TX FIFO, can be cleared by tx\_fifo\_clr\\\hline
+3&RSVD& & & \\\hline
+2&tx\_fifo\_clr&w1c&1'b0&Clear signal of TX FIFO\\\hline
+1&RSVD& & & \\\hline
+0&dbi\_dma\_tx\_en&r/w&1'b0&Enable signal of dma\_tx\_req/ack interface\\\hline
+
+}
+\subsection{dbi\_fifo\_config\_1}
+\label{dbi-dbi-fifo-config-1}
+Address：0x3001b084
+ \begin{figure}[H]
+\includegraphics{dbi_dbi_fifo_config_1.pdf}
+\end{figure}
+
+\regdes{31:19&RSVD& & & \\\hline
+18:16&tx\_fifo\_th&r/w&3'd0&TX FIFO threshold, dma\_tx\_req will not be asserted if tx\_fifo\_cnt is less than this value\\\hline
+15:4&RSVD& & & \\\hline
+3:0&tx\_fifo\_cnt&r&4'd8&TX FIFO available count\\\hline
+
+}
+\subsection{dbi\_fifo\_wdata}
+\label{dbi-dbi-fifo-wdata}
+Address：0x3001b088
+ \begin{figure}[H]
+\includegraphics{dbi_dbi_fifo_wdata.pdf}
+\end{figure}
+
+\regdes{31:0&dbi\_fifo\_wdata&w&x&Pixel data with 8 types of format (determined by fifo\_format)\\\hline
+
+}
+\subsection{dbi\_dummy}
+\label{dbi-dbi-dummy}
+Address：0x3001b0fc
+ \begin{figure}[H]
+\includegraphics{dbi_dbi_dummy.pdf}
+\end{figure}
+
+\regdes{31:8&RSVD& & & \\\hline
+7:0&dbi\_dummy&r/w&8'h0&Dummy register for FPGA mode pad control\\\hline
+
+}
