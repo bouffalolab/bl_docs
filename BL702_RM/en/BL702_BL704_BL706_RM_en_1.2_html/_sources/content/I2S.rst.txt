@@ -1,0 +1,48 @@
+==========
+I2S
+==========
+
+I2S introduction
+=================
+I2S is an interface standard for the transmission of digital audio data, and two groups (left and right channel) data are transmitted in a sequential manner.
+
+I2S separates the clock signal and the data signal for transmission, so that the receiving end does not need to restore the clock from the data signal, thereby reducing the design difficulty of the receiving end.
+
+I2S main features
+==================
+
+- Support master mode and slave mode
+- Support Left-justified/Right-justified/DSP and other data formats
+- Support 8/16/24/32 bit data width
+- In addition to mono/dual-channel mode, four-channel mode is also supported
+- Support dynamic mute switching function
+- The width of the data transmission FIFO is 32 bits and the depth is 16
+- The width of the data receiving FIFO is 32 bits and the depth is 16
+
+I2S function description
+========================
+
+.. table:: Pin lists
+    :widths: 20, 20, 60
+    :width: 100%
+    :align: center
+
+    +-----------+--------------+-------------------------------------------------------------------------------------------------+
+    |   Name    |   Type       |                           Description                                                           |
+    +===========+==============+=================================================================================================+
+    | I2Sx_DI   | input        | Serial data input                                                                               |
+    +-----------+--------------+-------------------------------------------------------------------------------------------------+
+    | I2Sx_DO   | output       | Serial data output                                                                              |
+    +-----------+--------------+-------------------------------------------------------------------------------------------------+
+    | I2Sx_BCLK | input/output | Synchronous transmission clock, output when used as a master, and input when used as a slave    |
+    +-----------+--------------+-------------------------------------------------------------------------------------------------+
+    | I2Sx_FS   | input/output | Data start/end signal, output when used as master, input when used as slave                     |
+    +-----------+--------------+-------------------------------------------------------------------------------------------------+
+
+.. only:: html
+
+   .. include:: i2s_register.rst
+
+.. raw:: latex
+
+   \input{../../en/content/i2s}

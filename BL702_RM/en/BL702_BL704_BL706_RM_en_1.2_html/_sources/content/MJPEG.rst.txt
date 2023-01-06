@@ -1,0 +1,67 @@
+===========
+MJPEG
+===========
+
+MJPEG introduction
+======================
+MJPEG (Motion Joint Photographic Experts Group) is a video coding format that can be accurate to frame editing and multi-layer image processing. Treating moving video sequences as continuous still images, this compression method compresses each frame individually and completely. By compressing the original data in YCbCr format, the memory space occupied by a frame of image can be greatly reduced.
+
+MJPEG main features
+=====================
+- Configurable input format, including:
+   * YCbCr4:2:2 plane or packing mode
+   * YCbCr4:2:0 plane mode
+   * YCbCr4:0:0
+- Configurable input data Y, Cb, Cr sequence
+- Adjustable quantization coefficient
+- Support software mode and linkage mode
+- Support swap mode
+- Can reserve jpg head space and automatically add jpg tail
+- Support automatic subcontracting function
+- Continuously cache up to 16 groups of picture information
+- A variety of application interruptions are conducive to flexible use and error notification
+
+MJPEG function description
+===========================
+Input configuration
+-----------------------
+The YCbCr format of the input data can be selected through the bit <REG_YUV_MODE> of the register MJPEG_CONTROL_1, including YCbCr4:2:2 plane or packing mode, YCbCr4:2:0 plane mode and YCbCr4:0:0 grayscale image. The arrangement order of Y, Cb, Cr can be configured through the upper 8 bits of this register and the register MJPEG_CONTROL_2.
+
+Quantization coefficient
+--------------------------
+The quantization coefficient can be set through the bit <REG_Q_MODE> of the register MJPEG_CONTROL_1. When the set value does not exceed 75, the quantization coefficient is the set value; when the set value exceeds 75, the quantization coefficient is 100.
+
+Software mode and linkage mode
+---------------------------------
+In software mode, MJPEG will read the specified number of original picture data from the memory for compression. In this mode, the picture data needs to be prepared in advance.
+
+In the linked mode, MJPEG will process the output of the CAM module as its input. MJPEG processes the 8*8 data block as a unit. When the CAM writes 8 lines of data to the memory, MJPEG will start to work . The memory space processed by MJPEG will be released to CAM for reuse, so that CAM can complete the linkage with MJPEG without the memory space of a whole picture.
+
+Swap mode
+-----------
+When using the swap mode, the MJPEG storage space will be divided into two evenly. When MJPEG finishes writing one of the blocks, an interrupt will be generated to notify the software to read the data away, and it will write the data into the other block. Alternate use back and forth, thus using less than one frame of image storage space for data processing.
+
+jpg function
+---------------
+The jpg function will automatically leave a space of a certain number of bytes at the beginning of each frame of data and fill in zeros. The size of this space is set by the lower 12 bits of the register MJPEG_HEADER_BYTE. In addition, if you enable automatic filling of the jpg end, two bytes of data will be added at the end of each frame of data, and the value of these two bytes is 0xFFD9.
+
+Automatic subcontracting function
+-------------------------------------
+The automatic sub-packet function divides each frame of data into several segments according to the byte length set by the bit <REG_PKET_BODY_BYTE> of the register MJPEG_PAKET_CTRL. Then set aside the length space set by the bits <REG_PKET_HEAD_BYTE> and <REG_PKET_TAIL_BYTE> of the register MJPEG_PAKET_HEAD_TAIL at the head and tail of each section respectively, so that the user can fill in the header and tail information later. If the length of a frame of data is not an integral multiple of the packet length, the packet tail length space will be directly reserved at the end of the data instead of completing the length of the last packet.
+
+Cache picture information
+-------------------------------
+The module contains 16 groups of FIFO to record the picture address, picture size and quantization coefficient. Whenever this module writes a complete frame to the memory, it will record the start address, picture size and quantization coefficient of this frame of picture in this FIFO. However, it should be noted that when there is insufficient memory remaining or when the 16 groups of FIFOs are full, the module will automatically discard the message of the next picture. In the part of the picture information taken out, the pop action can be done through the APB interface. When the old picture information is vacated, the FIFO will automatically advance to ensure the timing of the picture information inside the FIFO.
+
+Support a variety of interrupt information (independent switch configuration)
+------------------------------------------------------------------------------
+A、 Normal interrupt – Can be set to interrupt after writing a few pictures
+
+B、 Camera interrupt – The processing speed of MJPEG cannot keep up with the writing speed of the CAM module, and an interrupt is issued when the CAM overflows
+
+C、 Memory interrupt – When the memory is overwritten, an interrupt is issued
+
+D、 Frame interrupt – When the unprocessed pictures exceed 16 groups, an interrupt is issued
+
+E、 Swap interrupt - When a memory block is full in swap mode, an interrupt is issued
+

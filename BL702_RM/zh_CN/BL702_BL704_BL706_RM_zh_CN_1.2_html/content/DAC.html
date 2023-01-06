@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5. DAC &mdash; BL702/704/706 参考手册  文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="6. DMA" href="DMA.html" />
+    <link rel="prev" title="4. ADC" href="ADC.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL702/704/706 参考手册
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. 系统和存储器概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. 复位和时钟</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">4. ADC</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">5. DAC</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">5.1. 简介</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">5.2. 主要特点</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">5.3. 功能描述</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">5.4. 寄存器描述</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#gpadc-config">5.4.1. gpadc_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpadc-dma-rdata">5.4.2. gpadc_dma_rdata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpdac-config">5.4.3. gpdac_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpdac-dma-config">5.4.4. gpdac_dma_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpdac-dma-wdata">5.4.5. gpdac_dma_wdata</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">6. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="L1C.html">7. L1C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">8. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">9. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">10. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">11. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">12. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">13. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="QDEC.html">14. QDEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="KeyScan.html">15. KeyScan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2S.html">16. I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EMAC.html">17. Emac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USB.html">18. USB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">19. 版本信息</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL702/704/706 参考手册</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">5. </span>DAC</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="dac">
+<h1><span class="section-number">5. </span>DAC<a class="headerlink" href="#dac" title="永久链接至标题"></a></h1>
+<section id="id1">
+<h2><span class="section-number">5.1. </span>简介<a class="headerlink" href="#id1" title="永久链接至标题"></a></h2>
+<p>芯片内置一个10bits的数字模拟转换器(DAC）,FIFO深度为1，支持2路DAC调制输出。
+可用于音频播放，常规的模拟信号调制。</p>
+</section>
+<section id="id2">
+<h2><span class="section-number">5.2. </span>主要特点<a class="headerlink" href="#id2" title="永久链接至标题"></a></h2>
+<ul class="simple">
+<li><p>DAC调制精度为10bits</p></li>
+<li><p>DAC的输入时钟可选为32M或者Audio PLL</p></li>
+<li><p>支持DMA从内存将数据搬运至DAC调制寄存器</p></li>
+<li><p>支持双声道播放模式</p></li>
+<li><p>DAC的输出引脚固定，ChannelA固定为GPIO11，ChannelB固定为GPIO17</p></li>
+<li><p>DAC的参考电压可选择内部或者外部</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2><span class="section-number">5.3. </span>功能描述<a class="headerlink" href="#id3" title="永久链接至标题"></a></h2>
+<p>DAC模块基本框图如图所示。</p>
+<figure class="align-center" id="id5">
+<img alt="../_images/gpdac.svg" src="../_images/gpdac.svg" /><figcaption>
+<p><span class="caption-number">图 5.1 </span><span class="caption-text">DAC基本框图</span><a class="headerlink" href="#id5" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>DAC模块包含两路DAC调制电路，以及调制模拟信号相关的电源电路，用户可以通过Ref_Sel来选择DAC的参考电压是外部/内部，Ref_Rng来选择内部参考电压源。
+DAC的调制数据可以由CPU直接写入DAC调制寄存器（0x40000314中的GLB_GPDAC_A_DATA、GLB_GPDAC_B_DATA），也可以由DMA搬运至gpdac_dma_wdata（0x40002048）寄存器。</p>
+<p><strong>DAC的数据写入方式</strong></p>
+<p>CPU直接写入GLB_GPDAC_A_DATA、GLB_GPDAC_B_DATA寄存器完成调制，或者使用DMA，将需要调制的数据搬运到gpdac_dma_wdata中。</p>
+<p><strong>DMA的搬运模式</strong></p>
+<p>gpdac_dma_wdata（0x40002048）是一个32BITS的寄存器，默认含义为，32BITS值按顺序全部调制在ChannelA引脚上，
+也可配置为高16位默认是对应Channel B的模拟电压输出，低16位对应Channel A的模拟电压输出。
+注意无论是32/16位调制，都只有低10位有效，因为DAC的最大调制精度为10BITS。用户可以通过配置gpdac_dma_format寄存器来修改DMA搬运的高低字节含义。</p>
+<p>gpdac_dma_format为0，则DMA搬运进gpdac_dma_wdata的数据全部依次调制在Channel A，调制顺序为 {A0},{A1},{A2},... 。
+gpdac_dma_format为1，则DMA搬运进gpdac_dma_wdata的数据高16位调制在Channel B，低16位调制在Channel A。调制顺序为{B0,A0},{B1,A1},{B2,A2},...。这样的特性在立体声播放中非常有作用。
+gpdac_dma_format为2，则DMA搬运进gpdac_dma_wdata的数据全部调制在Channel A，但调制的顺序为{A1,A0},{A3,A2},{A5,A4},...。</p>
+<p><strong>DAC外部参考电压选择</strong></p>
+<p>用户可以通过配置gpdac_ref_sel（0x40000308[8]）来配置选择外部参考电压还是内部参考电压。</p>
+<p>如果选择内部参考电压，配置如下表所示。</p>
+<table class="colwidths-given docutils align-center" id="id6" style="width: 100%">
+<caption><span class="caption-number">表 5.1 </span><span class="caption-text">内部参考电压</span><a class="headerlink" href="#id6" title="永久链接至表格"></a></caption>
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 30%" />
+<col style="width: 40%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>gpdac_a_rng</p></th>
+<th class="head"><p>gpdac_ref_sel</p></th>
+<th class="head"><p>输出范围</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>00</p></td>
+<td><p>0</p></td>
+<td><p>0.2-1</p></td>
+</tr>
+<tr class="row-odd"><td><p>01/10</p></td>
+<td><p>0</p></td>
+<td><p>0.225-1.425</p></td>
+</tr>
+<tr class="row-even"><td><p>11</p></td>
+<td><p>0</p></td>
+<td><p>0.2-1.8</p></td>
+</tr>
+</tbody>
+</table>
+<p>如果选择外部参考电压，请将外部电压连入固定的GPIO7。</p>
+</section>
+<section id="id4">
+<h2><span class="section-number">5.4. </span>寄存器描述<a class="headerlink" href="#id4" title="永久链接至标题"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 46%" />
+<col style="width: 54%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>名称</p></td>
+<td><p>描述</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#gpadc-config">gpadc_config</a></p></td>
+<td><p>GPADC configuration</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#gpadc-dma-rdata">gpadc_dma_rdata</a></p></td>
+<td><p>GPADC DMA read data</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#gpdac-config">gpdac_config</a></p></td>
+<td><p>GPDAC configuration</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#gpdac-dma-config">gpdac_dma_config</a></p></td>
+<td><p>GPDAC dma configuration</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#gpdac-dma-wdata">gpdac_dma_wdata</a></p></td>
+<td><p>GPDAC dma write data</p></td>
+</tr>
+<tr class="row-odd"><td><p><a href="#id7"><span class="problematic" id="id8">`gpdac_ctrl`_</span></a></p></td>
+<td><p>GPDAC control</p></td>
+</tr>
+<tr class="row-even"><td><p><a href="#id9"><span class="problematic" id="id10">`gpdac_actrl`_</span></a></p></td>
+<td><p>GPDAC channelA control</p></td>
+</tr>
+<tr class="row-odd"><td><p><a href="#id11"><span class="problematic" id="id12">`gpdac_bctrl`_</span></a></p></td>
+<td><p>GPDAC channelB control</p></td>
+</tr>
+</tbody>
+</table>
+<section id="gpadc-config">
+<h3><span class="section-number">5.4.1. </span>gpadc_config<a class="headerlink" href="#gpadc-config" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x40002000</p>
+<figure class="align-center">
+<img alt="../_images/gpip_gpadc_config.svg" src="../_images/gpip_gpadc_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:24</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="5"><p>23:22</p></td>
+<td rowspan="5"><p>gpadc_fifo_thl</p></td>
+<td rowspan="5"><p>r/w</p></td>
+<td rowspan="5"><p>2'd0</p></td>
+<td rowspan="5"><p>fifo threshold</p>
+<p>2'b00: 1 data</p>
+<p>2'b01: 4 data</p>
+<p>2'b10: 8 data</p>
+<p>2'b11: 16 data</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>21:16</p></td>
+<td><p>gpadc_fifo_data_count</p></td>
+<td><p>r</p></td>
+<td><p>6'd0</p></td>
+<td><p>fifo data number</p></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>gpadc_fifo_rdy_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>write 1 mask</p></td>
+</tr>
+<tr class="row-even"><td><p>14</p></td>
+<td><p>gpadc_fifo_underrun_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>write 1 mask</p></td>
+</tr>
+<tr class="row-odd"><td><p>13</p></td>
+<td><p>gpadc_fifo_overrun_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>write 1 mask</p></td>
+</tr>
+<tr class="row-even"><td><p>12</p></td>
+<td><p>gpadc_rdy_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>write 1 mask</p></td>
+</tr>
+<tr class="row-odd"><td><p>11</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>10</p></td>
+<td><p>gpadc_fifo_underrun_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Write 1 to clear flag</p></td>
+</tr>
+<tr class="row-odd"><td><p>9</p></td>
+<td><p>gpadc_fifo_overrun_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Write 1 to clear flag</p></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>gpadc_rdy_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Write 1 to clear flag</p></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>gpadc_fifo_rdy</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>FIFO ready interrupt flag</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>gpadc_fifo_underrun</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>FIFO underrun interrupt flag</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>gpadc_fifo_overrun</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>FIFO overrun interrupt flag</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>gpadc_rdy</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Conversion data ready interrupt flag</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>gpadc_fifo_full</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>FIFO full flag</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>gpadc_fifo_ne</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>FIFO not empty flag</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>gpadc_fifo_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>FIFO clear signal</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>gpadc_dma_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>GPADC DMA enbale</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="gpadc-dma-rdata">
+<h3><span class="section-number">5.4.2. </span>gpadc_dma_rdata<a class="headerlink" href="#gpadc-dma-rdata" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x40002004</p>
+<figure class="align-center">
+<img alt="../_images/gpip_gpadc_dma_rdata.svg" src="../_images/gpip_gpadc_dma_rdata.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:26</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>25:0</p></td>
+<td><p>gpadc_dma_rdata</p></td>
+<td><p>r</p></td>
+<td><p>26'd0</p></td>
+<td><p>GPADC finial conversion result stored in the FIFO</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="gpdac-config">
+<h3><span class="section-number">5.4.3. </span>gpdac_config<a class="headerlink" href="#gpdac-config" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x40002040</p>
+<figure class="align-center">
+<img alt="../_images/gpip_gpdac_config.svg" src="../_images/gpip_gpdac_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:24</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="7"><p>23:20</p></td>
+<td rowspan="7"><p>gpdac_ch_b_sel</p></td>
+<td rowspan="7"><p>r/w</p></td>
+<td rowspan="7"><p>0</p></td>
+<td rowspan="7"><p>Channel B Source Select</p>
+<p>0: Reg</p>
+<p>1: DMA</p>
+<p>2: DMA + Filter</p>
+<p>3: Sin Gen</p>
+<p>4: A (The same as channel A)</p>
+<p>5: ~A (Inverse of channel A)</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="5"><p>19:16</p></td>
+<td rowspan="5"><p>gpdac_ch_a_sel</p></td>
+<td rowspan="5"><p>r/w</p></td>
+<td rowspan="5"><p>0</p></td>
+<td rowspan="5"><p>Channel A Source Select</p>
+<p>0: Reg</p>
+<p>1: DMA</p>
+<p>2: DMA + Filter</p>
+<p>3: Sin Gen</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>15:11</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>10:8</p></td>
+<td><p>gpdac_mode</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>0:32k, 1:16k, 3:8k,  4:512k(for DMA only)</p></td>
+</tr>
+<tr class="row-odd"><td><p>7:6</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>5:4</p></td>
+<td><p>dsm_mode</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>0:bypass, 1:dsm order=1, 2: dsm order=2</p></td>
+</tr>
+<tr class="row-odd"><td><p>3:2</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>gpdac_en2</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>GPDAC enable 2 (for B channel)</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>gpdac_en</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>GPDAC enable</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="gpdac-dma-config">
+<h3><span class="section-number">5.4.4. </span>gpdac_dma_config<a class="headerlink" href="#gpdac-dma-config" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x40002044</p>
+<figure class="align-center">
+<img alt="../_images/gpip_gpdac_dma_config.svg" src="../_images/gpip_gpdac_dma_config.svg" /></figure>
+</section>
+<section id="gpdac-dma-wdata">
+<h3><span class="section-number">5.4.5. </span>gpdac_dma_wdata<a class="headerlink" href="#gpdac-dma-wdata" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x40002048</p>
+<figure class="align-center">
+<img alt="../_images/gpip_gpdac_dma_wdata.svg" src="../_images/gpip_gpdac_dma_wdata.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>gpdac_dma_wdata</p></td>
+<td><p>w</p></td>
+<td><p>x</p></td>
+<td><p>GPDAC DMA TX data</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ADC.html" class="btn btn-neutral float-left" title="4. ADC" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="DMA.html" class="btn btn-neutral float-right" title="6. DMA" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2021.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

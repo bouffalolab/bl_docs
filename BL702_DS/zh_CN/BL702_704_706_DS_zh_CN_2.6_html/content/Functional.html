@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2. 功能描述 &mdash; BL702/704/706 数据手册  文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="3. 管脚定义" href="Pindefinition.html" />
+    <link rel="prev" title="1. 概述" href="overview.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL702/704/706 数据手册
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">1. 概述</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2. 功能描述</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#cpu">2.1. CPU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">2.2. 缓存</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">2.3. 内存</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dma">2.4. DMA控制器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">2.5. 总线结构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">2.6. 中断</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">2.7. 启动选项</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">2.8. 电源管理单元</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">2.9. 时钟架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">2.10. 外设</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#gpio">2.10.1. GPIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uart">2.10.2. UART</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spi">2.10.3. SPI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#i2c">2.10.4. I2C</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#i2s">2.10.5. I2S</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#timer">2.10.6. TIMER</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pwm">2.10.7. PWM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ir-ir-remote">2.10.8. IR(IR-remote)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usb2-0-full-speed">2.10.9. USB2.0(Full Speed)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#emac">2.10.10. EMAC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#qdec">2.10.11. QDEC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adc">2.10.12. ADC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dac">2.10.13. DAC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">2.10.14. 调试接口</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Pindefinition.html">3. 管脚定义</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Electricalcharacteristics.html">4. 电气特性</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ProductUse.html">5. 产品使用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Referencedesign.html">6. 参考设计</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PackagingQFN32.html">7. 封装信息QFN32</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PackagingQFN40.html">8. 封装信息QFN40</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PackagingQFN48.html">9. 封装信息QFN48</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TopMarkingDefinition.html">10. 标志定义</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OrderingInformation.html">11. 订购信息</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">12. 版本信息</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL702/704/706 数据手册</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">2. </span>功能描述</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1><span class="section-number">2. </span>功能描述<a class="headerlink" href="#id1" title="永久链接至标题"></a></h1>
+<p>BL702/BL704/BL706主要功能描述如下:</p>
+<figure class="align-center" id="id11">
+<img alt="../_images/SystemArchitecture.svg" src="../_images/SystemArchitecture.svg" /><figcaption>
+<p><span class="caption-number">图 2.1 </span><span class="caption-text">系统框图</span><a class="headerlink" href="#id11" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<section id="cpu">
+<h2><span class="section-number">2.1. </span>CPU<a class="headerlink" href="#cpu" title="永久链接至标题"></a></h2>
+<p>BL702/BL704/BL706 32-bit RISC CPU包含用于32位单精度算术的FPU（浮点单元），
+三级流水线（IF，EXE，WB），压缩的16位和32位指令集，包含4个硬件可编程断点
+的标准JTAG调试器端口，包含64个中断和16个中断级别/优先级的中断控制器，
+用于低延迟中断处理。 时钟频率高达144MHz，可以动态配置用来更改时钟频率，
+进入省电模式以实现低功耗。</p>
+<p>ZigBee/BLE堆栈和应用程序均在单个32-bit RISC CPU上运行，
+用来实现简单和超低功耗的应用程序。CPU性能约1.46 DMIPS / MHz；3.1 CoreMark / MHz。</p>
+</section>
+<section id="id2">
+<h2><span class="section-number">2.2. </span>缓存<a class="headerlink" href="#id2" title="永久链接至标题"></a></h2>
+<p>BL702/BL704/BL706的缓存提高了CPU访问外部存储器的效能。
+高速缓存可以部分或全部配置为TCM（紧密耦合内存）。</p>
+</section>
+<section id="id3">
+<h2><span class="section-number">2.3. </span>内存<a class="headerlink" href="#id3" title="永久链接至标题"></a></h2>
+<p>BL702/BL704/BL706存储器包括：片上零延迟SRAM存储器，只读存储器，一次写入存储器，
+嵌入式闪存（可选），嵌入式pSRAM（BL704/BL706,可选）。</p>
+</section>
+<section id="dma">
+<h2><span class="section-number">2.4. </span>DMA控制器<a class="headerlink" href="#dma" title="永久链接至标题"></a></h2>
+<p>BL702/BL704/BL706 DMA（直接存储器访问）控制器具有四个专用通道，
+用于管理外设和存储器之间的数据传输，以提高CPU /总线效率。
+DMA有四种传输类型，内存到内存，内存到外设、外设到内存以及外设到外设四种模式。
+DMA还支持LLI（链接列表项）功能，该链表由一系列链接列表预定义多个传输，
+然后硬件会根据每个LLI的大小和地址自动完成所有传输。</p>
+<p>DMA支持的外设包括USB，UART，I2C，I2S，SPI，ADC和DAC。</p>
+</section>
+<section id="id4">
+<h2><span class="section-number">2.5. </span>总线结构<a class="headerlink" href="#id4" title="永久链接至标题"></a></h2>
+<p>BL702/BL704/BL706总线连接与地址访问总结如下：</p>
+<table class="colwidths-given docutils align-center" id="id12" style="width: 100%">
+<caption><span class="caption-number">表 2.1 </span><span class="caption-text">总线连接</span><a class="headerlink" href="#id12" title="永久链接至表格"></a></caption>
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 18%" />
+<col style="width: 18%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>从/主</p></th>
+<th class="head"><p>CPU</p></th>
+<th class="head"><p>以太网</p></th>
+<th class="head"><p>DMA</p></th>
+<th class="head"><p>加密引擎</p></th>
+<th class="head"><p>调试接口</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>内存</p></td>
+<td><p>V</p></td>
+<td><p>V</p></td>
+<td><p>V</p></td>
+<td><p>V</p></td>
+<td><p>V</p></td>
+</tr>
+<tr class="row-odd"><td><p>外设</p></td>
+<td><p>V</p></td>
+<td><p>-</p></td>
+<td><p>V</p></td>
+<td><p>-</p></td>
+<td><p>V</p></td>
+</tr>
+<tr class="row-even"><td><p>Zigbee/BLE</p></td>
+<td><p>V</p></td>
+<td><p>-</p></td>
+<td><p>V</p></td>
+<td><p>-</p></td>
+<td><p>V</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-center" id="id13" style="width: 100%">
+<caption><span class="caption-number">表 2.2 </span><span class="caption-text">地址映像</span><a class="headerlink" href="#id13" title="永久链接至表格"></a></caption>
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>目标</p></th>
+<th class="head"><p>开始地址</p></th>
+<th class="head"><p>大小</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>RETRAM</p></td>
+<td><p>0x40010000</p></td>
+<td><p>4KB</p></td>
+<td><p>深度睡眠内存（保留RAM）</p></td>
+</tr>
+<tr class="row-odd"><td><p>HBN</p></td>
+<td><p>0x4000F000</p></td>
+<td><p>4KB</p></td>
+<td><p>深度睡眠控制（休眠）</p></td>
+</tr>
+<tr class="row-even"><td><p>PDS</p></td>
+<td><p>0x4000E000</p></td>
+<td><p>4KB</p></td>
+<td><p>睡眠控制（掉电睡眠）</p></td>
+</tr>
+<tr class="row-odd"><td><p>USB</p></td>
+<td><p>0x4000D800</p></td>
+<td><p>1KB</p></td>
+<td><p>USB控制</p></td>
+</tr>
+<tr class="row-even"><td><p>EMAC</p></td>
+<td><p>0x4000D000</p></td>
+<td><p>2KB</p></td>
+<td><p>EMAC控制(BL704/BL706)</p></td>
+</tr>
+<tr class="row-odd"><td><p>DMA</p></td>
+<td><p>0x4000C000</p></td>
+<td><p>4KB</p></td>
+<td><p>DMA控制</p></td>
+</tr>
+<tr class="row-even"><td><p>QSPI</p></td>
+<td><p>0x4000B000</p></td>
+<td><p>4KB</p></td>
+<td><p>闪存/pSRAM QSPI控制</p></td>
+</tr>
+<tr class="row-odd"><td><p>CAM</p></td>
+<td><p>0x4000AD00</p></td>
+<td><p>256B</p></td>
+<td><p>CAM 控制(BL706)</p></td>
+</tr>
+<tr class="row-even"><td><p>I2S</p></td>
+<td><p>0x4000AA00</p></td>
+<td><p>256B</p></td>
+<td><p>I2S控制</p></td>
+</tr>
+<tr class="row-odd"><td><p>KYS</p></td>
+<td><p>0x4000A900</p></td>
+<td><p>256B</p></td>
+<td><p>Key-Scan控制</p></td>
+</tr>
+<tr class="row-even"><td><p>QDEC2</p></td>
+<td><p>0x4000A880</p></td>
+<td><p>64B</p></td>
+<td><p>正交解码器控制</p></td>
+</tr>
+<tr class="row-odd"><td><p>QDEC1</p></td>
+<td><p>0x4000A840</p></td>
+<td><p>64B</p></td>
+<td><p>正交解码器控制</p></td>
+</tr>
+<tr class="row-even"><td><p>QDEC0</p></td>
+<td><p>0x4000A800</p></td>
+<td><p>64B</p></td>
+<td><p>正交解码器控制</p></td>
+</tr>
+<tr class="row-odd"><td><p>IRR</p></td>
+<td><p>0x4000A600</p></td>
+<td><p>256B</p></td>
+<td><p>红外遥控器</p></td>
+</tr>
+<tr class="row-even"><td><p>TIMER</p></td>
+<td><p>0x4000A500</p></td>
+<td><p>256B</p></td>
+<td><p>计时器控制</p></td>
+</tr>
+<tr class="row-odd"><td><p>PWM</p></td>
+<td><p>0x4000A400</p></td>
+<td><p>256B</p></td>
+<td><p>脉冲宽度调制控制</p></td>
+</tr>
+<tr class="row-even"><td><p>I2C</p></td>
+<td><p>0x4000A300</p></td>
+<td><p>256B</p></td>
+<td><p>I2C控制</p></td>
+</tr>
+<tr class="row-odd"><td><p>SPI</p></td>
+<td><p>0x4000A200</p></td>
+<td><p>256B</p></td>
+<td><p>SPI主/从控制</p></td>
+</tr>
+<tr class="row-even"><td><p>UART1</p></td>
+<td><p>0x4000A100</p></td>
+<td><p>256B</p></td>
+<td><p>UART控制</p></td>
+</tr>
+<tr class="row-odd"><td><p>UART0</p></td>
+<td><p>0x4000A000</p></td>
+<td><p>256B</p></td>
+<td><p>UART控制</p></td>
+</tr>
+<tr class="row-even"><td><p>L1C</p></td>
+<td><p>0x40009000</p></td>
+<td><p>4KB</p></td>
+<td><p>缓存控制</p></td>
+</tr>
+<tr class="row-odd"><td><p>eFuse</p></td>
+<td><p>0x40007000</p></td>
+<td><p>4KB</p></td>
+<td><p>eFuse存储器控制</p></td>
+</tr>
+<tr class="row-even"><td><p>SEC</p></td>
+<td><p>0x40004000</p></td>
+<td><p>4KB</p></td>
+<td><p>安全引擎</p></td>
+</tr>
+<tr class="row-odd"><td><p>GPIP</p></td>
+<td><p>0x40002000</p></td>
+<td><p>4KB</p></td>
+<td><p>通用DAC / ADC / ACOMP接口控制</p></td>
+</tr>
+<tr class="row-even"><td><p>MIX</p></td>
+<td><p>0x40001000</p></td>
+<td><p>4KB</p></td>
+<td><p>混合信号寄存器</p></td>
+</tr>
+<tr class="row-odd"><td><p>GLB</p></td>
+<td><p>0x40000000</p></td>
+<td><p>4KB</p></td>
+<td><p>全局寄存器</p></td>
+</tr>
+<tr class="row-even"><td><p>pSRAM</p></td>
+<td><p>0x24000000</p></td>
+<td><p>8MB</p></td>
+<td><p>pSRAM存储器</p></td>
+</tr>
+<tr class="row-odd"><td><p>XIP</p></td>
+<td><p>0x23000000</p></td>
+<td><p>8MB</p></td>
+<td><p>XIP闪存</p></td>
+</tr>
+<tr class="row-even"><td><p>OCRAM</p></td>
+<td><p>0x22020000</p></td>
+<td><p>64KB</p></td>
+<td><p>片上存储器</p></td>
+</tr>
+<tr class="row-odd"><td><p>DTCM</p></td>
+<td><p>0x22014000</p></td>
+<td><p>48KB</p></td>
+<td><p>数据高速缓存</p></td>
+</tr>
+<tr class="row-even"><td><p>ITCM</p></td>
+<td><p>0x22010000</p></td>
+<td><p>16KB</p></td>
+<td><p>指令高速缓存</p></td>
+</tr>
+<tr class="row-odd"><td><p>ROM</p></td>
+<td><p>0x21000000</p></td>
+<td><p>192KB</p></td>
+<td><p>只读存储器</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id5">
+<h2><span class="section-number">2.6. </span>中断<a class="headerlink" href="#id5" title="永久链接至标题"></a></h2>
+<p>BL702/BL704/BL706支持内部RTC时钟唤醒、外部中断唤醒，以实现低功耗睡眠唤醒功能。</p>
+<p>CPU中断控制器支持包括UART中断、I2C中断、SPI中断、定时器中断、DMA中断等在内的共64个可屏蔽中断触发源。所有I/O引脚都可以配置为外部中断输入模式，外部中断支持高电平触发、低电平触发、上升沿触发和下降沿触发共四种触发类型。</p>
+</section>
+<section id="id6">
+<h2><span class="section-number">2.7. </span>启动选项<a class="headerlink" href="#id6" title="永久链接至标题"></a></h2>
+<p>BL702/BL704/BL706支持多种启动，可选择从UART、USB、Flash闪存启动。</p>
+</section>
+<section id="id7">
+<h2><span class="section-number">2.8. </span>电源管理单元<a class="headerlink" href="#id7" title="永久链接至标题"></a></h2>
+<p>电源管理单元（PMU）管理整个芯片的电源，可分为运行、空闲、睡眠、休眠和电源关闭模式。
+软件可配置进入睡眠模式时，通过RTC定时器或EINT来唤醒，以达到低功耗电源管理。</p>
+<p>睡眠模式非常灵活，可以使应用配置为最低功耗。</p>
+</section>
+<section id="id8">
+<h2><span class="section-number">2.9. </span>时钟架构<a class="headerlink" href="#id8" title="永久链接至标题"></a></h2>
+<p>时钟控制单元为核心MCU和外围SOC设备生成时钟。 时钟源可以是XTAL，PLL或RC振荡器。
+通过适当的配置（例如sel，div，en等）来动态节省功耗。PMU以32kHz时钟运行，
+使系统在睡眠模式下保持低功耗。</p>
+<figure class="align-center" id="id14">
+<img alt="../_images/clocktree.svg" src="../_images/clocktree.svg" /><figcaption>
+<p><span class="caption-number">图 2.2 </span><span class="caption-text">时钟框图</span><a class="headerlink" href="#id14" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id9">
+<h2><span class="section-number">2.10. </span>外设<a class="headerlink" href="#id9" title="永久链接至标题"></a></h2>
+<p>外设包括 USB2.0，以太网，IR-remote，SPI，UART，ISO 17987，I2C，I2S，PWM，QDEC，KeyScan，ADC，DAC，
+PIR，Camera。</p>
+<section id="gpio">
+<h3><span class="section-number">2.10.1. </span>GPIO<a class="headerlink" href="#gpio" title="永久链接至标题"></a></h3>
+<p>BL702 具有 15 个 GPIO，BL704 具有 23 个 GPIO，BL706 具有 31 个 GPIO，具有以下特性：</p>
+<ul class="simple">
+<li><p>每个 GPIO 都可用作通用输入和输出功能，上拉/下拉/浮空可由软件配置</p></li>
+<li><p>每个 GPIO 都支持中断功能，中断支持上升沿触发，下降沿触发，高电平触发以及低电平触发</p></li>
+<li><p>每个 GPIO 都可以设置为高阻态，用于低功耗模式</p></li>
+</ul>
+</section>
+<section id="uart">
+<h3><span class="section-number">2.10.2. </span>UART<a class="headerlink" href="#uart" title="永久链接至标题"></a></h3>
+<p>芯片内置两个通用异步串行收发器（UART0 和 UART1），具有以下特性：</p>
+<ul class="simple">
+<li><p>支持LIN 主/从功能</p></li>
+<li><p>工作时钟可以选择为 FCLK 或 96MHz， 波特率最大支持8M</p></li>
+<li><p>支持硬件的 CTS 和 RTS 信号管理</p></li>
+<li><p>TX 和 RX 具有独立 FIFO，FIFO深度为128字节，支持DMA功能</p></li>
+</ul>
+</section>
+<section id="spi">
+<h3><span class="section-number">2.10.3. </span>SPI<a class="headerlink" href="#spi" title="永久链接至标题"></a></h3>
+<p>芯片内置一个 SPI，可以配置为主模式或者从模式，SPI 模块时钟是 BCLK，具有以下特性：</p>
+<ul class="simple">
+<li><p>作为主机，时钟频率最高为 36MHz</p></li>
+<li><p>作为从机，允许主机最大的时钟频率为 24MHz</p></li>
+<li><p>每帧的位宽可以配置为 8 位/ 16 位/ 24 位/ 32 位</p></li>
+<li><p>SPI 的收发具有独立 FIFO ，FIFO 深度固定为4帧(即，如果帧的位宽是8bit，FIFO的深度是4字节)</p></li>
+<li><p>支持 DMA 传输模式</p></li>
+</ul>
+</section>
+<section id="i2c">
+<h3><span class="section-number">2.10.4. </span>I2C<a class="headerlink" href="#i2c" title="永久链接至标题"></a></h3>
+<p>芯片内置一个 I2C 接口，具有以下特性：</p>
+<ul class="simple">
+<li><p>支持主机模式和 7bit 寻址</p></li>
+<li><p>工作时钟为 BCLK</p></li>
+<li><p>具有器件地址寄存器，寄存器地址寄存器，寄存器地址长度可配为 1字节/2字节/3字节/4字节</p></li>
+<li><p>I2C的收发具有独立 FIFO，FIFO深度为 2 words</p></li>
+<li><p>支持 DMA 功能</p></li>
+</ul>
+</section>
+<section id="i2s">
+<h3><span class="section-number">2.10.5. </span>I2S<a class="headerlink" href="#i2s" title="永久链接至标题"></a></h3>
+<p>芯片内置一个 I2S 接口，具有以下特性：</p>
+<ul class="simple">
+<li><p>支持 Left-justified/ Right-justified/ DSP 等数据格式，数据宽度可配置为 8/16/24/32 比特</p></li>
+<li><p>除单声道/双声道模式之外，同时支持四声道模式</p></li>
+<li><p>I2S 收发具有独立的 FIFO，FIFO深度为 16 帧；在数据宽度为 16 比特时，FIFO深度可以设置为 32 帧</p></li>
+<li><p>I2S模块具有独立的 Audio PLL，支持 48K (及其整数分频)和 44.1K (及其整数分频)两类采样率</p></li>
+</ul>
+</section>
+<section id="timer">
+<h3><span class="section-number">2.10.6. </span>TIMER<a class="headerlink" href="#timer" title="永久链接至标题"></a></h3>
+<p>芯片内置两个通用定时器和一个看门狗定时器，具有以下特性：</p>
+<ul class="simple">
+<li><p>通用定时器的时钟源可以选择 FCLK/32K/1K/XTAL</p></li>
+<li><p>看门狗定时器的时钟源可以选择 FCLK/32K/XTAL</p></li>
+<li><p>每个计数器都有 8-bit 分频器</p></li>
+<li><p>每组通用定时器都包含三个比较寄存器，支持比较中断，计数模式支持 FreeRun 模式和 PreLoad 模式</p></li>
+<li><p>16-bit 看门狗定时器，支持中断或复位两种看门狗溢出方式</p></li>
+</ul>
+</section>
+<section id="pwm">
+<h3><span class="section-number">2.10.7. </span>PWM<a class="headerlink" href="#pwm" title="永久链接至标题"></a></h3>
+<p>芯片内置五路 PWM 信号，具有以下特性：</p>
+<ul class="simple">
+<li><p>三种时钟源 BCLK/XCLK/32K 可供选择</p></li>
+<li><p>分频寄存器和周期寄存器位宽为 16-bit</p></li>
+<li><p>每通道 PWM 支持输出极性可调，双门限值设定，增加脉冲输出灵活性</p></li>
+<li><p>支持 PWM 周期计数中断，用于统计输出脉冲数等</p></li>
+</ul>
+</section>
+<section id="ir-ir-remote">
+<h3><span class="section-number">2.10.8. </span>IR(IR-remote)<a class="headerlink" href="#ir-ir-remote" title="永久链接至标题"></a></h3>
+<p>芯片内置一个红外遥控，具有以下特性：</p>
+<ul class="simple">
+<li><p>支持发送和接收两种模式</p></li>
+<li><p>既支持以固定协议 NEC、 RC-5 接收数据，也支持以脉冲宽度计数方式接收任意格式数据</p></li>
+<li><p>时钟源为 XCLK，具有强大的红外波形编辑能力，可发出符合各种协议的波形，发射功率有15档可调</p></li>
+<li><p>接收 FIFO 深度为 64 字节</p></li>
+</ul>
+</section>
+<section id="usb2-0-full-speed">
+<h3><span class="section-number">2.10.9. </span>USB2.0(Full Speed)<a class="headerlink" href="#usb2-0-full-speed" title="永久链接至标题"></a></h3>
+<p>芯片内嵌一个兼容全速 USB 的设备控制器，具有以下特性：</p>
+<ul class="simple">
+<li><p>遵循全速 USB 设备标准</p></li>
+<li><p>具备 8 个端点，每个端点都有 64 字节深度的 FIFO</p></li>
+<li><p>除端点 0 外，其它端点均支持中断/批量/同步传输</p></li>
+<li><p>具有待机/恢复功能</p></li>
+<li><p>USB 专用的 48MHz 时钟由内部主 PLL 直接产生</p></li>
+</ul>
+</section>
+<section id="emac">
+<h3><span class="section-number">2.10.10. </span>EMAC<a class="headerlink" href="#emac" title="永久链接至标题"></a></h3>
+<p>EMAC 模块是一个兼容 IEEE 802.3 的 10/100Mbps 以太网控制器(Ethernet Media Access Controller)，具有以下特性：</p>
+<ul class="simple">
+<li><p>兼容 IEEE 802.3 定义的 MAC 层功能</p></li>
+<li><p>支持 IEEE 802.3 定义的RMII 接口的 PHY，通过 MDIO 与 PHY 交互</p></li>
+<li><p>支持 10Mbps 与 100Mbps 以太网</p></li>
+<li><p>支持半双工与全双工，数据收发通过 Buffer Descriptor 数据结构来实现，EMAC控制内嵌AHB Master，可以直接从内存读取或者写入数据</p></li>
+<li><p>Buffer Descriptor 数据结构存放在 EMAC 内部 RAM，Buffer Descriptor 总个数多达 128 个，用户可以根据场景，灵活配置收发Buffer Descriptor个数</p></li>
+</ul>
+<p>EMAC 时序图如下所示：</p>
+<figure class="align-center" id="id15">
+<img alt="../_images/EMACTiming.svg" src="../_images/EMACTiming.svg" /><figcaption>
+<p><span class="caption-number">图 2.3 </span><span class="caption-text">EMAC 时序图</span><a class="headerlink" href="#id15" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<table class="colwidths-given docutils align-center" id="id16" style="width: 100%">
+<caption><span class="caption-number">表 2.3 </span><span class="caption-text">使用 RX Clock 对应的时序条件</span><a class="headerlink" href="#id16" title="永久链接至表格"></a></caption>
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 20%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 30%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head" colspan="7"><p>将寄存器 clk_cfg3 对应的位设置为：cfg_inv_eth_rx_clk = 1，cfg_inv_eth_tx_clk = 0，cfg_sel_eth_ref_clk_o = 0</p></th>
+</tr>
+<tr class="row-even"><th class="head" colspan="2"><p>时序参数（1.8V, Load = 20PF）</p></th>
+<th class="head"><p>最小值</p></th>
+<th class="head"><p>典型值</p></th>
+<th class="head"><p>最大值</p></th>
+<th class="head"><p>单位</p></th>
+<th class="head"><p>备注</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-odd"><td><p>T<sub>cyc</sub></p></td>
+<td><p>Clock Cycle</p></td>
+<td><p>-</p></td>
+<td><p>20</p></td>
+<td><p>-</p></td>
+<td><p>ns</p></td>
+<td><p>Clock From ETH PHY</p></td>
+</tr>
+<tr class="row-even"><td><p>T<sub>vld</sub></p></td>
+<td><p>Output Valid Delay</p></td>
+<td><p>7.38</p></td>
+<td><p>-</p></td>
+<td><p>16.3</p></td>
+<td><p>ns</p></td>
+<td><p>TXD/TX_EN</p></td>
+</tr>
+<tr class="row-odd"><td><p>T<sub>su</sub></p></td>
+<td><p>Input Setup Time</p></td>
+<td><p>10</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>ns</p></td>
+<td><p>RXD/RX_DV/RXERR</p></td>
+</tr>
+<tr class="row-even"><td><p>T<sub>h</sub></p></td>
+<td><p>Input Hold Time</p></td>
+<td><p>0</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>ns</p></td>
+<td><p>RXD/RX_DV/RXERR</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-center" id="id17" style="width: 100%">
+<caption><span class="caption-number">表 2.4 </span><span class="caption-text">不使用 RX Clock 对应的时序条件</span><a class="headerlink" href="#id17" title="永久链接至表格"></a></caption>
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 20%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 30%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head" colspan="7"><p>将寄存器 clk_cfg3 对应的位设置为：cfg_inv_eth_rx_clk = 0，cfg_inv_eth_tx_clk = 0，cfg_sel_eth_ref_clk_o = 0</p></th>
+</tr>
+<tr class="row-even"><th class="head" colspan="2"><p>时序参数（1.8V, Load = 20PF）</p></th>
+<th class="head"><p>最小值</p></th>
+<th class="head"><p>典型值</p></th>
+<th class="head"><p>最大值</p></th>
+<th class="head"><p>单位</p></th>
+<th class="head"><p>备注</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-odd"><td><p>T<sub>cyc</sub></p></td>
+<td><p>Clock Cycle</p></td>
+<td><p>-</p></td>
+<td><p>20</p></td>
+<td><p>-</p></td>
+<td><p>ns</p></td>
+<td><p>Clock From ETH PHY</p></td>
+</tr>
+<tr class="row-even"><td><p>T<sub>vld</sub></p></td>
+<td><p>Output Valid Delay</p></td>
+<td><p>7.38</p></td>
+<td><p>-</p></td>
+<td><p>16.3</p></td>
+<td><p>ns</p></td>
+<td><p>TXD/TX_EN</p></td>
+</tr>
+<tr class="row-odd"><td><p>T<sub>su</sub></p></td>
+<td><p>Input Setup Time</p></td>
+<td><p>2</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>ns</p></td>
+<td><p>RXD/RX_DV/RXERR</p></td>
+</tr>
+<tr class="row-even"><td><p>T<sub>h</sub></p></td>
+<td><p>Input Hold Time</p></td>
+<td><p>3</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>ns</p></td>
+<td><p>RXD/RX_DV/RXERR</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="qdec">
+<h3><span class="section-number">2.10.11. </span>QDEC<a class="headerlink" href="#qdec" title="永久链接至标题"></a></h3>
+<p>芯片内置三组正交解码器(quadrature decoder)，用于将双路旋转编码器产生的两组相位相差 90 度的脉冲解码为对应转速和旋转
+方向，具有以下特性：</p>
+<ul class="simple">
+<li><p>时钟源可以选择 32K（f32k_clk）或 32M（xclk）</p></li>
+<li><p>具有 16 位脉冲计数范围（-32768~32767 pulse/sample）</p></li>
+<li><p>具有 12 种可配置的 sample 周期（32us~131ms per sample at 1MHz）</p></li>
+<li><p>具有 16 位可设置的report 周期（0~65535 sample/report)</p></li>
+</ul>
+</section>
+<section id="adc">
+<h3><span class="section-number">2.10.12. </span>ADC<a class="headerlink" href="#adc" title="永久链接至标题"></a></h3>
+<p>芯片内置一个 12bits 的逐次逼近式模拟数字转换器 (ADC) ，具有以下特性：</p>
+<ul class="simple">
+<li><p>最大工作时钟为 2MHz, 支持 12 路外部模拟输入和若干内部模拟信号选择，支持单通道转换和多通道扫描两种模式</p></li>
+<li><p>支持 2.0V，3.2V 可选内部参考电压，转换结果为 12/14/16bits(通过过采样实现)左对齐模式</p></li>
+<li><p>拥有深度为 32 的 FIFO，支持多种中断，支持 DMA 功能</p></li>
+<li><p>ADC 除了用于普通模拟信号测量外，还可以用于测量供电电压</p></li>
+<li><p>可以通过测量内/外部二极管电压用于温度检测</p></li>
+</ul>
+</section>
+<section id="dac">
+<h3><span class="section-number">2.10.13. </span>DAC<a class="headerlink" href="#dac" title="永久链接至标题"></a></h3>
+<p>芯片内置一个10bits 的数字模拟转换器 (DAC），具有以下特性：</p>
+<ul class="simple">
+<li><p>FIFO 深度为 1，支持2路DAC调制输出</p></li>
+<li><p>可用于音频播放，常规的模拟信号调制</p></li>
+<li><p>工作时钟可选为 32M 或者 Audio PLL</p></li>
+<li><p>支持 DMA 将内存搬运至 DAC 调制寄存器</p></li>
+<li><p>输出引脚固定为 ChannelA 为 GPIO11，ChannelB 为 GPIO17</p></li>
+</ul>
+</section>
+<section id="id10">
+<h3><span class="section-number">2.10.14. </span>调试接口<a class="headerlink" href="#id10" title="永久链接至标题"></a></h3>
+<p>支持标准的JTAG 4线调试接口，支持使用Jlink/OpenOCD/CK Link等调试器进行调试。</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="overview.html" class="btn btn-neutral float-left" title="1. 概述" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="Pindefinition.html" class="btn btn-neutral float-right" title="3. 管脚定义" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2022.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

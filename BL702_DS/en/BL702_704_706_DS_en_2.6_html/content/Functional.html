@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2. Functional Description &mdash; BL702/704/706 Datasheet   documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="3. Pin Definition" href="Pindefinition.html" />
+    <link rel="prev" title="1. Overview" href="overview.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL702/704/706 Datasheet 
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">1. Overview</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2. Functional Description</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#cpu">2.1. CPU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cache">2.2. Cache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#memory">2.3. Memory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dma">2.4. DMA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bus">2.5. Bus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#interrupt">2.6. Interrupt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#boot">2.7. Boot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#power">2.8. Power</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#clock">2.9. Clock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#peripherals">2.10. Peripherals</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#gpio">2.10.1. GPIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uart">2.10.2. UART</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spi">2.10.3. SPI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#i2c">2.10.4. I2C</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#i2s">2.10.5. I2S</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#timer">2.10.6. TIMER</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pwm">2.10.7. PWM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ir-ir-remote">2.10.8. IR (IR-remote)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usb2-0-full-speed">2.10.9. USB2.0(Full Speed)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#emac">2.10.10. EMAC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#qdec">2.10.11. QDEC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adc">2.10.12. ADC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dac">2.10.13. DAC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#debug-interface">2.10.14. debug interface</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Pindefinition.html">3. Pin Definition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Electricalcharacteristics.html">4. Electrical Specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ProductUse.html">5. Product use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Referencedesign.html">6. Reference Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PackagingQFN32.html">7. Package Information(QFN32)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PackagingQFN40.html">8. Package Information(QFN40)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PackagingQFN48.html">9. Package Information(QFN48)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TopMarkingDefinition.html">10. Top Marking Definition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OrderingInformation.html">11. Ordering Information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">12. Revision history</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL702/704/706 Datasheet </a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">2. </span>Functional Description</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="functional-description">
+<h1><span class="section-number">2. </span>Functional Description<a class="headerlink" href="#functional-description" title="Permalink to this headline"></a></h1>
+<p>BL702/BL704/BL706 main functions described as follows：</p>
+<figure class="align-center" id="id1">
+<img alt="../_images/SystemArchitecture.svg" src="../_images/SystemArchitecture.svg" /><figcaption>
+<p><span class="caption-number">Fig. 2.1 </span><span class="caption-text">System Architecture</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<section id="cpu">
+<h2><span class="section-number">2.1. </span>CPU<a class="headerlink" href="#cpu" title="Permalink to this headline"></a></h2>
+<p>BL702/BL704/BL706 32-bit RISC CPU contains FPU (floating-point unit) for 32-bit single-precision arithmetic, three-stage pipelined (IF, EXE, WB), compressed 16 and 32-bit instruction set, standard JTAG debugger port including 4 hardware-programmable breakpoints, interrupt controller including 64 interrupts and 16 interrupt levels/priorities for low latency interrupt processing. Up to 144MHz clock frequency, can be dynamically configured to change clock frequency, enter the power saving mode to achieve low power consumption.</p>
+<p>Both zigbee/BLE stack and application run on single 32-bit RISC CPU for simple and ultra-low power applications. CPU performance ~1.46 DMIPS/MHz. ~3.1 CoreMark/MHz.</p>
+</section>
+<section id="cache">
+<h2><span class="section-number">2.2. </span>Cache<a class="headerlink" href="#cache" title="Permalink to this headline"></a></h2>
+<p>BL702/BL704/BL706 cache improves CPU performance to access external memory. Cache memories can be partially or fully configured as TCM (tightly coupled memory).</p>
+</section>
+<section id="memory">
+<h2><span class="section-number">2.3. </span>Memory<a class="headerlink" href="#memory" title="Permalink to this headline"></a></h2>
+<p>BL702/BL704/BL706 memories include: on-chip zero-delay SRAM memories, read-only memories, write-once memories, embedded flash memory (optional), embedded pSRAM (BL704/BL706,optional).</p>
+</section>
+<section id="dma">
+<h2><span class="section-number">2.4. </span>DMA<a class="headerlink" href="#dma" title="Permalink to this headline"></a></h2>
+<p>BL702/BL704/BL706 DMA (direct memory access) controller has eight dedicated channels that manage data transfer between peripherals and memories to improve cpu/bus efficiency.</p>
+<p>There are four main types of transfers including memory to memory, memory to peripheral, peripheral to peripheral and peripheral to memory. DMA also supports LLI (link list item) that multiple transfers are pre-defined by a series of linked lists, then hardware automatically complete all transfers according to each LLI size and address. DMA supports peripheral USB, UART, I2C, I2S, SPI, ADC and DAC.</p>
+</section>
+<section id="bus">
+<h2><span class="section-number">2.5. </span>Bus<a class="headerlink" href="#bus" title="Permalink to this headline"></a></h2>
+<p>BL702/BL704/BL706 bus fabric connection and memory-map summarized as follows：</p>
+<table class="colwidths-given docutils align-center" id="id2" style="width: 100%">
+<caption><span class="caption-number">Table 2.1 </span><span class="caption-text">Bus Connection</span><a class="headerlink" href="#id2" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 18%" />
+<col style="width: 18%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Slave/ Master</p></th>
+<th class="head"><p>CPU</p></th>
+<th class="head"><p>Ethernet</p></th>
+<th class="head"><p>DMA</p></th>
+<th class="head"><p>Crypto Engine</p></th>
+<th class="head"><p>Debug</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>SRAM</p></td>
+<td><p>V</p></td>
+<td><p>V</p></td>
+<td><p>V</p></td>
+<td><p>V</p></td>
+<td><p>V</p></td>
+</tr>
+<tr class="row-odd"><td><p>Peripheral</p></td>
+<td><p>V</p></td>
+<td><p>-</p></td>
+<td><p>V</p></td>
+<td><p>-</p></td>
+<td><p>V</p></td>
+</tr>
+<tr class="row-even"><td><p>BLE/zigbee</p></td>
+<td><p>V</p></td>
+<td><p>-</p></td>
+<td><p>V</p></td>
+<td><p>-</p></td>
+<td><p>V</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-center" id="id3" style="width: 100%">
+<caption><span class="caption-number">Table 2.2 </span><span class="caption-text">Memory Map</span><a class="headerlink" href="#id3" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Module</p></th>
+<th class="head"><p>Base Address</p></th>
+<th class="head"><p>Size</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>RETRAM</p></td>
+<td><p>0x40010000</p></td>
+<td><p>4KB</p></td>
+<td><p>Deep sleep memory (Retention RAM)</p></td>
+</tr>
+<tr class="row-odd"><td><p>HBN</p></td>
+<td><p>0x4000F000</p></td>
+<td><p>4KB</p></td>
+<td><p>Deep sleep control (Hibernate)</p></td>
+</tr>
+<tr class="row-even"><td><p>PDS</p></td>
+<td><p>0x4000E000</p></td>
+<td><p>4KB</p></td>
+<td><p>Sleep control (Power Down Sleep)</p></td>
+</tr>
+<tr class="row-odd"><td><p>USB</p></td>
+<td><p>0x4000D800</p></td>
+<td><p>1KB</p></td>
+<td><p>USB control</p></td>
+</tr>
+<tr class="row-even"><td><p>EMAC</p></td>
+<td><p>0x4000D000</p></td>
+<td><p>2KB</p></td>
+<td><p>Ethernet MAC control (BL704/BL706)</p></td>
+</tr>
+<tr class="row-odd"><td><p>DMA</p></td>
+<td><p>0x4000C000</p></td>
+<td><p>4KB</p></td>
+<td><p>DMA control</p></td>
+</tr>
+<tr class="row-even"><td><p>QSPI</p></td>
+<td><p>0x4000B000</p></td>
+<td><p>4KB</p></td>
+<td><p>Flash/pSRAM QSPI control</p></td>
+</tr>
+<tr class="row-odd"><td><p>CAM</p></td>
+<td><p>0x4000AD00</p></td>
+<td><p>256B</p></td>
+<td><p>CAM control (BL706)</p></td>
+</tr>
+<tr class="row-even"><td><p>I2S</p></td>
+<td><p>0x4000AA00</p></td>
+<td><p>256B</p></td>
+<td><p>I2S control</p></td>
+</tr>
+<tr class="row-odd"><td><p>KYS</p></td>
+<td><p>0x4000A900</p></td>
+<td><p>256B</p></td>
+<td><p>Key-Scan control</p></td>
+</tr>
+<tr class="row-even"><td><p>QDEC2</p></td>
+<td><p>0x4000A880</p></td>
+<td><p>64B</p></td>
+<td><p>Quadrature decoder control</p></td>
+</tr>
+<tr class="row-odd"><td><p>QDEC1</p></td>
+<td><p>0x4000A840</p></td>
+<td><p>64B</p></td>
+<td><p>Quadrature decoder control</p></td>
+</tr>
+<tr class="row-even"><td><p>QDEC0</p></td>
+<td><p>0x4000A800</p></td>
+<td><p>64B</p></td>
+<td><p>Quadrature decoder control</p></td>
+</tr>
+<tr class="row-odd"><td><p>IRR</p></td>
+<td><p>0x4000A600</p></td>
+<td><p>256B</p></td>
+<td><p>IR Remote control</p></td>
+</tr>
+<tr class="row-even"><td><p>TIMER</p></td>
+<td><p>0x4000A500</p></td>
+<td><p>256B</p></td>
+<td><p>Timer control</p></td>
+</tr>
+<tr class="row-odd"><td><p>PWM</p></td>
+<td><p>0x4000A400</p></td>
+<td><p>256B</p></td>
+<td><p>Pulse Width Modulation * 5 control</p></td>
+</tr>
+<tr class="row-even"><td><p>I2C</p></td>
+<td><p>0x4000A300</p></td>
+<td><p>256B</p></td>
+<td><p>I2C control</p></td>
+</tr>
+<tr class="row-odd"><td><p>SPI</p></td>
+<td><p>0x4000A200</p></td>
+<td><p>256B</p></td>
+<td><p>SPI master/slave control</p></td>
+</tr>
+<tr class="row-even"><td><p>UART1</p></td>
+<td><p>0x4000A100</p></td>
+<td><p>256B</p></td>
+<td><p>UART control (support ISO 17987)</p></td>
+</tr>
+<tr class="row-odd"><td><p>UART0</p></td>
+<td><p>0x4000A000</p></td>
+<td><p>256B</p></td>
+<td><p>UART control (support ISO 17987)</p></td>
+</tr>
+<tr class="row-even"><td><p>L1C</p></td>
+<td><p>0x40009000</p></td>
+<td><p>4KB</p></td>
+<td><p>Cache control</p></td>
+</tr>
+<tr class="row-odd"><td><p>eFuse</p></td>
+<td><p>0x40007000</p></td>
+<td><p>4KB</p></td>
+<td><p>eFuse memory control</p></td>
+</tr>
+<tr class="row-even"><td><p>SEC</p></td>
+<td><p>0x40004000</p></td>
+<td><p>4KB</p></td>
+<td><p>Security engine</p></td>
+</tr>
+<tr class="row-odd"><td><p>GPIP</p></td>
+<td><p>0x40002000</p></td>
+<td><p>4KB</p></td>
+<td><p>General purpose DAC/ADC/ACOMP interface control</p></td>
+</tr>
+<tr class="row-even"><td><p>MIX</p></td>
+<td><p>0x40001000</p></td>
+<td><p>4KB</p></td>
+<td><p>Mixed signal register</p></td>
+</tr>
+<tr class="row-odd"><td><p>GLB</p></td>
+<td><p>0x40000000</p></td>
+<td><p>4KB</p></td>
+<td><p>Global control register</p></td>
+</tr>
+<tr class="row-even"><td><p>pSRAM</p></td>
+<td><p>0x24000000</p></td>
+<td><p>8MB</p></td>
+<td><p>pSRAM memory</p></td>
+</tr>
+<tr class="row-odd"><td><p>XIP</p></td>
+<td><p>0x23000000</p></td>
+<td><p>8MB</p></td>
+<td><p>XIP Flash memory</p></td>
+</tr>
+<tr class="row-even"><td><p>OCRAM</p></td>
+<td><p>0x22020000</p></td>
+<td><p>64KB</p></td>
+<td><p>On-chip memory</p></td>
+</tr>
+<tr class="row-odd"><td><p>DTCM</p></td>
+<td><p>0x22014000</p></td>
+<td><p>48KB</p></td>
+<td><p>Data cache memory</p></td>
+</tr>
+<tr class="row-even"><td><p>ITCM</p></td>
+<td><p>0x22010000</p></td>
+<td><p>16KB</p></td>
+<td><p>Instruction cache memory</p></td>
+</tr>
+<tr class="row-odd"><td><p>ROM</p></td>
+<td><p>0x21000000</p></td>
+<td><p>192KB</p></td>
+<td><p>Read-only memory</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="interrupt">
+<h2><span class="section-number">2.6. </span>Interrupt<a class="headerlink" href="#interrupt" title="Permalink to this headline"></a></h2>
+<p>BL702/BL704/BL706 supports internal RTC wake-up and external GPIO interrupts wake-up.</p>
+<p>The CPU interrupt controller supports a total of 64 maskable interrupt trigger sources including UART interrupt, I2C interrupt, SPI interrupt, timer interrupt, DMA interrupt, etc. All I/O pins can be configured as external interrupt input mode. The external interrupt supports four trigger types: high level trigger, low level trigger, rising edge trigger and falling edge trigger.</p>
+</section>
+<section id="boot">
+<h2><span class="section-number">2.7. </span>Boot<a class="headerlink" href="#boot" title="Permalink to this headline"></a></h2>
+<p>BL702/BL704/BL706 supports multiple boot options: UART, USB, and Flash.</p>
+</section>
+<section id="power">
+<h2><span class="section-number">2.8. </span>Power<a class="headerlink" href="#power" title="Permalink to this headline"></a></h2>
+<p>PMU (power management unit) manages the power of the entire chip and is divided into running, idle, sleep, hibernation and power off modes. The software can be configured to enter sleep mode and wake-up via RTC timer or EINT to achieve low-power sleep and accurate wake-up management.</p>
+<p>Power down sleep modes are flexible for applications to configure as the lowest power consumption.</p>
+</section>
+<section id="clock">
+<h2><span class="section-number">2.9. </span>Clock<a class="headerlink" href="#clock" title="Permalink to this headline"></a></h2>
+<p>Clock control unit generates clocks to the core MCU and the peripheral SOC devices. The root clock source can be XTAL, PLL or RC oscillator. Dynamic power-saved by proper configurations such as sel, div, en, etc. PMU runs at 32KHz clock to keep system low-power in sleep mode.</p>
+<figure class="align-center" id="id4">
+<img alt="../_images/clocktree.svg" src="../_images/clocktree.svg" /><figcaption>
+<p><span class="caption-number">Fig. 2.2 </span><span class="caption-text">Clock Architecture</span><a class="headerlink" href="#id4" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="peripherals">
+<h2><span class="section-number">2.10. </span>Peripherals<a class="headerlink" href="#peripherals" title="Permalink to this headline"></a></h2>
+<p>Peripherals include USB2.0, Ethernet, IR-remote, SPI, UART, ISO 17987, I2C, I2S, PWM, QDEC, KeyScan, ADC, DAC, PIR, Camera.</p>
+<p>Each peripheral can be assigned to different groups of GPIOs through flexible configurations. Each GPIO can be used as a general-purpose input and output function.</p>
+<section id="gpio">
+<h3><span class="section-number">2.10.1. </span>GPIO<a class="headerlink" href="#gpio" title="Permalink to this headline"></a></h3>
+<p>The BL702 has 15 GPIOs, the BL704 has 23 GPIOs, and the BL706 has 31 GPIOs with the following features:</p>
+<ul class="simple">
+<li><p>Each GPIO can be used as general purpose input and output function, pull-up/pull-down/float can be configured by software</p></li>
+<li><p>Each GPIO supports interrupt function, the interrupt supports rising edge trigger, falling edge trigger, high level trigger and low level trigger</p></li>
+<li><p>Each GPIO can be set to high impedance state for low power mode</p></li>
+</ul>
+</section>
+<section id="uart">
+<h3><span class="section-number">2.10.2. </span>UART<a class="headerlink" href="#uart" title="Permalink to this headline"></a></h3>
+<p>The chip has two built-in UARTs (UART0 and UART1) with the following features:</p>
+<ul class="simple">
+<li><p>Support LIN master/slave function</p></li>
+<li><p>The working clock can be selected as FCLK or 96MHz, and the maximum baud rate supports 8M</p></li>
+<li><p>Supports CTS and RTS signal management for hardware</p></li>
+<li><p>TX and RX have independent FIFO, FIFO depth is 128 bytes, support DMA function</p></li>
+</ul>
+</section>
+<section id="spi">
+<h3><span class="section-number">2.10.3. </span>SPI<a class="headerlink" href="#spi" title="Permalink to this headline"></a></h3>
+<p>The chip has a built-in SPI, which can be configured in master mode or slave mode. The clock of the SPI module is BCLK, which has the following characteristics:</p>
+<ul class="simple">
+<li><p>As master, clock frequency up to 36MHz</p></li>
+<li><p>As a slave, the maximum clock frequency of the master is allowed to be 24MHz</p></li>
+<li><p>The bit width of each frame can be configured as 8bit/16bit/24bit/32bit</p></li>
+<li><p>The transceiver of SPI has an independent FIFO, and the FIFO depth is fixed to 4 frames (that is, if the bit width of the frame is 8 bits, the depth of the FIFO is 4 bytes)</p></li>
+<li><p>Support DMA transfer mode</p></li>
+</ul>
+</section>
+<section id="i2c">
+<h3><span class="section-number">2.10.4. </span>I2C<a class="headerlink" href="#i2c" title="Permalink to this headline"></a></h3>
+<p>The chip has a built-in I2C interface with the following features:</p>
+<ul class="simple">
+<li><p>Support host mode and 7bit addressing</p></li>
+<li><p>The working clock is BCLK</p></li>
+<li><p>With device address register, register address register, register address length can be configured as 1 byte/2 bytes/3 bytes/4 bytes</p></li>
+<li><p>I2C transceiver has independent FIFO, FIFO depth is 2 words</p></li>
+<li><p>Support DMA function</p></li>
+</ul>
+</section>
+<section id="i2s">
+<h3><span class="section-number">2.10.5. </span>I2S<a class="headerlink" href="#i2s" title="Permalink to this headline"></a></h3>
+<p>The chip has a built-in I2S interface with the following features:</p>
+<ul class="simple">
+<li><p>Support Left-justified/ Right-justified/ DSP and other data formats, the data width can be configured as 8/16/24/32 bits</p></li>
+<li><p>In addition to mono/dual-channel mode, supports quad-channel mode at the same time</p></li>
+<li><p>I2S transceiver has an independent FIFO with a FIFO depth of 16 frames; when the data width is 16 bits, the FIFO depth can be set to 32 frames</p></li>
+<li><p>The I2S module has an independent Audio PLL that supports 48K (and its integer division) and 44.1K (and its integer division) sample rates</p></li>
+</ul>
+</section>
+<section id="timer">
+<h3><span class="section-number">2.10.6. </span>TIMER<a class="headerlink" href="#timer" title="Permalink to this headline"></a></h3>
+<p>The chip has two built-in general-purpose timers and a watchdog timer with the following features:</p>
+<ul class="simple">
+<li><p>The clock source of the general timer can be selected from FCLK/32K/1K/XTAL</p></li>
+<li><p>The clock source of the watchdog timer can be selected from FCLK/32K/XTAL</p></li>
+<li><p>8-bit divider for each counter</p></li>
+<li><p>Each group of general-purpose timers includes three compare registers, supports compare interrupts, and supports FreeRun mode and PreLoad mode in counting mode</p></li>
+<li><p>16-bit watchdog timer, supports two watchdog overflow methods: interrupt or reset</p></li>
+</ul>
+</section>
+<section id="pwm">
+<h3><span class="section-number">2.10.7. </span>PWM<a class="headerlink" href="#pwm" title="Permalink to this headline"></a></h3>
+<p>The chip has five built-in PWM signals with the following characteristics:</p>
+<ul class="simple">
+<li><p>Three clock sources BCLK/XCLK/32K</p></li>
+<li><p>Frequency divider register and period register are 16-bit wide</p></li>
+<li><p>Each channel PWM supports adjustable output polarity, dual threshold setting, increasing the flexibility of pulse output</p></li>
+<li><p>Support PWM cycle count interrupt for counting the number of output pulses</p></li>
+</ul>
+</section>
+<section id="ir-ir-remote">
+<h3><span class="section-number">2.10.8. </span>IR (IR-remote)<a class="headerlink" href="#ir-ir-remote" title="Permalink to this headline"></a></h3>
+<p>The chip has a built-in infrared remote control with the following features:</p>
+<ul class="simple">
+<li><p>Support both sending and receiving modes</p></li>
+<li><p>Supports receiving data with fixed protocols NEC, RC-5, and receiving data in any format with pulse width counting</p></li>
+<li><p>The clock source is XCLK, which has a powerful infrared waveform editing capability, which can send waveforms conforming to various protocols, and the transmit power can be adjusted in 15 steps</p></li>
+<li><p>Receive FIFO depth of 64 bytes</p></li>
+</ul>
+</section>
+<section id="usb2-0-full-speed">
+<h3><span class="section-number">2.10.9. </span>USB2.0(Full Speed)<a class="headerlink" href="#usb2-0-full-speed" title="Permalink to this headline"></a></h3>
+<p>The chip embeds a full-speed USB compatible device controller with the following features:</p>
+<ul class="simple">
+<li><p>Compliant with full-speed USB device standards</p></li>
+<li><p>Has 8 endpoints, each with a 64-byte deep FIFO</p></li>
+<li><p>All endpoints except endpoint 0 support interrupt/bulk/isochronous transfers</p></li>
+<li><p>With standby/resume function</p></li>
+<li><p>USB dedicated 48MHz clock directly generated by internal main PLL</p></li>
+</ul>
+</section>
+<section id="emac">
+<h3><span class="section-number">2.10.10. </span>EMAC<a class="headerlink" href="#emac" title="Permalink to this headline"></a></h3>
+<p>The EMAC module is an IEEE 802.3 compliant 10/100Mbps Ethernet controller with the following features:</p>
+<ul class="simple">
+<li><p>Compatible with MAC layer functions defined by IEEE 802.3</p></li>
+<li><p>PHY that supports RMII interface defined by IEEE 802.3, interacts with PHY through MDIO</p></li>
+<li><p>Supports 10Mbps and 100Mbps Ethernet</p></li>
+<li><p>Support half-duplex and full-duplex, data transmission and reception are realized through Buffer Descriptor data structure, EMAC control embedded AHB Master, can directly read or write data from memory</p></li>
+<li><p>The Buffer Descriptor data structure is stored in the internal RAM of the EMAC. The total number of Buffer Descriptors is up to 128. Users can flexibly configure the number of Buffer Descriptors to send and receive according to the scene</p></li>
+</ul>
+<p>The EMAC timing diagram is shown below:</p>
+<figure class="align-center" id="id5">
+<img alt="../_images/EMACTiming.svg" src="../_images/EMACTiming.svg" /><figcaption>
+<p><span class="caption-number">Fig. 2.3 </span><span class="caption-text">EMAC Timing Diagram</span><a class="headerlink" href="#id5" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<table class="colwidths-given docutils align-center" id="id6" style="width: 100%">
+<caption><span class="caption-number">Table 2.3 </span><span class="caption-text">Timing conditions for using RX Clock</span><a class="headerlink" href="#id6" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 20%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 30%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head" colspan="7"><p>Set the corresponding bit of register clk_cfg3:cfg_inv_eth_rx_clk = 1,cfg_inv_eth_tx_clk = 0,cfg_sel_eth_ref_clk_o = 0</p></th>
+</tr>
+<tr class="row-even"><th class="head" colspan="2"><p>Timing parameters(1.8V, Load = 20PF)</p></th>
+<th class="head"><p>Min.</p></th>
+<th class="head"><p>Typ</p></th>
+<th class="head"><p>Max.</p></th>
+<th class="head"><p>Unit</p></th>
+<th class="head"><p>Note</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-odd"><td><p>T<sub>cyc</sub></p></td>
+<td><p>Clock Cycle</p></td>
+<td><p>-</p></td>
+<td><p>20</p></td>
+<td><p>-</p></td>
+<td><p>ns</p></td>
+<td><p>Clock From ETH PHY</p></td>
+</tr>
+<tr class="row-even"><td><p>T<sub>vld</sub></p></td>
+<td><p>Output Valid Delay</p></td>
+<td><p>7.38</p></td>
+<td><p>-</p></td>
+<td><p>16.3</p></td>
+<td><p>ns</p></td>
+<td><p>TXD/TX_EN</p></td>
+</tr>
+<tr class="row-odd"><td><p>T<sub>su</sub></p></td>
+<td><p>Input Setup Time</p></td>
+<td><p>10</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>ns</p></td>
+<td><p>RXD/RX_DV/RXERR</p></td>
+</tr>
+<tr class="row-even"><td><p>T<sub>h</sub></p></td>
+<td><p>Input Hold Time</p></td>
+<td><p>0</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>ns</p></td>
+<td><p>RXD/RX_DV/RXERR</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-center" id="id7" style="width: 100%">
+<caption><span class="caption-number">Table 2.4 </span><span class="caption-text">Timing conditions without using RX Clock</span><a class="headerlink" href="#id7" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 20%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 30%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head" colspan="7"><p>Set the corresponding bit of register clk_cfg3:cfg_inv_eth_rx_clk = 0,cfg_inv_eth_tx_clk = 0,cfg_sel_eth_ref_clk_o = 0</p></th>
+</tr>
+<tr class="row-even"><th class="head" colspan="2"><p>Timing parameters(1.8V, Load = 20PF)</p></th>
+<th class="head"><p>Min.</p></th>
+<th class="head"><p>Typ</p></th>
+<th class="head"><p>Max.</p></th>
+<th class="head"><p>Unit</p></th>
+<th class="head"><p>Note</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-odd"><td><p>T<sub>cyc</sub></p></td>
+<td><p>Clock Cycle</p></td>
+<td><p>-</p></td>
+<td><p>20</p></td>
+<td><p>-</p></td>
+<td><p>ns</p></td>
+<td><p>Clock From ETH PHY</p></td>
+</tr>
+<tr class="row-even"><td><p>T<sub>vld</sub></p></td>
+<td><p>Output Valid Delay</p></td>
+<td><p>7.38</p></td>
+<td><p>-</p></td>
+<td><p>16.3</p></td>
+<td><p>ns</p></td>
+<td><p>TXD/TX_EN</p></td>
+</tr>
+<tr class="row-odd"><td><p>T<sub>su</sub></p></td>
+<td><p>Input Setup Time</p></td>
+<td><p>2</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>ns</p></td>
+<td><p>RXD/RX_DV/RXERR</p></td>
+</tr>
+<tr class="row-even"><td><p>T<sub>h</sub></p></td>
+<td><p>Input Hold Time</p></td>
+<td><p>3</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>ns</p></td>
+<td><p>RXD/RX_DV/RXERR</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="qdec">
+<h3><span class="section-number">2.10.11. </span>QDEC<a class="headerlink" href="#qdec" title="Permalink to this headline"></a></h3>
+<p>The chip has built-in three sets of quadrature decoders, which are used to decode the two sets of pulses with a phase difference of 90 degrees generated by the two-way rotary encoder into the corresponding speed and rotation.
+direction, with the following properties:</p>
+<ul class="simple">
+<li><p>The clock source can be selected from 32K (f32k_clk) or 32M (xclk)</p></li>
+<li><p>With 16-bit pulse count range (-32768~32767 pulse/sample)</p></li>
+<li><p>Has 12 configurable sample periods (32us~131ms per sample at 1MHz)</p></li>
+<li><p>16-bit configurable report period (0~65535 sample/report)</p></li>
+</ul>
+</section>
+<section id="adc">
+<h3><span class="section-number">2.10.12. </span>ADC<a class="headerlink" href="#adc" title="Permalink to this headline"></a></h3>
+<p>The chip has a built-in 12bits successive approximation analog-to-digital converter (ADC) with the following features:</p>
+<ul class="simple">
+<li><p>The maximum operating clock is 2MHz, supports 12 external analog inputs and several internal analog signal selections, supports single-channel conversion and multi-channel scanning modes</p></li>
+<li><p>Support 2.0V, 3.2V optional internal reference voltage, the conversion result is 12/14/16bits (through oversampling) left-justified mode</p></li>
+<li><p>Has a FIFO with a depth of 32, supports multiple interrupts, and supports DMA functions</p></li>
+<li><p>ADC can be used to measure supply voltage in addition to ordinary analog signal measurement</p></li>
+<li><p>Can be used for temperature detection by measuring internal/external diode voltage</p></li>
+</ul>
+</section>
+<section id="dac">
+<h3><span class="section-number">2.10.13. </span>DAC<a class="headerlink" href="#dac" title="Permalink to this headline"></a></h3>
+<p>The chip has a built-in 10bits digital-to-analog converter (DAC) with the following features:</p>
+<ul class="simple">
+<li><p>FIFO depth is 1, supports 2-channel DAC modulation output</p></li>
+<li><p>Can be used for audio playback, conventional analog signal modulation</p></li>
+<li><p>The working clock can be selected as 32M or Audio PLL</p></li>
+<li><p>Supports DMA transfer of memory to DAC modulation registers</p></li>
+<li><p>The output pin is fixed as ChannelA is GPIO11, ChannelB is GPIO17</p></li>
+</ul>
+</section>
+<section id="debug-interface">
+<h3><span class="section-number">2.10.14. </span>debug interface<a class="headerlink" href="#debug-interface" title="Permalink to this headline"></a></h3>
+<p>It supports standard JTAG 4-wire debugging interface, and supports debugging with debuggers such as Jlink/OpenOCD/CK Link.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="overview.html" class="btn btn-neutral float-left" title="1. Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Pindefinition.html" class="btn btn-neutral float-right" title="3. Pin Definition" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

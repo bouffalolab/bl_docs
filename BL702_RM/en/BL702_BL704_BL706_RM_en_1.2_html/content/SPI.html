@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>9. SPI &mdash; BL702/704/706 Reference Manual  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="10. UART" href="UART.html" />
+    <link rel="prev" title="8. IR" href="IR.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL702/704/706 Reference Manual
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. System and memory overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. Reset and clock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">4. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">5. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">6. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="L1C.html">7. L1C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">8. IR</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">9. SPI</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#spi-introduction">9.1. SPI introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#spi-main-features">9.2. SPI main features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#spi-function-description">9.3. SPI function description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#clock-control">9.3.1. Clock control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#master-continuous-transmission-mode">9.3.2. Master continuous transmission mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#acceptance-filtering-function">9.3.3. Acceptance filtering function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#receive-error-correction">9.3.4. Receive error correction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#slave-mode-timeout-mechanism">9.3.5. Slave mode timeout mechanism</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#i-o-transfer-mode">9.3.6. I/O transfer mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-transfer-mode">9.3.7. DMA transfer mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spi-interrupt">9.3.8. SPI interrupt</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#register-description">9.4. Register description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#spi-config">9.4.1. spi_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spi-int-sts">9.4.2. spi_int_sts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spi-bus-busy">9.4.3. spi_bus_busy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spi-prd-0">9.4.4. spi_prd_0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spi-prd-1">9.4.5. spi_prd_1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spi-rxd-ignr">9.4.6. spi_rxd_ignr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spi-sto-value">9.4.7. spi_sto_value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spi-fifo-config-0">9.4.8. spi_fifo_config_0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spi-fifo-config-1">9.4.9. spi_fifo_config_1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spi-fifo-wdata">9.4.10. spi_fifo_wdata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spi-fifo-rdata">9.4.11. spi_fifo_rdata</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">10. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">11. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">12. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">13. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="QDEC.html">14. QDEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="KeyScan.html">15. KeyScan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2S.html">16. I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EMAC.html">17. Emac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USB.html">18. USB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">19. Revision history</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL702/704/706 Reference Manual</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">9. </span>SPI</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="spi">
+<h1><span class="section-number">9. </span>SPI<a class="headerlink" href="#spi" title="Permalink to this headline"></a></h1>
+<section id="spi-introduction">
+<h2><span class="section-number">9.1. </span>SPI introduction<a class="headerlink" href="#spi-introduction" title="Permalink to this headline"></a></h2>
+<p>Serial Peripheral Interface Bus(SPI) is a synchronous serial communication
+interface specification for short-range communication. Devices use
+full-duplex mode for communication. There is a master and one or more slaves.
+Requires at least 4 wires, in fact 3 wires are also available
+(the one-way transmission), including SDI (data input),
+SDO (data output), SCLK (clock), CS (chip select).</p>
+</section>
+<section id="spi-main-features">
+<h2><span class="section-number">9.2. </span>SPI main features<a class="headerlink" href="#spi-main-features" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p>Can be used as SPI master or SPI slave</p></li>
+<li><p>The transmit and receive channels each have a FIFO with a depth of 4 frames</p></li>
+<li><p>Both master and slave devices support 4 clock formats(CPOL,CPHA)</p></li>
+<li><p>Both master and slave devices support 1/2/3/4 byte transmission mode</p></li>
+<li><p>Flexible clock configuration, support up to 40M clock</p></li>
+<li><p>Configurable MSB/LSB priority transmission</p></li>
+<li><p>Acceptance filtering function</p></li>
+<li><p>Timeout mechanism under the slave</p></li>
+<li><p>Support DMA transfer mode</p></li>
+</ul>
+</section>
+<section id="spi-function-description">
+<h2><span class="section-number">9.3. </span>SPI function description<a class="headerlink" href="#spi-function-description" title="Permalink to this headline"></a></h2>
+<section id="clock-control">
+<h3><span class="section-number">9.3.1. </span>Clock control<a class="headerlink" href="#clock-control" title="Permalink to this headline"></a></h3>
+<p>According to different clock phases and polarity settings, the SPI clock has
+four modes, which can be set by bit4 (CPOL) and bit5 (CPHA) of the SPI_CONFIG
+register. CPOL is used to determine the level of the SCK clock signal when
+idle, CPOL = 0 means the idle level is low, and CPOL = 1 means the idle level
+is high. CPHA is used to determine the sampling time. CPHA = 0 samples on the
+first clock edge of each cycle, and CPHA = 1 samples on the second clock edge
+of each cycle.</p>
+<p>By setting registers SPI_PRD_0 and SPI_PRD_1, you can also adjust the start
+and end level duration of the clock, the time of phase 0/1, and the interval
+between each frame of data. The specific settings in the four modes are shown
+below:</p>
+<figure class="align-center" id="id1">
+<img alt="../_images/SPIClockPrd.svg" src="../_images/SPIClockPrd.svg" /><figcaption>
+<p><span class="caption-number">Fig. 9.1 </span><span class="caption-text">SPI clock</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The meaning of each number is as follows:
+1 is the length of the start condition, 2 is the length of the stop condition,
+3 is the length of phase 0, 4 is the length of phase 1, and 5 is the interval
+between each frame of data.</p>
+</section>
+<section id="master-continuous-transmission-mode">
+<h3><span class="section-number">9.3.2. </span>Master continuous transmission mode<a class="headerlink" href="#master-continuous-transmission-mode" title="Permalink to this headline"></a></h3>
+<p>When this mode is enabled, the CS signal will not be released when the current data is transmitted and there is still data available in the FIFO.</p>
+</section>
+<section id="acceptance-filtering-function">
+<h3><span class="section-number">9.3.3. </span>Acceptance filtering function<a class="headerlink" href="#acceptance-filtering-function" title="Permalink to this headline"></a></h3>
+<p>By setting the start and end bits that need to be filtered out, the SPI discards the corresponding data segment in the received data. As shown below:</p>
+<figure class="align-center" id="id2">
+<img alt="../_images/SPIIgnore.svg" src="../_images/SPIIgnore.svg" /><figcaption>
+<p><span class="caption-number">Fig. 9.2 </span><span class="caption-text">SPI Ignore waveform</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>In the figure above, the start bit of the filter is set to 0, the end bit is set to 7, the dummy byte is received, and the end bit is set to 15, the dummy byte is discarded.</p>
+</section>
+<section id="receive-error-correction">
+<h3><span class="section-number">9.3.4. </span>Receive error correction<a class="headerlink" href="#receive-error-correction" title="Permalink to this headline"></a></h3>
+<p>By enabling this function and setting the threshold, the SPI will discard data that does not reach the threshold width.</p>
+</section>
+<section id="slave-mode-timeout-mechanism">
+<h3><span class="section-number">9.3.5. </span>Slave mode timeout mechanism<a class="headerlink" href="#slave-mode-timeout-mechanism" title="Permalink to this headline"></a></h3>
+<p>By setting a timeout threshold, an interrupt will be triggered when the SPI does not receive a clock signal after exceeding this time value in slave mode.</p>
+</section>
+<section id="i-o-transfer-mode">
+<h3><span class="section-number">9.3.6. </span>I/O transfer mode<a class="headerlink" href="#i-o-transfer-mode" title="Permalink to this headline"></a></h3>
+<p>The chip communications processor can perform FIFO fill and empty operations in response to interrupts from the FIFO. Each FIFO has a programmable FIFO trigger threshold to trigger interrupts. When the value in the RX FIFO exceeds the RX FIFO trigger threshold in the SPI controller 1, an interrupt will be generated and a signal will be sent to the chip communication processor to clear the RX FIFO. When the value in the TX FIFO is less than or equal to the TX FIFO trigger threshold in the SPI control register 1 plus 1, an interrupt will be generated and a signal will be sent to the chip communication processor to refill the TX FIFO.</p>
+<p>Query the SPI status register to determine the sampled value in the FIFO and the status of the FIFO. Software is responsible for ensuring the correct RX FIFO trigger threshold and TX FIFO trigger threshold to prevent receive FIFO overrun and transmit FIFO underrun.</p>
+</section>
+<section id="dma-transfer-mode">
+<h3><span class="section-number">9.3.7. </span>DMA transfer mode<a class="headerlink" href="#dma-transfer-mode" title="Permalink to this headline"></a></h3>
+<p>SPI supports DMA transfer mode. The use of this mode requires the TX and RX FIFO thresholds to be set separately. When this mode is enabled, the UART will check the TX / RX FIFO. Once the TX / RX FIFO available count value is greater than its set threshold, a DMA request will be initiated , DMA will move data to TX FIFO or out of RX FIFO according to the setting.</p>
+</section>
+<section id="spi-interrupt">
+<h3><span class="section-number">9.3.8. </span>SPI interrupt<a class="headerlink" href="#spi-interrupt" title="Permalink to this headline"></a></h3>
+<p>SPI has a variety of interrupt control, including the following interrupt modes:</p>
+<ul class="simple">
+<li><p>SPI transfer end interrupt</p></li>
+<li><p>TX FIFO request interrupt</p></li>
+<li><p>RX FIFO request interrupt</p></li>
+<li><p>Slave mode transfer timeout interrupt</p></li>
+<li><p>Slave mode TX overload interrupt</p></li>
+<li><p>TX / RX FIFO overflow interrupt</p></li>
+</ul>
+<p>In master mode, the SPI transfer end interrupt is triggered at the end of each frame of data transfer; in slave mode, the SPI transfer end interrupt is triggered when the CS signal is released. The TX / RX FIFO request interrupt will be triggered when its available FIFO count is greater than its set threshold. When the condition is not met, the interrupt flag will be automatically cleared. Slave mode transmission timeout interrupt is triggered when the threshold is exceeded in slave mode and no clock signal is received. If the TX / RX FIFO overflows or underflows, the TX / RX FIFO overflow interrupt will be triggered. When the FIFO clear bit TFC / RFC is set to 1, the corresponding FIFO will be cleared and the overflow interrupt flag will be automatically cleared.</p>
+<p>Query the interrupt status through register SPI_INT_STS and write 1 to the corresponding bit to clear the interrupt.</p>
+</section>
+</section>
+<section id="register-description">
+<h2><span class="section-number">9.4. </span>Register description<a class="headerlink" href="#register-description" title="Permalink to this headline"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 39%" />
+<col style="width: 61%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Name</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#spi-config">spi_config</a></p></td>
+<td><p>SPI configuration register</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#spi-int-sts">spi_int_sts</a></p></td>
+<td><p>SPI interrupt status</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#spi-bus-busy">spi_bus_busy</a></p></td>
+<td><p>SPI bus busy</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#spi-prd-0">spi_prd_0</a></p></td>
+<td><p>SPI length control register</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#spi-prd-1">spi_prd_1</a></p></td>
+<td><p>SPI length of interval</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#spi-rxd-ignr">spi_rxd_ignr</a></p></td>
+<td><p>SPI ingnore function</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#spi-sto-value">spi_sto_value</a></p></td>
+<td><p>SPI time-out value</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#spi-fifo-config-0">spi_fifo_config_0</a></p></td>
+<td><p>SPI FIFO configuration register0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#spi-fifo-config-1">spi_fifo_config_1</a></p></td>
+<td><p>SPI FIFO configuration register1</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#spi-fifo-wdata">spi_fifo_wdata</a></p></td>
+<td><p>SPI FIFO write data</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#spi-fifo-rdata">spi_fifo_rdata</a></p></td>
+<td><p>SPI FIFO read data</p></td>
+</tr>
+</tbody>
+</table>
+<section id="spi-config">
+<h3><span class="section-number">9.4.1. </span>spi_config<a class="headerlink" href="#spi-config" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x4000a200</p>
+<figure class="align-center">
+<img alt="../_images/spi_spi_config.svg" src="../_images/spi_spi_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15:12</p></td>
+<td><p>cr_spi_deg_cnt</p></td>
+<td><p>r/w</p></td>
+<td><p>4’d0</p></td>
+<td><p>De-glitch function cycle count</p></td>
+</tr>
+<tr class="row-even"><td><p>11</p></td>
+<td><p>cr_spi_deg_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Enable signal of all input de-glitch function</p></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td rowspan="3"><p>9</p></td>
+<td rowspan="3"><p>cr_spi_m_cont_en</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>Enable signal of master continuous transfer mode</p>
+<p>1’b0: Disabled, SS_n will de-assert between each data frame</p>
+<p>1’b1: Enabled, SS_n will stay asserted between each consecutive data frame if the next data is valid in the FIFO</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>cr_spi_rxd_ignr_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Enable signal of RX data ignore function</p></td>
+</tr>
+<tr class="row-even"><td rowspan="3"><p>7</p></td>
+<td rowspan="3"><p>cr_spi_byte_inv</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>Byte-inverse signal for each FIFO entry data</p>
+<p>0: Byte[0] is sent out first</p>
+<p>1: Byte[3] is sent out first</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3"><p>6</p></td>
+<td rowspan="3"><p>cr_spi_bit_inv</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>Bit-inverse signal for each data byte</p>
+<p>0: Each byte is sent out MSB-first</p>
+<p>1: Each byte is sent out LSB-first</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>cr_spi_sclk_ph</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>SCLK clock phase inverse signal</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><p>4</p></td>
+<td rowspan="3"><p>cr_spi_sclk_pol</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>SCLK polarity</p>
+<p>0: SCLK output LOW at IDLE state</p>
+<p>1: SCLK output HIGH at IDLE state</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="5"><p>3:2</p></td>
+<td rowspan="5"><p>cr_spi_frame_size</p></td>
+<td rowspan="5"><p>r/w</p></td>
+<td rowspan="5"><p>2’d0</p></td>
+<td rowspan="5"><p>SPI frame size (also the valid width for each FIFO entry)</p>
+<p>2’d0: 8-bit</p>
+<p>2’d1: 16-bit</p>
+<p>2’d2: 24-bit</p>
+<p>2’d3: 32-bit</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="2"><p>1</p></td>
+<td rowspan="2"><p>cr_spi_s_en</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>1’b0</p></td>
+<td rowspan="2"><p>Enable signal of SPI Slave function, Master and Slave should not be both enabled at the same time</p>
+<p>(This bit becomes don’t-care if cr_spi_m_en is enabled)</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="2"><p>0</p></td>
+<td rowspan="2"><p>cr_spi_m_en</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>1’b0</p></td>
+<td rowspan="2"><p>Enable signal of SPI Master function</p>
+<p>Asserting this bit will trigger the transaction, and should be de-asserted after finish</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+</tbody>
+</table>
+</section>
+<section id="spi-int-sts">
+<h3><span class="section-number">9.4.2. </span>spi_int_sts<a class="headerlink" href="#spi-int-sts" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x4000a204</p>
+<figure class="align-center">
+<img alt="../_images/spi_spi_int_sts.svg" src="../_images/spi_spi_int_sts.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:30</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>29</p></td>
+<td><p>cr_spi_fer_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt enable of spi_fer_int</p></td>
+</tr>
+<tr class="row-even"><td><p>28</p></td>
+<td><p>cr_spi_txu_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt enable of spi_txu_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>27</p></td>
+<td><p>cr_spi_sto_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt enable of spi_sto_int</p></td>
+</tr>
+<tr class="row-even"><td><p>26</p></td>
+<td><p>cr_spi_rxf_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt enable of spi_rxv_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>25</p></td>
+<td><p>cr_spi_txf_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt enable of spi_txe_int</p></td>
+</tr>
+<tr class="row-even"><td><p>24</p></td>
+<td><p>cr_spi_end_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt enable of spi_end_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>23:21</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>20</p></td>
+<td><p>cr_spi_txu_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1’b0</p></td>
+<td><p>Interrupt clear of spi_txu_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>19</p></td>
+<td><p>cr_spi_sto_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1’b0</p></td>
+<td><p>Interrupt clear of spi_sto_int</p></td>
+</tr>
+<tr class="row-even"><td><p>18:17</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>16</p></td>
+<td><p>cr_spi_end_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1’b0</p></td>
+<td><p>Interrupt clear of spi_end_int</p></td>
+</tr>
+<tr class="row-even"><td><p>15:14</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>13</p></td>
+<td><p>cr_spi_fer_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt mask of spi_fer_int</p></td>
+</tr>
+<tr class="row-even"><td><p>12</p></td>
+<td><p>cr_spi_txu_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt mask of spi_txu_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>11</p></td>
+<td><p>cr_spi_sto_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt mask of spi_sto_int</p></td>
+</tr>
+<tr class="row-even"><td><p>10</p></td>
+<td><p>cr_spi_rxf_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt mask of spi_rxv_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>9</p></td>
+<td><p>cr_spi_txf_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt mask of spi_txe_int</p></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>cr_spi_end_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt mask of spi_end_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>7:6</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>spi_fer_int</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>SPI TX/RX FIFO error interrupt, auto-cleared when FIFO overflow/underflow error flag is cleared</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>spi_txu_int</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>SPI slave mode TX underrun error flag, triggered when TXD is not ready during transfer in slave mode</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>spi_sto_int</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>SPI slave mode transfer time-out interrupt, triggered when SPI bus is idle for a given value</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>spi_rxf_int</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>SPI RX FIFO ready (rx_fifo_cnt &gt; rx_fifo_th) interrupt, auto-cleared when data is popped</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>spi_txf_int</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>SPI TX FIFO ready (tx_fifo_cnt &gt; tx_fifo_th) interrupt, auto-cleared when data is pushed</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><p>0</p></td>
+<td rowspan="3"><p>spi_end_int</p></td>
+<td rowspan="3"><p>r</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>SPI transfer end interrupt, shared by both master and slave mode</p>
+<p>Master mode: Triggered when the final frame is transferred</p>
+<p>Slave mode: Triggered when CS_n is de-asserted</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</section>
+<section id="spi-bus-busy">
+<h3><span class="section-number">9.4.3. </span>spi_bus_busy<a class="headerlink" href="#spi-bus-busy" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x4000a208</p>
+<figure class="align-center">
+<img alt="../_images/spi_spi_bus_busy.svg" src="../_images/spi_spi_bus_busy.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:1</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>sts_spi_bus_busy</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>Indicator of SPI bus busy</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="spi-prd-0">
+<h3><span class="section-number">9.4.4. </span>spi_prd_0<a class="headerlink" href="#spi-prd-0" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x4000a210</p>
+<figure class="align-center">
+<img alt="../_images/spi_spi_prd_0.svg" src="../_images/spi_spi_prd_0.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:24</p></td>
+<td><p>cr_spi_prd_d_ph_1</p></td>
+<td><p>r/w</p></td>
+<td><p>8’d15</p></td>
+<td><p>Length of DATA phase 1 (please refer to “Timing” tab)</p></td>
+</tr>
+<tr class="row-odd"><td><p>23:16</p></td>
+<td><p>cr_spi_prd_d_ph_0</p></td>
+<td><p>r/w</p></td>
+<td><p>8’d15</p></td>
+<td><p>Length of DATA phase 0 (please refer to “Timing” tab)</p></td>
+</tr>
+<tr class="row-even"><td><p>15:8</p></td>
+<td><p>cr_spi_prd_p</p></td>
+<td><p>r/w</p></td>
+<td><p>8’d15</p></td>
+<td><p>Length of STOP condition (please refer to “Timing” tab)</p></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>cr_spi_prd_s</p></td>
+<td><p>r/w</p></td>
+<td><p>8’d15</p></td>
+<td><p>Length of START condition (please refer to “Timing” tab)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="spi-prd-1">
+<h3><span class="section-number">9.4.5. </span>spi_prd_1<a class="headerlink" href="#spi-prd-1" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x4000a214</p>
+<figure class="align-center">
+<img alt="../_images/spi_spi_prd_1.svg" src="../_images/spi_spi_prd_1.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>cr_spi_prd_i</p></td>
+<td><p>r/w</p></td>
+<td><p>8’d15</p></td>
+<td><p>Length of INTERVAL between frame (please refer to “Timing” tab)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="spi-rxd-ignr">
+<h3><span class="section-number">9.4.6. </span>spi_rxd_ignr<a class="headerlink" href="#spi-rxd-ignr" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x4000a218</p>
+<figure class="align-center">
+<img alt="../_images/spi_spi_rxd_ignr.svg" src="../_images/spi_spi_rxd_ignr.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:21</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>20:16</p></td>
+<td><p>cr_spi_rxd_ignr_s</p></td>
+<td><p>r/w</p></td>
+<td><p>5’d0</p></td>
+<td><p>Starting point of RX data ignore function</p></td>
+</tr>
+<tr class="row-even"><td><p>15:5</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>4:0</p></td>
+<td><p>cr_spi_rxd_ignr_p</p></td>
+<td><p>r/w</p></td>
+<td><p>5’d0</p></td>
+<td><p>Stopping point of RX data ignore function</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="spi-sto-value">
+<h3><span class="section-number">9.4.7. </span>spi_sto_value<a class="headerlink" href="#spi-sto-value" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x4000a21c</p>
+<figure class="align-center">
+<img alt="../_images/spi_spi_sto_value.svg" src="../_images/spi_spi_sto_value.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:12</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>11:0</p></td>
+<td><p>cr_spi_sto_value</p></td>
+<td><p>r/w</p></td>
+<td><p>12’hFFF</p></td>
+<td><p>Time-out value for spi_sto_int triggering</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="spi-fifo-config-0">
+<h3><span class="section-number">9.4.8. </span>spi_fifo_config_0<a class="headerlink" href="#spi-fifo-config-0" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x4000a280</p>
+<figure class="align-center">
+<img alt="../_images/spi_spi_fifo_config_0.svg" src="../_images/spi_spi_fifo_config_0.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>rx_fifo_underflow</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>Underflow flag of RX FIFO, can be cleared by rx_fifo_clr</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>rx_fifo_overflow</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>Overflow flag of RX FIFO, can be cleared by rx_fifo_clr</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>tx_fifo_underflow</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>Underflow flag of TX FIFO, can be cleared by tx_fifo_clr</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>tx_fifo_overflow</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>Overflow flag of TX FIFO, can be cleared by tx_fifo_clr</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>rx_fifo_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1’b0</p></td>
+<td><p>Clear signal of RX FIFO</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>tx_fifo_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1’b0</p></td>
+<td><p>Clear signal of TX FIFO</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>spi_dma_rx_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Enable signal of dma_rx_req/ack interface</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>spi_dma_tx_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Enable signal of dma_tx_req/ack interface</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="spi-fifo-config-1">
+<h3><span class="section-number">9.4.9. </span>spi_fifo_config_1<a class="headerlink" href="#spi-fifo-config-1" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x4000a284</p>
+<figure class="align-center">
+<img alt="../_images/spi_spi_fifo_config_1.svg" src="../_images/spi_spi_fifo_config_1.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:26</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>25:24</p></td>
+<td><p>rx_fifo_th</p></td>
+<td><p>r/w</p></td>
+<td><p>2’d0</p></td>
+<td><p>RX FIFO threshold, dma_rx_req will not be asserted if tx_fifo_cnt is less than this value</p></td>
+</tr>
+<tr class="row-even"><td><p>23:18</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>17:16</p></td>
+<td><p>tx_fifo_th</p></td>
+<td><p>r/w</p></td>
+<td><p>2’d0</p></td>
+<td><p>TX FIFO threshold, dma_tx_req will not be asserted if tx_fifo_cnt is less than this value</p></td>
+</tr>
+<tr class="row-even"><td><p>15:11</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>10:8</p></td>
+<td><p>rx_fifo_cnt</p></td>
+<td><p>r</p></td>
+<td><p>3’d0</p></td>
+<td><p>RX FIFO available count</p></td>
+</tr>
+<tr class="row-even"><td><p>7:3</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>2:0</p></td>
+<td><p>tx_fifo_cnt</p></td>
+<td><p>r</p></td>
+<td><p>3’d4</p></td>
+<td><p>TX FIFO available count</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="spi-fifo-wdata">
+<h3><span class="section-number">9.4.10. </span>spi_fifo_wdata<a class="headerlink" href="#spi-fifo-wdata" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x4000a288</p>
+<figure class="align-center">
+<img alt="../_images/spi_spi_fifo_wdata.svg" src="../_images/spi_spi_fifo_wdata.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>spi_fifo_wdata</p></td>
+<td><p>w</p></td>
+<td><p>x</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="spi-fifo-rdata">
+<h3><span class="section-number">9.4.11. </span>spi_fifo_rdata<a class="headerlink" href="#spi-fifo-rdata" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x4000a28c</p>
+<figure class="align-center">
+<img alt="../_images/spi_spi_fifo_rdata.svg" src="../_images/spi_spi_fifo_rdata.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>spi_fifo_rdata</p></td>
+<td><p>r</p></td>
+<td><p>32’h0</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="IR.html" class="btn btn-neutral float-left" title="8. IR" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="UART.html" class="btn btn-neutral float-right" title="10. UART" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

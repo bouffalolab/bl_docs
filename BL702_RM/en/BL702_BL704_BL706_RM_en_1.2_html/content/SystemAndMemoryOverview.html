@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1. System and memory overview &mdash; BL702/704/706 Reference Manual  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2. Reset and clock" href="ResetAndClock.html" />
+    <link rel="prev" title="BL702/704/706 Reference Manual" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL702/704/706 Reference Manual
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. System and memory overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">1.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#main-features">1.2. Main features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#function-description">1.3. Function description</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. Reset and clock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">4. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">5. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">6. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="L1C.html">7. L1C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">8. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">9. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">10. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">11. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">12. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">13. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="QDEC.html">14. QDEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="KeyScan.html">15. KeyScan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2S.html">16. I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EMAC.html">17. Emac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USB.html">18. USB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">19. Revision history</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL702/704/706 Reference Manual</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">1. </span>System and memory overview</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="system-and-memory-overview">
+<h1><span class="section-number">1. </span>System and memory overview<a class="headerlink" href="#system-and-memory-overview" title="Permalink to this headline"></a></h1>
+<section id="introduction">
+<h2><span class="section-number">1.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline"></a></h2>
+<p>The on-chip processor uses RISC-V 32-bit with floating point.
+With high-speed processing memory system (see the L1C chapter for details), to achieve high-quality computing efficiency.
+External to the processor is a multilayer 32-bit AHB architecture with low power consumption, low latency, and high flexibility.
+The memory section contains high-speed tightly coupled memory as well as cache and system shared memory.
+Off-chip memory supports Flash expansion.</p>
+</section>
+<section id="main-features">
+<h2><span class="section-number">1.2. </span>Main features<a class="headerlink" href="#main-features" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p>RISC-V 32-bit with floating point</p></li>
+<li><p>Multi-layer 32-bit AHB bus architecture</p></li>
+<li><p>132KB RAM</p></li>
+<li><p>192KB ROM</p></li>
+<li><p>Off-chip memory Flash</p></li>
+</ul>
+</section>
+<section id="function-description">
+<h2><span class="section-number">1.3. </span>Function description<a class="headerlink" href="#function-description" title="Permalink to this headline"></a></h2>
+<p>The BL702/704/706 bus connection and address access are summarized as follows:</p>
+<p>The bus master includes CPU, Ethernet, DMA, encryption engine, debugging interface.
+The bus slave includes memory, peripherals, and Zigbee/BLE.
+Except for Ethernet and encryption engine which can only access memory, all other bus masters can access all bus slaves.</p>
+<table class="colwidths-given docutils align-center" id="id3" style="width: 100%">
+<caption><span class="caption-number">Table 1.1 </span><span class="caption-text">Bus connection</span><a class="headerlink" href="#id3" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Slave / Master</p></th>
+<th class="head"><p>CPU</p></th>
+<th class="head"><p>Ethernet</p></th>
+<th class="head"><p>DMA</p></th>
+<th class="head"><p>Encryption engine</p></th>
+<th class="head"><p>Debug interface</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>memory</p></td>
+<td><p>V</p></td>
+<td><p>V</p></td>
+<td><p>V</p></td>
+<td><p>V</p></td>
+<td><p>V</p></td>
+</tr>
+<tr class="row-odd"><td><p>Peripheral</p></td>
+<td><p>V</p></td>
+<td><p>-</p></td>
+<td><p>V</p></td>
+<td><p>-</p></td>
+<td><p>V</p></td>
+</tr>
+<tr class="row-even"><td><p>Zigbee/BLE</p></td>
+<td><p>V</p></td>
+<td><p>-</p></td>
+<td><p>V</p></td>
+<td><p>-</p></td>
+<td><p>V</p></td>
+</tr>
+</tbody>
+</table>
+<p>The address access mainly distinguishes “memory” or “peripheral” by [27:24], and the [31:28] bits can be ignored.
+The memory space is consecutive addresses 0x2010000~0x202FFFF (128KB SRAM)，the read-only memory address is 0x1000000，and the deep sleep memory address is 0x0010000。
+The off-chip space address is 0x3000000 (maximum support 8MB Flash).
+The peripheral space is 0x0000000 ~ 0x000F000.</p>
+<table class="colwidths-given docutils align-center" id="id4" style="width: 100%">
+<caption><span class="caption-number">Table 1.2 </span><span class="caption-text">Memory Map</span><a class="headerlink" href="#id4" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 40%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Module</p></th>
+<th class="head"><p>Base Address</p></th>
+<th class="head"><p>Size</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>RETRAM</p></td>
+<td><p>0x40010000</p></td>
+<td><p>4KB</p></td>
+<td><p>Deep sleep memory (Retention RAM)</p></td>
+</tr>
+<tr class="row-odd"><td><p>HBN</p></td>
+<td><p>0x4000F000</p></td>
+<td><p>4KB</p></td>
+<td><p>Deep sleep control (Hibernate)</p></td>
+</tr>
+<tr class="row-even"><td><p>PDS</p></td>
+<td><p>0x4000E000</p></td>
+<td><p>4KB</p></td>
+<td><p>Sleep control (Power Down Sleep)</p></td>
+</tr>
+<tr class="row-odd"><td><p>USB</p></td>
+<td><p>0x4000D800</p></td>
+<td><p>1KB</p></td>
+<td><p>USB control</p></td>
+</tr>
+<tr class="row-even"><td><p>EMAC</p></td>
+<td><p>0x4000D000</p></td>
+<td><p>2KB</p></td>
+<td><p>Ethernet MAC control</p></td>
+</tr>
+<tr class="row-odd"><td><p>DMA</p></td>
+<td><p>0x4000C000</p></td>
+<td><p>4KB</p></td>
+<td><p>DMA control</p></td>
+</tr>
+<tr class="row-even"><td><p>QSPI</p></td>
+<td><p>0x4000B000</p></td>
+<td><p>4KB</p></td>
+<td><p>Flash/pSRAM QSPI control</p></td>
+</tr>
+<tr class="row-odd"><td><p>I2S</p></td>
+<td><p>0x4000AA00</p></td>
+<td><p>256B</p></td>
+<td><p>I2S control</p></td>
+</tr>
+<tr class="row-even"><td><p>KYS</p></td>
+<td><p>0x4000A900</p></td>
+<td><p>256B</p></td>
+<td><p>Key-Scan control</p></td>
+</tr>
+<tr class="row-odd"><td><p>QDEC2</p></td>
+<td><p>0x4000A880</p></td>
+<td><p>64B</p></td>
+<td><p>Quadrature decoder control</p></td>
+</tr>
+<tr class="row-even"><td><p>QDEC1</p></td>
+<td><p>0x4000A840</p></td>
+<td><p>64B</p></td>
+<td><p>Quadrature decoder control</p></td>
+</tr>
+<tr class="row-odd"><td><p>QDEC0</p></td>
+<td><p>0x4000A800</p></td>
+<td><p>64B</p></td>
+<td><p>Quadrature decoder control</p></td>
+</tr>
+<tr class="row-even"><td><p>IRR</p></td>
+<td><p>0x4000A600</p></td>
+<td><p>256B</p></td>
+<td><p>IR Remote control</p></td>
+</tr>
+<tr class="row-odd"><td><p>TIMER</p></td>
+<td><p>0x4000A500</p></td>
+<td><p>256B</p></td>
+<td><p>Timer control</p></td>
+</tr>
+<tr class="row-even"><td><p>PWM</p></td>
+<td><p>0x4000A400</p></td>
+<td><p>256B</p></td>
+<td><p>Pulse Width Modulation <a href="#id1"><span class="problematic" id="id2">*</span></a>5 control</p></td>
+</tr>
+<tr class="row-odd"><td><p>I2C</p></td>
+<td><p>0x4000A300</p></td>
+<td><p>256B</p></td>
+<td><p>I2C control</p></td>
+</tr>
+<tr class="row-even"><td><p>SPI</p></td>
+<td><p>0x4000A200</p></td>
+<td><p>256B</p></td>
+<td><p>SPI master/slave control</p></td>
+</tr>
+<tr class="row-odd"><td><p>UART1</p></td>
+<td><p>0x4000A100</p></td>
+<td><p>256B</p></td>
+<td><p>UART control (support LIN-bus)</p></td>
+</tr>
+<tr class="row-even"><td><p>UART0</p></td>
+<td><p>0x4000A000</p></td>
+<td><p>256B</p></td>
+<td><p>UART control (support LIN-bus)</p></td>
+</tr>
+<tr class="row-odd"><td><p>L1C</p></td>
+<td><p>0x40009000</p></td>
+<td><p>4KB</p></td>
+<td><p>Cache control</p></td>
+</tr>
+<tr class="row-even"><td><p>eFuse</p></td>
+<td><p>0x40007000</p></td>
+<td><p>4KB</p></td>
+<td><p>eFuse memory control</p></td>
+</tr>
+<tr class="row-odd"><td><p>SEC</p></td>
+<td><p>0x40004000</p></td>
+<td><p>4KB</p></td>
+<td><p>Security engine</p></td>
+</tr>
+<tr class="row-even"><td><p>GPIP</p></td>
+<td><p>0x40002000</p></td>
+<td><p>4KB</p></td>
+<td><p>General purpose DAC/ADC/ACOMP interface control</p></td>
+</tr>
+<tr class="row-odd"><td><p>MIX</p></td>
+<td><p>0x40001000</p></td>
+<td><p>4KB</p></td>
+<td><p>Mixed signal register</p></td>
+</tr>
+<tr class="row-even"><td><p>GLB</p></td>
+<td><p>0x40000000</p></td>
+<td><p>4KB</p></td>
+<td><p>Global control register</p></td>
+</tr>
+<tr class="row-odd"><td><p>pSRAM</p></td>
+<td><p>0x24000000</p></td>
+<td><p>8MB</p></td>
+<td><p>pSRAM memory</p></td>
+</tr>
+<tr class="row-even"><td><p>XIP</p></td>
+<td><p>0x23000000</p></td>
+<td><p>8MB</p></td>
+<td><p>XIP Flash memory</p></td>
+</tr>
+<tr class="row-odd"><td><p>OCRAM</p></td>
+<td><p>0x22020000</p></td>
+<td><p>64KB</p></td>
+<td><p>On-chip memory</p></td>
+</tr>
+<tr class="row-even"><td><p>DTCM</p></td>
+<td><p>0x22014000</p></td>
+<td><p>48KB</p></td>
+<td><p>Data cache memory</p></td>
+</tr>
+<tr class="row-odd"><td><p>ITCM</p></td>
+<td><p>0x22010000</p></td>
+<td><p>16KB</p></td>
+<td><p>Instruction cache memory</p></td>
+</tr>
+<tr class="row-even"><td><p>ROM</p></td>
+<td><p>0x21000000</p></td>
+<td><p>192KB</p></td>
+<td><p>Read-only memory</p></td>
+</tr>
+</tbody>
+</table>
+<p>There are 64 interrupt sources. The level or edge trigger is configured by the CPU and can be masked. Details as follows:</p>
+<table class="colwidths-given docutils align-center" id="id5" style="width: 100%">
+<caption><span class="caption-number">Table 1.3 </span><span class="caption-text">Interrupt source</span><a class="headerlink" href="#id5" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Num</p></th>
+<th class="head"><p>Signal source</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>54~63</p></td>
+<td><p>wireless</p></td>
+</tr>
+<tr class="row-odd"><td><p>53</p></td>
+<td><p>brown-out</p></td>
+</tr>
+<tr class="row-even"><td><p>51~52</p></td>
+<td><p>hbn_irq</p></td>
+</tr>
+<tr class="row-odd"><td><p>50</p></td>
+<td><p>pds_int</p></td>
+</tr>
+<tr class="row-even"><td><p>47~49</p></td>
+<td><p>wireless</p></td>
+</tr>
+<tr class="row-odd"><td><p>44</p></td>
+<td><p>gpio_irq</p></td>
+</tr>
+<tr class="row-even"><td><p>40~42</p></td>
+<td><p>qdec_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>39</p></td>
+<td><p>kys_int</p></td>
+</tr>
+<tr class="row-even"><td><p>35~38</p></td>
+<td><p>timer_irq</p></td>
+</tr>
+<tr class="row-odd"><td><p>34</p></td>
+<td><p>pwm_int</p></td>
+</tr>
+<tr class="row-even"><td><p>32</p></td>
+<td><p>i2c_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>30</p></td>
+<td><p>uart1_irq</p></td>
+</tr>
+<tr class="row-even"><td><p>29</p></td>
+<td><p>uart0_irq</p></td>
+</tr>
+<tr class="row-odd"><td><p>27</p></td>
+<td><p>spi_int</p></td>
+</tr>
+<tr class="row-even"><td><p>26</p></td>
+<td><p>efuse_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>25</p></td>
+<td><p>adc_int</p></td>
+</tr>
+<tr class="row-even"><td><p>23</p></td>
+<td><p>flash_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>22</p></td>
+<td><p>emac_int</p></td>
+</tr>
+<tr class="row-even"><td><p>21</p></td>
+<td><p>usb_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>19~20</p></td>
+<td><p>ir_remote_int</p></td>
+</tr>
+<tr class="row-even"><td><p>18</p></td>
+<td><p>i2s_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>dma_int</p></td>
+</tr>
+<tr class="row-even"><td><p>9~14</p></td>
+<td><p>sec_eng_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>err_int</p></td>
+</tr>
+<tr class="row-even"><td><p>5~6</p></td>
+<td><p>rf_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>0~4</p></td>
+<td><p>err_int</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="BL702/704/706 Reference Manual" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ResetAndClock.html" class="btn btn-neutral float-right" title="2. Reset and clock" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,4056 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>寄存器描述 &mdash; BL702/704/706 参考手册  文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL702/704/706 参考手册
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. 系统和存储器概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. 复位和时钟</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">4. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">5. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">6. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="L1C.html">7. L1C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">8. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">9. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">10. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">11. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">12. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">13. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="QDEC.html">14. QDEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="KeyScan.html">15. KeyScan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2S.html">16. I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EMAC.html">17. Emac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USB.html">18. USB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">19. 版本信息</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL702/704/706 参考手册</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>寄存器描述</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>寄存器描述<a class="headerlink" href="#id1" title="永久链接至标题"></a></h1>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 46%" />
+<col style="width: 54%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>名称</p></td>
+<td><p>描述</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#usb-config">usb_config</a></p></td>
+<td><p>USB configuration</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#usb-lpm-config">usb_lpm_config</a></p></td>
+<td><p>USB lpm configuration</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#usb-resume-config">usb_resume_config</a></p></td>
+<td><p>USB resume configuration</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#usb-frame-no">usb_frame_no</a></p></td>
+<td><p>USB frame number</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#usb-error">usb_error</a></p></td>
+<td><p>USB error</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#usb-int-en">usb_int_en</a></p></td>
+<td><p>USB interrupt enable</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#usb-int-sts">usb_int_sts</a></p></td>
+<td><p>USB interrupt status</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#usb-int-mask">usb_int_mask</a></p></td>
+<td><p>USB interrupt mask</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#usb-int-clear">usb_int_clear</a></p></td>
+<td><p>USB interrupt clear</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ep1-config">ep1_config</a></p></td>
+<td><p>EP1 configuration</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ep2-config">ep2_config</a></p></td>
+<td><p>EP2 configuration</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ep3-config">ep3_config</a></p></td>
+<td><p>EP3 configuration</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ep4-config">ep4_config</a></p></td>
+<td><p>EP4 configuration</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ep5-config">ep5_config</a></p></td>
+<td><p>EP5 configuration</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ep6-config">ep6_config</a></p></td>
+<td><p>EP6 configuration</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ep7-config">ep7_config</a></p></td>
+<td><p>EP7 configuration</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ep0-fifo-config">ep0_fifo_config</a></p></td>
+<td><p>EP0 fifo configuration</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ep0-fifo-status">ep0_fifo_status</a></p></td>
+<td><p>EP0 fifo status</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ep0-tx-fifo-wdata">ep0_tx_fifo_wdata</a></p></td>
+<td><p>EP0 tx fifo write data</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ep0-rx-fifo-rdata">ep0_rx_fifo_rdata</a></p></td>
+<td><p>EP0 rx fifo write data</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ep1-fifo-config">ep1_fifo_config</a></p></td>
+<td><p>EP1 fifo configuration</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ep1-fifo-status">ep1_fifo_status</a></p></td>
+<td><p>EP1 fifo status</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ep1-tx-fifo-wdata">ep1_tx_fifo_wdata</a></p></td>
+<td><p>EP1 tx fifo write data</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ep1-rx-fifo-rdata">ep1_rx_fifo_rdata</a></p></td>
+<td><p>EP1 rx fifo write data</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ep2-fifo-config">ep2_fifo_config</a></p></td>
+<td><p>EP2 fifo configuration</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ep2-fifo-status">ep2_fifo_status</a></p></td>
+<td><p>EP2 fifo status</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ep2-tx-fifo-wdata">ep2_tx_fifo_wdata</a></p></td>
+<td><p>EP2 tx fifo write data</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ep2-rx-fifo-rdata">ep2_rx_fifo_rdata</a></p></td>
+<td><p>EP2 rx fifo write data</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ep3-fifo-config">ep3_fifo_config</a></p></td>
+<td><p>EP3 fifo configuration</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ep3-fifo-status">ep3_fifo_status</a></p></td>
+<td><p>EP3 fifo status</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ep3-tx-fifo-wdata">ep3_tx_fifo_wdata</a></p></td>
+<td><p>EP3 tx fifo write data</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ep3-rx-fifo-rdata">ep3_rx_fifo_rdata</a></p></td>
+<td><p>EP3 rx fifo write data</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ep4-fifo-config">ep4_fifo_config</a></p></td>
+<td><p>EP4 fifo configuration</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ep4-fifo-status">ep4_fifo_status</a></p></td>
+<td><p>EP4 fifo status</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ep4-tx-fifo-wdata">ep4_tx_fifo_wdata</a></p></td>
+<td><p>EP4 tx fifo write data</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ep4-rx-fifo-rdata">ep4_rx_fifo_rdata</a></p></td>
+<td><p>EP4 rx fifo write data</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ep5-fifo-config">ep5_fifo_config</a></p></td>
+<td><p>EP5 fifo configuration</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ep5-fifo-status">ep5_fifo_status</a></p></td>
+<td><p>EP5 fifo status</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ep5-tx-fifo-wdata">ep5_tx_fifo_wdata</a></p></td>
+<td><p>EP5 tx fifo write data</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ep5-rx-fifo-rdata">ep5_rx_fifo_rdata</a></p></td>
+<td><p>EP5 rx fifo read data</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ep6-fifo-config">ep6_fifo_config</a></p></td>
+<td><p>EP6 fifo configuration</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ep6-fifo-status">ep6_fifo_status</a></p></td>
+<td><p>EP6 fifo status</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ep6-tx-fifo-wdata">ep6_tx_fifo_wdata</a></p></td>
+<td><p>EP6 tx fifo write data</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ep6-rx-fifo-rdata">ep6_rx_fifo_rdata</a></p></td>
+<td><p>EP6 rx fifo read data</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ep7-fifo-config">ep7_fifo_config</a></p></td>
+<td><p>EP7 fifo configuration</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ep7-fifo-status">ep7_fifo_status</a></p></td>
+<td><p>EP7 fifo status</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ep7-tx-fifo-wdata">ep7_tx_fifo_wdata</a></p></td>
+<td><p>EP7 tx fifo write data</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ep7-rx-fifo-rdata">ep7_rx_fifo_rdata</a></p></td>
+<td><p>EP7 rx fifo read data</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#xcvr-if-config">xcvr_if_config</a></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<section id="usb-config">
+<h2>usb_config<a class="headerlink" href="#usb-config" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x4000d800</p>
+<figure class="align-center">
+<img alt="../_images/usb_usb_config.svg" src="../_images/usb_usb_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:29</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>28</p></td>
+<td><p>sts_usb_ep0_sw_rdy</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>EP0 transaction ready status bit. Asserted with sw_rdy, and de-asserted when ACK is sent/received.</p></td>
+</tr>
+<tr class="row-even"><td><p>27</p></td>
+<td><p>cr_usb_ep0_sw_rdy</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>EP0 transaction ready. When NACK is enabled, asserting this bit will allow one packet to be transferred even if NACK is asserted</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><p>26</p></td>
+<td rowspan="2"><p>cr_usb_ep0_sw_nack_out</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>1'b0</p></td>
+<td rowspan="2"><p>EP0 OUT/SETUP transaction nack response (SW control mode)</p>
+<p>Note: Should NOT enable both ep0_sw_nack_out and ep0_sw_stall at the same time</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="2"><p>25</p></td>
+<td rowspan="2"><p>cr_usb_ep0_sw_nack_in</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>1'b1</p></td>
+<td rowspan="2"><p>EP0 IN transaction nack response (SW control mode)</p>
+<p>Note: Should NOT enable both ep0_sw_nack_in and ep0_sw_stall at the same time</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="2"><p>24</p></td>
+<td rowspan="2"><p>cr_usb_ep0_sw_stall</p></td>
+<td rowspan="2"><p>w1c</p></td>
+<td rowspan="2"><p>1'b0</p></td>
+<td rowspan="2"><p>EP0 stall response (SW control mode)</p>
+<p>Note: Should NOT enable both ep0_sw_nack_in/out and ep0_sw_stall at the same time</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>23:16</p></td>
+<td><p>cr_usb_ep0_sw_size</p></td>
+<td><p>r/w</p></td>
+<td><p>8'd0</p></td>
+<td><p>EP0 transfer size (SW control mode)</p></td>
+</tr>
+<tr class="row-even"><td><p>15:9</p></td>
+<td><p>cr_usb_ep0_sw_addr</p></td>
+<td><p>r/w</p></td>
+<td><p>7'd0</p></td>
+<td><p>EP0 address (SW control mode)</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><p>8</p></td>
+<td rowspan="3"><p>cr_usb_ep0_sw_ctrl</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b0</p></td>
+<td rowspan="3"><p>EP0 software control enable</p>
+<p>1'b1: EP0 IN/OUT transaction is fully contolled by SW</p>
+<p>1'b0: EP0 IN/OUT transaction is controlled by HW</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>7:5</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><p>4</p></td>
+<td rowspan="3"><p>cr_usb_rom_dct_en</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b1</p></td>
+<td rowspan="3"><p>Enable signal of ROM-based descriptors (don't care if ep0_sw_ctrl is asserted)</p>
+<p>1'b1: USB descriptors stored in ROM will be used</p>
+<p>1'b0: SW should prepare the descriptors requested by HOST</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>3:1</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>cr_usb_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Enable signal of USB function</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="usb-lpm-config">
+<h2>usb_lpm_config<a class="headerlink" href="#usb-lpm-config" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x4000d804</p>
+<figure class="align-center">
+<img alt="../_images/usb_usb_lpm_config.svg" src="../_images/usb_usb_lpm_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31</p></td>
+<td><p>sts_lpm</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>LPM status bit</p></td>
+</tr>
+<tr class="row-odd"><td><p>30:20</p></td>
+<td><p>sts_lpm_attr</p></td>
+<td><p>r</p></td>
+<td><p>11'h0</p></td>
+<td><p>LPM attributes received in LPM packet</p></td>
+</tr>
+<tr class="row-even"><td><p>19:4</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="5"><p>3:2</p></td>
+<td rowspan="5"><p>cr_lpm_resp</p></td>
+<td rowspan="5"><p>r/w</p></td>
+<td rowspan="5"><p>2'd2</p></td>
+<td rowspan="5"><p>Response when LPM packet is received</p>
+<p>2'd3: NYET</p>
+<p>2'd2: STALL</p>
+<p>2'd1: NACK</p>
+<p>2'd0: ACK</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="2"><p>1</p></td>
+<td rowspan="2"><p>cr_lpm_resp_upd</p></td>
+<td rowspan="2"><p>w1c</p></td>
+<td rowspan="2"><p>1'b0</p></td>
+<td rowspan="2"><p>Response update signal (for async concern)</p>
+<p>Assert this bit when cr_lpm_resp is updated</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>cr_lpm_en</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>LPM enable signal</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="usb-resume-config">
+<h2>usb_resume_config<a class="headerlink" href="#usb-resume-config" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x4000d808</p>
+<figure class="align-center">
+<img alt="../_images/usb_usb_resume_config.svg" src="../_images/usb_usb_resume_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31</p></td>
+<td><p>cr_res_force</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Force to output K-state</p></td>
+</tr>
+<tr class="row-odd"><td><p>30:13</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>12</p></td>
+<td><p>cr_res_trig</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Resume K-state trigger</p></td>
+</tr>
+<tr class="row-odd"><td><p>11</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>10:0</p></td>
+<td><p>cr_res_width</p></td>
+<td><p>r/w</p></td>
+<td><p>11'd26</p></td>
+<td><p>Resume K-state width (unit: 2.67us)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="usb-frame-no">
+<h2>usb_frame_no<a class="headerlink" href="#usb-frame-no" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x4000d818</p>
+<figure class="align-center">
+<img alt="../_images/usb_usb_frame_no.svg" src="../_images/usb_usb_frame_no.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:20</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>19:16</p></td>
+<td><p>sts_ep_no</p></td>
+<td><p>r</p></td>
+<td><p>4'd0</p></td>
+<td><p>Endpoint number of the current transaction</p></td>
+</tr>
+<tr class="row-even"><td><p>15:12</p></td>
+<td><p>sts_pid</p></td>
+<td><p>r</p></td>
+<td><p>4'd0</p></td>
+<td><p>PID value of the current transaction</p></td>
+</tr>
+<tr class="row-odd"><td><p>11</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>10:0</p></td>
+<td><p>sts_frame_no</p></td>
+<td><p>r</p></td>
+<td><p>11'h0</p></td>
+<td><p>Current frame number</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="usb-error">
+<h2>usb_error<a class="headerlink" href="#usb-error" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x4000d81c</p>
+<figure class="align-center">
+<img alt="../_images/usb_usb_error.svg" src="../_images/usb_usb_error.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:7</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>crc16_err</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Data CRC error occurs, cleared by cr_usb_err_clr</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>crc5_err</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Token CRC error occurs, cleared by cr_usb_err_clr</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>pid_cks_err</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>PID check sum error occurs, cleared by cr_usb_err_clr</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>pid_seq_err</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>PID sequence error occurs, cleared by cr_usb_err_clr</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>ivld_ep_err</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Invalid endpoint error occurs, cleared by cr_usb_err_clr</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>xfer_to_err</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Transfer time-out error occurs, cleared by cr_usb_err_clr</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>utmi_rx_err</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>UTMI I/F RX error occurs, cleared by cr_usb_err_clr</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="usb-int-en">
+<h2>usb_int_en<a class="headerlink" href="#usb-int-en" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x4000d820</p>
+<figure class="align-center">
+<img alt="../_images/usb_usb_int_en.svg" src="../_images/usb_usb_int_en.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31</p></td>
+<td><p>cr_usb_err_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt enable of usb_err_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>30</p></td>
+<td><p>cr_sof_3ms_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Interrupt enable of sof_3ms_int</p></td>
+</tr>
+<tr class="row-even"><td><p>29</p></td>
+<td><p>cr_lpm_pkt_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Interrupt enable of lpm_pkt_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>28</p></td>
+<td><p>cr_lpm_wkup_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Interrupt enable of lpm_wkup_int</p></td>
+</tr>
+<tr class="row-even"><td><p>27</p></td>
+<td><p>cr_usb_rend_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Interrupt enable of usb_rend_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>26:24</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>23</p></td>
+<td><p>cr_ep7_done_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt enable of ep7_done_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>22</p></td>
+<td><p>cr_ep7_cmd_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt enable of ep7_cmd_int</p></td>
+</tr>
+<tr class="row-even"><td><p>21</p></td>
+<td><p>cr_ep6_done_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt enable of ep6_done_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>20</p></td>
+<td><p>cr_ep6_cmd_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt enable of ep6_cmd_int</p></td>
+</tr>
+<tr class="row-even"><td><p>19</p></td>
+<td><p>cr_ep5_done_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt enable of ep5_done_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>18</p></td>
+<td><p>cr_ep5_cmd_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt enable of ep5_cmd_int</p></td>
+</tr>
+<tr class="row-even"><td><p>17</p></td>
+<td><p>cr_ep4_done_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt enable of ep4_done_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>16</p></td>
+<td><p>cr_ep4_cmd_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt enable of ep4_cmd_int</p></td>
+</tr>
+<tr class="row-even"><td><p>15</p></td>
+<td><p>cr_ep3_done_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt enable of ep3_done_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>14</p></td>
+<td><p>cr_ep3_cmd_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt enable of ep3_cmd_int</p></td>
+</tr>
+<tr class="row-even"><td><p>13</p></td>
+<td><p>cr_ep2_done_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt enable of ep2_done_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>12</p></td>
+<td><p>cr_ep2_cmd_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt enable of ep2_cmd_int</p></td>
+</tr>
+<tr class="row-even"><td><p>11</p></td>
+<td><p>cr_ep1_done_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt enable of ep1_done_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>cr_ep1_cmd_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt enable of ep1_cmd_int</p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>cr_ep0_out_done_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt enable of ep0_out_done_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>cr_ep0_out_cmd_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt enable of ep0_out_cmd_int</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>cr_ep0_in_done_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt enable of ep0_in_done_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>cr_ep0_in_cmd_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt enable of ep0_in_cmd_int</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>cr_ep0_setup_done_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt enable of ep0_setup_done_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>cr_ep0_setup_cmd_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt enable of ep0_setup_cmd_int</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>cr_get_dct_cmd_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt enable of get_dct_cmd_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>cr_vbus_tgl_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt enable of vbus_tgl_int</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>cr_usb_reset_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt enable of usb_reset_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>cr_sof_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt enable of sof_int</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="usb-int-sts">
+<h2>usb_int_sts<a class="headerlink" href="#usb-int-sts" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x4000d824</p>
+<figure class="align-center">
+<img alt="../_images/usb_usb_int_sts.svg" src="../_images/usb_usb_int_sts.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31</p></td>
+<td><p>usb_err_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>USB error occurs, check usb_error for detailed error type</p></td>
+</tr>
+<tr class="row-odd"><td><p>30</p></td>
+<td><p>sof_3ms_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>SOF is absent for 3 ms</p></td>
+</tr>
+<tr class="row-even"><td><p>29</p></td>
+<td><p>lpm_pkt_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>LPM packet is received</p></td>
+</tr>
+<tr class="row-odd"><td><p>28</p></td>
+<td><p>lpm_wkup_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>LPM resume (wakeup) signal is received</p></td>
+</tr>
+<tr class="row-even"><td><p>27</p></td>
+<td><p>usb_rend_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>USB reset de-assert is triggered</p></td>
+</tr>
+<tr class="row-odd"><td><p>26:24</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>23</p></td>
+<td><p>ep7_done_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>EP7 IN or OUT command is finished</p></td>
+</tr>
+<tr class="row-odd"><td><p>22</p></td>
+<td><p>ep7_cmd_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>EP7 IN or OUT command is received</p></td>
+</tr>
+<tr class="row-even"><td><p>21</p></td>
+<td><p>ep6_done_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>EP6 IN or OUT command is finished</p></td>
+</tr>
+<tr class="row-odd"><td><p>20</p></td>
+<td><p>ep6_cmd_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>EP6 IN or OUT command is received</p></td>
+</tr>
+<tr class="row-even"><td><p>19</p></td>
+<td><p>ep5_done_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>EP5 IN or OUT command is finished</p></td>
+</tr>
+<tr class="row-odd"><td><p>18</p></td>
+<td><p>ep5_cmd_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>EP5 IN or OUT command is received</p></td>
+</tr>
+<tr class="row-even"><td><p>17</p></td>
+<td><p>ep4_done_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>EP4 IN or OUT command is finished</p></td>
+</tr>
+<tr class="row-odd"><td><p>16</p></td>
+<td><p>ep4_cmd_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>EP4 IN or OUT command is received</p></td>
+</tr>
+<tr class="row-even"><td><p>15</p></td>
+<td><p>ep3_done_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>EP3 IN or OUT command is finished</p></td>
+</tr>
+<tr class="row-odd"><td><p>14</p></td>
+<td><p>ep3_cmd_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>EP3 IN or OUT command is received</p></td>
+</tr>
+<tr class="row-even"><td><p>13</p></td>
+<td><p>ep2_done_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>EP2 IN or OUT command is finished</p></td>
+</tr>
+<tr class="row-odd"><td><p>12</p></td>
+<td><p>ep2_cmd_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>EP2 IN or OUT command is received</p></td>
+</tr>
+<tr class="row-even"><td><p>11</p></td>
+<td><p>ep1_done_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>EP1 IN or OUT command is finished</p></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>ep1_cmd_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>EP1 IN or OUT command is received</p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>ep0_out_done_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>EP0 OUT command is finished</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>ep0_out_cmd_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>EP0 OUT command is received</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>ep0_in_done_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>EP0 IN command is finished</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>ep0_in_cmd_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>EP0 IN command is received</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>ep0_setup_done_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>EP0 SETUP command is finished</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>ep0_setup_cmd_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>EP0 SETUP command is received</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>get_dct_cmd_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>GET_DESCRIPTOR command is received</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>vbus_tgl_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>VBUS detection is toggled, check 0x1FC[31] for vbus_detect status</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>usb_reset_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>USB reset is triggered</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>sof_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>SOF is received</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="usb-int-mask">
+<h2>usb_int_mask<a class="headerlink" href="#usb-int-mask" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x4000d828</p>
+<figure class="align-center">
+<img alt="../_images/usb_usb_int_mask.svg" src="../_images/usb_usb_int_mask.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31</p></td>
+<td><p>cr_usb_err_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of usb_err_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>30</p></td>
+<td><p>cr_sof_3ms_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of sof_3ms_int</p></td>
+</tr>
+<tr class="row-even"><td><p>29</p></td>
+<td><p>cr_lpm_pkt_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of lpm_pkt_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>28</p></td>
+<td><p>cr_lpm_wkup_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of lpm_wkup_int</p></td>
+</tr>
+<tr class="row-even"><td><p>27</p></td>
+<td><p>cr_usb_rend_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of usb_rend_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>26:24</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>23</p></td>
+<td><p>cr_ep7_done_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of ep7_done_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>22</p></td>
+<td><p>cr_ep7_cmd_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of ep7_cmd_int</p></td>
+</tr>
+<tr class="row-even"><td><p>21</p></td>
+<td><p>cr_ep6_done_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of ep6_done_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>20</p></td>
+<td><p>cr_ep6_cmd_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of ep6_cmd_int</p></td>
+</tr>
+<tr class="row-even"><td><p>19</p></td>
+<td><p>cr_ep5_done_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of ep5_done_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>18</p></td>
+<td><p>cr_ep5_cmd_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of ep5_cmd_int</p></td>
+</tr>
+<tr class="row-even"><td><p>17</p></td>
+<td><p>cr_ep4_done_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of ep4_done_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>16</p></td>
+<td><p>cr_ep4_cmd_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of ep4_cmd_int</p></td>
+</tr>
+<tr class="row-even"><td><p>15</p></td>
+<td><p>cr_ep3_done_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of ep3_done_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>14</p></td>
+<td><p>cr_ep3_cmd_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of ep3_cmd_int</p></td>
+</tr>
+<tr class="row-even"><td><p>13</p></td>
+<td><p>cr_ep2_done_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of ep2_done_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>12</p></td>
+<td><p>cr_ep2_cmd_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of ep2_cmd_int</p></td>
+</tr>
+<tr class="row-even"><td><p>11</p></td>
+<td><p>cr_ep1_done_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of ep1_done_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>cr_ep1_cmd_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of ep1_cmd_int</p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>cr_ep0_out_done_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of ep0_out_done_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>cr_ep0_out_cmd_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of ep0_out_cmd_int</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>cr_ep0_in_done_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of ep0_in_done_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>cr_ep0_in_cmd_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of ep0_in_cmd_int</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>cr_ep0_setup_done_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of ep0_setup_done_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>cr_ep0_setup_cmd_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of ep0_setup_cmd_int</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>cr_get_dct_cmd_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of get_dct_cmd_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>cr_vbus_tgl_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of vbus_tgl_int</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>cr_usb_reset_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of usb_reset_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>cr_sof_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of sof_int</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="usb-int-clear">
+<h2>usb_int_clear<a class="headerlink" href="#usb-int-clear" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x4000d82c</p>
+<figure class="align-center">
+<img alt="../_images/usb_usb_int_clear.svg" src="../_images/usb_usb_int_clear.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31</p></td>
+<td><p>cr_usb_err_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Interrupt clear of usb_err_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>30</p></td>
+<td><p>cr_sof_3ms_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Interrupt clear of sof_3ms_int</p></td>
+</tr>
+<tr class="row-even"><td><p>29</p></td>
+<td><p>cr_lpm_pkt_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Interrupt clear of lpm_pkt_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>28</p></td>
+<td><p>cr_lpm_wkup_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Interrupt clear of lpm_wkup_int</p></td>
+</tr>
+<tr class="row-even"><td><p>27</p></td>
+<td><p>cr_usb_rend_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Interrupt clear of usb_rend_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>26:24</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>23</p></td>
+<td><p>cr_ep7_done_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Interrupt clear of ep7_done_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>22</p></td>
+<td><p>cr_ep7_cmd_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Interrupt clear of ep7_cmd_int</p></td>
+</tr>
+<tr class="row-even"><td><p>21</p></td>
+<td><p>cr_ep6_done_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Interrupt clear of ep6_done_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>20</p></td>
+<td><p>cr_ep6_cmd_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Interrupt clear of ep6_cmd_int</p></td>
+</tr>
+<tr class="row-even"><td><p>19</p></td>
+<td><p>cr_ep5_done_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Interrupt clear of ep5_done_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>18</p></td>
+<td><p>cr_ep5_cmd_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Interrupt clear of ep5_cmd_int</p></td>
+</tr>
+<tr class="row-even"><td><p>17</p></td>
+<td><p>cr_ep4_done_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Interrupt clear of ep4_done_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>16</p></td>
+<td><p>cr_ep4_cmd_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Interrupt clear of ep4_cmd_int</p></td>
+</tr>
+<tr class="row-even"><td><p>15</p></td>
+<td><p>cr_ep3_done_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Interrupt clear of ep3_done_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>14</p></td>
+<td><p>cr_ep3_cmd_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Interrupt clear of ep3_cmd_int</p></td>
+</tr>
+<tr class="row-even"><td><p>13</p></td>
+<td><p>cr_ep2_done_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Interrupt clear of ep2_done_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>12</p></td>
+<td><p>cr_ep2_cmd_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Interrupt clear of ep2_cmd_int</p></td>
+</tr>
+<tr class="row-even"><td><p>11</p></td>
+<td><p>cr_ep1_done_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Interrupt clear of ep1_done_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>cr_ep1_cmd_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Interrupt clear of ep1_cmd_int</p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>cr_ep0_out_done_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Interrupt clear of ep0_out_done_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>cr_ep0_out_cmd_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Interrupt clear of ep0_out_cmd_int</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>cr_ep0_in_done_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Interrupt clear of ep0_in_done_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>cr_ep0_in_cmd_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Interrupt clear of ep0_in_cmd_int</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>cr_ep0_setup_done_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Interrupt clear of ep0_setup_done_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>cr_ep0_setup_cmd_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Interrupt clear of ep0_setup_cmd_int</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>cr_get_dct_cmd_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Interrupt clear of get_dct_cmd_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>cr_vbus_tgl_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Interrupt clear of vbus_tgl_int</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>cr_usb_reset_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Interrupt clear of usb_reset_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>cr_sof_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Interrupt clear of sof_int</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ep1-config">
+<h2>ep1_config<a class="headerlink" href="#ep1-config" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x4000d840</p>
+<figure class="align-center">
+<img alt="../_images/usb_ep1_config.svg" src="../_images/usb_ep1_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:20</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>19</p></td>
+<td><p>sts_ep1_rdy</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Endpoint ready status bit. Asserted with ep_rdy, and de-asserted when ACK is sent/received.</p></td>
+</tr>
+<tr class="row-even"><td><p>18</p></td>
+<td><p>cr_ep1_rdy</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Endpoint ready. When Endpoint NACK is enabled, asserting this bit will allow one packet to be transferred</p></td>
+</tr>
+<tr class="row-odd"><td><p>17</p></td>
+<td><p>cr_ep1_nack</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Endpoint NACK response enable, should not be enabled with STALL at the same time</p></td>
+</tr>
+<tr class="row-even"><td><p>16</p></td>
+<td><p>cr_ep1_stall</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Endpoint STALL response enable, should not be enabled with NACK at the same time</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="6"><p>15:13</p></td>
+<td rowspan="6"><p>cr_ep1_type</p></td>
+<td rowspan="6"><p>r/w</p></td>
+<td rowspan="6"><p>3'b100</p></td>
+<td rowspan="6"><p>Endpoint type</p>
+<p>3'b101: CTRL</p>
+<p>3'b010: ISO</p>
+<p>3'b100: BULK</p>
+<p>3'b000: INT</p>
+<p>Others: Reserved</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="5"><p>12:11</p></td>
+<td rowspan="5"><p>cr_ep1_dir</p></td>
+<td rowspan="5"><p>r/w</p></td>
+<td rowspan="5"><p>2'b01</p></td>
+<td rowspan="5"><p>Endpoint direction</p>
+<p>2'b00: Disabled</p>
+<p>2'b01: IN</p>
+<p>2'b10: OUT</p>
+<p>2'b11: Reserved</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>10:0</p></td>
+<td><p>cr_ep1_size</p></td>
+<td><p>r/w</p></td>
+<td><p>11'd64</p></td>
+<td><p>Endpoint max packet size</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ep2-config">
+<h2>ep2_config<a class="headerlink" href="#ep2-config" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x4000d844</p>
+<figure class="align-center">
+<img alt="../_images/usb_ep2_config.svg" src="../_images/usb_ep2_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:20</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>19</p></td>
+<td><p>sts_ep2_rdy</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Endpoint ready status bit. Asserted with ep_rdy, and de-asserted when ACK is sent/received.</p></td>
+</tr>
+<tr class="row-even"><td><p>18</p></td>
+<td><p>cr_ep2_rdy</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Endpoint ready. When Endpoint NACK is enabled, asserting this bit will allow one packet to be transferred</p></td>
+</tr>
+<tr class="row-odd"><td><p>17</p></td>
+<td><p>cr_ep2_nack</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Endpoint NACK response enable, should not be enabled with STALL at the same time</p></td>
+</tr>
+<tr class="row-even"><td><p>16</p></td>
+<td><p>cr_ep2_stall</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Endpoint STALL response enable, should not be enabled with NACK at the same time</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="6"><p>15:13</p></td>
+<td rowspan="6"><p>cr_ep2_type</p></td>
+<td rowspan="6"><p>r/w</p></td>
+<td rowspan="6"><p>3'b100</p></td>
+<td rowspan="6"><p>Endpoint type</p>
+<p>3'b101: CTRL</p>
+<p>3'b010: ISO</p>
+<p>3'b100: BULK</p>
+<p>3'b000: INT</p>
+<p>Others: Reserved</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="5"><p>12:11</p></td>
+<td rowspan="5"><p>cr_ep2_dir</p></td>
+<td rowspan="5"><p>r/w</p></td>
+<td rowspan="5"><p>2'b01</p></td>
+<td rowspan="5"><p>Endpoint direction</p>
+<p>2'b00: Disabled</p>
+<p>2'b01: IN</p>
+<p>2'b10: OUT</p>
+<p>2'b11: Reserved</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>10:0</p></td>
+<td><p>cr_ep2_size</p></td>
+<td><p>r/w</p></td>
+<td><p>11'd64</p></td>
+<td><p>Endpoint max packet size</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ep3-config">
+<h2>ep3_config<a class="headerlink" href="#ep3-config" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x4000d848</p>
+<figure class="align-center">
+<img alt="../_images/usb_ep3_config.svg" src="../_images/usb_ep3_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:20</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>19</p></td>
+<td><p>sts_ep3_rdy</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Endpoint ready status bit. Asserted with ep_rdy, and de-asserted when ACK is sent/received.</p></td>
+</tr>
+<tr class="row-even"><td><p>18</p></td>
+<td><p>cr_ep3_rdy</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Endpoint ready. When Endpoint NACK is enabled, asserting this bit will allow one packet to be transferred</p></td>
+</tr>
+<tr class="row-odd"><td><p>17</p></td>
+<td><p>cr_ep3_nack</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Endpoint NACK response enable, should not be enabled with STALL at the same time</p></td>
+</tr>
+<tr class="row-even"><td><p>16</p></td>
+<td><p>cr_ep3_stall</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Endpoint STALL response enable, should not be enabled with NACK at the same time</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="6"><p>15:13</p></td>
+<td rowspan="6"><p>cr_ep3_type</p></td>
+<td rowspan="6"><p>r/w</p></td>
+<td rowspan="6"><p>3'b100</p></td>
+<td rowspan="6"><p>Endpoint type</p>
+<p>3'b101: CTRL</p>
+<p>3'b010: ISO</p>
+<p>3'b100: BULK</p>
+<p>3'b000: INT</p>
+<p>Others: Reserved</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="5"><p>12:11</p></td>
+<td rowspan="5"><p>cr_ep3_dir</p></td>
+<td rowspan="5"><p>r/w</p></td>
+<td rowspan="5"><p>2'b01</p></td>
+<td rowspan="5"><p>Endpoint direction</p>
+<p>2'b00: Disabled</p>
+<p>2'b01: IN</p>
+<p>2'b10: OUT</p>
+<p>2'b11: Reserved</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>10:0</p></td>
+<td><p>cr_ep3_size</p></td>
+<td><p>r/w</p></td>
+<td><p>11'd64</p></td>
+<td><p>Endpoint max packet size</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ep4-config">
+<h2>ep4_config<a class="headerlink" href="#ep4-config" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x4000d84c</p>
+<figure class="align-center">
+<img alt="../_images/usb_ep4_config.svg" src="../_images/usb_ep4_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:20</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>19</p></td>
+<td><p>sts_ep4_rdy</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Endpoint ready status bit. Asserted with ep_rdy, and de-asserted when ACK is sent/received.</p></td>
+</tr>
+<tr class="row-even"><td><p>18</p></td>
+<td><p>cr_ep4_rdy</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Endpoint ready. When Endpoint NACK is enabled, asserting this bit will allow one packet to be transferred</p></td>
+</tr>
+<tr class="row-odd"><td><p>17</p></td>
+<td><p>cr_ep4_nack</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Endpoint NACK response enable, should not be enabled with STALL at the same time</p></td>
+</tr>
+<tr class="row-even"><td><p>16</p></td>
+<td><p>cr_ep4_stall</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Endpoint STALL response enable, should not be enabled with NACK at the same time</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="6"><p>15:13</p></td>
+<td rowspan="6"><p>cr_ep4_type</p></td>
+<td rowspan="6"><p>r/w</p></td>
+<td rowspan="6"><p>3'b100</p></td>
+<td rowspan="6"><p>Endpoint type</p>
+<p>3'b101: CTRL</p>
+<p>3'b010: ISO</p>
+<p>3'b100: BULK</p>
+<p>3'b000: INT</p>
+<p>Others: Reserved</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="5"><p>12:11</p></td>
+<td rowspan="5"><p>cr_ep4_dir</p></td>
+<td rowspan="5"><p>r/w</p></td>
+<td rowspan="5"><p>2'b01</p></td>
+<td rowspan="5"><p>Endpoint direction</p>
+<p>2'b00: Disabled</p>
+<p>2'b01: IN</p>
+<p>2'b10: OUT</p>
+<p>2'b11: Reserved</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>10:0</p></td>
+<td><p>cr_ep4_size</p></td>
+<td><p>r/w</p></td>
+<td><p>11'd64</p></td>
+<td><p>Endpoint max packet size</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ep5-config">
+<h2>ep5_config<a class="headerlink" href="#ep5-config" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x4000d850</p>
+<figure class="align-center">
+<img alt="../_images/usb_ep5_config.svg" src="../_images/usb_ep5_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:20</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>19</p></td>
+<td><p>sts_ep5_rdy</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Endpoint ready status bit. Asserted with ep_rdy, and de-asserted when ACK is sent/received.</p></td>
+</tr>
+<tr class="row-even"><td><p>18</p></td>
+<td><p>cr_ep5_rdy</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Endpoint ready. When Endpoint NACK is enabled, asserting this bit will allow one packet to be transferred</p></td>
+</tr>
+<tr class="row-odd"><td><p>17</p></td>
+<td><p>cr_ep5_nack</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Endpoint NACK response enable, should not be enabled with STALL at the same time</p></td>
+</tr>
+<tr class="row-even"><td><p>16</p></td>
+<td><p>cr_ep5_stall</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Endpoint STALL response enable, should not be enabled with NACK at the same time</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="6"><p>15:13</p></td>
+<td rowspan="6"><p>cr_ep5_type</p></td>
+<td rowspan="6"><p>r/w</p></td>
+<td rowspan="6"><p>3'b100</p></td>
+<td rowspan="6"><p>Endpoint type</p>
+<p>3'b101: CTRL</p>
+<p>3'b010: ISO</p>
+<p>3'b100: BULK</p>
+<p>3'b000: INT</p>
+<p>Others: Reserved</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="5"><p>12:11</p></td>
+<td rowspan="5"><p>cr_ep5_dir</p></td>
+<td rowspan="5"><p>r/w</p></td>
+<td rowspan="5"><p>2'b01</p></td>
+<td rowspan="5"><p>Endpoint direction</p>
+<p>2'b00: Disabled</p>
+<p>2'b01: IN</p>
+<p>2'b10: OUT</p>
+<p>2'b11: Reserved</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>10:0</p></td>
+<td><p>cr_ep5_size</p></td>
+<td><p>r/w</p></td>
+<td><p>11'd64</p></td>
+<td><p>Endpoint max packet size</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ep6-config">
+<h2>ep6_config<a class="headerlink" href="#ep6-config" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x4000d854</p>
+<figure class="align-center">
+<img alt="../_images/usb_ep6_config.svg" src="../_images/usb_ep6_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:20</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>19</p></td>
+<td><p>sts_ep6_rdy</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Endpoint ready status bit. Asserted with ep_rdy, and de-asserted when ACK is sent/received.</p></td>
+</tr>
+<tr class="row-even"><td><p>18</p></td>
+<td><p>cr_ep6_rdy</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Endpoint ready. When Endpoint NACK is enabled, asserting this bit will allow one packet to be transferred</p></td>
+</tr>
+<tr class="row-odd"><td><p>17</p></td>
+<td><p>cr_ep6_nack</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Endpoint NACK response enable, should not be enabled with STALL at the same time</p></td>
+</tr>
+<tr class="row-even"><td><p>16</p></td>
+<td><p>cr_ep6_stall</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Endpoint STALL response enable, should not be enabled with NACK at the same time</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="6"><p>15:13</p></td>
+<td rowspan="6"><p>cr_ep6_type</p></td>
+<td rowspan="6"><p>r/w</p></td>
+<td rowspan="6"><p>3'b100</p></td>
+<td rowspan="6"><p>Endpoint type</p>
+<p>3'b101: CTRL</p>
+<p>3'b010: ISO</p>
+<p>3'b100: BULK</p>
+<p>3'b000: INT</p>
+<p>Others: Reserved</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="5"><p>12:11</p></td>
+<td rowspan="5"><p>cr_ep6_dir</p></td>
+<td rowspan="5"><p>r/w</p></td>
+<td rowspan="5"><p>2'b01</p></td>
+<td rowspan="5"><p>Endpoint direction</p>
+<p>2'b00: Disabled</p>
+<p>2'b01: IN</p>
+<p>2'b10: OUT</p>
+<p>2'b11: Reserved</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>10:0</p></td>
+<td><p>cr_ep6_size</p></td>
+<td><p>r/w</p></td>
+<td><p>11'd64</p></td>
+<td><p>Endpoint max packet size</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ep7-config">
+<h2>ep7_config<a class="headerlink" href="#ep7-config" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x4000d858</p>
+<figure class="align-center">
+<img alt="../_images/usb_ep7_config.svg" src="../_images/usb_ep7_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:20</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>19</p></td>
+<td><p>sts_ep7_rdy</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Endpoint ready status bit. Asserted with ep_rdy, and de-asserted when ACK is sent/received.</p></td>
+</tr>
+<tr class="row-even"><td><p>18</p></td>
+<td><p>cr_ep7_rdy</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Endpoint ready. When Endpoint NACK is enabled, asserting this bit will allow one packet to be transferred</p></td>
+</tr>
+<tr class="row-odd"><td><p>17</p></td>
+<td><p>cr_ep7_nack</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Endpoint NACK response enable, should not be enabled with STALL at the same time</p></td>
+</tr>
+<tr class="row-even"><td><p>16</p></td>
+<td><p>cr_ep7_stall</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Endpoint STALL response enable, should not be enabled with NACK at the same time</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="6"><p>15:13</p></td>
+<td rowspan="6"><p>cr_ep7_type</p></td>
+<td rowspan="6"><p>r/w</p></td>
+<td rowspan="6"><p>3'b100</p></td>
+<td rowspan="6"><p>Endpoint type</p>
+<p>3'b101: CTRL</p>
+<p>3'b010: ISO</p>
+<p>3'b100: BULK</p>
+<p>3'b000: INT</p>
+<p>Others: Reserved</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="5"><p>12:11</p></td>
+<td rowspan="5"><p>cr_ep7_dir</p></td>
+<td rowspan="5"><p>r/w</p></td>
+<td rowspan="5"><p>2'b01</p></td>
+<td rowspan="5"><p>Endpoint direction</p>
+<p>2'b00: Disabled</p>
+<p>2'b01: IN</p>
+<p>2'b10: OUT</p>
+<p>2'b11: Reserved</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>10:0</p></td>
+<td><p>cr_ep7_size</p></td>
+<td><p>r/w</p></td>
+<td><p>11'd64</p></td>
+<td><p>Endpoint max packet size</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ep0-fifo-config">
+<h2>ep0_fifo_config<a class="headerlink" href="#ep0-fifo-config" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x4000d900</p>
+<figure class="align-center">
+<img alt="../_images/usb_ep0_fifo_config.svg" src="../_images/usb_ep0_fifo_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>ep0_rx_fifo_underflow</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Underflow flag of RX FIFO, can be cleared by rx_fifo_clr</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>ep0_rx_fifo_overflow</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Overflow flag of RX FIFO, can be cleared by rx_fifo_clr</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>ep0_tx_fifo_underflow</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Underflow flag of TX FIFO, can be cleared by tx_fifo_clr</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>ep0_tx_fifo_overflow</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Overflow flag of TX FIFO, can be cleared by tx_fifo_clr</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>ep0_rx_fifo_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Clear signal of RX FIFO</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>ep0_tx_fifo_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Clear signal of TX FIFO</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>ep0_dma_rx_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Enable signal of dma_rx_req/ack interface</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>ep0_dma_tx_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Enable signal of dma_tx_req/ack interface</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ep0-fifo-status">
+<h2>ep0_fifo_status<a class="headerlink" href="#ep0-fifo-status" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x4000d904</p>
+<figure class="align-center">
+<img alt="../_images/usb_ep0_fifo_status.svg" src="../_images/usb_ep0_fifo_status.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31</p></td>
+<td><p>ep0_rx_fifo_full</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>RX FIFO full flag</p></td>
+</tr>
+<tr class="row-odd"><td><p>30</p></td>
+<td><p>ep0_rx_fifo_empty</p></td>
+<td><p>r</p></td>
+<td><p>1'b1</p></td>
+<td><p>RX FIFO empty flag</p></td>
+</tr>
+<tr class="row-even"><td><p>29:23</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>22:16</p></td>
+<td><p>ep0_rx_fifo_cnt</p></td>
+<td><p>r</p></td>
+<td><p>7'd0</p></td>
+<td><p>RX FIFO available count</p></td>
+</tr>
+<tr class="row-even"><td><p>15</p></td>
+<td><p>ep0_tx_fifo_full</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>TX FIFO full flag</p></td>
+</tr>
+<tr class="row-odd"><td><p>14</p></td>
+<td><p>ep0_tx_fifo_empty</p></td>
+<td><p>r</p></td>
+<td><p>1'b1</p></td>
+<td><p>TX FIFO empty flag</p></td>
+</tr>
+<tr class="row-even"><td><p>13:7</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>6:0</p></td>
+<td><p>ep0_tx_fifo_cnt</p></td>
+<td><p>r</p></td>
+<td><p>7'd64</p></td>
+<td><p>TX FIFO available count</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ep0-tx-fifo-wdata">
+<h2>ep0_tx_fifo_wdata<a class="headerlink" href="#ep0-tx-fifo-wdata" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x4000d908</p>
+<figure class="align-center">
+<img alt="../_images/usb_ep0_tx_fifo_wdata.svg" src="../_images/usb_ep0_tx_fifo_wdata.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>ep0_tx_fifo_wdata</p></td>
+<td><p>w</p></td>
+<td><p>x</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ep0-rx-fifo-rdata">
+<h2>ep0_rx_fifo_rdata<a class="headerlink" href="#ep0-rx-fifo-rdata" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x4000d90c</p>
+<figure class="align-center">
+<img alt="../_images/usb_ep0_rx_fifo_rdata.svg" src="../_images/usb_ep0_rx_fifo_rdata.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>ep0_rx_fifo_rdata</p></td>
+<td><p>r</p></td>
+<td><p>8'h0</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ep1-fifo-config">
+<h2>ep1_fifo_config<a class="headerlink" href="#ep1-fifo-config" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x4000d910</p>
+<figure class="align-center">
+<img alt="../_images/usb_ep1_fifo_config.svg" src="../_images/usb_ep1_fifo_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>ep1_rx_fifo_underflow</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Underflow flag of RX FIFO, can be cleared by rx_fifo_clr</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>ep1_rx_fifo_overflow</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Overflow flag of RX FIFO, can be cleared by rx_fifo_clr</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>ep1_tx_fifo_underflow</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Underflow flag of TX FIFO, can be cleared by tx_fifo_clr</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>ep1_tx_fifo_overflow</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Overflow flag of TX FIFO, can be cleared by tx_fifo_clr</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>ep1_rx_fifo_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Clear signal of RX FIFO</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>ep1_tx_fifo_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Clear signal of TX FIFO</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>ep1_dma_rx_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Enable signal of dma_rx_req/ack interface</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>ep1_dma_tx_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Enable signal of dma_tx_req/ack interface</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ep1-fifo-status">
+<h2>ep1_fifo_status<a class="headerlink" href="#ep1-fifo-status" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x4000d914</p>
+<figure class="align-center">
+<img alt="../_images/usb_ep1_fifo_status.svg" src="../_images/usb_ep1_fifo_status.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31</p></td>
+<td><p>ep1_rx_fifo_full</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>RX FIFO full flag</p></td>
+</tr>
+<tr class="row-odd"><td><p>30</p></td>
+<td><p>ep1_rx_fifo_empty</p></td>
+<td><p>r</p></td>
+<td><p>1'b1</p></td>
+<td><p>RX FIFO empty flag</p></td>
+</tr>
+<tr class="row-even"><td><p>29:23</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>22:16</p></td>
+<td><p>ep1_rx_fifo_cnt</p></td>
+<td><p>r</p></td>
+<td><p>7'd0</p></td>
+<td><p>RX FIFO available count</p></td>
+</tr>
+<tr class="row-even"><td><p>15</p></td>
+<td><p>ep1_tx_fifo_full</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>TX FIFO full flag</p></td>
+</tr>
+<tr class="row-odd"><td><p>14</p></td>
+<td><p>ep1_tx_fifo_empty</p></td>
+<td><p>r</p></td>
+<td><p>1'b1</p></td>
+<td><p>TX FIFO empty flag</p></td>
+</tr>
+<tr class="row-even"><td><p>13:7</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>6:0</p></td>
+<td><p>ep1_tx_fifo_cnt</p></td>
+<td><p>r</p></td>
+<td><p>7'd64</p></td>
+<td><p>TX FIFO available count</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ep1-tx-fifo-wdata">
+<h2>ep1_tx_fifo_wdata<a class="headerlink" href="#ep1-tx-fifo-wdata" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x4000d918</p>
+<figure class="align-center">
+<img alt="../_images/usb_ep1_tx_fifo_wdata.svg" src="../_images/usb_ep1_tx_fifo_wdata.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>ep1_tx_fifo_wdata</p></td>
+<td><p>w</p></td>
+<td><p>x</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ep1-rx-fifo-rdata">
+<h2>ep1_rx_fifo_rdata<a class="headerlink" href="#ep1-rx-fifo-rdata" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x4000d91c</p>
+<figure class="align-center">
+<img alt="../_images/usb_ep1_rx_fifo_rdata.svg" src="../_images/usb_ep1_rx_fifo_rdata.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>ep1_rx_fifo_rdata</p></td>
+<td><p>r</p></td>
+<td><p>8'h0</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ep2-fifo-config">
+<h2>ep2_fifo_config<a class="headerlink" href="#ep2-fifo-config" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x4000d920</p>
+<figure class="align-center">
+<img alt="../_images/usb_ep2_fifo_config.svg" src="../_images/usb_ep2_fifo_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>ep2_rx_fifo_underflow</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Underflow flag of RX FIFO, can be cleared by rx_fifo_clr</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>ep2_rx_fifo_overflow</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Overflow flag of RX FIFO, can be cleared by rx_fifo_clr</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>ep2_tx_fifo_underflow</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Underflow flag of TX FIFO, can be cleared by tx_fifo_clr</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>ep2_tx_fifo_overflow</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Overflow flag of TX FIFO, can be cleared by tx_fifo_clr</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>ep2_rx_fifo_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Clear signal of RX FIFO</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>ep2_tx_fifo_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Clear signal of TX FIFO</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>ep2_dma_rx_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Enable signal of dma_rx_req/ack interface</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>ep2_dma_tx_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Enable signal of dma_tx_req/ack interface</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ep2-fifo-status">
+<h2>ep2_fifo_status<a class="headerlink" href="#ep2-fifo-status" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x4000d924</p>
+<figure class="align-center">
+<img alt="../_images/usb_ep2_fifo_status.svg" src="../_images/usb_ep2_fifo_status.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31</p></td>
+<td><p>ep2_rx_fifo_full</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>RX FIFO full flag</p></td>
+</tr>
+<tr class="row-odd"><td><p>30</p></td>
+<td><p>ep2_rx_fifo_empty</p></td>
+<td><p>r</p></td>
+<td><p>1'b1</p></td>
+<td><p>RX FIFO empty flag</p></td>
+</tr>
+<tr class="row-even"><td><p>29:23</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>22:16</p></td>
+<td><p>ep2_rx_fifo_cnt</p></td>
+<td><p>r</p></td>
+<td><p>7'd0</p></td>
+<td><p>RX FIFO available count</p></td>
+</tr>
+<tr class="row-even"><td><p>15</p></td>
+<td><p>ep2_tx_fifo_full</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>TX FIFO full flag</p></td>
+</tr>
+<tr class="row-odd"><td><p>14</p></td>
+<td><p>ep2_tx_fifo_empty</p></td>
+<td><p>r</p></td>
+<td><p>1'b1</p></td>
+<td><p>TX FIFO empty flag</p></td>
+</tr>
+<tr class="row-even"><td><p>13:7</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>6:0</p></td>
+<td><p>ep2_tx_fifo_cnt</p></td>
+<td><p>r</p></td>
+<td><p>7'd64</p></td>
+<td><p>TX FIFO available count</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ep2-tx-fifo-wdata">
+<h2>ep2_tx_fifo_wdata<a class="headerlink" href="#ep2-tx-fifo-wdata" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x4000d928</p>
+<figure class="align-center">
+<img alt="../_images/usb_ep2_tx_fifo_wdata.svg" src="../_images/usb_ep2_tx_fifo_wdata.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>ep2_tx_fifo_wdata</p></td>
+<td><p>w</p></td>
+<td><p>x</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ep2-rx-fifo-rdata">
+<h2>ep2_rx_fifo_rdata<a class="headerlink" href="#ep2-rx-fifo-rdata" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x4000d92c</p>
+<figure class="align-center">
+<img alt="../_images/usb_ep2_rx_fifo_rdata.svg" src="../_images/usb_ep2_rx_fifo_rdata.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>ep2_rx_fifo_rdata</p></td>
+<td><p>r</p></td>
+<td><p>8'h0</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ep3-fifo-config">
+<h2>ep3_fifo_config<a class="headerlink" href="#ep3-fifo-config" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x4000d930</p>
+<figure class="align-center">
+<img alt="../_images/usb_ep3_fifo_config.svg" src="../_images/usb_ep3_fifo_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>ep3_rx_fifo_underflow</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Underflow flag of RX FIFO, can be cleared by rx_fifo_clr</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>ep3_rx_fifo_overflow</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Overflow flag of RX FIFO, can be cleared by rx_fifo_clr</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>ep3_tx_fifo_underflow</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Underflow flag of TX FIFO, can be cleared by tx_fifo_clr</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>ep3_tx_fifo_overflow</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Overflow flag of TX FIFO, can be cleared by tx_fifo_clr</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>ep3_rx_fifo_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Clear signal of RX FIFO</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>ep3_tx_fifo_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Clear signal of TX FIFO</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>ep3_dma_rx_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Enable signal of dma_rx_req/ack interface</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>ep3_dma_tx_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Enable signal of dma_tx_req/ack interface</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ep3-fifo-status">
+<h2>ep3_fifo_status<a class="headerlink" href="#ep3-fifo-status" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x4000d934</p>
+<figure class="align-center">
+<img alt="../_images/usb_ep3_fifo_status.svg" src="../_images/usb_ep3_fifo_status.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31</p></td>
+<td><p>ep3_rx_fifo_full</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>RX FIFO full flag</p></td>
+</tr>
+<tr class="row-odd"><td><p>30</p></td>
+<td><p>ep3_rx_fifo_empty</p></td>
+<td><p>r</p></td>
+<td><p>1'b1</p></td>
+<td><p>RX FIFO empty flag</p></td>
+</tr>
+<tr class="row-even"><td><p>29:23</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>22:16</p></td>
+<td><p>ep3_rx_fifo_cnt</p></td>
+<td><p>r</p></td>
+<td><p>7'd0</p></td>
+<td><p>RX FIFO available count</p></td>
+</tr>
+<tr class="row-even"><td><p>15</p></td>
+<td><p>ep3_tx_fifo_full</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>TX FIFO full flag</p></td>
+</tr>
+<tr class="row-odd"><td><p>14</p></td>
+<td><p>ep3_tx_fifo_empty</p></td>
+<td><p>r</p></td>
+<td><p>1'b1</p></td>
+<td><p>TX FIFO empty flag</p></td>
+</tr>
+<tr class="row-even"><td><p>13:7</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>6:0</p></td>
+<td><p>ep3_tx_fifo_cnt</p></td>
+<td><p>r</p></td>
+<td><p>7'd64</p></td>
+<td><p>TX FIFO available count</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ep3-tx-fifo-wdata">
+<h2>ep3_tx_fifo_wdata<a class="headerlink" href="#ep3-tx-fifo-wdata" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x4000d938</p>
+<figure class="align-center">
+<img alt="../_images/usb_ep3_tx_fifo_wdata.svg" src="../_images/usb_ep3_tx_fifo_wdata.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>ep3_tx_fifo_wdata</p></td>
+<td><p>w</p></td>
+<td><p>x</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ep3-rx-fifo-rdata">
+<h2>ep3_rx_fifo_rdata<a class="headerlink" href="#ep3-rx-fifo-rdata" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x4000d93c</p>
+<figure class="align-center">
+<img alt="../_images/usb_ep3_rx_fifo_rdata.svg" src="../_images/usb_ep3_rx_fifo_rdata.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>ep3_rx_fifo_rdata</p></td>
+<td><p>r</p></td>
+<td><p>8'h0</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ep4-fifo-config">
+<h2>ep4_fifo_config<a class="headerlink" href="#ep4-fifo-config" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x4000d940</p>
+<figure class="align-center">
+<img alt="../_images/usb_ep4_fifo_config.svg" src="../_images/usb_ep4_fifo_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>ep4_rx_fifo_underflow</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Underflow flag of RX FIFO, can be cleared by rx_fifo_clr</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>ep4_rx_fifo_overflow</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Overflow flag of RX FIFO, can be cleared by rx_fifo_clr</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>ep4_tx_fifo_underflow</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Underflow flag of TX FIFO, can be cleared by tx_fifo_clr</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>ep4_tx_fifo_overflow</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Overflow flag of TX FIFO, can be cleared by tx_fifo_clr</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>ep4_rx_fifo_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Clear signal of RX FIFO</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>ep4_tx_fifo_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Clear signal of TX FIFO</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>ep4_dma_rx_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Enable signal of dma_rx_req/ack interface</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>ep4_dma_tx_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Enable signal of dma_tx_req/ack interface</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ep4-fifo-status">
+<h2>ep4_fifo_status<a class="headerlink" href="#ep4-fifo-status" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x4000d944</p>
+<figure class="align-center">
+<img alt="../_images/usb_ep4_fifo_status.svg" src="../_images/usb_ep4_fifo_status.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31</p></td>
+<td><p>ep4_rx_fifo_full</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>RX FIFO full flag</p></td>
+</tr>
+<tr class="row-odd"><td><p>30</p></td>
+<td><p>ep4_rx_fifo_empty</p></td>
+<td><p>r</p></td>
+<td><p>1'b1</p></td>
+<td><p>RX FIFO empty flag</p></td>
+</tr>
+<tr class="row-even"><td><p>29:23</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>22:16</p></td>
+<td><p>ep4_rx_fifo_cnt</p></td>
+<td><p>r</p></td>
+<td><p>7'd0</p></td>
+<td><p>RX FIFO available count</p></td>
+</tr>
+<tr class="row-even"><td><p>15</p></td>
+<td><p>ep4_tx_fifo_full</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>TX FIFO full flag</p></td>
+</tr>
+<tr class="row-odd"><td><p>14</p></td>
+<td><p>ep4_tx_fifo_empty</p></td>
+<td><p>r</p></td>
+<td><p>1'b1</p></td>
+<td><p>TX FIFO empty flag</p></td>
+</tr>
+<tr class="row-even"><td><p>13:7</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>6:0</p></td>
+<td><p>ep4_tx_fifo_cnt</p></td>
+<td><p>r</p></td>
+<td><p>7'd64</p></td>
+<td><p>TX FIFO available count</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ep4-tx-fifo-wdata">
+<h2>ep4_tx_fifo_wdata<a class="headerlink" href="#ep4-tx-fifo-wdata" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x4000d948</p>
+<figure class="align-center">
+<img alt="../_images/usb_ep4_tx_fifo_wdata.svg" src="../_images/usb_ep4_tx_fifo_wdata.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>ep4_tx_fifo_wdata</p></td>
+<td><p>w</p></td>
+<td><p>x</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ep4-rx-fifo-rdata">
+<h2>ep4_rx_fifo_rdata<a class="headerlink" href="#ep4-rx-fifo-rdata" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x4000d94c</p>
+<figure class="align-center">
+<img alt="../_images/usb_ep4_rx_fifo_rdata.svg" src="../_images/usb_ep4_rx_fifo_rdata.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>ep4_rx_fifo_rdata</p></td>
+<td><p>r</p></td>
+<td><p>8'h0</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ep5-fifo-config">
+<h2>ep5_fifo_config<a class="headerlink" href="#ep5-fifo-config" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x4000d950</p>
+<figure class="align-center">
+<img alt="../_images/usb_ep5_fifo_config.svg" src="../_images/usb_ep5_fifo_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>ep5_rx_fifo_underflow</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Underflow flag of RX FIFO, can be cleared by rx_fifo_clr</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>ep5_rx_fifo_overflow</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Overflow flag of RX FIFO, can be cleared by rx_fifo_clr</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>ep5_tx_fifo_underflow</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Underflow flag of TX FIFO, can be cleared by tx_fifo_clr</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>ep5_tx_fifo_overflow</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Overflow flag of TX FIFO, can be cleared by tx_fifo_clr</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>ep5_rx_fifo_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Clear signal of RX FIFO</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>ep5_tx_fifo_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Clear signal of TX FIFO</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>ep5_dma_rx_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Enable signal of dma_rx_req/ack interface</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>ep5_dma_tx_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Enable signal of dma_tx_req/ack interface</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ep5-fifo-status">
+<h2>ep5_fifo_status<a class="headerlink" href="#ep5-fifo-status" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x4000d954</p>
+<figure class="align-center">
+<img alt="../_images/usb_ep5_fifo_status.svg" src="../_images/usb_ep5_fifo_status.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31</p></td>
+<td><p>ep5_rx_fifo_full</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>RX FIFO full flag</p></td>
+</tr>
+<tr class="row-odd"><td><p>30</p></td>
+<td><p>ep5_rx_fifo_empty</p></td>
+<td><p>r</p></td>
+<td><p>1'b1</p></td>
+<td><p>RX FIFO empty flag</p></td>
+</tr>
+<tr class="row-even"><td><p>29:23</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>22:16</p></td>
+<td><p>ep5_rx_fifo_cnt</p></td>
+<td><p>r</p></td>
+<td><p>7'd0</p></td>
+<td><p>RX FIFO available count</p></td>
+</tr>
+<tr class="row-even"><td><p>15</p></td>
+<td><p>ep5_tx_fifo_full</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>TX FIFO full flag</p></td>
+</tr>
+<tr class="row-odd"><td><p>14</p></td>
+<td><p>ep5_tx_fifo_empty</p></td>
+<td><p>r</p></td>
+<td><p>1'b1</p></td>
+<td><p>TX FIFO empty flag</p></td>
+</tr>
+<tr class="row-even"><td><p>13:7</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>6:0</p></td>
+<td><p>ep5_tx_fifo_cnt</p></td>
+<td><p>r</p></td>
+<td><p>7'd64</p></td>
+<td><p>TX FIFO available count</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ep5-tx-fifo-wdata">
+<h2>ep5_tx_fifo_wdata<a class="headerlink" href="#ep5-tx-fifo-wdata" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x4000d958</p>
+<figure class="align-center">
+<img alt="../_images/usb_ep5_tx_fifo_wdata.svg" src="../_images/usb_ep5_tx_fifo_wdata.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>ep5_tx_fifo_wdata</p></td>
+<td><p>w</p></td>
+<td><p>x</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ep5-rx-fifo-rdata">
+<h2>ep5_rx_fifo_rdata<a class="headerlink" href="#ep5-rx-fifo-rdata" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x4000d95c</p>
+<figure class="align-center">
+<img alt="../_images/usb_ep5_rx_fifo_rdata.svg" src="../_images/usb_ep5_rx_fifo_rdata.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>ep5_rx_fifo_rdata</p></td>
+<td><p>r</p></td>
+<td><p>8'h0</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ep6-fifo-config">
+<h2>ep6_fifo_config<a class="headerlink" href="#ep6-fifo-config" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x4000d960</p>
+<figure class="align-center">
+<img alt="../_images/usb_ep6_fifo_config.svg" src="../_images/usb_ep6_fifo_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>ep6_rx_fifo_underflow</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Underflow flag of RX FIFO, can be cleared by rx_fifo_clr</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>ep6_rx_fifo_overflow</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Overflow flag of RX FIFO, can be cleared by rx_fifo_clr</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>ep6_tx_fifo_underflow</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Underflow flag of TX FIFO, can be cleared by tx_fifo_clr</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>ep6_tx_fifo_overflow</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Overflow flag of TX FIFO, can be cleared by tx_fifo_clr</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>ep6_rx_fifo_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Clear signal of RX FIFO</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>ep6_tx_fifo_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Clear signal of TX FIFO</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>ep6_dma_rx_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Enable signal of dma_rx_req/ack interface</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>ep6_dma_tx_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Enable signal of dma_tx_req/ack interface</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ep6-fifo-status">
+<h2>ep6_fifo_status<a class="headerlink" href="#ep6-fifo-status" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x4000d964</p>
+<figure class="align-center">
+<img alt="../_images/usb_ep6_fifo_status.svg" src="../_images/usb_ep6_fifo_status.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31</p></td>
+<td><p>ep6_rx_fifo_full</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>RX FIFO full flag</p></td>
+</tr>
+<tr class="row-odd"><td><p>30</p></td>
+<td><p>ep6_rx_fifo_empty</p></td>
+<td><p>r</p></td>
+<td><p>1'b1</p></td>
+<td><p>RX FIFO empty flag</p></td>
+</tr>
+<tr class="row-even"><td><p>29:23</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>22:16</p></td>
+<td><p>ep6_rx_fifo_cnt</p></td>
+<td><p>r</p></td>
+<td><p>7'd0</p></td>
+<td><p>RX FIFO available count</p></td>
+</tr>
+<tr class="row-even"><td><p>15</p></td>
+<td><p>ep6_tx_fifo_full</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>TX FIFO full flag</p></td>
+</tr>
+<tr class="row-odd"><td><p>14</p></td>
+<td><p>ep6_tx_fifo_empty</p></td>
+<td><p>r</p></td>
+<td><p>1'b1</p></td>
+<td><p>TX FIFO empty flag</p></td>
+</tr>
+<tr class="row-even"><td><p>13:7</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>6:0</p></td>
+<td><p>ep6_tx_fifo_cnt</p></td>
+<td><p>r</p></td>
+<td><p>7'd64</p></td>
+<td><p>TX FIFO available count</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ep6-tx-fifo-wdata">
+<h2>ep6_tx_fifo_wdata<a class="headerlink" href="#ep6-tx-fifo-wdata" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x4000d968</p>
+<figure class="align-center">
+<img alt="../_images/usb_ep6_tx_fifo_wdata.svg" src="../_images/usb_ep6_tx_fifo_wdata.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>ep6_tx_fifo_wdata</p></td>
+<td><p>w</p></td>
+<td><p>x</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ep6-rx-fifo-rdata">
+<h2>ep6_rx_fifo_rdata<a class="headerlink" href="#ep6-rx-fifo-rdata" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x4000d96c</p>
+<figure class="align-center">
+<img alt="../_images/usb_ep6_rx_fifo_rdata.svg" src="../_images/usb_ep6_rx_fifo_rdata.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>ep6_rx_fifo_rdata</p></td>
+<td><p>r</p></td>
+<td><p>8'h0</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ep7-fifo-config">
+<h2>ep7_fifo_config<a class="headerlink" href="#ep7-fifo-config" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x4000d970</p>
+<figure class="align-center">
+<img alt="../_images/usb_ep7_fifo_config.svg" src="../_images/usb_ep7_fifo_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>ep7_rx_fifo_underflow</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Underflow flag of RX FIFO, can be cleared by rx_fifo_clr</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>ep7_rx_fifo_overflow</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Overflow flag of RX FIFO, can be cleared by rx_fifo_clr</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>ep7_tx_fifo_underflow</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Underflow flag of TX FIFO, can be cleared by tx_fifo_clr</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>ep7_tx_fifo_overflow</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Overflow flag of TX FIFO, can be cleared by tx_fifo_clr</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>ep7_rx_fifo_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Clear signal of RX FIFO</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>ep7_tx_fifo_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Clear signal of TX FIFO</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>ep7_dma_rx_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Enable signal of dma_rx_req/ack interface</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>ep7_dma_tx_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Enable signal of dma_tx_req/ack interface</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ep7-fifo-status">
+<h2>ep7_fifo_status<a class="headerlink" href="#ep7-fifo-status" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x4000d974</p>
+<figure class="align-center">
+<img alt="../_images/usb_ep7_fifo_status.svg" src="../_images/usb_ep7_fifo_status.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31</p></td>
+<td><p>ep7_rx_fifo_full</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>RX FIFO full flag</p></td>
+</tr>
+<tr class="row-odd"><td><p>30</p></td>
+<td><p>ep7_rx_fifo_empty</p></td>
+<td><p>r</p></td>
+<td><p>1'b1</p></td>
+<td><p>RX FIFO empty flag</p></td>
+</tr>
+<tr class="row-even"><td><p>29:23</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>22:16</p></td>
+<td><p>ep7_rx_fifo_cnt</p></td>
+<td><p>r</p></td>
+<td><p>7'd0</p></td>
+<td><p>RX FIFO available count</p></td>
+</tr>
+<tr class="row-even"><td><p>15</p></td>
+<td><p>ep7_tx_fifo_full</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>TX FIFO full flag</p></td>
+</tr>
+<tr class="row-odd"><td><p>14</p></td>
+<td><p>ep7_tx_fifo_empty</p></td>
+<td><p>r</p></td>
+<td><p>1'b1</p></td>
+<td><p>TX FIFO empty flag</p></td>
+</tr>
+<tr class="row-even"><td><p>13:7</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>6:0</p></td>
+<td><p>ep7_tx_fifo_cnt</p></td>
+<td><p>r</p></td>
+<td><p>7'd64</p></td>
+<td><p>TX FIFO available count</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ep7-tx-fifo-wdata">
+<h2>ep7_tx_fifo_wdata<a class="headerlink" href="#ep7-tx-fifo-wdata" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x4000d978</p>
+<figure class="align-center">
+<img alt="../_images/usb_ep7_tx_fifo_wdata.svg" src="../_images/usb_ep7_tx_fifo_wdata.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>ep7_tx_fifo_wdata</p></td>
+<td><p>w</p></td>
+<td><p>x</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ep7-rx-fifo-rdata">
+<h2>ep7_rx_fifo_rdata<a class="headerlink" href="#ep7-rx-fifo-rdata" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x4000d97c</p>
+<figure class="align-center">
+<img alt="../_images/usb_ep7_rx_fifo_rdata.svg" src="../_images/usb_ep7_rx_fifo_rdata.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>ep7_rx_fifo_rdata</p></td>
+<td><p>r</p></td>
+<td><p>8'h0</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="xcvr-if-config">
+<h2>xcvr_if_config<a class="headerlink" href="#xcvr-if-config" title="永久链接至标题"></a></h2>
+<p><strong>地址：</strong>  0x4000d9fc</p>
+<figure class="align-center">
+<img alt="../_images/usb_xcvr_if_config.svg" src="../_images/usb_xcvr_if_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31</p></td>
+<td><p>sts_vbus_det</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Transceiver VBUS detection status</p></td>
+</tr>
+<tr class="row-odd"><td><p>30:12</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>11</p></td>
+<td><p>cr_xcvr_om_rx_dn</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Transceiver RX signals output mode CR value</p></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>cr_xcvr_om_rx_dp</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Transceiver RX signals output mode CR value</p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>cr_xcvr_om_rx_d</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Transceiver RX signals output mode CR value</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><p>8</p></td>
+<td rowspan="3"><p>cr_xcvr_om_rx_sel</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b0</p></td>
+<td rowspan="3"><p>Select signal of transceiver RX signals in output mode (tx_oe# = 0)</p>
+<p>1'b0: rx_d/dp/dn is directly from transceiver</p>
+<p>1'b1: rx_d/dp/dn is controlled by CR (cr_xcvr_om_rx_d/dp/dn)</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>cr_xcvr_force_rx_dn</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Transceiver RX signals force mode value</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>cr_xcvr_force_rx_dp</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Transceiver RX signals force mode value</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>cr_xcvr_force_rx_d</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Transceiver RX signals force mode value</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><p>4</p></td>
+<td rowspan="3"><p>cr_xcvr_force_rx_en</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b0</p></td>
+<td rowspan="3"><p>Enable signal of transceiver RX signals force mode</p>
+<p>1'b0: rx_d/dp/dn is from Transceiver</p>
+<p>1'b1: tx_d/dp/dn is controlled by CR (cr_xcvr_force_rx_d/dp/dn)</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>cr_xcvr_force_tx_dn</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Transceiver TX signals force mode value</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>cr_xcvr_force_tx_dp</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Transceiver TX signals force mode value</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>cr_xcvr_force_tx_oe</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Transceiver TX signals force mode value</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><p>0</p></td>
+<td rowspan="3"><p>cr_xcvr_force_tx_en</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b0</p></td>
+<td rowspan="3"><p>Enable signal of transceiver TX signals force mode</p>
+<p>1'b0: tx_oe/dp/dn is controlled by HW</p>
+<p>1'b1: tx_oe/dp/dn is controlled by CR (cr_xcvr_force_tx_oe/dp/dn)</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2021.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

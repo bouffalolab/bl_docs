@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register description &mdash; BL702/704/706 Reference Manual  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL702/704/706 Reference Manual
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. System and memory overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. Reset and clock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">4. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">5. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">6. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="L1C.html">7. L1C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">8. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">9. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">10. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">11. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">12. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">13. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="QDEC.html">14. QDEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="KeyScan.html">15. KeyScan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2S.html">16. I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EMAC.html">17. Emac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USB.html">18. USB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">19. Revision history</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL702/704/706 Reference Manual</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Register description</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="register-description">
+<h1>Register description<a class="headerlink" href="#register-description" title="Permalink to this headline"></a></h1>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 41%" />
+<col style="width: 59%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Name</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ks-ctrl">ks_ctrl</a></p></td>
+<td><p>Keyscan contro</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ks-int-en">ks_int_en</a></p></td>
+<td><p>Keyscan interrupt enable</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ks-int-sts">ks_int_sts</a></p></td>
+<td><p>Keyscan interrupt status</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#keycode-clr">keycode_clr</a></p></td>
+<td><p>Keycode clear</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#keycode-value">keycode_value</a></p></td>
+<td><p>Keycode value</p></td>
+</tr>
+</tbody>
+</table>
+<section id="ks-ctrl">
+<h2>ks_ctrl<a class="headerlink" href="#ks-ctrl" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x4000a900</p>
+<figure class="align-center">
+<img alt="../_images/kys_ks_ctrl.svg" src="../_images/kys_ks_ctrl.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:25</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>24:20</p></td>
+<td><p>col_num</p></td>
+<td><p>r/w</p></td>
+<td><p>5’d19</p></td>
+<td><p>col_num + 1</p></td>
+</tr>
+<tr class="row-even"><td><p>19</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>18:16</p></td>
+<td><p>row_num</p></td>
+<td><p>r/w</p></td>
+<td><p>3’d7</p></td>
+<td><p>row_num + 1</p></td>
+</tr>
+<tr class="row-even"><td><p>15:10</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>9:8</p></td>
+<td><p>rc_ext</p></td>
+<td><p>r/w</p></td>
+<td><p>2’d3</p></td>
+<td><p>idle duration between column scans</p></td>
+</tr>
+<tr class="row-even"><td><p>7:4</p></td>
+<td><p>deg_cnt</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>deg_en</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>deglitch</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>ghost_en</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>ghost key event detection</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>ks_en</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ks-int-en">
+<h2>ks_int_en<a class="headerlink" href="#ks-int-en" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x4000a910</p>
+<figure class="align-center">
+<img alt="../_images/kys_ks_int_en.svg" src="../_images/kys_ks_int_en.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:1</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>ks_int_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ks-int-sts">
+<h2>ks_int_sts<a class="headerlink" href="#ks-int-sts" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x4000a914</p>
+<figure class="align-center">
+<img alt="../_images/kys_ks_int_sts.svg" src="../_images/kys_ks_int_sts.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:4</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>3:0</p></td>
+<td><p>keycode_valid</p></td>
+<td><p>r</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="keycode-clr">
+<h2>keycode_clr<a class="headerlink" href="#keycode-clr" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x4000a918</p>
+<figure class="align-center">
+<img alt="../_images/kys_keycode_clr.svg" src="../_images/kys_keycode_clr.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:4</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>3:0</p></td>
+<td><p>keycode_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="keycode-value">
+<h2>keycode_value<a class="headerlink" href="#keycode-value" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x4000a91c</p>
+<figure class="align-center">
+<img alt="../_images/kys_keycode_value.svg" src="../_images/kys_keycode_value.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:24</p></td>
+<td><p>keycode3</p></td>
+<td><p>r</p></td>
+<td><p>8’hff</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>23:16</p></td>
+<td><p>keycode2</p></td>
+<td><p>r</p></td>
+<td><p>8’hff</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>15:8</p></td>
+<td><p>keycode1</p></td>
+<td><p>r</p></td>
+<td><p>8’hff</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><p>7:0</p></td>
+<td rowspan="2"><p>keycode0</p></td>
+<td rowspan="2"><p>r</p></td>
+<td rowspan="2"><p>8’hff</p></td>
+<td rowspan="2"><p>Col = keycode / (row_num+1)</p>
+<p>Row = keycode % (row_num+1)</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

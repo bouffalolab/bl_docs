@@ -1,0 +1,112 @@
+
+
+Features 
+=======================================
+
+.. raw:: latex
+
+   \section*{Features}
+   \begin{multicols}{2}
+
+- Wireless
+
+   * 2.4 GHz RF transceiver
+   * Bluetooth® Specification v5.0
+   * Bluetooth® Low Energy 1Mbps and 2Mbps
+   * Bluetooth® Long Range Coded 500Kbps and 125Kbps
+   * Zigbee 3.0, Base Device Behavior, Core Stack R21, Green Power
+   * IEEE 802.15.4 MAC/PHY
+   * Support BLE/zigbee coexistence
+   * Integrated balun, PA/LNA
+
+- MCU Subsystem
+
+   * 32-bit RISC CPU with FPU
+   * Level-1 cache
+   * One RTC timer update to one year
+   * Two 32-bit general purpose timers
+   * Eight DMA channels
+   * CPU frequency configurable from 1MHz to 144MHz
+   * JTAG development support
+   * XIP QSPI Flash/pSRAM with hardware encryption support
+
+- Memory
+
+   * 132KB RAM
+   * 192KB ROM
+   * 1Kb eFuse
+   * Embedded Flash (optional)
+   * Embedded pSRAM (BL704/BL706,optional)
+
+- Security
+
+   * Secure boot
+   * Secure debug ports
+   * QSPI Flash On-The-Fly AES Decryption (OTFAD) - AES-128, CTR+ mode
+   * Support AES 128/192/256 bits
+   * Support MD5, SHA-1/224/256/384/512
+   * Support TRNG (True Random Number Generator)
+   * Support PKA (Public Key Accelerator)
+
+- Peripheral
+
+   * USB2.0 FS (Full-Speed) device interface
+   * IR remote control interface
+   * One SPI master/slave
+   * Two UARTs
+   
+      Support ISO 17987(Local Interconnect Network)
+   * One I2C master
+   * One I2S master/slave
+   * Five PWM channels
+   * Quadrature decoder
+   * Key-Scan-Matrix interface
+   * 12-bit general ADC
+   * 10-bit general DAC
+   * PIR (Passive Infra-Red) detection
+   * Ethernet RMII interface(BL704/BL706)
+   * Camera interface(BL706)
+   * 15(BL702)/23(BL704)/31(BL706) Flexible GPIOs (flexible)
+
+- Power Management
+
+   * Active CPU
+   * Idle 
+   * Power Down Sleep (flexible)
+   * Hibernate
+   * Off
+   * Active Rx
+   * Active Tx
+
+- Clock
+
+   * External main clock XTAL 32MHz
+   * External low power consumption and the RTC clock XTAL 32/32.768kHz
+   * Internal RC 32kHz oscillator
+   * Internal RC 32MHz oscillator
+   * Internal System PLL
+   * Internal Audio PLL
+
+.. raw:: latex
+
+   \end{multicols}
+   \tableofcontents
+   \listoffigures
+   \listoftables
+   
+.. toctree::
+   :maxdepth: 2
+   :numbered:
+
+   content/overview
+   content/Functional
+   content/Pindefinition
+   content/Electricalcharacteristics
+   content/ProductUse
+   content/Referencedesign
+   content/PackagingQFN32
+   content/PackagingQFN40
+   content/PackagingQFN48
+   content/TopMarkingDefinition
+   content/OrderingInformation
+   content/version

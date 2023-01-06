@@ -1,0 +1,817 @@
+\section{寄存器描述}
+\regover{
+{\hyperref[glb-GPIO-CFGCTL0]{GPIO\_CFGCTL0}}&
+\\
+\hline
+{\hyperref[glb-GPIO-CFGCTL1]{GPIO\_CFGCTL1}}&
+\\
+\hline
+{\hyperref[glb-GPIO-CFGCTL2]{GPIO\_CFGCTL2}}&
+\\
+\hline
+{\hyperref[glb-GPIO-CFGCTL3]{GPIO\_CFGCTL3}}&
+\\
+\hline
+{\hyperref[glb-GPIO-CFGCTL4]{GPIO\_CFGCTL4}}&
+\\
+\hline
+{\hyperref[glb-GPIO-CFGCTL5]{GPIO\_CFGCTL5}}&
+\\
+\hline
+{\hyperref[glb-GPIO-CFGCTL6]{GPIO\_CFGCTL6}}&
+\\
+\hline
+{\hyperref[glb-GPIO-CFGCTL7]{GPIO\_CFGCTL7}}&
+\\
+\hline
+{\hyperref[glb-GPIO-CFGCTL8]{GPIO\_CFGCTL8}}&
+\\
+\hline
+{\hyperref[glb-GPIO-CFGCTL9]{GPIO\_CFGCTL9}}&
+\\
+\hline
+{\hyperref[glb-GPIO-CFGCTL10]{GPIO\_CFGCTL10}}&
+\\
+\hline
+{\hyperref[glb-GPIO-CFGCTL11]{GPIO\_CFGCTL11}}&
+\\
+\hline
+{\hyperref[glb-GPIO-CFGCTL12]{GPIO\_CFGCTL12}}&
+\\
+\hline
+{\hyperref[glb-GPIO-CFGCTL13]{GPIO\_CFGCTL13}}&
+\\
+\hline
+{\hyperref[glb-GPIO-CFGCTL14]{GPIO\_CFGCTL14}}&
+\\
+\hline
+{\hyperref[glb-GPIO-CFGCTL15]{GPIO\_CFGCTL15}}&
+\\
+\hline
+{\hyperref[glb-GPIO-CFGCTL30]{GPIO\_CFGCTL30}}&
+\\
+\hline
+{\hyperref[glb-GPIO-CFGCTL32]{GPIO\_CFGCTL32}}&
+\\
+\hline
+{\hyperref[glb-GPIO-CFGCTL34]{GPIO\_CFGCTL34}}&
+\\
+\hline
+{\hyperref[glb-GPIO-CFGCTL35]{GPIO\_CFGCTL35}}&
+\\
+\hline
+{\hyperref[glb-GPIO-INT-MASK1]{GPIO\_INT\_MASK1}}&
+\\
+\hline
+{\hyperref[glb-GPIO-INT-STAT1]{GPIO\_INT\_STAT1}}&
+\\
+\hline
+{\hyperref[glb-GPIO-INT-CLR1]{GPIO\_INT\_CLR1}}&
+\\
+\hline
+{\hyperref[glb-GPIO-INT-MODE-SET1]{GPIO\_INT\_MODE\_SET1}}&
+\\
+\hline
+{\hyperref[glb-GPIO-INT-MODE-SET2]{GPIO\_INT\_MODE\_SET2}}&
+\\
+\hline
+{\hyperref[glb-GPIO-INT-MODE-SET3]{GPIO\_INT\_MODE\_SET3}}&
+\\
+\hline
+{\hyperref[glb-GPIO-INT-MODE-SET4]{GPIO\_INT\_MODE\_SET4}}&
+\\
+\hline
+{\hyperref[glb-GPIO-INT2-MASK1]{GPIO\_INT2\_MASK1}}&
+\\
+\hline
+{\hyperref[glb-GPIO-INT2-STAT1]{GPIO\_INT2\_STAT1}}&
+\\
+\hline
+{\hyperref[glb-GPIO-INT2-CLR1]{GPIO\_INT2\_CLR1}}&
+\\
+\hline
+{\hyperref[glb-GPIO-INT2-MODE-SET1]{GPIO\_INT2\_MODE\_SET1}}&
+\\
+\hline
+{\hyperref[glb-GPIO-INT2-MODE-SET2]{GPIO\_INT2\_MODE\_SET2}}&
+\\
+\hline
+{\hyperref[glb-GPIO-INT2-MODE-SET3]{GPIO\_INT2\_MODE\_SET3}}&
+\\
+\hline
+{\hyperref[glb-GPIO-INT2-MODE-SET4]{GPIO\_INT2\_MODE\_SET4}}&
+\\
+\hline
+}
+
+
+\subsection{GPIO\_CFGCTL0}
+\label{glb-GPIO-CFGCTL0}
+地址：0x40000100
+ \begin{figure}[H]
+\includegraphics{glb_GPIO_CFGCTL0.pdf}
+\end{figure}
+
+\regdes{31:29&RSVD& & & \\\hline
+28:24&reg\_gpio\_1\_func\_sel&r/w&5'hE&GPIO Function Select (Default : JTAG)\\\hline
+23:22&RSVD& & & \\\hline
+21&reg\_gpio\_1\_pd&r/w&0&GPIO Pull Down Control\\\hline
+20&reg\_gpio\_1\_pu&r/w&0&GPIO Pull Up Control\\\hline
+19:18&reg\_gpio\_1\_drv&r/w&0&GPIO Driving Control\\\hline
+17&reg\_gpio\_1\_smt&r/w&1&GPIO SMT Control\\\hline
+16&reg\_gpio\_1\_ie&r/w&1&GPIO Input Enable\\\hline
+15:13&RSVD& & & \\\hline
+12:8&reg\_gpio\_0\_func\_sel&r/w&5'hE&GPIO Function Select (Default : JTAG)\\\hline
+7:6&RSVD& & & \\\hline
+5&reg\_gpio\_0\_pd&r/w&0&GPIO Pull Down Control\\\hline
+4&reg\_gpio\_0\_pu&r/w&0&GPIO Pull Up Control\\\hline
+3:2&reg\_gpio\_0\_drv&r/w&0&GPIO Driving Control\\\hline
+1&reg\_gpio\_0\_smt&r/w&1&GPIO SMT Control\\\hline
+0&reg\_gpio\_0\_ie&r/w&1&GPIO Input Enable\\\hline
+
+}
+\subsection{GPIO\_CFGCTL1}
+\label{glb-GPIO-CFGCTL1}
+地址：0x40000104
+ \begin{figure}[H]
+\includegraphics{glb_GPIO_CFGCTL1.pdf}
+\end{figure}
+
+\regdes{31:29&RSVD& & & \\\hline
+28:24&reg\_gpio\_3\_func\_sel&r/w&5'hB&GPIO Function Select (Default : SWGPIO)\\\hline
+23:22&RSVD& & & \\\hline
+21&reg\_gpio\_3\_pd&r/w&0&GPIO Pull Down Control\\\hline
+20&reg\_gpio\_3\_pu&r/w&0&GPIO Pull Up Control\\\hline
+19:18&reg\_gpio\_3\_drv&r/w&0&GPIO Driving Control\\\hline
+17&reg\_gpio\_3\_smt&r/w&1&GPIO SMT Control\\\hline
+16&reg\_gpio\_3\_ie&r/w&1&GPIO Input Enable\\\hline
+15:13&RSVD& & & \\\hline
+12:8&reg\_gpio\_2\_func\_sel&r/w&5'hE&GPIO Function Select (Default : JTAG)\\\hline
+7:6&RSVD& & & \\\hline
+5&reg\_gpio\_2\_pd&r/w&0&GPIO Pull Down Control\\\hline
+4&reg\_gpio\_2\_pu&r/w&0&GPIO Pull Up Control\\\hline
+3:2&reg\_gpio\_2\_drv&r/w&0&GPIO Driving Control\\\hline
+1&reg\_gpio\_2\_smt&r/w&1&GPIO SMT Control\\\hline
+0&reg\_gpio\_2\_ie&r/w&1&GPIO Input Enable\\\hline
+
+}
+\subsection{GPIO\_CFGCTL2}
+\label{glb-GPIO-CFGCTL2}
+地址：0x40000108
+ \begin{figure}[H]
+\includegraphics{glb_GPIO_CFGCTL2.pdf}
+\end{figure}
+
+\regdes{31:29&RSVD& & & \\\hline
+28:24&reg\_gpio\_5\_func\_sel&r/w&5'hB&GPIO Function Select (Default : SWGPIO)\\\hline
+23:22&RSVD& & & \\\hline
+21&reg\_gpio\_5\_pd&r/w&0&GPIO Pull Down Control\\\hline
+20&reg\_gpio\_5\_pu&r/w&0&GPIO Pull Up Control\\\hline
+19:18&reg\_gpio\_5\_drv&r/w&0&GPIO Driving Control\\\hline
+17&reg\_gpio\_5\_smt&r/w&1&GPIO SMT Control\\\hline
+16&reg\_gpio\_5\_ie&r/w&1&GPIO Input Enable\\\hline
+15:13&RSVD& & & \\\hline
+12:8&reg\_gpio\_4\_func\_sel&r/w&5'hB&GPIO Function Select (Default : SWGPIO)\\\hline
+7:6&RSVD& & & \\\hline
+5&reg\_gpio\_4\_pd&r/w&0&GPIO Pull Down Control\\\hline
+4&reg\_gpio\_4\_pu&r/w&0&GPIO Pull Up Control\\\hline
+3:2&reg\_gpio\_4\_drv&r/w&0&GPIO Driving Control\\\hline
+1&reg\_gpio\_4\_smt&r/w&1&GPIO SMT Control\\\hline
+0&reg\_gpio\_4\_ie&r/w&1&GPIO Input Enable\\\hline
+
+}
+\subsection{GPIO\_CFGCTL3}
+\label{glb-GPIO-CFGCTL3}
+地址：0x4000010c
+ \begin{figure}[H]
+\includegraphics{glb_GPIO_CFGCTL3.pdf}
+\end{figure}
+
+\regdes{31:29&RSVD& & & \\\hline
+28:24&reg\_gpio\_7\_func\_sel&r/w&5'hB&GPIO Function Select (Default : SWGPIO)\\\hline
+23:22&RSVD& & & \\\hline
+21&reg\_gpio\_7\_pd&r/w&0&GPIO Pull Down Control\\\hline
+20&reg\_gpio\_7\_pu&r/w&0&GPIO Pull Up Control\\\hline
+19:18&reg\_gpio\_7\_drv&r/w&0&GPIO Driving Control\\\hline
+17&reg\_gpio\_7\_smt&r/w&1&GPIO SMT Control\\\hline
+16&reg\_gpio\_7\_ie&r/w&1&GPIO Input Enable\\\hline
+15:13&RSVD& & & \\\hline
+12:8&reg\_gpio\_6\_func\_sel&r/w&5'hB&GPIO Function Select (Default : SWGPIO )\\\hline
+7:6&RSVD& & & \\\hline
+5&reg\_gpio\_6\_pd&r/w&0&GPIO Pull Down Control\\\hline
+4&reg\_gpio\_6\_pu&r/w&0&GPIO Pull Up Control\\\hline
+3:2&reg\_gpio\_6\_drv&r/w&0&GPIO Driving Control\\\hline
+1&reg\_gpio\_6\_smt&r/w&1&GPIO SMT Control\\\hline
+0&reg\_gpio\_6\_ie&r/w&1&GPIO Input Enable\\\hline
+
+}
+\subsection{GPIO\_CFGCTL4}
+\label{glb-GPIO-CFGCTL4}
+地址：0x40000110
+ \begin{figure}[H]
+\includegraphics{glb_GPIO_CFGCTL4.pdf}
+\end{figure}
+
+\regdes{31:29&RSVD& & & \\\hline
+28:24&reg\_gpio\_9\_func\_sel&r/w&5'hE&GPIO Function Select (Default : JTAG )\\\hline
+23:22&RSVD& & & \\\hline
+21&reg\_gpio\_9\_pd&r/w&0&GPIO Pull Down Control (Use this bit if reg\_en\_hw\_pu\_pd := 0 (0x4000F014[16])\\\hline
+20&reg\_gpio\_9\_pu&r/w&0&GPIO Pull Up Control (Use this bit if reg\_en\_hw\_pu\_pd := 0 (0x4000F014[16])\\\hline
+19:18&reg\_gpio\_9\_drv&r/w&0&GPIO Driving Control\\\hline
+17&reg\_gpio\_9\_smt&r/w&1&GPIO SMT Control(Useless, IE depend on reg\_aon\_pad\_ie\_smt[0] : 0x4000F014[8])\\\hline
+16&reg\_gpio\_9\_ie&r/w&0&GPIO Input Enable (Useless, IE depend on reg\_aon\_pad\_ie\_smt[0] : 0x4000F014[8])\\\hline
+15:13&RSVD& & & \\\hline
+12:8&reg\_gpio\_8\_func\_sel&r/w&5'hB&GPIO Function Select (Default : SWGPIO )\\\hline
+7:6&RSVD& & & \\\hline
+5&reg\_gpio\_8\_pd&r/w&0&GPIO Pull Down Control\\\hline
+4&reg\_gpio\_8\_pu&r/w&0&GPIO Pull Up Control\\\hline
+3:2&reg\_gpio\_8\_drv&r/w&0&GPIO Driving Control\\\hline
+1&reg\_gpio\_8\_smt&r/w&1&GPIO SMT Control\\\hline
+0&reg\_gpio\_8\_ie&r/w&1&GPIO Input Enable\\\hline
+
+}
+\subsection{GPIO\_CFGCTL5}
+\label{glb-GPIO-CFGCTL5}
+地址：0x40000114
+ \begin{figure}[H]
+\includegraphics{glb_GPIO_CFGCTL5.pdf}
+\end{figure}
+
+\regdes{31:29&RSVD& & & \\\hline
+28:24&reg\_gpio\_11\_func\_sel&r/w&5'hB&GPIO Function Select (Default : SWGPIO )\\\hline
+23:22&RSVD& & & \\\hline
+21&reg\_gpio\_11\_pd&r/w&0&GPIO Pull Down Control\\\hline
+20&reg\_gpio\_11\_pu&r/w&0&GPIO Pull Up Control\\\hline
+19:18&reg\_gpio\_11\_drv&r/w&0&GPIO Driving Control\\\hline
+17&reg\_gpio\_11\_smt&r/w&1&GPIO SMT Control(Useless, IE depend on reg\_aon\_pad\_ie\_smt[2] : 0x4000F014[10])\\\hline
+16&reg\_gpio\_11\_ie&r/w&1&GPIO Input Enable (Useless, IE depend on reg\_aon\_pad\_ie\_smt[2] : 0x4000F014[10])\\\hline
+15:13&RSVD& & & \\\hline
+12:8&reg\_gpio\_10\_func\_sel&r/w&5'hB&GPIO Function Select (Default : SWGPIO )\\\hline
+7:6&RSVD& & & \\\hline
+5&reg\_gpio\_10\_pd&r/w&0&GPIO Pull Down Control\\\hline
+4&reg\_gpio\_10\_pu&r/w&0&GPIO Pull Up Control\\\hline
+3:2&reg\_gpio\_10\_drv&r/w&0&GPIO Driving Control\\\hline
+1&reg\_gpio\_10\_smt&r/w&1&GPIO SMT Control(Useless, IE depend on reg\_aon\_pad\_ie\_smt[1] : 0x4000F014[9])\\\hline
+0&reg\_gpio\_10\_ie&r/w&1&GPIO Input Enable (Useless, IE depend on reg\_aon\_pad\_ie\_smt[1] : 0x4000F014[9])\\\hline
+
+}
+\subsection{GPIO\_CFGCTL6}
+\label{glb-GPIO-CFGCTL6}
+地址：0x40000118
+ \begin{figure}[H]
+\includegraphics{glb_GPIO_CFGCTL6.pdf}
+\end{figure}
+
+\regdes{31:29&RSVD& & & \\\hline
+28:24&reg\_gpio\_13\_func\_sel&r/w&5'hB&GPIO Function Select (Default : SWGPIO )\\\hline
+23:22&RSVD& & & \\\hline
+21&reg\_gpio\_13\_pd&r/w&0&GPIO Pull Down Control\\\hline
+20&reg\_gpio\_13\_pu&r/w&0&GPIO Pull Up Control\\\hline
+19:18&reg\_gpio\_13\_drv&r/w&0&GPIO Driving Control\\\hline
+17&reg\_gpio\_13\_smt&r/w&1&GPIO SMT Control(Useless, IE depend on reg\_aon\_pad\_ie\_smt[4] : 0x4000F014[12])\\\hline
+16&reg\_gpio\_13\_ie&r/w&1&GPIO Input Enable (Useless, IE depend on reg\_aon\_pad\_ie\_smt[4] : 0x4000F014[12])\\\hline
+15:13&RSVD& & & \\\hline
+12:8&reg\_gpio\_12\_func\_sel&r/w&5'hB&GPIO Function Select (Default : SWGPIO )\\\hline
+7:6&RSVD& & & \\\hline
+5&reg\_gpio\_12\_pd&r/w&0&GPIO Pull Down Control\\\hline
+4&reg\_gpio\_12\_pu&r/w&0&GPIO Pull Up Control\\\hline
+3:2&reg\_gpio\_12\_drv&r/w&0&GPIO Driving Control\\\hline
+1&reg\_gpio\_12\_smt&r/w&1&GPIO SMT Control(Useless, IE depend on reg\_aon\_pad\_ie\_smt[3] : 0x4000F014[11])\\\hline
+0&reg\_gpio\_12\_ie&r/w&1&GPIO Input Enable (Useless, IE depend on reg\_aon\_pad\_ie\_smt[3] : 0x4000F014[11])\\\hline
+
+}
+\subsection{GPIO\_CFGCTL7}
+\label{glb-GPIO-CFGCTL7}
+地址：0x4000011c
+ \begin{figure}[H]
+\includegraphics{glb_GPIO_CFGCTL7.pdf}
+\end{figure}
+
+\regdes{31:29&RSVD& & & \\\hline
+28:24&reg\_gpio\_15\_func\_sel&r/w&5'hB&GPIO Function Select (Default : SWGPIO )\\\hline
+23:22&RSVD& & & \\\hline
+21&reg\_gpio\_15\_pd&r/w&0&GPIO Pull Down Control\\\hline
+20&reg\_gpio\_15\_pu&r/w&0&GPIO Pull Up Control\\\hline
+19:18&reg\_gpio\_15\_drv&r/w&0&GPIO Driving Control\\\hline
+17&reg\_gpio\_15\_smt&r/w&1&GPIO SMT Control\\\hline
+16&reg\_gpio\_15\_ie&r/w&1&GPIO Input Enable\\\hline
+15:13&RSVD& & & \\\hline
+12:8&reg\_gpio\_14\_func\_sel&r/w&5'hB&GPIO Function Select (Default : SWGPIO )\\\hline
+7:6&RSVD& & & \\\hline
+5&reg\_gpio\_14\_pd&r/w&0&GPIO Pull Down Control\\\hline
+4&reg\_gpio\_14\_pu&r/w&0&GPIO Pull Up Control\\\hline
+3:2&reg\_gpio\_14\_drv&r/w&0&GPIO Driving Control\\\hline
+1&reg\_gpio\_14\_smt&r/w&1&GPIO SMT Control\\\hline
+0&reg\_gpio\_14\_ie&r/w&1&GPIO Input Enable\\\hline
+
+}
+\subsection{GPIO\_CFGCTL8}
+\label{glb-GPIO-CFGCTL8}
+地址：0x40000120
+ \begin{figure}[H]
+\includegraphics{glb_GPIO_CFGCTL8.pdf}
+\end{figure}
+
+\regdes{31:29&RSVD& & & \\\hline
+28:24&reg\_gpio\_17\_func\_sel&r/w&5'hB&GPIO Function Select (Default : SWGPIO )\\\hline
+23:22&RSVD& & & \\\hline
+21&reg\_gpio\_17\_pd&r/w&0&GPIO Pull Down Control (Use this bit if reg\_en\_hw\_pu\_pd := 0 (0x4000F014[16])\\\hline
+20&reg\_gpio\_17\_pu&r/w&0&GPIO Pull Up Control (Use this bit if reg\_en\_hw\_pu\_pd := 0 (0x4000F014[16])\\\hline
+19:18&reg\_gpio\_17\_drv&r/w&0&GPIO Driving Control\\\hline
+17&reg\_gpio\_17\_smt&r/w&1&GPIO SMT Control\\\hline
+16&reg\_gpio\_17\_ie&r/w&1&GPIO Input Enable\\\hline
+15:13&RSVD& & & \\\hline
+12:8&reg\_gpio\_16\_func\_sel&r/w&5'hB&GPIO Function Select (Default : SWGPIO )\\\hline
+7:6&RSVD& & & \\\hline
+5&reg\_gpio\_16\_pd&r/w&0&GPIO Pull Down Control\\\hline
+4&reg\_gpio\_16\_pu&r/w&0&GPIO Pull Up Control\\\hline
+3:2&reg\_gpio\_16\_drv&r/w&0&GPIO Driving Control\\\hline
+1&reg\_gpio\_16\_smt&r/w&1&GPIO SMT Control\\\hline
+0&reg\_gpio\_16\_ie&r/w&1&GPIO Input Enable\\\hline
+
+}
+\subsection{GPIO\_CFGCTL9}
+\label{glb-GPIO-CFGCTL9}
+地址：0x40000124
+ \begin{figure}[H]
+\includegraphics{glb_GPIO_CFGCTL9.pdf}
+\end{figure}
+
+\regdes{31:29&RSVD& & & \\\hline
+28:24&reg\_gpio\_19\_func\_sel&r/w&5'hB&GPIO Function Select (Default : SWGPIO )\\\hline
+23:22&RSVD& & & \\\hline
+21&reg\_gpio\_19\_pd&r/w&0&GPIO Pull Down Control\\\hline
+20&reg\_gpio\_19\_pu&r/w&0&GPIO Pull Up Control\\\hline
+19:18&reg\_gpio\_19\_drv&r/w&0&GPIO Driving Control\\\hline
+17&reg\_gpio\_19\_smt&r/w&1&GPIO SMT Control\\\hline
+16&reg\_gpio\_19\_ie&r/w&1&GPIO Input Enable\\\hline
+15:13&RSVD& & & \\\hline
+12:8&reg\_gpio\_18\_func\_sel&r/w&5'hB&GPIO Function Select (Default : SWGPIO )\\\hline
+7:6&RSVD& & & \\\hline
+5&reg\_gpio\_18\_pd&r/w&0&GPIO Pull Down Control\\\hline
+4&reg\_gpio\_18\_pu&r/w&0&GPIO Pull Up Control\\\hline
+3:2&reg\_gpio\_18\_drv&r/w&0&GPIO Driving Control\\\hline
+1&reg\_gpio\_18\_smt&r/w&1&GPIO SMT Control\\\hline
+0&reg\_gpio\_18\_ie&r/w&1&GPIO Input Enable\\\hline
+
+}
+\subsection{GPIO\_CFGCTL10}
+\label{glb-GPIO-CFGCTL10}
+地址：0x40000128
+ \begin{figure}[H]
+\includegraphics{glb_GPIO_CFGCTL10.pdf}
+\end{figure}
+
+\regdes{31:29&RSVD& & & \\\hline
+28:24&reg\_gpio\_21\_func\_sel&r/w&5'hB&GPIO Function Select (Default : SWGPIO )\\\hline
+23:22&RSVD& & & \\\hline
+21&reg\_gpio\_21\_pd&r/w&0&GPIO Pull Down Control\\\hline
+20&reg\_gpio\_21\_pu&r/w&0&GPIO Pull Up Control\\\hline
+19:18&reg\_gpio\_21\_drv&r/w&0&GPIO Driving Control\\\hline
+17&reg\_gpio\_21\_smt&r/w&1&GPIO SMT Control\\\hline
+16&reg\_gpio\_21\_ie&r/w&1&GPIO Input Enable\\\hline
+15:13&RSVD& & & \\\hline
+12:8&reg\_gpio\_20\_func\_sel&r/w&5'hB&GPIO Function Select (Default : SWGPIO )\\\hline
+7:6&RSVD& & & \\\hline
+5&reg\_gpio\_20\_pd&r/w&0&GPIO Pull Down Control\\\hline
+4&reg\_gpio\_20\_pu&r/w&0&GPIO Pull Up Control\\\hline
+3:2&reg\_gpio\_20\_drv&r/w&0&GPIO Driving Control\\\hline
+1&reg\_gpio\_20\_smt&r/w&1&GPIO SMT Control\\\hline
+0&reg\_gpio\_20\_ie&r/w&1&GPIO Input Enable\\\hline
+
+}
+\subsection{GPIO\_CFGCTL11}
+\label{glb-GPIO-CFGCTL11}
+地址：0x4000012c
+ \begin{figure}[H]
+\includegraphics{glb_GPIO_CFGCTL11.pdf}
+\end{figure}
+
+\regdes{31:29&RSVD& & & \\\hline
+28:24&reg\_gpio\_23\_func\_sel&r/w&5'hB&GPIO Function Select (Default : SWGPIO )\\\hline
+23:22&RSVD& & & \\\hline
+21&reg\_gpio\_23\_pd&r/w&0&GPIO Pull Down Control\\\hline
+20&reg\_gpio\_23\_pu&r/w&0&GPIO Pull Up Control\\\hline
+19:18&reg\_gpio\_23\_drv&r/w&0&GPIO Driving Control\\\hline
+17&reg\_gpio\_23\_smt&r/w&1&GPIO SMT Control\\\hline
+16&reg\_gpio\_23\_ie&r/w&1&GPIO Input Enable\\\hline
+15:13&RSVD& & & \\\hline
+12:8&reg\_gpio\_22\_func\_sel&r/w&5'hB&GPIO Function Select (Default : SWGPIO )\\\hline
+7:6&RSVD& & & \\\hline
+5&reg\_gpio\_22\_pd&r/w&0&GPIO Pull Down Control\\\hline
+4&reg\_gpio\_22\_pu&r/w&0&GPIO Pull Up Control\\\hline
+3:2&reg\_gpio\_22\_drv&r/w&0&GPIO Driving Control\\\hline
+1&reg\_gpio\_22\_smt&r/w&1&GPIO SMT Control\\\hline
+0&reg\_gpio\_22\_ie&r/w&1&GPIO Input Enable\\\hline
+
+}
+\subsection{GPIO\_CFGCTL12}
+\label{glb-GPIO-CFGCTL12}
+地址：0x40000130
+ \begin{figure}[H]
+\includegraphics{glb_GPIO_CFGCTL12.pdf}
+\end{figure}
+
+\regdes{31:29&RSVD& & & \\\hline
+28:24&reg\_gpio\_25\_func\_sel&r/w&5'hB&GPIO Function Select (Default : SWGPIO )\\\hline
+23:22&RSVD& & & \\\hline
+21&reg\_gpio\_25\_pd&r/w&0&GPIO Pull Down Control\\\hline
+20&reg\_gpio\_25\_pu&r/w&0&GPIO Pull Up Control\\\hline
+19:18&reg\_gpio\_25\_drv&r/w&0&GPIO Driving Control\\\hline
+17&reg\_gpio\_25\_smt&r/w&1&GPIO SMT Control\\\hline
+16&reg\_gpio\_25\_ie&r/w&1&GPIO Input Enable\\\hline
+15:13&RSVD& & & \\\hline
+12:8&reg\_gpio\_24\_func\_sel&r/w&5'hB&GPIO Function Select (Default : SWGPIO )\\\hline
+7:6&RSVD& & & \\\hline
+5&reg\_gpio\_24\_pd&r/w&1&GPIO Pull Down Control\\\hline
+4&reg\_gpio\_24\_pu&r/w&0&GPIO Pull Up Control\\\hline
+3:2&reg\_gpio\_24\_drv&r/w&0&GPIO Driving Control\\\hline
+1&reg\_gpio\_24\_smt&r/w&1&GPIO SMT Control\\\hline
+0&reg\_gpio\_24\_ie&r/w&1&GPIO Input Enable\\\hline
+
+}
+\subsection{GPIO\_CFGCTL13}
+\label{glb-GPIO-CFGCTL13}
+地址：0x40000134
+ \begin{figure}[H]
+\includegraphics{glb_GPIO_CFGCTL13.pdf}
+\end{figure}
+
+\regdes{31:29&RSVD& & & \\\hline
+28:24&reg\_gpio\_27\_func\_sel&r/w&5'hB&GPIO Function Select (Default : SWGPIO )\\\hline
+23:22&RSVD& & & \\\hline
+21&reg\_gpio\_27\_pd&r/w&0&GPIO Pull Down Control\\\hline
+20&reg\_gpio\_27\_pu&r/w&0&GPIO Pull Up Control\\\hline
+19:18&reg\_gpio\_27\_drv&r/w&0&GPIO Driving Control\\\hline
+17&reg\_gpio\_27\_smt&r/w&1&GPIO SMT Control\\\hline
+16&reg\_gpio\_27\_ie&r/w&1&GPIO Input Enable\\\hline
+15:13&RSVD& & & \\\hline
+12:8&reg\_gpio\_26\_func\_sel&r/w&5'hB&GPIO Function Select (Default : SWGPIO )\\\hline
+7:6&RSVD& & & \\\hline
+5&reg\_gpio\_26\_pd&r/w&0&GPIO Pull Down Control\\\hline
+4&reg\_gpio\_26\_pu&r/w&0&GPIO Pull Up Control\\\hline
+3:2&reg\_gpio\_26\_drv&r/w&0&GPIO Driving Control\\\hline
+1&reg\_gpio\_26\_smt&r/w&1&GPIO SMT Control\\\hline
+0&reg\_gpio\_26\_ie&r/w&1&GPIO Input Enable\\\hline
+
+}
+\subsection{GPIO\_CFGCTL14}
+\label{glb-GPIO-CFGCTL14}
+地址：0x40000138
+ \begin{figure}[H]
+\includegraphics{glb_GPIO_CFGCTL14.pdf}
+\end{figure}
+
+\regdes{31:29&RSVD& & & \\\hline
+28:24&reg\_gpio\_29\_func\_sel&r/w&5'hB&GPIO Function Select (Default : SWGPIO )\\\hline
+23:22&RSVD& & & \\\hline
+21&reg\_gpio\_29\_pd&r/w&0&GPIO Pull Down Control\\\hline
+20&reg\_gpio\_29\_pu&r/w&0&GPIO Pull Up Control\\\hline
+19:18&reg\_gpio\_29\_drv&r/w&0&GPIO Driving Control\\\hline
+17&reg\_gpio\_29\_smt&r/w&1&GPIO SMT Control\\\hline
+16&reg\_gpio\_29\_ie&r/w&1&GPIO Input Enable\\\hline
+15:13&RSVD& & & \\\hline
+12:8&reg\_gpio\_28\_func\_sel&r/w&5'hB&GPIO Function Select (Default : SWGPIO )\\\hline
+7:6&RSVD& & & \\\hline
+5&reg\_gpio\_28\_pd&r/w&0&GPIO Pull Down Control\\\hline
+4&reg\_gpio\_28\_pu&r/w&0&GPIO Pull Up Control\\\hline
+3:2&reg\_gpio\_28\_drv&r/w&0&GPIO Driving Control\\\hline
+1&reg\_gpio\_28\_smt&r/w&1&GPIO SMT Control\\\hline
+0&reg\_gpio\_28\_ie&r/w&1&GPIO Input Enable\\\hline
+
+}
+\subsection{GPIO\_CFGCTL15}
+\label{glb-GPIO-CFGCTL15}
+地址：0x4000013c
+ \begin{figure}[H]
+\includegraphics{glb_GPIO_CFGCTL15.pdf}
+\end{figure}
+
+\regdes{31:29&RSVD& & & \\\hline
+28:24&reg\_gpio\_31\_func\_sel&r/w&5'hB&GPIO Function Select (Default : SWGPIO )\\\hline
+23:22&RSVD& & & \\\hline
+21&reg\_gpio\_31\_pd&r/w&0&GPIO Pull Down Control\\\hline
+20&reg\_gpio\_31\_pu&r/w&0&GPIO Pull Up Control\\\hline
+19:18&reg\_gpio\_31\_drv&r/w&0&GPIO Driving Control\\\hline
+17&reg\_gpio\_31\_smt&r/w&1&GPIO SMT Control\\\hline
+16&reg\_gpio\_31\_ie&r/w&1&GPIO Input Enable\\\hline
+15:13&RSVD& & & \\\hline
+12:8&reg\_gpio\_30\_func\_sel&r/w&5'hB&GPIO Function Select (Default : SWGPIO )\\\hline
+7:6&RSVD& & & \\\hline
+5&reg\_gpio\_30\_pd&r/w&0&GPIO Pull Down Control\\\hline
+4&reg\_gpio\_30\_pu&r/w&0&GPIO Pull Up Control\\\hline
+3:2&reg\_gpio\_30\_drv&r/w&0&GPIO Driving Control\\\hline
+1&reg\_gpio\_30\_smt&r/w&1&GPIO SMT Control\\\hline
+0&reg\_gpio\_30\_ie&r/w&1&GPIO Input Enable\\\hline
+-1:22&RSVD& & & \\\hline
+21&reg\_gpio\_33\_pd&r/w&0&GPIO Pull Down Control\\\hline
+20&reg\_gpio\_33\_pu&r/w&0&GPIO Pull Up Control\\\hline
+19:18&reg\_gpio\_33\_drv&r/w&0&GPIO Driving Control\\\hline
+17&reg\_gpio\_33\_smt&r/w&1&GPIO SMT Control\\\hline
+16&reg\_gpio\_33\_ie&r/w&1&GPIO Input Enable\\\hline
+15:6&RSVD& & & \\\hline
+5&reg\_gpio\_32\_pd&r/w&0&GPIO Pull Down Control\\\hline
+4&reg\_gpio\_32\_pu&r/w&0&GPIO Pull Up Control\\\hline
+3:2&reg\_gpio\_32\_drv&r/w&0&GPIO Driving Control\\\hline
+1&reg\_gpio\_32\_smt&r/w&1&GPIO SMT Control\\\hline
+0&reg\_gpio\_32\_ie&r/w&1&GPIO Input Enable\\\hline
+-1:22&RSVD& & & \\\hline
+21&reg\_gpio\_35\_pd&r/w&0&GPIO Pull Down Control\\\hline
+20&reg\_gpio\_35\_pu&r/w&0&GPIO Pull Up Control\\\hline
+19:18&reg\_gpio\_35\_drv&r/w&0&GPIO Driving Control\\\hline
+17&reg\_gpio\_35\_smt&r/w&1&GPIO SMT Control\\\hline
+16&reg\_gpio\_35\_ie&r/w&1&GPIO Input Enable\\\hline
+15:6&RSVD& & & \\\hline
+5&reg\_gpio\_34\_pd&r/w&0&GPIO Pull Down Control\\\hline
+4&reg\_gpio\_34\_pu&r/w&0&GPIO Pull Up Control\\\hline
+3:2&reg\_gpio\_34\_drv&r/w&0&GPIO Driving Control\\\hline
+1&reg\_gpio\_34\_smt&r/w&1&GPIO SMT Control\\\hline
+0&reg\_gpio\_34\_ie&r/w&1&GPIO Input Enable\\\hline
+-1:22&RSVD& & & \\\hline
+21&reg\_gpio\_37\_pd&r/w&0&GPIO Pull Down Control\\\hline
+20&reg\_gpio\_37\_pu&r/w&0&GPIO Pull Up Control\\\hline
+19:18&reg\_gpio\_37\_drv&r/w&0&GPIO Driving Control\\\hline
+17&reg\_gpio\_37\_smt&r/w&1&GPIO SMT Control\\\hline
+16&reg\_gpio\_37\_ie&r/w&1&GPIO Input Enable\\\hline
+15:6&RSVD& & & \\\hline
+5&reg\_gpio\_36\_pd&r/w&0&GPIO Pull Down Control\\\hline
+4&reg\_gpio\_36\_pu&r/w&0&GPIO Pull Up Control\\\hline
+3:2&reg\_gpio\_36\_drv&r/w&0&GPIO Driving Control\\\hline
+1&reg\_gpio\_36\_smt&r/w&1&GPIO SMT Control\\\hline
+0&reg\_gpio\_36\_ie&r/w&1&GPIO Input Enable\\\hline
+
+}
+\subsection{GPIO\_CFGCTL30}
+\label{glb-GPIO-CFGCTL30}
+地址：0x40000180
+ \begin{figure}[H]
+\includegraphics{glb_GPIO_CFGCTL30.pdf}
+\end{figure}
+
+\regdes{31&reg\_gpio\_31\_i&r&0&Register Controlled GPIO Input value\\\hline
+30&reg\_gpio\_30\_i&r&0&Register Controlled GPIO Input value\\\hline
+29&reg\_gpio\_29\_i&r&0&Register Controlled GPIO Input value\\\hline
+28&reg\_gpio\_28\_i&r&0&Register Controlled GPIO Input value\\\hline
+27&reg\_gpio\_27\_i&r&0&Register Controlled GPIO Input value\\\hline
+26&reg\_gpio\_26\_i&r&0&Register Controlled GPIO Input value\\\hline
+25&reg\_gpio\_25\_i&r&0&Register Controlled GPIO Input value\\\hline
+24&reg\_gpio\_24\_i&r&0&Register Controlled GPIO Input value\\\hline
+23&reg\_gpio\_23\_i&r&0&Register Controlled GPIO Input value\\\hline
+22&reg\_gpio\_22\_i&r&0&Register Controlled GPIO Input value\\\hline
+21&reg\_gpio\_21\_i&r&0&Register Controlled GPIO Input value\\\hline
+20&reg\_gpio\_20\_i&r&0&Register Controlled GPIO Input value\\\hline
+19&reg\_gpio\_19\_i&r&0&Register Controlled GPIO Input value\\\hline
+18&reg\_gpio\_18\_i&r&0&Register Controlled GPIO Input value\\\hline
+17&reg\_gpio\_17\_i&r&0&Register Controlled GPIO Input value\\\hline
+16&reg\_gpio\_16\_i&r&0&Register Controlled GPIO Input value\\\hline
+15&reg\_gpio\_15\_i&r&0&Register Controlled GPIO Input value\\\hline
+14&reg\_gpio\_14\_i&r&0&Register Controlled GPIO Input value\\\hline
+13&reg\_gpio\_13\_i&r&0&Register Controlled GPIO Input value\\\hline
+12&reg\_gpio\_12\_i&r&0&Register Controlled GPIO Input value\\\hline
+11&reg\_gpio\_11\_i&r&0&Register Controlled GPIO Input value\\\hline
+10&reg\_gpio\_10\_i&r&0&Register Controlled GPIO Input value\\\hline
+9&reg\_gpio\_9\_i&r&0&Register Controlled GPIO Input value\\\hline
+8&reg\_gpio\_8\_i&r&0&Register Controlled GPIO Input value\\\hline
+7&reg\_gpio\_7\_i&r&0&Register Controlled GPIO Input value\\\hline
+6&reg\_gpio\_6\_i&r&0&Register Controlled GPIO Input value\\\hline
+5&reg\_gpio\_5\_i&r&0&Register Controlled GPIO Input value\\\hline
+4&reg\_gpio\_4\_i&r&0&Register Controlled GPIO Input value\\\hline
+3&reg\_gpio\_3\_i&r&0&Register Controlled GPIO Input value\\\hline
+2&reg\_gpio\_2\_i&r&0&Register Controlled GPIO Input value\\\hline
+1&reg\_gpio\_1\_i&r&0&Register Controlled GPIO Input value\\\hline
+0&reg\_gpio\_0\_i&r&0&Register Controlled GPIO Input value\\\hline
+
+}
+\subsection{GPIO\_CFGCTL32}
+\label{glb-GPIO-CFGCTL32}
+地址：0x40000188
+ \begin{figure}[H]
+\includegraphics{glb_GPIO_CFGCTL32.pdf}
+\end{figure}
+
+\regdes{31&reg\_gpio\_31\_o&r/w&0&Register Controlled GPIO Output Value\\\hline
+30&reg\_gpio\_30\_o&r/w&0&Register Controlled GPIO Output Value\\\hline
+29&reg\_gpio\_29\_o&r/w&0&Register Controlled GPIO Output Value\\\hline
+28&reg\_gpio\_28\_o&r/w&0&Register Controlled GPIO Output Value\\\hline
+27&reg\_gpio\_27\_o&r/w&0&Register Controlled GPIO Output Value\\\hline
+26&reg\_gpio\_26\_o&r/w&0&Register Controlled GPIO Output Value\\\hline
+25&reg\_gpio\_25\_o&r/w&0&Register Controlled GPIO Output Value\\\hline
+24&reg\_gpio\_24\_o&r/w&0&Register Controlled GPIO Output Value\\\hline
+23&reg\_gpio\_23\_o&r/w&0&Register Controlled GPIO Output Value\\\hline
+22&reg\_gpio\_22\_o&r/w&0&Register Controlled GPIO Output Value\\\hline
+21&reg\_gpio\_21\_o&r/w&0&Register Controlled GPIO Output Value\\\hline
+20&reg\_gpio\_20\_o&r/w&0&Register Controlled GPIO Output Value\\\hline
+19&reg\_gpio\_19\_o&r/w&0&Register Controlled GPIO Output Value\\\hline
+18&reg\_gpio\_18\_o&r/w&0&Register Controlled GPIO Output Value\\\hline
+17&reg\_gpio\_17\_o&r/w&0&Register Controlled GPIO Output Value\\\hline
+16&reg\_gpio\_16\_o&r/w&0&Register Controlled GPIO Output Value\\\hline
+15&reg\_gpio\_15\_o&r/w&0&Register Controlled GPIO Output Value\\\hline
+14&reg\_gpio\_14\_o&r/w&0&Register Controlled GPIO Output Value\\\hline
+13&reg\_gpio\_13\_o&r/w&0&Register Controlled GPIO Output Value\\\hline
+12&reg\_gpio\_12\_o&r/w&0&Register Controlled GPIO Output Value\\\hline
+11&reg\_gpio\_11\_o&r/w&0&Register Controlled GPIO Output Value\\\hline
+10&reg\_gpio\_10\_o&r/w&0&Register Controlled GPIO Output Value\\\hline
+9&reg\_gpio\_9\_o&r/w&0&Register Controlled GPIO Output Value\\\hline
+8&reg\_gpio\_8\_o&r/w&0&Register Controlled GPIO Output Value\\\hline
+7&reg\_gpio\_7\_o&r/w&0&Register Controlled GPIO Output Value\\\hline
+6&reg\_gpio\_6\_o&r/w&0&Register Controlled GPIO Output Value\\\hline
+5&reg\_gpio\_5\_o&r/w&0&Register Controlled GPIO Output Value\\\hline
+4&reg\_gpio\_4\_o&r/w&0&Register Controlled GPIO Output Value\\\hline
+3&reg\_gpio\_3\_o&r/w&0&Register Controlled GPIO Output Value\\\hline
+2&reg\_gpio\_2\_o&r/w&0&Register Controlled GPIO Output Value\\\hline
+1&reg\_gpio\_1\_o&r/w&0&Register Controlled GPIO Output Value\\\hline
+0&reg\_gpio\_0\_o&r/w&0&Register Controlled GPIO Output Value\\\hline
+
+}
+\subsection{GPIO\_CFGCTL34}
+\label{glb-GPIO-CFGCTL34}
+地址：0x40000190
+ \begin{figure}[H]
+\includegraphics{glb_GPIO_CFGCTL34.pdf}
+\end{figure}
+
+\regdes{31&reg\_gpio\_31\_oe&r/w&0&Register Controlled GPIO Output Enable (Used when GPIO Function select to Register Control GPIO)\\\hline
+30&reg\_gpio\_30\_oe&r/w&0&Register Controlled GPIO Output Enable (Used when GPIO Function select to Register Control GPIO)\\\hline
+29&reg\_gpio\_29\_oe&r/w&0&Register Controlled GPIO Output Enable (Used when GPIO Function select to Register Control GPIO)\\\hline
+28&reg\_gpio\_28\_oe&r/w&0&Register Controlled GPIO Output Enable (Used when GPIO Function select to Register Control GPIO)\\\hline
+27&reg\_gpio\_27\_oe&r/w&0&Register Controlled GPIO Output Enable (Used when GPIO Function select to Register Control GPIO)\\\hline
+26&reg\_gpio\_26\_oe&r/w&0&Register Controlled GPIO Output Enable (Used when GPIO Function select to Register Control GPIO)\\\hline
+25&reg\_gpio\_25\_oe&r/w&0&Register Controlled GPIO Output Enable (Used when GPIO Function select to Register Control GPIO)\\\hline
+24&reg\_gpio\_24\_oe&r/w&0&Register Controlled GPIO Output Enable (Used when GPIO Function select to Register Control GPIO)\\\hline
+23&reg\_gpio\_23\_oe&r/w&0&Register Controlled GPIO Output Enable (Used when GPIO Function select to Register Control GPIO)\\\hline
+22&reg\_gpio\_22\_oe&r/w&0&Register Controlled GPIO Output Enable (Used when GPIO Function select to Register Control GPIO)\\\hline
+21&reg\_gpio\_21\_oe&r/w&0&Register Controlled GPIO Output Enable (Used when GPIO Function select to Register Control GPIO)\\\hline
+20&reg\_gpio\_20\_oe&r/w&0&Register Controlled GPIO Output Enable (Used when GPIO Function select to Register Control GPIO)\\\hline
+19&reg\_gpio\_19\_oe&r/w&0&Register Controlled GPIO Output Enable (Used when GPIO Function select to Register Control GPIO)\\\hline
+18&reg\_gpio\_18\_oe&r/w&0&Register Controlled GPIO Output Enable (Used when GPIO Function select to Register Control GPIO)\\\hline
+17&reg\_gpio\_17\_oe&r/w&0&Register Controlled GPIO Output Enable (Used when GPIO Function select to Register Control GPIO)\\\hline
+16&reg\_gpio\_16\_oe&r/w&0&Register Controlled GPIO Output Enable (Used when GPIO Function select to Register Control GPIO)\\\hline
+15&reg\_gpio\_15\_oe&r/w&0&Register Controlled GPIO Output Enable (Used when GPIO Function select to Register Control GPIO)\\\hline
+14&reg\_gpio\_14\_oe&r/w&0&Register Controlled GPIO Output Enable (Used when GPIO Function select to Register Control GPIO)\\\hline
+13&reg\_gpio\_13\_oe&r/w&0&Register Controlled GPIO Output Enable (Used when GPIO Function select to Register Control GPIO)\\\hline
+12&reg\_gpio\_12\_oe&r/w&0&Register Controlled GPIO Output Enable (Used when GPIO Function select to Register Control GPIO)\\\hline
+11&reg\_gpio\_11\_oe&r/w&0&Register Controlled GPIO Output Enable (Used when GPIO Function select to Register Control GPIO)\\\hline
+10&reg\_gpio\_10\_oe&r/w&0&Register Controlled GPIO Output Enable (Used when GPIO Function select to Register Control GPIO)\\\hline
+9&reg\_gpio\_9\_oe&r/w&0&Register Controlled GPIO Output Enable (Used when GPIO Function select to Register Control GPIO)\\\hline
+8&reg\_gpio\_8\_oe&r/w&0&Register Controlled GPIO Output Enable (Used when GPIO Function select to Register Control GPIO)\\\hline
+7&reg\_gpio\_7\_oe&r/w&0&Register Controlled GPIO Output Enable (Used when GPIO Function select to Register Control GPIO)\\\hline
+6&reg\_gpio\_6\_oe&r/w&0&Register Controlled GPIO Output Enable (Used when GPIO Function select to Register Control GPIO)\\\hline
+5&reg\_gpio\_5\_oe&r/w&0&Register Controlled GPIO Output Enable (Used when GPIO Function select to Register Control GPIO)\\\hline
+4&reg\_gpio\_4\_oe&r/w&0&Register Controlled GPIO Output Enable (Used when GPIO Function select to Register Control GPIO)\\\hline
+3&reg\_gpio\_3\_oe&r/w&0&Register Controlled GPIO Output Enable (Used when GPIO Function select to Register Control GPIO)\\\hline
+2&reg\_gpio\_2\_oe&r/w&0&Register Controlled GPIO Output Enable (Used when GPIO Function select to Register Control GPIO)\\\hline
+1&reg\_gpio\_1\_oe&r/w&0&Register Controlled GPIO Output Enable (Used when GPIO Function select to Register Control GPIO)\\\hline
+0&reg\_gpio\_0\_oe&r/w&0&Register Controlled GPIO Output Enable (Used when GPIO Function select to Register Control GPIO)\\\hline
+
+}
+\subsection{GPIO\_CFGCTL35}
+\label{glb-GPIO-CFGCTL35}
+地址：0x40000194
+ \begin{figure}[H]
+\includegraphics{glb_GPIO_CFGCTL35.pdf}
+\end{figure}
+
+\regdes{31:0&reg\_gpio\_int\_mask1&r/w&32'hFFFFFFFF&reg\_gpio\_int\_mask[31:0]\\\hline
+
+}
+\subsection{GPIO\_INT\_STAT1}
+\label{glb-GPIO-INT-STAT1}
+地址：0x400001a8
+ \begin{figure}[H]
+\includegraphics{glb_GPIO_INT_STAT1.pdf}
+\end{figure}
+
+\regdes{31:0&gpio\_int\_stat1&r&0&gpio\_int\_stat[31:0]\\\hline
+
+}
+\subsection{GPIO\_INT\_CLR1}
+\label{glb-GPIO-INT-CLR1}
+地址：0x400001b0
+ \begin{figure}[H]
+\includegraphics{glb_GPIO_INT_CLR1.pdf}
+\end{figure}
+
+\regdes{31:0&reg\_gpio\_int\_clr1&r/w&0&reg\_gpio\_int\_clr[31:0]\\\hline
+
+}
+\subsection{GPIO\_INT\_MODE\_SET1}
+\label{glb-GPIO-INT-MODE-SET1}
+地址：0x400001c0
+ \begin{figure}[H]
+\includegraphics{glb_GPIO_INT_MODE_SET1.pdf}
+\end{figure}
+
+\regdes{31:30&RSVD& & & \\\hline
+29:0&reg\_gpio\_int\_mode\_set1&r/w&0&{reg\_gpio9\_int\_mode[2:0], ……. reg\_gpio1\_int\_mode[2:0],reg\_gpio0\_int\_mode}\\\hline
+
+}
+\subsection{GPIO\_INT\_MODE\_SET2}
+\label{glb-GPIO-INT-MODE-SET2}
+地址：0x400001c4
+ \begin{figure}[H]
+\includegraphics{glb_GPIO_INT_MODE_SET2.pdf}
+\end{figure}
+
+\regdes{31:30&RSVD& & & \\\hline
+29:0&reg\_gpio\_int\_mode\_set2&r/w&0&{reg\_gpio19\_int\_mode[2:0], ……. reg\_gpio11\_int\_mode[2:0],reg\_gpio10\_int\_mode}\\\hline
+
+}
+\subsection{GPIO\_INT\_MODE\_SET3}
+\label{glb-GPIO-INT-MODE-SET3}
+地址：0x400001c8
+ \begin{figure}[H]
+\includegraphics{glb_GPIO_INT_MODE_SET3.pdf}
+\end{figure}
+
+\regdes{31:30&RSVD& & & \\\hline
+29:0&reg\_gpio\_int\_mode\_set3&r/w&0&{reg\_gpio29\_int\_mode[2:0], ……. reg\_gpio21\_int\_mode[2:0],reg\_gpio20\_int\_mode}\\\hline
+
+}
+\subsection{GPIO\_INT\_MODE\_SET4}
+\label{glb-GPIO-INT-MODE-SET4}
+地址：0x400001cc
+ \begin{figure}[H]
+\includegraphics{glb_GPIO_INT_MODE_SET4.pdf}
+\end{figure}
+
+\regdes{31:6&RSVD& & & \\\hline
+5:0&reg\_gpio\_int\_mode\_set4&r/w&0&{reg\_gpio31\_int\_mode[2:0],reg\_gpio30\_int\_mode}\\\hline
+
+}
+\subsection{GPIO\_INT2\_MASK1}
+\label{glb-GPIO-INT2-MASK1}
+地址：0x400001d0
+ \begin{figure}[H]
+\includegraphics{glb_GPIO_INT2_MASK1.pdf}
+\end{figure}
+
+\regdes{31:0&reg\_gpio\_int2\_mask1&r/w&32'hFFFFFFFF&reg\_gpio\_int2\_mask[31:0]\\\hline
+
+}
+\subsection{GPIO\_INT2\_STAT1}
+\label{glb-GPIO-INT2-STAT1}
+地址：0x400001d4
+ \begin{figure}[H]
+\includegraphics{glb_GPIO_INT2_STAT1.pdf}
+\end{figure}
+
+\regdes{31:0&gpio\_int2\_stat1&r&0&gpio\_int2\_stat[31:0]\\\hline
+
+}
+\subsection{GPIO\_INT2\_CLR1}
+\label{glb-GPIO-INT2-CLR1}
+地址：0x400001d8
+ \begin{figure}[H]
+\includegraphics{glb_GPIO_INT2_CLR1.pdf}
+\end{figure}
+
+\regdes{31:0&reg\_gpio\_int2\_clr1&r/w&0&reg\_gpio\_int2\_clr[31:0]\\\hline
+
+}
+\subsection{GPIO\_INT2\_MODE\_SET1}
+\label{glb-GPIO-INT2-MODE-SET1}
+地址：0x400001dc
+ \begin{figure}[H]
+\includegraphics{glb_GPIO_INT2_MODE_SET1.pdf}
+\end{figure}
+
+\regdes{31:30&RSVD& & & \\\hline
+29:0&reg\_gpio\_int2\_mode\_set1&r/w&0&{reg\_gpio9\_int2\_mode[2:0], ……. reg\_gpio1\_int2\_mode[2:0],reg\_gpio0\_int2\_mode}\\\hline
+
+}
+\subsection{GPIO\_INT2\_MODE\_SET2}
+\label{glb-GPIO-INT2-MODE-SET2}
+地址：0x400001e0
+ \begin{figure}[H]
+\includegraphics{glb_GPIO_INT2_MODE_SET2.pdf}
+\end{figure}
+
+\regdes{31:30&RSVD& & & \\\hline
+29:0&reg\_gpio\_int2\_mode\_set2&r/w&0&{reg\_gpio19\_int2\_mode[2:0], ……. reg\_gpio11\_int2\_mode[2:0],reg\_gpio10\_int2\_mode}\\\hline
+
+}
+\subsection{GPIO\_INT2\_MODE\_SET3}
+\label{glb-GPIO-INT2-MODE-SET3}
+地址：0x400001e4
+ \begin{figure}[H]
+\includegraphics{glb_GPIO_INT2_MODE_SET3.pdf}
+\end{figure}
+
+\regdes{31:30&RSVD& & & \\\hline
+29:0&reg\_gpio\_int2\_mode\_set3&r/w&0&{reg\_gpio29\_int2\_mode[2:0], ……. reg\_gpio21\_int2\_mode[2:0],reg\_gpio20\_int2\_mode}\\\hline
+
+}
+\subsection{GPIO\_INT2\_MODE\_SET4}
+\label{glb-GPIO-INT2-MODE-SET4}
+地址：0x400001e8
+ \begin{figure}[H]
+\includegraphics{glb_GPIO_INT2_MODE_SET4.pdf}
+\end{figure}
+
+\regdes{31:6&RSVD& & & \\\hline
+5:0&reg\_gpio\_int2\_mode\_set4&r/w&0&{reg\_gpio31\_int2\_mode[2:0],reg\_gpio30\_int2\_mode}\\\hline
+-1:12&RSVD& & & \\\hline
+11&reg\_usb\_use\_ctrl&r/w&1'b1&1: USB XCVR use on-chip usb controller ; 0: USB XCVR usb off-chip usb controller\\\hline
+10:0&RSVD& & & \\\hline
+
+}

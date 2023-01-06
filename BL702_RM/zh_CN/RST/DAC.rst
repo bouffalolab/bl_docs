@@ -1,0 +1,73 @@
+==========
+DAC
+==========
+
+简介
+=====
+芯片内置一个10bits的数字模拟转换器(DAC）,FIFO深度为1，支持2路DAC调制输出。
+可用于音频播放，常规的模拟信号调制。
+
+主要特点
+=========
+- DAC调制精度为10bits
+- DAC的输入时钟可选为32M或者Audio PLL
+- 支持DMA从内存将数据搬运至DAC调制寄存器
+- 支持双声道播放模式
+- DAC的输出引脚固定，ChannelA固定为GPIO11，ChannelB固定为GPIO17
+- DAC的参考电压可选择内部或者外部
+
+功能描述
+==========
+DAC模块基本框图如图所示。
+
+.. figure:: ../../picture/gpdac.svg
+   :align: center
+
+   DAC基本框图
+
+DAC模块包含两路DAC调制电路，以及调制模拟信号相关的电源电路，用户可以通过Ref_Sel来选择DAC的参考电压是外部/内部，Ref_Rng来选择内部参考电压源。
+DAC的调制数据可以由CPU直接写入DAC调制寄存器（0x40000314中的GLB_GPDAC_A_DATA、GLB_GPDAC_B_DATA），也可以由DMA搬运至gpdac_dma_wdata（0x40002048）寄存器。
+
+**DAC的数据写入方式**
+
+CPU直接写入GLB_GPDAC_A_DATA、GLB_GPDAC_B_DATA寄存器完成调制，或者使用DMA，将需要调制的数据搬运到gpdac_dma_wdata中。
+
+
+**DMA的搬运模式**
+
+gpdac_dma_wdata（0x40002048）是一个32BITS的寄存器，默认含义为，32BITS值按顺序全部调制在ChannelA引脚上，
+也可配置为高16位默认是对应Channel B的模拟电压输出，低16位对应Channel A的模拟电压输出。
+注意无论是32/16位调制，都只有低10位有效，因为DAC的最大调制精度为10BITS。用户可以通过配置gpdac_dma_format寄存器来修改DMA搬运的高低字节含义。
+
+gpdac_dma_format为0，则DMA搬运进gpdac_dma_wdata的数据全部依次调制在Channel A，调制顺序为 {A0},{A1},{A2},... 。
+gpdac_dma_format为1，则DMA搬运进gpdac_dma_wdata的数据高16位调制在Channel B，低16位调制在Channel A。调制顺序为{B0,A0},{B1,A1},{B2,A2},...。这样的特性在立体声播放中非常有作用。
+gpdac_dma_format为2，则DMA搬运进gpdac_dma_wdata的数据全部调制在Channel A，但调制的顺序为{A1,A0},{A3,A2},{A5,A4},...。
+
+
+**DAC外部参考电压选择**
+
+用户可以通过配置gpdac_ref_sel（0x40000308[8]）来配置选择外部参考电压还是内部参考电压。
+
+如果选择内部参考电压，配置如下表所示。
+
+.. table:: 内部参考电压
+
+    +-------------+---------------+-------------+
+    | gpdac_a_rng | gpdac_ref_sel | 输出范围    |
+    +=============+===============+=============+
+    | 00          | 0             | 0.2-1       |
+    +-------------+---------------+-------------+
+    | 01/10       | 0             | 0.225-1.425 |
+    +-------------+---------------+-------------+
+    | 11          | 0             | 0.2-1.8     |
+    +-------------+---------------+-------------+
+
+如果选择外部参考电压，请将外部电压连入固定的GPIO7。
+
+.. only:: html
+
+   .. include:: dac_register.rst
+
+.. raw:: latex
+
+   \input{../../zh_CN/content/dac}

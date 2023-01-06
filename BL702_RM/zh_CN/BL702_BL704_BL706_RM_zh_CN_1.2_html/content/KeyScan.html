@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>15. KeyScan &mdash; BL702/704/706 参考手册  文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="16. I2S" href="I2S.html" />
+    <link rel="prev" title="14. QDEC" href="QDEC.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL702/704/706 参考手册
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. 系统和存储器概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. 复位和时钟</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">4. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">5. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">6. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="L1C.html">7. L1C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">8. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">9. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">10. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">11. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">12. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">13. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="QDEC.html">14. QDEC</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">15. KeyScan</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">15.1. 简介</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">15.2. 主要特征</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">15.3. 功能描述</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">15.3.1. 可配置的行列数</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpio">15.3.2. GPIO选择</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">15.3.3. 键值</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">15.3.4. 中断</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">15.4. 寄存器描述</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ks-ctrl">15.4.1. ks_ctrl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ks-int-en">15.4.2. ks_int_en</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ks-int-sts">15.4.3. ks_int_sts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#keycode-clr">15.4.4. keycode_clr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#keycode-value">15.4.5. keycode_value</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="I2S.html">16. I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EMAC.html">17. Emac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USB.html">18. USB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">19. 版本信息</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL702/704/706 参考手册</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">15. </span>KeyScan</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="keyscan">
+<h1><span class="section-number">15. </span>KeyScan<a class="headerlink" href="#keyscan" title="永久链接至标题"></a></h1>
+<section id="id1">
+<h2><span class="section-number">15.1. </span>简介<a class="headerlink" href="#id1" title="永久链接至标题"></a></h2>
+<p>KYS(Key Scan)模块用于对矩阵键盘进行扫描以获取键值，它会周期性的对键盘连接引脚进行扫描，一旦发现有按键按下会立即产生一个中断。</p>
+</section>
+<section id="id2">
+<h2><span class="section-number">15.2. </span>主要特征<a class="headerlink" href="#id2" title="永久链接至标题"></a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>可配置的行列数，最大可支持8行*20列的矩阵键盘</p></li>
+<li><p>最多存储四个键值</p></li>
+<li><p>支持按键中断</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="id3">
+<h2><span class="section-number">15.3. </span>功能描述<a class="headerlink" href="#id3" title="永久链接至标题"></a></h2>
+<section id="id4">
+<h3><span class="section-number">15.3.1. </span>可配置的行列数<a class="headerlink" href="#id4" title="永久链接至标题"></a></h3>
+<p>通过寄存器KS_CTRL的位&lt;ROW_NUM&gt;和&lt;COL_NUM&gt;可以分别配置矩阵键盘的行列数，配置值为实际值减一。行数最大支持8行，列数最大支持20列。</p>
+</section>
+<section id="gpio">
+<h3><span class="section-number">15.3.2. </span>GPIO选择<a class="headerlink" href="#gpio" title="永久链接至标题"></a></h3>
+<p>由于按键扫描固定从功能为ROW_0和COL_0的GPIO引脚开始扫描，所以行引脚需要从功能为ROW_0的GPIO开始往下依次选择，即从GPIO0/GPIO8/GPIO16/GPIO24中的任意一个开始，列引脚需要从功能为COL_0的GPIO开始往下依次选择，即从GPIO0/GPIO20中的任意一个开始。</p>
+</section>
+<section id="id5">
+<h3><span class="section-number">15.3.3. </span>键值<a class="headerlink" href="#id5" title="永久链接至标题"></a></h3>
+<p>键值会存储在寄存器KEYCODE_VALUE中，每8位为一个键值，第一个键值会存放在最低8位。当寄存器KEYCODE_CLR中对应序号的位被置一时，对应的键值和中断标志位会被清除。键值对应的行号=键值%总行数，键值对应的列号=键值/总行数。</p>
+</section>
+<section id="id6">
+<h3><span class="section-number">15.3.4. </span>中断<a class="headerlink" href="#id6" title="永久链接至标题"></a></h3>
+<p>当检测到有按键按下时，中断标志位会置一，同时产生一个中断。</p>
+</section>
+</section>
+<section id="id7">
+<h2><span class="section-number">15.4. </span>寄存器描述<a class="headerlink" href="#id7" title="永久链接至标题"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 41%" />
+<col style="width: 59%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>名称</p></td>
+<td><p>描述</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ks-ctrl">ks_ctrl</a></p></td>
+<td><p>Keyscan contro</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ks-int-en">ks_int_en</a></p></td>
+<td><p>Keyscan interrupt enable</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ks-int-sts">ks_int_sts</a></p></td>
+<td><p>Keyscan interrupt status</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#keycode-clr">keycode_clr</a></p></td>
+<td><p>Keycode clear</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#keycode-value">keycode_value</a></p></td>
+<td><p>Keycode value</p></td>
+</tr>
+</tbody>
+</table>
+<section id="ks-ctrl">
+<h3><span class="section-number">15.4.1. </span>ks_ctrl<a class="headerlink" href="#ks-ctrl" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x4000a900</p>
+<figure class="align-center">
+<img alt="../_images/kys_ks_ctrl.svg" src="../_images/kys_ks_ctrl.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:25</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>24:20</p></td>
+<td><p>col_num</p></td>
+<td><p>r/w</p></td>
+<td><p>5'd19</p></td>
+<td><p>col_num + 1</p></td>
+</tr>
+<tr class="row-even"><td><p>19</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>18:16</p></td>
+<td><p>row_num</p></td>
+<td><p>r/w</p></td>
+<td><p>3'd7</p></td>
+<td><p>row_num + 1</p></td>
+</tr>
+<tr class="row-even"><td><p>15:10</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>9:8</p></td>
+<td><p>rc_ext</p></td>
+<td><p>r/w</p></td>
+<td><p>2'd3</p></td>
+<td><p>idle duration between column scans</p></td>
+</tr>
+<tr class="row-even"><td><p>7:4</p></td>
+<td><p>deg_cnt</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>deg_en</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>deglitch</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>ghost_en</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>ghost key event detection</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>ks_en</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ks-int-en">
+<h3><span class="section-number">15.4.2. </span>ks_int_en<a class="headerlink" href="#ks-int-en" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x4000a910</p>
+<figure class="align-center">
+<img alt="../_images/kys_ks_int_en.svg" src="../_images/kys_ks_int_en.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:1</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>ks_int_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ks-int-sts">
+<h3><span class="section-number">15.4.3. </span>ks_int_sts<a class="headerlink" href="#ks-int-sts" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x4000a914</p>
+<figure class="align-center">
+<img alt="../_images/kys_ks_int_sts.svg" src="../_images/kys_ks_int_sts.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:4</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>3:0</p></td>
+<td><p>keycode_valid</p></td>
+<td><p>r</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="keycode-clr">
+<h3><span class="section-number">15.4.4. </span>keycode_clr<a class="headerlink" href="#keycode-clr" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x4000a918</p>
+<figure class="align-center">
+<img alt="../_images/kys_keycode_clr.svg" src="../_images/kys_keycode_clr.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:4</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>3:0</p></td>
+<td><p>keycode_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="keycode-value">
+<h3><span class="section-number">15.4.5. </span>keycode_value<a class="headerlink" href="#keycode-value" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x4000a91c</p>
+<figure class="align-center">
+<img alt="../_images/kys_keycode_value.svg" src="../_images/kys_keycode_value.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:24</p></td>
+<td><p>keycode3</p></td>
+<td><p>r</p></td>
+<td><p>8'hff</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>23:16</p></td>
+<td><p>keycode2</p></td>
+<td><p>r</p></td>
+<td><p>8'hff</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>15:8</p></td>
+<td><p>keycode1</p></td>
+<td><p>r</p></td>
+<td><p>8'hff</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><p>7:0</p></td>
+<td rowspan="2"><p>keycode0</p></td>
+<td rowspan="2"><p>r</p></td>
+<td rowspan="2"><p>8'hff</p></td>
+<td rowspan="2"><p>Col = keycode / (row_num+1)</p>
+<p>Row = keycode % (row_num+1)</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="QDEC.html" class="btn btn-neutral float-left" title="14. QDEC" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="I2S.html" class="btn btn-neutral float-right" title="16. I2S" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2021.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

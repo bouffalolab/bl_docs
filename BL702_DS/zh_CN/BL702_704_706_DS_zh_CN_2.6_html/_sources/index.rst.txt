@@ -1,0 +1,110 @@
+
+Features
+============
+.. raw:: latex
+
+   \section*{Features}
+   \begin{multicols}{2}
+
+- 无线
+
+   * 2.4GHz射频收发器
+   * 蓝牙规范v5.0
+   * 蓝牙低功耗1Mbps和2Mbps
+   * 蓝牙®Long Range Coded 500Kbps和125Kbps
+   * Zigbee 3.0，基本设备行为，Core Stack R21，绿色能源标准
+   * IEEE 802.15.4 MAC/PHY
+   * 支持 BLE/zigbee共存
+   * 集成balun，PA/LNA
+
+- MCU子系统
+
+   * 带FPU（浮点单元）的32位RISC CPU
+   * 一级缓存
+   * 1个RTC计时器，最长计数周期为1年
+   * 2个32位通用定时器
+   * 8个DMA通道
+   * CPU频率可配置为1MHz至144MHz
+   * JTAG开发支持
+   * XIP QSPI Flash/pSRAM 具备硬件解密功能
+
+- 内存
+
+   * 132KB RAM
+   * 192KB ROM
+   * 1Kb eFuse
+   * 嵌入式Flash闪存 (选配)
+   * 嵌入式pSRAM (BL704/BL706,选配)
+
+- 安全机制
+
+   * 安全启动
+   * 安全调试端口
+   * QSPI Flash即时AES解密（OTFAD）- AES - 128和CTR+模式
+   * 支持 AES 128/192/256位加密引擎
+   * 支持 MD5,SHA-1/224/256/384/512
+   * 真实随机数发生器(TRNG)
+   * 公钥加速器(PKA)
+
+- 外设
+
+   * USB2.0 FS（全速）设备接口
+   * 红外遥控接口
+   * 1个SPI主/从机
+   * 2个UART
+   
+      支持ISO 17987（本地互连网络）
+   * 1个I2C主机
+   * 1个I2S主/从
+   * 5个PWM通道
+   * 正交解码器
+   * 按键扫描矩阵接口
+   * 12位通用ADC
+   * 10位通用DAC
+   * 被动红外（PIR）检测
+   * 以太网RMII接口(BL704/BL706)
+   * 摄像头接口(BL706)
+   * 15(BL702)/23(BL704)/31(BL706)个GPIO（功能可配置）
+
+- 电源管理模式
+
+   * CPU正常运作
+   * 空闲模式
+   * 睡眠模式（可配置不同区域）
+   * 休眠模式
+   * 电源关闭模式
+   * 主动接收
+   * 主动发送
+
+- 时钟架构
+
+   * 外部主时钟XTAL 32MHz
+   * 外部低功耗和RTC时钟 XTAL32/32.768kHz
+   * 内部RC 32kHz振荡器
+   * 内部RC 32MHz振荡器
+   * 内部系统PLL
+   * 内部音频PLL
+
+.. raw:: latex
+
+   \end{multicols}
+   \tableofcontents
+   \listoffigures
+   \listoftables
+
+.. toctree::
+   :maxdepth: 2
+   :numbered:
+
+   content/overview
+   content/Functional
+   content/Pindefinition
+   content/Electricalcharacteristics
+   content/ProductUse
+   content/Referencedesign
+   content/PackagingQFN32
+   content/PackagingQFN40
+   content/PackagingQFN48
+   content/TopMarkingDefinition
+   content/OrderingInformation
+   content/version

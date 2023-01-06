@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2. 复位和时钟 &mdash; BL702/704/706 参考手册  文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="3. GLB" href="GLB.html" />
+    <link rel="prev" title="1. 系统和存储器概述" href="SystemAndMemoryOverview.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL702/704/706 参考手册
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. 系统和存储器概述</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2. 复位和时钟</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">2.1. 简介</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">2.2. 复位源</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">2.3. 时钟源</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">4. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">5. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">6. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="L1C.html">7. L1C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">8. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">9. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">10. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">11. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">12. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">13. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="QDEC.html">14. QDEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="KeyScan.html">15. KeyScan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2S.html">16. I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EMAC.html">17. Emac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USB.html">18. USB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">19. 版本信息</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL702/704/706 参考手册</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">2. </span>复位和时钟</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1><span class="section-number">2. </span>复位和时钟<a class="headerlink" href="#id1" title="永久链接至标题"></a></h1>
+<section id="id2">
+<h2><span class="section-number">2.1. </span>简介<a class="headerlink" href="#id2" title="永久链接至标题"></a></h2>
+<p>芯片内部包含的复位源：硬件重置，看门狗重置，软件复位。
+芯片内包含多个时钟源：XTAL，DLL，RC。搭配分频等配置送至各模块。</p>
+</section>
+<section id="id3">
+<h2><span class="section-number">2.2. </span>复位源<a class="headerlink" href="#id3" title="永久链接至标题"></a></h2>
+<p>复位源包含</p>
+<ul class="simple">
+<li><p>硬件重置:通过管脚进行重置</p>
+<ul>
+<li><p>管脚电源重置（PU_CHIP = 0-&gt; 1）：类似电源上电重置</p></li>
+<li><p>电源上电重置：芯片从断电中复电，HBN逻辑将芯片系统进行重置</p></li>
+</ul>
+</li>
+<li><p>看门狗重置</p>
+<ul>
+<li><p>当看门狗报警触发重置信号时，重置管理单元将在必要准备后，重置芯片系统，看门狗内部逻辑会记录看门狗重置的状态</p></li>
+</ul>
+</li>
+<li><p>软件复位:通过软件设置寄存器进行全局或局部复位</p>
+<ul>
+<li><p>软件初始重置（reg_ctrl_pwron_rst）：通过软件将该位置1，进行芯片系统重置</p></li>
+<li><p>软件CPU复位（reg_ctrl_cpu_reset）：通过软件将该位置1，进行CPU部分系统复位</p></li>
+<li><p>软件系统复位（reg_ctrl_sys_reset）：通过软件将该位置1，保留必要的逻辑处理如电源管理单元，进行芯片部分系统复位</p></li>
+<li><p>软件模块复位：根据特定模块的需求，设置软件复位</p></li>
+</ul>
+</li>
+</ul>
+<figure class="align-center" id="id5">
+<img alt="../_images/ResetTop.svg" src="../_images/ResetTop.svg" /><figcaption>
+<p><span class="caption-number">图 2.1 </span><span class="caption-text">复位源</span><a class="headerlink" href="#id5" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id4">
+<h2><span class="section-number">2.3. </span>时钟源<a class="headerlink" href="#id4" title="永久链接至标题"></a></h2>
+<p>时钟源包含：</p>
+<ul class="simple">
+<li><p>XTAL   ：外部晶振时钟，主要支持频率32MHz</p></li>
+<li><p>XTAL32K：外部晶振时钟，频率32KHz</p></li>
+<li><p>RC32M  ：RC振荡器时钟，频率32MHz，提供校准</p></li>
+<li><p>DLL    ：锁相回路时钟，内部系统高速时钟，最高频率支持144MHz</p></li>
+</ul>
+<p>时钟控制单元将来自振荡器的时钟分配给内核和外围设备。
+可通过选择系统时钟源，动态分频器，时钟配置，睡眠使用32KHz时钟，以达到低功耗时钟管理。</p>
+<p>外围设备时钟包括: Flash、USB2.0、Ethernet、UART、I2C、I2S、SPI、PWM、IR-remote、QDEC、KeyScan、ADC、DAC。</p>
+<figure class="align-center" id="id6">
+<img alt="../_images/ClockTree.svg" src="../_images/ClockTree.svg" /><figcaption>
+<p><span class="caption-number">图 2.2 </span><span class="caption-text">时钟架构</span><a class="headerlink" href="#id6" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="SystemAndMemoryOverview.html" class="btn btn-neutral float-left" title="1. 系统和存储器概述" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="GLB.html" class="btn btn-neutral float-right" title="3. GLB" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2021.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

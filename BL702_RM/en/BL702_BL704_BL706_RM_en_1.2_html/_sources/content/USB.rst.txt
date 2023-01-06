@@ -1,0 +1,216 @@
+===========
+USB
+===========
+
+USB introduction
+=================
+USB (Universal Serial Bus), fully supports USB1.1 full-speed devices, and partially supports USB2.0.
+
+USB main features
+===================
+- Support USB full speed device-mode
+
+- Supports 8 bidirectional endpoints: EP0 can be configured as control/bulk/interrupt/synchronization endpoints, EP1-EP7 can be configured as bulk/interrupt/synchronization endpoints
+
+- Each endpoint contains TX and RX FIFOs with a depth of 64 bytes and supports DMA
+
+- Support internal transceiver
+
+- Support suspend/resume
+
+- Support LPM
+
+- Support multiple USB interrupt configurations
+
+USB function description
+=========================
+USB steps
+--------------
+
+1. Configure the internal transceiver, the corresponding addresses are 0x40000228 and 0x4000022C
+
+2. Configure usb_config and epx_config of each endpoint
+
+3. Configure USB interrupt related registers
+
+4. Configure USB DMA related (optional)
+
+5. Configure GPIO as USB function (internal transmitter----function is 10)
+
+6. 0x40000228[20]usb_enum is set to 1, so that the host recognizes that the USB device is inserted and triggers the enumeration process
+
+Part of the register configuration and function description
+--------------------------------------------------------------
+
+- swrdy:Read only, only when this bit is 0, can write 1 to cr_usb_ep0_sw_rdy
+- crsr:Writing 1 is automatically cleared. When the software allows the next packet to reply with ACK, write 1 to this field, and only the next packet will reply with ACK. For OUT/IN transaction data, it will be received or sent from FIFO (FIFO release once)
+- e0snko:It needs to be set to 1, which means that the OUT transaction will reply NAK by default, and the data will not enter the FIFO (FIFO is not released)
+- e0snki:It needs to be set to 1, which means that the IN transaction will reply NAK by default, and the data will not be sent from the FIFO (FIFO is not released)
+- e0ss:Writing 1 is automatically cleared. Write 1 to this field when the software allows the next packet to reply STALL, then only the next packet will reply STALL
+- epxdit:"Token package => trigger xxx_cmd_int => data package => trigger xxx_done_int => handshake package"
+- epxcit:"Token package => trigger xxx_cmd_int => data package => trigger xxx_done_int => handshake package"
+- ep0odit:"Token package => trigger xxx_cmd_int => data package => trigger xxx_done_int => handshake package"
+- ep0ocit:"Token package => trigger xxx_cmd_int => data package => trigger xxx_done_int => handshake package"
+- ep0idit:"Token package => trigger xxx_cmd_int => data package => trigger xxx_done_int => handshake package"
+- ep0icit:"Token package => trigger xxx_cmd_int => data package => trigger xxx_done_int => handshake package"
+- ep0sdit:"Token package => trigger xxx_cmd_int => data package => trigger xxx_done_int => handshake package"
+- ep0scit:"Token package => trigger xxx_cmd_int => data package => trigger xxx_done_int => handshake package"
+- exrs:Read only. Only when this bit is 0, can write 1 to cr_epx_rdy
+- exr:Writing 1 is automatically cleared. When the software allows the next packet to reply ACK, write 1 to this field, then only the next packet will reply ACK (FIFO release once)
+- exn:It needs to be set to 1, which means that the transaction will reply NAK by default. IN/OUT depends on the transmission direction configuration of the current endpoint (FIFO is not released)
+- exs:Set when the software wants to suspend this endpoint, after setting this endpoint will always reply STALL
+
+.. figure:: ../../picture/USBIT.svg
+   :align: center
+   :scale: 70%
+
+   USB interrupt trigger mode
+
+USB enumeration phase interrupt processing flow
+----------------------------------------------------
+
+1. The first is a reset of more than 10ms, which will trigger the reset interrupt.
+
+2. When the reset ends, the reset end interrupt will be triggered.
+
+3. The SETUP transaction, IN transaction, and OUT transaction of the enumeration process will trigger e0sdit, e0icit, and ep0dit respectively.
+
+4. After the enumeration is over, the IN transaction and OUT transaction between the host and the specific endpoint EPx will trigger epxcit and epxdit respectively.
+
+Register operation flow of each transfer transaction
+--------------------------------------------------------
+
+- Control transmission-SETUP transaction data reception:
+
+    * Enter interrupt
+    * Determine the e0sdit interrupt flag bit
+    * What is stored in e0rfr is the data from the setup firm, which can be obtained by reading e0rfr according to e0rfc
+    * Set a crsr to release subsequent transactions
+    * Clear interrupt flag
+    * Exit interrupt
+
+- Control transmission-IN transaction data transmission:
+
+    * Enter interrupt
+    * Determine the e0idit interrupt flag bit
+    * Wait for swrdy to be 0 before writing data to e0tfw
+    * Set a crsr to release subsequent transactions
+    * Clear interrupt flag
+    * Exit interrupt
+
+- Control transmission-OUT transaction data reception:
+
+    * Enter interrupt
+    * Determine the ep0dit interrupt flag bit
+    * What is stored in e0rfr is the data from the OUT firm, which can be obtained by reading e0rfr according to e0rfc
+    * Set a crsr to release subsequent transactions
+    * Clear interrupt flag
+    * Exit interrupt
+
+- EPx(x=1...7)——IN transaction data transmission:
+
+    * Enter interrupt
+    * Determine the epxcit interrupt flag bit
+    * Wait for exrs to be 0 before writing data to extfw (exs needs to be changed to 1 only when only 1 byte is sent)
+    * Set an exr to release subsequent transactions
+    * Clear interrupt flag
+    * Exit interrupt
+
+- EPx(x=1...7)——OUT transaction data reception:
+
+    * Enter interrupt
+    * Determine the epxdit interrupt flag bit
+    * The data stored in exrfr is the data from the OUT firm, which can be obtained by reading exrfr according to exrfc
+    * Set an exrs to release subsequent transactions
+    * Clear interrupt flag
+    * Exit interrupt
+
+.. figure:: ../../picture/USBCommunicate.svg
+   :align: center
+   :scale: 70%
+
+   USB communication method
+
+Recommended configuration of internal transmitter register:
+
+.. table:: Register configuration 1
+    :widths: 50, 50
+    :width: 100%
+    :align: center
+
+    +---------------------+-----------+
+    |      usb_xcvr       |   value   |
+    +=====================+===========+
+    | usb_rcv             | read only |
+    +---------------------+-----------+
+    | usb_vip             | read only |
+    +---------------------+-----------+
+    | usb_vim             | read only |
+    +---------------------+-----------+
+    | usb_bd              | read only |
+    +---------------------+-----------+
+    | pu_usb              |    0->1   |
+    +---------------------+-----------+
+    | usb_sus             |     0     |
+    +---------------------+-----------+
+    | usb_spd             |     1     |
+    +---------------------+-----------+
+    | usb_enum            |    0->1   |
+    +---------------------+-----------+
+    | usb_data_convert    |     0     |
+    +---------------------+-----------+
+    | usb_oeb             | read only |
+    +---------------------+-----------+
+    | usb_oeb_reg         |     1     |
+    +---------------------+-----------+
+    | usb_oeb_sel         |     0     |
+    +---------------------+-----------+
+    | usb_rout_pmos       |     3     |
+    +---------------------+-----------+
+    | usb_rout_nmos       |     3     |
+    +---------------------+-----------+
+    | pu_usb_ldo          |     0     |
+    +---------------------+-----------+
+    | usb_ldo_vfb         |     3     |
+    +---------------------+-----------+
+
+.. table:: Register configuration 2
+    :widths: 50, 50
+    :width: 100%
+    :align: center
+
+    +---------------------+-----------+
+    |   usb_xcvr_config   |   value   |
+    +=====================+===========+
+    | usb_slewrate_p_rise |     4     |
+    +---------------------+-----------+
+    | usb_slewrate_p_fall |     3     |
+    +---------------------+-----------+
+    | usb_slewrate_m_rise |     4     |
+    +---------------------+-----------+
+    | usb_slewrate_m_fall |     3     |
+    +---------------------+-----------+
+    | usb_res_pullup_tune |     2     |
+    +---------------------+-----------+
+    | reg_usb_use_ctrl    |     0     |
+    +---------------------+-----------+
+    | usb_str_drv         |     1     |
+    +---------------------+-----------+
+    | reg_usb_use_xcvr    |     1     |
+    +---------------------+-----------+
+    | usb_bd_vth          |     7     |
+    +---------------------+-----------+
+    | usb_v_hys_p         |     1     |
+    +---------------------+-----------+
+    | usb_v_hys_m         |     1     |
+    +---------------------+-----------+
+
+Note: You need to set pu_usb and usb_enum to one when you are ready to open the internal transceiver.
+
+.. only:: html
+
+   .. include:: usb_register.rst
+
+.. raw:: latex
+
+   \input{../../en/content/usb}

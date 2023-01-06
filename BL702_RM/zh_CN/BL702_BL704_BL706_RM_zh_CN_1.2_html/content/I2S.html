@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>16. I2S &mdash; BL702/704/706 参考手册  文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="17. Emac" href="EMAC.html" />
+    <link rel="prev" title="15. KeyScan" href="KeyScan.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL702/704/706 参考手册
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. 系统和存储器概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. 复位和时钟</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">4. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">5. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">6. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="L1C.html">7. L1C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">8. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">9. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">10. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">11. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">12. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">13. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="QDEC.html">14. QDEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="KeyScan.html">15. KeyScan</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">16. I2S</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">16.1. 简介</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">16.2. 主要特征</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">16.3. 功能描述</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">16.4. 寄存器描述</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#i2s-config">16.4.1. i2s_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#i2s-int-sts">16.4.2. i2s_int_sts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#i2s-bclk-config">16.4.3. i2s_bclk_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#i2s-fifo-config-0">16.4.4. i2s_fifo_config_0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#i2s-fifo-config-1">16.4.5. i2s_fifo_config_1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#i2s-fifo-wdata">16.4.6. i2s_fifo_wdata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#i2s-fifo-rdata">16.4.7. i2s_fifo_rdata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#i2s-io-config">16.4.8. i2s_io_config</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="EMAC.html">17. Emac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USB.html">18. USB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">19. 版本信息</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL702/704/706 参考手册</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">16. </span>I2S</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="i2s">
+<h1><span class="section-number">16. </span>I2S<a class="headerlink" href="#i2s" title="永久链接至标题"></a></h1>
+<section id="id1">
+<h2><span class="section-number">16.1. </span>简介<a class="headerlink" href="#id1" title="永久链接至标题"></a></h2>
+<p>I2S是传输数字音频数据的一种接口标准，采用序列的方式传输2组（左右声道）数据。</p>
+<p>I2S将时钟信号与数据信号分开传输，使得接收端不用从数据信号还原时钟，进而降低接收端的设计难度。</p>
+</section>
+<section id="id2">
+<h2><span class="section-number">16.2. </span>主要特征<a class="headerlink" href="#id2" title="永久链接至标题"></a></h2>
+<ul class="simple">
+<li><p>支持主模式以及从模式</p></li>
+<li><p>支持Left-justified/Right-justified/DSP等数据格式</p></li>
+<li><p>支持8/16/24/32比特数据宽度</p></li>
+<li><p>除单声道/双声道模式之外，同时支持四声道模式</p></li>
+<li><p>支持动态静音切换功能</p></li>
+<li><p>数据发送FIFO的宽度为32位，深度16</p></li>
+<li><p>数据接收FIFO的宽度为32位，深度16</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2><span class="section-number">16.3. </span>功能描述<a class="headerlink" href="#id3" title="永久链接至标题"></a></h2>
+<p>引脚列表：</p>
+<table class="colwidths-given docutils align-center" id="id5" style="width: 100%">
+<caption><span class="caption-number">表 16.1 </span><span class="caption-text">I2S 引脚</span><a class="headerlink" href="#id5" title="永久链接至表格"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>名称</p></th>
+<th class="head"><p>类型</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>I2Sx_DI</p></td>
+<td><p>输入</p></td>
+<td><p>串行数据输入</p></td>
+</tr>
+<tr class="row-odd"><td><p>I2Sx_DO</p></td>
+<td><p>输出</p></td>
+<td><p>串行数据输出</p></td>
+</tr>
+<tr class="row-even"><td><p>I2Sx_BCLK</p></td>
+<td><p>输入/输出</p></td>
+<td><p>同步传输时钟，作为主机时为输出，作为从机时为输入</p></td>
+</tr>
+<tr class="row-odd"><td><p>I2Sx_FS</p></td>
+<td><p>输入/输出</p></td>
+<td><p>数据起始/结束表示信号，作为主机时为输出，作为从机时为输入</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id4">
+<h2><span class="section-number">16.4. </span>寄存器描述<a class="headerlink" href="#id4" title="永久链接至标题"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 44%" />
+<col style="width: 56%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>名称</p></td>
+<td><p>描述</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#i2s-config">i2s_config</a></p></td>
+<td><p>I2S configuration</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#i2s-int-sts">i2s_int_sts</a></p></td>
+<td><p>I2S interrupt status</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#i2s-bclk-config">i2s_bclk_config</a></p></td>
+<td><p>I2S clock configuration</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#i2s-fifo-config-0">i2s_fifo_config_0</a></p></td>
+<td><p>I2S FIFO configuration0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#i2s-fifo-config-1">i2s_fifo_config_1</a></p></td>
+<td><p>I2S DMA FIFO configuration</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#i2s-fifo-wdata">i2s_fifo_wdata</a></p></td>
+<td><p>I2S FIFO write data</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#i2s-fifo-rdata">i2s_fifo_rdata</a></p></td>
+<td><p>I2S FIFO read data</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#i2s-io-config">i2s_io_config</a></p></td>
+<td><p>I2S IO configuration</p></td>
+</tr>
+</tbody>
+</table>
+<section id="i2s-config">
+<h3><span class="section-number">16.4.1. </span>i2s_config<a class="headerlink" href="#i2s-config" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x4000aa00</p>
+<figure class="align-center">
+<img alt="../_images/i2s_i2s_config.svg" src="../_images/i2s_i2s_config.svg" /></figure>
+</section>
+<section id="i2s-int-sts">
+<h3><span class="section-number">16.4.2. </span>i2s_int_sts<a class="headerlink" href="#i2s-int-sts" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x4000aa04</p>
+<figure class="align-center">
+<img alt="../_images/i2s_i2s_int_sts.svg" src="../_images/i2s_i2s_int_sts.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:27</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>26</p></td>
+<td><p>cr_i2s_fer_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt enable of i2s_fer_int</p></td>
+</tr>
+<tr class="row-even"><td><p>25</p></td>
+<td><p>cr_i2s_rxf_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt enable of i2s_rxf_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>24</p></td>
+<td><p>cr_i2s_txf_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt enable of i2s_txf_int</p></td>
+</tr>
+<tr class="row-even"><td><p>23:11</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>cr_i2s_fer_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of i2s_fer_int</p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>cr_i2s_rxf_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of i2s_rxf_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>cr_i2s_txf_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of i2s_txf_int</p></td>
+</tr>
+<tr class="row-even"><td><p>7:3</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>i2s_fer_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>I2S TX/RX FIFO error interrupt, auto-cleared when FIFO overflow/underflow error flag is cleared</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>i2s_rxf_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>I2S RX FIFO ready (rx_fifo_cnt &gt; rx_fifo_th) interrupt, auto-cleared when data is popped</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>i2s_txf_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>I2S TX FIFO ready (tx_fifo_cnt &gt; tx_fifo_th) interrupt, auto-cleared when data is pushed</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="i2s-bclk-config">
+<h3><span class="section-number">16.4.3. </span>i2s_bclk_config<a class="headerlink" href="#i2s-bclk-config" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x4000aa10</p>
+<figure class="align-center">
+<img alt="../_images/i2s_i2s_bclk_config.svg" src="../_images/i2s_i2s_bclk_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:28</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>27:16</p></td>
+<td><p>cr_bclk_div_h</p></td>
+<td><p>r/w</p></td>
+<td><p>12'd1</p></td>
+<td><p>I2S BCLK active high period (unit: cycle of i2s_clk)</p></td>
+</tr>
+<tr class="row-even"><td><p>15:12</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>11:0</p></td>
+<td><p>cr_bclk_div_l</p></td>
+<td><p>r/w</p></td>
+<td><p>12'd1</p></td>
+<td><p>I2S BCLK active low period (unit: cycle of i2s_clk)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="i2s-fifo-config-0">
+<h3><span class="section-number">16.4.4. </span>i2s_fifo_config_0<a class="headerlink" href="#i2s-fifo-config-0" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x4000aa80</p>
+<figure class="align-center">
+<img alt="../_images/i2s_i2s_fifo_config_0.svg" src="../_images/i2s_i2s_fifo_config_0.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:11</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="4"><p>10</p></td>
+<td rowspan="4"><p>cr_fifo_24b_lj</p></td>
+<td rowspan="4"><p>r/w</p></td>
+<td rowspan="4"><p>1'b0</p></td>
+<td rowspan="4"><p>FIFO 24-bit data left-justified mode</p>
+<p>1'b0: Right-justified, {8'h0, data[23:0]}</p>
+<p>1'b1: Left-justified, {data[23:0], 8'h0}</p>
+<p>Note: Valid only when cr_data_size = 2'd2 (24-bit)</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="2"><p>9</p></td>
+<td rowspan="2"><p>cr_fifo_lr_exchg</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>1'b0</p></td>
+<td rowspan="2"><p>The position of L/R channel data within each entry is exchanged if this bit is enabled</p>
+<p>Can only be enabled if data size is 8 or 16 bits and csr_fifo_lr_merge is enabled</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="4"><p>8</p></td>
+<td rowspan="4"><p>cr_fifo_lr_merge</p></td>
+<td rowspan="4"><p>r/w</p></td>
+<td rowspan="4"><p>1'b0</p></td>
+<td rowspan="4"><p>Each FIFO entry contains both L/R channel data if this bit is enabled</p>
+<p>Can only be enabled if data size is 8 or 16 bits</p>
+<p>Note: cr_fifo_lr_merge &amp;cr_mono_mode should NOT be enabled at the same time</p>
+<p>Note: cr_fifo_lr_merge &amp;cr_fifo_l_shift should NOT be enabled at the same time</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>rx_fifo_underflow</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Underflow flag of RX FIFO, can be cleared by rx_fifo_clr</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>rx_fifo_overflow</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Overflow flag of RX FIFO, can be cleared by rx_fifo_clr</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>tx_fifo_underflow</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Underflow flag of TX FIFO, can be cleared by tx_fifo_clr</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>tx_fifo_overflow</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Overflow flag of TX FIFO, can be cleared by tx_fifo_clr</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>rx_fifo_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Clear signal of RX FIFO</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>tx_fifo_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Clear signal of TX FIFO</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>i2s_dma_rx_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Enable signal of dma_rx_req/ack interface</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>i2s_dma_tx_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Enable signal of dma_tx_req/ack interface</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="i2s-fifo-config-1">
+<h3><span class="section-number">16.4.5. </span>i2s_fifo_config_1<a class="headerlink" href="#i2s-fifo-config-1" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x4000aa84</p>
+<figure class="align-center">
+<img alt="../_images/i2s_i2s_fifo_config_1.svg" src="../_images/i2s_i2s_fifo_config_1.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:28</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>27:24</p></td>
+<td><p>rx_fifo_th</p></td>
+<td><p>r/w</p></td>
+<td><p>4'd0</p></td>
+<td><p>RX FIFO threshold, dma_rx_req will not be asserted if tx_fifo_cnt is less than this value</p></td>
+</tr>
+<tr class="row-even"><td><p>23:20</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>19:16</p></td>
+<td><p>tx_fifo_th</p></td>
+<td><p>r/w</p></td>
+<td><p>4'd0</p></td>
+<td><p>TX FIFO threshold, dma_tx_req will not be asserted if tx_fifo_cnt is less than this value</p></td>
+</tr>
+<tr class="row-even"><td><p>15:13</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>12:8</p></td>
+<td><p>rx_fifo_cnt</p></td>
+<td><p>r</p></td>
+<td><p>5'd0</p></td>
+<td><p>RX FIFO available count</p></td>
+</tr>
+<tr class="row-even"><td><p>7:5</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>4:0</p></td>
+<td><p>tx_fifo_cnt</p></td>
+<td><p>r</p></td>
+<td><p>5'd16</p></td>
+<td><p>TX FIFO available count</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="i2s-fifo-wdata">
+<h3><span class="section-number">16.4.6. </span>i2s_fifo_wdata<a class="headerlink" href="#i2s-fifo-wdata" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x4000aa88</p>
+<figure class="align-center">
+<img alt="../_images/i2s_i2s_fifo_wdata.svg" src="../_images/i2s_i2s_fifo_wdata.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>i2s_fifo_wdata</p></td>
+<td><p>w</p></td>
+<td><p>x</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="i2s-fifo-rdata">
+<h3><span class="section-number">16.4.7. </span>i2s_fifo_rdata<a class="headerlink" href="#i2s-fifo-rdata" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x4000aa8c</p>
+<figure class="align-center">
+<img alt="../_images/i2s_i2s_fifo_rdata.svg" src="../_images/i2s_i2s_fifo_rdata.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>i2s_fifo_rdata</p></td>
+<td><p>r</p></td>
+<td><p>32'h0</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="i2s-io-config">
+<h3><span class="section-number">16.4.8. </span>i2s_io_config<a class="headerlink" href="#i2s-io-config" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x4000aafc</p>
+<figure class="align-center">
+<img alt="../_images/i2s_i2s_io_config.svg" src="../_images/i2s_i2s_io_config.svg" /></figure>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="KeyScan.html" class="btn btn-neutral float-left" title="15. KeyScan" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="EMAC.html" class="btn btn-neutral float-right" title="17. Emac" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2021.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

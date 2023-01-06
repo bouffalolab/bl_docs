@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register description &mdash; BL702/704/706 Reference Manual  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL702/704/706 Reference Manual
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. System and memory overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. Reset and clock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">4. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">5. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">6. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="L1C.html">7. L1C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">8. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">9. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">10. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">11. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">12. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">13. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="QDEC.html">14. QDEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="KeyScan.html">15. KeyScan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2S.html">16. I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EMAC.html">17. Emac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USB.html">18. USB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">19. Revision history</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL702/704/706 Reference Manual</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Register description</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="register-description">
+<h1>Register description<a class="headerlink" href="#register-description" title="Permalink to this headline"></a></h1>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 70%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Name</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mode">MODE</a></p></td>
+<td><p>EMAC configuration</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#int-source">INT_SOURCE</a></p></td>
+<td><p>EMAC transmit control</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#int-mask">INT_MASK</a></p></td>
+<td><p>EMAC interrupt mask</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ipgt">IPGT</a></p></td>
+<td><p>Inter packet gap</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#packetlen">PACKETLEN</a></p></td>
+<td><p>Frame length</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#collconfig">COLLCONFIG</a></p></td>
+<td><p>Collision configuration</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tx-bd-num">TX_BD_NUM</a></p></td>
+<td><p>TX buffer descriptors number</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#miimode">MIIMODE</a></p></td>
+<td><p>Management Data configuration</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#miicommand">MIICOMMAND</a></p></td>
+<td><p>Trigger command</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#miiaddress">MIIADDRESS</a></p></td>
+<td><p>Register address</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#miitx-data">MIITX_DATA</a></p></td>
+<td><p>Control data to be written to PHY</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#miirx-data">MIIRX_DATA</a></p></td>
+<td><p>Received data from PHY</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#miistatus">MIISTATUS</a></p></td>
+<td><p>MIIM I/F status</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mac-addr0">MAC_ADDR0</a></p></td>
+<td><p>Ethernet MAC address0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mac-addr1">MAC_ADDR1</a></p></td>
+<td><p>Ethernet MAC address1</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hash0-addr">HASH0_ADDR</a></p></td>
+<td><p>Lower 32-bit of HASH register</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hash1-addr">HASH1_ADDR</a></p></td>
+<td><p>Upper 32-bit of HASH register</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#txctrl">TXCTRL</a></p></td>
+<td><p>TX control</p></td>
+</tr>
+</tbody>
+</table>
+<section id="mode">
+<h2>MODE<a class="headerlink" href="#mode" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x4000d000</p>
+<figure class="align-center">
+<img alt="../_images/emac_MODE.svg" src="../_images/emac_MODE.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:18</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><p>17</p></td>
+<td rowspan="3"><p>RMII_EN</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>RMII mode enable</p>
+<p>0: MII PHY I/F is used</p>
+<p>1: RMII PHY I/F is used</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3"><p>16</p></td>
+<td rowspan="3"><p>RECSMALL</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>Receive small frame enable</p>
+<p>0: Frames smaller than MINFL are ignored.</p>
+<p>1: Frames smaller than MINFL are accepted.</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3"><p>15</p></td>
+<td rowspan="3"><p>PAD</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b1</p></td>
+<td rowspan="3"><p>Padding enable</p>
+<p>0: Do not add pads to frames shorter than MINFL.</p>
+<p>1: Add pads to short frames, until the length equals MINFL.</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3"><p>14</p></td>
+<td rowspan="3"><p>HUGEN</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>Huge frames enable</p>
+<p>0: The maximum frame length is MAXFL. All additional bytes are dropped.</p>
+<p>1: Frame size is not limited by MAXFL and can be up to 64K bytes.</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3"><p>13</p></td>
+<td rowspan="3"><p>CRCEN</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b1</p></td>
+<td rowspan="3"><p>CRC Enable</p>
+<p>0: TX MAC does not append CRC field.</p>
+<p>1: TX MAC will append CRC field to every frame.</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>12:11</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><p>10</p></td>
+<td rowspan="3"><p>FULLD</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>Full duplex</p>
+<p>0: Half duplex mode.</p>
+<p>1: Full duplex mode.</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>9:7</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><p>6</p></td>
+<td rowspan="3"><p>IFG</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>Inter frame gap check</p>
+<p>0: IFG is verified before each frame be received.</p>
+<p>1: All frames are received regardless to IFG requirement.</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3"><p>5</p></td>
+<td rowspan="3"><p>PRO</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>Promiscuous mode enable</p>
+<p>0: The destination address is checked before receiving.</p>
+<p>1: All frames received regardless of the address.</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td rowspan="3"><p>3</p></td>
+<td rowspan="3"><p>BRO</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b1</p></td>
+<td rowspan="3"><p>Broadcast address enable</p>
+<p>0: Reject all frames containing the broadcast address unless the PRO bit is asserted.</p>
+<p>1: Receive all frames containing broadcast address.</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3"><p>2</p></td>
+<td rowspan="3"><p>NOPRE</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>No preamble mode</p>
+<p>0: 7-byte preamble will be sent.</p>
+<p>1: No preamble will be sent.</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="4"><p>1</p></td>
+<td rowspan="4"><p>TXEN</p></td>
+<td rowspan="4"><p>r/w</p></td>
+<td rowspan="4"><p>1’b0</p></td>
+<td rowspan="4"><p>Transmit enable</p>
+<p>0: Transmitter is disabled.</p>
+<p>1: Transmitter is enabled.</p>
+<p>If TX_BD_NUM equals 0x0 (zero buffer descriptors are used), then the transmitter is disabled regardless of TXEN.</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="4"><p>0</p></td>
+<td rowspan="4"><p>RXEN</p></td>
+<td rowspan="4"><p>r/w</p></td>
+<td rowspan="4"><p>1’b0</p></td>
+<td rowspan="4"><p>Receiver enable</p>
+<p>0: Receiver is disabled.</p>
+<p>1: Receiver is enabled.</p>
+<p>If TX_BD_NUM equals 0x80 (all buffer descriptors are used for TX), then the receiver is disabled regardless of RXEN.</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</section>
+<section id="int-source">
+<h2>INT_SOURCE<a class="headerlink" href="#int-source" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x4000d004</p>
+<figure class="align-center">
+<img alt="../_images/emac_INT_SOURCE.svg" src="../_images/emac_INT_SOURCE.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:7</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><p>6</p></td>
+<td rowspan="3"><p>RXC</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>Receive control frame</p>
+<p>This bit indicates that the control frame was received. It is cleared by writing 1 to it.</p>
+<p>Bit RXFLOW in the CTRLMODE register must be set to 1 in order to get the RXC bit set.</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3"><p>5</p></td>
+<td rowspan="3"><p>TXC</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>Transmit control frame</p>
+<p>This bit indicates that a control frame was transmitted. It is cleared by writing 1 to it.</p>
+<p>Bit TXFLOW in the CTRLMODE register must be set to 1 in order to get the TXC bit set.</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3"><p>4</p></td>
+<td rowspan="3"><p>BUSY</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>Busy</p>
+<p>This bit indicates that RX packet is being received and there is no empty buffer descriptor to use. It iscleared by writing 1 to it.</p>
+<p>This bit appears regardless to the IRQ bits in the Receive Buffer Descriptor.</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="4"><p>3</p></td>
+<td rowspan="4"><p>RXE</p></td>
+<td rowspan="4"><p>r/w</p></td>
+<td rowspan="4"><p>1’b0</p></td>
+<td rowspan="4"><p>Receive error</p>
+<p>This bit indicates that an error occurred while receiving data (overrun, receiver error, dribble</p>
+<p>nibble, too long, &gt;64K, CRC error, bus error or late collision. It is cleared by writing 1 to it.</p>
+<p>This bit appears only when IRQ bit is set in the Receive Buffer Descriptor.</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3"><p>2</p></td>
+<td rowspan="3"><p>RXB</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>Receive frame</p>
+<p>This bit indicates that a frame was received. It is cleared by writing 1 to it.</p>
+<p>This bit appears only when IRQ bit is set in the Receive Buffer Descriptor.</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="4"><p>1</p></td>
+<td rowspan="4"><p>TXE</p></td>
+<td rowspan="4"><p>r/w</p></td>
+<td rowspan="4"><p>1’b0</p></td>
+<td rowspan="4"><p>Transmit error</p>
+<p>This bit indicates that a buffer was not transmitted due to a transmit error (underrun,</p>
+<p>retransmission limit, late collision, bus error or defer timeout). It is cleared by writing 1 to it.</p>
+<p>This bit appears only when IRQ bit is set in the Transmit Buffer Descriptor.</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3"><p>0</p></td>
+<td rowspan="3"><p>TXB</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>Transmit buffer</p>
+<p>This bit indicates that a buffer has been transmitted. It is cleared by writing 1 to it.</p>
+<p>This bit appears only when IRQ bit is set in the Transmit Buffer Descriptor.</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</section>
+<section id="int-mask">
+<h2>INT_MASK<a class="headerlink" href="#int-mask" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x4000d008</p>
+<figure class="align-center">
+<img alt="../_images/emac_INT_MASK.svg" src="../_images/emac_INT_MASK.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:7</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><p>6</p></td>
+<td rowspan="3"><p>RXC_M</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b1</p></td>
+<td rowspan="3"><p>Receive control frame mask ENABLE</p>
+<p>0: Interrupt is un-masked</p>
+<p>1: Interrupt is masked</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3"><p>5</p></td>
+<td rowspan="3"><p>TXC_M</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b1</p></td>
+<td rowspan="3"><p>Transmit control frame mask ENABLE</p>
+<p>0: Interrupt is un-masked</p>
+<p>1: Interrupt is masked</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3"><p>4</p></td>
+<td rowspan="3"><p>BUSY_M</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b1</p></td>
+<td rowspan="3"><p>Busy mask ENABLE</p>
+<p>0: Interrupt is un-masked</p>
+<p>1: Interrupt is masked</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3"><p>3</p></td>
+<td rowspan="3"><p>RXE_M</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b1</p></td>
+<td rowspan="3"><p>Receive error mask ENABLE</p>
+<p>0: Interrupt is un-masked</p>
+<p>1: Interrupt is masked</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3"><p>2</p></td>
+<td rowspan="3"><p>RXB_M</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b1</p></td>
+<td rowspan="3"><p>Receive frame mask ENABLE</p>
+<p>0: Interrupt is un-masked</p>
+<p>1: Interrupt is masked</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3"><p>1</p></td>
+<td rowspan="3"><p>TXE_M</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b1</p></td>
+<td rowspan="3"><p>Transmit error mask ENABLE</p>
+<p>0: Interrupt is un-masked</p>
+<p>1: Interrupt is masked</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3"><p>0</p></td>
+<td rowspan="3"><p>TXB_M</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b1</p></td>
+<td rowspan="3"><p>Transmit buffer mask ENABLE</p>
+<p>0: Interrupt is un-masked</p>
+<p>1: Interrupt is masked</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</section>
+<section id="ipgt">
+<h2>IPGT<a class="headerlink" href="#ipgt" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x4000d00c</p>
+<figure class="align-center">
+<img alt="../_images/emac_IPGT.svg" src="../_images/emac_IPGT.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:7</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><p>6:0</p></td>
+<td rowspan="3"><p>IPGT</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>7’h18</p></td>
+<td rowspan="3"><p>Inter packet gap</p>
+<p>The recommended value is 0x18 (24 clock cycles),</p>
+<p>which equals 9.6 us for 10 Mbps and 0.96 us for 100 Mbps mode</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</section>
+<section id="packetlen">
+<h2>PACKETLEN<a class="headerlink" href="#packetlen" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x4000d018</p>
+<figure class="align-center">
+<img alt="../_images/emac_PACKETLEN.svg" src="../_images/emac_PACKETLEN.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td rowspan="4"><p>31:16</p></td>
+<td rowspan="4"><p>MINFL</p></td>
+<td rowspan="4"><p>r/w</p></td>
+<td rowspan="4"><p>16’h40</p></td>
+<td rowspan="4"><p>Minimum frame length</p>
+<p>The minimum Ethernet packet is 64 bytes long (0x40).</p>
+<p>To receive small packets, assert the RECSMALL bit or change the MINFL value.</p>
+<p>To transmit small packets, assert the PAD bit or change the MINFL value.</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="4"><p>15:0</p></td>
+<td rowspan="4"><p>MAXFL</p></td>
+<td rowspan="4"><p>r/w</p></td>
+<td rowspan="4"><p>16’h600</p></td>
+<td rowspan="4"><p>Maximum frame length</p>
+<p>The maximum Ethernet packet is 1518 bytes long. To support this and to have some additional</p>
+<p>space for tags, a default maximum packet length equals to 1536 bytes (0x600).</p>
+<p>For bigger packets, you can assert the HUGEN bit or increase the value of MAXFL field.</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</section>
+<section id="collconfig">
+<h2>COLLCONFIG<a class="headerlink" href="#collconfig" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x4000d01c</p>
+<figure class="align-center">
+<img alt="../_images/emac_COLLCONFIG.svg" src="../_images/emac_COLLCONFIG.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:20</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="4"><p>19:16</p></td>
+<td rowspan="4"><p>MAXRET</p></td>
+<td rowspan="4"><p>r/w</p></td>
+<td rowspan="4"><p>4’hF</p></td>
+<td rowspan="4"><p>Maximum retry</p>
+<p>This field specifies the maximum number of consequential retransmission attempts after the collision is detected.</p>
+<p>When the maximum number has been reached, the TX MAC reports an error and stops transmitting the current packet.</p>
+<p>According to the Ethernet standard, the MAXRET default value is set to 0xf (15).</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>15:6</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td rowspan="3"><p>5:0</p></td>
+<td rowspan="3"><p>COLLVALID</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>6’h3F</p></td>
+<td rowspan="3"><p>Collision valid</p>
+<p>This field specifies a collision time window. A collision that occurs later than the time window</p>
+<p>is reported as a “Late Collisions” and transmission of the current packet is aborted.</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+</tbody>
+</table>
+</section>
+<section id="tx-bd-num">
+<h2>TX_BD_NUM<a class="headerlink" href="#tx-bd-num" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x4000d020</p>
+<figure class="align-center">
+<img alt="../_images/emac_TX_BD_NUM.svg" src="../_images/emac_TX_BD_NUM.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>30:24</p></td>
+<td><p>RXBDPTR</p></td>
+<td><p>r</p></td>
+<td><p>7’h0</p></td>
+<td><p>RX buffer descriptors (BD) pointer, pointing at the RXBD currently being used</p></td>
+</tr>
+<tr class="row-even"><td><p>23</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>22:16</p></td>
+<td><p>TXBDPTR</p></td>
+<td><p>r</p></td>
+<td><p>7’h0</p></td>
+<td><p>TX buffer descriptors (BD) pointer, pointing at the TXBD currently being used</p></td>
+</tr>
+<tr class="row-even"><td><p>15:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><p>7:0</p></td>
+<td rowspan="3"><p>TXBDNUM</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>8’h40</p></td>
+<td rowspan="3"><p>TX buffer descriptors (BD) number</p>
+<p>Number of TX BD. TX and RX share 128 (0x80) descriptors, so the number of RX BD equals 0x80 - TXBDNUM.</p>
+<p>The maximum number of TXBDNUM is 0x80. Values greater then 0x80 cannot be written into this register.</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</section>
+<section id="miimode">
+<h2>MIIMODE<a class="headerlink" href="#miimode" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x4000d028</p>
+<figure class="align-center">
+<img alt="../_images/emac_MIIMODE.svg" src="../_images/emac_MIIMODE.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:9</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><p>8</p></td>
+<td rowspan="3"><p>MIINOPRE</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>No preamble for Management Data (MD)</p>
+<p>0: 32-bit preamble will be sent.</p>
+<p>1: No preamble will be sent.</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="2"><p>7:0</p></td>
+<td rowspan="2"><p>CLKDIV</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>8’h64</p></td>
+<td rowspan="2"><p>Clock divider for Management Data Clock (MDC)</p>
+<p>The source clock is bus clock and can be divided by any even number.</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</section>
+<section id="miicommand">
+<h2>MIICOMMAND<a class="headerlink" href="#miicommand" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x4000d02c</p>
+<figure class="align-center">
+<img alt="../_images/emac_MIICOMMAND.svg" src="../_images/emac_MIICOMMAND.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:3</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><p>2</p></td>
+<td rowspan="2"><p>WCTRLDATA</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>1’b0</p></td>
+<td rowspan="2"><p>Write control data, setting this bit to 1 will trigger the command (auto cleared)</p>
+<p>Note: [2]/[1]/[0] cannot be asserted at the same time, execute one command at a time</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="2"><p>1</p></td>
+<td rowspan="2"><p>RSTAT</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>1’b0</p></td>
+<td rowspan="2"><p>Read status, setting this bit to 1 will trigger the command (auto cleared)</p>
+<p>Note: [2]/[1]/[0] cannot be asserted at the same time, execute one command at a time</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="2"><p>0</p></td>
+<td rowspan="2"><p>SCANSTAT</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>1’b0</p></td>
+<td rowspan="2"><p>Scan status, setting this bit to 1 will trigger the command (auto cleared)</p>
+<p>Note: [2]/[1]/[0] cannot be asserted at the same time, execute one command at a time</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+</tbody>
+</table>
+</section>
+<section id="miiaddress">
+<h2>MIIADDRESS<a class="headerlink" href="#miiaddress" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x4000d030</p>
+<figure class="align-center">
+<img alt="../_images/emac_MIIADDRESS.svg" src="../_images/emac_MIIADDRESS.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:13</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>12:8</p></td>
+<td><p>RGAD</p></td>
+<td><p>r/w</p></td>
+<td><p>5’h0</p></td>
+<td><p>Register Address</p></td>
+</tr>
+<tr class="row-even"><td><p>7:5</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>4:0</p></td>
+<td><p>FIAD</p></td>
+<td><p>r/w</p></td>
+<td><p>5’h0</p></td>
+<td><p>PHY Address</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="miitx-data">
+<h2>MIITX_DATA<a class="headerlink" href="#miitx-data" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x4000d034</p>
+<figure class="align-center">
+<img alt="../_images/emac_MIITX_DATA.svg" src="../_images/emac_MIITX_DATA.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15:0</p></td>
+<td><p>CTRLDATA</p></td>
+<td><p>r/w</p></td>
+<td><p>16’h0</p></td>
+<td><p>Control Data to be written to PHY</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="miirx-data">
+<h2>MIIRX_DATA<a class="headerlink" href="#miirx-data" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x4000d038</p>
+<figure class="align-center">
+<img alt="../_images/emac_MIIRX_DATA.svg" src="../_images/emac_MIIRX_DATA.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15:0</p></td>
+<td><p>PRSD</p></td>
+<td><p>r</p></td>
+<td><p>16’h0</p></td>
+<td><p>Received Data from PHY</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="miistatus">
+<h2>MIISTATUS<a class="headerlink" href="#miistatus" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x4000d03c</p>
+<figure class="align-center">
+<img alt="../_images/emac_MIISTATUS.svg" src="../_images/emac_MIISTATUS.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:2</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><p>1</p></td>
+<td rowspan="3"><p>MIIM_BUSY</p></td>
+<td rowspan="3"><p>r</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>MIIM I/F busy signal</p>
+<p>0: The MIIM I/F is ready.</p>
+<p>1: The MIIM I/F is busy.</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>MIIM_LINKFAIL</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>MIIM I/F link fail signal</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="mac-addr0">
+<h2>MAC_ADDR0<a class="headerlink" href="#mac-addr0" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x4000d040</p>
+<figure class="align-center">
+<img alt="../_images/emac_MAC_ADDR0.svg" src="../_images/emac_MAC_ADDR0.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:24</p></td>
+<td><p>MAC_B2</p></td>
+<td><p>r/w</p></td>
+<td><p>8’d0</p></td>
+<td><p>Ethernet MAC address byte 2</p></td>
+</tr>
+<tr class="row-odd"><td><p>23:16</p></td>
+<td><p>MAC_B3</p></td>
+<td><p>r/w</p></td>
+<td><p>8’d0</p></td>
+<td><p>Ethernet MAC address byte 3</p></td>
+</tr>
+<tr class="row-even"><td><p>15:8</p></td>
+<td><p>MAC_B4</p></td>
+<td><p>r/w</p></td>
+<td><p>8’d0</p></td>
+<td><p>Ethernet MAC address byte 4</p></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>MAC_B5</p></td>
+<td><p>r/w</p></td>
+<td><p>8’d0</p></td>
+<td><p>Ethernet MAC address byte 5</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="mac-addr1">
+<h2>MAC_ADDR1<a class="headerlink" href="#mac-addr1" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x4000d044</p>
+<figure class="align-center">
+<img alt="../_images/emac_MAC_ADDR1.svg" src="../_images/emac_MAC_ADDR1.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15:8</p></td>
+<td><p>MAC_B0</p></td>
+<td><p>r/w</p></td>
+<td><p>8’d0</p></td>
+<td><p>Ethernet MAC address byte 0</p></td>
+</tr>
+<tr class="row-even"><td><p>7:0</p></td>
+<td><p>MAC_B1</p></td>
+<td><p>r/w</p></td>
+<td><p>8’d0</p></td>
+<td><p>Ethernet MAC address byte 1</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="hash0-addr">
+<h2>HASH0_ADDR<a class="headerlink" href="#hash0-addr" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x4000d048</p>
+<figure class="align-center">
+<img alt="../_images/emac_HASH0_ADDR.svg" src="../_images/emac_HASH0_ADDR.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>HASH0</p></td>
+<td><p>r/w</p></td>
+<td><p>32’h0</p></td>
+<td><p>Lower 32-bit of HASH register</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="hash1-addr">
+<h2>HASH1_ADDR<a class="headerlink" href="#hash1-addr" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x4000d04c</p>
+<figure class="align-center">
+<img alt="../_images/emac_HASH1_ADDR.svg" src="../_images/emac_HASH1_ADDR.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>HASH1</p></td>
+<td><p>r/w</p></td>
+<td><p>32’h0</p></td>
+<td><p>Upper 32-bit of HASH register</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="txctrl">
+<h2>TXCTRL<a class="headerlink" href="#txctrl" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x4000d050</p>
+<figure class="align-center">
+<img alt="../_images/emac_TXCTRL.svg" src="../_images/emac_TXCTRL.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:17</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><p>16</p></td>
+<td rowspan="2"><p>TXPAUSERQ</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>1’b0</p></td>
+<td rowspan="2"><p>TX Pause Request</p>
+<p>Writing 1 to this bit starts sending control frame and is automatically cleared to zero.</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="2"><p>15:0</p></td>
+<td rowspan="2"><p>TXPAUSETV</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>16’h0</p></td>
+<td rowspan="2"><p>TX Pause Timer Value</p>
+<p>The value that is sent in the pause control frame.</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

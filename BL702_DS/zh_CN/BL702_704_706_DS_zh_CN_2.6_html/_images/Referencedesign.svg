@@ -1,0 +1,5109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:v="http://schemas.microsoft.com/visio/2003/SVGExtensions/"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="7.0866146in"
+   height="6.2224102in"
+   viewBox="0 0 510.23625 448.01353"
+   xml:space="preserve"
+   color-interpolation-filters="sRGB"
+   class="st19"
+   version="1.1"
+   id="svg1370"
+   sodipodi:docname="Referencedesign_common.svg"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"><metadata
+   id="metadata1374"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title /></cc:Work></rdf:RDF></metadata><sodipodi:namedview
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="0"
+   inkscape:pageshadow="2"
+   inkscape:window-width="1920"
+   inkscape:window-height="1017"
+   id="namedview1372"
+   showgrid="false"
+   inkscape:zoom="8.3235296"
+   inkscape:cx="355.24675"
+   inkscape:cy="112.01323"
+   inkscape:window-x="1912"
+   inkscape:window-y="-8"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="svg1370"
+   inkscape:document-rotation="0" />
+	<v:documentProperties
+   v:langID="1033"
+   v:viewMarkup="false">
+		<v:userDefs>
+			<v:ud
+   v:nameU="msvSubprocessMaster"
+   v:prompt=""
+   v:val="VT4(Rectangle)" />
+			<v:ud
+   v:nameU="msvNoAutoConnect"
+   v:val="VT0(1):26" />
+			<v:ud
+   v:nameU="msvConvertTheme" />
+		</v:userDefs>
+	</v:documentProperties>
+
+	<style
+   type="text/css"
+   id="style2">
+	<![CDATA[
+		.st1 {fill:none;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:3}
+		.st2 {fill:none;stroke:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.24}
+		.st3 {fill:#000000;font-family:Arial;font-size:3em}
+		.st4 {font-size:1em}
+		.st5 {stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:1}
+		.st6 {marker-end:url(#mrkr10-19);stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:1}
+		.st7 {fill:#000000;fill-opacity:1;stroke:#000000;stroke-opacity:1;stroke-width:0.28409090909091}
+		.st8 {fill:#ffffff;stroke:#404040;stroke-linecap:round;stroke-linejoin:round;stroke-width:1}
+		.st9 {fill:#000000;font-family:Arial;font-size:0.666664em}
+		.st10 {marker-start:url(#mrkr10-44);stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:1}
+		.st11 {fill:#ffffff;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:1}
+		.st12 {fill:#ffffff;stroke:none;stroke-linecap:butt;stroke-width:7.2}
+		.st13 {fill:#000000;font-family:Arial;font-size:0.833336em}
+		.st14 {fill:none;stroke:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.75}
+		.st15 {marker-start:url(#mrkr41-222);stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:1}
+		.st16 {marker-start:url(#mrkr4-266);stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:1}
+		.st17 {fill:#000000;fill-opacity:1;stroke:#000000;stroke-opacity:1;stroke-width:0.23584905660377}
+		.st18 {fill:none;stroke:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:1}
+		.st19 {fill:none;fill-rule:evenodd;font-size:12px;overflow:visible;stroke-linecap:square;stroke-miterlimit:3}
+	]]>
+	</style>
+
+	<defs
+   id="Markers">
+		<g
+   id="lend10">
+			<path
+   d="M 0,0.75 C -0.414214,0.75 -0.75,0.414214 -0.75,0 -0.75,-0.414214 -0.414214,-0.75 0,-0.75 0.414214,-0.75 0.75,-0.414214 0.75,0 0.75,0.414214 0.414214,0.75 0,0.75 Z"
+   style="stroke:none"
+   id="path4" />
+		</g>
+		<marker
+   id="mrkr10-19"
+   class="st7"
+   v:arrowType="10"
+   v:arrowSize="2"
+   v:setback="2.64"
+   refX="-2.6400001"
+   orient="auto"
+   markerUnits="strokeWidth"
+   overflow="visible">
+			<use
+   xlink:href="#lend10"
+   transform="scale(-3.52)"
+   id="use7"
+   x="0"
+   y="0"
+   width="100%"
+   height="100%" />
+		</marker>
+		<marker
+   id="mrkr10-44"
+   class="st7"
+   v:arrowType="10"
+   v:arrowSize="2"
+   v:setback="2.28"
+   refX="2.28"
+   orient="auto"
+   markerUnits="strokeWidth"
+   overflow="visible">
+			<use
+   xlink:href="#lend10"
+   transform="scale(3.52)"
+   id="use10"
+   x="0"
+   y="0"
+   width="100%"
+   height="100%" />
+		</marker>
+		<g
+   id="lend41">
+			<path
+   d="M 0.75,0.75 C 0.335786,0.75 0,0.414214 0,0 0,-0.414214 0.335786,-0.75 0.75,-0.75 1.16421,-0.75 1.5,-0.414214 1.5,0 1.5,0.414214 1.16421,0.75 0.75,0.75 Z"
+   style="fill:none;stroke-linecap:round;stroke-linejoin:round"
+   id="path13" />
+		</g>
+		<marker
+   id="mrkr41-222"
+   class="st7"
+   v:arrowType="41"
+   v:arrowSize="2"
+   v:setback="4.92"
+   refX="4.9200001"
+   orient="auto"
+   markerUnits="strokeWidth"
+   overflow="visible">
+			<use
+   xlink:href="#lend41"
+   transform="scale(3.52)"
+   id="use16"
+   x="0"
+   y="0"
+   width="100%"
+   height="100%" />
+		</marker>
+		<g
+   id="lend4">
+			<path
+   d="M 2,1 0,0 2,-1 v 2"
+   style="stroke:none"
+   id="path19" />
+		</g>
+		<marker
+   id="mrkr4-266"
+   class="st17"
+   v:arrowType="4"
+   v:arrowSize="3"
+   v:setback="8.12"
+   refX="8.1199999"
+   orient="auto"
+   markerUnits="strokeWidth"
+   overflow="visible">
+			<use
+   xlink:href="#lend4"
+   transform="scale(4.24)"
+   id="use22"
+   x="0"
+   y="0"
+   width="100%"
+   height="100%" />
+		</marker>
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	
+			
+			
+			
+			
+		
+				
+				
+				
+			
+					<clipPath
+   id="mfid21">
+						<rect
+   x="-0.70832998"
+   y="-0.70968002"
+   width="1634.1"
+   height="888.03998"
+   id="mfid22" />
+					</clipPath>
+					
+				
+						<mask
+   id="mfid23">
+							<rect
+   width="1634"
+   height="888"
+   fill="#ffffff"
+   stroke="none"
+   id="rect400"
+   x="0"
+   y="0" />
+						</mask>
+						<mask
+   id="mfid24"
+   fill="#ffffff"
+   stroke="none">
+							<g
+   id="g407">
+								<g
+   mask="url(#mfid23)"
+   id="g405">
+									<use
+   xlink:href="#mfid22"
+   id="use403"
+   x="0"
+   y="0"
+   width="100%"
+   height="100%" />
+								</g>
+							</g>
+						</mask>
+						<defs
+   id="defs411">
+							<path
+   id="mfid25"
+   d="M 0,0 H 2490200 V 1353300 H 0 Z" />
+						</defs>
+						<mask
+   id="mfid26">
+							<use
+   xlink:href="#mfid25"
+   fill-rule="evenodd"
+   fill="#ffffff"
+   stroke="none"
+   transform="matrix(6.5617e-4,0,0,6.5617e-4,0,0)"
+   id="use413"
+   x="0"
+   y="0"
+   width="100%"
+   height="100%" />
+						</mask>
+						<mask
+   id="mfid27"
+   fill="#ffffff"
+   stroke="none">
+							<g
+   mask="url(#mfid24)"
+   id="g420">
+								<g
+   mask="url(#mfid26)"
+   id="g418">
+									<use
+   xlink:href="#mfid22"
+   id="use416"
+   x="0"
+   y="0"
+   width="100%"
+   height="100%" />
+								</g>
+							</g>
+						</mask>
+						<defs
+   id="defs424">
+							<image
+   id="mfid28"
+   width="817"
+   height="444"
+   xlink:href="data:image/png;base64,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" />
+						</defs>
+						
+						
+						<mask
+   id="mfid30">
+							<rect
+   width="1634"
+   height="888"
+   fill="#ffffff"
+   stroke="none"
+   id="rect435"
+   x="0"
+   y="0" />
+						</mask>
+					<clipPath
+   id="mfid29"><rect
+     x="-0.5"
+     y="-0.5"
+     width="817"
+     height="444"
+     id="rect748" /></clipPath>
+			
+			
+			
+			
+		
+				
+				
+				
+			
+					<clipPath
+   id="mfid1">
+						<rect
+   x="-0.70832998"
+   y="-0.70968002"
+   width="2337"
+   height="843.09998"
+   id="mfid2" />
+					</clipPath>
+					
+				
+						<mask
+   id="mfid3">
+							<rect
+   width="2337"
+   height="843"
+   fill="#ffffff"
+   stroke="none"
+   id="rect184"
+   x="0"
+   y="0" />
+						</mask>
+						<mask
+   id="mfid4"
+   fill="#ffffff"
+   stroke="none">
+							<g
+   id="g191">
+								<g
+   mask="url(#mfid3)"
+   id="g189">
+									<use
+   xlink:href="#mfid2"
+   id="use187"
+   x="0"
+   y="0"
+   width="100%"
+   height="100%" />
+								</g>
+							</g>
+						</mask>
+						<defs
+   id="defs195">
+							<path
+   id="mfid5"
+   d="M 0,0 H 3561600 V 1284700 H 0 Z" />
+						</defs>
+						<mask
+   id="mfid6">
+							<use
+   xlink:href="#mfid5"
+   fill-rule="evenodd"
+   fill="#ffffff"
+   stroke="none"
+   transform="matrix(6.5617e-4,0,0,6.5617e-4,0,0)"
+   id="use197"
+   x="0"
+   y="0"
+   width="100%"
+   height="100%" />
+						</mask>
+						<mask
+   id="mfid7"
+   fill="#ffffff"
+   stroke="none">
+							<g
+   mask="url(#mfid4)"
+   id="g204">
+								<g
+   mask="url(#mfid6)"
+   id="g202">
+									<use
+   xlink:href="#mfid2"
+   id="use200"
+   x="0"
+   y="0"
+   width="100%"
+   height="100%" />
+								</g>
+							</g>
+						</mask>
+						<defs
+   id="defs208">
+							<image
+   id="mfid8"
+   width="374"
+   height="135"
+   xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXYAAACHCAYAAAAC53JtAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAABhOSURBVHhe7Z0vrCRVE8XxG+QaHBjcChwOg0FjERgMGolCrEBjEatQKCQOgyJBIVEkmA0JyYYEM1+foQb66+6ZubdOVd0/U7/kZObNvp33Xk/3vXWrzq1+LdHzxx9/nH799dfTDz/8cPrmm29OX3311enLL788ffbZZ6dPPvnk9PHHH58f8TVex7/j+/D9+H/4//JWU/HXX3+dXr58efr9999Pv/322/8Jr+HvxvfIt0/Nn3/+eT4W2+NwORb4d/nWqVhfGy9evDif+8+fPz9fC7guLvr000/Pr+Pf8X3ff//9+f/hmMlbJYkvuBi//fbb88n4zjvv4MSjhffB++F98f7La8OAQely4eKCff/9989/z9OnT3d/51ZvvPHG+Xs/+OCD0+eff36e8H766adhB3x8dhiUMEBhwHrvvfdOb7/99unJkye7v32rt9566/Tuu++ePvroo3MA8N13350Ht7///hv/PgRe1wYCoxGvjaRzMNhg4HnzzTd3J56HMBh88cUX50Fu+borEEVh0MEgjt9zeclFGORwzDFp9BrRYuD9+uuvz4P48qWbMNhjsvj555/xdVfgHMW56nkurIVgAOfFjz/+iK+TpA5ctFgeLk+bCtEeIriW0QrSBRjAMNguXzYRonpEba1TV7/88sv5vCiJwr2ESRUDW6toHucizsnlaXNhUsG1ujxPkusgQsQgsjztTojcIiMVpBU+/PDD3e/RWliaRx4HrBgwsVmlF6yE9A0GWEy8y9fu4JjjHFyedidcszhfl+dJ8h9IL+BCWZ52L0TOmICW5+a8evXqvOxfnnYvLP8RxS/PXUAkiOh4edq9MOB6pWpwrrVcrdUIqRpcy8vz5JHBSfvs2bPdCTKCUKi0upgRlfayvK7V66+/fi68WqUmMKB75829hMjVqjaDcwsF4OXpcMKknxH8A4KLt8c0g0ZITTAFRjhalofhheI2E63hGI4Sod8TInhtXQZ1DJxTy9PhhYkuc/APAKK6HoqiHpIBuhjkTLF0XZ5OJUSZKHIuz4tBDn15mE5wkNSsZGaZ5LeqPQ7JQGBpGWXLaiWkZ+5FavCJzxKZ3pKklm6CaG6U/LFWmLzv1WRQgB017VIq1NAii+5JAKMUBK2EnPPyuENO7IcR6ifXluKPdk7IZL5DCtAPI1mxJyODfCGi2OXpwwl50vXyE57f5eEhtU5TPfI5gTrEZaLDuTFqkZgVVmnZsmBQJM/60IL3GimoXr35kcJWdzhGStodzC5MdLOnoErU4+7u5AaSikilUqmbksJ50jvRfmxEPqi6I1eJIhVWCljmoUgJwUaH5S/y27DjIbcLq2VU75lowVd+ae6FKBnHBmkgCM+RIsK/jbp/oEb4jHF+wH6IHDeOAc5PPOJrvH5pFnb0/2fR+pxA+gd/O84FPOJ8wPWA49TqmigptCcNkQKRu1CAwUDN+McBBnwsi0dOlWBQwvHAhhA4crB7dXm9iEtrV0x4uNCXl4YWBihM3Fji1271x/cjKMD5MHruG4M0BksEOjXnBPL++H4cP0TSkXtNZOxIesP7JMAH75mTwyCHk3mE6A0TEdJd+J2Xr03BQI/BcZQcMFYl9+yEWnC+YcIboS6A6w8TNBvsHIEgCtcfIv/lSzdJgJX0gmeEg8gjuoKOgaJHXzFSCNodjRoQwWLgXJ52JXiiMbF5DGJHIJLFiqjHyQ7XR1QjMhwHTB6e14Y0OktaIx+EuTCIRV2418AA30NXQawkWt4AAwMHPo/laVPhs2jdgwRRfA+pO6SM1nbaaOD28lqly/smrfCI5vChRkalJbRy+SB33tMdjTDAt+hjgt2bnp0kNSA90WLSR5qs5YC+xatZmWQBkmikkm0qpomUN8hnRxXVsIHnspGlRxC1eudbL0KOu6fJbUvUDtoeA541Hjtoc5dqMNZNm7C09SgEeiCTj5uutSPoEc/0DKx3iAaX592DlYxn3rm31co14L6xTs3KxJl4Iw4EM43oYfW4kLGs7zlKv4b1+QBt2zGMgvUqFg6tqMKoJdapy+zt7oycZGYa+QOzjkxGtXqhwG1tBxw1SvOoxfScfrkFghTLe9OOehy6BxGUpce7tmd3T0juz1wjbtLwsgCONunLHgtzISXVc43hFvi9rRxEIx+HrrFyQyC6G3n29Ug9rNVzAXmLtwVylDSE7Ox00+gOESvTQTpljLEqGMK2NkqR9AiJGNw1woDmPcFBUsfongi31EgT/hFW7UZGKSR3j0TXtLCUGrEQtMZrM9ZWvQ9oURMc1Hu+PXKPw+h5Zqt+RCOaDLrDyv0x+qDubXPcan1zit6IbjPQ64Usq88wzdBLxWJ1I3WdRIuVX33kQimQ1gbh6nEyjEjBbNXrCsZrS/0tjbTP4RoWxy397UpkUKElA8HQtGqE1VvPDDijUCdZnoartwFNXDtN1LqHEgtSeRYOu7RAKshZ9R9k92Mz9TQxerSRqFEvdjdMcC1b+c7Qu9wicOwt8Okei2hkFmtSD90dFzXHqojOqJcBzWsfQ41GabdwC4u03uhuoVDYHWPolz3DZgKLxkZSBKUktY6msPsYcE7JCo5S60Kq3BuAElY+rClhlgKi0SSZ3MPi4hu9WLpi97fV6NIHx+KYtsyrWqSj0OZ2eaRTfK2X32y95VIIlgmK0iw9VNhVcRZS72ARjcxykNnBeBtRoRXv8qCW7PJsAhtdrn93C4ug5y0SbyEBC6V1wY91nUkBcngsJrnR7dSusBsIZlkeSmdBStuUgcXJ22LXrkTaasFFs+3UyKa4Wvm52Q1qRyk1ttfOLDlmNpCaoaDsgkWVunX+0wr2JLvWiph93xZRO7vSuKRgtrDNoaKjdjZav+bFZyf8WaJ2wKZk0v54AButXxvMRgNFX+buQGidsI1Q17A+cGk4FQLbsfCWM4od0KJz7Wzx+FbdiW2mNkvUztZyMmrfYJFbXzQFbO+PewUt1uIVWcNgUw/38p7sgBZVpGdXs1JwvQqb+nv27Bkep8D7nHsoWMvRTF5SxupZWmNgnCHYGHNrRWAFG1GXrODYZmISRbvDrmYlcLoJG1BcS3mNBrtfoqXJoCvYXtK99vHQwEbTpXlfNl8bMZGyg1np5MM6Q7wLymyfoJoUJbPNfqZe5exKLjJd2S3sBppW1jMPmEi6NufLLDmlyOQGmxqo2VDF/izv1BQbSdds1JMJW61ZioesJbaHDX3NYXpetN4sYgm7BKzd4s1G7Z755cjBDDBRO4rVy6Mb2EW9PKikmXQkX67SLAYGwETtYn54XFiP8kzROmNFFEtgNcwKQVIlLjAWR83gwqYDvfLL7OSrSRMxk+pMAxpbsJ6hq6waxsKlHcx6hbE4ak8i1k7oUURli6ba1gcyIajklV9mbudGTry79yvVTAMa075hpppDFWxRaKYTiFm5SCpLDbNd36NXCOOQYnzErOXWuojK5v6ZzXrM6vGetXIkWqyYhocpmnoX76JhIjO2UMNsr5cCrCnMBio2788UlK1vcsy0rmZrT2wawmMl1womLdjz7SXdYCLFCe8UvvsbS1XiUS5g976lsoxKmJ1/FptkmNSUdSGfSVNarKSYnz/TvhIm8Jmld1UxrANkpoiAScNYRczMisHyImacCFL0o2G83Fatjdli7iIaZk/FTPllNiX2UP1jGHuZpxujBcygalVnYCJly92XzK5bq5UDk1+2muSYQdX4+ti9f6la9u+3pmWqdCiYLmqe/uloEA2QN9U1o/XvwbhhLCNEZjVp9Xswu24trw+mkJ3mhn80Ux+dm0hkpdJMLUIBU3VnHCBHMHY/Cx93D5HyBW2PclhWjbaT7967RNabpZiV3Gwra2YjpVEdrG+YbcuanXQ9wwxm1ptimIjZovER0x/duubCpArZTXPMZO/RgIps8zwNzCpqpmLyVRjT/2yFCMZK5VFA1m5fZxuxMas4j0IdM8mxwQdjA/bYic0UtBkvfW8w6ZiZvP2HYDDSRgAzdXEETLXdy3XARCXMcpMpFnpZX7XnKbvHguwHbg5jAbVyKvUAc71GtbpuBrPMnKnBEGAuGK/BjIlKGO80k9/3WsUxkarWEcLcPcsrKmR61s8WqTLe/plMHzuYBkO13Qt7h8mve92lhbmIxUGhQluslKjaBWYVoU2JMCkgz0172lWEpPamgdmsNNPqZQcz4y2aCu3F4r2bTbsjWGvrYpa4HsXCC0wvI+3qkgl8PPPZTN5/plvF9WCF7RKxY1XLchNMDzCDmbXNcQuzktCkIBhLnUcTsjXa4rb2ImaMBYvcYFKoEzpCdn9jiTxXl4dgFvIWZu0swvwHjsnyoJL3hcJ8Tpo8IhOlevuDtXl22UFbTeeBz+7nlmi22hizCxU1LKysWG3H1yMtP+/4l+hJ+GOWx2lgvPzex4KxHmomYO2FEtHhk+mwWJuCYNoGR3QR1O4zmM3Nxly7wTp8sRthCVN7q7PeYVwgi9zR5tk1uw21PysiSmXa19amiZiUVITjQpuiw/U7k9VPouERdPhiN5JIYSq0t6SLOhbaXG/t78fUGgJ7Xe9+dolqmz8xjgvL1snXYFxCl9TADOCcZe5DG6jDF7vRbDk6oG24FXUsmLz3omKY6Me6pcI1tJNwbQFVm8+PSnWM8FlFwdwrOFCHL3Yjb+dDNEwu1dOrvIbZqFQTPTI57KjGStq0Wa0tVWt/jbLRIR2q3Y07W+taxjkWqMMXu9FshVP5e1SKOhaMh7smOotaGTBoUyTYRl5TG9I6YiIHTW09xHO/QQuYtFSgDl/sSVPBnBRRUaqw+/klqrFjah0x4i8PgfFwV+aWd/+/RJErWm3txfq2ga1hnGOBOnyxC83Wfx1oW8JGHwttdFbT3VBroYvs9c3klkvdKhE/wwLtDlTpfzMbu7+zMx2+2IVm3IarvStNZJQKtNF0TeMn7Z20aiYPFrggtLnl0tULU9OItBKSHu6pGKCAevhiF5rtLixAu5yNbqugLRqWWh6ZYlxNuscC7QRUmv8eZcBkvPYRlsxImBbXQTp8sQvNVk0H2k6GkVEq0BY2S90gzOafyPQD0EZnpfZUbYrDuyHcFqaoHv2ZeUMW/iN0+GIXms3/Kuz+zhJFWR0vaNMDcHeUuEFGcAdd0Kal5P/dRethj05VMhvKxDQwDUxPpSAdvtiFZpvlhd3fWaJoP78ce5VKlt3MwB7dClZb8C51g2jTcy1SldqbOs+2H4U5f0OEk6pHIaesvRNN5+w/hAJpb96gxXvg1do+a/3hFmiX3aVOJu9UjyXaVKIcw2nA6uVo3OpF8msmETD+10pPNA2TAy/5XbUFwxYWWO/iprbve4salHYSiq4RJUkYjF85evXCFMpKcuDaKDiiXe8WcqfhXbR7BqLrLkCiwWrNtvs0Sf6FyVtH+pUBfp72xsol96fV9tuIanq1hiyU3UVrp2yRt/YuJCfJcDADRPTADrQ+8xI3k3Zgb9HGmZmQF90En6u222d03QVEbFxLkqEYbWDXNqYqsbZpN0BJF8RQSAfETfC5avt7t3CNaTfmzHbf4iT5l1G2jl/QDjglKQLtwN6izQRTG7n3uTE7cFsM7KN47pMkDO8inDXaFEHJln/twN4i8mMcQq9evcLjVfDvIw3s2l5HLVZaSRKCNmJv1R2vx4i9Ra6Widjvee4zYk+SwcmB/T8eZWAvScVoaxk5sCdJB4yWY++xeNoiFZPF0//I4mmSbGDanrYY2LUpghIbntbu2CJXy3xui+7y7Nmzo/93Vy0G9rQ7JskGuRBVih7Y8fO0G5RKBhzvxlqWMCutRXfR9l8p2QhmjXbn6Yz3VkiSM565WmuYvjaeLQWi7yQFpGag1V20LQVKUl7WSEqlWuKmSZL5YPqv3LPNWcNMQvJ/b6IdLFv0ipGeLNV68uQJHu+ivfdri14x2t91xpvmJMma3UlfopLB0hLvtr3aXbgtujt6NyyTukG1WgyW2r420bczTJJodid9iaLzqdp6AKLUkk6U2okDBd3otJS20FtaD9AWJMVZFIYcd5VKLLBJMixap0n0haFNlSCiLhl4mVTPy5cv8RiGd8FQO3FEFySZgV0K0EkyJ6PkU7WuldK2ujI4q1RSnLVE+5mVRtTaHH60N5xprRD9mSVJKNplt0R1YWh3GJamHxD9jbIxR+szf/HiBR7vol0diU0yDMb2GX07wyQJZZSt9FpbW80NFbT+7ci0FNxIWj9/qR2R2d+wKAzvWwQmybCM4t/WdnYsjVKB1g0SuXph3EGl6QeJZlWKLCRrgxJZ8STJvAxk89v9DiWqiaa1A0Vk0ZC5OUqJ7XPF7v+XKDItpb2RdfaJSaaHiQCj3CDM71gz0GiLhpGrF1mBVEvqB8Vod59GpqW0HvZoW2aShINlt2cPFgu0xTyoJjXARMOLQtB2M6y9N2vvRXXGxdRih2yShKONfCQ/7442RSJtfothWixUpjnUaB0xtekirZc9qtslU+CNTBclSTO0jhOxILoTmUv1dpwYsPvZJaqNUrVWwqjeOdqUFBQ1CSdJU7TOmAh3AXOrNk1aQO6sU62IFATTh722BQSzEzdi4NTuvk1HTPIwePf3ZmAKp5ooWpv2iejLrp2AIY0NUbpBViuogLr7uSXKW+IlD4O04FWp5O5EDMxgpulAKZOBSt6tjLU+e+2OUG0KzNt1wrQSqNnXkCTDo9116Z2C0KZGnj59isdqmEHDsyjHpKS0Pnttfx7vdAez47TFXZ6SpBlae1utjU7B7meWiNmEok1BeE5yjAtE23ucsX967nHQnqtQ9ohJHgomCpLb1pnDFAsZK6Z24PB0hGjth1BpK4EtjP3T60YWqBVoVy4RdZAk6QrGBeF1EWsLmZB2MAPaHaiQlyNEmyorvR3eNXrbts+sXHLHafKQaD3cXpGQdjArvbnGNXorzjG/T013yyOYlYJH2oOZ7L0L/UnSJdqe55B1TpWxOVq0FNZOKqU39qiBcQax1kMmHeaxktP2zBclyePB+NmtI1UmUrTwUT9//nz3vqVi0kBHaNMhkFH9Y/e+JbIurDNpmPSvJw8LfNhaR4gUtMzQ9l+HLHqCM44QNv2xhknDWKXIGBeKpQWUWVF61YGSZAi0m2Agq34pzKBqnO/fvX+prJxCzMrFahXFdNe0nOQWdu9fqqgW00nSJYzt0Sq/rO0FDlm2ZGUiVQsHBmM3hKwGM2ZnMmTxe2g3S0EBey2SpG8kjaEWm99mokPIMjIje+icZGBWw0ws1jf/0DbdgtioXVY/amX/9SRZ0LbxhcQyqYbJrXvYLrUWUIhx5zCuIIjZoHUE00MHYrbyMxMcxE6wSTIF7EWs7dPO5JMhCzfMFqZgB2nrDpI+UMtjN7D031FJ2z+GccJA6YZJkhVad8xFtYMsewFDFm6YLWzkDNWmh5h8MuQ1mDGbg6DalAw+T2YFB1kV9JNkChgf90WlVjcZ+ChpOxiWIPlqtRCtlk467GoJktqAORaTnKzKimD8+xDbTiFJpoPxT691L3JnrI1raXqvl8IWdCHcf/XexiVmh+lF3remY1NE0L1JGDlxxhl1Uc0kkiQPA1u0ugjF2G30jkHO6v0j8qhMEXUtpDPWqRlE8oiwLQZMyHsjjtVEjJYNmDDXKxnUBdg01FpZNE2SAyxSJGthcMQFbTVIXnQvErbAImpfCz1PtP1orsl69+812BTJVjgObC59q4zWk+QGrFPFW5659S1WUbWXvHLrW5gWzxHK3HqSFCBWtS4VeUecngc0r/7n1+h5wk8nTJIUYOGG8FBUhLrGosDpoRa3fLMocFqL3eWaJA8Fc1chD7W8Gw6zvd5DrW4gYV2DYeXtCEqSKbHwtltIOlA2pZd8u8cdm2qw2FhmJa/bEibJ9LBb7Fl53KFIS+tURC/ODysLJKPSzXBJklyhVeSOKNmjbYAW/C7W1r9StUxFHdFycM9BPUmMiC4iRrs+arDaaFWq1umXa6DILl76EKEpWcQehiR5KHBRWW8sOVKvA9ka5gYlpcJA1nt0ilVMxESHOksLJ1CSPAxenmbksEeKyLAlXtobmAuDpdzJaAjgJWfa/N6Sda/5JEmugEFNdoHSgm2ttu1vTyCqZu4duxZy+CPnkDEIW6VnUNvJ/i9J0gBElbiYa1vdon8M8ugtNh15gZ2qKHLW7txFJ0hMkjPljxHBYzVT2+cffWSQissBPUk6ARtYMFCjYx9skriwEYFCGMQx6GESQEQ6e74UgzxWIUhbIa2CY4DJD06fy7HAJrDZi4GY+PF5Y7BGBI5zAscAxwLHBMcGxwjHKn3ps/Daa/8Di2lqtFEzjnYAAAAASUVORK5CYIIAAAA=" />
+						</defs>
+						
+						
+						<mask
+   id="mfid10">
+							<rect
+   width="2337"
+   height="843"
+   fill="#ffffff"
+   stroke="none"
+   id="rect219"
+   x="0"
+   y="0" />
+						</mask>
+					
+			
+			
+			
+			
+		
+				
+				
+				
+			<mask
+   id="mfid7-9"
+   fill="#ffffff"
+   stroke="none"><g
+     mask="url(#mfid4-2)"
+     id="g204-1"><g
+       mask="url(#mfid6-7)"
+       id="g202-2"><use
+         xlink:href="#mfid2"
+         id="use200-5"
+         x="0"
+         y="0"
+         width="100%"
+         height="100%" /></g></g></mask><mask
+   id="mfid4-2"
+   fill="#ffffff"
+   stroke="none"><g
+     id="g191-2"><g
+       mask="url(#mfid3-1)"
+       id="g189-0"><use
+         xlink:href="#mfid2"
+         id="use187-1"
+         x="0"
+         y="0"
+         width="100%"
+         height="100%" /></g></g></mask><mask
+   id="mfid3-1"><rect
+     width="2337"
+     height="843"
+     fill="#ffffff"
+     stroke="none"
+     id="rect184-1"
+     x="0"
+     y="0" /></mask><mask
+   id="mfid6-7"><use
+     xlink:href="#mfid5"
+     fill-rule="evenodd"
+     fill="#ffffff"
+     stroke="none"
+     transform="matrix(6.5617e-4,0,0,6.5617e-4,0,0)"
+     id="use197-1"
+     x="0"
+     y="0"
+     width="100%"
+     height="100%" /></mask><clipPath
+   id="mfid9-1"><rect
+     x="-0.5"
+     y="-0.5"
+     width="374"
+     height="135"
+     id="rect210-2" /></clipPath><clipPath
+   id="clipPath3373"><rect
+     x="-0.5"
+     y="-0.5"
+     width="374"
+     height="135"
+     id="rect3371" /></clipPath>
+							
+						
+								<clipPath
+   id="mfid9">
+									<rect
+   x="-0.5"
+   y="-0.5"
+   width="374"
+   height="135"
+   id="rect210" />
+								</clipPath>
+								
+							</defs>
+	<g
+   id="shape1-1"
+   v:mID="1"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,123.80078,-170.76126)"
+   style="stroke-width:1.09925">
+			<title
+   id="title28">工作表.1</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<rect
+   x="0"
+   y="324"
+   width="288"
+   height="288"
+   class="st1"
+   id="rect30" />
+		</g><g
+   id="shape2-3"
+   v:mID="2"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,173.31829,-219.49544)"
+   style="stroke-width:1.09925">
+			<title
+   id="title33">工作表.2</title>
+			<desc
+   id="desc35">BL702/4/6</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,0,4,0)" />
+			<v:textRect
+   cx="90"
+   cy="585"
+   width="180"
+   height="54" />
+			<rect
+   x="0"
+   y="558"
+   width="180"
+   height="54"
+   class="st2"
+   id="rect37" />
+			<text
+   x="7.9299998"
+   y="594"
+   class="st3"
+   v:langID="1033"
+   id="text43"
+   style="stroke-width:1.09925"><v:paragraph
+   v:spLine="-1"
+   v:horizAlign="1" /><v:tabList />BL702<tspan
+   class="st4"
+   v:langID="2052"
+   id="tspan39"
+   style="stroke-width:1.09925">/</tspan><tspan
+   class="st4"
+   v:langID="2052"
+   id="tspan41"
+   style="stroke-width:1.09925">4</tspan>/6</text>		</g><g
+   id="shape3-8"
+   v:mID="3"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,751.02249,48.542209)"
+   style="stroke-width:1.09925">
+			<title
+   id="title46">工作表.3</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 63"
+   class="st5"
+   id="path48" />
+		</g><g
+   id="shape4-11"
+   v:mID="4"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,33.018688,-268.22963)"
+   style="stroke-width:1.09925">
+			<title
+   id="title51">工作表.4</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 99"
+   class="st5"
+   id="path53" />
+		</g><g
+   id="shape5-14"
+   v:mID="5"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,222.83578,-503.77819)"
+   style="stroke-width:1.09925">
+			<title
+   id="title56">工作表.5</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 33.36"
+   class="st6"
+   id="path58" />
+		</g><g
+   id="shape6-20"
+   v:mID="6"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,243.46808,-515.96174)"
+   style="stroke-width:1.09925">
+			<title
+   id="title61">工作表.6</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,598.5 H 27 L 13.5,612 Z"
+   class="st8"
+   id="path63" />
+		</g><g
+   id="shape7-22"
+   v:mID="7"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,239.34162,-528.14528)"
+   style="stroke-width:1.09925">
+			<title
+   id="title66">工作表.7</title>
+			<desc
+   id="desc68">Antenna</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,0,4,0)" />
+			<v:textRect
+   cx="18"
+   cy="605.25"
+   width="36"
+   height="13.5" />
+			<rect
+   x="0"
+   y="598.5"
+   width="36"
+   height="13.5"
+   class="st2"
+   id="rect70" />
+			<text
+   x="3.0999999"
+   y="607.25"
+   class="st9"
+   v:langID="1033"
+   id="text72"
+   style="stroke-width:1.09925"><v:paragraph
+   v:spLine="-1"
+   v:horizAlign="1" /><v:tabList />Antenna</text>		</g><g
+   id="shape8-25"
+   v:mID="8"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,817.04949,24.175117)"
+   style="stroke-width:1.09925">
+			<title
+   id="title75">工作表.8</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 36"
+   class="st5"
+   id="path77" />
+		</g><g
+   id="shape9-28"
+   v:mID="9"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,243.46808,-414.43218)"
+   style="stroke-width:1.09925">
+			<title
+   id="title80">工作表.9</title>
+			<desc
+   id="desc82">ANT</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,4,4,4)" />
+			<v:textRect
+   cx="13.5"
+   cy="603"
+   width="27.01"
+   height="18" />
+			<rect
+   x="0"
+   y="594"
+   width="27.000099"
+   height="18"
+   class="st2"
+   id="rect84" />
+			<text
+   x="5.5"
+   y="605"
+   class="st9"
+   v:langID="1033"
+   id="text86"
+   style="stroke-width:1.09925"><v:paragraph
+   v:spLine="-1"
+   v:horizAlign="1" /><v:tabList />ANT</text>		</g><g
+   id="shape10-31"
+   v:mID="10"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,817.04949,81.032022)"
+   style="stroke-width:1.09925">
+			<title
+   id="title89">工作表.10</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 45"
+   class="st5"
+   id="path91" />
+		</g><g
+   id="shape11-34"
+   v:mID="11"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,222.83578,-463.16637)"
+   style="stroke-width:1.09925">
+			<title
+   id="title94">工作表.11</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 33.36"
+   class="st6"
+   id="path96" />
+		</g><g
+   id="shape12-39"
+   v:mID="12"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,643.73457,332.82531)"
+   style="stroke-width:1.09925">
+			<title
+   id="title99">工作表.12</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 2.28,612 H 2.64 27"
+   class="st10"
+   id="path101" />
+		</g><g
+   id="shape13-45"
+   v:mID="13"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,66.030358,-463.52465)"
+   style="stroke-width:1.09925">
+			<title
+   id="title104">工作表.13</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 18"
+   class="st5"
+   id="path106" />
+		</g><g
+   id="shape14-48"
+   v:mID="14"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,66.030358,-463.52465)"
+   style="stroke-width:1.09925">
+			<title
+   id="title109">工作表.14</title>
+			<desc
+   id="desc111">5V</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,0,4,0)" />
+			<v:textRect
+   cx="9"
+   cy="605.448"
+   width="18"
+   height="13.1036" />
+			<rect
+   x="0"
+   y="598.896"
+   width="18"
+   height="13.1036"
+   class="st2"
+   id="rect113" />
+			<text
+   x="4.1100001"
+   y="607.45001"
+   class="st9"
+   v:langID="1033"
+   id="text115"
+   style="stroke-width:1.09925"><v:paragraph
+   v:spLine="-1"
+   v:horizAlign="1" /><v:tabList />5V</text>		</g><g
+   id="shape15-51"
+   v:mID="15"
+   v:groupContext="shape"
+   v:layerMember="0"
+   transform="matrix(0.91699081,0,0,0.9024849,387.89413,-320.21637)"
+   style="stroke-width:1.09925">
+			<title
+   id="title118">1-D double.30</title>
+			<desc
+   id="desc120">15/23/31x GPIO</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="visVersion"
+   v:val="VT0(15):26" />
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(0,0,0,0)" />
+			<v:textRect
+   cx="45"
+   cy="594"
+   width="90"
+   height="36" />
+			<path
+   d="M 18,583.2 V 576 l -18,18 18,18 v -7.2 H 72 V 612 L 90,594 72,576 v 7.2 z"
+   class="st11"
+   id="path122" />
+			<rect
+   v:rectContext="textBkgnd"
+   x="9.1450195"
+   y="588"
+   width="71.709999"
+   height="12.0001"
+   class="st12"
+   id="rect124" />
+			<text
+   x="9.1499996"
+   y="597"
+   class="st13"
+   v:langID="1033"
+   id="text130"
+   style="stroke-width:1.09925"><v:paragraph
+   v:horizAlign="1" /><v:tabList />15<tspan
+   class="st4"
+   v:langID="2052"
+   id="tspan126"
+   style="stroke-width:1.09925">/</tspan><tspan
+   class="st4"
+   v:langID="2052"
+   id="tspan128"
+   style="stroke-width:1.09925">23</tspan>/31x GPIO</text>		</g><g
+   id="shape16-57"
+   v:mID="16"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,325.99725,-170.76126)"
+   style="stroke-width:1.09925">
+			<title
+   id="title133">工作表.16</title>
+			<desc
+   id="desc135">XTAL32K_OUT</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,4,4,0)" />
+			<v:textRect
+   cx="31.5"
+   cy="603.198"
+   width="63.01"
+   height="17.6036" />
+			<rect
+   x="0"
+   y="594.396"
+   width="63"
+   height="17.6036"
+   class="st14"
+   id="rect137" />
+			<text
+   x="3.4200001"
+   y="605.59998"
+   class="st9"
+   v:langID="1033"
+   id="text139"
+   style="stroke-width:1.09925"><v:paragraph
+   v:horizAlign="2" /><v:tabList />XTAL32K_OUT</text>		</g><g
+   id="shape17-60"
+   v:mID="17"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,266.1636,-171.11954)"
+   style="stroke-width:1.09925">
+			<title
+   id="title142">工作表.17</title>
+			<desc
+   id="desc144">XTAL32K_IN</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,0,4,0)" />
+			<v:textRect
+   cx="24.75"
+   cy="603.198"
+   width="49.5"
+   height="17.6036" />
+			<rect
+   x="0"
+   y="594.396"
+   width="49.5"
+   height="17.6036"
+   class="st14"
+   id="rect146" />
+			<text
+   x="1.4"
+   y="605.59998"
+   class="st9"
+   v:langID="1033"
+   id="text148"
+   style="stroke-width:1.09925"><v:paragraph
+   v:horizAlign="1" /><v:tabList />XTAL32K_IN</text>		</g><g
+   id="shape18-63"
+   v:mID="18"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,136.18015,-170.76126)"
+   style="stroke-width:1.09925">
+			<title
+   id="title151">工作表.18</title>
+			<desc
+   id="desc153">XTAL_IN</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,4,4,4)" />
+			<v:textRect
+   cx="22.5"
+   cy="603.198"
+   width="45"
+   height="17.6036" />
+			<rect
+   x="0"
+   y="594.396"
+   width="45"
+   height="17.6036"
+   class="st2"
+   id="rect155" />
+			<text
+   x="4"
+   y="605.20001"
+   class="st9"
+   v:langID="1033"
+   id="text157"
+   style="stroke-width:1.09925"><v:paragraph
+   v:spLine="-1" /><v:tabList />XTAL_IN</text>		</g><g
+   id="shape19-66"
+   v:mID="19"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,202.20349,-170.76126)"
+   style="stroke-width:1.09925">
+			<title
+   id="title160">工作表.19</title>
+			<desc
+   id="desc162">XTAL_OUT</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,0,4,0)" />
+			<v:textRect
+   cx="22.5"
+   cy="603.198"
+   width="45"
+   height="17.6036" />
+			<rect
+   x="0"
+   y="594.396"
+   width="45"
+   height="17.6036"
+   class="st14"
+   id="rect164" />
+			<text
+   x="1.83"
+   y="605.59998"
+   class="st9"
+   v:langID="1033"
+   id="text166"
+   style="stroke-width:1.09925"><v:paragraph
+   v:horizAlign="1" /><v:tabList />XTAL_OUT</text>		</g><g
+   id="shape21-69"
+   v:mID="21"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,346.62955,-390.06509)"
+   style="stroke-width:1.09925">
+			<title
+   id="title169">工作表.21</title>
+			<desc
+   id="desc171">PU_CHIP</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,4,4,0)" />
+			<v:textRect
+   cx="22.5"
+   cy="603"
+   width="45"
+   height="18" />
+			<rect
+   x="0"
+   y="594"
+   width="45"
+   height="18"
+   class="st14"
+   id="rect173" />
+			<text
+   x="6.3200002"
+   y="605.40002"
+   class="st9"
+   v:langID="1033"
+   id="text175"
+   style="stroke-width:1.09925"><v:paragraph
+   v:horizAlign="2" /><v:tabList />PU_CHIP</text>		</g><rect
+   v:rectContext="foreign"
+   x="56.664932"
+   y="-260.49289"
+   width="24.367092"
+   height="8.9149485"
+   class="st14"
+   id="rect180"
+   transform="rotate(90)" /><use
+   xlink:href="#mfid8"
+   clip-path="url(#mfid9)"
+   transform="matrix(0,0.06565665,-0.08726337,0,261.81918,56.35911)"
+   id="use213"
+   x="0"
+   y="0"
+   width="100%"
+   height="100%"
+   style="stroke-width:82.5247" /><rect
+   v:rectContext="foreign"
+   x="56.664932"
+   y="-260.49289"
+   width="24.367092"
+   height="8.9149485"
+   class="st14"
+   id="rect228"
+   transform="rotate(90)" /><rect
+   v:rectContext="foreign"
+   x="90.789108"
+   y="304.07126"
+   width="24.758751"
+   height="8.773922"
+   class="st14"
+   id="rect233" /><rect
+   v:rectContext="foreign"
+   x="90.789108"
+   y="304.07126"
+   width="24.758751"
+   height="8.773922"
+   class="st14"
+   id="rect281" /><g
+   id="shape24-78"
+   v:mID="24"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,123.80078,-260.10726)"
+   style="stroke-width:1.09925">
+			<title
+   id="title284">工作表.24</title>
+			<desc
+   id="desc286">VDDIO_2</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,0,4,4)" />
+			<v:textRect
+   cx="27"
+   cy="603"
+   width="54.01"
+   height="18" />
+			<rect
+   x="0"
+   y="594"
+   width="54"
+   height="18"
+   class="st2"
+   id="rect288" />
+			<text
+   x="4"
+   y="605"
+   class="st9"
+   v:langID="1033"
+   id="text290"
+   style="stroke-width:1.09925"><v:paragraph
+   v:spLine="-1" /><v:tabList />VDDIO_2</text>		</g><g
+   id="shape25-81"
+   v:mID="25"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,346.62955,-195.12835)"
+   style="stroke-width:1.09925">
+			<title
+   id="title293">工作表.25</title>
+			<desc
+   id="desc295">VDDIO_3</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,4,4,0)" />
+			<v:textRect
+   cx="22.5"
+   cy="603"
+   width="45"
+   height="18" />
+			<rect
+   x="0"
+   y="594"
+   width="45"
+   height="18"
+   class="st14"
+   id="rect297" />
+			<text
+   x="6.77"
+   y="605.40002"
+   class="st9"
+   v:langID="1033"
+   id="text299"
+   style="stroke-width:1.09925"><v:paragraph
+   v:horizAlign="2" /><v:tabList />VDDIO_3</text>		</g><g
+   id="shape26-84"
+   v:mID="26"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,346.62955,-328.33873)"
+   style="stroke-width:1.09925">
+			<title
+   id="title302">工作表.26</title>
+			<desc
+   id="desc304">GPIO</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,4,4,0)" />
+			<v:textRect
+   cx="22.5"
+   cy="603"
+   width="45"
+   height="18" />
+			<rect
+   x="0"
+   y="594"
+   width="45"
+   height="18"
+   class="st14"
+   id="rect306" />
+			<text
+   x="21"
+   y="605.40002"
+   class="st9"
+   v:langID="1033"
+   id="text308"
+   style="stroke-width:1.09925"><v:paragraph
+   v:horizAlign="2" /><v:tabList />GPIO</text>		</g><g
+   id="shape27-87"
+   v:mID="27"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,123.80078,-236.09846)"
+   style="stroke-width:1.09925">
+			<title
+   id="title311">工作表.27</title>
+			<desc
+   id="desc313">SW_DCDC</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,4,4,4)" />
+			<v:textRect
+   cx="27"
+   cy="603.198"
+   width="54"
+   height="17.6036" />
+			<rect
+   x="0"
+   y="594.396"
+   width="54"
+   height="17.6036"
+   class="st2"
+   id="rect315" />
+			<text
+   x="4"
+   y="605.20001"
+   class="st9"
+   v:langID="1033"
+   id="text317"
+   style="stroke-width:1.09925"><v:paragraph
+   v:spLine="-1" /><v:tabList />SW_DCDC</text>		</g><g
+   id="shape28-90"
+   v:mID="28"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,1.0880816e-6,-1.1055707e-6,0.9024849,115.53073,-243.86254)"
+   style="stroke-width:1.09925">
+			<title
+   id="title320">工作表.28</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 9"
+   class="st5"
+   id="path322" />
+		</g><g
+   id="shape29-93"
+   v:mID="29"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,74.283268,-243.86254)"
+   style="stroke-width:1.09925">
+			<title
+   id="title325">工作表.29</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 18"
+   class="st5"
+   id="path327" />
+		</g><g
+   id="shape30-96"
+   v:mID="30"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,123.80078,-211.37309)"
+   style="stroke-width:1.09925">
+			<title
+   id="title330">工作表.30</title>
+			<desc
+   id="desc332">DCDC_OUT</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,4,4,4)" />
+			<v:textRect
+   cx="27"
+   cy="603.198"
+   width="54"
+   height="17.6036" />
+			<rect
+   x="0"
+   y="594.396"
+   width="54"
+   height="17.6036"
+   class="st2"
+   id="rect334" />
+			<text
+   x="4"
+   y="605.20001"
+   class="st9"
+   v:langID="1033"
+   id="text336"
+   style="stroke-width:1.09925"><v:paragraph
+   v:spLine="-1" /><v:tabList />DCDC_OUT</text>		</g><g
+   id="shape31-99"
+   v:mID="31"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,33.018688,-219.49544)"
+   style="stroke-width:1.09925">
+			<title
+   id="title339">工作表.31</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 99"
+   class="st5"
+   id="path341" />
+		</g><g
+   id="shape32-102"
+   v:mID="32"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,643.73457,308.45821)"
+   style="stroke-width:1.09925">
+			<title
+   id="title344">工作表.32</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 2.28,612 H 2.64 27"
+   class="st10"
+   id="path346" />
+		</g><g
+   id="shape33-107"
+   v:mID="33"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,569.45831,113.52148)"
+   style="stroke-width:1.09925">
+			<title
+   id="title349">工作表.33</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 333.4"
+   class="st5"
+   id="path351" />
+		</g><g
+   id="shape34-110"
+   v:mID="34"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,784.03416,40.419846)"
+   style="stroke-width:1.09925">
+			<title
+   id="title354">工作表.34</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 18"
+   class="st5"
+   id="path356" />
+		</g><g
+   id="shape35-113"
+   v:mID="35"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,779.9077,40.419846)"
+   style="stroke-width:1.09925">
+			<title
+   id="title359">工作表.35</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 18"
+   class="st5"
+   id="path361" />
+		</g><g
+   id="shape36-116"
+   v:mID="36"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,784.03416,81.032022)"
+   style="stroke-width:1.09925">
+			<title
+   id="title364">工作表.36</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 18"
+   class="st5"
+   id="path366" />
+		</g><g
+   id="shape37-119"
+   v:mID="37"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,779.9077,81.032022)"
+   style="stroke-width:1.09925">
+			<title
+   id="title369">工作表.37</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 18"
+   class="st5"
+   id="path371" />
+		</g><g
+   id="shape38-122"
+   v:mID="38"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,189.82412,-503.77819)"
+   style="stroke-width:1.09925">
+			<title
+   id="title374">工作表.38</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 31.5"
+   class="st5"
+   id="path376" />
+		</g><g
+   id="shape39-125"
+   v:mID="39"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,189.82412,-463.16637)"
+   style="stroke-width:1.09925">
+			<title
+   id="title379">工作表.39</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 2.28,612 H 2.64 31.5"
+   class="st10"
+   id="path381" />
+		</g><g
+   id="shape40-130"
+   v:mID="40"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,183.63443,-446.92164)"
+   style="stroke-width:1.09925">
+			<title
+   id="title384">工作表.40</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 13.5"
+   class="st5"
+   id="path386" />
+		</g><g
+   id="shape41-133"
+   v:mID="41"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,185.69766,-444.89105)"
+   style="stroke-width:1.09925">
+			<title
+   id="title389">工作表.41</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 9"
+   class="st5"
+   id="path391" />
+		</g><rect
+   v:rectContext="foreign"
+   x="173.3183"
+   y="186.62186"
+   width="165.05835"
+   height="88.60759"
+   class="st14"
+   id="rect396" /><rect
+   v:rectContext="foreign"
+   x="173.3183"
+   y="186.62186"
+   width="165.05835"
+   height="88.60759"
+   class="st14"
+   id="rect444" /><g
+   id="shape43-139"
+   v:mID="43"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,610.7229,284.09112)"
+   style="stroke-width:1.09925">
+			<title
+   id="title447">工作表.43</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 2.28,612 H 2.64 27"
+   class="st10"
+   id="path449" />
+		</g><g
+   id="shape44-144"
+   v:mID="44"
+   v:groupContext="shape"
+   transform="matrix(-0.0032249,0.90247932,-0.91698513,-0.00317389,635.82276,91.096542)"
+   style="stroke-width:1.09925">
+			<title
+   id="title452">工作表.44</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 105.14"
+   class="st6"
+   id="path454" />
+		</g><g
+   id="shape45-149"
+   v:mID="45"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,94.915568,-248.28201)"
+   style="stroke-width:1.09925">
+			<title
+   id="title457">工作表.45</title>
+			<desc
+   id="desc459">L1</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,0,4,0)" />
+			<v:textRect
+   cx="9"
+   cy="605.448"
+   width="18"
+   height="13.1036" />
+			<rect
+   x="0"
+   y="598.896"
+   width="18"
+   height="13.1036"
+   class="st2"
+   id="rect461" />
+			<text
+   x="4.5500002"
+   y="607.45001"
+   class="st9"
+   v:langID="1033"
+   id="text463"
+   style="stroke-width:1.09925"><v:paragraph
+   v:spLine="-1"
+   v:horizAlign="1" /><v:tabList />L1</text>		</g><g
+   id="shape46-152"
+   v:mID="46"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,259.97392,-477.5601)"
+   style="stroke-width:1.09925">
+			<title
+   id="title466">工作表.46</title>
+			<desc
+   id="desc468">L2</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,0,4,0)" />
+			<v:textRect
+   cx="9"
+   cy="605.448"
+   width="18"
+   height="13.1036" />
+			<rect
+   x="0"
+   y="598.896"
+   width="18"
+   height="13.1036"
+   class="st2"
+   id="rect470" />
+			<text
+   x="4.5500002"
+   y="607.45001"
+   class="st9"
+   v:langID="1033"
+   id="text472"
+   style="stroke-width:1.09925"><v:paragraph
+   v:spLine="-1"
+   v:horizAlign="1" /><v:tabList />L2</text>		</g><g
+   id="shape47-155"
+   v:mID="47"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,59.840668,-247.92372)"
+   style="stroke-width:1.09925">
+			<title
+   id="title475">工作表.47</title>
+			<desc
+   id="desc477">R2 (NM)</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,0,4,0)" />
+			<v:textRect
+   cx="9"
+   cy="603.198"
+   width="18"
+   height="17.6036" />
+			<rect
+   x="0"
+   y="594.396"
+   width="18"
+   height="17.6036"
+   class="st2"
+   id="rect479" />
+			<text
+   x="3.8900001"
+   y="601.20001"
+   class="st9"
+   v:langID="1033"
+   id="text483"
+   style="stroke-width:1.09925"><v:paragraph
+   v:spLine="-1"
+   v:horizAlign="1" /><v:tabList />R2<v:newlineChar /><tspan
+   x="0.12"
+   dy="1em"
+   class="st4"
+   id="tspan481"
+   style="stroke-width:1.09925">(</tspan>NM)</text>		</g><g
+   id="shape48-159"
+   v:mID="48"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,610.7229,210.98985)"
+   style="stroke-width:1.09925">
+			<title
+   id="title486">工作表.48</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 24.36"
+   class="st6"
+   id="path488" />
+		</g><g
+   id="shape49-164"
+   v:mID="49"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,212.51964,-471.28874)"
+   style="stroke-width:1.09925">
+			<title
+   id="title491">工作表.49</title>
+			<desc
+   id="desc493">C15</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,0,4,0)" />
+			<v:textRect
+   cx="9"
+   cy="605.448"
+   width="18"
+   height="13.1036" />
+			<rect
+   x="0"
+   y="598.896"
+   width="18"
+   height="13.1036"
+   class="st2"
+   id="rect495" />
+			<text
+   x="1.66"
+   y="607.45001"
+   class="st9"
+   v:langID="1033"
+   id="text497"
+   style="stroke-width:1.09925"><v:paragraph
+   v:spLine="-1"
+   v:horizAlign="1" /><v:tabList />C15</text>		</g><g
+   id="shape50-167"
+   v:mID="50"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,212.51964,-512.25884)"
+   style="stroke-width:1.09925">
+			<title
+   id="title500">工作表.50</title>
+			<desc
+   id="desc502">C16</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,0,4,0)" />
+			<v:textRect
+   cx="9"
+   cy="605.448"
+   width="18"
+   height="13.1036" />
+			<rect
+   x="0"
+   y="598.896"
+   width="18"
+   height="13.1036"
+   class="st2"
+   id="rect504" />
+			<text
+   x="1.66"
+   y="607.45001"
+   class="st9"
+   v:langID="1033"
+   id="text506"
+   style="stroke-width:1.09925"><v:paragraph
+   v:spLine="-1"
+   v:horizAlign="1" /><v:tabList />C16</text>		</g><g
+   id="shape51-170"
+   v:mID="51"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,982.10785,170.37803)"
+   style="stroke-width:1.09925">
+			<title
+   id="title509">工作表.51</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 9"
+   class="st5"
+   id="path511" />
+		</g><g
+   id="shape52-173"
+   v:mID="52"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,396.14705,-405.95244)"
+   style="stroke-width:1.09925">
+			<title
+   id="title514">工作表.52</title>
+			<desc
+   id="desc516">R3</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,0,4,0)" />
+			<v:textRect
+   cx="9"
+   cy="605.448"
+   width="18"
+   height="13.1036" />
+			<rect
+   x="0"
+   y="598.896"
+   width="18"
+   height="13.1036"
+   class="st2"
+   id="rect518" />
+			<text
+   x="3.8900001"
+   y="607.45001"
+   class="st9"
+   v:langID="1033"
+   id="text520"
+   style="stroke-width:1.09925"><v:paragraph
+   v:spLine="-1"
+   v:horizAlign="1" /><v:tabList />R3</text>		</g><g
+   id="shape53-176"
+   v:mID="53"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,416.77935,-406.30982)"
+   style="stroke-width:1.09925">
+			<title
+   id="title523">工作表.53</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="m 4.5,598.5 4.5,1.13 -9,2.25 9,2.25 -9,2.25 9,2.25 -9,2.24 4.5,1.13"
+   class="st5"
+   id="path525" />
+		</g><g
+   id="shape54-179"
+   v:mID="54"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,187.76089,-442.86046)"
+   style="stroke-width:1.09925">
+			<title
+   id="title528">工作表.54</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 4.5"
+   class="st5"
+   id="path530" />
+		</g><g
+   id="shape55-182"
+   v:mID="55"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,414.71611,-373.82037)"
+   style="stroke-width:1.09925">
+			<title
+   id="title533">工作表.55</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 13.5"
+   class="st5"
+   id="path535" />
+		</g><g
+   id="shape56-185"
+   v:mID="56"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,416.77935,-371.78977)"
+   style="stroke-width:1.09925">
+			<title
+   id="title538">工作表.56</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 9"
+   class="st5"
+   id="path540" />
+		</g><g
+   id="shape57-188"
+   v:mID="57"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,418.84257,-369.75918)"
+   style="stroke-width:1.09925">
+			<title
+   id="title543">工作表.57</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 4.5"
+   class="st5"
+   id="path545" />
+		</g><g
+   id="shape58-191"
+   v:mID="58"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,2.070248,-138.2718)"
+   style="stroke-width:1.09925">
+			<title
+   id="title548">工作表.58</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 13.5"
+   class="st5"
+   id="path550" />
+		</g><g
+   id="shape59-194"
+   v:mID="59"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,4.133478,-136.24121)"
+   style="stroke-width:1.09925">
+			<title
+   id="title553">工作表.59</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 9"
+   class="st5"
+   id="path555" />
+		</g><g
+   id="shape60-197"
+   v:mID="60"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,6.196698,-134.21062)"
+   style="stroke-width:1.09925">
+			<title
+   id="title558">工作表.60</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 4.5"
+   class="st5"
+   id="path560" />
+		</g><g
+   id="shape61-200"
+   v:mID="61"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,982.10785,154.1333)"
+   style="stroke-width:1.09925">
+			<title
+   id="title563">工作表.61</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 13.5"
+   class="st5"
+   id="path565" />
+		</g><g
+   id="shape62-203"
+   v:mID="62"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,412.65288,-386.00391)"
+   style="stroke-width:1.09925">
+			<title
+   id="title568">工作表.62</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 18"
+   class="st5"
+   id="path570" />
+		</g><g
+   id="shape63-206"
+   v:mID="63"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,412.65288,-381.94272)"
+   style="stroke-width:1.09925">
+			<title
+   id="title573">工作表.63</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 18"
+   class="st5"
+   id="path575" />
+		</g><g
+   id="shape64-209"
+   v:mID="64"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,396.14705,-377.88154)"
+   style="stroke-width:1.09925">
+			<title
+   id="title578">工作表.64</title>
+			<desc
+   id="desc580">C14</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,0,4,0)" />
+			<v:textRect
+   cx="9"
+   cy="605.448"
+   width="18"
+   height="13.1036" />
+			<rect
+   x="0"
+   y="598.896"
+   width="18"
+   height="13.1036"
+   class="st2"
+   id="rect582" />
+			<text
+   x="1.66"
+   y="607.45001"
+   class="st9"
+   v:langID="1033"
+   id="text584"
+   style="stroke-width:1.09925"><v:paragraph
+   v:spLine="-1"
+   v:horizAlign="1" /><v:tabList />C14</text>		</g><g
+   id="shape65-212"
+   v:mID="65"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,982.10785,146.85657)"
+   style="stroke-width:1.09925">
+			<title
+   id="title587">工作表.65</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 5.42"
+   class="st6"
+   id="path589" />
+		</g><g
+   id="shape66-217"
+   v:mID="66"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,982.10785,119.61325)"
+   style="stroke-width:1.09925">
+			<title
+   id="title592">工作表.66</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 4.92,612 H 5.28 15.75"
+   class="st15"
+   id="path594" />
+		</g><g
+   id="shape67-223"
+   v:mID="67"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,396.14705,-430.67691)"
+   style="stroke-width:1.09925">
+			<title
+   id="title597">工作表.67</title>
+			<desc
+   id="desc599">AVDD33_AON</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,0,4,0)" />
+			<v:textRect
+   cx="27"
+   cy="605.448"
+   width="54"
+   height="13.1036" />
+			<rect
+   x="0"
+   y="598.896"
+   width="54"
+   height="13.1036"
+   class="st2"
+   id="rect601" />
+			<text
+   x="0.54000002"
+   y="607.45001"
+   class="st9"
+   v:langID="1033"
+   id="text603"
+   style="stroke-width:1.09925"><v:paragraph
+   v:spLine="-1"
+   v:horizAlign="1" /><v:tabList />AVDD33_AON</text>		</g><g
+   id="shape68-226"
+   v:mID="68"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,412.65288,-191.06717)"
+   style="stroke-width:1.09925">
+			<title
+   id="title606">工作表.68</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 18"
+   class="st5"
+   id="path608" />
+		</g><g
+   id="shape69-229"
+   v:mID="69"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,412.65288,-187.00599)"
+   style="stroke-width:1.09925">
+			<title
+   id="title611">工作表.69</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 18"
+   class="st5"
+   id="path613" />
+		</g><g
+   id="shape70-232"
+   v:mID="70"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,982.10785,365.31477)"
+   style="stroke-width:1.09925">
+			<title
+   id="title616">工作表.70</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 13.5"
+   class="st5"
+   id="path618" />
+		</g><g
+   id="shape71-235"
+   v:mID="71"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,396.14705,-182.94481)"
+   style="stroke-width:1.09925">
+			<title
+   id="title621">工作表.71</title>
+			<desc
+   id="desc623">C2</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,0,4,0)" />
+			<v:textRect
+   cx="9"
+   cy="605.448"
+   width="18"
+   height="13.1036" />
+			<rect
+   x="0"
+   y="598.896"
+   width="18"
+   height="13.1036"
+   class="st2"
+   id="rect625" />
+			<text
+   x="3.8900001"
+   y="607.45001"
+   class="st9"
+   v:langID="1033"
+   id="text627"
+   style="stroke-width:1.09925"><v:paragraph
+   v:spLine="-1"
+   v:horizAlign="1" /><v:tabList />C2</text>		</g><g
+   id="shape72-238"
+   v:mID="72"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,414.71611,-174.82244)"
+   style="stroke-width:1.09925">
+			<title
+   id="title630">工作表.72</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 13.5"
+   class="st5"
+   id="path632" />
+		</g><g
+   id="shape73-241"
+   v:mID="73"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,416.77935,-172.79185)"
+   style="stroke-width:1.09925">
+			<title
+   id="title635">工作表.73</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 9"
+   class="st5"
+   id="path637" />
+		</g><g
+   id="shape74-244"
+   v:mID="74"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,418.84257,-170.76126)"
+   style="stroke-width:1.09925">
+			<title
+   id="title640">工作表.74</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 4.5"
+   class="st5"
+   id="path642" />
+		</g><g
+   id="shape75-247"
+   v:mID="75"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,982.10785,349.07004)"
+   style="stroke-width:1.09925">
+			<title
+   id="title645">工作表.75</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 2.28,612 H 2.64 13.5"
+   class="st10"
+   id="path647" />
+		</g><g
+   id="shape76-252"
+   v:mID="76"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,49.524518,-243.86254)"
+   style="stroke-width:1.09925">
+			<title
+   id="title650">工作表.76</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 13.5"
+   class="st5"
+   id="path652" />
+		</g><g
+   id="shape77-255"
+   v:mID="77"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,41.271598,-122.20631)"
+   style="stroke-width:1.09925">
+			<title
+   id="title655">工作表.77</title>
+			<desc
+   id="desc657">DCDC can be bypassed (L1 removed) with R2 mounted for low cost</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,0,4,0)"
+   v:verticalAlign="0" />
+			<v:textRect
+   cx="45"
+   cy="594.198"
+   width="90"
+   height="35.6036" />
+			<rect
+   x="0"
+   y="576.396"
+   width="90"
+   height="35.6036"
+   class="st2"
+   id="rect659" />
+			<text
+   x="0"
+   y="587.59998"
+   class="st9"
+   v:langID="1033"
+   id="text667"
+   style="stroke-width:1.09925"><v:paragraph /><v:tabList />DCDC can be bypassed <tspan
+   x="0"
+   dy="1.2em"
+   class="st4"
+   id="tspan661"
+   style="stroke-width:1.09925">(</tspan>L1 removed) with R<tspan
+   class="st4"
+   v:langID="2052"
+   id="tspan663"
+   style="stroke-width:1.09925">2</tspan> <tspan
+   x="0"
+   dy="1.2em"
+   class="st4"
+   id="tspan665"
+   style="stroke-width:1.09925">mounted </tspan>for low cost</text>		</g><g
+   id="shape78-261"
+   v:mID="78"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,387.89413,-397.83007)"
+   style="stroke-width:1.09925">
+			<title
+   id="title670">工作表.78</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 8.12,612 H 8.48 90"
+   class="st16"
+   id="path672" />
+		</g><g
+   id="shape79-267"
+   v:mID="79"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,387.89413,-203.25072)"
+   style="stroke-width:1.09925">
+			<title
+   id="title675">工作表.79</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 8.12,612 H 8.48 36"
+   class="st16"
+   id="path677" />
+		</g><g
+   id="shape80-272"
+   v:mID="80"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,156.81245,-146.39417)"
+   style="stroke-width:1.09925">
+			<title
+   id="title680">工作表.80</title>
+			<desc
+   id="desc682">32MHz</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,0,4,0)" />
+			<v:textRect
+   cx="36"
+   cy="598.896"
+   width="72"
+   height="26.2071" />
+			<rect
+   x="0"
+   y="585.79303"
+   width="72"
+   height="26.2071"
+   class="st18"
+   id="rect684" />
+			<text
+   x="23.33"
+   y="601.29999"
+   class="st9"
+   v:langID="1033"
+   id="text686"
+   style="stroke-width:1.09925"><v:paragraph
+   v:horizAlign="1" /><v:tabList />32MHz</text>		</g><g
+   id="shape81-275"
+   v:mID="81"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,319.80756,-130.1498)"
+   style="stroke-width:1.09925">
+			<title
+   id="title689">工作表.81</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<rect
+   x="0"
+   y="594"
+   width="4.5"
+   height="18"
+   class="st11"
+   id="rect691" />
+		</g><g
+   id="shape82-277"
+   v:mID="82"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,876.88315,405.92658)"
+   style="stroke-width:1.09925">
+			<title
+   id="title694">工作表.82</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 18"
+   class="st5"
+   id="path696" />
+		</g><g
+   id="shape83-280"
+   v:mID="83"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,889.26255,405.92658)"
+   style="stroke-width:1.09925">
+			<title
+   id="title699">工作表.83</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 18"
+   class="st5"
+   id="path701" />
+		</g><g
+   id="shape84-283"
+   v:mID="84"
+   v:groupContext="shape"
+   transform="matrix(0.00881515,0.9024432,-0.91694844,0.0086757,850.03366,376.24927)"
+   style="stroke-width:1.09925">
+			<title
+   id="title704">工作表.84</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 36"
+   class="st5"
+   id="path706" />
+		</g><g
+   id="shape85-286"
+   v:mID="85"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,916.08455,383.38342)"
+   style="stroke-width:1.09925">
+			<title
+   id="title709">工作表.85</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 33.35"
+   class="st5"
+   id="path711" />
+		</g><g
+   id="shape88-289"
+   v:mID="88"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,288.85913,-146.39417)"
+   style="stroke-width:1.09925">
+			<title
+   id="title714">工作表.88</title>
+			<desc
+   id="desc716">32.768kHz</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,0,4,0)" />
+			<v:textRect
+   cx="36"
+   cy="598.896"
+   width="72"
+   height="26.2071" />
+			<rect
+   x="0"
+   y="585.79303"
+   width="72"
+   height="26.2071"
+   class="st18"
+   id="rect718" />
+			<text
+   x="16.879999"
+   y="601.29999"
+   class="st9"
+   v:langID="1033"
+   id="text720"
+   style="stroke-width:1.09925"><v:paragraph
+   v:horizAlign="1" /><v:tabList />32.768kHz</text>		</g><g
+   id="shape89-292"
+   v:mID="89"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,187.76089,-130.1498)"
+   style="stroke-width:1.09925">
+			<title
+   id="title723">工作表.89</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<rect
+   x="0"
+   y="594"
+   width="4.5"
+   height="18"
+   class="st11"
+   id="rect725" />
+		</g><g
+   id="shape90-294"
+   v:mID="90"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,744.8328,405.92658)"
+   style="stroke-width:1.09925">
+			<title
+   id="title728">工作表.90</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 18"
+   class="st5"
+   id="path730" />
+		</g><g
+   id="shape91-297"
+   v:mID="91"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,757.21218,405.92658)"
+   style="stroke-width:1.09925">
+			<title
+   id="title733">工作表.91</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 18"
+   class="st5"
+   id="path735" />
+		</g><g
+   id="shape92-300"
+   v:mID="92"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,718.01082,381.91688)"
+   style="stroke-width:1.09925">
+			<title
+   id="title738">工作表.92</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 35.6"
+   class="st5"
+   id="path740" />
+		</g><g
+   id="shape93-303"
+   v:mID="93"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,784.03416,381.91688)"
+   style="stroke-width:1.09925">
+			<title
+   id="title743">工作表.93</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 35.37"
+   class="st5"
+   id="path745" />
+		</g><g
+   id="shape112-306"
+   v:mID="112"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,181.5712,-118.324)"
+   style="stroke-width:1.09925">
+			<title
+   id="title748">工作表.112</title>
+			<desc
+   id="desc750">X1</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,0,4,0)" />
+			<v:textRect
+   cx="9"
+   cy="605.448"
+   width="18"
+   height="13.1036" />
+			<rect
+   x="0"
+   y="598.896"
+   width="18"
+   height="13.1036"
+   class="st2"
+   id="rect752" />
+			<text
+   x="4.1100001"
+   y="607.45001"
+   class="st9"
+   v:langID="1033"
+   id="text754"
+   style="stroke-width:1.09925"><v:paragraph
+   v:spLine="-1"
+   v:horizAlign="1" /><v:tabList />X1</text>		</g><g
+   id="shape113-309"
+   v:mID="113"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,313.61788,-117.96625)"
+   style="stroke-width:1.09925">
+			<title
+   id="title757">工作表.113</title>
+			<desc
+   id="desc759">X2</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,0,4,0)" />
+			<v:textRect
+   cx="9"
+   cy="605.448"
+   width="18"
+   height="13.1036" />
+			<rect
+   x="0"
+   y="598.896"
+   width="18"
+   height="13.1036"
+   class="st2"
+   id="rect761" />
+			<text
+   x="4.1100001"
+   y="607.45001"
+   class="st9"
+   v:langID="1033"
+   id="text763"
+   style="stroke-width:1.09925"><v:paragraph
+   v:spLine="-1"
+   v:horizAlign="1" /><v:tabList />X2</text>		</g><g
+   id="shape126-312"
+   v:mID="126"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,346.62955,-260.10726)"
+   style="stroke-width:1.09925">
+			<title
+   id="title766">工作表.126</title>
+			<desc
+   id="desc768">VDDIO_1</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,4,4,0)" />
+			<v:textRect
+   cx="22.5"
+   cy="603"
+   width="45"
+   height="18" />
+			<rect
+   x="0"
+   y="594"
+   width="45"
+   height="18"
+   class="st14"
+   id="rect770" />
+			<text
+   x="6.77"
+   y="605.40002"
+   class="st9"
+   v:langID="1033"
+   id="text772"
+   style="stroke-width:1.09925"><v:paragraph
+   v:horizAlign="2" /><v:tabList />VDDIO_1</text>		</g><g
+   id="shape127-315"
+   v:mID="127"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,387.89413,-268.22963)"
+   style="stroke-width:1.09925">
+			<title
+   id="title775">工作表.127</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 8.12,612 H 8.48 36"
+   class="st16"
+   id="path777" />
+		</g><g
+   id="shape128-320"
+   v:mID="128"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,123.80078,-357.93392)"
+   style="stroke-width:1.09925">
+			<title
+   id="title780">工作表.128</title>
+			<desc
+   id="desc782">VDDBUS_USB</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,0,4,4)" />
+			<v:textRect
+   cx="31.5"
+   cy="603"
+   width="63.01"
+   height="18" />
+			<rect
+   x="0"
+   y="594"
+   width="63"
+   height="18"
+   class="st2"
+   id="rect784" />
+			<text
+   x="4"
+   y="605"
+   class="st9"
+   v:langID="1033"
+   id="text786"
+   style="stroke-width:1.09925"><v:paragraph
+   v:spLine="-1" /><v:tabList />VDDBUS_USB</text>		</g><g
+   id="shape129-323"
+   v:mID="129"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,123.80078,-187.00599)"
+   style="stroke-width:1.09925">
+			<title
+   id="title789">工作表.129</title>
+			<desc
+   id="desc791">AVDD_RF</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,0,4,4)" />
+			<v:textRect
+   cx="31.5"
+   cy="603"
+   width="63.01"
+   height="18" />
+			<rect
+   x="0"
+   y="594"
+   width="63"
+   height="18"
+   class="st2"
+   id="rect793" />
+			<text
+   x="4"
+   y="605"
+   class="st9"
+   v:langID="1033"
+   id="text795"
+   style="stroke-width:1.09925"><v:paragraph
+   v:spLine="-1" /><v:tabList />AVDD_RF</text>		</g><g
+   id="shape130-326"
+   v:mID="130"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,123.80078,-308.84145)"
+   style="stroke-width:1.09925">
+			<title
+   id="title798">工作表.130</title>
+			<desc
+   id="desc800">AVDD33_PA</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,0,4,4)" />
+			<v:textRect
+   cx="31.5"
+   cy="603"
+   width="63.01"
+   height="18" />
+			<rect
+   x="0"
+   y="594"
+   width="63"
+   height="18"
+   class="st2"
+   id="rect802" />
+			<text
+   x="4"
+   y="605"
+   class="st9"
+   v:langID="1033"
+   id="text804"
+   style="stroke-width:1.09925"><v:paragraph
+   v:spLine="-1" /><v:tabList />AVDD33_PA</text>		</g><g
+   id="shape131-329"
+   v:mID="131"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,123.80078,-284.47435)"
+   style="stroke-width:1.09925">
+			<title
+   id="title807">工作表.131</title>
+			<desc
+   id="desc809">AVDD33_AON</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,0,4,4)" />
+			<v:textRect
+   cx="31.5"
+   cy="603"
+   width="63.01"
+   height="18" />
+			<rect
+   x="0"
+   y="594"
+   width="63"
+   height="18"
+   class="st2"
+   id="rect811" />
+			<text
+   x="4"
+   y="605"
+   class="st9"
+   v:langID="1033"
+   id="text813"
+   style="stroke-width:1.09925"><v:paragraph
+   v:spLine="-1" /><v:tabList />AVDD33_AON</text>		</g><g
+   id="shape132-332"
+   v:mID="132"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,594.21706,251.60167)"
+   style="stroke-width:1.09925">
+			<title
+   id="title816">工作表.132</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 18"
+   class="st5"
+   id="path818" />
+		</g><g
+   id="shape133-335"
+   v:mID="133"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,590.0906,251.60167)"
+   style="stroke-width:1.09925">
+			<title
+   id="title821">工作表.133</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 18"
+   class="st5"
+   id="path823" />
+		</g><g
+   id="shape134-338"
+   v:mID="134"
+   v:groupContext="shape"
+   transform="matrix(0.91698345,0.00361362,-0.0036717,0.90247765,35.265308,-292.59312)"
+   style="stroke-width:1.09925">
+			<title
+   id="title826">工作表.134</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 99"
+   class="st5"
+   id="path828" />
+		</g><g
+   id="shape135-341"
+   v:mID="135"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,8.259938,-292.59672)"
+   style="stroke-width:1.09925">
+			<title
+   id="title831">工作表.135</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 22.5"
+   class="st5"
+   id="path833" />
+		</g><g
+   id="shape136-344"
+   v:mID="136"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,12.386388,-366.05628)"
+   style="stroke-width:1.09925">
+			<title
+   id="title836">工作表.136</title>
+			<desc
+   id="desc838">C5</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,0,4,0)" />
+			<v:textRect
+   cx="9"
+   cy="605.448"
+   width="18"
+   height="13.1036" />
+			<rect
+   x="0"
+   y="598.896"
+   width="18"
+   height="13.1036"
+   class="st2"
+   id="rect840" />
+			<text
+   x="3.8900001"
+   y="607.45001"
+   class="st9"
+   v:langID="1033"
+   id="text842"
+   style="stroke-width:1.09925"><v:paragraph
+   v:spLine="-1"
+   v:horizAlign="1" /><v:tabList />C5</text>		</g><g
+   id="shape137-347"
+   v:mID="137"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,123.80078,-382.30101)"
+   style="stroke-width:1.09925">
+			<title
+   id="title845">工作表.137</title>
+			<desc
+   id="desc847">VDDCORE</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,0,4,4)" />
+			<v:textRect
+   cx="31.5"
+   cy="603"
+   width="63.01"
+   height="18" />
+			<rect
+   x="0"
+   y="594"
+   width="63"
+   height="18"
+   class="st2"
+   id="rect849" />
+			<text
+   x="4"
+   y="605"
+   class="st9"
+   v:langID="1033"
+   id="text851"
+   style="stroke-width:1.09925"><v:paragraph
+   v:spLine="-1" /><v:tabList />VDDCORE</text>		</g><g
+   id="shape138-350"
+   v:mID="138"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,594.21706,153.77502)"
+   style="stroke-width:1.09925">
+			<title
+   id="title854">工作表.138</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 18"
+   class="st5"
+   id="path856" />
+		</g><g
+   id="shape139-353"
+   v:mID="139"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,590.0906,153.77502)"
+   style="stroke-width:1.09925">
+			<title
+   id="title859">工作表.139</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 18"
+   class="st5"
+   id="path861" />
+		</g><g
+   id="shape140-356"
+   v:mID="140"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,33.018688,-390.42338)"
+   style="stroke-width:1.09925">
+			<title
+   id="title864">工作表.140</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 99"
+   class="st5"
+   id="path866" />
+		</g><g
+   id="shape141-359"
+   v:mID="141"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,8.259938,-390.42338)"
+   style="stroke-width:1.09925">
+			<title
+   id="title869">工作表.141</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 22.5"
+   class="st5"
+   id="path871" />
+		</g><g
+   id="shape142-362"
+   v:mID="142"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,12.386388,-390.42338)"
+   style="stroke-width:1.09925">
+			<title
+   id="title874">工作表.142</title>
+			<desc
+   id="desc876">C6</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,0,4,0)" />
+			<v:textRect
+   cx="9"
+   cy="605.448"
+   width="18"
+   height="13.1036" />
+			<rect
+   x="0"
+   y="598.896"
+   width="18"
+   height="13.1036"
+   class="st2"
+   id="rect878" />
+			<text
+   x="3.8900001"
+   y="607.45001"
+   class="st9"
+   v:langID="1033"
+   id="text880"
+   style="stroke-width:1.09925"><v:paragraph
+   v:spLine="-1"
+   v:horizAlign="1" /><v:tabList />C6</text>		</g><g
+   id="shape143-365"
+   v:mID="143"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,594.21706,324.70295)"
+   style="stroke-width:1.09925">
+			<title
+   id="title883">工作表.143</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 18"
+   class="st5"
+   id="path885" />
+		</g><g
+   id="shape144-368"
+   v:mID="144"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,590.0906,324.70295)"
+   style="stroke-width:1.09925">
+			<title
+   id="title888">工作表.144</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 18"
+   class="st5"
+   id="path890" />
+		</g><g
+   id="shape145-371"
+   v:mID="145"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,8.259938,-219.49544)"
+   style="stroke-width:1.09925">
+			<title
+   id="title893">工作表.145</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 22.5"
+   class="st5"
+   id="path895" />
+		</g><g
+   id="shape146-374"
+   v:mID="146"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,12.386388,-219.49544)"
+   style="stroke-width:1.09925">
+			<title
+   id="title898">工作表.146</title>
+			<desc
+   id="desc900">C7</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,0,4,0)" />
+			<v:textRect
+   cx="9"
+   cy="605.448"
+   width="18"
+   height="13.1036" />
+			<rect
+   x="0"
+   y="598.896"
+   width="18"
+   height="13.1036"
+   class="st2"
+   id="rect902" />
+			<text
+   x="3.8900001"
+   y="607.45001"
+   class="st9"
+   v:langID="1033"
+   id="text904"
+   style="stroke-width:1.09925"><v:paragraph
+   v:spLine="-1"
+   v:horizAlign="1" /><v:tabList />C7</text>		</g><g
+   id="shape147-377"
+   v:mID="147"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,594.21706,275.96876)"
+   style="stroke-width:1.09925">
+			<title
+   id="title907">工作表.147</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 18"
+   class="st5"
+   id="path909" />
+		</g><g
+   id="shape148-380"
+   v:mID="148"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,590.0906,275.96876)"
+   style="stroke-width:1.09925">
+			<title
+   id="title912">工作表.148</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 18"
+   class="st5"
+   id="path914" />
+		</g><g
+   id="shape149-383"
+   v:mID="149"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,8.259938,-268.22963)"
+   style="stroke-width:1.09925">
+			<title
+   id="title917">工作表.149</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 22.5"
+   class="st5"
+   id="path919" />
+		</g><g
+   id="shape150-386"
+   v:mID="150"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,12.386388,-268.22963)"
+   style="stroke-width:1.09925">
+			<title
+   id="title922">工作表.150</title>
+			<desc
+   id="desc924">C13</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,0,4,0)" />
+			<v:textRect
+   cx="9"
+   cy="605.448"
+   width="18"
+   height="13.1036" />
+			<rect
+   x="0"
+   y="598.896"
+   width="18"
+   height="13.1036"
+   class="st2"
+   id="rect926" />
+			<text
+   x="1.66"
+   y="607.45001"
+   class="st9"
+   v:langID="1033"
+   id="text928"
+   style="stroke-width:1.09925"><v:paragraph
+   v:spLine="-1"
+   v:horizAlign="1" /><v:tabList />C13</text>		</g><g
+   id="shape151-389"
+   v:mID="151"
+   v:groupContext="shape"
+   transform="matrix(0,-0.9024849,0.91699081,0,-486.9151,312.5194)"
+   style="stroke-width:1.09925">
+			<title
+   id="title931">工作表.151</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="m 4.5,598.5 4.5,1.13 -9,2.25 9,2.25 -9,2.25 9,2.25 -9,2.24 4.5,1.13"
+   class="st5"
+   id="path933" />
+		</g><g
+   id="shape152-392"
+   v:mID="152"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,594.21706,178.14211)"
+   style="stroke-width:1.09925">
+			<title
+   id="title936">工作表.152</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 18"
+   class="st5"
+   id="path938" />
+		</g><g
+   id="shape153-395"
+   v:mID="153"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,590.0906,178.14211)"
+   style="stroke-width:1.09925">
+			<title
+   id="title941">工作表.153</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 18"
+   class="st5"
+   id="path943" />
+		</g><g
+   id="shape154-398"
+   v:mID="154"
+   v:groupContext="shape"
+   transform="matrix(0.91698345,0.00361362,-0.0036717,0.90247765,35.265308,-366.05177)"
+   style="stroke-width:1.09925">
+			<title
+   id="title946">工作表.154</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 99"
+   class="st5"
+   id="path948" />
+		</g><g
+   id="shape155-401"
+   v:mID="155"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,8.259938,-366.05628)"
+   style="stroke-width:1.09925">
+			<title
+   id="title951">工作表.155</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 22.5"
+   class="st5"
+   id="path953" />
+		</g><g
+   id="shape156-404"
+   v:mID="156"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,12.386388,-292.23934)"
+   style="stroke-width:1.09925">
+			<title
+   id="title956">工作表.156</title>
+			<desc
+   id="desc958">C12</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,0,4,0)" />
+			<v:textRect
+   cx="9"
+   cy="605.448"
+   width="18"
+   height="13.1036" />
+			<rect
+   x="0"
+   y="598.896"
+   width="18"
+   height="13.1036"
+   class="st2"
+   id="rect960" />
+			<text
+   x="1.66"
+   y="607.45001"
+   class="st9"
+   v:langID="1033"
+   id="text962"
+   style="stroke-width:1.09925"><v:paragraph
+   v:spLine="-1"
+   v:horizAlign="1" /><v:tabList />C12</text>		</g><g
+   id="shape157-407"
+   v:mID="157"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,594.21706,202.5092)"
+   style="stroke-width:1.09925">
+			<title
+   id="title965">工作表.157</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 18"
+   class="st5"
+   id="path967" />
+		</g><g
+   id="shape158-410"
+   v:mID="158"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,590.0906,202.5092)"
+   style="stroke-width:1.09925">
+			<title
+   id="title970">工作表.158</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 18"
+   class="st5"
+   id="path972" />
+		</g><g
+   id="shape159-413"
+   v:mID="159"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,33.018688,-316.96381)"
+   style="stroke-width:1.09925">
+			<title
+   id="title975">工作表.159</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 96.75"
+   class="st5"
+   id="path977" />
+		</g><g
+   id="shape160-416"
+   v:mID="160"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,8.259938,-341.33091)"
+   style="stroke-width:1.09925">
+			<title
+   id="title980">工作表.160</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 22.5"
+   class="st5"
+   id="path982" />
+		</g><g
+   id="shape161-419"
+   v:mID="161"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,594.21706,227.23458)"
+   style="stroke-width:1.09925">
+			<title
+   id="title985">工作表.161</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 18"
+   class="st5"
+   id="path987" />
+		</g><g
+   id="shape162-422"
+   v:mID="162"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,590.0906,227.23458)"
+   style="stroke-width:1.09925">
+			<title
+   id="title990">工作表.162</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 18"
+   class="st5"
+   id="path992" />
+		</g><g
+   id="shape163-425"
+   v:mID="163"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,8.259938,-316.96381)"
+   style="stroke-width:1.09925">
+			<title
+   id="title995">工作表.163</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 22.5"
+   class="st5"
+   id="path997" />
+		</g><g
+   id="shape164-428"
+   v:mID="164"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,12.386388,-316.96381)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1000">工作表.164</title>
+			<desc
+   id="desc1002">C11</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,0,4,0)" />
+			<v:textRect
+   cx="9"
+   cy="605.448"
+   width="18"
+   height="13.1036" />
+			<rect
+   x="0"
+   y="598.896"
+   width="18"
+   height="13.1036"
+   class="st2"
+   id="rect1004" />
+			<text
+   x="1.66"
+   y="607.45001"
+   class="st9"
+   v:langID="1033"
+   id="text1006"
+   style="stroke-width:1.09925"><v:paragraph
+   v:spLine="-1"
+   v:horizAlign="1" /><v:tabList />C11</text>		</g><g
+   id="shape165-431"
+   v:mID="165"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,33.018688,-341.33091)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1009">工作表.165</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 18"
+   class="st5"
+   id="path1011" />
+		</g><g
+   id="shape166-434"
+   v:mID="166"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,610.7229,113.52148)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1014">工作表.166</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 24.36"
+   class="st6"
+   id="path1016" />
+		</g><g
+   id="shape167-439"
+   v:mID="167"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,123.80078,-402.24863)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1019">工作表.167</title>
+			<desc
+   id="desc1021">AVDD15 (1.5V Output) Internal Use Only</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,0,4,4)" />
+			<v:textRect
+   cx="45"
+   cy="603"
+   width="90"
+   height="18" />
+			<rect
+   x="0"
+   y="594"
+   width="90"
+   height="18"
+   class="st2"
+   id="rect1023" />
+			<text
+   x="4"
+   y="601"
+   class="st9"
+   v:langID="1033"
+   id="text1027"
+   style="stroke-width:1.09925"><v:paragraph
+   v:spLine="-1" /><v:tabList />AVDD15 (1.5V Output)<v:newlineChar /><tspan
+   x="4"
+   dy="1em"
+   class="st4"
+   id="tspan1025"
+   style="stroke-width:1.09925">Internal Use Only</tspan></text>		</g><g
+   id="shape168-443"
+   v:mID="168"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,594.21706,105.04083)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1030">工作表.168</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 18"
+   class="st5"
+   id="path1032" />
+		</g><g
+   id="shape169-446"
+   v:mID="169"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,590.0906,105.04083)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1035">工作表.169</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 18"
+   class="st5"
+   id="path1037" />
+		</g><g
+   id="shape170-449"
+   v:mID="170"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,33.018688,-414.43218)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1040">工作表.170</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 99"
+   class="st5"
+   id="path1042" />
+		</g><g
+   id="shape171-452"
+   v:mID="171"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,8.259938,-438.79928)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1045">工作表.171</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 22.5"
+   class="st5"
+   id="path1047" />
+		</g><g
+   id="shape172-455"
+   v:mID="172"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,12.386388,-439.15756)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1050">工作表.172</title>
+			<desc
+   id="desc1052">C8</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,0,4,0)" />
+			<v:textRect
+   cx="9"
+   cy="605.448"
+   width="18"
+   height="13.1036" />
+			<rect
+   x="0"
+   y="598.896"
+   width="18"
+   height="13.1036"
+   class="st2"
+   id="rect1054" />
+			<text
+   x="3.8900001"
+   y="607.45001"
+   class="st9"
+   v:langID="1033"
+   id="text1056"
+   style="stroke-width:1.09925"><v:paragraph
+   v:spLine="-1"
+   v:horizAlign="1" /><v:tabList />C8</text>		</g><g
+   id="shape173-458"
+   v:mID="173"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,594.21706,129.76621)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1059">工作表.173</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 18"
+   class="st5"
+   id="path1061" />
+		</g><g
+   id="shape174-461"
+   v:mID="174"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,590.0906,129.76621)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1064">工作表.174</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 18"
+   class="st5"
+   id="path1066" />
+		</g><g
+   id="shape175-464"
+   v:mID="175"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,8.259938,-414.43218)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1069">工作表.175</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 22.5"
+   class="st5"
+   id="path1071" />
+		</g><g
+   id="shape176-467"
+   v:mID="176"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,12.386388,-414.43218)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1074">工作表.176</title>
+			<desc
+   id="desc1076">C9</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,0,4,0)" />
+			<v:textRect
+   cx="9"
+   cy="605.448"
+   width="18"
+   height="13.1036" />
+			<rect
+   x="0"
+   y="598.896"
+   width="18"
+   height="13.1036"
+   class="st2"
+   id="rect1078" />
+			<text
+   x="3.8900001"
+   y="607.45001"
+   class="st9"
+   v:langID="1033"
+   id="text1080"
+   style="stroke-width:1.09925"><v:paragraph
+   v:spLine="-1"
+   v:horizAlign="1" /><v:tabList />C9</text>		</g><g
+   id="shape177-470"
+   v:mID="177"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,33.018688,-438.79928)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1083">工作表.177</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 18"
+   class="st5"
+   id="path1085" />
+		</g><g
+   id="shape178-473"
+   v:mID="178"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,643.73457,357.1924)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1088">工作表.178</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 2.28,612 H 2.64 27"
+   class="st10"
+   id="path1090" />
+		</g><g
+   id="shape179-478"
+   v:mID="179"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,594.21706,348.71176)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1093">工作表.179</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 18"
+   class="st5"
+   id="path1095" />
+		</g><g
+   id="shape180-481"
+   v:mID="180"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,590.0906,348.71176)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1098">工作表.180</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 18"
+   class="st5"
+   id="path1100" />
+		</g><g
+   id="shape181-484"
+   v:mID="181"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,33.018688,-195.12835)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1103">工作表.181</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 99"
+   class="st5"
+   id="path1105" />
+		</g><g
+   id="shape182-487"
+   v:mID="182"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,8.259938,-195.12835)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1108">工作表.182</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 22.5"
+   class="st5"
+   id="path1110" />
+		</g><g
+   id="shape183-490"
+   v:mID="183"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,12.386388,-195.48664)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1113">工作表.183</title>
+			<desc
+   id="desc1115">C3</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,0,4,0)" />
+			<v:textRect
+   cx="9"
+   cy="605.448"
+   width="18"
+   height="13.1036" />
+			<rect
+   x="0"
+   y="598.896"
+   width="18"
+   height="13.1036"
+   class="st2"
+   id="rect1117" />
+			<text
+   x="3.8900001"
+   y="607.45001"
+   class="st9"
+   v:langID="1033"
+   id="text1119"
+   style="stroke-width:1.09925"><v:paragraph
+   v:spLine="-1"
+   v:horizAlign="1" /><v:tabList />C3</text>		</g><g
+   id="shape184-493"
+   v:mID="184"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,594.21706,373.43713)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1122">工作表.184</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 18"
+   class="st5"
+   id="path1124" />
+		</g><g
+   id="shape185-496"
+   v:mID="185"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,590.0906,373.43713)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1127">工作表.185</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 18"
+   class="st5"
+   id="path1129" />
+		</g><g
+   id="shape186-499"
+   v:mID="186"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,8.259938,-170.76126)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1132">工作表.186</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 22.5"
+   class="st5"
+   id="path1134" />
+		</g><g
+   id="shape187-502"
+   v:mID="187"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,12.386388,-170.76126)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1137">工作表.187</title>
+			<desc
+   id="desc1139">C4</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,0,4,0)" />
+			<v:textRect
+   cx="9"
+   cy="605.448"
+   width="18"
+   height="13.1036" />
+			<rect
+   x="0"
+   y="598.896"
+   width="18"
+   height="13.1036"
+   class="st2"
+   id="rect1141" />
+			<text
+   x="3.8900001"
+   y="607.45001"
+   class="st9"
+   v:langID="1033"
+   id="text1143"
+   style="stroke-width:1.09925"><v:paragraph
+   v:spLine="-1"
+   v:horizAlign="1" /><v:tabList />C4</text>		</g><g
+   id="shape188-505"
+   v:mID="188"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,33.018688,-170.76126)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1146">工作表.188</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 54"
+   class="st5"
+   id="path1148" />
+		</g><g
+   id="shape189-508"
+   v:mID="189"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,99.042028,-463.16637)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1151">工作表.189</title>
+			<desc
+   id="desc1153">3.3V</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,0,4,0)" />
+			<v:textRect
+   cx="9"
+   cy="605.448"
+   width="18"
+   height="13.1036" />
+			<rect
+   x="0"
+   y="598.896"
+   width="18"
+   height="13.1036"
+   class="st2"
+   id="rect1155" />
+			<text
+   x="0.76999998"
+   y="607.45001"
+   class="st9"
+   v:langID="1033"
+   id="text1157"
+   style="stroke-width:1.09925"><v:paragraph
+   v:spLine="-1"
+   v:horizAlign="1" /><v:tabList />3.3V</text>		</g><g
+   id="shape190-511"
+   v:mID="190"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,668.49331,89.154392)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1160">工作表.190</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 159.36"
+   class="st6"
+   id="path1162" />
+		</g><g
+   id="shape191-516"
+   v:mID="191"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,99.042028,-463.16637)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1165">工作表.191</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 18"
+   class="st5"
+   id="path1167" />
+		</g><g
+   id="shape192-519"
+   v:mID="192"
+   v:groupContext="shape"
+   transform="matrix(1.3923923e-4,0.90248489,-0.9169908,1.3703659e-4,668.49331,235.5645)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1170">工作表.192</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 24.36"
+   class="st6"
+   id="path1172" />
+		</g><g
+   id="shape193-524"
+   v:mID="193"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,412.65288,-256.04609)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1175">工作表.193</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 18"
+   class="st5"
+   id="path1177" />
+		</g><g
+   id="shape194-527"
+   v:mID="194"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,412.65288,-251.9849)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1180">工作表.194</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 18"
+   class="st5"
+   id="path1182" />
+		</g><g
+   id="shape195-530"
+   v:mID="195"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,982.10785,300.33586)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1185">工作表.195</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 13.5"
+   class="st5"
+   id="path1187" />
+		</g><g
+   id="shape196-533"
+   v:mID="196"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,396.14705,-247.92372)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1190">工作表.196</title>
+			<desc
+   id="desc1192">C1</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,0,4,0)" />
+			<v:textRect
+   cx="9"
+   cy="605.448"
+   width="18"
+   height="13.1036" />
+			<rect
+   x="0"
+   y="598.896"
+   width="18"
+   height="13.1036"
+   class="st2"
+   id="rect1194" />
+			<text
+   x="3.8900001"
+   y="607.45001"
+   class="st9"
+   v:langID="1033"
+   id="text1196"
+   style="stroke-width:1.09925"><v:paragraph
+   v:spLine="-1"
+   v:horizAlign="1" /><v:tabList />C1</text>		</g><g
+   id="shape197-536"
+   v:mID="197"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,414.71611,-239.80135)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1199">工作表.197</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 13.5"
+   class="st5"
+   id="path1201" />
+		</g><g
+   id="shape198-539"
+   v:mID="198"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,416.77935,-237.77076)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1204">工作表.198</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 9"
+   class="st5"
+   id="path1206" />
+		</g><g
+   id="shape199-542"
+   v:mID="199"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,418.84257,-235.74018)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1209">工作表.199</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 4.5"
+   class="st5"
+   id="path1211" />
+		</g><g
+   id="shape200-545"
+   v:mID="200"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,982.10785,284.09112)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1214">工作表.200</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 2.28,612 H 2.64 13.5"
+   class="st10"
+   id="path1216" />
+		</g><g
+   id="shape201-550"
+   v:mID="201"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,401.68017,-284.02311)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1219">工作表.201</title>
+			<desc
+   id="desc1221">1.8 or 3.3V</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,0,4,0)" />
+			<v:textRect
+   cx="22.5"
+   cy="603.198"
+   width="45"
+   height="17.6036" />
+			<rect
+   x="0"
+   y="594.396"
+   width="45"
+   height="17.6036"
+   class="st2"
+   id="rect1223" />
+			<text
+   x="2.9300001"
+   y="605.20001"
+   class="st9"
+   v:langID="1033"
+   id="text1225"
+   style="stroke-width:1.09925"><v:paragraph
+   v:spLine="-1"
+   v:horizAlign="1" /><v:tabList />1.8 or 3.3V</text>		</g><g
+   id="shape202-553"
+   v:mID="202"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,426.43893,-259.65602)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1228">工作表.202</title>
+			<desc
+   id="desc1230">GPOP0~8/GPIO23~31</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,0,4,0)" />
+			<v:textRect
+   cx="45"
+   cy="603.198"
+   width="90"
+   height="17.6036" />
+			<rect
+   x="0"
+   y="594.396"
+   width="90"
+   height="17.6036"
+   class="st2"
+   id="rect1232" />
+			<text
+   x="8.6199999"
+   y="605.20001"
+   class="st9"
+   v:langID="1033"
+   id="text1234"
+   style="stroke-width:1.09925"><v:paragraph
+   v:spLine="-1"
+   v:horizAlign="2" /><v:tabList />GPOP0~8/GPIO23~31</text>		</g><g
+   id="shape203-556"
+   v:mID="203"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,393.42726,-194.67711)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1237">工作表.203</title>
+			<desc
+   id="desc1239">GPOP14~22</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,0,4,0)" />
+			<v:textRect
+   cx="45"
+   cy="603.198"
+   width="90"
+   height="17.6036" />
+			<rect
+   x="0"
+   y="594.396"
+   width="90"
+   height="17.6036"
+   class="st2"
+   id="rect1241" />
+			<text
+   x="44.41"
+   y="605.20001"
+   class="st9"
+   v:langID="1033"
+   id="text1243"
+   style="stroke-width:1.09925"><v:paragraph
+   v:spLine="-1"
+   v:horizAlign="2" /><v:tabList />GPOP14~22</text>		</g><g
+   id="shape204-559"
+   v:mID="204"
+   v:groupContext="shape"
+   transform="matrix(-1.3283743e-4,0.90248489,-0.9169908,-1.3073607e-4,668.49698,259.80345)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1246">工作表.204</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 24.36"
+   class="st6"
+   id="path1248" />
+		</g><g
+   id="shape205-564"
+   v:mID="205"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,49.524518,-268.58791)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1251">工作表.205</title>
+			<desc
+   id="desc1253">GPOP9~12 (Interrupt)</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,0,4,0)" />
+			<v:textRect
+   cx="31.5"
+   cy="603.198"
+   width="63.01"
+   height="17.6036" />
+			<rect
+   x="0"
+   y="594.396"
+   width="63"
+   height="17.6036"
+   class="st2"
+   id="rect1255" />
+			<text
+   x="10.93"
+   y="601.20001"
+   class="st9"
+   v:langID="1033"
+   id="text1259"
+   style="stroke-width:1.09925"><v:paragraph
+   v:spLine="-1"
+   v:horizAlign="1" /><v:tabList />GPOP9~12 <tspan
+   x="13.94"
+   dy="1em"
+   class="st4"
+   id="tspan1257"
+   style="stroke-width:1.09925">(</tspan>Interrupt)</text>		</g><g
+   id="shape206-568"
+   v:mID="206"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,12.386388,-341.68919)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1262">工作表.206</title>
+			<desc
+   id="desc1264">C10</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,0,4,0)" />
+			<v:textRect
+   cx="9"
+   cy="605.448"
+   width="18"
+   height="13.1036" />
+			<rect
+   x="0"
+   y="598.896"
+   width="18"
+   height="13.1036"
+   class="st2"
+   id="rect1266" />
+			<text
+   x="1.66"
+   y="607.45001"
+   class="st9"
+   v:langID="1033"
+   id="text1268"
+   style="stroke-width:1.09925"><v:paragraph
+   v:spLine="-1"
+   v:horizAlign="1" /><v:tabList />C10</text>		</g><g
+   id="shape207-571"
+   v:mID="207"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,375.51476,-473.31932)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1271">工作表.207</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="m 4.5,598.5 4.5,1.13 -9,2.25 9,2.25 -9,2.25 9,2.25 -9,2.24 4.5,1.13"
+   class="st5"
+   id="path1273" />
+		</g><g
+   id="shape208-574"
+   v:mID="208"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,940.84325,56.664932)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1276">工作表.208</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 11.25"
+   class="st5"
+   id="path1278" />
+		</g><g
+   id="shape209-577"
+   v:mID="209"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,940.84325,79.001432)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1281">工作表.209</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 11.25"
+   class="st5"
+   id="path1283" />
+		</g><g
+   id="shape210-580"
+   v:mID="210"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,373.45153,-463.16637)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1286">工作表.210</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 13.5"
+   class="st5"
+   id="path1288" />
+		</g><g
+   id="shape211-583"
+   v:mID="211"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,375.51476,-461.13578)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1291">工作表.211</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 9"
+   class="st5"
+   id="path1293" />
+		</g><g
+   id="shape212-586"
+   v:mID="212"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,377.57798,-459.10519)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1296">工作表.212</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 4.5"
+   class="st5"
+   id="path1298" />
+		</g><g
+   id="shape213-589"
+   v:mID="213"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,359.00892,-473.49891)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1301">工作表.213</title>
+			<desc
+   id="desc1303">R1</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,0,4,0)" />
+			<v:textRect
+   cx="9"
+   cy="605.448"
+   width="18"
+   height="13.1036" />
+			<rect
+   x="0"
+   y="598.896"
+   width="18"
+   height="13.1036"
+   class="st2"
+   id="rect1305" />
+			<text
+   x="3.8900001"
+   y="607.45001"
+   class="st9"
+   v:langID="1033"
+   id="text1307"
+   style="stroke-width:1.09925"><v:paragraph
+   v:spLine="-1"
+   v:horizAlign="1" /><v:tabList />R1</text>		</g><g
+   id="shape214-592"
+   v:mID="214"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,363.13538,-495.65583)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1310">工作表.214</title>
+			<desc
+   id="desc1312">GPIO28</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,0,4,0)" />
+			<v:textRect
+   cx="18"
+   cy="605.25"
+   width="36"
+   height="13.5" />
+			<rect
+   x="0"
+   y="598.5"
+   width="36"
+   height="13.5"
+   class="st2"
+   id="rect1314" />
+			<text
+   x="3.55"
+   y="607.25"
+   class="st9"
+   v:langID="1033"
+   id="text1316"
+   style="stroke-width:1.09925"><v:paragraph
+   v:spLine="-1"
+   v:horizAlign="1" /><v:tabList />GPIO28</text>		</g><g
+   id="shape216-595"
+   v:mID="216"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,413.02793,-288.0843)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1319">工作表.216</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 18"
+   class="st5"
+   id="path1321" />
+		</g><g
+   id="shape217-598"
+   v:mID="217"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,981.96115,264.23645)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1324">工作表.217</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 19.36"
+   class="st6"
+   id="path1326" />
+		</g><g
+   id="shape218-603"
+   v:mID="218"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,401.68017,-219.0442)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1329">工作表.218</title>
+			<desc
+   id="desc1331">1.8 or 3.3V</desc>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<v:textBlock
+   v:margins="rect(4,0,4,0)" />
+			<v:textRect
+   cx="22.5"
+   cy="603.198"
+   width="45"
+   height="17.6036" />
+			<rect
+   x="0"
+   y="594.396"
+   width="45"
+   height="17.6036"
+   class="st2"
+   id="rect1333" />
+			<text
+   x="2.9300001"
+   y="605.20001"
+   class="st9"
+   v:langID="1033"
+   id="text1335"
+   style="stroke-width:1.09925"><v:paragraph
+   v:spLine="-1"
+   v:horizAlign="1" /><v:tabList />1.8 or 3.3V</text>		</g><g
+   id="shape219-606"
+   v:mID="219"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,413.02793,-223.10539)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1338">工作表.219</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 18"
+   class="st5"
+   id="path1340" />
+		</g><g
+   id="shape220-609"
+   v:mID="220"
+   v:groupContext="shape"
+   transform="matrix(0,0.9024849,-0.91699081,0,981.96115,329.21537)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1343">工作表.220</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 19.36"
+   class="st6"
+   id="path1345" />
+		</g><g
+   id="shape221-614"
+   v:mID="221"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,156.81245,-138.2718)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1348">工作表.221</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 28.53"
+   class="st5"
+   id="path1350" />
+		</g><g
+   id="shape222-617"
+   v:mID="222"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,196.38885,-138.12109)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1353">工作表.222</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 28.84"
+   class="st5"
+   id="path1355" />
+		</g><g
+   id="shape223-620"
+   v:mID="223"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,289.23418,-138.47847)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1358">工作表.223</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 28.53"
+   class="st5"
+   id="path1360" />
+		</g><g
+   id="shape224-623"
+   v:mID="224"
+   v:groupContext="shape"
+   transform="matrix(0.91699081,0,0,0.9024849,328.43553,-138.32685)"
+   style="stroke-width:1.09925">
+			<title
+   id="title1363">工作表.224</title>
+			<v:userDefs>
+				<v:ud
+   v:nameU="msvThemeColors"
+   v:val="VT0(36):26" />
+			</v:userDefs>
+			<path
+   d="M 0,612 H 28.84"
+   class="st5"
+   id="path1365" />
+		</g>
+<rect
+   style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.5;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1"
+   id="rect1376"
+   width="509.73624"
+   height="447.51355"
+   x="0.25"
+   y="0.25" /><use
+   xlink:href="#mfid28"
+   clip-path="url(#mfid29)"
+   transform="matrix(0.15074472,3.5015452e-4,-0.00128023,0.17375807,193.09104,190.89812)"
+   id="use751"
+   x="0"
+   y="0"
+   width="100%"
+   height="100%"
+   style="stroke-width:1.09925" /><use
+   xlink:href="#mfid8"
+   clip-path="url(#mfid9-1)"
+   transform="matrix(0.066712,0,0,0.08588292,90.800814,302.71517)"
+   id="use213-1"
+   x="0"
+   y="0"
+   width="100%"
+   height="100%"
+   style="stroke-width:82.5247" /></svg>

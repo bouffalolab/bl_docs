@@ -1,0 +1,74 @@
+==========
+DAC
+==========
+
+DAC introduction
+==================
+The chip has a built-in 10bits digital-to-analog converter (DAC) with a FIFO depth of 1, and supports 2 DAC modulation outputs.
+Can be used for audio playback, conventional analog signal modulation.
+
+DAC main feature
+================
+- DAC modulation accuracy is 10bits
+- DAC input clock can be selected as 32M or Audio PLL
+- Support DMA to transfer memory to DAC modulation register
+- Support dual channel playback DMA transport mode
+- The output pin of DAC is fixed to ChannelA as GPIO11, ChannelB as GPIO17
+- DAC reference voltage can be selected internally
+
+DAC function description
+==========================
+The basic block diagram of the DAC module is shown in the figure.
+
+.. figure:: ../../picture/gpdac.svg
+   :align: center
+
+   DAC basic block diagram
+
+The DAC module contains two DAC modulation circuits and a power supply circuit related to modulating analog signals. The user can use Ref_Sel to select whether the DAC reference voltage is external/internal, and Ref_Rng to select the internal reference voltage source.
+
+The modulation data of the DAC can be directly written into the DAC modulation register (GLB_GPDAC_A_DATA, GLB_GPDAC_B_DATA in 0x40000314) by the CPU, or it can be transferred to the gpdac_dma_wdata (0x40002048) register by the DMA.
+
+**DAC data writing method**
+
+The CPU directly writes the GLB_GPDAC_A_DATA, GLB_GPDAC_B_DATA registers to complete the modulation, or uses DMA to transfer the data that needs to be modulated to gpdac_dma_wdata.
+
+**DMA handling mode**
+
+gpdac_dma_wdata (0x40002048) is a 32BITS register. The default meaning is that the 32BITS values are all modulated on the ChannelA pin in order. It can also be configured as the high 16 bits which correspond to the analog voltage output of Channel B by default, and the low 16 bits correspond to the analog voltage output of Channel A.
+
+Note that whether it is 32/16-bit modulation, only the lower 10 bits are valid, because the maximum modulation accuracy of the DAC is 10BITS. The user can modify the meaning of the high and low bytes transported by the DMA by configuring the gpdac_dma_format register.
+
+If gpdac_dma_format is 0, the data transferred by DMA into gpdac_dma_wdata are all modulated in Channel A in sequence, and the modulation order is {A0},{A1},{A2},...
+
+If gpdac_dma_format is 1, the high 16 bits of the data transferred into gpdac_dma_wdata by DMA are modulated in Channel B, and the low 16 bits are modulated in Channel A. The modulation sequence is {B0,A0},{B1,A1},{B2,A2},.... This feature is very useful in stereo playback.
+
+If gpdac_dma_format is 2, the data transferred by DMA into gpdac_dma_wdata is all modulated in Channel A, but the order of modulation is {A1,A0},{A3,A2},{A5,A4},...
+
+**DAC external reference voltage selection**
+
+The user can select external reference voltage or internal reference voltage by configuring gpdac_ref_sel (0x40000308[8]).
+
+If the internal reference voltage is selected, the configuration is shown in the following table.
+
+.. table:: Internal reference voltage
+
+    +-------------+---------------+-------------+
+    | gpdac_a_rng | gpdac_ref_sel | Output range|
+    +=============+===============+=============+
+    | 00          | 0             | 0.2-1       |
+    +-------------+---------------+-------------+
+    | 01/10       | 0             | 0.225-1.425 |
+    +-------------+---------------+-------------+
+    | 11          | 0             | 0.2-1.8     |
+    +-------------+---------------+-------------+
+
+If you choose an external reference voltage, please connect the external voltage to the fixed GPIO7.
+
+.. only:: html
+
+   .. include:: dac_register.rst
+
+.. raw:: latex
+
+   \input{../../en/content/dac}

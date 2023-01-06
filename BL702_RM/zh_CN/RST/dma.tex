@@ -1,0 +1,904 @@
+\section{寄存器描述}
+\regover{
+{\hyperref[dma-DMA-IntStatus]{DMA\_IntStatus}}&Interrupt status
+\\
+\hline
+{\hyperref[dma-DMA-IntTCStatus]{DMA\_IntTCStatus}}&Interrupt terminal count request status
+\\
+\hline
+{\hyperref[dma-DMA-IntTCClear]{DMA\_IntTCClear}}&Terminal count request clear
+\\
+\hline
+{\hyperref[dma-DMA-IntErrorStatus]{DMA\_IntErrorStatus}}&Interrupt error status
+\\
+\hline
+{\hyperref[dma-DMA-IntErrClr]{DMA\_IntErrClr}}&Interrupt error clear
+\\
+\hline
+{\hyperref[dma-DMA-RawIntTCStatus]{DMA\_RawIntTCStatus}}&Status of the terminal count interrupt prior to masking
+\\
+\hline
+{\hyperref[dma-DMA-RawIntErrorStatus]{DMA\_RawIntErrorStatus}}&Status of the error interrupt prior to masking
+\\
+\hline
+{\hyperref[dma-DMA-EnbldChns]{DMA\_EnbldChns}}&Channel enable status
+\\
+\hline
+{\hyperref[dma-DMA-SoftBReq]{DMA\_SoftBReq}}&Software burst request
+\\
+\hline
+{\hyperref[dma-DMA-SoftSReq]{DMA\_SoftSReq}}&Software single request
+\\
+\hline
+{\hyperref[dma-DMA-SoftLBReq]{DMA\_SoftLBReq}}&Software last burst request
+\\
+\hline
+{\hyperref[dma-DMA-SoftLSReq]{DMA\_SoftLSReq}}&Software last single request
+\\
+\hline
+{\hyperref[dma-DMA-Config]{DMA\_Config}}&DMA general configuration
+\\
+\hline
+{\hyperref[dma-DMA-Sync]{DMA\_Sync}}&DMA request asynchronous setting
+\\
+\hline
+{\hyperref[dma-DMA-C0SrcAddr]{DMA\_C0SrcAddr}}&Channel DMA source address
+\\
+\hline
+{\hyperref[dma-DMA-C0DstAddr]{DMA\_C0DstAddr}}&Channel DMA Destination address
+\\
+\hline
+{\hyperref[dma-DMA-C0LLI]{DMA\_C0LLI}}&Channel DMA link list
+\\
+\hline
+{\hyperref[dma-DMA-C0Control]{DMA\_C0Control}}&Channel DMA bus control
+\\
+\hline
+{\hyperref[dma-DMA-C0Config]{DMA\_C0Config}}&Channel DMA configuration
+\\
+\hline
+{\hyperref[dma-DMA-C1SrcAddr]{DMA\_C1SrcAddr}}&Channel DMA source address
+\\
+\hline
+{\hyperref[dma-DMA-C1DstAddr]{DMA\_C1DstAddr}}&Channel DMA Destination address
+\\
+\hline
+{\hyperref[dma-DMA-C1LLI]{DMA\_C1LLI}}&Channel DMA link list
+\\
+\hline
+{\hyperref[dma-DMA-C1Control]{DMA\_C1Control}}&Channel DMA bus control
+\\
+\hline
+{\hyperref[dma-DMA-C1Config]{DMA\_C1Config}}&Channel DMA configuration
+\\
+\hline
+{\hyperref[dma-DMA-C2SrcAddr]{DMA\_C2SrcAddr}}&Channel DMA source address
+\\
+\hline
+{\hyperref[dma-DMA-C2DstAddr]{DMA\_C2DstAddr}}&Channel DMA Destination address
+\\
+\hline
+{\hyperref[dma-DMA-C2LLI]{DMA\_C2LLI}}&Channel DMA link list
+\\
+\hline
+{\hyperref[dma-DMA-C2Control]{DMA\_C2Control}}&Channel DMA bus contro
+\\
+\hline
+{\hyperref[dma-DMA-C2Config]{DMA\_C2Config}}&Channel DMA configuration
+\\
+\hline
+{\hyperref[dma-DMA-C3SrcAddr]{DMA\_C3SrcAddr}}&Channel DMA source address
+\\
+\hline
+{\hyperref[dma-DMA-C3DstAddr]{DMA\_C3DstAddr}}&Channel DMA Destination address
+\\
+\hline
+{\hyperref[dma-DMA-C3LLI]{DMA\_C3LLI}}&Channel DMA link list
+\\
+\hline
+{\hyperref[dma-DMA-C3Control]{DMA\_C3Control}}&Channel DMA bus control
+\\
+\hline
+{\hyperref[dma-DMA-C3Config]{DMA\_C3Config}}&Channel DMA configuration
+\\
+\hline
+{\hyperref[dma-DMA-C4SrcAddr]{DMA\_C4SrcAddr}}&Channel DMA source address
+\\
+\hline
+{\hyperref[dma-DMA-C4DstAddr]{DMA\_C4DstAddr}}&Channel DMA Destination address
+\\
+\hline
+{\hyperref[dma-DMA-C4LLI]{DMA\_C4LLI}}&Channel DMA link list
+\\
+\hline
+{\hyperref[dma-DMA-C4Control]{DMA\_C4Control}}&Channel DMA bus control
+\\
+\hline
+{\hyperref[dma-DMA-C4Config]{DMA\_C4Config}}&Channel DMA configuration
+\\
+\hline
+{\hyperref[dma-DMA-C5SrcAddr]{DMA\_C5SrcAddr}}&Channel DMA source address
+\\
+\hline
+{\hyperref[dma-DMA-C5DstAddr]{DMA\_C5DstAddr}}&Channel DMA Destination address
+\\
+\hline
+{\hyperref[dma-DMA-C5LLI]{DMA\_C5LLI}}&Channel DMA link list
+\\
+\hline
+{\hyperref[dma-DMA-C5Control]{DMA\_C5Control}}&Channel DMA bus control
+\\
+\hline
+{\hyperref[dma-DMA-C5Config]{DMA\_C5Config}}&Channel DMA configuration
+\\
+\hline
+{\hyperref[dma-DMA-C6SrcAddr]{DMA\_C6SrcAddr}}&Channel DMA source address
+\\
+\hline
+{\hyperref[dma-DMA-C6DstAddr]{DMA\_C6DstAddr}}&Channel DMA Destination address
+\\
+\hline
+{\hyperref[dma-DMA-C6LLI]{DMA\_C6LLI}}&Channel DMA link list
+\\
+\hline
+{\hyperref[dma-DMA-C6Control]{DMA\_C6Control}}&Channel DMA bus control
+\\
+\hline
+{\hyperref[dma-DMA-C6Config]{DMA\_C6Config}}&Channel DMA configuration
+\\
+\hline
+{\hyperref[dma-DMA-C7SrcAddr]{DMA\_C7SrcAddr}}&Channel DMA source address
+\\
+\hline
+{\hyperref[dma-DMA-C7DstAddr]{DMA\_C7DstAddr}}&Channel DMA Destination address
+\\
+\hline
+{\hyperref[dma-DMA-C7LLI]{DMA\_C7LLI}}&Channel DMA link list
+\\
+\hline
+{\hyperref[dma-DMA-C7Control]{DMA\_C7Control}}&Channel DMA bus control
+\\
+\hline
+{\hyperref[dma-DMA-C7Config]{DMA\_C7Config}}&Channel DMA configuration
+\\
+\hline
+}
+
+\subsection{DMA\_IntStatus}
+\label{dma-DMA-IntStatus}
+地址：0x4000c000
+ \begin{figure}[H]
+\includegraphics{dma_DMA_IntStatus.pdf}
+\end{figure}
+
+\regdes{31:8&RSVD& & & \\\hline
+7:0&IntStatus&r&0&Status of the DMA interrupts after masking\\\hline
+
+}
+\subsection{DMA\_IntTCStatus}
+\label{dma-DMA-IntTCStatus}
+地址：0x4000c004
+ \begin{figure}[H]
+\includegraphics{dma_DMA_IntTCStatus.pdf}
+\end{figure}
+
+\regdes{31:8&RSVD& & & \\\hline
+7:0&IntTCStatus&r&0&Interrupt terminal count request status\\\hline
+
+}
+\subsection{DMA\_IntTCClear}
+\label{dma-DMA-IntTCClear}
+地址：0x4000c008
+ \begin{figure}[H]
+\includegraphics{dma_DMA_IntTCClear.pdf}
+\end{figure}
+
+\regdes{31:8&RSVD& & & \\\hline
+7:0&IntTCClear&w&0&Terminal count request clear\\\hline
+
+}
+\subsection{DMA\_IntErrorStatus}
+\label{dma-DMA-IntErrorStatus}
+地址：0x4000c00c
+ \begin{figure}[H]
+\includegraphics{dma_DMA_IntErrorStatus.pdf}
+\end{figure}
+
+\regdes{31:8&RSVD& & & \\\hline
+7:0&IntErrorStatus&r&0&Interrupt error status\\\hline
+
+}
+\subsection{DMA\_IntErrClr}
+\label{dma-DMA-IntErrClr}
+地址：0x4000c010
+ \begin{figure}[H]
+\includegraphics{dma_DMA_IntErrClr.pdf}
+\end{figure}
+
+\regdes{31:8&RSVD& & & \\\hline
+7:0&IntErrClr&w&0&Interrupt error clear\\\hline
+
+}
+\subsection{DMA\_RawIntTCStatus}
+\label{dma-DMA-RawIntTCStatus}
+地址：0x4000c014
+ \begin{figure}[H]
+\includegraphics{dma_DMA_RawIntTCStatus.pdf}
+\end{figure}
+
+\regdes{31:8&RSVD& & & \\\hline
+7:0&RawIntTCStatus&r&0&Status of the terminal count interrupt prior to masking\\\hline
+
+}
+\subsection{DMA\_RawIntErrorStatus}
+\label{dma-DMA-RawIntErrorStatus}
+地址：0x4000c018
+ \begin{figure}[H]
+\includegraphics{dma_DMA_RawIntErrorStatus.pdf}
+\end{figure}
+
+\regdes{31:8&RSVD& & & \\\hline
+7:0&RawIntErrorStatus&r&0&Status of the error interrupt prior to masking\\\hline
+
+}
+\subsection{DMA\_EnbldChns}
+\label{dma-DMA-EnbldChns}
+地址：0x4000c01c
+ \begin{figure}[H]
+\includegraphics{dma_DMA_EnbldChns.pdf}
+\end{figure}
+
+\regdes{31:8&RSVD& & & \\\hline
+7:0&EnabledChannels&r&0&Channel enable status\\\hline
+
+}
+\subsection{DMA\_SoftBReq}
+\label{dma-DMA-SoftBReq}
+地址：0x4000c020
+ \begin{figure}[H]
+\includegraphics{dma_DMA_SoftBReq.pdf}
+\end{figure}
+
+\regdes{31:0&SoftBReq&r/w&0&Software burst request\\\hline
+
+}
+\subsection{DMA\_SoftSReq}
+\label{dma-DMA-SoftSReq}
+地址：0x4000c024
+ \begin{figure}[H]
+\includegraphics{dma_DMA_SoftSReq.pdf}
+\end{figure}
+
+\regdes{31:0&SoftSReq&r/w&0&Software single request\\\hline
+
+}
+\subsection{DMA\_SoftLBReq}
+\label{dma-DMA-SoftLBReq}
+地址：0x4000c028
+ \begin{figure}[H]
+\includegraphics{dma_DMA_SoftLBReq.pdf}
+\end{figure}
+
+\regdes{31:0&SoftLBReq&r/w&0&Software last burst request\\\hline
+
+}
+\subsection{DMA\_SoftLSReq}
+\label{dma-DMA-SoftLSReq}
+地址：0x4000c02c
+ \begin{figure}[H]
+\includegraphics{dma_DMA_SoftLSReq.pdf}
+\end{figure}
+
+\regdes{31:0&SoftLSReq&r/w&0&Software last single request\\\hline
+
+}
+\subsection{DMA\_Config}
+\label{dma-DMA-Config}
+地址：0x4000c030
+ \begin{figure}[H]
+\includegraphics{dma_DMA_Config.pdf}
+\end{figure}
+
+\regdes{31:2&RSVD& & & \\\hline
+1&M&r/w&0&AHB Master endianness configuration: 0 = little-endian, 1 = big-endian\\\hline
+0&E&r/w&0&SMDMA Enable.\\\hline
+
+}
+\subsection{DMA\_Sync}
+\label{dma-DMA-Sync}
+地址：0x4000c034
+ \begin{figure}[H]
+\includegraphics{dma_DMA_Sync.pdf}
+\end{figure}
+
+\regdes{31:0&DMA\_Sync&r/w&0&DMA synchronization logic for DMA request signals: 0 = enable, 1 = disable\\\hline
+
+}
+\subsection{DMA\_C0SrcAddr}
+\label{dma-DMA-C0SrcAddr}
+地址：0x4000c100
+ \begin{figure}[H]
+\includegraphics{dma_DMA_C0SrcAddr.pdf}
+\end{figure}
+
+\regdes{31:0&SrcAddr&r/w&0&DMA source address\\\hline
+
+}
+\subsection{DMA\_C0DstAddr}
+\label{dma-DMA-C0DstAddr}
+地址：0x4000c104
+ \begin{figure}[H]
+\includegraphics{dma_DMA_C0DstAddr.pdf}
+\end{figure}
+
+\regdes{31:0&DstAddr&r/w&0&DMA Destination address\\\hline
+
+}
+\subsection{DMA\_C0LLI}
+\label{dma-DMA-C0LLI}
+地址：0x4000c108
+ \begin{figure}[H]
+\includegraphics{dma_DMA_C0LLI.pdf}
+\end{figure}
+
+\regdes{31:0&LLI&r/w&0&First linked list item. Bits [1:0] must be 0.\\\hline
+
+}
+\subsection{DMA\_C0Control}
+\label{dma-DMA-C0Control}
+地址：0x4000c10c
+ \begin{figure}[H]
+\includegraphics{dma_DMA_C0Control.pdf}
+\end{figure}
+
+\regdes{31&I&r/w&0&Terminal count interrupt enable bit. It controls whether the current LLI is expected to trigger the terminal count interrupt.\\\hline
+30:28&Prot&r/w&0&Protection.\\\hline
+27&DI&r/w&1&Destination increment. When set, the Destination address is incremented after each transfer.\\\hline
+26&SI&r/w&1&Source increment. When set, the source address is incremented after each transfer.\\\hline
+25&SLargerD&r/w&0&In Memory-to-memory mode, Set this bit high when Src data size is larger than Dst.\\\hline
+24:23&fix\_cnt&r/w&2'd0&Only effect when dst\_min\_mode = 1 \par Destination transfer cnt = (total src byte cnt - (fix\_cnt<<DWidth))<<DWidth
+\\\hline
+22:21&DWidth&r/w&2'b10&Destination transfer width: 8/16/32\\\hline
+20&RSVD& & & \\\hline
+19:18&SWidth&r/w&2'b10&Source transfer width: 8/16/32\\\hline
+17&dst\_add\_mode&r/w&1'b0&Add mode : issue remain destination traffic\\\hline
+16:15&DBSize&r/w&2'b01&Destination burst size: 1/4/8/16\\\hline
+14&dst\_min\_mode&r/w&1'b0&Minus mode : Not issue all destination traffic\\\hline
+13:12&SBSize&r/w&2'b01&Source burst size: 1/4/8/16. Note CH FIFO Size is 16Bytes and SBSize*Swidth should <= 16B\\\hline
+11:0&TransferSize&r/w&0&Transfer size: 0~4095. Number of data transfers left to complete when the SMDMA is the flow controller.\\\hline
+
+}
+\subsection{DMA\_C0Config}
+\label{dma-DMA-C0Config}
+地址：0x4000c110
+ \begin{figure}[H]
+\includegraphics{dma_DMA_C0Config.pdf}
+\end{figure}
+
+\regdes{31:30&RSVD& & & \\\hline
+29:20&LLICounter&r&0&LLI counter. Increased 1 each LLI run. Cleared 0 when config Control.\\\hline
+19&RSVD& & & \\\hline
+18&H&r/w&0&Halt: 0 = enable DMA requests, 1 = ignore subsequent source DMA requests.\\\hline
+17&A&r&0&Active: 0 = no data in FIFO of the channel, 1 = FIFO of the channel has data.\\\hline
+16&L&r/w&0&Lock.\\\hline
+15&ITC&r/w&0&Terminal count interrupt mask.\\\hline
+14&IE&r/w&0&Interrupt error mask.\\\hline
+13:11&FlowCntrl&r/w&0&000: Memory-to-memory (DMA) \par 001: Memory-to-peripheral (DMA) \par 010: Peripheral-to-memory (DMA) \par 011: Source peripheral-to-Destination peripheral (DMA) \par 100: Source peripheral-to-Destination peripheral (Destination peripheral) \par 101: Memory-to-peripheral (peripheral) \par 110: Peripheral-to-memory (peripheral) \par 111: Source peripheral-to-Destination peripheral (Source peripheral)
+\\\hline
+10:6&DstPeripheral&r/w&0&Destination peripheral. \par [23:22] GPADC \par [21:18] I2S \par [17:14] PDM \par [13:10] SSP \par [ 9: 6] I2C \par [ 5: 0] UART
+\\\hline
+5:1&SrcPeripheral&r/w&0&Source peripheral.\\\hline
+0&E&r/w&0&Channel enable.\\\hline
+
+}
+\subsection{DMA\_C1SrcAddr}
+\label{dma-DMA-C1SrcAddr}
+地址：0x4000c200
+ \begin{figure}[H]
+\includegraphics{dma_DMA_C1SrcAddr.pdf}
+\end{figure}
+
+\regdes{31:0&SrcAddr&r/w&0&\\\hline
+
+}
+\subsection{DMA\_C1DstAddr}
+\label{dma-DMA-C1DstAddr}
+地址：0x4000c204
+ \begin{figure}[H]
+\includegraphics{dma_DMA_C1DstAddr.pdf}
+\end{figure}
+
+\regdes{31:0&DstAddr&r/w&0&\\\hline
+
+}
+\subsection{DMA\_C1LLI}
+\label{dma-DMA-C1LLI}
+地址：0x4000c208
+ \begin{figure}[H]
+\includegraphics{dma_DMA_C1LLI.pdf}
+\end{figure}
+
+\regdes{31:2&LLI&r/w&0&\\\hline
+1:0&RSVD& & & \\\hline
+
+}
+\subsection{DMA\_C1Control}
+\label{dma-DMA-C1Control}
+地址：0x4000c20c
+ \begin{figure}[H]
+\includegraphics{dma_DMA_C1Control.pdf}
+\end{figure}
+
+\regdes{31&I&r/w&0&\\\hline
+30:28&Prot&r/w&0&\\\hline
+27&DI&r/w&1&\\\hline
+26&SI&r/w&1&\\\hline
+25&RSVD& & & \\\hline
+24:23&fix\_cnt&r/w&2'd0&\\\hline
+22:24&RSVD& & & \\\hline
+23:21&DWidth&r/w&3'b010&\\\hline
+20:18&SWidth&r/w&3'b010&\\\hline
+17&dst\_add\_mode&r/w&1'b0&\\\hline
+16:15&DBSize&r/w&3'b001&\\\hline
+14&dst\_min\_mode&r/w&1'b0&\\\hline
+13:12&SBSize&r/w&3'b001&\\\hline
+11:0&TransferSize&r/w&0&\\\hline
+
+}
+\subsection{DMA\_C1Config}
+\label{dma-DMA-C1Config}
+地址：0x4000c210
+ \begin{figure}[H]
+\includegraphics{dma_DMA_C1Config.pdf}
+\end{figure}
+
+\regdes{31:19&RSVD& & & \\\hline
+18&H&r/w&0&\\\hline
+17&A&r&0&\\\hline
+16&L&r/w&0&\\\hline
+15&ITC&r/w&0&\\\hline
+14&IE&r/w&0&\\\hline
+13:11&FlowCntrl&r/w&0&\\\hline
+10:6&DstPeripheral&r/w&0&\\\hline
+5:1&SrcPeripheral&r/w&0&\\\hline
+0&E&r/w&0&\\\hline
+
+}
+\subsection{DMA\_C2SrcAddr}
+\label{dma-DMA-C2SrcAddr}
+地址：0x4000c300
+ \begin{figure}[H]
+\includegraphics{dma_DMA_C2SrcAddr.pdf}
+\end{figure}
+
+\regdes{31:0&SrcAddr&r/w&0&\\\hline
+
+}
+\subsection{DMA\_C2DstAddr}
+\label{dma-DMA-C2DstAddr}
+地址：0x4000c304
+ \begin{figure}[H]
+\includegraphics{dma_DMA_C2DstAddr.pdf}
+\end{figure}
+
+\regdes{31:0&DstAddr&r/w&0&\\\hline
+
+}
+\subsection{DMA\_C2LLI}
+\label{dma-DMA-C2LLI}
+地址：0x4000c308
+ \begin{figure}[H]
+\includegraphics{dma_DMA_C2LLI.pdf}
+\end{figure}
+
+\regdes{31:2&LLI&r/w&0&\\\hline
+1:0&RSVD& & & \\\hline
+
+}
+\subsection{DMA\_C2Control}
+\label{dma-DMA-C2Control}
+地址：0x4000c30c
+ \begin{figure}[H]
+\includegraphics{dma_DMA_C2Control.pdf}
+\end{figure}
+
+\regdes{31&I&r/w&0&\\\hline
+30:28&Prot&r/w&0&\\\hline
+27&DI&r/w&1&\\\hline
+26&SI&r/w&1&\\\hline
+25&RSVD& & & \\\hline
+24:23&fix\_cnt&r/w&2'd0&\\\hline
+22:24&RSVD& & & \\\hline
+23:21&DWidth&r/w&3'b010&\\\hline
+20:18&SWidth&r/w&3'b010&\\\hline
+17&dst\_add\_mode&r/w&1'b0&\\\hline
+16:15&DBSize&r/w&3'b001&\\\hline
+14&dst\_min\_mode&r/w&1'b0&\\\hline
+13:12&SBSize&r/w&3'b001&\\\hline
+11:0&TransferSize&r/w&0&\\\hline
+
+}
+\subsection{DMA\_C2Config}
+\label{dma-DMA-C2Config}
+地址：0x4000c310
+ \begin{figure}[H]
+\includegraphics{dma_DMA_C2Config.pdf}
+\end{figure}
+
+\regdes{31:19&RSVD& & & \\\hline
+18&H&r/w&0&\\\hline
+17&A&r&0&\\\hline
+16&L&r/w&0&\\\hline
+15&ITC&r/w&0&\\\hline
+14&IE&r/w&0&\\\hline
+13:11&FlowCntrl&r/w&0&\\\hline
+10:6&DstPeripheral&r/w&0&\\\hline
+5:1&SrcPeripheral&r/w&0&\\\hline
+0&E&r/w&0&\\\hline
+
+}
+\subsection{DMA\_C3SrcAddr}
+\label{dma-DMA-C3SrcAddr}
+地址：0x4000c400
+ \begin{figure}[H]
+\includegraphics{dma_DMA_C3SrcAddr.pdf}
+\end{figure}
+
+\regdes{31:0&SrcAddr&r/w&0&\\\hline
+
+}
+\subsection{DMA\_C3DstAddr}
+\label{dma-DMA-C3DstAddr}
+地址：0x4000c404
+ \begin{figure}[H]
+\includegraphics{dma_DMA_C3DstAddr.pdf}
+\end{figure}
+
+\regdes{31:0&DstAddr&r/w&0&\\\hline
+
+}
+\subsection{DMA\_C3LLI}
+\label{dma-DMA-C3LLI}
+地址：0x4000c408
+ \begin{figure}[H]
+\includegraphics{dma_DMA_C3LLI.pdf}
+\end{figure}
+
+\regdes{31:2&LLI&r/w&0&\\\hline
+1:0&RSVD& & & \\\hline
+
+}
+\subsection{DMA\_C3Control}
+\label{dma-DMA-C3Control}
+地址：0x4000c40c
+ \begin{figure}[H]
+\includegraphics{dma_DMA_C3Control.pdf}
+\end{figure}
+
+\regdes{31&I&r/w&0&\\\hline
+30:28&Prot&r/w&0&\\\hline
+27&DI&r/w&1&\\\hline
+26&SI&r/w&1&\\\hline
+25&RSVD& & & \\\hline
+24:23&fix\_cnt&r/w&2'd0&\\\hline
+22:24&RSVD& & & \\\hline
+23:21&DWidth&r/w&3'b010&\\\hline
+20:18&SWidth&r/w&3'b010&\\\hline
+17&dst\_add\_mode&r/w&1'b0&\\\hline
+16:15&DBSize&r/w&3'b001&\\\hline
+14&dst\_min\_mode&r/w&1'b0&\\\hline
+13:12&SBSize&r/w&3'b001&\\\hline
+11:0&TransferSize&r/w&0&\\\hline
+
+}
+\subsection{DMA\_C3Config}
+\label{dma-DMA-C3Config}
+地址：0x4000c410
+ \begin{figure}[H]
+\includegraphics{dma_DMA_C3Config.pdf}
+\end{figure}
+
+\regdes{31:19&RSVD& & & \\\hline
+18&H&r/w&0&\\\hline
+17&A&r&0&\\\hline
+16&L&r/w&0&\\\hline
+15&ITC&r/w&0&\\\hline
+14&IE&r/w&0&\\\hline
+13:11&FlowCntrl&r/w&0&\\\hline
+10:6&DstPeripheral&r/w&0&\\\hline
+5:1&SrcPeripheral&r/w&0&\\\hline
+0&E&r/w&0&\\\hline
+
+}
+\subsection{DMA\_C4SrcAddr}
+\label{dma-DMA-C4SrcAddr}
+地址：0x4000c500
+ \begin{figure}[H]
+\includegraphics{dma_DMA_C4SrcAddr.pdf}
+\end{figure}
+
+\regdes{31:0&SrcAddr&r/w&0&\\\hline
+
+}
+\subsection{DMA\_C4DstAddr}
+\label{dma-DMA-C4DstAddr}
+地址：0x4000c504
+ \begin{figure}[H]
+\includegraphics{dma_DMA_C4DstAddr.pdf}
+\end{figure}
+
+\regdes{31:0&DstAddr&r/w&0&\\\hline
+
+}
+\subsection{DMA\_C4LLI}
+\label{dma-DMA-C4LLI}
+地址：0x4000c508
+ \begin{figure}[H]
+\includegraphics{dma_DMA_C4LLI.pdf}
+\end{figure}
+
+\regdes{31:2&LLI&r/w&0&\\\hline
+1:0&RSVD& & & \\\hline
+
+}
+\subsection{DMA\_C4Control}
+\label{dma-DMA-C4Control}
+地址：0x4000c50c
+ \begin{figure}[H]
+\includegraphics{dma_DMA_C4Control.pdf}
+\end{figure}
+
+\regdes{31&I&r/w&0&\\\hline
+30:28&Prot&r/w&0&\\\hline
+27&DI&r/w&1&\\\hline
+26&SI&r/w&1&\\\hline
+25&RSVD& & & \\\hline
+24:23&fix\_cnt&r/w&2'd0&\\\hline
+22:24&RSVD& & & \\\hline
+23:21&DWidth&r/w&3'b010&\\\hline
+20:18&SWidth&r/w&3'b010&\\\hline
+17&dst\_add\_mode&r/w&1'b0&\\\hline
+16:15&DBSize&r/w&3'b001&\\\hline
+14&dst\_min\_mode&r/w&1'b0&\\\hline
+13:12&SBSize&r/w&3'b001&\\\hline
+11:0&TransferSize&r/w&0&\\\hline
+
+}
+\subsection{DMA\_C4Config}
+\label{dma-DMA-C4Config}
+地址：0x4000c510
+ \begin{figure}[H]
+\includegraphics{dma_DMA_C4Config.pdf}
+\end{figure}
+
+\regdes{31:19&RSVD& & & \\\hline
+18&H&r/w&0&\\\hline
+17&A&r&0&\\\hline
+16&L&r/w&0&\\\hline
+15&ITC&r/w&0&\\\hline
+14&IE&r/w&0&\\\hline
+13:11&FlowCntrl&r/w&0&\\\hline
+10:6&DstPeripheral&r/w&0&\\\hline
+5:1&SrcPeripheral&r/w&0&\\\hline
+0&E&r/w&0&\\\hline
+
+}
+\subsection{DMA\_C5SrcAddr}
+\label{dma-DMA-C5SrcAddr}
+地址：0x4000c600
+ \begin{figure}[H]
+\includegraphics{dma_DMA_C5SrcAddr.pdf}
+\end{figure}
+
+\regdes{31:0&SrcAddr&r/w&0&\\\hline
+
+}
+\subsection{DMA\_C5DstAddr}
+\label{dma-DMA-C5DstAddr}
+地址：0x4000c604
+ \begin{figure}[H]
+\includegraphics{dma_DMA_C5DstAddr.pdf}
+\end{figure}
+
+\regdes{31:0&DstAddr&r/w&0&\\\hline
+
+}
+\subsection{DMA\_C5LLI}
+\label{dma-DMA-C5LLI}
+地址：0x4000c608
+ \begin{figure}[H]
+\includegraphics{dma_DMA_C5LLI.pdf}
+\end{figure}
+
+\regdes{31:2&LLI&r/w&0&\\\hline
+1:0&RSVD& & & \\\hline
+
+}
+\subsection{DMA\_C5Control}
+\label{dma-DMA-C5Control}
+地址：0x4000c60c
+ \begin{figure}[H]
+\includegraphics{dma_DMA_C5Control.pdf}
+\end{figure}
+
+\regdes{31&I&r/w&0&\\\hline
+30:28&Prot&r/w&0&\\\hline
+27&DI&r/w&1&\\\hline
+26&SI&r/w&1&\\\hline
+25&RSVD& & & \\\hline
+24:23&fix\_cnt&r/w&2'd0&\\\hline
+22:24&RSVD& & & \\\hline
+23:21&DWidth&r/w&3'b010&\\\hline
+20:18&SWidth&r/w&3'b010&\\\hline
+17&dst\_add\_mode&r/w&1'b0&\\\hline
+16:15&DBSize&r/w&3'b001&\\\hline
+14&dst\_min\_mode&r/w&1'b0&\\\hline
+13:12&SBSize&r/w&3'b001&\\\hline
+11:0&TransferSize&r/w&0&\\\hline
+
+}
+\subsection{DMA\_C5Config}
+\label{dma-DMA-C5Config}
+地址：0x4000c610
+ \begin{figure}[H]
+\includegraphics{dma_DMA_C5Config.pdf}
+\end{figure}
+
+\regdes{31:19&RSVD& & & \\\hline
+18&H&r/w&0&\\\hline
+17&A&r&0&\\\hline
+16&L&r/w&0&\\\hline
+15&ITC&r/w&0&\\\hline
+14&IE&r/w&0&\\\hline
+13:11&FlowCntrl&r/w&0&\\\hline
+10:6&DstPeripheral&r/w&0&\\\hline
+5:1&SrcPeripheral&r/w&0&\\\hline
+0&E&r/w&0&\\\hline
+
+}
+\subsection{DMA\_C6SrcAddr}
+\label{dma-DMA-C6SrcAddr}
+地址：0x4000c700
+ \begin{figure}[H]
+\includegraphics{dma_DMA_C6SrcAddr.pdf}
+\end{figure}
+
+\regdes{31:0&SrcAddr&r/w&0&\\\hline
+
+}
+\subsection{DMA\_C6DstAddr}
+\label{dma-DMA-C6DstAddr}
+地址：0x4000c704
+ \begin{figure}[H]
+\includegraphics{dma_DMA_C6DstAddr.pdf}
+\end{figure}
+
+\regdes{31:0&DstAddr&r/w&0&\\\hline
+
+}
+\subsection{DMA\_C6LLI}
+\label{dma-DMA-C6LLI}
+地址：0x4000c708
+ \begin{figure}[H]
+\includegraphics{dma_DMA_C6LLI.pdf}
+\end{figure}
+
+\regdes{31:2&LLI&r/w&0&\\\hline
+1:0&RSVD& & & \\\hline
+
+}
+\subsection{DMA\_C6Control}
+\label{dma-DMA-C6Control}
+地址：0x4000c70c
+ \begin{figure}[H]
+\includegraphics{dma_DMA_C6Control.pdf}
+\end{figure}
+
+\regdes{31&I&r/w&0&\\\hline
+30:28&Prot&r/w&0&\\\hline
+27&DI&r/w&1&\\\hline
+26&SI&r/w&1&\\\hline
+25&RSVD& & & \\\hline
+24:23&fix\_cnt&r/w&2'd0&\\\hline
+22:24&RSVD& & & \\\hline
+23:21&DWidth&r/w&3'b010&\\\hline
+20:18&SWidth&r/w&3'b010&\\\hline
+17&dst\_add\_mode&r/w&1'b0&\\\hline
+16:15&DBSize&r/w&3'b001&\\\hline
+14&dst\_min\_mode&r/w&1'b0&\\\hline
+13:12&SBSize&r/w&3'b001&\\\hline
+11:0&TransferSize&r/w&0&\\\hline
+
+}
+\subsection{DMA\_C6Config}
+\label{dma-DMA-C6Config}
+地址：0x4000c710
+ \begin{figure}[H]
+\includegraphics{dma_DMA_C6Config.pdf}
+\end{figure}
+
+\regdes{31:19&RSVD& & & \\\hline
+18&H&r/w&0&\\\hline
+17&A&r&0&\\\hline
+16&L&r/w&0&\\\hline
+15&ITC&r/w&0&\\\hline
+14&IE&r/w&0&\\\hline
+13:11&FlowCntrl&r/w&0&\\\hline
+10:6&DstPeripheral&r/w&0&\\\hline
+5:1&SrcPeripheral&r/w&0&\\\hline
+0&E&r/w&0&\\\hline
+
+}
+\subsection{DMA\_C7SrcAddr}
+\label{dma-DMA-C7SrcAddr}
+地址：0x4000c800
+ \begin{figure}[H]
+\includegraphics{dma_DMA_C7SrcAddr.pdf}
+\end{figure}
+
+\regdes{31:0&SrcAddr&r/w&0&\\\hline
+
+}
+\subsection{DMA\_C7DstAddr}
+\label{dma-DMA-C7DstAddr}
+地址：0x4000c804
+ \begin{figure}[H]
+\includegraphics{dma_DMA_C7DstAddr.pdf}
+\end{figure}
+
+\regdes{31:0&DstAddr&r/w&0&\\\hline
+
+}
+\subsection{DMA\_C7LLI}
+\label{dma-DMA-C7LLI}
+地址：0x4000c808
+ \begin{figure}[H]
+\includegraphics{dma_DMA_C7LLI.pdf}
+\end{figure}
+
+\regdes{31:2&LLI&r/w&0&\\\hline
+1:0&RSVD& & & \\\hline
+
+}
+\subsection{DMA\_C7Control}
+\label{dma-DMA-C7Control}
+地址：0x4000c80c
+ \begin{figure}[H]
+\includegraphics{dma_DMA_C7Control.pdf}
+\end{figure}
+
+\regdes{31&I&r/w&0&\\\hline
+30:28&Prot&r/w&0&\\\hline
+27&DI&r/w&1&\\\hline
+26&SI&r/w&1&\\\hline
+25&RSVD& & & \\\hline
+24:23&fix\_cnt&r/w&2'd0&\\\hline
+22:24&RSVD& & & \\\hline
+23:21&DWidth&r/w&3'b010&\\\hline
+20:18&SWidth&r/w&3'b010&\\\hline
+17&dst\_add\_mode&r/w&1'b0&\\\hline
+16:15&DBSize&r/w&3'b001&\\\hline
+14&dst\_min\_mode&r/w&1'b0&\\\hline
+13:12&SBSize&r/w&3'b001&\\\hline
+11:0&TransferSize&r/w&0&\\\hline
+
+}
+\subsection{DMA\_C7Config}
+\label{dma-DMA-C7Config}
+地址：0x4000c810
+ \begin{figure}[H]
+\includegraphics{dma_DMA_C7Config.pdf}
+\end{figure}
+
+\regdes{31:19&RSVD& & & \\\hline
+18&H&r/w&0&\\\hline
+17&A&r&0&\\\hline
+16&L&r/w&0&\\\hline
+15&ITC&r/w&0&\\\hline
+14&IE&r/w&0&\\\hline
+13:11&FlowCntrl&r/w&0&\\\hline
+10:6&DstPeripheral&r/w&0&\\\hline
+5:1&SrcPeripheral&r/w&0&\\\hline
+0&E&r/w&0&\\\hline
+
+}

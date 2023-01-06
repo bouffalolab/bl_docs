@@ -1,0 +1,1444 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>14. QDEC &mdash; BL702/704/706 参考手册  文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="15. KeyScan" href="KeyScan.html" />
+    <link rel="prev" title="13. TIMER" href="TIMER.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL702/704/706 参考手册
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. 系统和存储器概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. 复位和时钟</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">4. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">5. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">6. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="L1C.html">7. L1C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">8. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">9. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">10. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">11. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">12. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">13. TIMER</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">14. QDEC</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">14.1. 简介</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">14.2. 主要特征</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">14.3. 功能描述</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">14.4. 寄存器描述</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#qdec0-ctrl0">14.4.1. qdec0_ctrl0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#qdec0-ctrl1">14.4.2. qdec0_ctrl1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#qdec0-value">14.4.3. qdec0_value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#qdec0-int-en">14.4.4. qdec0_int_en</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#qdec0-int-sts">14.4.5. qdec0_int_sts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#qdec0-int-clr">14.4.6. qdec0_int_clr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#qdec1-ctrl0">14.4.7. qdec1_ctrl0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#qdec1-ctrl1">14.4.8. qdec1_ctrl1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#qdec1-value">14.4.9. qdec1_value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#qdec1-int-en">14.4.10. qdec1_int_en</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#qdec1-int-sts">14.4.11. qdec1_int_sts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#qdec1-int-clr">14.4.12. qdec1_int_clr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#qdec2-ctrl0">14.4.13. qdec2_ctrl0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#qdec2-ctrl1">14.4.14. qdec2_ctrl1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#qdec2-value">14.4.15. qdec2_value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#qdec2-int-en">14.4.16. qdec2_int_en</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#qdec2-int-sts">14.4.17. qdec2_int_sts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#qdec2-int-clr">14.4.18. qdec2_int_clr</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="KeyScan.html">15. KeyScan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2S.html">16. I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EMAC.html">17. Emac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USB.html">18. USB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">19. 版本信息</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL702/704/706 参考手册</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">14. </span>QDEC</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="qdec">
+<h1><span class="section-number">14. </span>QDEC<a class="headerlink" href="#qdec" title="永久链接至标题"></a></h1>
+<section id="id1">
+<h2><span class="section-number">14.1. </span>简介<a class="headerlink" href="#id1" title="永久链接至标题"></a></h2>
+<p>正交解码器（quadrature decoder），用于将双路旋转编码器产生的两组相位相差90度的脉冲解码为对应转速和旋转方向。</p>
+</section>
+<section id="id2">
+<h2><span class="section-number">14.2. </span>主要特征<a class="headerlink" href="#id2" title="永久链接至标题"></a></h2>
+<ul class="simple">
+<li><p>三组QDEC可供使用</p></li>
+<li><p>QDEC的时钟源可以为32K（f32k_clk）或32M（xclk），正常工作时建议选择32M作为时钟源，当进入睡眠模式并希望可以由QDEC唤醒时建议使用32k</p></li>
+<li><p>支持5位分频值，可分频1~32</p></li>
+<li><p>16位脉冲计数范围（-32768~32767 pulse/sample）</p></li>
+<li><p>12种可配置的sample周期（32us~131ms per sample at 1MHz）</p></li>
+<li><p>16位可设置的report周期（0~65535 sample/report）</p></li>
+<li><p>内置一个可随采样进行闪烁的LED功能（LED on/off 0~511 us/sample）</p></li>
+<li><p>中断可配（sample中断、report中断、error中断、overflow中断）</p></li>
+<li><p>可配置为PDS的唤醒源（clock source需要配置为32k）</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2><span class="section-number">14.3. </span>功能描述<a class="headerlink" href="#id3" title="永久链接至标题"></a></h2>
+<p>QDEC预期的工作频率为1MHz，检测的速度越快所需的工作频率越高。
+每次采样会将编码器输出的A/B两相脉冲解码为高低电平，对比前次采样结果可获得当前编码器旋转方向与脉冲计数变化情况（顺时针转+1，逆时针转-1，不转不变，出错报错并计数），经过report所设定的采样次数后，即可获得此段时间内编码器的旋转方向和脉冲计数，据此求解出此段report时间内转速方向均值。
+每次采样的周期可配，在工作频率为1MHz时，最低32us一次采样，最高131ms一次采样。
+可配置中断为单次采样结束触发（sample中断）、多次采样结束触发（report中断），以灵活测量转速。
+可配置的LED闪烁功能，闪烁频率=LED周期/采样周期，每次闪烁中的on/off由LED极性决定。</p>
+<figure class="align-center" id="id5">
+<img alt="../_images/qdec.svg" src="../_images/qdec.svg" /><figcaption>
+<p><span class="caption-number">图 14.1 </span><span class="caption-text">QDEC功能框图</span><a class="headerlink" href="#id5" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id4">
+<h2><span class="section-number">14.4. </span>寄存器描述<a class="headerlink" href="#id4" title="永久链接至标题"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 43%" />
+<col style="width: 57%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>名称</p></td>
+<td><p>描述</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#qdec0-ctrl0">qdec0_ctrl0</a></p></td>
+<td><p>QDEC0 control0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qdec0-ctrl1">qdec0_ctrl1</a></p></td>
+<td><p>QDEC0 control1</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#qdec0-value">qdec0_value</a></p></td>
+<td><p>QDEC0 value</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qdec0-int-en">qdec0_int_en</a></p></td>
+<td><p>QDEC0 interrupt enable</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#qdec0-int-sts">qdec0_int_sts</a></p></td>
+<td><p>QDEC0 interrupt status</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qdec0-int-clr">qdec0_int_clr</a></p></td>
+<td><p>QDEC0 interrupt clear</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#qdec1-ctrl0">qdec1_ctrl0</a></p></td>
+<td><p>QDEC1 control0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qdec1-ctrl1">qdec1_ctrl1</a></p></td>
+<td><p>QDEC1 control1</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#qdec1-value">qdec1_value</a></p></td>
+<td><p>QDEC1 value</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qdec1-int-en">qdec1_int_en</a></p></td>
+<td><p>QDEC1 interrupt enable</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#qdec1-int-sts">qdec1_int_sts</a></p></td>
+<td><p>QDEC1 interrupt status</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qdec1-int-clr">qdec1_int_clr</a></p></td>
+<td><p>QDEC1 interrupt clear</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#qdec2-ctrl0">qdec2_ctrl0</a></p></td>
+<td><p>QDEC2 control0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qdec2-ctrl1">qdec2_ctrl1</a></p></td>
+<td><p>QDEC2 control1</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#qdec2-value">qdec2_value</a></p></td>
+<td><p>QDEC2 value</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qdec2-int-en">qdec2_int_en</a></p></td>
+<td><p>QDEC2 interrupt enable</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#qdec2-int-sts">qdec2_int_sts</a></p></td>
+<td><p>QDEC2 interrupt status</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qdec2-int-clr">qdec2_int_clr</a></p></td>
+<td><p>QDEC2 interrupt clear</p></td>
+</tr>
+</tbody>
+</table>
+<section id="qdec0-ctrl0">
+<h3><span class="section-number">14.4.1. </span>qdec0_ctrl0<a class="headerlink" href="#qdec0-ctrl0" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x4000a800</p>
+<figure class="align-center">
+<img alt="../_images/qdec_qdec0_ctrl0.svg" src="../_images/qdec_qdec0_ctrl0.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:28</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><p>27:12</p></td>
+<td rowspan="2"><p>rpt_period</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>16'd10</p></td>
+<td rowspan="2"><p>&quot;RPT&quot; report period in [samples/report]. Specifies the number of samples to be accumulated in the ACC1 register before the RPT_RDY and DBL_RDY events can be generated</p>
+<p>&quot;RPT_US&quot; report period in [us/report] = SP * RP</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="14"><p>11:8</p></td>
+<td rowspan="14"><p>spl_period</p></td>
+<td rowspan="14"><p>r/w</p></td>
+<td rowspan="14"><p>4'h2</p></td>
+<td rowspan="14"><p>&quot;SPL&quot; sample period in [us/sample]. The SAMPLE register will be updated for every new sample</p>
+<p>0:  32 us</p>
+<p>1:  64</p>
+<p>2: 128</p>
+<p>3: 256</p>
+<p>4: 512</p>
+<p>5:   1 ms</p>
+<p>6:   2</p>
+<p>7:   4</p>
+<p>8:   8</p>
+<p>9:  16</p>
+<p>A:  32</p>
+<p>B:  65</p>
+<p>C: 131</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>7:4</p></td>
+<td><p>deg_cnt</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>deg_en</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>deglitch</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>led_pol</p></td>
+<td><p>r/w</p></td>
+<td><p>1</p></td>
+<td><p>led polarity</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>led_en</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>qdec_en</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="qdec0-ctrl1">
+<h3><span class="section-number">14.4.2. </span>qdec0_ctrl1<a class="headerlink" href="#qdec0-ctrl1" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x4000a804</p>
+<figure class="align-center">
+<img alt="../_images/qdec_qdec0_ctrl1.svg" src="../_images/qdec_qdec0_ctrl1.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:25</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>24:16</p></td>
+<td><p>led_period</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>Period in us the LED is switched on prior to sampling</p></td>
+</tr>
+<tr class="row-even"><td><p>15:4</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>input_swap</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>input a/b swap</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>rpt_mode</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>rpt option  0: Count time only if sample change  1: Continue time</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>spl_mode</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>spl option  0: Stop sample if rpt_rdy  1: Continue sample</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>acc_mode</p></td>
+<td><p>r/w</p></td>
+<td><p>1</p></td>
+<td><p>acc option  0: Stop accumulate if overflow  1: Continue accumulate</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="qdec0-value">
+<h3><span class="section-number">14.4.3. </span>qdec0_value<a class="headerlink" href="#qdec0-value" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x4000a808</p>
+<figure class="align-center">
+<img alt="../_images/qdec_qdec0_value.svg" src="../_images/qdec_qdec0_value.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:30</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="5"><p>29:28</p></td>
+<td rowspan="5"><p>spl_val</p></td>
+<td rowspan="5"><p>r</p></td>
+<td rowspan="5"><p>0</p></td>
+<td rowspan="5"><p>Sample value. Direction of last change</p>
+<p>00: no change</p>
+<p>01: clockwise</p>
+<p>11: counter-clockwise</p>
+<p>10: Error</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>27:20</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>19:16</p></td>
+<td><p>acc2_val</p></td>
+<td><p>r</p></td>
+<td><p>0</p></td>
+<td><p>Double error accumulation (0~15)</p></td>
+</tr>
+<tr class="row-even"><td><p>15:0</p></td>
+<td><p>acc1_val</p></td>
+<td><p>r</p></td>
+<td><p>0</p></td>
+<td><p>Sample accumulation (-1024~1023)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="qdec0-int-en">
+<h3><span class="section-number">14.4.4. </span>qdec0_int_en<a class="headerlink" href="#qdec0-int-en" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x4000a810</p>
+<figure class="align-center">
+<img alt="../_images/qdec_qdec0_int_en.svg" src="../_images/qdec_qdec0_int_en.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:4</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>overflow_en</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>dbl_rdy_en</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>spl_rdy_en</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>rpt_rdy_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="qdec0-int-sts">
+<h3><span class="section-number">14.4.5. </span>qdec0_int_sts<a class="headerlink" href="#qdec0-int-sts" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x4000a814</p>
+<figure class="align-center">
+<img alt="../_images/qdec_qdec0_int_sts.svg" src="../_images/qdec_qdec0_int_sts.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:4</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>overflow_sts</p></td>
+<td><p>r</p></td>
+<td><p>0</p></td>
+<td><p>ACC1 or ACC2 overflow</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>dbl_rdy_sts</p></td>
+<td><p>r</p></td>
+<td><p>0</p></td>
+<td><p>ACC2 double error</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>spl_rdy_sts</p></td>
+<td><p>r</p></td>
+<td><p>0</p></td>
+<td><p>Event being generated for every new sample value written to the SAMPLE register</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>rpt_rdy_sts</p></td>
+<td><p>r</p></td>
+<td><p>0</p></td>
+<td><p>Non-null report ready</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="qdec0-int-clr">
+<h3><span class="section-number">14.4.6. </span>qdec0_int_clr<a class="headerlink" href="#qdec0-int-clr" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x4000a818</p>
+<figure class="align-center">
+<img alt="../_images/qdec_qdec0_int_clr.svg" src="../_images/qdec_qdec0_int_clr.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:4</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>overflow_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>dbl_rdy_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>spl_rdy_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>rpt_rdy_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="qdec1-ctrl0">
+<h3><span class="section-number">14.4.7. </span>qdec1_ctrl0<a class="headerlink" href="#qdec1-ctrl0" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x4000a840</p>
+<figure class="align-center">
+<img alt="../_images/qdec_qdec1_ctrl0.svg" src="../_images/qdec_qdec1_ctrl0.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:28</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><p>27:12</p></td>
+<td rowspan="2"><p>rpt_period</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>16'd10</p></td>
+<td rowspan="2"><p>&quot;RPT&quot; report period in [samples/report]. Specifies the number of samples to be accumulated in the ACC1 register before the RPT_RDY and DBL_RDY events can be generated</p>
+<p>&quot;RPT_US&quot; report period in [us/report] = SP * RP</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="14"><p>11:8</p></td>
+<td rowspan="14"><p>spl_period</p></td>
+<td rowspan="14"><p>r/w</p></td>
+<td rowspan="14"><p>4'h2</p></td>
+<td rowspan="14"><p>&quot;SPL&quot; sample period in [us/sample]. The SAMPLE register will be updated for every new sample</p>
+<p>0:  32 us</p>
+<p>1:  64</p>
+<p>2: 128</p>
+<p>3: 256</p>
+<p>4: 512</p>
+<p>5:   1 ms</p>
+<p>6:   2</p>
+<p>7:   4</p>
+<p>8:   8</p>
+<p>9:  16</p>
+<p>A:  32</p>
+<p>B:  65</p>
+<p>C: 131</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>7:4</p></td>
+<td><p>deg_cnt</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>deg_en</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>deglitch</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>led_pol</p></td>
+<td><p>r/w</p></td>
+<td><p>1</p></td>
+<td><p>led polarity</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>led_en</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>qdec_en</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="qdec1-ctrl1">
+<h3><span class="section-number">14.4.8. </span>qdec1_ctrl1<a class="headerlink" href="#qdec1-ctrl1" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x4000a844</p>
+<figure class="align-center">
+<img alt="../_images/qdec_qdec1_ctrl1.svg" src="../_images/qdec_qdec1_ctrl1.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:25</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>24:16</p></td>
+<td><p>led_period</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>Period in us the LED is switched on prior to sampling</p></td>
+</tr>
+<tr class="row-even"><td><p>15:4</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>input_swap</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>input a/b swap</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>rpt_mode</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>rpt option  0: Count time only if sample change  1: Continue time</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>spl_mode</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>spl option  0: Stop sample if rpt_rdy  1: Continue sample</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>acc_mode</p></td>
+<td><p>r/w</p></td>
+<td><p>1</p></td>
+<td><p>acc option  0: Stop accumulate if overflow  1: Continue accumulate</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="qdec1-value">
+<h3><span class="section-number">14.4.9. </span>qdec1_value<a class="headerlink" href="#qdec1-value" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x4000a848</p>
+<figure class="align-center">
+<img alt="../_images/qdec_qdec1_value.svg" src="../_images/qdec_qdec1_value.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:30</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="5"><p>29:28</p></td>
+<td rowspan="5"><p>spl_val</p></td>
+<td rowspan="5"><p>r</p></td>
+<td rowspan="5"><p>0</p></td>
+<td rowspan="5"><p>Sample value. Direction of last change</p>
+<p>00: no change</p>
+<p>01: clockwise</p>
+<p>11: counter-clockwise</p>
+<p>10: Error</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>27:20</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>19:16</p></td>
+<td><p>acc2_val</p></td>
+<td><p>r</p></td>
+<td><p>0</p></td>
+<td><p>Double error accumulation (0~15)</p></td>
+</tr>
+<tr class="row-even"><td><p>15:0</p></td>
+<td><p>acc1_val</p></td>
+<td><p>r</p></td>
+<td><p>0</p></td>
+<td><p>Sample accumulation (-1024~1023)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="qdec1-int-en">
+<h3><span class="section-number">14.4.10. </span>qdec1_int_en<a class="headerlink" href="#qdec1-int-en" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x4000a850</p>
+<figure class="align-center">
+<img alt="../_images/qdec_qdec1_int_en.svg" src="../_images/qdec_qdec1_int_en.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:4</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>overflow_en</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>dbl_rdy_en</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>spl_rdy_en</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>rpt_rdy_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="qdec1-int-sts">
+<h3><span class="section-number">14.4.11. </span>qdec1_int_sts<a class="headerlink" href="#qdec1-int-sts" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x4000a854</p>
+<figure class="align-center">
+<img alt="../_images/qdec_qdec1_int_sts.svg" src="../_images/qdec_qdec1_int_sts.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:4</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>overflow_sts</p></td>
+<td><p>r</p></td>
+<td><p>0</p></td>
+<td><p>ACC1 or ACC2 overflow</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>dbl_rdy_sts</p></td>
+<td><p>r</p></td>
+<td><p>0</p></td>
+<td><p>ACC2 double error</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>spl_rdy_sts</p></td>
+<td><p>r</p></td>
+<td><p>0</p></td>
+<td><p>Event being generated for every new sample value written to the SAMPLE register</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>rpt_rdy_sts</p></td>
+<td><p>r</p></td>
+<td><p>0</p></td>
+<td><p>Non-null report ready</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="qdec1-int-clr">
+<h3><span class="section-number">14.4.12. </span>qdec1_int_clr<a class="headerlink" href="#qdec1-int-clr" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x4000a858</p>
+<figure class="align-center">
+<img alt="../_images/qdec_qdec1_int_clr.svg" src="../_images/qdec_qdec1_int_clr.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:4</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>overflow_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>dbl_rdy_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>spl_rdy_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>rpt_rdy_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="qdec2-ctrl0">
+<h3><span class="section-number">14.4.13. </span>qdec2_ctrl0<a class="headerlink" href="#qdec2-ctrl0" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x4000a880</p>
+<figure class="align-center">
+<img alt="../_images/qdec_qdec2_ctrl0.svg" src="../_images/qdec_qdec2_ctrl0.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:28</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><p>27:12</p></td>
+<td rowspan="2"><p>rpt_period</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>16'd10</p></td>
+<td rowspan="2"><p>&quot;RPT&quot; report period in [samples/report]. Specifies the number of samples to be accumulated in the ACC1 register before the RPT_RDY and DBL_RDY events can be generated</p>
+<p>&quot;RPT_US&quot; report period in [us/report] = SP * RP</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="14"><p>11:8</p></td>
+<td rowspan="14"><p>spl_period</p></td>
+<td rowspan="14"><p>r/w</p></td>
+<td rowspan="14"><p>4'h2</p></td>
+<td rowspan="14"><p>&quot;SPL&quot; sample period in [us/sample]. The SAMPLE register will be updated for every new sample</p>
+<p>0:  32 us</p>
+<p>1:  64</p>
+<p>2: 128</p>
+<p>3: 256</p>
+<p>4: 512</p>
+<p>5:   1 ms</p>
+<p>6:   2</p>
+<p>7:   4</p>
+<p>8:   8</p>
+<p>9:  16</p>
+<p>A:  32</p>
+<p>B:  65</p>
+<p>C: 131</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>7:4</p></td>
+<td><p>deg_cnt</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>deg_en</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>deglitch</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>led_pol</p></td>
+<td><p>r/w</p></td>
+<td><p>1</p></td>
+<td><p>led polarity</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>led_en</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>qdec_en</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="qdec2-ctrl1">
+<h3><span class="section-number">14.4.14. </span>qdec2_ctrl1<a class="headerlink" href="#qdec2-ctrl1" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x4000a884</p>
+<figure class="align-center">
+<img alt="../_images/qdec_qdec2_ctrl1.svg" src="../_images/qdec_qdec2_ctrl1.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:25</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>24:16</p></td>
+<td><p>led_period</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>Period in us the LED is switched on prior to sampling</p></td>
+</tr>
+<tr class="row-even"><td><p>15:4</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>input_swap</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>input a/b swap</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>rpt_mode</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>rpt option  0: Count time only if sample change  1: Continue time</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>spl_mode</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>spl option  0: Stop sample if rpt_rdy  1: Continue sample</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>acc_mode</p></td>
+<td><p>r/w</p></td>
+<td><p>1</p></td>
+<td><p>acc option  0: Stop accumulate if overflow  1: Continue accumulate</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="qdec2-value">
+<h3><span class="section-number">14.4.15. </span>qdec2_value<a class="headerlink" href="#qdec2-value" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x4000a888</p>
+<figure class="align-center">
+<img alt="../_images/qdec_qdec2_value.svg" src="../_images/qdec_qdec2_value.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:30</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="5"><p>29:28</p></td>
+<td rowspan="5"><p>spl_val</p></td>
+<td rowspan="5"><p>r</p></td>
+<td rowspan="5"><p>0</p></td>
+<td rowspan="5"><p>Sample value. Direction of last change</p>
+<p>00: no change</p>
+<p>01: clockwise</p>
+<p>11: counter-clockwise</p>
+<p>10: Error</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>27:20</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>19:16</p></td>
+<td><p>acc2_val</p></td>
+<td><p>r</p></td>
+<td><p>0</p></td>
+<td><p>Double error accumulation (0~15)</p></td>
+</tr>
+<tr class="row-even"><td><p>15:0</p></td>
+<td><p>acc1_val</p></td>
+<td><p>r</p></td>
+<td><p>0</p></td>
+<td><p>Sample accumulation (-1024~1023)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="qdec2-int-en">
+<h3><span class="section-number">14.4.16. </span>qdec2_int_en<a class="headerlink" href="#qdec2-int-en" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x4000a890</p>
+<figure class="align-center">
+<img alt="../_images/qdec_qdec2_int_en.svg" src="../_images/qdec_qdec2_int_en.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:4</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>overflow_en</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>dbl_rdy_en</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>spl_rdy_en</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>rpt_rdy_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="qdec2-int-sts">
+<h3><span class="section-number">14.4.17. </span>qdec2_int_sts<a class="headerlink" href="#qdec2-int-sts" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x4000a894</p>
+<figure class="align-center">
+<img alt="../_images/qdec_qdec2_int_sts.svg" src="../_images/qdec_qdec2_int_sts.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:4</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>overflow_sts</p></td>
+<td><p>r</p></td>
+<td><p>0</p></td>
+<td><p>ACC1 or ACC2 overflow</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>dbl_rdy_sts</p></td>
+<td><p>r</p></td>
+<td><p>0</p></td>
+<td><p>ACC2 double error</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>spl_rdy_sts</p></td>
+<td><p>r</p></td>
+<td><p>0</p></td>
+<td><p>Event being generated for every new sample value written to the SAMPLE register</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>rpt_rdy_sts</p></td>
+<td><p>r</p></td>
+<td><p>0</p></td>
+<td><p>Non-null report ready</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="qdec2-int-clr">
+<h3><span class="section-number">14.4.18. </span>qdec2_int_clr<a class="headerlink" href="#qdec2-int-clr" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x4000a898</p>
+<figure class="align-center">
+<img alt="../_images/qdec_qdec2_int_clr.svg" src="../_images/qdec_qdec2_int_clr.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:4</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>overflow_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>dbl_rdy_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>spl_rdy_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>rpt_rdy_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>0</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="TIMER.html" class="btn btn-neutral float-left" title="13. TIMER" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="KeyScan.html" class="btn btn-neutral float-right" title="15. KeyScan" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2021.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+===
+L1C
+===
+
+L1C introduction
+====================
+L1 Cache Controller is a unit module located outside the processor, used to manage the code or data buffer on Flash/pSRAM and improve the speed of CPU access to Flash/pSRAM. The architecture is as follows:
+
+.. figure:: ../../picture/L1CArch.svg
+   :align: center
+   :scale: 70%
+
+   L1c architecture
+
+L1C is a high-speed unit integrated between the processor and Flash. 
+Because the speed of the processor is very fast, when the processor needs to wait for a long time to access the Flash, 
+the less time wasted, the higher the efficiency. 
+The L1C cache can be used as a lubricating role between the processor and the Flash to improve the efficiency of the processor.
+
+L1C main features
+==================
+- 4-way Set-Associative mapping
+- Variable cache size
+- Connect to TCM address space, can easily configure L1C space as TCM space
+- Support cache performance statistics
+
+L1C function description
+============================
+Mutual conversion between TCM and Cache RAM resources
+---------------------------------------------------------
+In order to increase memory usage efficiency, it is supported to adjust all or part of the Cache's 16K RAM to TCM space, so that users can adjust the memory usage and efficiency according to the actual situation.
+The maximum Cache can be set to 16K, divided into 4 ways, each way is 4K, and the unit of adjustment is 1 way, which is 4K. The default size of ITCM is 16K. Set by WayDisable.
+The actual space size of Cache and ITCM can be flexibly adjusted.
+
+.. table:: WayDisable settings
+
+    +------------+-----------------------+-------+
+    | WayDisable |    Cache              | ITCM  |
+    +============+=======================+=======+
+    |   none     |     16K               | 0K    |
+    +------------+-----------------------+-------+
+    |   one way  |     12K               | 4K    |
+    +------------+-----------------------+-------+
+    |   two way  |     8K                | 8K    |
+    +------------+-----------------------+-------+
+    | three way  |     4K                | 12K   |
+    +------------+-----------------------+-------+
+    | four way   |     0K                | 16K   |
+    +------------+-----------------------+-------+
+
+Cache
+-------------
+The unit of each line buffer is 32 bytes, and the 4-way associative mapping cache is used. The application architecture is as follows:
+
+.. figure:: ../../picture/L1cWay.svg
+   :align: center
+
+   Cache architecture
+
+Each set of associative mapping caches contains two parts, the first is a tag, which contains the valid value and the address mapping relationship. The second part is data storage. When the processor accesses the cache, the cache processor compares the relationship between the address and the tag. When the address comparison is successful, the representative can directly get data from the cache. Conversely, the cache processor will capture related data through the AHB Master and put the data into the cache and respond to the processor's data.
+
+When most of the data can be successfully compared in the tag, the waiting time of the processor can be greatly reduced, and the use efficiency can be increased.
+
+.. only:: html
+
+   .. include:: l1c_register.rst
+
+.. raw:: latex
+
+   \input{../../en/content/l1c}

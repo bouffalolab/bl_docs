@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>10. UART &mdash; BL702/704/706 Reference Manual  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="11. I2C" href="I2C.html" />
+    <link rel="prev" title="9. SPI" href="SPI.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL702/704/706 Reference Manual
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. System and memory overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. Reset and clock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">4. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">5. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">6. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="L1C.html">7. L1C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">8. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">9. SPI</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">10. UART</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#uart-introduction">10.1. UART introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uart-main-features">10.2. UART main features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uart-function-description">10.3. UART function description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data-format-description">10.3.1. Data format description</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clock-source">10.3.2. Clock source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#baud-rate-setting">10.3.3. Baud rate setting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#transmitter">10.3.4. Transmitter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#receiver">10.3.5. Receiver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#automatic-baud-rate-detection">10.3.6. Automatic baud rate detection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hardware-flow-control">10.3.7. Hardware flow control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lin-transmission-mode">10.3.8. LIN transmission mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-transfer-mode">10.3.9. DMA transfer mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uart-interrupt">10.3.10. UART interrupt</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#register-description">10.4. Register description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#utx-config">10.4.1. utx_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#urx-config">10.4.2. urx_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uart-bit-prd">10.4.3. uart_bit_prd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data-config">10.4.4. data_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#utx-ir-position">10.4.5. utx_ir_position</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#urx-ir-position">10.4.6. urx_ir_position</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#urx-rto-timer">10.4.7. urx_rto_timer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uart-sw-mode">10.4.8. uart_sw_mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uart-int-sts">10.4.9. uart_int_sts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uart-int-mask">10.4.10. uart_int_mask</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uart-int-clear">10.4.11. uart_int_clear</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uart-int-en">10.4.12. uart_int_en</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uart-status">10.4.13. uart_status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sts-urx-abr-prd">10.4.14. sts_urx_abr_prd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uart-fifo-config-0">10.4.15. uart_fifo_config_0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uart-fifo-config-1">10.4.16. uart_fifo_config_1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uart-fifo-wdata">10.4.17. uart_fifo_wdata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uart-fifo-rdata">10.4.18. uart_fifo_rdata</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">11. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">12. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">13. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="QDEC.html">14. QDEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="KeyScan.html">15. KeyScan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2S.html">16. I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EMAC.html">17. Emac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USB.html">18. USB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">19. Revision history</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL702/704/706 Reference Manual</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">10. </span>UART</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="uart">
+<h1><span class="section-number">10. </span>UART<a class="headerlink" href="#uart" title="Permalink to this headline"></a></h1>
+<section id="uart-introduction">
+<h2><span class="section-number">10.1. </span>UART introduction<a class="headerlink" href="#uart-introduction" title="Permalink to this headline"></a></h2>
+<p>Universal Asynchronous Receiver / Transmitter (commonly known as UART) is an asynchronous transceiver that provides a flexible way to exchange full-duplex data with external devices.</p>
+<p>BL70x has two sets of UART ports (UART0 and UART1). By using with DMA, you can achieve efficient data communication.</p>
+</section>
+<section id="uart-main-features">
+<h2><span class="section-number">10.2. </span>UART main features<a class="headerlink" href="#uart-main-features" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p>Full-duplex asynchronous communication</p></li>
+<li><p>Data bit length can be selected from 5/6/7/8 bits</p></li>
+<li><p>Stop bit length can be selected from 0.5/1/1.5/2 bits</p></li>
+<li><p>Supports odd/even/no parity bits</p></li>
+<li><p>Detects wrong start bit</p></li>
+<li><p>Support LIN protocol (receive and send REAK/SYNC)</p></li>
+<li><p>Multiple interrupt control</p></li>
+<li><p>Support hardware flow control (RTS / CTS)</p></li>
+<li><p>Convenient baud rate programming</p></li>
+<li><p>Configurable MSB / LSB priority transmission</p></li>
+<li><p>Normal / fixed character automatic baud rate detection</p></li>
+<li><p>32-byte transmit / receive FIFO</p></li>
+<li><p>Support DMA transfer mode</p></li>
+</ul>
+</section>
+<section id="uart-function-description">
+<h2><span class="section-number">10.3. </span>UART function description<a class="headerlink" href="#uart-function-description" title="Permalink to this headline"></a></h2>
+<section id="data-format-description">
+<h3><span class="section-number">10.3.1. </span>Data format description<a class="headerlink" href="#data-format-description" title="Permalink to this headline"></a></h3>
+<p>Normal UART communication data is composed of a start bit, a data bit, a parity bit, and a stop bit. The BL702’s UART supports configurable data bits, parity bits, and stop bits, all of which are set in the utx_config and urx_config registers. The waveform of one frame of data is shown below:</p>
+<figure class="align-center" id="id1">
+<img alt="../_images/UARTData.svg" src="../_images/UARTData.svg" /><figcaption>
+<p><span class="caption-number">Fig. 10.1 </span><span class="caption-text">UART data</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The start bit of the data frame occupies 1 bit, and the stop bit can be 0.5/1/1.5/2-bit wide by configuring the cr_utx_bit_cnt_p bit in the register utx_config. The start bit is at a low level and the stop bit is at a high level.
+The data bit width can be set to 5/6/7/8-bit by the cr_utx_bit_cnt_d bit in the register utx_config.</p>
+<p>When the cr_utx_prt_en bit in the register utx_config and the cr_urx_prt_en bit in the register urx_config are set, the data frame adds a parity check bit after the data. The cr_utx_prt_sel bit in the register utx_config and the cr_urx_prt_sel bit in the register urx_config are used to select odd or even parity check. When the receiver detects the check bit error of the input data, it will generate the check error interrupt. However, the received data will still be stored into the FIFO.</p>
+<p>Calculation method of odd parity check: If there is an odd number of “1” in the current data bit, the odd parity check bit is set to 0. Otherwise, it is set to 1.</p>
+<p>Calculation method of even parity check: If there is an odd number of “1” in the current data bit, the even parity check bit is set to 1. Otherwise, it is set to 0.</p>
+</section>
+<section id="clock-source">
+<h3><span class="section-number">10.3.2. </span>Clock source<a class="headerlink" href="#clock-source" title="Permalink to this headline"></a></h3>
+<p>The UART has two clock sources: 96MHz PLL_CLK and FCLK. The frequency divider in the clock is used to divide the clock source and then generate a clock signal to drive the UART module. As shown below:</p>
+<figure class="align-center" id="id2">
+<img alt="../_images/UARTClk.svg" src="../_images/UARTClk.svg" /><figcaption>
+<p><span class="caption-number">Fig. 10.2 </span><span class="caption-text">UART clock</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="baud-rate-setting">
+<h3><span class="section-number">10.3.3. </span>Baud rate setting<a class="headerlink" href="#baud-rate-setting" title="Permalink to this headline"></a></h3>
+<div class="math">
+<p><img src="../_images/math/0a37d96e4b093c0535725d32a43cf3d39f9751a4.png" alt="Baudrate = \frac{UART\_clk}{uart\_prd + 1}"/></p>
+</div><p>The user can set the baud rate of RX and TX separately. Take TX as an example: the value of uart_prd is the value of the lower 16 bits cr_utx_bit_prd of the register UART_BIT_PRD. Since the maximum value of the 16-bit bit width coefficient is 65535, the minimum baud rate supported by UART is : UART_clk/65536.</p>
+<p>Before sampling the data, UART will filter the data to remove the burrs in the waveform. Then, the data will be sampled at the intermediate value of the 16-bit width factor, so that the sampling time can be adjusted based on baud rates, to ensure that the intermediate value is always sampled, providing much higher flexibility and accuracy. The sampling process is shown as follows:</p>
+<figure class="align-center" id="id3">
+<img alt="../_images/UARTSample.svg" src="../_images/UARTSample.svg" /><figcaption>
+<p><span class="caption-number">Fig. 10.3 </span><span class="caption-text">UART sampling waveform</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="transmitter">
+<h3><span class="section-number">10.3.4. </span>Transmitter<a class="headerlink" href="#transmitter" title="Permalink to this headline"></a></h3>
+<p>The transmitter contains a 128-byte transmit FIFO to store the data to be transmitted. Software can write TX FIFO through APB bus, and can also move data into TX FIFO through DMA. When the transmit enable bit is set, the data stored in the FIFO will be output from the TX pin. Software can choose to transfer data to TX FIFO through DMA or APB bus.
+Software can check the status of transmitter by querying the remaining free space count value of TX FIFO through tx_fifo_cnt in the register uart_fifo_config_1.</p>
+<p>FreeRun mode of transmitter:</p>
+<ul class="simple">
+<li><p>If the FreeRun mode is disabled, transmission will be terminated and an interrupt will be generated when the sent bytes reach the specified length. Before next transmission, you need to re-disable and enable the TxE bit.</p></li>
+<li><p>If the FreeRun mode is enabled, the transmitter will send when there is data in the TX FIFO, and will not stop working because the sent bytes reach the specified length.</p></li>
+</ul>
+</section>
+<section id="receiver">
+<h3><span class="section-number">10.3.5. </span>Receiver<a class="headerlink" href="#receiver" title="Permalink to this headline"></a></h3>
+<p>The receiver contains a 128-byte receive FIFO to store the received data. Software can check the status of receiver by querying the available data count value of RX FIFO through rx_fifo_cnt in the register uart_fifo_config_1.
+The low 8 bits of the register URX_RTO_TIMER are used to set a receiving timeout threshold, which will trigger an interrupt when the receiver fails to receive data beyond the threshold.
+The cr_urx_deg_en and cr_urx_deg_cnt in the register urx_config are used to enable the deburring function and set the threshold, which control the filtering part before sampling by UART.
+UART will filter out the burrs whose width is lower than the threshold in the waveform and then send it to sampling.</p>
+</section>
+<section id="automatic-baud-rate-detection">
+<h3><span class="section-number">10.3.6. </span>Automatic baud rate detection<a class="headerlink" href="#automatic-baud-rate-detection" title="Permalink to this headline"></a></h3>
+<p>The UART module supports automatic baud rate detection, which is divided into two modes, a generic mode and a fixed character (square wave) mode.
+The cr_urx_abr_en in the urx_config register enables auto baud rate detection, and when it is turned on, both detection modes are enabled.</p>
+<p><strong>General mode</strong></p>
+<p>For any character data received, the UART module will count the number of clocks in the bit width. This number will then be written into the lower 16 bits of the register STS_URX_ABR_PRD and used to calculate the baud rate. Therefore, when the first received data bit is 1, the correct baud rate can be obtained. Such as ‘0x01’ under LSB-FIRST.</p>
+<p><strong>Fixed character mode</strong></p>
+<p>In this mode, after counting the number of clocks in the starting bit width, the UART module will continue to count the number of clocks of subsequent data bits and compare with the start bit. If it fluctuates within the allowable error range, it will pass the test, otherwise the count value will be discarded. Therefore, only when the fixed characters ‘0x55’/’0xD5’ under LSB-FIRST or ‘0xAA’/’0xAB’ under MSB-FIRST are received. The UART module will write the count value of the number of clocks in the starting bit width into the upper 16 bits of the register STS_URX_ABR_PRD. As shown below:</p>
+<figure class="align-center" id="id4">
+<img alt="../_images/UARTAbr.svg" src="../_images/UARTAbr.svg" /><figcaption>
+<p><span class="caption-number">Fig. 10.4 </span><span class="caption-text">UART fixed character mode waveform</span><a class="headerlink" href="#id4" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>For an unknown baud rate, the UART uses UART_CLK to count the start bit width of 1000, and the second bit width of 1001. If there is no more than 4 UART_CLK floating up and down from the previous bit width, the UART will continue to count the third bit, which is 1005. If the difference with the start bit exceeds 4, the detection fails and the data is discarded. The UART will sequentially compare the first 6 bits of the data bit with the start bit.</p>
+<p>The formula for calculating the detected baud rate is as follows:</p>
+<div class="math">
+<p><img src="../_images/math/5cf6d48d2ebc4c3f93f501b5170e2c2a63a0f210.png" alt="Baudrate = \frac{UART\_clk}{Count + 1}"/></p>
+</div></section>
+<section id="hardware-flow-control">
+<h3><span class="section-number">10.3.7. </span>Hardware flow control<a class="headerlink" href="#hardware-flow-control" title="Permalink to this headline"></a></h3>
+<p>The UART supports hardware flow control in CTS / RTS mode to prevent data in the FIFO from being lost because it is too late to process. The hardware flow control connection is shown in the following figure:</p>
+<figure class="align-center" id="id5">
+<img alt="../_images/UARTCTSRTS.svg" src="../_images/UARTCTSRTS.svg" /><figcaption>
+<p><span class="caption-number">Fig. 10.5 </span><span class="caption-text">UART flow control</span><a class="headerlink" href="#id5" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>When using the hardware flow control function, the output signal RTS is low to indicate that the other party is requested to send data, and RTS is high to indicate that the other party is notified to suspend data transmission until RTS is restored to low level.Two ways for hardware flow control of the transmitter:</p>
+<ul class="simple">
+<li><p>Hardware control (the cr_urx_rts_sw_mode in the register uart_sw_mode is 0): RTS goes high when cr_urx_en in the register urx_config is not turned on or the RX FIFO is almost full (one byte left).</p></li>
+<li><p>Software control(the cr_urx_rts_sw_mode in the register uart_sw_mode is 1): The level of RTS can be changed by configuring cr_urx_rts_sw_val in the register uart_sw_mode.</p></li>
+</ul>
+<p>The TX CTS can be enabled by configuring the bit &lt;cr_utx_cts_en&gt; of the utx_config register. When the device detects that the input signal CTS is pulled high, TX will stop sending data until it detects that CTS is pulled low before continuing to send.</p>
+</section>
+<section id="lin-transmission-mode">
+<h3><span class="section-number">10.3.8. </span>LIN transmission mode<a class="headerlink" href="#lin-transmission-mode" title="Permalink to this headline"></a></h3>
+<p>When the transmitter needs to use the LIN transmission mode, it can send the BREAK field and the SYNC field by configuring &lt;cr_utx_lin_en&gt;. The width of the interval field is determined by &lt;cr_utx_bit_cnt_b&gt;.</p>
+<p>When the receiver needs to use the LIN transmission mode, you can configure &lt;cr_urx_lin_en&gt; to detect the interval field and the synchronization field, and trigger the corresponding interrupt &lt;urx_lse_int&gt; when the format of the synchronization field is wrong.</p>
+</section>
+<section id="dma-transfer-mode">
+<h3><span class="section-number">10.3.9. </span>DMA transfer mode<a class="headerlink" href="#dma-transfer-mode" title="Permalink to this headline"></a></h3>
+<p>UART supports DMA transfer. Using DMA transfer, the TX and RX FIFO thresholds need to be set respectively by tx_fifo_th and rx_fifo_th in register uart_fifo_config_1.
+When this mode is enabled, if tx_fifo_cnt in uart_fifo_config_1 is greater than tx_fifo_th, a DMA TX request will be triggered.
+After the DMA is configured, when the DMA receives the request, it will move the data from the memory to the TX FIFO according to the settings.
+If the rx_fifo_cnt in uart_fifo_config_1 is greater than rx_fifo_th, the DMA RX request will be triggered.
+After the DMA is configured, when the DMA receives the request, it will transfer the data of the RX FIFO to the memory according to the settings.</p>
+</section>
+<section id="uart-interrupt">
+<h3><span class="section-number">10.3.10. </span>UART interrupt<a class="headerlink" href="#uart-interrupt" title="Permalink to this headline"></a></h3>
+<p>UART has a wealth of interrupt control, including the following interrupt modes:</p>
+<ul class="simple">
+<li><p>TX transmission end interrupt</p></li>
+<li><p>RX transmission end interrupt</p></li>
+<li><p>TX FIFO request interrupt</p></li>
+<li><p>RX FIFO request interrupt</p></li>
+<li><p>RX timeout interrupt</p></li>
+<li><p>RX parity error interrupt</p></li>
+<li><p>TX FIFO overflow interrupt</p></li>
+<li><p>RX FIFO overflow interrupt</p></li>
+<li><p>RX LIN mode synchronization field (SYNC Field) error interrupt</p></li>
+</ul>
+<p>TX and RX can respectively set a transmission length value through the upper 16 bits of the UTX_CONFIG and URX_CONFIG registers. When the number of bytes transmitted reaches this value, the corresponding TX/RX transmission end interrupt will be triggered.</p>
+<p>The TX/RX FIFO request interrupt will be triggered when the available FIFO count value is greater than the threshold set in the register UART_FIFO_CONFIG_1, and the interrupt flag will be automatically cleared when the condition is not met.</p>
+<p>The RX timeout interrupt will be triggered when the receiver exceeds the timeout threshold without receiving data, and the RX parity error interrupt will occur when a parity error occurs. If the TX/RX FIFO overflows or underflows, the corresponding overflow interrupt will be triggered.</p>
+<p>When the FIFO clear bit TFICLR/RFICLR is set to 1, the corresponding FIFO will be cleared and the overflow interrupt flag will be automatically cleared. When the LIN mode is enabled, the synchronization field (SYNC Field) should be 0x55 according to the protocol. Therefore, when the received data is not 0x55, the synchronization field error interrupt is triggered.</p>
+<p>The interrupt status can be inquired through the register uart_int_sts, and the interrupt can be cleared by writing 1 to the corresponding bit of the register uart_int_clear.</p>
+</section>
+</section>
+<section id="register-description">
+<h2><span class="section-number">10.4. </span>Register description<a class="headerlink" href="#register-description" title="Permalink to this headline"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 38%" />
+<col style="width: 62%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Name</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#utx-config">utx_config</a></p></td>
+<td><p>UART TX configuration register</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#urx-config">urx_config</a></p></td>
+<td><p>UART RX configuration register</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#uart-bit-prd">uart_bit_prd</a></p></td>
+<td><p>UART period control register</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#data-config">data_config</a></p></td>
+<td><p>UART data configuration register</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#utx-ir-position">utx_ir_position</a></p></td>
+<td><p>UART TX ir position control register</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#urx-ir-position">urx_ir_position</a></p></td>
+<td><p>UART RX ir position control register</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#urx-rto-timer">urx_rto_timer</a></p></td>
+<td><p>RTO interrupt control register</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#uart-sw-mode">uart_sw_mode</a></p></td>
+<td><p>UART SW mode configuration register</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#uart-int-sts">uart_int_sts</a></p></td>
+<td><p>UART interrupt status</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#uart-int-mask">uart_int_mask</a></p></td>
+<td><p>UART interrupt mask</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#uart-int-clear">uart_int_clear</a></p></td>
+<td><p>UART interrupt clear</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#uart-int-en">uart_int_en</a></p></td>
+<td><p>UART interrupt enable</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#uart-status">uart_status</a></p></td>
+<td><p>UART status control register</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#sts-urx-abr-prd">sts_urx_abr_prd</a></p></td>
+<td><p>Auto baud detection control register</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#uart-fifo-config-0">uart_fifo_config_0</a></p></td>
+<td><p>UART FIFO configuration register0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#uart-fifo-config-1">uart_fifo_config_1</a></p></td>
+<td><p>UART FIFO configuration register1</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#uart-fifo-wdata">uart_fifo_wdata</a></p></td>
+<td><p>UART FIFO write data</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#uart-fifo-rdata">uart_fifo_rdata</a></p></td>
+<td><p>UART FIFO read data</p></td>
+</tr>
+</tbody>
+</table>
+<section id="utx-config">
+<h3><span class="section-number">10.4.1. </span>utx_config<a class="headerlink" href="#utx-config" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x4000a000</p>
+<figure class="align-center">
+<img alt="../_images/uart_utx_config.svg" src="../_images/uart_utx_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>cr_utx_len</p></td>
+<td><p>r/w</p></td>
+<td><p>16’d0</p></td>
+<td><p>Length of UART TX data transfer (Unit: character/byte) (Don’t-care if cr_utx_frm_en is enabled)</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><p>15:13</p></td>
+<td rowspan="2"><p>cr_utx_bit_cnt_b</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>3’d4</p></td>
+<td rowspan="2"><p>UART TX BREAK bit count (for LIN protocol)</p>
+<p>Note: Additional 8 bit times will be added since LIN Break field requires at least 13 bit times</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>12:11</p></td>
+<td><p>cr_utx_bit_cnt_p</p></td>
+<td><p>r/w</p></td>
+<td><p>2’d1</p></td>
+<td><p>UART TX STOP bit count (unit: 0.5 bit)</p></td>
+</tr>
+<tr class="row-even"><td><p>10:8</p></td>
+<td><p>cr_utx_bit_cnt_d</p></td>
+<td><p>r/w</p></td>
+<td><p>3’d7</p></td>
+<td><p>UART TX DATA bit count for each character</p></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>cr_utx_ir_inv</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Inverse signal of UART TX output in IR mode</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>cr_utx_ir_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Enable signal of UART TX IR mode</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><p>5</p></td>
+<td rowspan="3"><p>cr_utx_prt_sel</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>Select signal of UART TX parity bit</p>
+<p>1: Odd parity</p>
+<p>0: Even parity</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>cr_utx_prt_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Enable signal of UART TX parity bit</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>cr_utx_lin_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Enable signal of UART TX LIN mode (LIN header will be sent before sending data)</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>cr_utx_frm_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Enable signal of UART TX freerun mode (utx_end_int will be disabled)</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>cr_utx_cts_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Enable signal of UART TX CTS flow control function</p></td>
+</tr>
+<tr class="row-even"><td rowspan="2"><p>0</p></td>
+<td rowspan="2"><p>cr_utx_en</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>1’b0</p></td>
+<td rowspan="2"><p>Enable signal of UART TX function</p>
+<p>Asserting this bit will trigger the transaction, and should be de-asserted after finish</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</section>
+<section id="urx-config">
+<h3><span class="section-number">10.4.2. </span>urx_config<a class="headerlink" href="#urx-config" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x4000a004</p>
+<figure class="align-center">
+<img alt="../_images/uart_urx_config.svg" src="../_images/uart_urx_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td rowspan="2"><p>31:16</p></td>
+<td rowspan="2"><p>cr_urx_len</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>16’d0</p></td>
+<td rowspan="2"><p>Length of UART RX data transfer (Unit: character/byte)</p>
+<p>urx_end_int will assert when this length is reached</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>15:12</p></td>
+<td><p>cr_urx_deg_cnt</p></td>
+<td><p>r/w</p></td>
+<td><p>4’d0</p></td>
+<td><p>De-glitch function cycle count</p></td>
+</tr>
+<tr class="row-odd"><td><p>11</p></td>
+<td><p>cr_urx_deg_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Enable signal of RXD input de-glitch function</p></td>
+</tr>
+<tr class="row-even"><td><p>10:8</p></td>
+<td><p>cr_urx_bit_cnt_d</p></td>
+<td><p>r/w</p></td>
+<td><p>3’d7</p></td>
+<td><p>UART RX DATA bit count for each character</p></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>cr_urx_ir_inv</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Inverse signal of UART RX input in IR mode</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>cr_urx_ir_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Enable signal of UART RX IR mode</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><p>5</p></td>
+<td rowspan="3"><p>cr_urx_prt_sel</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>Select signal of UART RX parity bit</p>
+<p>1: Odd parity</p>
+<p>0: Even parity</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>cr_urx_prt_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Enable signal of UART RX parity bit</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>cr_urx_lin_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Enable signal of UART RX LIN mode (LIN header will be required and checked before receiving data)</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>cr_urx_abr_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Enable signal of UART RX Auto Baud Rate detection function</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>cr_urx_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Enable signal of UART RX function</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="uart-bit-prd">
+<h3><span class="section-number">10.4.3. </span>uart_bit_prd<a class="headerlink" href="#uart-bit-prd" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x4000a008</p>
+<figure class="align-center">
+<img alt="../_images/uart_uart_bit_prd.svg" src="../_images/uart_uart_bit_prd.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>cr_urx_bit_prd</p></td>
+<td><p>r/w</p></td>
+<td><p>16’d255</p></td>
+<td><p>Period of each UART RX bit, related to baud rate</p></td>
+</tr>
+<tr class="row-odd"><td><p>15:0</p></td>
+<td><p>cr_utx_bit_prd</p></td>
+<td><p>r/w</p></td>
+<td><p>16’d255</p></td>
+<td><p>Period of each UART TX bit, related to baud rate</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="data-config">
+<h3><span class="section-number">10.4.4. </span>data_config<a class="headerlink" href="#data-config" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x4000a00c</p>
+<figure class="align-center">
+<img alt="../_images/uart_data_config.svg" src="../_images/uart_data_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:1</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><p>0</p></td>
+<td rowspan="3"><p>cr_uart_bit_inv</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>Bit-inverse signal for each data byte</p>
+<p>0: Each byte is sent out LSB-first</p>
+<p>1: Each byte is sent out MSB-first</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</section>
+<section id="utx-ir-position">
+<h3><span class="section-number">10.4.5. </span>utx_ir_position<a class="headerlink" href="#utx-ir-position" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x4000a010</p>
+<figure class="align-center">
+<img alt="../_images/uart_utx_ir_position.svg" src="../_images/uart_utx_ir_position.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>cr_utx_ir_pos_p</p></td>
+<td><p>r/w</p></td>
+<td><p>16’d159</p></td>
+<td><p>STOP position of UART TX IR pulse</p></td>
+</tr>
+<tr class="row-odd"><td><p>15:0</p></td>
+<td><p>cr_utx_ir_pos_s</p></td>
+<td><p>r/w</p></td>
+<td><p>16’d112</p></td>
+<td><p>START position of UART TX IR pulse</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="urx-ir-position">
+<h3><span class="section-number">10.4.6. </span>urx_ir_position<a class="headerlink" href="#urx-ir-position" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x4000a014</p>
+<figure class="align-center">
+<img alt="../_images/uart_urx_ir_position.svg" src="../_images/uart_urx_ir_position.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15:0</p></td>
+<td><p>cr_urx_ir_pos_s</p></td>
+<td><p>r/w</p></td>
+<td><p>16’d111</p></td>
+<td><p>START position of UART RXD pulse recovered from IR signal</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="urx-rto-timer">
+<h3><span class="section-number">10.4.7. </span>urx_rto_timer<a class="headerlink" href="#urx-rto-timer" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x4000a018</p>
+<figure class="align-center">
+<img alt="../_images/uart_urx_rto_timer.svg" src="../_images/uart_urx_rto_timer.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>cr_urx_rto_value</p></td>
+<td><p>r/w</p></td>
+<td><p>8’d15</p></td>
+<td><p>Time-out value for triggering RTO interrupt (unit: bit time)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="uart-sw-mode">
+<h3><span class="section-number">10.4.8. </span>uart_sw_mode<a class="headerlink" href="#uart-sw-mode" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x4000a01c</p>
+<figure class="align-center">
+<img alt="../_images/uart_uart_sw_mode.svg" src="../_images/uart_uart_sw_mode.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:4</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>cr_urx_rts_sw_val</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>UART RX RTS output SW control value</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>cr_urx_rts_sw_mode</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>UART RX RTS output SW control mode</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>cr_utx_txd_sw_val</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>UART TX TXD output SW control value</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>cr_utx_txd_sw_mode</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>UART TX TXD output SW control mode</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="uart-int-sts">
+<h3><span class="section-number">10.4.9. </span>uart_int_sts<a class="headerlink" href="#uart-int-sts" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x4000a020</p>
+<figure class="align-center">
+<img alt="../_images/uart_uart_int_sts.svg" src="../_images/uart_uart_int_sts.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:9</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>urx_lse_int</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>UART RX LIN mode sync field error interrupt</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>urx_fer_int</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>UART RX FIFO error interrupt, auto-cleared when FIFO overflow/underflow error flag is cleared</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>utx_fer_int</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>UART TX FIFO error interrupt, auto-cleared when FIFO overflow/underflow error flag is cleared</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>urx_pce_int</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>UART RX parity check error interrupt</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>urx_rto_int</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>UART RX Time-out interrupt</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>urx_fifo_int</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>UART RX FIFO ready (rx_fifo_cnt &gt; rx_fifo_th) interrupt, auto-cleared when data is popped</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>utx_fifo_int</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>UART TX FIFO ready (tx_fifo_cnt &gt; tx_fifo_th) interrupt, auto-cleared when data is pushed</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>urx_end_int</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>UART RX transfer end interrupt (set according to cr_urx_len)</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>utx_end_int</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>UART TX transfer end interrupt (set according to cr_utx_len)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="uart-int-mask">
+<h3><span class="section-number">10.4.10. </span>uart_int_mask<a class="headerlink" href="#uart-int-mask" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x4000a024</p>
+<figure class="align-center">
+<img alt="../_images/uart_uart_int_mask.svg" src="../_images/uart_uart_int_mask.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:9</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>cr_urx_lse_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt mask of urx_lse_int</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>cr_urx_fer_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt mask of urx_fer_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>cr_utx_fer_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt mask of utx_fer_int</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>cr_urx_pce_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt mask of urx_pce_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>cr_urx_rto_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt mask of urx_rto_int</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>cr_urx_fifo_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt mask of urx_fifo_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>cr_utx_fifo_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt mask of utx_fifo_int</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>cr_urx_end_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt mask of urx_end_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>cr_utx_end_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt mask of utx_end_int</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="uart-int-clear">
+<h3><span class="section-number">10.4.11. </span>uart_int_clear<a class="headerlink" href="#uart-int-clear" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x4000a028</p>
+<figure class="align-center">
+<img alt="../_images/uart_uart_int_clear.svg" src="../_images/uart_uart_int_clear.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:9</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>cr_urx_lse_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1’b0</p></td>
+<td><p>Interrupt clear of urx_lse_int</p></td>
+</tr>
+<tr class="row-even"><td><p>7:6</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>cr_urx_pce_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1’b0</p></td>
+<td><p>Interrupt clear of urx_pce_int</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>cr_urx_rto_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1’b0</p></td>
+<td><p>Interrupt clear of urx_rto_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>3:2</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>cr_urx_end_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1’b0</p></td>
+<td><p>Interrupt clear of urx_end_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>cr_utx_end_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1’b0</p></td>
+<td><p>Interrupt clear of utx_end_int</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="uart-int-en">
+<h3><span class="section-number">10.4.12. </span>uart_int_en<a class="headerlink" href="#uart-int-en" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x4000a02c</p>
+<figure class="align-center">
+<img alt="../_images/uart_uart_int_en.svg" src="../_images/uart_uart_int_en.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:9</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>cr_urx_lse_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt enable of urx_lse_int</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>cr_urx_fer_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt enable of urx_fer_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>cr_utx_fer_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt enable of utx_fer_int</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>cr_urx_pce_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt enable of urx_pce_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>cr_urx_rto_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt enable of urx_rto_int</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>cr_urx_fifo_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt enable of urx_fifo_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>cr_utx_fifo_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt enable of utx_fifo_int</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>cr_urx_end_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt enable of urx_end_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>cr_utx_end_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt enable of utx_end_int</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="uart-status">
+<h3><span class="section-number">10.4.13. </span>uart_status<a class="headerlink" href="#uart-status" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x4000a030</p>
+<figure class="align-center">
+<img alt="../_images/uart_uart_status.svg" src="../_images/uart_uart_status.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:2</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>sts_urx_bus_busy</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>Indicator of UART RX bus busy</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>sts_utx_bus_busy</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>Indicator of UART TX bus busy</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="sts-urx-abr-prd">
+<h3><span class="section-number">10.4.14. </span>sts_urx_abr_prd<a class="headerlink" href="#sts-urx-abr-prd" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x4000a034</p>
+<figure class="align-center">
+<img alt="../_images/uart_sts_urx_abr_prd.svg" src="../_images/uart_sts_urx_abr_prd.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>sts_urx_abr_prd_0x55</p></td>
+<td><p>r</p></td>
+<td><p>16’d0</p></td>
+<td><p>Bit period of Auto Baud Rate detection using codeword 0x55</p></td>
+</tr>
+<tr class="row-odd"><td><p>15:0</p></td>
+<td><p>sts_urx_abr_prd_start</p></td>
+<td><p>r</p></td>
+<td><p>16’d0</p></td>
+<td><p>Bit period of Auto Baud Rate detection using START bit</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="uart-fifo-config-0">
+<h3><span class="section-number">10.4.15. </span>uart_fifo_config_0<a class="headerlink" href="#uart-fifo-config-0" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x4000a080</p>
+<figure class="align-center">
+<img alt="../_images/uart_uart_fifo_config_0.svg" src="../_images/uart_uart_fifo_config_0.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>rx_fifo_underflow</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>Underflow flag of RX FIFO, can be cleared by rx_fifo_clr</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>rx_fifo_overflow</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>Overflow flag of RX FIFO, can be cleared by rx_fifo_clr</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>tx_fifo_underflow</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>Underflow flag of TX FIFO, can be cleared by tx_fifo_clr</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>tx_fifo_overflow</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>Overflow flag of TX FIFO, can be cleared by tx_fifo_clr</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>rx_fifo_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1’b0</p></td>
+<td><p>Clear signal of RX FIFO</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>tx_fifo_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1’b0</p></td>
+<td><p>Clear signal of TX FIFO</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>uart_dma_rx_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Enable signal of dma_rx_req/ack interface</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>uart_dma_tx_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Enable signal of dma_tx_req/ack interface</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="uart-fifo-config-1">
+<h3><span class="section-number">10.4.16. </span>uart_fifo_config_1<a class="headerlink" href="#uart-fifo-config-1" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x4000a084</p>
+<figure class="align-center">
+<img alt="../_images/uart_uart_fifo_config_1.svg" src="../_images/uart_uart_fifo_config_1.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>30:24</p></td>
+<td><p>rx_fifo_th</p></td>
+<td><p>r/w</p></td>
+<td><p>7’d0</p></td>
+<td><p>RX FIFO threshold, dma_rx_req will not be asserted if tx_fifo_cnt is less than this value</p></td>
+</tr>
+<tr class="row-even"><td><p>23</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>22:16</p></td>
+<td><p>tx_fifo_th</p></td>
+<td><p>r/w</p></td>
+<td><p>7’d0</p></td>
+<td><p>TX FIFO threshold, dma_tx_req will not be asserted if tx_fifo_cnt is less than this value</p></td>
+</tr>
+<tr class="row-even"><td><p>15:8</p></td>
+<td><p>rx_fifo_cnt</p></td>
+<td><p>r</p></td>
+<td><p>8’d0</p></td>
+<td><p>RX FIFO available count</p></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>tx_fifo_cnt</p></td>
+<td><p>r</p></td>
+<td><p>8’d128</p></td>
+<td><p>TX FIFO available count</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="uart-fifo-wdata">
+<h3><span class="section-number">10.4.17. </span>uart_fifo_wdata<a class="headerlink" href="#uart-fifo-wdata" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x4000a088</p>
+<figure class="align-center">
+<img alt="../_images/uart_uart_fifo_wdata.svg" src="../_images/uart_uart_fifo_wdata.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>uart_fifo_wdata</p></td>
+<td><p>w</p></td>
+<td><p>x</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="uart-fifo-rdata">
+<h3><span class="section-number">10.4.18. </span>uart_fifo_rdata<a class="headerlink" href="#uart-fifo-rdata" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x4000a08c</p>
+<figure class="align-center">
+<img alt="../_images/uart_uart_fifo_rdata.svg" src="../_images/uart_uart_fifo_rdata.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>uart_fifo_rdata</p></td>
+<td><p>r</p></td>
+<td><p>8’h0</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="SPI.html" class="btn btn-neutral float-left" title="9. SPI" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="I2C.html" class="btn btn-neutral float-right" title="11. I2C" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
