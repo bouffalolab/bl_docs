@@ -1,24 +1,24 @@
-=================
-Pin Definition 
-=================
+==============
+管脚定义
+==============
 
-BL808C 88-pin package includes 26 power pins, 22 analog pins, and 40 flexible GPIO pins.
+BL808C 88-pin 封装包括固定电源接口 26 个、固定模拟接口 22 个、以及富含弹性的 GPIO 接口 40 个供应用选择。
 
 .. figure:: ../../picture/QFN88C.svg
    :align: center
    :scale: 80%
 
-   BL808C Pin layout
+   BL808C 管脚布局
 
-BL808D 88-pin package includes 27 power pins, 25 analog pins, and 36 flexible GPIO pins.
+BL808D 88-pin 封装包括固定电源接口 27 个、固定模拟接口 25 个、以及富含弹性的 GPIO 接口 36 个供应用选择。
 
 .. figure:: ../../picture/QFN88D.svg
    :align: center
    :scale: 80%
 
-   BL808D Pin layout
+   BL808D 管脚布局
 
-.. table:: Pin Description TB_SIZE_TINY
+.. table:: 管脚定义 TB_SIZE_TINY
     :widths: 6,6,9,6,13,8,13,15,24
     :width: 100%
     :align: center
@@ -3585,7 +3585,4 @@ BL808D 88-pin package includes 27 power pins, 25 analog pins, and 36 flexible GP
     | 88       | 88       | \-             | Power    | VSS_DCDC11        | \-                | \-                | VSS_DCDC11        | DCDC circuit ground pin                                                                                                   |
     +----------+----------+----------------+----------+-------------------+-------------------+-------------------+-------------------+---------------------------------------------------------------------------------------------------------------------------+
 
-.. [0201] This function defaults to SPI_MOSI, which can be converted to SPI_MISO through a register.
-
-
-
+.. [0201] 该功能默认为 SPI_MOSI，可通过寄存器将该功能转换为 SPI_MISO。

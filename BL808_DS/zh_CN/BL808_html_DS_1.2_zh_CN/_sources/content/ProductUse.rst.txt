@@ -1,21 +1,20 @@
 ============
-Product use
+产品使用
 ============
 
-Moisture Sensitivity Level(MSL)
-=====================================
+湿敏等级(MSL)
+===================
 
-The moisture sensitivity level of the chip is: MSL3. After the vacuum package is opened, it needs to be used up within 168 hours (7 days) at ≤30°C/60%RH, otherwise it needs to be baked and put online.
-
-For baking temperature and time, please refer to IPC/JEDECJ-STD-033B01.
+芯片的湿敏等级为：MSL3。真空包装打开后，在≤30°C/60%RH下，需要在168小时（7天）内使用完毕，否则需要烘烤后上线。
+烘烤温度和时间可参考IPC/JEDECJ-STD-033B01。
 
 .. table::  Reference Conditions for Drying Mounted or Unmounted SMD Packages
             (User Bake: Floor life begins counting at time = 0 after bake)
 
     +--------------+--------+-----------+------------+-----------+------------+-----------+------------+
-    | Package Body | Level  |    Bake @ 125°C        |    Bake @ 90°C         |    Bake @ 40°C         |
+    | Package      | Level  |    Bake @ 125°C        |    Bake @ 90°C         |    Bake @ 40°C         |
     +              +        +                        +                        +                        +
-    |              |        |                        | ≤5% RH                 | ≤5% RH                 |
+    | Body         |        |                        | ≤5% RH                 | ≤5% RH                 |
     +              +        +-----------+------------+-----------+------------+-----------+------------+
     |              |        | Exceeding | Exceeding  | Exceeding | Exceeding  | Exceeding | Exceeding  |
     +              +        +           +            +           +            +           +            +
@@ -36,16 +35,15 @@ For baking temperature and time, please refer to IPC/JEDECJ-STD-033B01.
     |              | 5a     | 16 hours  | 10 hours   | 54 hours  | 24 hours   | 22 days   | 10 days    |
     +--------------+--------+-----------+------------+-----------+------------+-----------+------------+
 
-Electro-Static discharge（ESD）
-==================================
-- Human Body Model(HBM): 2000V
-- Charged-Device Model(CDM): 500V
+静电放电（ESD）
+=================
+- 人体放电模式(HBM): 2000V
+- 组件充电模式(CDM): 500V
 
-Reflow Profile
+回流焊接曲线(Reflow Profile)
 ==============================
-For details, please refer to IPC/JEDEC J-STD-020E.
 
-.. figure:: ../../picture/ClassificationProfile.svg
+.. figure:: ../../picture/ClassificationProfile.*
    :align: center
 
    Classification Profile (Not to scale)
@@ -83,6 +81,6 @@ For details, please refer to IPC/JEDEC J-STD-020E.
     +--------------------------------------------------------------------+----------------------------------+-----------------------------------+
 
 
-
+具体可参考IPC/JEDEC J-STD-020E。
 
 

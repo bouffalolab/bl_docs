@@ -6,99 +6,101 @@ Features
    \section*{Features}
    \begin{multicols}{2}
 
-- Wireless (Tier-1 RF Performance)
+- 无线（业内顶尖射频性能）
   
-  * 2.4 GHz RF transceiver
+  * 2.4GHz 射频收发器
   * Wi-Fi 802.11 b/g/n
   * Bluetooth® 5.x Dual-mode (BT+BLE)
   * Zigbee / IEEE 802.15.4
-  * Wi-Fi/Bluetooth/Zigbee Coexistence
-  * Integrated balun, PA/LNA
-  * Support External PA/LNA
-  
-- Microcontroller
-  
-  * Multi-Core RISC-V CPUs (Max Freq 480MHz)
-  * RTC timer up to one year
-  * General purpose timers
-  * DMA channels
-  * JTAG development support
-  * XIP QSPI flash support
-  
-- Audio Codec
+  * Wi-Fi/蓝牙/zigbee 共存
+  * 集成 balun，PA/LNA
+  * 支持外部PA/LNA
 
-  * ADC*2 (Mic*2 or Mic*1+Line-in)
+- 微控制器子系统
+  
+  * 多核 RISC-V CPUs (Max Freq 480MHz)
+  * RTC 定时器最长计数周期为 1 年
+  * 通用定时器
+  * DMA 通道
+  * JTAG 开发支持
+  * XIP QSPI 闪存支持
+
+- 音频编码译码器
+
+  * ADC*2 (MIC*2 or MIC*1+Line-in)
   * DAC*1 (Speaker)
-  * Sample Rate 8~192KHz, 24bit
+  * 采样率8~192 KHz，24bit
+
 
 
 - Video/Image/Display
 
   * MJPEG , H264 (Baseline/Main)
-  * Maximum resolution:2M(1920x1080)
-  * Video encoding format:
+  * 最大分辨率：2M(1920x1080)
+  * 视频编码格式:
 
      + MJPEG and H264 (Baseline/Main)
      + 1920x1080 @ 30fps + 640x480 @ 30fps
-     + Up to 8-ROI(region-of-interest)
-  * Camera Sensor interface: DVP and MIPI-CSI
-  * Display interface: SPI、DBI、DPI(RGB)、MIPI-DSI
+     + 高达 8-ROI(region-of-interest)
+  * Camera Sensor接口：DVP和MIPI-CSI
+  * 显示接口：SPI、DBI、DPI(RGB)、MIPI-DSI
 
 
-- AI NN general HW Accelerator
+- AI NN 通用硬件加速器
 
-  * NPU BLAI-100 (Bouffalo Lab AI engine)
-    For Video/Audio detection/recognition, etc.
+  * NPU BLAI-100 (BLAI engine) 用于视频/音频检测/识别
 
 - Memory
 
-  * Embedded 32/64MB DRAM
-  * Support max 128MB SPI-Nor Flash
-  * Support max 256MB SPI-NAND Flash
+  * 内嵌 32/64MB DRAM
+  * 支持最大128MB SPI-Nor Flash
+  * 支持最大256MB SPI-NAND Flash
 
-- Security
+
+- 安全
   
-  * Secure boot ; Secure debug
-  * XIP QSPI On-The-Fly AES Decryption (OTFAD)
-  * Support sensitive SW isolation (TrustZone)
-  * AES-CBC/CCM/GCM/XTS modes
-  * MD5, SHA-1/224/256/384/512
-  * TRNG (True Random Number Generator)
-  * PKA (Public Key Accelerator) for RSA/ECC
+  * 安全启动、安全调试
+  * XIP QSPI On-The-Fly AES 解密 (OTFAD)
+
+  * 支持 RISC-V 安全 zone 分区
+  * AES-CBC/GCM/XTS 模式
+  * MD5，SHA-1/224/256/384/512
+  * TRNG（真随机数生成器）
+  * 用于 RSA/ECC 的 PKA（公钥加速器）
 
 
-- Peripherals
+- 外设
 
   * USB 2.0 HS OTG
-  * Ethernet RMII Interface
-  * SD-card interface
-  * Four UART interface
-  * Two SPI interface
-  * Four I2C interface
-  * Eight PWM channels
-  * I2S interface
-  * PDM interface
-  * General-Purpose ADC
-  * General-Purpose DAC
-  * General analog comparators (ACOMP)
-  * PIR (Passive Infra-Red) detection
-  * IR remote HW accelerator
-  * Support 12-Channel Touch
-  * Flexible 36 or 40 GPIOs
+  * 以太网 RMII 接口
+  * SD 卡接口
+  * 4 个UART接口（支持RS485、ISO 17987-8、ISO 11898-1）
+  * 2 个SPI接口 (Max Freq 80MHz)
+  * 4 个I2C接口
+  * 8 个PWM通道
+  * I2S接口
+  * PDM接口
+  * 通用ADC
+  * 通用DAC
+  * 通用模拟比较器 (ACOMP)
+  * PIR（被动红外）检测
+  * IR remote 硬件加速器
+  * 支持 12 通道 Touch
+  * 可配置的 36 或 40 个 GPIO
 
-- Power Modes (Ultra-low Power modes)
+- 功耗（超低功耗模式）
 
-  * Off(~1uA) ; Hibernate 
-  * Power Down Sleep (flexible)
+  * 关闭 (~1uA)、休眠
+  * 断电睡眠
 
-- Clock
+- 时钟
 
-  * Support XTAL 24/26/32/38.4/40 MHz
-  * Support XTAL 32/32.768 KHz
-  * Internal RC 32KHz/32MHz oscillator
-  * Internal System PLLs
+  * 支持 XTAL 24/26/32/38.4/40 MHz
+  * 支持 XTAL 32/32.768 KHz
+  * 内部 RC 32KHz/32MHz 振荡器
+  * 内部系统 PLL
 
-- Package Type
+- 封装类型
 
   * 88 pin QFN
 
@@ -108,7 +110,6 @@ Features
    \tableofcontents
    \listoffigures
    \listoftables
-
 
 .. toctree::
    :maxdepth: 2

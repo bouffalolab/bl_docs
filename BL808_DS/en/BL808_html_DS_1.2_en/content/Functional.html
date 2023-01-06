@@ -220,7 +220,7 @@ Peripherals supported by DMA include UART, I2C, SPI, ADC, IR, GPIO, Audio, I2S, 
 </tr>
 <tr class="row-even"><td><p>pSRAM</p></td>
 <td><p>pSRAM</p></td>
-<td><p>0x54000000</p></td>
+<td><p>0x50000000</p></td>
 <td><p>64MB</p></td>
 <td><p>pSRAM memory address space, actual size depends on chip model</p></td>
 </tr>
@@ -512,7 +512,7 @@ Peripherals supported by DMA include UART, I2C, SPI, ADC, IR, GPIO, Audio, I2S, 
 <td><p>64K</p></td>
 <td><p>64K</p></td>
 </tr>
-<tr class="row-odd"><td><p>VRAM</p></td>
+<tr class="row-odd"><td rowspan="2"><p>VRAM</p></td>
 <td><p>0x3F000000 - 0x3F007FFF</p></td>
 <td><p>32K</p></td>
 <td><p>32K</p></td>
@@ -522,6 +522,16 @@ Peripherals supported by DMA include UART, I2C, SPI, ADC, IR, GPIO, Audio, I2S, 
 <td><p>32K</p></td>
 <td><p>32K</p></td>
 <td><p>32K</p></td>
+</tr>
+<tr class="row-even"><td><p>0x3F008000 - 0x3F017FFF</p></td>
+<td><p>64K</p></td>
+<td><p>64K</p></td>
+<td><p>64K</p></td>
+<td><p>64K</p></td>
+<td><p>64K</p></td>
+<td><p>-</p></td>
+<td><p>64K</p></td>
+<td><p>-</p></td>
 </tr>
 </tbody>
 </table>
