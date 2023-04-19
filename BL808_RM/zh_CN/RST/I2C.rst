@@ -4,22 +4,29 @@ I2C
 
 简介
 =====
-I2C (Inter-Intergrated Circuit)是一种串行通讯总线，使用多主从架构，用来连接低速外围装置。
-每个器件都有一个唯一的地址识别，并且都可以作为一个发送器或接收器。每个连接到总线的器件都可以通过唯一的地址和一直存在的主、从机关系用软件设置地址，主机可以作为主机发送器或主机接收器。
-如果有两个或多个主机同时初始化，数据传输可以通过冲突检测和仲裁防止数据被破坏。
-BL808包含4组I2C控制器主机，可灵活配置slaveAddr、subAddr以及传输数据，方便与从设备通信，提供2个word深度的fifo，提供中断功能，可搭配DMA使用提高效率，可灵活调整时钟频率。
+I2C (Inter-Intergrated Circuit)是一种串行通讯总线，使用多主从架构，用来连接低速外围设备。
+每个器件都有一个唯一的地址识别，并且都可以作为发送器或接收器。
+如果有多个主机同时操作一个从机，数据传输可以通过冲突检测和仲裁机制防止数据被破坏。
+BL808 包含 4 组 I2C 控制器主机，可灵活配置 slaveAddr、subAddr 以及传输数据，方便与从设备通信，提供 2 个 word 深度的 fifo，支持中断控制，可搭配 DMA 使用提高效率，起始、结束和数据发送阶段的电平持续时间可分段灵活控制。
 
 主要特征
 =========
 - 支持主机模式
 - 支持多主机模式和仲裁功能
-- 时钟频率可灵活调整
-- 支持10地址模式
-- 支持DMA传输模式
-
+- 起始、结束和数据发送阶段的电平持续时间可分段灵活控制
+- 支持 7 位地址格式和 10 位地址格式
+- 支持 DMA 传输模式
+- 支持多种中断机制
 
 功能描述
 ==========
+基本架构
+-------------
+.. figure:: ../../picture/I2CFramework.svg
+   :align: center
+
+   I2C基本架构图
+
 引脚列表：
 
 .. table:: I2C引脚
@@ -35,11 +42,11 @@ BL808包含4组I2C控制器主机，可灵活配置slaveAddr、subAddr以及传�
 起始和停止条件
 -----------------
 所有传输都由起始条件(START condition)开始，以停止条件(STOP condition)结束。
-起始条件和停止条件一般都由主机产生，总线在起始条件后被认为处于总线忙的状态，在停止条件后的某段时间内被认为处于空闲状态。
+起始条件和停止条件一般都由主机产生，总线在起始条件后处于总线忙的状态，在停止条件后至下一次起始条件前处于空闲状态。
 
-起始条件:SCL为高电平时SDA产生一高至低的电平转换；
+起始条件：SCL为高电平时SDA产生由高至低的电平转换；
 
-停止条件:SCL为高电平时SDA产生一低至高的电平转换。
+停止条件：SCL为高电平时SDA产生由低至高的电平转换。
 
 波形示意图如下：
 
@@ -51,56 +58,72 @@ BL808包含4组I2C控制器主机，可灵活配置slaveAddr、subAddr以及传�
 数据传输格式
 ----------------
 
-7地址模式:
+1. 7 位寻址模式
 
-传输的第一个8位为寻址字节，包括7位从机地址和1位方向位。数据由主机发送或接收是由主机所送出的第1个字节的第8位控制，
-若为0表示数据由主机发送；为1则表示数据由主机接收，紧接着从机发出应答位(ACK)，在数据传输完成后，主机发出停止信号，波形图如下：
+传输的第一个8位为寻址字节，包括7位从机地址和1位方向位。数据由主机发送或接收是由第1个字节的第8位（即方向位）控制的，
+为0表示数据由主机发送；为1表示数据由主机接收。在方向位之后是应答位(ACK)，由从机发出应答（将信号拉低），主机在收到应答后，开始传输指定长度的数据。
+数据传输完成后，主机将发出停止信号，数据传输格式如下：
 
-.. figure:: ../../picture/I2CMasterTxRx.svg
+.. figure:: ../../picture/I2CMasterTxSlaveRx.svg
    :align: center
 
-   I2C数据传输格式
+   主发送和从接收的数据格式
+
+.. figure:: ../../picture/I2CMasterRxSlaveTx.svg
+   :align: center
+
+   主接收和从发送的数据格式
 
 **主发送和从接收的时序**
 
-.. figure:: ../../picture/I2CMasterTxSlaveRx.svg
+.. figure:: ../../picture/I2CMasterTxSlaveRxSequence.svg
    :align: center
 
    主发送和从接收的时序
 
 **主接收和从发送的时序**
 
-.. figure:: ../../picture/I2CMasterRxSlaveTx.svg
+.. figure:: ../../picture/I2CMasterRxSlaveTxSequence.svg
    :align: center
 
    主接收和从发送的时序
 
-10地址模式:使用时需要将寄存器i2c_config中cr_i2c_10b_addr_en置1。
+2. 10 位寻址模式
 
-10bit的从机地址由开始条件(S)或重复开始条件(Sr)后的两个字节组成。第一个字节的前7位是1111 0XX，XX是10bit地址的最高有效位的前两位。第一个字节的第8bit是读写位，决定传输方向。
-尽管1111 XXX有8种可能的组合，然后只有1111 0XX这四种可以用于10bit寻址，剩下的1111 1XX这四种是为将来I2C扩展用的。
+使用 10 位寻址模式时，需要将寄存器 i2c_config 中的 cr_i2c_10b_addr_en 置 1 。
 
-前面描述的用于7bit寻址的读写格式都适用于10bit寻址，详情如下:
-
-1.主-发送器传输到从-接收器(10bit从机地址)
+10bit 的从机地址由开始条件(S)或重复开始条件(Sr)后的两个字节组成。第一个字节的前 7 位是1111 0XX，XX 是 10 bit 地址的最高两位。
+第一个字节的第 8 bit 是读写位，决定传输方向。
+第二个字节是 10 bit 地址中剩下的低 8 位。数据传输格式如下：
 
 .. figure:: ../../picture/I2CMasterToSlave10BitAddress.svg
    :align: center
 
-从图中看出传输方向不变。当接收到开始条件后的10bit地址，从机就和它自己的地址比较从机地址的第一个字节(1111 0XX),并检查第八个bit(读写位)是否为0。有可能多个设备都匹配并产生应答(A1)。接下来所有从机开始匹配自己地址与第二个字节的8个bit(XXXX XXXX),这时就只有一个从机匹配并产生应答(A2)，被主机寻址匹配的从机会保持被寻址的状态直到接收到终止条件或者是重复开始条件后跟着一个不同的从机地址。
+   主发送和从接收的数据格式(10bit 从地址)
 
-2.主-接收器从从-发送器接收数据(10bit从地址)
+当从机接收到 10 bit 地址时，会从第一个字节(1111 0XX)开始匹配，并检查第 8bit (读写位) 是否为 0 (写)。
+如果第一个字节中 XX 的值与从机 10 bit 地址的最高两位相同，则第一个字节匹配通过，从机将给出应答A。如果有多个从机设备连接到总线上，则可能有多个设备匹配并产生应答A。
+接下来所有从机开始匹配第二个字节(XXXX XXXX)，其中只会有一个从机的 10 bit 地址低八位与第二个字节完全相同，该从机将给出应答A。
+被主机寻址匹配的从机将保持被寻址的状态，直到接收到终止条件或者是重复开始条件。
 
 .. figure:: ../../picture/I2CSlaveToMaster10BitAddress.svg
    :align: center
 
-在第二个读写位之后传输方向就会改变。在第二个应答A2之前，处理过程与上面的主-发送器寻址从-接收器一致。在重复开始条件(Sr)之后，匹配的从机会保持被寻址上的状态。这个从机会检查Sr之后的第一个字节的前7bit是否正确，然后测试第8bit是否为1(读)。如果这也匹配的话，从机就认定它被作为一个发送器被寻址到了并产生应答A3。从-发送器会保持被寻址的状态直到接收到终止条件(P)或者重复开始条件(Sr)跟着一个不同的从机地址，然后这个时候的重复开始条件下，所有的从机会比较它们的地址与11110XX比较并测试第八位(读写位)。然而它们不会寻址到，因为对于10bit设备，读写位是1，或者对于7bit的设备，1111 0XX的从机地址不匹配。
+   主接收和从发送的数据格式(10bit 从地址)
+
+在第二个应答A之前，处理过程与上面的主-发送器寻址从-接收器一致。
+在重复开始条件(Sr)之后，匹配的从机将保持被寻址的状态。
+从机会检查Sr之后的第一个字节的前 7bit 是否为 1111 0XX ，并检查第 8bit 是否为 1 (读)。
+如果匹配，从机就认定它作为发送器寻址成功并产生应答A。
+从-发送器会保持被寻址的状态，直到接收到终止条件(P)或者重复开始条件(Sr)。
+接收到重复开始条件(Sr)后，所有的从机会与 11110XX 匹配并测试第八位(读写位)。
+然而它们中除了之前已经匹配的从机，都不会被寻址到。因为对于10bit地址的设备，读写位是 1，不满足第一个字节读写位为 0 的匹配条件；或者对于7bit地址的设备，1111 0XX的从机地址不匹配。
 
 仲裁
 ------
-当I2C总线存在多个主机时，可能会发生多个主机同时启动传输的情况，此时必须要依靠仲裁机制来决定哪个主机有权利完成接下来的数据传输，其余主机则须放弃对总线的控制，等到总线再次空出来后才能再次启动传输。
+当I2C总线存在多个主机时，可能会发生多个主机同时启动传输的情况，此时必须要依靠仲裁机制来决定哪个主机有权利完成接下来的数据传输，其余主机则须放弃对总线的控制权，等到总线再次空闲后才能重新启动传输。
 
-在传输过程中，所有主机都需要在SCL为高电平时检查SDA是否与自己所想送出的资料相符，当SDA电平与预期不同时，表示有别的主机也在同时进行传输，而发现SDA电平不同的主机则失去此次仲裁，由其他主机完成数据传输。
+在传输过程中，所有主机都需要在 SCL 为高电平时检查 SDA 的电平状态是否与自己想发送的数据电平状态相符，当 SDA 电平与预期不同时，表示有别的主机也在同时进行传输，而发现 SDA 电平不同的主机则失去此次对总线的控制权，由其他主机完成数据传输。
 
 两主机同时传输数据并启动仲裁机制的波形示意图如下：
 
@@ -114,9 +137,16 @@ I2C时钟设定
 ============
 
 I2C的时钟可由bclk(bus clock)和xclk而来，可以在其的基础上做分频处理。
-寄存器i2c_prd_data可以对数据段的时钟做分频处理。i2c模块将数据发送分为4个阶段，每个阶段在寄存器中用单独一个字节来控制，每个阶段的采样个数是可以设置的，4个采样数共同决定了i2c clock的分频系数。
-比如现在bclk是32M，寄存器i2c_prd_data在不做配置默认情况下的值是0x0f0f0f0f，那么I2C的时钟频率为 32M/((15 + 1) * 4) = 500K。
-同理，寄存器i2c_prd_start和i2c_prd_stop也会分别对起始位和停止位的时钟做分频处理。
+开始条件的持续时间、每一位数据的持续时间以及结束条件的持续时间分别由寄存器 i2c_prd_start、i2c_prd_data 和 i2c_prd_stop 进行设置。
+其中每一种持续时间又可以细分为 4 个阶段，每个阶段的采样个数在寄存器中用单独一个字节来控制（实际值为寄存器值加1），数据部分的 4 个阶段设置值共同决定了i2c clock的分频系数。
+
+如下图所示，假设 I2C 时钟源选为 32M 的 bclk，寄存器 i2c_prd_data 设置为 0x0f0f0f0f，即图中的第二个 0 为 0x0f+1=0x10，第二个 1 为 0x0f+1=0x10，第二个 2 为 0x0f+1=0x10，第二个 3 为 0x0f+1=0x10。
+则I2C的时钟频率为 32MHz/(0x10+0x10+0x10+0x10) = 500K。
+
+.. figure:: ../../picture/I2CClock.svg
+   :align: center
+
+   I2C 时钟设定
 
 I2C配置流程
 ============
@@ -135,42 +165,42 @@ I2C配置流程
 读写标志位
 -----------
 
-I2C支持发送和接收两种工作状态，寄存器i2c_config中cr_i2c_pkt_dir表示发送或者接收状态，设置为0时，表示发送状态，设置为1时，表示接收状态。
+I2C 支持发送和接收两种工作状态，寄存器 i2c_config 中的 cr_i2c_pkt_dir 用于控制发送或接收，设置为 0 时，表示发送状态，设置为 1 时，表示接收状态。
 
 从设备地址
 -----------
 
-每个对接I2C的从设备，都会有唯一设别地址，通常该地址是7位长度，将从设备地址写入寄存器i2c_config中cr_i2c_slv_addr，I2C在将从设备地址发送出去之前，会自动左移1位，并在最低位补上发送接收方向位。
+每个对接 I2C 的从设备，都会有唯一设备地址，该地址通常是 7 bit 的，将该 7 bit 值写入寄存器 i2c_config 中的 cr_i2c_slv_addr，I2C 在将从设备地址发送出去之前，会自动左移1位，并在最低位补上发送接收方向位。
 
 从设备寄存器地址
 -----------------
 
-从设备寄存器地址表示I2C需要对从设备某个寄存器做读写操作的寄存器地址。将从设备寄存器地址写入寄存器 i2c_sub_addr，同时需要将寄存器i2c_config中cr_i2c_sub_addr_en置1。
-如果将寄存器i2c_config中cr_i2c_sub_addr_en置0，那么I2C主机发送时会跳过从设备寄存器地址段。
+通过设置从设备寄存器地址，可以对从设备的寄存器进行读写操作。使用时需要将从设备寄存器地址写入寄存器 i2c_sub_addr，同时将寄存器 i2c_config 中的 cr_i2c_sub_addr_en 置 1。
+如果将寄存器 i2c_config 中的 cr_i2c_sub_addr_en 置 0，那么 I2C 主机发送时会跳过从设备寄存器地址段。
 
 从设备寄存器地址长度
 ----------------------
 
-将从设备寄存器地址长度减1再写入寄存器i2c_config中cr_i2c_sub_addr_bc。
+可以通过寄存器 i2c_config 中的 cr_i2c_sub_addr_bc 设置从设备寄存器地址长度（从设备寄存器地址长度为写入寄存器的值 + 1），详细配置参考寄存器描述。
 
 数据
 --------
 
 数据部分表示需要发送到从设备的数据，或者需要从从设备接收到的数据。
-当I2C发送数据时，需要将数据依次以word为单位写入I2C FIFO，发送数据写FIFO的寄存器地址i2c_fifo_wdata。
-当I2C接收数据时，需要依次以word为单位从I2C FIFO中将数据读出来，接收数据读FIFO的寄存器地址i2c_fifo_rdata。
+当 I2C 发送数据时，需要将数据依次以 word 为单位写入寄存器 i2c_fifo_wdata 中。
+当 I2C 接收数据时，需要依次以 word 为单位从寄存器 i2c_fifo_rdata 中将数据读出来。
 
 数据长度
 ---------
 
-将数据长度减1再写入寄存器i2c_config中cr_i2c_pkt_len。
+可以通过寄存器 i2c_config 中的 cr_i2c_pkt_len 设置发送数据长度（发送数据长度为写入寄存器的值 + 1），最大发送长度为 256 字节。
 
 使能信号
 ---------
 
-将以上几项配置完成后，再将使能信号寄存器i2c_config中cr_i2c_m_en置1，就自动启动I2C发送流程了。
+将以上几项配置完成后，再将使能信号寄存器 i2c_config 中的 cr_i2c_m_en 置 1，就自动启动 I2C 发送流程。
 
-当读写标志位配置为0时，I2C发送数据，主机发送流程：
+当读写标志位配置为 0 时，I2C 发送数据，以发送 2 字节为例，发送流程：
 
 1. 起始位
 
@@ -184,7 +214,7 @@ I2C支持发送和接收两种工作状态，寄存器i2c_config中cr_i2c_pkt_di
 
 6. 停止位
 
-当读写标志位配置为1时，I2C接收数据，主机发送流程：
+当读写标志位配置为 1 时，I2C 接收数据，以接收 2 字节为例，主机发送流程：
 
 1. 起始位
 
@@ -206,23 +236,23 @@ I2C支持发送和接收两种工作状态，寄存器i2c_config中cr_i2c_pkt_di
 FIFO管理
 ============
 
-I2C FIFO深度为2个word，I2C发送和接收可分为RX FIFO和TX FIFO。
-寄存器i2c_fifo_config_1中rx_fifo_cnt表示RX FIFO中有多少数据(单位word)需要读取。
-寄存器i2c_fifo_config_1中tx_fifo_cnt表示TX FIFO中剩余多少空间(单位Word)可供写入。
+I2C FIFO 分为 RX FIFO 和 TX FIFO ，大小各为 2 个 word 。
+寄存器 i2c_fifo_config_1 中的 rx_fifo_cnt 表示 RX FIFO 中有多少数据(单位 word)需要读取。
+寄存器 i2c_fifo_config_1 中的 tx_fifo_cnt 表示 TX FIFO 中剩余多少空间(单位 Word)可供写入。
 
 I2C FIFO状态：
 
- - RX FIFO underflow: 当RX FIFO中的数据被读取完毕或者为空时，继续从RX FIFO中读取数据，寄存器i2c_fifo_config_0中rx_fifo_underflow会被置1；
- - RX FIFO overflow: 当I2C接收数据直到RX FIFO的2个word被填满后，在没有读取RX FIFO的情况下，I2C再次接收到数据，寄存器i2c_fifo_config_0中rx_fifo_overflow会被置1；
- - TX FIFO underflow: 当向TX FIFO中填入的数据大小不满足配置的I2C数据长度:i2c_config中cr_i2c_pkt_len，并且已经没有新数据继续填入TX FIFO中时，寄存器i2c_fifo_config_0中tx_fifo_underflow会被置1；
- - TX FIFO overflow: 当TX FIFO的2个word被填满后，在TX FIFO中的数据没有发出去之前，再次向TX FIFO中填入数据，寄存器i2c_fifo_config_0中tx_fifo_overflow会被置1。
+ - RX FIFO underflow: 当 RX FIFO 中的数据被读取完毕或者为空，继续从 RX FIFO 中读取数据，则寄存器i2c_fifo_config_0中的rx_fifo_underflow会被置1；
+ - RX FIFO overflow: 当 I2C 接收数据直到 RX FIFO 的 2 个 word 被填满后，在没有读取 RX FIFO 的情况下，I2C 再次接收到数据，寄存器i2c_fifo_config_0中的rx_fifo_overflow会被置1；
+ - TX FIFO underflow: 当向 TX FIFO 中填入的数据大小不满足配置的 I2C 数据长度（i2c_config中的cr_i2c_pkt_len），并且已经没有新数据继续填入 TX FIFO 中时，寄存器i2c_fifo_config_0中的tx_fifo_underflow会被置1；
+ - TX FIFO overflow: 当 TX FIFO 的 2 个 word 被填满后，在 TX FIFO 中的数据没有发出去之前，再次向 TX FIFO 中填入数据，寄存器 i2c_fifo_config_0 中的 tx_fifo_overflow 会被置 1。
 
-搭配使用DMA
+DMA 功能
 ============
 
-I2C可以使用DMA进行数据的发送和接收。将寄存器i2c_fifo_config_0中i2c_dma_tx_en置1，则开启DMA发送模式，为I2C分配好通道后，DMA会将数据从存储区传输到i2c_fifo_wdata寄存器中。
-将寄存器i2c_fifo_config_0中i2c_dma_rx_en置1，则开启DMA接收模式，为I2C分配好通道后，DMA会将i2c_fifo_rdata寄存器中的数据传输到存储区中。
-I2C模块搭配使用DMA时，数据部分将由DMA自动完成搬运，不需要CPU再将数据写入I2C TX FIFO或者从I2C RX FIFO中读取数据。
+I2C 可以使用 DMA 进行数据的发送和接收。将寄存器 i2c_fifo_config_0 中的 i2c_dma_tx_en 置 1，则开启 DMA 发送模式，为 I2C 分配好 DMA 通道后，DMA 会将数据从存储区搬运到 i2c_fifo_wdata 寄存器中。
+将寄存器 i2c_fifo_config_0 中的 i2c_dma_rx_en 置 1，则开启 DMA 接收模式，为 I2C 分配好 DMA 通道后，DMA 会将 i2c_fifo_rdata 寄存器中的数据搬运到存储区中。
+I2C 模块使用 DMA 功能时，数据部分将由 DMA 自动完成搬运，不需要 CPU 再将数据写入 I2C TX FIFO 或者从 I2C RX FIFO 中读出。
 
 DMA发送流程
 -------------
@@ -243,11 +273,11 @@ DMA发送流程
 
 8. 配置DMA源地址transfer width
 
-9. 配置DMA目的地址transfer width(需要注意I2C搭配DMA使用时，目的地址transfer width需要设置为32bits，以word对齐使用)
+9. 配置DMA目的地址transfer width(需要注意I2C使用DMA功能时，目的地址transfer width需要设置为32bits，以word对齐使用)
 
 10. 配置DMA源地址为存储发送数据的内存地址
 
-11. 配置DMA目的地址为I2C TX FIFO地址，i2c_fifo_wdata
+11. 配置DMA目的地址为I2C TX FIFO地址，即i2c_fifo_wdata
 
 12. 使能DMA
 
@@ -268,11 +298,11 @@ DMA接收流程
 
 7. 配置DMA transfer size
 
-8. 配置DMA源地址transfer width(需要注意I2C搭配DMA使用时，源地址transfer width需要设置为32bits，以word对齐使用)
+8. 配置DMA源地址transfer width(需要注意I2C使用DMA功能时，源地址transfer width需要设置为32bits，以word对齐使用)
 
 9. 配置DMA目的地址transfer width
 
-10. 配置DMA源地址为I2C RX FIFO地址，i2c_fifo_rdata
+10. 配置DMA源地址为I2C RX FIFO地址，即i2c_fifo_rdata
 
 11. 配置DMA目的地址为存储接收数据的内存地址
 
@@ -285,16 +315,27 @@ DMA接收流程
 
 I2C包括如下几种中断：
 
- - I2C_TRANS_END_INT: I2C传输结束中断
- - I2C_TX_FIFO_READY_INT: 当I2C TX FIFO有空闲空间可用于填充时，触发中断
- - I2C_RX_FIFO_READY_INT: 当I2C RX FIFO接收到数据时，触发中断
- - I2C_NACK_RECV_INT: 当I2C模块检测到NACK状态，触发中断
- - I2C_ARB_LOST_INT: I2C仲裁丢失中断
- - I2C_FIFO_ERR_INT: I2C FIFO ERROR中断
+- I2C_TRANS_END_INT
+  * I2C传输结束中断，当I2C完成一次传输时产生该中断
+
+- I2C_TX_FIFO_READY_INT
+  * 当 i2c_fifo_config_1 中的 tx_fifo_cnt 大于 tx_fifo_th 时，产生 TX FIFO 请求中断，当条件不满足时该中断标志会自动清除
+
+- I2C_RX_FIFO_READY_INT
+  * 当 i2c_fifo_config_1 中的 rx_fifo_cnt 大于 rx_fifo_th 时，产生 RX FIFO请求中断，当条件不满足时该中断标志会自动清除
+
+- I2C_NACK_RECV_INT
+  * 当 I2C 模块检测到NACK状态时，产生NACK中断
+
+- I2C_ARB_LOST_INT
+  * I2C 仲裁丢失中断
+
+- I2C_FIFO_ERR_INT
+  * 当 TX/RX FIFO 发生 overflow 或 underflow 时，产生 FIFO ERROR 中断
 
 .. only:: html
 
-   .. include:: dma2d_register.rst
+   .. include:: i2c_register.rst
 
 .. raw:: latex
 

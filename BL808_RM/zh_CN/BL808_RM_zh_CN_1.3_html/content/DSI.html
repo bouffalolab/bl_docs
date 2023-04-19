@@ -1,0 +1,2924 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>12. DSI &mdash; BL808 参考手册  文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="13. CAM" href="Cam.html" />
+    <link rel="prev" title="11. DPI" href="DPI.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL808 参考手册
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. 系统和存储器概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. 复位和时钟</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPIO.html">4. GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">5. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">6. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">7. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA2D.html">8. DMA2D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lz4d.html">9. LZ4D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBI.html">10. DBI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DPI.html">11. DPI</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">12. DSI</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">12.1. 简介</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">12.2. 主要特点</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">12.3. 功能描述</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">12.3.1. DSI协议分层</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">12.3.2. 物理层</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clock-lane">12.3.3. 时钟通道(Clock Lane)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#lpm-lp-11">12.3.3.1. 低功耗模式(LPM，LP-11)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ulpm-lp-00">12.3.3.2. 超低功耗模式(ULPM，LP-00)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hscm-hs-0-1">12.3.3.3. 高速时钟模式(HSCM，HS-0/1)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#data-lanes">12.3.4. 数据通道(Data Lanes)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#hsdt">12.3.4.1. 高速数据传输(HSDT)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bus-turn-around-bta">12.3.4.2. Bus Turn-Around(BTA)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#escape">12.3.4.3. Escape模式</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lpdt">12.3.4.4. 低功耗数据传输(LPDT)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ulps">12.3.4.5. 超低功耗状态(ULPS)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rar">12.3.4.6. 远程复位(RAR)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ack">12.3.4.7. 应答(ACK)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">12.3.5. 通道管理层</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">12.3.6. 协议层</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id8">12.3.6.1. 短数据包</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id9">12.3.6.2. 长数据包</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id10">12.3.6.3. 每次传输多个数据包</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id11">12.3.6.4. 数据包字节的位顺序</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id12">12.3.6.5. 数据包的字节顺序</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ph">12.3.6.6. 数据包头(PH)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#di">12.3.6.7. 数据标识(DI)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vc">12.3.6.8. 虚拟通道(VC)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dt">12.3.6.9. 数据类型(DT)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pd">12.3.6.10. 包数据(PD)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#wc">12.3.6.11. 字计数(WC)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ecc">12.3.6.12. 纠错码(ECC)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pf">12.3.6.13. 数据包尾(PF)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id13">12.3.7. 应用层</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id14">12.3.8. 命令模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id15">12.3.9. 视频模式</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#non-burst-mode-with-sync-pulses">12.3.9.1. 具有同步脉冲的非突发模式(Non-Burst Mode with SYNC Pulses)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#non-burst-mode-with-sync-events">12.3.9.2. 具有同步事件的非突发模式(Non-Burst Mode with SYNC Events)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#burst-mode">12.3.9.3. 突发模式(Burst Mode)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#line-buffer">12.3.10. Line Buffer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id16">12.3.11. 显示数据格式</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#yuv422-8-bit">12.3.11.1. YUV422(8-bit)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rgb565">12.3.11.2. RGB565</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rgb666-loosely-packed">12.3.11.3. RGB666(loosely packed)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rgb888">12.3.11.4. RGB888</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id17">12.3.12. 中断</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma">12.3.13. DMA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#osd">12.3.14. 与OSD配合使用</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id18">12.4. 寄存器描述</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dsi-config">12.4.1. dsi_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dsi-esc-config">12.4.2. dsi_esc_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dsi-lpdt-tx-config">12.4.3. dsi_lpdt_tx_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dsi-hstx-config">12.4.4. dsi_hstx_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dsi-int-status">12.4.5. dsi_int_status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dsi-int-mask">12.4.6. dsi_int_mask</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dsi-int-clear">12.4.7. dsi_int_clear</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dsi-int-enable">12.4.8. dsi_int_enable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dsi-fifo-config-0">12.4.9. dsi_fifo_config_0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dsi-fifo-config-1">12.4.10. dsi_fifo_config_1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dsi-fifo-wdata">12.4.11. dsi_fifo_wdata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dsi-fifo-rdata">12.4.12. dsi_fifo_rdata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dphy-config-0">12.4.13. dphy_config_0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dphy-config-1">12.4.14. dphy_config_1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dphy-config-2">12.4.15. dphy_config_2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dphy-config-3">12.4.16. dphy_config_3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dphy-config-4">12.4.17. dphy_config_4</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dphy-config-5">12.4.18. dphy_config_5</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dphy-config-6">12.4.19. dphy_config_6</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dphy-config-7">12.4.20. dphy_config_7</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dphy-config-8">12.4.21. dphy_config_8</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dphy-config-9">12.4.22. dphy_config_9</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dphy-config-10">12.4.23. dphy_config_10</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dphy-config-11">12.4.24. dphy_config_11</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dphy-config-12">12.4.25. dphy_config_12</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dphy-config-13">12.4.26. dphy_config_13</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dphy-config-14">12.4.27. dphy_config_14</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dphy-config-15">12.4.28. dphy_config_15</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dphy-config-16">12.4.29. dphy_config_16</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dummy-reg">12.4.30. dummy_reg</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Cam.html">13. CAM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">14. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">15. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">16. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">17. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">18. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">19. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2s.html">20. I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PDM.html">21. PDM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AUDIO.html">22. AUDIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PSRAM.html">23. PSRAM Contorller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Emac.html">24. Emac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USB.html">25. USB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SDH.html">26. SDH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MJPEG.html">27. MJPEG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="JDEC.html">28. JDEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="VENC.html">29. VENC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NPUtoolchain.html">30. NPU toolchain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NPU.html">31. NPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IPC.html">32. IPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LowPower.html">33. LowPower</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SEC_ENG.html">34. SEC ENG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">35. 版本信息</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL808 参考手册</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">12. </span>DSI</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="dsi">
+<h1><span class="section-number">12. </span>DSI<a class="headerlink" href="#dsi" title="永久链接至标题"></a></h1>
+<section id="id1">
+<h2><span class="section-number">12.1. </span>简介<a class="headerlink" href="#id1" title="永久链接至标题"></a></h2>
+<p>DSI是显示串行接口(Display Serial Interface)的简称，是MIPI联盟定义的用于与显示屏通信的接口协议。
+它向外设发送像素或命令，并可从外设读取状态或像素信息。DSI在高速模式下所有的数据通道都是单向传输，低速模式下只有第一个数据通道是双向传输，其他通道为单向传输。
+时钟通道专用于在高速传输数据的过程中传输同步时钟信号。另外，一个主机端还允许同时与多个从属端进行通信。本芯片内置了DSI控制器和D-PHY，可以实现与DSI兼容显示屏进行通信，从而将数据显示在屏幕上。</p>
+</section>
+<section id="id2">
+<h2><span class="section-number">12.2. </span>主要特点<a class="headerlink" href="#id2" title="永久链接至标题"></a></h2>
+<blockquote>
+<div><ul>
+<li><p>符合 MIPI® 联盟标准</p></li>
+<li><p>MIPI® D-PHY 接口 ,最高速度可达800Mbps</p></li>
+<li><p>1条 Clock Lane,最多支持4条Data Lane</p></li>
+<li><p>Data Lane支持四种排列顺序</p></li>
+<li><p>支持Ultra Low Power Mode和High Speed Mode</p></li>
+<li><p>Data Lane 0支持双向通信和逃逸模式</p></li>
+<li><p>Escape模式支持LPDT/ULPS/Trigger</p></li>
+<li><p>LPDT模式下支持长包和短包的发送</p></li>
+<li><p>支持ECC和校验功能</p></li>
+<li><p>支持数据长度错误和数据溢出错误中断</p></li>
+<li><p>支持命令模式和视频模式</p></li>
+<li><p>视频模式下支持Event和Pulse模式</p></li>
+<li><p>显示接口支持的数据格式包括：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>YUV422, 8-bit</p></li>
+<li><p>RGB565</p></li>
+<li><p>RGB666, loosely packed</p></li>
+<li><p>RGB888</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>丰富多样的中断机制和状态查询</p></li>
+<li><p>LPDT模式下支持DMA传输</p></li>
+<li><p>可与OSD配合使用</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="id3">
+<h2><span class="section-number">12.3. </span>功能描述<a class="headerlink" href="#id3" title="永久链接至标题"></a></h2>
+<p>DSI模块基本框图如下图所示：</p>
+<figure class="align-center" id="id19">
+<img alt="../_images/DSIBlock.svg" src="../_images/DSIBlock.svg" /><figcaption>
+<p><span class="caption-number">图 12.1 </span><span class="caption-text">DSI基本框图</span><a class="headerlink" href="#id19" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<section id="id4">
+<h3><span class="section-number">12.3.1. </span>DSI协议分层<a class="headerlink" href="#id4" title="永久链接至标题"></a></h3>
+<p>DSI协议总共可分为4层，从下往上依次是物理层、通道管理层、协议层和应用层，如下图所示：</p>
+<figure class="align-center" id="id20">
+<img alt="../_images/DSILayer.svg" src="../_images/DSILayer.svg" /><figcaption>
+<p><span class="caption-number">图 12.2 </span><span class="caption-text">协议分层</span><a class="headerlink" href="#id20" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>物理层：物理层规定了传输介质(电导体)、输入/输出电路以及从串行位流捕获“1”和“0”的时钟机制。
+另外还规定了发送开始(SoT)和发送结束(EoT)的信令机制，以及可在发送和接收PHY之间传输的其他“带外”信息。</p>
+<p>通道管理层：DSI可扩展通道以提高性能，根据应用的带宽要求，数据通道的数量可以是1、2、3或4。
+通道管理层的作用是在发送端将需要发送的数据按照通道次序分组输送到相应的数据通道，在接收端从各个通道收集数据后将它们合并到一个重新组合的数据流中，从而恢复出原始流序列。</p>
+<p>协议层：DSI协议定义了数据包格式，包括短数据包和长数据包。协议层的作用是在发送端根据数据的类型和内容进行组包，完成ECC码和CRC码的添加并传输到通道管理层；
+在接收端根据ECC码和CRC码对收到的数据包进行检错纠错，完成对包头和数据内容的译码并传输到应用层。</p>
+<p>应用层：根据应用模块的需要，应用层在发送端对要发送的命令和数据进行初步编码转化为DSI所规定的格式，在接收端将接收的数据还原为应用模块支持的数据格式和时序要求。</p>
+</section>
+<section id="id5">
+<h3><span class="section-number">12.3.2. </span>物理层<a class="headerlink" href="#id5" title="永久链接至标题"></a></h3>
+<p>按照D-PHY协议，物理层中在主机端和从属端之间采用的是同步连接，时钟通道(Clock Lane)用于传送高速时钟，一个或多个数据通道(Data Lanes)用于传送低功耗数据信号或高速数据信号。每一个通道
+都是利用两根互连线实现主机端和从属端的连接，且都支持高速(HS)模式和低功耗(LP)模式。在高速模式下，发送端同时驱动该通道的两根互连线，输出低摆幅差分信号，例如200mV；
+在低速模式下，发送端会分别驱动互连线，各自输出摆幅相对较大的单端信号，例如1.2V。两种模式下的互连线电平如下图所示：</p>
+<figure class="align-center" id="id21">
+<img alt="../_images/DSILevel.svg" src="../_images/DSILevel.svg" /><figcaption>
+<p><span class="caption-number">图 12.3 </span><span class="caption-text">高速和低功耗模式下的电平</span><a class="headerlink" href="#id21" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>互连线两端是驱动单元和接收单元。驱动单元包括差分发送模块(HS_TX)和低功耗单端发送模块(LP_TX),接收单元包括差分接收模块(HS_RX)和低功耗单端接收模块(LP_RX)。
+差分发送模块(HS_TX)以差分信号驱动互连线，高速通道上呈现两种状态：Differential-0和Differential-1。
+低功耗单端发送模块(LP_TX)独立地驱动两根互连线，通道上有四种不同的状态：LP-00、LP-01、LP-10和LP-11。
+协议针对线路电平作了具体的定义并设置了三种操作模式：高速模式、控制模式和Escape模式，如下表所示：</p>
+<figure class="align-center" id="id22">
+<img alt="../_images/DSILaneState.svg" src="../_images/DSILaneState.svg" /><figcaption>
+<p><span class="caption-number">图 12.4 </span><span class="caption-text">通道状态码</span><a class="headerlink" href="#id22" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="clock-lane">
+<h3><span class="section-number">12.3.3. </span>时钟通道(Clock Lane)<a class="headerlink" href="#clock-lane" title="永久链接至标题"></a></h3>
+<p>时钟通道可以被驱动到三种不同的功耗模式：低功耗模式(Low Power Mode，LPM)、超低功耗模式(Ultra-Low Power Mode，ULPM)和高速时钟模式(High Speed Clock Mode，HSCM)。
+时钟通道不同功耗模式相互切换的主要流程图如下所示：</p>
+<figure class="align-center" id="id23">
+<img alt="../_images/DSIClockMode.svg" src="../_images/DSIClockMode.svg" /><figcaption>
+<p><span class="caption-number">图 12.5 </span><span class="caption-text">时钟通道模式切换图</span><a class="headerlink" href="#id23" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<section id="lpm-lp-11">
+<h4><span class="section-number">12.3.3.1. </span>低功耗模式(LPM，LP-11)<a class="headerlink" href="#lpm-lp-11" title="永久链接至标题"></a></h4>
+<p>有三种方式进入：</p>
+<p>1.在软件复位、硬件复位和上电时序后，自动进入LP-11(LPM)。</p>
+<p>2.离开超低功耗模式(ULPM，LP-00)后先变为LP-10，再进入LP-11(LPM)，如下图所示：</p>
+<figure class="align-center" id="id24">
+<img alt="../_images/DSIULPM2LPM.svg" src="../_images/DSIULPM2LPM.svg" /><figcaption>
+<p><span class="caption-number">图 12.6 </span><span class="caption-text">由超低功耗模式进入低功耗模式</span><a class="headerlink" href="#id24" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>3.离开高速时钟模式(HSCM，HS-0或HS-1)后先变为HS-0，再进入LP-11(LPM)，如下图所示：</p>
+<figure class="align-center" id="id25">
+<img alt="../_images/DSIHSCM2LPM.svg" src="../_images/DSIHSCM2LPM.svg" /><figcaption>
+<p><span class="caption-number">图 12.7 </span><span class="caption-text">由高速时钟模式进入低功耗模式</span><a class="headerlink" href="#id25" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="ulpm-lp-00">
+<h4><span class="section-number">12.3.3.2. </span>超低功耗模式(ULPM，LP-00)<a class="headerlink" href="#ulpm-lp-00" title="永久链接至标题"></a></h4>
+<p>只有一种方式进入：
+从低功耗模式(LPM，LP-11)先变为LP-10，再进入LP-00(ULPM)，如下图所示：</p>
+<figure class="align-center" id="id26">
+<img alt="../_images/DSILPM2ULPM.svg" src="../_images/DSILPM2ULPM.svg" /><figcaption>
+<p><span class="caption-number">图 12.8 </span><span class="caption-text">由低功耗模式进入超低功耗模式</span><a class="headerlink" href="#id26" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="hscm-hs-0-1">
+<h4><span class="section-number">12.3.3.3. </span>高速时钟模式(HSCM，HS-0/1)<a class="headerlink" href="#hscm-hs-0-1" title="永久链接至标题"></a></h4>
+<p>只有一种方式进入：
+从低功耗模式(LPM，LP-11)先变为LP-01，再变为LP-00，然后变为HS-0，之后进入HS-0/1(HSCM)，如下图所示：</p>
+<figure class="align-center" id="id27">
+<img alt="../_images/DSILPM2HSCM.svg" src="../_images/DSILPM2HSCM.svg" /><figcaption>
+<p><span class="caption-number">图 12.9 </span><span class="caption-text">由低功耗模式进入高速时钟模式</span><a class="headerlink" href="#id27" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="data-lanes">
+<h3><span class="section-number">12.3.4. </span>数据通道(Data Lanes)<a class="headerlink" href="#data-lanes" title="永久链接至标题"></a></h3>
+<p>所有的数据通道(D3P/N、D2P/N、D1P/N和D0P/N)都可以被驱动到高速数据传输(High-Speed Data Transmission，HSDT)模式，但只有数据通道0(D0P/N)可以进入Escape模式和Bus Turn-Around Request(BTA)模式。
+三种模式的进入和退出序列如下表所示：</p>
+<figure class="align-center" id="id28">
+<img alt="../_images/DSIDataMode.svg" src="../_images/DSIDataMode.svg" /><figcaption>
+<p><span class="caption-number">图 12.10 </span><span class="caption-text">数据通道三种模式进入和退出序列</span><a class="headerlink" href="#id28" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<section id="hsdt">
+<h4><span class="section-number">12.3.4.1. </span>高速数据传输(HSDT)<a class="headerlink" href="#hsdt" title="永久链接至标题"></a></h4>
+<p>当MCU的时钟通道已经进入高速时钟模式(HSCM)后显示模块可以进入高速数据传输(HSDT)。进入高速数据传输的序列如下图所示：</p>
+<figure class="align-center" id="id29">
+<img alt="../_images/DSIHSDTStart.svg" src="../_images/DSIHSDTStart.svg" /><figcaption>
+<p><span class="caption-number">图 12.11 </span><span class="caption-text">高速数据传输进入序列</span><a class="headerlink" href="#id29" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>序列：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>开始：LP-11；</p></li>
+<li><p>HS请求：LP-01；</p></li>
+<li><p>HS确定：LP-00=&gt;HS-0(接收端:Lane终端使能)</p></li>
+<li><p>接收端同步：011101(按发送的bit顺序)，发送端同步：00011101(按发送的bit顺序)；</p></li>
+<li><p>结束：高速数据传输，准备好接收加载的高速数据。</p></li>
+</ul>
+</div></blockquote>
+<p>当MCU的时钟通道处于高速时钟模式(HSCM)时显示模块可以退出高速数据传输，并且HSCM必须保持到所有的数据通道都进入LP-11模式。退出高速数据传输的序列如下图所示：</p>
+<figure class="align-center" id="id30">
+<img alt="../_images/DSIHSDTEnd.svg" src="../_images/DSIHSDTEnd.svg" /><figcaption>
+<p><span class="caption-number">图 12.12 </span><span class="caption-text">高速数据传输退出序列</span><a class="headerlink" href="#id30" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>序列：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>开始：高速数据传输；</p></li>
+<li><p>停止高速数据传输：如果最后的加载位是HS-0则MCU变为HS-1,如果最后的加载位是HS-1则MCU变为HS-0；</p></li>
+<li><p>结束：LP-11(接收端：Lane终端禁用)。</p></li>
+</ul>
+</div></blockquote>
+<p>高速数据传输的突发操作可以由一个数据包或者多个数据包组成，这些数据包可以是长包也可以是短包。以下是一些不同的高速数据传输突发例子：</p>
+<figure class="align-center" id="id31">
+<img alt="../_images/DSIHSDTBurst.svg" src="../_images/DSIHSDTBurst.svg" /><figcaption>
+<p><span class="caption-number">图 12.13 </span><span class="caption-text">高速数据传输突发序列</span><a class="headerlink" href="#id31" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="bus-turn-around-bta">
+<h4><span class="section-number">12.3.4.2. </span>Bus Turn-Around(BTA)<a class="headerlink" href="#bus-turn-around-bta" title="永久链接至标题"></a></h4>
+<p>当正在控制通道D0P/N的MCU或显示模块想要从接收端获取信息时，可以开启一个总线反转过程，使总线控制权发生反转。
+MCU和显示模块发起总线反转过程使用相同的序列，如下图所示：</p>
+<figure class="align-center" id="id32">
+<img alt="../_images/DSIBTA.svg" src="../_images/DSIBTA.svg" /><figcaption>
+<p><span class="caption-number">图 12.14 </span><span class="caption-text">总线反转序列</span><a class="headerlink" href="#id32" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>序列：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>开始：LP-11；</p></li>
+<li><p>反转请求(MCU)：LP-11=&gt;LP-10=&gt;LP-00=&gt;LP-10=&gt;LP-00；</p></li>
+<li><p>MCU会等待直到显示模块开始控制通道D0P/N，而MCU则停止控制通道D0P/N并设为高阻态；</p></li>
+<li><p>显示模块变为停止模式：LP-00=&gt;LP-10=&gt;LP-11。</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="escape">
+<h4><span class="section-number">12.3.4.3. </span>Escape模式<a class="headerlink" href="#escape" title="永久链接至标题"></a></h4>
+<p>Escape模式是LPM下的一种特殊模式，有以下几个作用：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>1.从MCU发送低功耗传输(LPDT)命令到显示模块；</p></li>
+<li><p>2.驱动数据通道到超低功耗状态(ULPS)；</p></li>
+<li><p>3.发送远程复位(RAR)命令，复位显示模块；</p></li>
+<li><p>4.发送应答(ACK)信号，用于从显示模块传输非错误事件到MCU。</p></li>
+</ul>
+</div></blockquote>
+<p>Escape模式的基本序列如下图所示：</p>
+<figure class="align-center" id="id33">
+<img alt="../_images/DSIEscape.svg" src="../_images/DSIEscape.svg" /><figcaption>
+<p><span class="caption-number">图 12.15 </span><span class="caption-text">Escape模式序列</span><a class="headerlink" href="#id33" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>序列：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>开始：LP-11；</p></li>
+<li><p>Escape模式进入(EME)：LP-11=&gt;LP-10=&gt;LP-00=&gt;LP-01=&gt;LP-00；</p></li>
+<li><p>Escape命令(EC)：当其中一个数据通道从低变高再变低时，此变化显示了当前数据位的值(D0P = 1，D0N = 0)。</p></li>
+<li><p>当数据通道0从低变高再变低，接收器会锁存1bit数据，即逻辑0。接收器会把这种从低变高再变低的传输作为</p></li>
+<li><p>其内部的时钟；</p></li>
+<li><p>如果需要的话，加载数据；</p></li>
+<li><p>退出Escape：LP-00=&gt;LP-10=&gt;LP-11；</p></li>
+<li><p>结束：LP-11。</p></li>
+</ul>
+</div></blockquote>
+<p>Escape命令种类如下表所示：</p>
+<figure class="align-center" id="id34">
+<img alt="../_images/DSIEscapeCommand.svg" src="../_images/DSIEscapeCommand.svg" /><figcaption>
+<p><span class="caption-number">图 12.16 </span><span class="caption-text">Escape模式命令</span><a class="headerlink" href="#id34" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="lpdt">
+<h4><span class="section-number">12.3.4.4. </span>低功耗数据传输(LPDT)<a class="headerlink" href="#lpdt" title="永久链接至标题"></a></h4>
+<p>当数据通道进入Escape模式，并且MCU已经将LPDT命令发送给显示模块，则MCU可以在低功耗模式下将数据发送到显示模块。
+显示模块发送数据到MCU时也使用同样的序列。LPDT序列如下图所示：</p>
+<figure class="align-center" id="id35">
+<img alt="../_images/DSILPDT.svg" src="../_images/DSILPDT.svg" /><figcaption>
+<p><span class="caption-number">图 12.17 </span><span class="caption-text">低功耗数据传输序列</span><a class="headerlink" href="#id35" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>序列：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>开始：LP-11；</p></li>
+<li><p>Escape模式进入(EME)：LP-11=&gt;LP-10=&gt;LP-00=&gt;LP-01=&gt;LP-00；</p></li>
+<li><p>Escape模式下发送LPDT命令：0x87(LSB-first)；</p></li>
+<li><p>加载数据：一个或多个字节，当数据通道在字节之间停止(所有通道都为低)时，处于暂停状态；</p></li>
+<li><p>退出Escape：LP-00=&gt;LP-10=&gt;LP-11；</p></li>
+<li><p>结束：LP-11。</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="ulps">
+<h4><span class="section-number">12.3.4.5. </span>超低功耗状态(ULPS)<a class="headerlink" href="#ulps" title="永久链接至标题"></a></h4>
+<p>当数据通道进入Escape模式时，MCU可以强制数据通道进入超低功耗状态。ULPS序列如下图所示：</p>
+<figure class="align-center" id="id36">
+<img alt="../_images/DSIULPS.svg" src="../_images/DSIULPS.svg" /><figcaption>
+<p><span class="caption-number">图 12.18 </span><span class="caption-text">超低功耗状态序列</span><a class="headerlink" href="#id36" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>序列：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>开始：LP-11；</p></li>
+<li><p>Escape模式进入(EME)：LP-11=&gt;LP-10=&gt;LP-00=&gt;LP-01=&gt;LP-00；</p></li>
+<li><p>Escape模式下发送ULPS命令：0x78(LSB-first)；</p></li>
+<li><p>超低功耗状态，MCU保持数据通道为低；</p></li>
+<li><p>退出Escape：LP-00=&gt;LP-10=&gt;LP-11；</p></li>
+<li><p>结束：LP-11(数据通道退出ULPS之后必须等待100us才能发送下一条命令)。</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="rar">
+<h4><span class="section-number">12.3.4.6. </span>远程复位(RAR)<a class="headerlink" href="#rar" title="永久链接至标题"></a></h4>
+<p>远程复位是Trigger命令中的一种，当数据通道进入Escape模式时，MCU可以通知显示模块在远程申请复位触发器中进行复位。RAR序列如下图所示：</p>
+<figure class="align-center" id="id37">
+<img alt="../_images/DSIRAR.svg" src="../_images/DSIRAR.svg" /><figcaption>
+<p><span class="caption-number">图 12.19 </span><span class="caption-text">远程复位序列</span><a class="headerlink" href="#id37" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>序列：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>开始：LP-11；</p></li>
+<li><p>Escape模式进入(EME)：LP-11=&gt;LP-10=&gt;LP-00=&gt;LP-01=&gt;LP-00；</p></li>
+<li><p>Escape模式下发送RAR命令：0x46(LSB-first)；</p></li>
+<li><p>退出Escape：LP-00=&gt;LP-10=&gt;LP-11；</p></li>
+<li><p>结束：LP-11。</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="ack">
+<h4><span class="section-number">12.3.4.7. </span>应答(ACK)<a class="headerlink" href="#ack" title="永久链接至标题"></a></h4>
+<p>应答是Trigger命令中的一种，显示模块可以通过ACK通知MCU有未识别的错误。显示模块发送ACK的序列如下图所示：</p>
+<figure class="align-center" id="id38">
+<img alt="../_images/DSIACK.svg" src="../_images/DSIACK.svg" /><figcaption>
+<p><span class="caption-number">图 12.20 </span><span class="caption-text">应答序列</span><a class="headerlink" href="#id38" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>序列：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>开始：LP-11；</p></li>
+<li><p>Escape模式进入(EME)：LP-11=&gt;LP-10=&gt;LP-00=&gt;LP-01=&gt;LP-00；</p></li>
+<li><p>Escape模式下发送ACK命令：0x84(LSB-first)；</p></li>
+<li><p>退出Escape：LP-00=&gt;LP-10=&gt;LP-11；</p></li>
+<li><p>结束：LP-11</p></li>
+</ul>
+</div></blockquote>
+</section>
+</section>
+<section id="id6">
+<h3><span class="section-number">12.3.5. </span>通道管理层<a class="headerlink" href="#id6" title="永久链接至标题"></a></h3>
+<p>DSI是一种通道可扩展接口，按照实际应用的带宽需求可能会将数据通道从一条扩展为两条、三条或者四条，并获得峰值总线带宽的近似线性增加。
+在发射端，通道管理层的作用是把协议层的数据按照一定的顺序分发到每个数据通道上；在接收端，通道管理层的作用是从各个通道收集传输的字节，并将字节合并成完整的数据包。
+所有的数据通道共用一个时钟信号，但每个通道不一定是同时传输完成的，当传输的字节数不是通道数的整数倍时，某些通道会在其他通道之前传完数据。
+除通道0之外，其他三条通道的排列顺序可以通过&lt;CR_LANE_MUX_SEL&gt;配置。</p>
+<p>有以下四种排列顺序：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Lane0,Lane1,Lane2,Lane3</p></li>
+<li><p>Lane0,Lane3,Lane1,Lane2</p></li>
+<li><p>Lane0,Lane2,Lane3,Lane1</p></li>
+<li><p>Lane0,Lane2,Lane1,Lane3</p></li>
+</ul>
+</div></blockquote>
+<p>分别以单通道和四通道(顺序为Lane0,Lane1,Lane2,Lane3)为例，发送端如下图所示：</p>
+<figure class="align-center" id="id39">
+<img alt="../_images/DSILaneDistributor.svg" src="../_images/DSILaneDistributor.svg" /><figcaption>
+<p><span class="caption-number">图 12.21 </span><span class="caption-text">发送端拆分</span><a class="headerlink" href="#id39" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>接收端如下图所示：</p>
+<figure class="align-center" id="id40">
+<a class="reference internal image-reference" href="../_images/DSILaneMerger.svg"><img alt="../_images/DSILaneMerger.svg" src="../_images/DSILaneMerger.svg" /></a>
+<figcaption>
+<p><span class="caption-number">图 12.22 </span><span class="caption-text">接收端组合</span><a class="headerlink" href="#id40" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>通道分配器接受任意字节长度的HS传输，缓冲N个字节，其中N是接口中实现的通道数，并在N个通道上并行发送N个字节组。
+在发送数据之前，所有通道并行执行SoT序列，以向其对应的接收单元指示数据包的第一个字节开始。
+SoT之后，通道通过循环过程从第一个数据包并行发送N字节组，对于四通道系统，数据包的字节0进入通道0，字节1进入通道1，字节2进入通道2，字节3进入通道3，字节4进入通道0，依此类推。
+由于HS传输由任意数量的字节组成，这些字节可能不是通道的整数倍，因此某些通道可能会在其他通道之前先发完数据。
+尽管所有通道均以并行SoT同时启动，但每条通道独立运行，可在其他通道之前完成HS传输，提前一个字节发送EoT。如下图所示：</p>
+<figure class="align-center" id="id41">
+<img alt="../_images/DSINotMultiple.svg" src="../_images/DSINotMultiple.svg" /><figcaption>
+<p><span class="caption-number">图 12.23 </span><span class="caption-text">非通道整数倍传输</span><a class="headerlink" href="#id41" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id7">
+<h3><span class="section-number">12.3.6. </span>协议层<a class="headerlink" href="#id7" title="永久链接至标题"></a></h3>
+<p>DSI是一个基于数据包传送的通信协议，MCU和显示模块之间传送的命令和数据基本上都是以数据包格式进行。
+DSI所定义的数据包有两种：短数据包(SPa)和长数据包(LPa)。数据包的类型(SPa或LPa)可以从它们的包头(PH)中识别出来。</p>
+<section id="id8">
+<h4><span class="section-number">12.3.6.1. </span>短数据包<a class="headerlink" href="#id8" title="永久链接至标题"></a></h4>
+<p>短数据包由一个8-bit数据标识(DI)、两个字节命令或数据和一个8-bit ECC组成。包括ECC在内，短数据包的长度为4字节。
+短数据包主要用于大多数命令模式命令和相关参数，另外还用来传递诸如H同步和V同步边缘之类的事件。因为长度较短，所以可以准确地将定时信息传送到外围逻辑。短数据包结构如下图所示：</p>
+<figure class="align-center" id="id42">
+<img alt="../_images/DSISpa.svg" src="../_images/DSISpa.svg" /><figcaption>
+<p><span class="caption-number">图 12.24 </span><span class="caption-text">短数据包结构图</span><a class="headerlink" href="#id42" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>其中：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>LP-11：低功率-停止状态</p></li>
+<li><p>SoT：传输开始</p></li>
+<li><p>DI：8-bit，数据标识</p></li>
+<li><p>Data 0：8-bit，包数据0</p></li>
+<li><p>Data 1：8-bit，包数据1</p></li>
+<li><p>ECC：8-bit，纠错码</p></li>
+<li><p>EoT：传输结束</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="id9">
+<h4><span class="section-number">12.3.6.2. </span>长数据包<a class="headerlink" href="#id9" title="永久链接至标题"></a></h4>
+<p>长数据包由32-bit数据包头(PH)、具有可变字节数的数据有效负载和16-bit数据包尾(PF)组成。其中包头可分为8-bit数据标识、16-bit字计数(WC)和8-bit ECC。
+由于记录有效负载长度的WC为两个字节，取值范围为0到65535，因此长数据包的长度范围是6到65541个字节。长数据包主要用于传输大量图像数据或部分控制命令。长数据包结构如下图所示：</p>
+<figure class="align-center" id="id43">
+<img alt="../_images/DSILpa.svg" src="../_images/DSILpa.svg" /><figcaption>
+<p><span class="caption-number">图 12.25 </span><span class="caption-text">长数据包结构图</span><a class="headerlink" href="#id43" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>其中：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>LP-11：低功率-停止状态</p></li>
+<li><p>SoT：传输开始</p></li>
+<li><p>DI：8-bit，数据标识</p></li>
+<li><p>WC：16-bit，字计数</p></li>
+<li><p>ECC：8-bit，纠错码</p></li>
+<li><p>Data 0，Data 1...：数据包数据(0~65535字节)</p></li>
+<li><p>CS：16-bit，校验和</p></li>
+<li><p>EoT：传输结束</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="id10">
+<h4><span class="section-number">12.3.6.3. </span>每次传输多个数据包<a class="headerlink" href="#id10" title="永久链接至标题"></a></h4>
+<p>在上面短数据包和长数据包结构图中，传输只包含了一个分组。对于多个数据包，如果每次传输都只发送一个数据包，LPS和高速模式之间频繁切换的开销将严重限制带宽。
+DSI协议允许将多个数据包连接起来发送，数据包之间不需要SoT、EoT和LP-11，如下图所示：</p>
+<figure class="align-center" id="id44">
+<a class="reference internal image-reference" href="../_images/DSISpaLpa.svg"><img alt="../_images/DSISpaLpa.svg" src="../_images/DSISpaLpa.svg" /></a>
+<figcaption>
+<p><span class="caption-number">图 12.26 </span><span class="caption-text">一次传输多个数据包</span><a class="headerlink" href="#id44" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id11">
+<h4><span class="section-number">12.3.6.4. </span>数据包字节的位顺序<a class="headerlink" href="#id11" title="永久链接至标题"></a></h4>
+<p>在数据包中使用的字节的位顺序是首先发送字节的最低有效位(LSB)，最后发送最高有效位(MSB)，下图是一个例子：</p>
+<figure class="align-center" id="id45">
+<img alt="../_images/DSIBitOrder.svg" src="../_images/DSIBitOrder.svg" /><figcaption>
+<p><span class="caption-number">图 12.27 </span><span class="caption-text">数据包字节的位顺序</span><a class="headerlink" href="#id45" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id12">
+<h4><span class="section-number">12.3.6.5. </span>数据包的字节顺序<a class="headerlink" href="#id12" title="永久链接至标题"></a></h4>
+<p>在数据包中使用的多字节信息的字节顺序是首先发送信息的最低有效(LS)字节，最后发送最高有效(MS)字节。例如字计数(WC)由2个字节组成，首先发送LS字节，然后发送MS字节，如下图所示：</p>
+<figure class="align-center" id="id46">
+<img alt="../_images/DSIByteOrder.svg" src="../_images/DSIByteOrder.svg" /><figcaption>
+<p><span class="caption-number">图 12.28 </span><span class="caption-text">数据包的字节顺序</span><a class="headerlink" href="#id46" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="ph">
+<h4><span class="section-number">12.3.6.6. </span>数据包头(PH)<a class="headerlink" href="#ph" title="永久链接至标题"></a></h4>
+<p>数据包头始终由4个字节组成，对于短数据包和长数据包，这4个字节的内容有所不同。短数据包包括：1个字节的数据标识(DI)、2个字节的数据包数据(PD0、PD1)和1个字节的纠错码(ECC)。
+长数据包包括：1个字节的数据标识(DI)、2个字节的字计数(WC)和1个字节的纠错码(ECC)。</p>
+</section>
+<section id="di">
+<h4><span class="section-number">12.3.6.7. </span>数据标识(DI)<a class="headerlink" href="#di" title="永久链接至标题"></a></h4>
+<p>数据标识是数据包头(PH)的一部分，它由两个部分组成：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>虚拟通道(VC)，2-bit，DI[7:6]</p></li>
+<li><p>数据类型(DT)，6-bit，DI[5:0]</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="vc">
+<h4><span class="section-number">12.3.6.8. </span>虚拟通道(VC)<a class="headerlink" href="#vc" title="永久链接至标题"></a></h4>
+<p>虚拟通道是数据标识(DI[7:6])结构的一部分，用于确定MCU数据包发往的位置。
+虚拟通道可以为4个不同的显示模块分配4个不同的通道，各个显示模块将使用与MCU用于向其发送数据包的虚拟通道相同的虚拟通道。</p>
+</section>
+<section id="dt">
+<h4><span class="section-number">12.3.6.9. </span>数据类型(DT)<a class="headerlink" href="#dt" title="永久链接至标题"></a></h4>
+<p>数据类型是数据标识(DI[5:0])结构的一部分，用于定义数据包是长数据包类型还是短数据包类型以及数据包格式。其中从MCU到显示模块的数据类型的定义如下表所示：</p>
+<figure class="align-center" id="id47">
+<img alt="../_images/DSIDTMCU.svg" src="../_images/DSIDTMCU.svg" /><figcaption>
+<p><span class="caption-number">图 12.29 </span><span class="caption-text">从 MCU到显示模块的数据类型</span><a class="headerlink" href="#id47" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>从显示模块到MCU的数据类型的定义如下表所示：</p>
+<figure class="align-center" id="id48">
+<img alt="../_images/DSIDTDisp.svg" src="../_images/DSIDTDisp.svg" /><figcaption>
+<p><span class="caption-number">图 12.30 </span><span class="caption-text">从显示模块到 MCU的数据类型</span><a class="headerlink" href="#id48" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="pd">
+<h4><span class="section-number">12.3.6.10. </span>包数据(PD)<a class="headerlink" href="#pd" title="永久链接至标题"></a></h4>
+<p>对于短数据包，包数据是数据包头的一部分，位于数据标识之后，固定2个字节，即数据0和数据1。包数据的发送顺序是先发送数据0，再发送数据1。
+如果信息长度为1个字节，则数据1的值为0。对于长数据包，包数据位于数据包头之后，字节长度由字计数(WC)确定。</p>
+</section>
+<section id="wc">
+<h4><span class="section-number">12.3.6.11. </span>字计数(WC)<a class="headerlink" href="#wc" title="永久链接至标题"></a></h4>
+<p>字计数是长数据包包头的一部分，位于数据标识之后，用于确定长数据包的包数据(PD)部分的总字节数。字计数固定为2个字节，发送顺序是先发送最低有效字节，再发送最高有效字节。</p>
+</section>
+<section id="ecc">
+<h4><span class="section-number">12.3.6.12. </span>纠错码(ECC)<a class="headerlink" href="#ecc" title="永久链接至标题"></a></h4>
+<p>纠错码是数据包头的一部分，可以识别一个或多个错误，并且只能纠正一个错误。
+ECC保护以下字段：
+- 短数据包：DI(8-bit)、PD(16-bit)和ECC(8-bit)
+- 长数据包：DI(8-bit)、WC(16-bit)和ECC(8-bit)
+以短数据包为例，ECC各个位的计算方法如下图所示(“^”表示异或运算)：</p>
+<figure class="align-center" id="id49">
+<img alt="../_images/DSIECC.svg" src="../_images/DSIECC.svg" /><figcaption>
+<p><span class="caption-number">图 12.31 </span><span class="caption-text">ECC计算示例</span><a class="headerlink" href="#id49" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>公式：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>ECC[7] = 0</p></li>
+<li><p>ECC[6] = 0</p></li>
+<li><p>ECC[5] = D10^D11^D12^D13^D14^D15^D16^D17^D18^D19^D21^D22^D23</p></li>
+<li><p>ECC[4] = D4^D5^D6^D7^D8^D9^D16^D17^D18^D19^D20^D22^D23</p></li>
+<li><p>ECC[3] = D1^D2^D3^D7^D8^D9^D13^D14^D15^D19^D20^D21^D23</p></li>
+<li><p>ECC[2] = D0^D2^D3^D5^D6^D9^D11^D12^D15^D18^D20^D21^D22</p></li>
+<li><p>ECC[1] = D0^D1^D3^D4^D6^D8^D10^D12^D14^D17^D20^D21^D22^D23</p></li>
+<li><p>ECC[0] = D0^D1^D2^D4^D5^D7^D10^D11^D13^D16^D20^D21^D22^D23</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="pf">
+<h4><span class="section-number">12.3.6.13. </span>数据包尾(PF)<a class="headerlink" href="#pf" title="永久链接至标题"></a></h4>
+<p>数据包尾是长数据包的一部分，位于包数据(PD)之后。包尾是根据长数据包的包数据计算的校验和，该校验和是使用由多项式X16+X12+X5+X0生成的16位循环冗余校验(CRC)值，如下图所示：</p>
+<figure class="align-center" id="id50">
+<img alt="../_images/DSICRC.svg" src="../_images/DSICRC.svg" /><figcaption>
+<p><span class="caption-number">图 12.32 </span><span class="caption-text">CRC计算方法</span><a class="headerlink" href="#id50" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>16位循环冗余校验(CRC)发生器在计算前的初始值为0xFFFF，包数据最低有效位(LSB)是输入CRC的第一位，下图是以数据0x01为例，进行CRC计算的步骤说明：</p>
+<figure class="align-center" id="id51">
+<img alt="../_images/DSICRCCal.svg" src="../_images/DSICRCCal.svg" /><figcaption>
+<p><span class="caption-number">图 12.33 </span><span class="caption-text">CRC计算示例</span><a class="headerlink" href="#id51" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="id13">
+<h3><span class="section-number">12.3.7. </span>应用层<a class="headerlink" href="#id13" title="永久链接至标题"></a></h3>
+<p>该层描述数据流中包含的数据的更高级编码和解释。取决于显示子系统架构，它可以由具有规定格式的像素或编码比特流，或者由显示模块内的显示控制器解释的命令组成。
+DSI规范描述了像素值、比特流、命令和命令参数到数据包组件中字节的映射。(具体内容见显示命令集(DCS)规范，DCS规范不在本文档介绍范围内)</p>
+</section>
+<section id="id14">
+<h3><span class="section-number">12.3.8. </span>命令模式<a class="headerlink" href="#id14" title="永久链接至标题"></a></h3>
+<p>命令模式是指以发送命令和数据的形式实现MCU与包含显示控制器的外围设备(如显示模块)的交互。显示控制器可以包括本地寄存器和压缩或未压缩帧缓冲器，使用命令模式的系统对寄存器和帧缓冲存储器进行写入和读取。
+MCU通过向显示控制器发送命令、参数和数据，间接控制外围设备的活动。MCU还可以读取显示模块状态信息或帧存储器的内容。命令模式需要双向接口。</p>
+</section>
+<section id="id15">
+<h3><span class="section-number">12.3.9. </span>视频模式<a class="headerlink" href="#id15" title="永久链接至标题"></a></h3>
+<p>视频模式是指以实时像素流的形式从MCU传输到外围设备的操作。显示模块依靠MCU以足够的带宽提供图像数据，以避免显示图像中的闪烁或其他可见伪影。视频信息只能使用高速模式传输。
+视频模式又可以分为三种模式：具有同步脉冲的非突发模式(Non-Burst Mode with SYNC Pulses)、具有同步事件的非突发模式(Non-Burst Mode with SYNC Events)和突发模式(Burst Mode)。
+这三种模式有着不同的数据包序列，外围设备的定时要求决定了哪种模式是合适的。</p>
+<section id="non-burst-mode-with-sync-pulses">
+<h4><span class="section-number">12.3.9.1. </span>具有同步脉冲的非突发模式(Non-Burst Mode with SYNC Pulses)<a class="headerlink" href="#non-burst-mode-with-sync-pulses" title="永久链接至标题"></a></h4>
+<p>该模式使外围设备能够准确重建原始视频定时，包括同步脉冲宽度。使用这种模式，目标是通过DSI串行链路准确地传送DPI类型的定时，这包括匹配的DPI像素传输速率和同步脉冲等定时事件的宽度。
+因此，使用发送同步脉冲的开始和结束的数据包来定义同步周期。
+此模式的示例如下图所示，其中HSA、HBP和HFP的周期由LP模式中的定时间隔来填充，DSI会在HSA、HBP和HFP开始时从HS切换到LP模式，期间保持LP-11状态，在结束时切换回HS模式：</p>
+<figure class="align-center" id="id52">
+<img alt="../_images/DSIVideoPulse.svg" src="../_images/DSIVideoPulse.svg" /><figcaption>
+<p><span class="caption-number">图 12.34 </span><span class="caption-text">具有同步脉冲的非突发模式时序图</span><a class="headerlink" href="#id52" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="non-burst-mode-with-sync-events">
+<h4><span class="section-number">12.3.9.2. </span>具有同步事件的非突发模式(Non-Burst Mode with SYNC Events)<a class="headerlink" href="#non-burst-mode-with-sync-events" title="永久链接至标题"></a></h4>
+<p>该模式与具有同步脉冲的非突发模式类似，但不需要精确重建同步脉冲宽度，因此将同步脉冲替换为单个同步事件，是对上述具有同步事件的非突发模式的简化。
+这种模式仅传输每个同步脉冲的开始，外围设备可根据需要从接收到的每个同步事件包中重新生成同步脉冲。像素的传输速率与在相应的并行显示接口(如DPI-2)中的传输速率相同。
+此模式的示例如下图所示，其中HSA、HBP和HFP的周期由LP模式中的定时间隔来填充，DSI会在HSA、HBP和HFP开始时从HS切换到LP模式，期间保持LP-11状态，在结束时切换回HS模式：</p>
+<figure class="align-center" id="id53">
+<img alt="../_images/DSIVideoEvent.svg" src="../_images/DSIVideoEvent.svg" /><figcaption>
+<p><span class="caption-number">图 12.35 </span><span class="caption-text">具有同步事件的非突发模式时序图</span><a class="headerlink" href="#id53" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="burst-mode">
+<h4><span class="section-number">12.3.9.3. </span>突发模式(Burst Mode)<a class="headerlink" href="#burst-mode" title="永久链接至标题"></a></h4>
+<p>该模式下的像素数据包经过了时间压缩，从而可以在较短时间内完成传输。这种方式降低了总体DSI功耗，并为链路上任何方向的其他数据传输提供更大的时间块。在HS像素数据传输完成之后，总线会进入LP模式。
+在此期间，总线可以保持空闲即LP-11状态，或者LP传输可以在任一方向上进行。如果外围设备控制向MCU发送数据的总线，其传输时间应受到限制，以确保数据不会从其内部缓冲存储器流向显示设备。
+此模式的示例如下图所示，其中HSA、HBP和HFP的周期由LP模式中的定时间隔来填充，DSI会在HSA、HBP和HFP开始时从HS切换到LP模式，期间保持LP-11状态，在结束时切换回HS模式：</p>
+<figure class="align-center" id="id54">
+<img alt="../_images/DSIVideoBurst.svg" src="../_images/DSIVideoBurst.svg" /><figcaption>
+<p><span class="caption-number">图 12.36 </span><span class="caption-text">突发模式时序图</span><a class="headerlink" href="#id54" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="line-buffer">
+<h3><span class="section-number">12.3.10. </span>Line Buffer<a class="headerlink" href="#line-buffer" title="永久链接至标题"></a></h3>
+<p>因为前端模块向DSI模块输入数据的速度和DSI输出数据的速度不匹配，所以需要对数据进行缓冲。DSI内部有一个最多可以容纳1280*3个字节的Line Buffer，用于视频模式下对输入DSI模块的数据进行缓存。
+用户需要通过&lt;CR_HSTX_OUT_TH&gt;设置一个阈值，对于视频模式下的每行(H-Sync)图像数据，DSI模块在收到其前端模块输入的数据之后不会将数据立即发送出去，而是先缓存在Line Buffer中。
+当Line Buffer中缓存的像素点达到设定的阈值时，DSI开始向显示模块发送数据。这样当DSI模块的输入速度大于输出速度时，输入部分来不及发送的数据会先放在Line Buffer中；
+而当DSI模块的输入速度小于输出速度时，Line Buffer会先缓存一部分数据，达到阈值后再开始发送，以保证DSI发送整行像素的时间与剩余像素输入的时间相匹配。阈值的具体计算公式如下：</p>
+<blockquote>
+<div><p>Threshold = ceil(Width * (1 - Fdp * BPP / Fhs / LN))</p>
+</div></blockquote>
+<p>其中：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>ceil()为向上取整；</p></li>
+<li><p>Width为图像一行的像素点数；</p></li>
+<li><p>Fdp为DSI上一级模块(即DSI的数据输入模块dp_dvp_tsrc)的工作时钟；</p></li>
+<li><p>BPP(Byte Per Pixel)为像素格式的字节数，RGB888/RGB666为3，RGB565/YUV422_8为2；</p></li>
+<li><p>LN(Lane Number)为Data Lane的数量；</p></li>
+<li><p>Threshold为所求的阈值，阈值的最小值为6，当计算值小于6时应设置为6。</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="id16">
+<h3><span class="section-number">12.3.11. </span>显示数据格式<a class="headerlink" href="#id16" title="永久链接至标题"></a></h3>
+<p>显示数据格式支持YUV422(8-bit)、RGB565、RGB666(loosely packed)和RGB888四种，在&lt;CR_DT&gt;中进行配置。</p>
+<section id="yuv422-8-bit">
+<h4><span class="section-number">12.3.11.1. </span>YUV422(8-bit)<a class="headerlink" href="#yuv422-8-bit" title="永久链接至标题"></a></h4>
+<p>YUV422(8-bit)格式中一个像素的Y、U、V分量各为8-bit，其中两个像素共用一组UV。YUV422(8-bit)格式的长数据包由一字节DI、两字节非零WC、一字节ECC、长度为WC字节的有效负载和两字节CRC组成。
+使用这种格式，像素边界与某些字节边界对齐，WC中的值应为任何可被4整除的非零值。YUV422(8-bit)格式长数据包结构如下图所示：</p>
+<figure class="align-center" id="id55">
+<img alt="../_images/DSIYUV422.svg" src="../_images/DSIYUV422.svg" /><figcaption>
+<p><span class="caption-number">图 12.37 </span><span class="caption-text">YUV422像素格式</span><a class="headerlink" href="#id55" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="rgb565">
+<h4><span class="section-number">12.3.11.2. </span>RGB565<a class="headerlink" href="#rgb565" title="永久链接至标题"></a></h4>
+<p>RGB565格式中一个像素的R、G、B分量分别为5-bit、6-bit、5-bit。RGB565格式的长数据包由一字节DI、两字节WC、一字节ECC、长度为WC字节的有效负载和两字节CRC组成。
+使用这种格式，像素边界每两个字节与字节边界对齐一次，WC中的值应为2的倍数。RGB565格式长数据包结构如下图所示：</p>
+<figure class="align-center" id="id56">
+<img alt="../_images/DSIRGB565.svg" src="../_images/DSIRGB565.svg" /><figcaption>
+<p><span class="caption-number">图 12.38 </span><span class="caption-text">RGB565像素格式</span><a class="headerlink" href="#id56" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="rgb666-loosely-packed">
+<h4><span class="section-number">12.3.11.3. </span>RGB666(loosely packed)<a class="headerlink" href="#rgb666-loosely-packed" title="永久链接至标题"></a></h4>
+<p>RGB666(loosely packed)格式中一个像素的R、G、B分量各为6-bit，但会移动到字节的高位，以便有效像素位占据每个字节的位[7:2]，而位[1:0]会被忽略。
+因此，每个像素在通道上传输时需要三个字节。RGB666格式的长数据包由一字节DI、两字节WC、一字节ECC、长度为WC字节的有效负载和两字节CRC组成。
+使用这种格式，像素边界每三个字节与字节边界对齐一次，WC中的值应为3的倍数。RGB666(loosely packed)格式长数据包结构如下图所示：</p>
+<figure class="align-center" id="id57">
+<img alt="../_images/DSIRGB666.svg" src="../_images/DSIRGB666.svg" /><figcaption>
+<p><span class="caption-number">图 12.39 </span><span class="caption-text">RGB666像素格式</span><a class="headerlink" href="#id57" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="rgb888">
+<h4><span class="section-number">12.3.11.4. </span>RGB888<a class="headerlink" href="#rgb888" title="永久链接至标题"></a></h4>
+<p>RGB888格式中一个像素的R、G、B分量各为8-bit。RGB888格式的长数据包由一字节DI、两字节WC、一字节ECC、长度为WC字节的有效负载和两字节CRC组成。
+使用这种格式，像素边界每三个字节与字节边界对齐一次，WC中的值应为3的倍数。RGB888格式长数据包结构如下图所示：</p>
+<figure class="align-center" id="id58">
+<img alt="../_images/DSIRGB888.svg" src="../_images/DSIRGB888.svg" /><figcaption>
+<p><span class="caption-number">图 12.40 </span><span class="caption-text">RGB888像素格式</span><a class="headerlink" href="#id58" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="id17">
+<h3><span class="section-number">12.3.12. </span>中断<a class="headerlink" href="#id17" title="永久链接至标题"></a></h3>
+<p>DSI模块拥有丰富的中断控制，包括以下几种：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>TX Escape命令结束中断</p></li>
+<li><p>RX LPDT结束中断</p></li>
+<li><p>RX ULPS命令中断</p></li>
+<li><p>RX Trigger 0命令中断</p></li>
+<li><p>RX Trigger 1命令中断</p></li>
+<li><p>RX Trigger 2命令中断</p></li>
+<li><p>RX Trigger 3命令中断</p></li>
+<li><p>TX LPDT FIFO请求中断</p></li>
+<li><p>RX LPDT FIFO请求中断</p></li>
+<li><p>Buffer Overrun错误中断</p></li>
+<li><p>Buffer Underrun错误中断</p></li>
+<li><p>像素过少错误中断</p></li>
+<li><p>像素过多错误中断</p></li>
+<li><p>FIFO溢出错误中断</p></li>
+</ul>
+</div></blockquote>
+<p>TX Escape命令结束中断会在任意Escape命令发送结束时触发；</p>
+<p>RX LPDT结束中断、RX ULPS命令中断、RX Trigger 0命令中断、RX Trigger 1命令中断、RX Trigger 2命令中断、RX Trigger 3命令中断分别会在对应的命令发出去之后，收到对方回复的ACK之后触发；</p>
+<p>当DSI_FIFO_CONFIG_1中TFICNT大于TFITH时,产生TX FIFO请求中断，当条件不满足时该中断标志会自动清除；</p>
+<p>当DSI_FIFO_CONFIG_1中RFICNT大于RFITH时,产生RX FIFO请求中断，当条件不满足时该中断标志会自动清除；</p>
+<p>Buffer Overrun错误中断会在Line Buffer Overrun，即进入Line Buffer的数据不能及时送出，Line Buffer被塞满时产生；</p>
+<p>Buffer Underrun错误中断会在Line Buffer Underrun，即Line Buffer中的数据被全部读出，新的数据不能及时填入时产生；</p>
+<p>像素过少错误中断会在H-Sync期间发送的像素数量比&lt;CR_HSTX_PC&gt;配置值小时产生；</p>
+<p>像素过多错误中断会在H-Sync期间发送的像素数量比&lt;CR_HSTX_PC&gt;配置值大时产生；</p>
+<p>FIFO溢出错误中断会在TX或者RX发生Overflow或者Underflow时产生。</p>
+</section>
+<section id="dma">
+<h3><span class="section-number">12.3.13. </span>DMA<a class="headerlink" href="#dma" title="永久链接至标题"></a></h3>
+<p>DSI LPDT模式下支持DMA传输模式，使用该模式需要通过寄存器DSI_FIFO_CONFIG_1的位&lt;TFITH&gt;和&lt;RFITH&gt;分别设置TX和RX FIFO的阈值。
+当该模式启用后，如果&lt;TFICNT&gt;大于&lt;TFITH&gt;，则会触发DMA TX请求，配置好DMA后，DMA在收到该请求时，会按照设定从内存中将数据搬运到TX FIFO。
+如果&lt;RFICNT&gt;大于&lt;RFITH&gt;，则会触发DMA RX请求，配置好DMA后，DMA在收到该请求时，会按照设定将RX FIFO的数据搬运到内存。</p>
+</section>
+<section id="osd">
+<h3><span class="section-number">12.3.14. </span>与OSD配合使用<a class="headerlink" href="#osd" title="永久链接至标题"></a></h3>
+<p>DSI的数据输入可以配置为先经过OSD处理，OSD的功能介绍请参阅OSD模块。</p>
+</section>
+</section>
+<section id="id18">
+<h2><span class="section-number">12.4. </span>寄存器描述<a class="headerlink" href="#id18" title="永久链接至标题"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 79%" />
+<col style="width: 21%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>名称</p></td>
+<td><p>描述</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dsi-config">dsi_config</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dsi-esc-config">dsi_esc_config</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dsi-lpdt-tx-config">dsi_lpdt_tx_config</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dsi-hstx-config">dsi_hstx_config</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dsi-int-status">dsi_int_status</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dsi-int-mask">dsi_int_mask</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dsi-int-clear">dsi_int_clear</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dsi-int-enable">dsi_int_enable</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dsi-fifo-config-0">dsi_fifo_config_0</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dsi-fifo-config-1">dsi_fifo_config_1</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dsi-fifo-wdata">dsi_fifo_wdata</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dsi-fifo-rdata">dsi_fifo_rdata</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dphy-config-0">dphy_config_0</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dphy-config-1">dphy_config_1</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dphy-config-2">dphy_config_2</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dphy-config-3">dphy_config_3</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dphy-config-4">dphy_config_4</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dphy-config-5">dphy_config_5</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dphy-config-6">dphy_config_6</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dphy-config-7">dphy_config_7</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dphy-config-8">dphy_config_8</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dphy-config-9">dphy_config_9</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dphy-config-10">dphy_config_10</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dphy-config-11">dphy_config_11</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dphy-config-12">dphy_config_12</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dphy-config-13">dphy_config_13</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dphy-config-14">dphy_config_14</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dphy-config-15">dphy_config_15</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dphy-config-16">dphy_config_16</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dummy-reg">dummy_reg</a></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<section id="dsi-config">
+<h3><span class="section-number">12.4.1. </span>dsi_config<a class="headerlink" href="#dsi-config" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x3001a100</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dsi_config.svg" src="../_images/dsi_dsi_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:24</p></td>
+<td><p>cr_hstx_vsa</p></td>
+<td><p>r/w</p></td>
+<td><p>8'd2</p></td>
+<td><p>HSTX Vertical Sync Active width</p></td>
+</tr>
+<tr class="row-odd"><td><p>23:16</p></td>
+<td><p>cr_hstx_vfp</p></td>
+<td><p>r/w</p></td>
+<td><p>8'd2</p></td>
+<td><p>HSTX Vertical Front Porch width</p></td>
+</tr>
+<tr class="row-even"><td><p>15:14</p></td>
+<td><p>cr_vc</p></td>
+<td><p>r/w</p></td>
+<td><p>2'd0</p></td>
+<td><p>Virtual Channel number</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="6"><p>13:8</p></td>
+<td rowspan="6"><p>cr_dt</p></td>
+<td rowspan="6"><p>r/w</p></td>
+<td rowspan="6"><p>6'h3E</p></td>
+<td rowspan="6"><p>Data Type</p>
+<p>6'h2C: YUV422, 8-bit</p>
+<p>6'h0E: RGB565</p>
+<p>6'h2E: RGB666, loosely packed</p>
+<p>6'h3E: RGB888</p>
+<p>Others: Reserved</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="5"><p>7:6</p></td>
+<td rowspan="5"><p>cr_lane_mux_sel</p></td>
+<td rowspan="5"><p>r/w</p></td>
+<td rowspan="5"><p>2'd0</p></td>
+<td rowspan="5"><p>Controls lane order</p>
+<p>2'd0: {lane3, lane2, lane1, lane0} (no lane is switched)</p>
+<p>2'd1: {lane2, lane1, lane3, lane0}</p>
+<p>2'd2: {lane1, lane3, lane2, lane0}</p>
+<p>2'd3: {lane3, lane1, lane2, lane0}</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><p>4</p></td>
+<td rowspan="3"><p>cr_hstx_mode</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b1</p></td>
+<td rowspan="3"><p>HSTX mode select</p>
+<p>1'b0: Sync Event mode</p>
+<p>1'b1: Sync Pulse mode</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="5"><p>2:1</p></td>
+<td rowspan="5"><p>cr_lane_num</p></td>
+<td rowspan="5"><p>r/w</p></td>
+<td rowspan="5"><p>2'd0</p></td>
+<td rowspan="5"><p>Lane number configuration</p>
+<p>2'd0: 1-lane MIPI TX</p>
+<p>2'd1: 2-lane MIPI TX</p>
+<p>2'd2: 4-lane MIPI TX</p>
+<p>2'd3: Reserved</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>cr_hstx_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>HSTX function enable signal</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dsi-esc-config">
+<h3><span class="section-number">12.4.2. </span>dsi_esc_config<a class="headerlink" href="#dsi-esc-config" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x3001a104</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dsi_esc_config.svg" src="../_images/dsi_dsi_esc_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:24</p></td>
+<td><p>st_esc_rx_len</p></td>
+<td><p>r</p></td>
+<td><p>8'd0</p></td>
+<td><p>Escape RX length received (Include packet header/data/footer) (unit: byte)</p></td>
+</tr>
+<tr class="row-odd"><td><p>23:17</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>16</p></td>
+<td><p>cr_esc_rx_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Escape RX enable signal</p></td>
+</tr>
+<tr class="row-odd"><td><p>15:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>7:4</p></td>
+<td><p>cr_esc_tx_trig</p></td>
+<td><p>r/w</p></td>
+<td><p>4'h0</p></td>
+<td><p>Escape TX trigger command</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>cr_esc_tx_ulps_exit</p></td>
+<td><p>w1p</p></td>
+<td><p>1'b0</p></td>
+<td><p>Escape TX ULPS exit signal trigger</p></td>
+</tr>
+<tr class="row-even"><td rowspan="5"><p>2:1</p></td>
+<td rowspan="5"><p>cr_esc_tx_mode</p></td>
+<td rowspan="5"><p>r/w</p></td>
+<td rowspan="5"><p>2'd0</p></td>
+<td rowspan="5"><p>Escape TX mode select</p>
+<p>2'd0: LPDT</p>
+<p>2'd1: Trigger command</p>
+<p>2'd2: ULPS Enable</p>
+<p>2'd3: ULPS Disable</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>cr_esc_tx_en</p></td>
+<td><p>w1p</p></td>
+<td><p>1'b0</p></td>
+<td><p>Escape TX enable signal</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dsi-lpdt-tx-config">
+<h3><span class="section-number">12.4.3. </span>dsi_lpdt_tx_config<a class="headerlink" href="#dsi-lpdt-tx-config" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x3001a108</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dsi_lpdt_tx_config.svg" src="../_images/dsi_dsi_lpdt_tx_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:24</p></td>
+<td><p>cr_lpdt_word1</p></td>
+<td><p>r/w</p></td>
+<td><p>8'h0</p></td>
+<td><p>LPDT TX word 1</p></td>
+</tr>
+<tr class="row-odd"><td><p>23:16</p></td>
+<td><p>cr_lpdt_word0</p></td>
+<td><p>r/w</p></td>
+<td><p>8'h0</p></td>
+<td><p>LPDT TX word 0</p></td>
+</tr>
+<tr class="row-even"><td><p>15:10</p></td>
+<td><p>cr_lpdt_di</p></td>
+<td><p>r/w</p></td>
+<td><p>6'h0</p></td>
+<td><p>LPDT TX data identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>9:8</p></td>
+<td><p>cr_lpdt_vc</p></td>
+<td><p>r/w</p></td>
+<td><p>2'h0</p></td>
+<td><p>LPDT TX virtual channel</p></td>
+</tr>
+<tr class="row-even"><td><p>7:0</p></td>
+<td><p>cr_lpdt_pdlen</p></td>
+<td><p>r/w</p></td>
+<td><p>8'd0</p></td>
+<td><p>LPDT TX packet data length (exclude packet header &amp; footer) (unit: byte)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dsi-hstx-config">
+<h3><span class="section-number">12.4.4. </span>dsi_hstx_config<a class="headerlink" href="#dsi-hstx-config" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x3001a10c</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dsi_hstx_config.svg" src="../_images/dsi_dsi_hstx_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:27</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="9"><p>26:16</p></td>
+<td rowspan="9"><p>cr_hstx_out_th</p></td>
+<td rowspan="9"><p>r/w</p></td>
+<td rowspan="9"><p>11'd840</p></td>
+<td rowspan="9"><p>Line buffer threshold for controller to start transmitting each line (unit: pixel)</p>
+<p>Formula: th = ceil( W * (1 - Fdp*BPP/Fhs/Ln) )</p>
+<p>th: cr_hstx_out_th</p>
+<p>W: Frame width</p>
+<p>Fdp: Display (dp_dvp_tsrc) clock rate</p>
+<p>Fhs: DSI byte clock rate (dsi_bit_clk/8 or mipipll_clk/8)</p>
+<p>BPP: Byte-per-pixel (equals 3 for RGB888 &amp; RGB666; equals 2 for RGB565 &amp; YUV422_8)</p>
+<p>Ln: DSI lane number (controlled by cr_lane_num)</p>
+<p>Note: The minimum value is 6 for synchronization concern (Set to 6 if the formula result is negative or less than 6)</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>15:11</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><p>10:0</p></td>
+<td rowspan="2"><p>cr_hstx_pc</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>11'd1280</p></td>
+<td rowspan="2"><p>Pixel count of each line (frame width) (unit:pixel)</p>
+<p>Note: Pixel count should not exceed 1280 (720p) and should be a multiple of 4</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+</tbody>
+</table>
+</section>
+<section id="dsi-int-status">
+<h3><span class="section-number">12.4.5. </span>dsi_int_status<a class="headerlink" href="#dsi-int-status" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x3001a110</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dsi_int_status.svg" src="../_images/dsi_dsi_int_status.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:14</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="12"><p>13:0</p></td>
+<td rowspan="12"><p>dsi_int_status</p></td>
+<td rowspan="12"><p>r</p></td>
+<td rowspan="12"><p>14'h0</p></td>
+<td rowspan="12"><p>[13]: FIFO Error (check 0x60[7:4] for detail)</p>
+<p>[12]: Pixel Count Too Large Error</p>
+<p>[11]: Pixel Count Too Small Error</p>
+<p>[10]: Buffer Underrun Error</p>
+<p>[9]: Buffer Overrun Error</p>
+<p>[8]: RX LPDT FIFO ready</p>
+<p>[7]: TX LPDT FIFO ready</p>
+<p>[6:3]: RX Trigger Command</p>
+<p>[2]: RX ULPS Command</p>
+<p>[1]: RX LPDT End</p>
+<p>[0]: TX Escape Command End</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+</tbody>
+</table>
+</section>
+<section id="dsi-int-mask">
+<h3><span class="section-number">12.4.6. </span>dsi_int_mask<a class="headerlink" href="#dsi-int-mask" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x3001a114</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dsi_int_mask.svg" src="../_images/dsi_dsi_int_mask.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:14</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="12"><p>13:0</p></td>
+<td rowspan="12"><p>dsi_int_mask</p></td>
+<td rowspan="12"><p>r/w</p></td>
+<td rowspan="12"><p>14'h3FFF</p></td>
+<td rowspan="12"><p>[13]: FIFO Error (check 0x60[7:4] for detail)</p>
+<p>[12]: Pixel Count Too Large Error</p>
+<p>[11]: Pixel Count Too Small Error</p>
+<p>[10]: Buffer Underrun Error</p>
+<p>[9]: Buffer Overrun Error</p>
+<p>[8]: RX LPDT FIFO ready</p>
+<p>[7]: TX LPDT FIFO ready</p>
+<p>[6:3]: RX Trigger Command</p>
+<p>[2]: RX ULPS Command</p>
+<p>[1]: RX LPDT End</p>
+<p>[0]: TX Escape Command End</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+</tbody>
+</table>
+</section>
+<section id="dsi-int-clear">
+<h3><span class="section-number">12.4.7. </span>dsi_int_clear<a class="headerlink" href="#dsi-int-clear" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x3001a118</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dsi_int_clear.svg" src="../_images/dsi_dsi_int_clear.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:14</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="12"><p>13:0</p></td>
+<td rowspan="12"><p>dsi_int_clear</p></td>
+<td rowspan="12"><p>w1p</p></td>
+<td rowspan="12"><p>14'h0</p></td>
+<td rowspan="12"><p>[13]: FIFO Error (check 0x60[7:4] for detail)</p>
+<p>[12]: Pixel Count Too Large Error</p>
+<p>[11]: Pixel Count Too Small Error</p>
+<p>[10]: Buffer Underrun Error</p>
+<p>[9]: Buffer Overrun Error</p>
+<p>[8]: RX LPDT FIFO ready</p>
+<p>[7]: TX LPDT FIFO ready</p>
+<p>[6:3]: RX Trigger Command</p>
+<p>[2]: RX ULPS Command</p>
+<p>[1]: RX LPDT End</p>
+<p>[0]: TX Escape Command End</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+</tbody>
+</table>
+</section>
+<section id="dsi-int-enable">
+<h3><span class="section-number">12.4.8. </span>dsi_int_enable<a class="headerlink" href="#dsi-int-enable" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x3001a11c</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dsi_int_enable.svg" src="../_images/dsi_dsi_int_enable.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:14</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="12"><p>13:0</p></td>
+<td rowspan="12"><p>dsi_int_enable</p></td>
+<td rowspan="12"><p>r/w</p></td>
+<td rowspan="12"><p>14'h3FFF</p></td>
+<td rowspan="12"><p>[13]: FIFO Error (check 0x60[7:4] for detail)</p>
+<p>[12]: Pixel Count Too Large Error</p>
+<p>[11]: Pixel Count Too Small Error</p>
+<p>[10]: Buffer Underrun Error</p>
+<p>[9]: Buffer Overrun Error</p>
+<p>[8]: RX LPDT FIFO ready</p>
+<p>[7]: TX LPDT FIFO ready</p>
+<p>[6:3]: RX Trigger Command</p>
+<p>[2]: RX ULPS Command</p>
+<p>[1]: RX LPDT End</p>
+<p>[0]: TX Escape Command End</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+</tbody>
+</table>
+</section>
+<section id="dsi-fifo-config-0">
+<h3><span class="section-number">12.4.9. </span>dsi_fifo_config_0<a class="headerlink" href="#dsi-fifo-config-0" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x3001a160</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dsi_fifo_config_0.svg" src="../_images/dsi_dsi_fifo_config_0.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>rx_fifo_underflow</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Underflow flag of RX FIFO, can be cleared by rx_fifo_clr</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>rx_fifo_overflow</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Overflow flag of RX FIFO, can be cleared by rx_fifo_clr</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>tx_fifo_underflow</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Underflow flag of TX FIFO, can be cleared by tx_fifo_clr</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>tx_fifo_overflow</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Overflow flag of TX FIFO, can be cleared by tx_fifo_clr</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>rx_fifo_clr</p></td>
+<td><p>w1p</p></td>
+<td><p>1'b0</p></td>
+<td><p>Clear signal of RX FIFO</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>tx_fifo_clr</p></td>
+<td><p>w1p</p></td>
+<td><p>1'b0</p></td>
+<td><p>Clear signal of TX FIFO</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>dsi_dma_rx_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Enable signal of dma_rx_req/ack interface</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>dsi_dma_tx_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Enable signal of dma_tx_req/ack interface</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dsi-fifo-config-1">
+<h3><span class="section-number">12.4.10. </span>dsi_fifo_config_1<a class="headerlink" href="#dsi-fifo-config-1" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x3001a164</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dsi_fifo_config_1.svg" src="../_images/dsi_dsi_fifo_config_1.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:26</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>25:24</p></td>
+<td><p>rx_fifo_th</p></td>
+<td><p>r/w</p></td>
+<td><p>2'd0</p></td>
+<td><p>RX FIFO threshold, dma_rx_req will not be asserted if tx_fifo_cnt is less than this value</p></td>
+</tr>
+<tr class="row-even"><td><p>23:18</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>17:16</p></td>
+<td><p>tx_fifo_th</p></td>
+<td><p>r/w</p></td>
+<td><p>2'd0</p></td>
+<td><p>TX FIFO threshold, dma_tx_req will not be asserted if tx_fifo_cnt is less than this value</p></td>
+</tr>
+<tr class="row-even"><td><p>15:11</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>10:8</p></td>
+<td><p>rx_fifo_cnt</p></td>
+<td><p>r</p></td>
+<td><p>3'd0</p></td>
+<td><p>RX FIFO available count</p></td>
+</tr>
+<tr class="row-even"><td><p>7:3</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>2:0</p></td>
+<td><p>tx_fifo_cnt</p></td>
+<td><p>r</p></td>
+<td><p>3'd4</p></td>
+<td><p>TX FIFO available count</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dsi-fifo-wdata">
+<h3><span class="section-number">12.4.11. </span>dsi_fifo_wdata<a class="headerlink" href="#dsi-fifo-wdata" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x3001a168</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dsi_fifo_wdata.svg" src="../_images/dsi_dsi_fifo_wdata.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>dsi_fifo_wdata</p></td>
+<td><p>w</p></td>
+<td><p>x</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dsi-fifo-rdata">
+<h3><span class="section-number">12.4.12. </span>dsi_fifo_rdata<a class="headerlink" href="#dsi-fifo-rdata" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x3001a16c</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dsi_fifo_rdata.svg" src="../_images/dsi_dsi_fifo_rdata.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>dsi_fifo_rdata</p></td>
+<td><p>r</p></td>
+<td><p>32'h0</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-0">
+<h3><span class="section-number">12.4.13. </span>dphy_config_0<a class="headerlink" href="#dphy-config-0" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x3001a180</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_0.svg" src="../_images/dsi_dphy_config_0.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31</p></td>
+<td><p>dsi_reset_n</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>MIPI DSI D-PHY reset pin</p></td>
+</tr>
+<tr class="row-odd"><td><p>30</p></td>
+<td><p>dl0_turnesc</p></td>
+<td><p>w1p</p></td>
+<td><p>1'b0</p></td>
+<td><p>Data lane0 Bus Turnaround</p></td>
+</tr>
+<tr class="row-even"><td><p>29:28</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>27</p></td>
+<td><p>dl3_forcetxstopmode</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Force Lane3 to Generate Stop State</p></td>
+</tr>
+<tr class="row-even"><td><p>26</p></td>
+<td><p>dl2_forcetxstopmode</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Force Lane2 to Generate Stop State</p></td>
+</tr>
+<tr class="row-odd"><td><p>25</p></td>
+<td><p>dl1_forcetxstopmode</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Force Lane1 to Generate Stop State</p></td>
+</tr>
+<tr class="row-even"><td><p>24</p></td>
+<td><p>dl0_forcetxstopmode</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Force Lane0 to Generate Stop State</p></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>dl3_forcerxmode</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Enables the reverse escape LP receiver. Lane3 immediately transitions to receive mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>22</p></td>
+<td><p>dl2_forcerxmode</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Enables the reverse escape LP receiver. Lane2 immediately transitions to receive mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>21</p></td>
+<td><p>dl1_forcerxmode</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Enables the reverse escape LP receiver. Lane1 immediately transitions to receive mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>20</p></td>
+<td><p>dl0_forcerxmode</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Enables the reverse escape LP receiver. Lane0 immediately transitions to receive mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>19</p></td>
+<td><p>dl3_ulpsactivenot</p></td>
+<td><p>r</p></td>
+<td><p>1'b1</p></td>
+<td><p>Data lane3 is NOT in the ULP state</p></td>
+</tr>
+<tr class="row-even"><td><p>18</p></td>
+<td><p>dl2_ulpsactivenot</p></td>
+<td><p>r</p></td>
+<td><p>1'b1</p></td>
+<td><p>Data lane2 is NOT in the ULP state</p></td>
+</tr>
+<tr class="row-odd"><td><p>17</p></td>
+<td><p>dl1_ulpsactivenot</p></td>
+<td><p>r</p></td>
+<td><p>1'b1</p></td>
+<td><p>Data lane1 is NOT in the ULP state</p></td>
+</tr>
+<tr class="row-even"><td><p>16</p></td>
+<td><p>dl0_ulpsactivenot</p></td>
+<td><p>r</p></td>
+<td><p>1'b1</p></td>
+<td><p>Data lane0 is NOT in the ULP state</p></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>dl3_stopstate</p></td>
+<td><p>r</p></td>
+<td><p>1'b1</p></td>
+<td><p>Data lane3 is in Stop state</p></td>
+</tr>
+<tr class="row-even"><td><p>14</p></td>
+<td><p>dl2_stopstate</p></td>
+<td><p>r</p></td>
+<td><p>1'b1</p></td>
+<td><p>Data lane2 is in Stop state</p></td>
+</tr>
+<tr class="row-odd"><td><p>13</p></td>
+<td><p>dl1_stopstate</p></td>
+<td><p>r</p></td>
+<td><p>1'b1</p></td>
+<td><p>Data lane1 is in Stop state</p></td>
+</tr>
+<tr class="row-even"><td><p>12</p></td>
+<td><p>dl0_stopstate</p></td>
+<td><p>r</p></td>
+<td><p>1'b1</p></td>
+<td><p>Data lane0 is in Stop state</p></td>
+</tr>
+<tr class="row-odd"><td><p>11</p></td>
+<td><p>dl3_enable</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Data lane3 enable</p></td>
+</tr>
+<tr class="row-even"><td><p>10</p></td>
+<td><p>dl2_enable</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Data lane2 enable</p></td>
+</tr>
+<tr class="row-odd"><td><p>9</p></td>
+<td><p>dl1_enable</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Data lane1 enable</p></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>dl0_enable</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Data lane0 enable</p></td>
+</tr>
+<tr class="row-odd"><td><p>7:6</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>cl_ulpsactivenot</p></td>
+<td><p>r</p></td>
+<td><p>1'b1</p></td>
+<td><p>Clock lane is NOT in the ULP state</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>cl_stopstate</p></td>
+<td><p>r</p></td>
+<td><p>1'b1</p></td>
+<td><p>Clock lane is in Stop state</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>cl_txulpsexit</p></td>
+<td><p>w1p</p></td>
+<td><p>1'b0</p></td>
+<td><p>Clock lane Transmit ULP Exit Sequence</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>cl_txulpsclk</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Clock lane Transmit Ultra-Low Power State</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>cl_txrequesths</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Clock lane High-Speed Transmit Request</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>cl_enable</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Clock lane enable</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-1">
+<h3><span class="section-number">12.4.14. </span>dphy_config_1<a class="headerlink" href="#dphy-config-1" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x3001a184</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_1.svg" src="../_images/dsi_dphy_config_1.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:25</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>24</p></td>
+<td><p>reg_en_lprx_at_ulps</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_en_lprx_at_ulps</p></td>
+</tr>
+<tr class="row-even"><td><p>23:16</p></td>
+<td><p>reg_time_ck_exit</p></td>
+<td><p>r/w</p></td>
+<td><p>8'h5</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_time_ck_exit (tx_clk_esc) txclkesc: 40M, datarate: 800Mbps</p></td>
+</tr>
+<tr class="row-odd"><td><p>15:8</p></td>
+<td><p>reg_time_ck_trail</p></td>
+<td><p>r/w</p></td>
+<td><p>8'h3</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_time_ck_trail (tx_clk_esc)</p></td>
+</tr>
+<tr class="row-even"><td><p>7:0</p></td>
+<td><p>reg_time_ck_zero</p></td>
+<td><p>r/w</p></td>
+<td><p>8'hF</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_time_ck_zero (tx_clk_esc)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-2">
+<h3><span class="section-number">12.4.15. </span>dphy_config_2<a class="headerlink" href="#dphy-config-2" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x3001a188</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_2.svg" src="../_images/dsi_dphy_config_2.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:24</p></td>
+<td><p>reg_time_hs_exit</p></td>
+<td><p>r/w</p></td>
+<td><p>8'h5</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_time_hs_exit (tx_clk_esc)</p></td>
+</tr>
+<tr class="row-odd"><td><p>23:16</p></td>
+<td><p>reg_time_hs_prep</p></td>
+<td><p>r/w</p></td>
+<td><p>8'h2</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_time_hs_prep (tx_clk_esc)</p></td>
+</tr>
+<tr class="row-even"><td><p>15:8</p></td>
+<td><p>reg_time_hs_trail</p></td>
+<td><p>r/w</p></td>
+<td><p>8'h3</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_time_hs_trail (tx_clk_esc)</p></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>reg_time_hs_zero</p></td>
+<td><p>r/w</p></td>
+<td><p>8'h5</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_time_hs_zero (tx_clk_esc)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-3">
+<h3><span class="section-number">12.4.16. </span>dphy_config_3<a class="headerlink" href="#dphy-config-3" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x3001a18c</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_3.svg" src="../_images/dsi_dphy_config_3.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:24</p></td>
+<td><p>reg_time_lpx</p></td>
+<td><p>r/w</p></td>
+<td><p>8'h3</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_time_lpx (tx_clk_esc)</p></td>
+</tr>
+<tr class="row-odd"><td><p>23:16</p></td>
+<td><p>reg_time_reqrdy</p></td>
+<td><p>r/w</p></td>
+<td><p>8'h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_time_reqrdy</p></td>
+</tr>
+<tr class="row-even"><td><p>15:8</p></td>
+<td><p>reg_time_ta_get</p></td>
+<td><p>r/w</p></td>
+<td><p>8'hF</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_time_ta_get (tx_clk_esc)</p></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>reg_time_ta_go</p></td>
+<td><p>r/w</p></td>
+<td><p>8'hC</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_time_ta_go (tx_clk_esc)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-4">
+<h3><span class="section-number">12.4.17. </span>dphy_config_4<a class="headerlink" href="#dphy-config-4" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x3001a190</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_4.svg" src="../_images/dsi_dphy_config_4.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15:0</p></td>
+<td><p>reg_time_wakeup</p></td>
+<td><p>r/w</p></td>
+<td><p>16'h9C41</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_time_wakeup (tx_clk_esc)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-5">
+<h3><span class="section-number">12.4.18. </span>dphy_config_5<a class="headerlink" href="#dphy-config-5" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x3001a194</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_5.svg" src="../_images/dsi_dphy_config_5.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:24</p></td>
+<td><p>reg_trig0_code</p></td>
+<td><p>r/w</p></td>
+<td><p>8'b0100_0110</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_trig0_code</p></td>
+</tr>
+<tr class="row-odd"><td><p>23:16</p></td>
+<td><p>reg_trig1_code</p></td>
+<td><p>r/w</p></td>
+<td><p>8'b1011_1010</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_trig1_code</p></td>
+</tr>
+<tr class="row-even"><td><p>15:8</p></td>
+<td><p>reg_trig2_code</p></td>
+<td><p>r/w</p></td>
+<td><p>8'b1000_0100</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_trig2_code</p></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>reg_trig3_code</p></td>
+<td><p>r/w</p></td>
+<td><p>8'b0000_0101</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_trig3_code</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-6">
+<h3><span class="section-number">12.4.19. </span>dphy_config_6<a class="headerlink" href="#dphy-config-6" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x3001a198</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_6.svg" src="../_images/dsi_dphy_config_6.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15:8</p></td>
+<td><p>reg_lpdt_code</p></td>
+<td><p>r/w</p></td>
+<td><p>8'b1000_0111</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_lpdt_code</p></td>
+</tr>
+<tr class="row-even"><td><p>7:0</p></td>
+<td><p>reg_ulps_code</p></td>
+<td><p>r/w</p></td>
+<td><p>8'b0111_1000</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ulps_code</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-7">
+<h3><span class="section-number">12.4.20. </span>dphy_config_7<a class="headerlink" href="#dphy-config-7" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x3001a19c</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_7.svg" src="../_images/dsi_dphy_config_7.svg" /></figure>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 6%" />
+<col style="width: 27%" />
+<col style="width: 5%" />
+<col style="width: 7%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:20</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>19</p></td>
+<td><p>reg_ana_byte_rev</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_byte_rev</p></td>
+</tr>
+<tr class="row-even"><td><p>18</p></td>
+<td><p>reg_ana_clk_en_esc</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_clk_en_esc</p></td>
+</tr>
+<tr class="row-odd"><td><p>17</p></td>
+<td><p>reg_ana_hs_txen_clklane_esc</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_hs_txen_clklane_esc</p></td>
+</tr>
+<tr class="row-even"><td><p>16</p></td>
+<td><p>reg_ana_lp_dntxdata_clklane_esc</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_lp_dntxdata_clklane_esc</p></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>reg_ana_lp_dptxdata_clklane_esc</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_lp_dptxdata_clklane_esc</p></td>
+</tr>
+<tr class="row-even"><td><p>14</p></td>
+<td><p>reg_ana_lp_txen_clklane_esc</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_lp_txen_clklane_esc</p></td>
+</tr>
+<tr class="row-odd"><td><p>13</p></td>
+<td><p>reg_force_clk_hiz_hs</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_force_clk_hiz_hs</p></td>
+</tr>
+<tr class="row-even"><td><p>12</p></td>
+<td><p>reg_force_clk_hiz_lp</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_force_clk_hiz_lp</p></td>
+</tr>
+<tr class="row-odd"><td><p>11:8</p></td>
+<td><p>reg_force_hiz_hs</p></td>
+<td><p>r/w</p></td>
+<td><p>4'h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_force_hiz_hs</p></td>
+</tr>
+<tr class="row-even"><td><p>7:4</p></td>
+<td><p>reg_force_hiz_lp</p></td>
+<td><p>r/w</p></td>
+<td><p>4'h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_force_hiz_lp</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>reg_pt_prbs_or_jitt</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_pt_prbs_or_jitt</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>reg_pt_lp_mode</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_pt_lp_mode</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>reg_pt_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_pt_en</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>reg_ana_test_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_test_en</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-8">
+<h3><span class="section-number">12.4.21. </span>dphy_config_8<a class="headerlink" href="#dphy-config-8" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x3001a1a0</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_8.svg" src="../_images/dsi_dphy_config_8.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:28</p></td>
+<td><p>reg_ana_hs_p2s_sel_byte</p></td>
+<td><p>r/w</p></td>
+<td><p>4'h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_hs_p2s_sel_byte</p></td>
+</tr>
+<tr class="row-odd"><td><p>27:24</p></td>
+<td><p>reg_ana_hs_sync_ld_byte</p></td>
+<td><p>r/w</p></td>
+<td><p>4'h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_hs_sync_ld_byte</p></td>
+</tr>
+<tr class="row-even"><td><p>23:20</p></td>
+<td><p>reg_ana_hs_trail_byte</p></td>
+<td><p>r/w</p></td>
+<td><p>4'h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_hs_trail_byte</p></td>
+</tr>
+<tr class="row-odd"><td><p>19:16</p></td>
+<td><p>reg_ana_hstxen</p></td>
+<td><p>r/w</p></td>
+<td><p>4'h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_hstxen</p></td>
+</tr>
+<tr class="row-even"><td><p>15:12</p></td>
+<td><p>reg_ana_lprxen</p></td>
+<td><p>r/w</p></td>
+<td><p>4'h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_lprxen</p></td>
+</tr>
+<tr class="row-odd"><td><p>11:8</p></td>
+<td><p>reg_ana_lptxen</p></td>
+<td><p>r/w</p></td>
+<td><p>4'h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_lptxen</p></td>
+</tr>
+<tr class="row-even"><td><p>7:4</p></td>
+<td><p>reg_ana_lptxn_data</p></td>
+<td><p>r/w</p></td>
+<td><p>4'h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_lptxn_data</p></td>
+</tr>
+<tr class="row-odd"><td><p>3:0</p></td>
+<td><p>reg_ana_lptxp_data</p></td>
+<td><p>r/w</p></td>
+<td><p>4'h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_lptxp_data</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-9">
+<h3><span class="section-number">12.4.22. </span>dphy_config_9<a class="headerlink" href="#dphy-config-9" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x3001a1a4</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_9.svg" src="../_images/dsi_dphy_config_9.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>reg_ana_hs_data_out_byte</p></td>
+<td><p>r/w</p></td>
+<td><p>32'h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_hs_data_out_byte</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-10">
+<h3><span class="section-number">12.4.23. </span>dphy_config_10<a class="headerlink" href="#dphy-config-10" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x3001a1a8</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_10.svg" src="../_images/dsi_dphy_config_10.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:28</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>27</p></td>
+<td><p>reg_ana_vref_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_vref_en</p></td>
+</tr>
+<tr class="row-even"><td><p>26:24</p></td>
+<td><p>reg_ana_vreg400mv_trim</p></td>
+<td><p>r/w</p></td>
+<td><p>3'h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_vreg400mv_trim</p></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>reg_ana_bg_vref_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_bg_vref_en</p></td>
+</tr>
+<tr class="row-even"><td><p>22</p></td>
+<td><p>reg_dphy_bg_vref_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_dphy_bg_vref_en</p></td>
+</tr>
+<tr class="row-odd"><td><p>21:19</p></td>
+<td><p>reg_dphy_vreg400mv_trim</p></td>
+<td><p>r/w</p></td>
+<td><p>3'h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_dphy_vreg400mv_trim</p></td>
+</tr>
+<tr class="row-even"><td><p>18:14</p></td>
+<td><p>reg_imp_pd_code</p></td>
+<td><p>r/w</p></td>
+<td><p>5'h9</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_imp_pd_code</p></td>
+</tr>
+<tr class="row-odd"><td><p>13:9</p></td>
+<td><p>reg_imp_pu_code</p></td>
+<td><p>r/w</p></td>
+<td><p>5'h8</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_imp_pu_code</p></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>reg_testbus_hi8bsel_8bmode</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_testbus_hi8bsel_8bmode</p></td>
+</tr>
+<tr class="row-odd"><td><p>7:4</p></td>
+<td><p>reg_testbus_sel_hi</p></td>
+<td><p>r/w</p></td>
+<td><p>4'h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_testbus_sel_hi</p></td>
+</tr>
+<tr class="row-even"><td><p>3:0</p></td>
+<td><p>reg_testbus_sel_lo</p></td>
+<td><p>r/w</p></td>
+<td><p>4'h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_testbus_sel_lo</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-11">
+<h3><span class="section-number">12.4.24. </span>dphy_config_11<a class="headerlink" href="#dphy-config-11" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x3001a1ac</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_11.svg" src="../_images/dsi_dphy_config_11.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>reg_dsi_ana_1</p></td>
+<td><p>r/w</p></td>
+<td><p>16'h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_dsi_ana_1</p></td>
+</tr>
+<tr class="row-odd"><td><p>15:0</p></td>
+<td><p>reg_dsi_ana_0</p></td>
+<td><p>r/w</p></td>
+<td><p>16'hc14</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_dsi_ana_0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-12">
+<h3><span class="section-number">12.4.25. </span>dphy_config_12<a class="headerlink" href="#dphy-config-12" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x3001a1b0</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_12.svg" src="../_images/dsi_dphy_config_12.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15:0</p></td>
+<td><p>reg_dsi_ana_2</p></td>
+<td><p>r/w</p></td>
+<td><p>16'h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_dsi_ana_2</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-13">
+<h3><span class="section-number">12.4.26. </span>dphy_config_13<a class="headerlink" href="#dphy-config-13" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x3001a1b4</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_13.svg" src="../_images/dsi_dphy_config_13.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15:0</p></td>
+<td><p>reg_rd_dig_test_bus</p></td>
+<td><p>r</p></td>
+<td><p>16'h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_rd_dig_test_bus</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-14">
+<h3><span class="section-number">12.4.27. </span>dphy_config_14<a class="headerlink" href="#dphy-config-14" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x3001a1b8</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_14.svg" src="../_images/dsi_dphy_config_14.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>reg_pt_free_rep_pat</p></td>
+<td><p>r/w</p></td>
+<td><p>32'h87654321</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_pt_free_rep_pat</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-15">
+<h3><span class="section-number">12.4.28. </span>dphy_config_15<a class="headerlink" href="#dphy-config-15" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x3001a1bc</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_15.svg" src="../_images/dsi_dphy_config_15.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:30</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>29</p></td>
+<td><p>reg_csi_rst_n_pre</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Note: reg_csi_rst_n_pre should be released at least 2 us BEFORE releasing csi_reset_n</p></td>
+</tr>
+<tr class="row-even"><td><p>28</p></td>
+<td><p>reg_dsi_rst_n_pre</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Note: reg_dsi_rst_n_pre should be released at least 2 us BEFORE releasing dsi_reset_n</p></td>
+</tr>
+<tr class="row-odd"><td><p>27:25</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>24</p></td>
+<td><p>reg_mipi_ldo_fast</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>23:21</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>20</p></td>
+<td><p>reg_ten_dsi_ldo</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>19</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>18:16</p></td>
+<td><p>reg_dphy_ldo11_rfb_sw</p></td>
+<td><p>r/w</p></td>
+<td><p>3'd4</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15:13</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>12</p></td>
+<td><p>reg_dphy_short_ldo11</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>11:9</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>reg_dphy_pu_ldo11</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>enable LDO11 for both dsi and csi</p></td>
+</tr>
+<tr class="row-odd"><td><p>7:5</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>reg_dsi_pw_avdd1815</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>0: power switch on</p></td>
+</tr>
+<tr class="row-odd"><td><p>3:1</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>reg_dsi_dc_tp_out_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-16">
+<h3><span class="section-number">12.4.29. </span>dphy_config_16<a class="headerlink" href="#dphy-config-16" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x3001a1c0</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_16.svg" src="../_images/dsi_dphy_config_16.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:2</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>reg_dsi_lprx_clk_inv</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>reg_dsi_byte_clk_inv</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dummy-reg">
+<h3><span class="section-number">12.4.30. </span>dummy_reg<a class="headerlink" href="#dummy-reg" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x3001a1fc</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dummy_reg.svg" src="../_images/dsi_dummy_reg.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>dummy_reg</p></td>
+<td><p>r/w</p></td>
+<td><p>32'h0</p></td>
+<td><p>Dummy registers</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="DPI.html" class="btn btn-neutral float-left" title="11. DPI" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="Cam.html" class="btn btn-neutral float-right" title="13. CAM" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2021.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

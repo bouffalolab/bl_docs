@@ -1,0 +1,2149 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register description &mdash; BL808 Reference Manual  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL808 Reference Manual
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. System and Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. Reset and Clock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPIO.html">4. GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">5. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">6. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">7. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA2D.html">8. DMA2D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lz4d.html">9. LZ4D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBI.html">10. DBI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DPI.html">11. DPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DSI.html">12. DSI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cam.html">13. CAM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">14. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">15. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">16. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">17. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">18. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">19. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2s.html">20. I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PDM.html">21. PDM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AUDIO.html">22. AUDIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PSRAM.html">23. PSRAM Contorller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Emac.html">24. Emac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USB.html">25. USB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SDH.html">26. SDH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MJPEG.html">27. MJPEG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="JDEC.html">28. JDEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="VENC.html">29. VENC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NPUtoolchain.html">30. NPU toolchain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NPU.html">31. NPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IPC.html">32. IPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LowPower.html">33. LowPower</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SEC_ENG.html">34. SEC ENG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">35. Revision history</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL808 Reference Manual</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Register description</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="register-description">
+<h1>Register description<a class="headerlink" href="#register-description" title="Permalink to this headline"></a></h1>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 64%" />
+<col style="width: 36%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Name</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dsi-config">dsi_config</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dsi-esc-config">dsi_esc_config</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dsi-lpdt-tx-config">dsi_lpdt_tx_config</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dsi-hstx-config">dsi_hstx_config</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dsi-int-status">dsi_int_status</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dsi-int-mask">dsi_int_mask</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dsi-int-clear">dsi_int_clear</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dsi-int-enable">dsi_int_enable</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dsi-fifo-config-0">dsi_fifo_config_0</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dsi-fifo-config-1">dsi_fifo_config_1</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dsi-fifo-wdata">dsi_fifo_wdata</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dsi-fifo-rdata">dsi_fifo_rdata</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dphy-config-0">dphy_config_0</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dphy-config-1">dphy_config_1</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dphy-config-2">dphy_config_2</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dphy-config-3">dphy_config_3</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dphy-config-4">dphy_config_4</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dphy-config-5">dphy_config_5</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dphy-config-6">dphy_config_6</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dphy-config-7">dphy_config_7</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dphy-config-8">dphy_config_8</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dphy-config-9">dphy_config_9</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dphy-config-10">dphy_config_10</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dphy-config-11">dphy_config_11</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dphy-config-12">dphy_config_12</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dphy-config-13">dphy_config_13</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dphy-config-14">dphy_config_14</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dphy-config-15">dphy_config_15</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dphy-config-16">dphy_config_16</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dummy-reg">dummy_reg</a></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<section id="dsi-config">
+<h2>dsi_config<a class="headerlink" href="#dsi-config" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x3001a100</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dsi_config.svg" src="../_images/dsi_dsi_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:24</p></td>
+<td><p>cr_hstx_vsa</p></td>
+<td><p>r/w</p></td>
+<td><p>8’d2</p></td>
+<td><p>HSTX Vertical Sync Active width</p></td>
+</tr>
+<tr class="row-odd"><td><p>23:16</p></td>
+<td><p>cr_hstx_vfp</p></td>
+<td><p>r/w</p></td>
+<td><p>8’d2</p></td>
+<td><p>HSTX Vertical Front Porch width</p></td>
+</tr>
+<tr class="row-even"><td><p>15:14</p></td>
+<td><p>cr_vc</p></td>
+<td><p>r/w</p></td>
+<td><p>2’d0</p></td>
+<td><p>Virtual Channel number</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="6"><p>13:8</p></td>
+<td rowspan="6"><p>cr_dt</p></td>
+<td rowspan="6"><p>r/w</p></td>
+<td rowspan="6"><p>6’h3E</p></td>
+<td rowspan="6"><p>Data Type</p>
+<p>6’h2C: YUV422, 8-bit</p>
+<p>6’h0E: RGB565</p>
+<p>6’h2E: RGB666, loosely packed</p>
+<p>6’h3E: RGB888</p>
+<p>Others: Reserved</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="5"><p>7:6</p></td>
+<td rowspan="5"><p>cr_lane_mux_sel</p></td>
+<td rowspan="5"><p>r/w</p></td>
+<td rowspan="5"><p>2’d0</p></td>
+<td rowspan="5"><p>Controls lane order</p>
+<p>2’d0: {lane3, lane2, lane1, lane0} (no lane is switched)</p>
+<p>2’d1: {lane2, lane1, lane3, lane0}</p>
+<p>2’d2: {lane1, lane3, lane2, lane0}</p>
+<p>2’d3: {lane3, lane1, lane2, lane0}</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><p>4</p></td>
+<td rowspan="3"><p>cr_hstx_mode</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b1</p></td>
+<td rowspan="3"><p>HSTX mode select</p>
+<p>1’b0: Sync Event mode</p>
+<p>1’b1: Sync Pulse mode</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="5"><p>2:1</p></td>
+<td rowspan="5"><p>cr_lane_num</p></td>
+<td rowspan="5"><p>r/w</p></td>
+<td rowspan="5"><p>2’d0</p></td>
+<td rowspan="5"><p>Lane number configuration</p>
+<p>2’d0: 1-lane MIPI TX</p>
+<p>2’d1: 2-lane MIPI TX</p>
+<p>2’d2: 4-lane MIPI TX</p>
+<p>2’d3: Reserved</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>cr_hstx_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>HSTX function enable signal</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dsi-esc-config">
+<h2>dsi_esc_config<a class="headerlink" href="#dsi-esc-config" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x3001a104</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dsi_esc_config.svg" src="../_images/dsi_dsi_esc_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:24</p></td>
+<td><p>st_esc_rx_len</p></td>
+<td><p>r</p></td>
+<td><p>8’d0</p></td>
+<td><p>Escape RX length received (Include packet header/data/footer) (unit: byte)</p></td>
+</tr>
+<tr class="row-odd"><td><p>23:17</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>16</p></td>
+<td><p>cr_esc_rx_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Escape RX enable signal</p></td>
+</tr>
+<tr class="row-odd"><td><p>15:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>7:4</p></td>
+<td><p>cr_esc_tx_trig</p></td>
+<td><p>r/w</p></td>
+<td><p>4’h0</p></td>
+<td><p>Escape TX trigger command</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>cr_esc_tx_ulps_exit</p></td>
+<td><p>w1p</p></td>
+<td><p>1’b0</p></td>
+<td><p>Escape TX ULPS exit signal trigger</p></td>
+</tr>
+<tr class="row-even"><td rowspan="5"><p>2:1</p></td>
+<td rowspan="5"><p>cr_esc_tx_mode</p></td>
+<td rowspan="5"><p>r/w</p></td>
+<td rowspan="5"><p>2’d0</p></td>
+<td rowspan="5"><p>Escape TX mode select</p>
+<p>2’d0: LPDT</p>
+<p>2’d1: Trigger command</p>
+<p>2’d2: ULPS Enable</p>
+<p>2’d3: ULPS Disable</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>cr_esc_tx_en</p></td>
+<td><p>w1p</p></td>
+<td><p>1’b0</p></td>
+<td><p>Escape TX enable signal</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dsi-lpdt-tx-config">
+<h2>dsi_lpdt_tx_config<a class="headerlink" href="#dsi-lpdt-tx-config" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x3001a108</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dsi_lpdt_tx_config.svg" src="../_images/dsi_dsi_lpdt_tx_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:24</p></td>
+<td><p>cr_lpdt_word1</p></td>
+<td><p>r/w</p></td>
+<td><p>8’h0</p></td>
+<td><p>LPDT TX word 1</p></td>
+</tr>
+<tr class="row-odd"><td><p>23:16</p></td>
+<td><p>cr_lpdt_word0</p></td>
+<td><p>r/w</p></td>
+<td><p>8’h0</p></td>
+<td><p>LPDT TX word 0</p></td>
+</tr>
+<tr class="row-even"><td><p>15:10</p></td>
+<td><p>cr_lpdt_di</p></td>
+<td><p>r/w</p></td>
+<td><p>6’h0</p></td>
+<td><p>LPDT TX data identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>9:8</p></td>
+<td><p>cr_lpdt_vc</p></td>
+<td><p>r/w</p></td>
+<td><p>2’h0</p></td>
+<td><p>LPDT TX virtual channel</p></td>
+</tr>
+<tr class="row-even"><td><p>7:0</p></td>
+<td><p>cr_lpdt_pdlen</p></td>
+<td><p>r/w</p></td>
+<td><p>8’d0</p></td>
+<td><p>LPDT TX packet data length (exclude packet header &amp; footer) (unit: byte)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dsi-hstx-config">
+<h2>dsi_hstx_config<a class="headerlink" href="#dsi-hstx-config" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x3001a10c</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dsi_hstx_config.svg" src="../_images/dsi_dsi_hstx_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:27</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="9"><p>26:16</p></td>
+<td rowspan="9"><p>cr_hstx_out_th</p></td>
+<td rowspan="9"><p>r/w</p></td>
+<td rowspan="9"><p>11’d840</p></td>
+<td rowspan="9"><p>Line buffer threshold for controller to start transmitting each line (unit: pixel)</p>
+<p>Formula: th = ceil( W * (1 - Fdp*BPP/Fhs/Ln) )</p>
+<p>th: cr_hstx_out_th</p>
+<p>W: Frame width</p>
+<p>Fdp: Display (dp_dvp_tsrc) clock rate</p>
+<p>Fhs: DSI byte clock rate (dsi_bit_clk/8 or mipipll_clk/8)</p>
+<p>BPP: Byte-per-pixel (equals 3 for RGB888 &amp; RGB666; equals 2 for RGB565 &amp; YUV422_8)</p>
+<p>Ln: DSI lane number (controlled by cr_lane_num)</p>
+<p>Note: The minimum value is 6 for synchronization concern (Set to 6 if the formula result is negative or less than 6)</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>15:11</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><p>10:0</p></td>
+<td rowspan="2"><p>cr_hstx_pc</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>11’d1280</p></td>
+<td rowspan="2"><p>Pixel count of each line (frame width) (unit:pixel)</p>
+<p>Note: Pixel count should not exceed 1280 (720p) and should be a multiple of 4</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+</tbody>
+</table>
+</section>
+<section id="dsi-int-status">
+<h2>dsi_int_status<a class="headerlink" href="#dsi-int-status" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x3001a110</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dsi_int_status.svg" src="../_images/dsi_dsi_int_status.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:14</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="12"><p>13:0</p></td>
+<td rowspan="12"><p>dsi_int_status</p></td>
+<td rowspan="12"><p>r</p></td>
+<td rowspan="12"><p>14’h0</p></td>
+<td rowspan="12"><p>[13]: FIFO Error (check 0x60[7:4] for detail)</p>
+<p>[12]: Pixel Count Too Large Error</p>
+<p>[11]: Pixel Count Too Small Error</p>
+<p>[10]: Buffer Underrun Error</p>
+<p>[9]: Buffer Overrun Error</p>
+<p>[8]: RX LPDT FIFO ready</p>
+<p>[7]: TX LPDT FIFO ready</p>
+<p>[6:3]: RX Trigger Command</p>
+<p>[2]: RX ULPS Command</p>
+<p>[1]: RX LPDT End</p>
+<p>[0]: TX Escape Command End</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+</tbody>
+</table>
+</section>
+<section id="dsi-int-mask">
+<h2>dsi_int_mask<a class="headerlink" href="#dsi-int-mask" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x3001a114</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dsi_int_mask.svg" src="../_images/dsi_dsi_int_mask.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:14</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="12"><p>13:0</p></td>
+<td rowspan="12"><p>dsi_int_mask</p></td>
+<td rowspan="12"><p>r/w</p></td>
+<td rowspan="12"><p>14’h3FFF</p></td>
+<td rowspan="12"><p>[13]: FIFO Error (check 0x60[7:4] for detail)</p>
+<p>[12]: Pixel Count Too Large Error</p>
+<p>[11]: Pixel Count Too Small Error</p>
+<p>[10]: Buffer Underrun Error</p>
+<p>[9]: Buffer Overrun Error</p>
+<p>[8]: RX LPDT FIFO ready</p>
+<p>[7]: TX LPDT FIFO ready</p>
+<p>[6:3]: RX Trigger Command</p>
+<p>[2]: RX ULPS Command</p>
+<p>[1]: RX LPDT End</p>
+<p>[0]: TX Escape Command End</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+</tbody>
+</table>
+</section>
+<section id="dsi-int-clear">
+<h2>dsi_int_clear<a class="headerlink" href="#dsi-int-clear" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x3001a118</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dsi_int_clear.svg" src="../_images/dsi_dsi_int_clear.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:14</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="12"><p>13:0</p></td>
+<td rowspan="12"><p>dsi_int_clear</p></td>
+<td rowspan="12"><p>w1p</p></td>
+<td rowspan="12"><p>14’h0</p></td>
+<td rowspan="12"><p>[13]: FIFO Error (check 0x60[7:4] for detail)</p>
+<p>[12]: Pixel Count Too Large Error</p>
+<p>[11]: Pixel Count Too Small Error</p>
+<p>[10]: Buffer Underrun Error</p>
+<p>[9]: Buffer Overrun Error</p>
+<p>[8]: RX LPDT FIFO ready</p>
+<p>[7]: TX LPDT FIFO ready</p>
+<p>[6:3]: RX Trigger Command</p>
+<p>[2]: RX ULPS Command</p>
+<p>[1]: RX LPDT End</p>
+<p>[0]: TX Escape Command End</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+</tbody>
+</table>
+</section>
+<section id="dsi-int-enable">
+<h2>dsi_int_enable<a class="headerlink" href="#dsi-int-enable" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x3001a11c</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dsi_int_enable.svg" src="../_images/dsi_dsi_int_enable.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:14</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="12"><p>13:0</p></td>
+<td rowspan="12"><p>dsi_int_enable</p></td>
+<td rowspan="12"><p>r/w</p></td>
+<td rowspan="12"><p>14’h3FFF</p></td>
+<td rowspan="12"><p>[13]: FIFO Error (check 0x60[7:4] for detail)</p>
+<p>[12]: Pixel Count Too Large Error</p>
+<p>[11]: Pixel Count Too Small Error</p>
+<p>[10]: Buffer Underrun Error</p>
+<p>[9]: Buffer Overrun Error</p>
+<p>[8]: RX LPDT FIFO ready</p>
+<p>[7]: TX LPDT FIFO ready</p>
+<p>[6:3]: RX Trigger Command</p>
+<p>[2]: RX ULPS Command</p>
+<p>[1]: RX LPDT End</p>
+<p>[0]: TX Escape Command End</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+</tbody>
+</table>
+</section>
+<section id="dsi-fifo-config-0">
+<h2>dsi_fifo_config_0<a class="headerlink" href="#dsi-fifo-config-0" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x3001a160</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dsi_fifo_config_0.svg" src="../_images/dsi_dsi_fifo_config_0.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>rx_fifo_underflow</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>Underflow flag of RX FIFO, can be cleared by rx_fifo_clr</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>rx_fifo_overflow</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>Overflow flag of RX FIFO, can be cleared by rx_fifo_clr</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>tx_fifo_underflow</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>Underflow flag of TX FIFO, can be cleared by tx_fifo_clr</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>tx_fifo_overflow</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>Overflow flag of TX FIFO, can be cleared by tx_fifo_clr</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>rx_fifo_clr</p></td>
+<td><p>w1p</p></td>
+<td><p>1’b0</p></td>
+<td><p>Clear signal of RX FIFO</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>tx_fifo_clr</p></td>
+<td><p>w1p</p></td>
+<td><p>1’b0</p></td>
+<td><p>Clear signal of TX FIFO</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>dsi_dma_rx_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Enable signal of dma_rx_req/ack interface</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>dsi_dma_tx_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Enable signal of dma_tx_req/ack interface</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dsi-fifo-config-1">
+<h2>dsi_fifo_config_1<a class="headerlink" href="#dsi-fifo-config-1" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x3001a164</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dsi_fifo_config_1.svg" src="../_images/dsi_dsi_fifo_config_1.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:26</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>25:24</p></td>
+<td><p>rx_fifo_th</p></td>
+<td><p>r/w</p></td>
+<td><p>2’d0</p></td>
+<td><p>RX FIFO threshold, dma_rx_req will not be asserted if tx_fifo_cnt is less than this value</p></td>
+</tr>
+<tr class="row-even"><td><p>23:18</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>17:16</p></td>
+<td><p>tx_fifo_th</p></td>
+<td><p>r/w</p></td>
+<td><p>2’d0</p></td>
+<td><p>TX FIFO threshold, dma_tx_req will not be asserted if tx_fifo_cnt is less than this value</p></td>
+</tr>
+<tr class="row-even"><td><p>15:11</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>10:8</p></td>
+<td><p>rx_fifo_cnt</p></td>
+<td><p>r</p></td>
+<td><p>3’d0</p></td>
+<td><p>RX FIFO available count</p></td>
+</tr>
+<tr class="row-even"><td><p>7:3</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>2:0</p></td>
+<td><p>tx_fifo_cnt</p></td>
+<td><p>r</p></td>
+<td><p>3’d4</p></td>
+<td><p>TX FIFO available count</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dsi-fifo-wdata">
+<h2>dsi_fifo_wdata<a class="headerlink" href="#dsi-fifo-wdata" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x3001a168</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dsi_fifo_wdata.svg" src="../_images/dsi_dsi_fifo_wdata.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>dsi_fifo_wdata</p></td>
+<td><p>w</p></td>
+<td><p>x</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dsi-fifo-rdata">
+<h2>dsi_fifo_rdata<a class="headerlink" href="#dsi-fifo-rdata" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x3001a16c</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dsi_fifo_rdata.svg" src="../_images/dsi_dsi_fifo_rdata.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>dsi_fifo_rdata</p></td>
+<td><p>r</p></td>
+<td><p>32’h0</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-0">
+<h2>dphy_config_0<a class="headerlink" href="#dphy-config-0" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x3001a180</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_0.svg" src="../_images/dsi_dphy_config_0.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31</p></td>
+<td><p>dsi_reset_n</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>MIPI DSI D-PHY reset pin</p></td>
+</tr>
+<tr class="row-odd"><td><p>30</p></td>
+<td><p>dl0_turnesc</p></td>
+<td><p>w1p</p></td>
+<td><p>1’b0</p></td>
+<td><p>Data lane0 Bus Turnaround</p></td>
+</tr>
+<tr class="row-even"><td><p>29:28</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>27</p></td>
+<td><p>dl3_forcetxstopmode</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Force Lane3 to Generate Stop State</p></td>
+</tr>
+<tr class="row-even"><td><p>26</p></td>
+<td><p>dl2_forcetxstopmode</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Force Lane2 to Generate Stop State</p></td>
+</tr>
+<tr class="row-odd"><td><p>25</p></td>
+<td><p>dl1_forcetxstopmode</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Force Lane1 to Generate Stop State</p></td>
+</tr>
+<tr class="row-even"><td><p>24</p></td>
+<td><p>dl0_forcetxstopmode</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Force Lane0 to Generate Stop State</p></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>dl3_forcerxmode</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Enables the reverse escape LP receiver. Lane3 immediately transitions to receive mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>22</p></td>
+<td><p>dl2_forcerxmode</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Enables the reverse escape LP receiver. Lane2 immediately transitions to receive mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>21</p></td>
+<td><p>dl1_forcerxmode</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Enables the reverse escape LP receiver. Lane1 immediately transitions to receive mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>20</p></td>
+<td><p>dl0_forcerxmode</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Enables the reverse escape LP receiver. Lane0 immediately transitions to receive mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>19</p></td>
+<td><p>dl3_ulpsactivenot</p></td>
+<td><p>r</p></td>
+<td><p>1’b1</p></td>
+<td><p>Data lane3 is NOT in the ULP state</p></td>
+</tr>
+<tr class="row-even"><td><p>18</p></td>
+<td><p>dl2_ulpsactivenot</p></td>
+<td><p>r</p></td>
+<td><p>1’b1</p></td>
+<td><p>Data lane2 is NOT in the ULP state</p></td>
+</tr>
+<tr class="row-odd"><td><p>17</p></td>
+<td><p>dl1_ulpsactivenot</p></td>
+<td><p>r</p></td>
+<td><p>1’b1</p></td>
+<td><p>Data lane1 is NOT in the ULP state</p></td>
+</tr>
+<tr class="row-even"><td><p>16</p></td>
+<td><p>dl0_ulpsactivenot</p></td>
+<td><p>r</p></td>
+<td><p>1’b1</p></td>
+<td><p>Data lane0 is NOT in the ULP state</p></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>dl3_stopstate</p></td>
+<td><p>r</p></td>
+<td><p>1’b1</p></td>
+<td><p>Data lane3 is in Stop state</p></td>
+</tr>
+<tr class="row-even"><td><p>14</p></td>
+<td><p>dl2_stopstate</p></td>
+<td><p>r</p></td>
+<td><p>1’b1</p></td>
+<td><p>Data lane2 is in Stop state</p></td>
+</tr>
+<tr class="row-odd"><td><p>13</p></td>
+<td><p>dl1_stopstate</p></td>
+<td><p>r</p></td>
+<td><p>1’b1</p></td>
+<td><p>Data lane1 is in Stop state</p></td>
+</tr>
+<tr class="row-even"><td><p>12</p></td>
+<td><p>dl0_stopstate</p></td>
+<td><p>r</p></td>
+<td><p>1’b1</p></td>
+<td><p>Data lane0 is in Stop state</p></td>
+</tr>
+<tr class="row-odd"><td><p>11</p></td>
+<td><p>dl3_enable</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Data lane3 enable</p></td>
+</tr>
+<tr class="row-even"><td><p>10</p></td>
+<td><p>dl2_enable</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Data lane2 enable</p></td>
+</tr>
+<tr class="row-odd"><td><p>9</p></td>
+<td><p>dl1_enable</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Data lane1 enable</p></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>dl0_enable</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Data lane0 enable</p></td>
+</tr>
+<tr class="row-odd"><td><p>7:6</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>cl_ulpsactivenot</p></td>
+<td><p>r</p></td>
+<td><p>1’b1</p></td>
+<td><p>Clock lane is NOT in the ULP state</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>cl_stopstate</p></td>
+<td><p>r</p></td>
+<td><p>1’b1</p></td>
+<td><p>Clock lane is in Stop state</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>cl_txulpsexit</p></td>
+<td><p>w1p</p></td>
+<td><p>1’b0</p></td>
+<td><p>Clock lane Transmit ULP Exit Sequence</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>cl_txulpsclk</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Clock lane Transmit Ultra-Low Power State</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>cl_txrequesths</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Clock lane High-Speed Transmit Request</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>cl_enable</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Clock lane enable</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-1">
+<h2>dphy_config_1<a class="headerlink" href="#dphy-config-1" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x3001a184</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_1.svg" src="../_images/dsi_dphy_config_1.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:25</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>24</p></td>
+<td><p>reg_en_lprx_at_ulps</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_en_lprx_at_ulps</p></td>
+</tr>
+<tr class="row-even"><td><p>23:16</p></td>
+<td><p>reg_time_ck_exit</p></td>
+<td><p>r/w</p></td>
+<td><p>8’h5</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_time_ck_exit (tx_clk_esc) txclkesc: 40M, datarate: 800Mbps</p></td>
+</tr>
+<tr class="row-odd"><td><p>15:8</p></td>
+<td><p>reg_time_ck_trail</p></td>
+<td><p>r/w</p></td>
+<td><p>8’h3</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_time_ck_trail (tx_clk_esc)</p></td>
+</tr>
+<tr class="row-even"><td><p>7:0</p></td>
+<td><p>reg_time_ck_zero</p></td>
+<td><p>r/w</p></td>
+<td><p>8’hF</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_time_ck_zero (tx_clk_esc)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-2">
+<h2>dphy_config_2<a class="headerlink" href="#dphy-config-2" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x3001a188</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_2.svg" src="../_images/dsi_dphy_config_2.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:24</p></td>
+<td><p>reg_time_hs_exit</p></td>
+<td><p>r/w</p></td>
+<td><p>8’h5</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_time_hs_exit (tx_clk_esc)</p></td>
+</tr>
+<tr class="row-odd"><td><p>23:16</p></td>
+<td><p>reg_time_hs_prep</p></td>
+<td><p>r/w</p></td>
+<td><p>8’h2</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_time_hs_prep (tx_clk_esc)</p></td>
+</tr>
+<tr class="row-even"><td><p>15:8</p></td>
+<td><p>reg_time_hs_trail</p></td>
+<td><p>r/w</p></td>
+<td><p>8’h3</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_time_hs_trail (tx_clk_esc)</p></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>reg_time_hs_zero</p></td>
+<td><p>r/w</p></td>
+<td><p>8’h5</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_time_hs_zero (tx_clk_esc)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-3">
+<h2>dphy_config_3<a class="headerlink" href="#dphy-config-3" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x3001a18c</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_3.svg" src="../_images/dsi_dphy_config_3.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:24</p></td>
+<td><p>reg_time_lpx</p></td>
+<td><p>r/w</p></td>
+<td><p>8’h3</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_time_lpx (tx_clk_esc)</p></td>
+</tr>
+<tr class="row-odd"><td><p>23:16</p></td>
+<td><p>reg_time_reqrdy</p></td>
+<td><p>r/w</p></td>
+<td><p>8’h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_time_reqrdy</p></td>
+</tr>
+<tr class="row-even"><td><p>15:8</p></td>
+<td><p>reg_time_ta_get</p></td>
+<td><p>r/w</p></td>
+<td><p>8’hF</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_time_ta_get (tx_clk_esc)</p></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>reg_time_ta_go</p></td>
+<td><p>r/w</p></td>
+<td><p>8’hC</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_time_ta_go (tx_clk_esc)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-4">
+<h2>dphy_config_4<a class="headerlink" href="#dphy-config-4" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x3001a190</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_4.svg" src="../_images/dsi_dphy_config_4.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15:0</p></td>
+<td><p>reg_time_wakeup</p></td>
+<td><p>r/w</p></td>
+<td><p>16’h9C41</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_time_wakeup (tx_clk_esc)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-5">
+<h2>dphy_config_5<a class="headerlink" href="#dphy-config-5" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x3001a194</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_5.svg" src="../_images/dsi_dphy_config_5.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:24</p></td>
+<td><p>reg_trig0_code</p></td>
+<td><p>r/w</p></td>
+<td><p>8’b0100_0110</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_trig0_code</p></td>
+</tr>
+<tr class="row-odd"><td><p>23:16</p></td>
+<td><p>reg_trig1_code</p></td>
+<td><p>r/w</p></td>
+<td><p>8’b1011_1010</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_trig1_code</p></td>
+</tr>
+<tr class="row-even"><td><p>15:8</p></td>
+<td><p>reg_trig2_code</p></td>
+<td><p>r/w</p></td>
+<td><p>8’b1000_0100</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_trig2_code</p></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>reg_trig3_code</p></td>
+<td><p>r/w</p></td>
+<td><p>8’b0000_0101</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_trig3_code</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-6">
+<h2>dphy_config_6<a class="headerlink" href="#dphy-config-6" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x3001a198</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_6.svg" src="../_images/dsi_dphy_config_6.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15:8</p></td>
+<td><p>reg_lpdt_code</p></td>
+<td><p>r/w</p></td>
+<td><p>8’b1000_0111</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_lpdt_code</p></td>
+</tr>
+<tr class="row-even"><td><p>7:0</p></td>
+<td><p>reg_ulps_code</p></td>
+<td><p>r/w</p></td>
+<td><p>8’b0111_1000</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ulps_code</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-7">
+<h2>dphy_config_7<a class="headerlink" href="#dphy-config-7" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x3001a19c</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_7.svg" src="../_images/dsi_dphy_config_7.svg" /></figure>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 6%" />
+<col style="width: 28%" />
+<col style="width: 5%" />
+<col style="width: 6%" />
+<col style="width: 56%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:20</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>19</p></td>
+<td><p>reg_ana_byte_rev</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_byte_rev</p></td>
+</tr>
+<tr class="row-even"><td><p>18</p></td>
+<td><p>reg_ana_clk_en_esc</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_clk_en_esc</p></td>
+</tr>
+<tr class="row-odd"><td><p>17</p></td>
+<td><p>reg_ana_hs_txen_clklane_esc</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_hs_txen_clklane_esc</p></td>
+</tr>
+<tr class="row-even"><td><p>16</p></td>
+<td><p>reg_ana_lp_dntxdata_clklane_esc</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_lp_dntxdata_clklane_esc</p></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>reg_ana_lp_dptxdata_clklane_esc</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_lp_dptxdata_clklane_esc</p></td>
+</tr>
+<tr class="row-even"><td><p>14</p></td>
+<td><p>reg_ana_lp_txen_clklane_esc</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_lp_txen_clklane_esc</p></td>
+</tr>
+<tr class="row-odd"><td><p>13</p></td>
+<td><p>reg_force_clk_hiz_hs</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_force_clk_hiz_hs</p></td>
+</tr>
+<tr class="row-even"><td><p>12</p></td>
+<td><p>reg_force_clk_hiz_lp</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_force_clk_hiz_lp</p></td>
+</tr>
+<tr class="row-odd"><td><p>11:8</p></td>
+<td><p>reg_force_hiz_hs</p></td>
+<td><p>r/w</p></td>
+<td><p>4’h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_force_hiz_hs</p></td>
+</tr>
+<tr class="row-even"><td><p>7:4</p></td>
+<td><p>reg_force_hiz_lp</p></td>
+<td><p>r/w</p></td>
+<td><p>4’h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_force_hiz_lp</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>reg_pt_prbs_or_jitt</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_pt_prbs_or_jitt</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>reg_pt_lp_mode</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_pt_lp_mode</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>reg_pt_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_pt_en</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>reg_ana_test_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_test_en</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-8">
+<h2>dphy_config_8<a class="headerlink" href="#dphy-config-8" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x3001a1a0</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_8.svg" src="../_images/dsi_dphy_config_8.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:28</p></td>
+<td><p>reg_ana_hs_p2s_sel_byte</p></td>
+<td><p>r/w</p></td>
+<td><p>4’h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_hs_p2s_sel_byte</p></td>
+</tr>
+<tr class="row-odd"><td><p>27:24</p></td>
+<td><p>reg_ana_hs_sync_ld_byte</p></td>
+<td><p>r/w</p></td>
+<td><p>4’h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_hs_sync_ld_byte</p></td>
+</tr>
+<tr class="row-even"><td><p>23:20</p></td>
+<td><p>reg_ana_hs_trail_byte</p></td>
+<td><p>r/w</p></td>
+<td><p>4’h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_hs_trail_byte</p></td>
+</tr>
+<tr class="row-odd"><td><p>19:16</p></td>
+<td><p>reg_ana_hstxen</p></td>
+<td><p>r/w</p></td>
+<td><p>4’h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_hstxen</p></td>
+</tr>
+<tr class="row-even"><td><p>15:12</p></td>
+<td><p>reg_ana_lprxen</p></td>
+<td><p>r/w</p></td>
+<td><p>4’h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_lprxen</p></td>
+</tr>
+<tr class="row-odd"><td><p>11:8</p></td>
+<td><p>reg_ana_lptxen</p></td>
+<td><p>r/w</p></td>
+<td><p>4’h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_lptxen</p></td>
+</tr>
+<tr class="row-even"><td><p>7:4</p></td>
+<td><p>reg_ana_lptxn_data</p></td>
+<td><p>r/w</p></td>
+<td><p>4’h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_lptxn_data</p></td>
+</tr>
+<tr class="row-odd"><td><p>3:0</p></td>
+<td><p>reg_ana_lptxp_data</p></td>
+<td><p>r/w</p></td>
+<td><p>4’h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_lptxp_data</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-9">
+<h2>dphy_config_9<a class="headerlink" href="#dphy-config-9" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x3001a1a4</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_9.svg" src="../_images/dsi_dphy_config_9.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>reg_ana_hs_data_out_byte</p></td>
+<td><p>r/w</p></td>
+<td><p>32’h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_hs_data_out_byte</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-10">
+<h2>dphy_config_10<a class="headerlink" href="#dphy-config-10" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x3001a1a8</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_10.svg" src="../_images/dsi_dphy_config_10.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:28</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>27</p></td>
+<td><p>reg_ana_vref_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_vref_en</p></td>
+</tr>
+<tr class="row-even"><td><p>26:24</p></td>
+<td><p>reg_ana_vreg400mv_trim</p></td>
+<td><p>r/w</p></td>
+<td><p>3’h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_vreg400mv_trim</p></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>reg_ana_bg_vref_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_ana_bg_vref_en</p></td>
+</tr>
+<tr class="row-even"><td><p>22</p></td>
+<td><p>reg_dphy_bg_vref_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_dphy_bg_vref_en</p></td>
+</tr>
+<tr class="row-odd"><td><p>21:19</p></td>
+<td><p>reg_dphy_vreg400mv_trim</p></td>
+<td><p>r/w</p></td>
+<td><p>3’h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_dphy_vreg400mv_trim</p></td>
+</tr>
+<tr class="row-even"><td><p>18:14</p></td>
+<td><p>reg_imp_pd_code</p></td>
+<td><p>r/w</p></td>
+<td><p>5’h9</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_imp_pd_code</p></td>
+</tr>
+<tr class="row-odd"><td><p>13:9</p></td>
+<td><p>reg_imp_pu_code</p></td>
+<td><p>r/w</p></td>
+<td><p>5’h8</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_imp_pu_code</p></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>reg_testbus_hi8bsel_8bmode</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_testbus_hi8bsel_8bmode</p></td>
+</tr>
+<tr class="row-odd"><td><p>7:4</p></td>
+<td><p>reg_testbus_sel_hi</p></td>
+<td><p>r/w</p></td>
+<td><p>4’h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_testbus_sel_hi</p></td>
+</tr>
+<tr class="row-even"><td><p>3:0</p></td>
+<td><p>reg_testbus_sel_lo</p></td>
+<td><p>r/w</p></td>
+<td><p>4’h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_testbus_sel_lo</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-11">
+<h2>dphy_config_11<a class="headerlink" href="#dphy-config-11" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x3001a1ac</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_11.svg" src="../_images/dsi_dphy_config_11.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>reg_dsi_ana_1</p></td>
+<td><p>r/w</p></td>
+<td><p>16’h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_dsi_ana_1</p></td>
+</tr>
+<tr class="row-odd"><td><p>15:0</p></td>
+<td><p>reg_dsi_ana_0</p></td>
+<td><p>r/w</p></td>
+<td><p>16’hc14</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_dsi_ana_0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-12">
+<h2>dphy_config_12<a class="headerlink" href="#dphy-config-12" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x3001a1b0</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_12.svg" src="../_images/dsi_dphy_config_12.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15:0</p></td>
+<td><p>reg_dsi_ana_2</p></td>
+<td><p>r/w</p></td>
+<td><p>16’h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_dsi_ana_2</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-13">
+<h2>dphy_config_13<a class="headerlink" href="#dphy-config-13" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x3001a1b4</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_13.svg" src="../_images/dsi_dphy_config_13.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15:0</p></td>
+<td><p>reg_rd_dig_test_bus</p></td>
+<td><p>r</p></td>
+<td><p>16’h0</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_rd_dig_test_bus</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-14">
+<h2>dphy_config_14<a class="headerlink" href="#dphy-config-14" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x3001a1b8</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_14.svg" src="../_images/dsi_dphy_config_14.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>reg_pt_free_rep_pat</p></td>
+<td><p>r/w</p></td>
+<td><p>32’h87654321</p></td>
+<td><p>MIPI DSI D-PHY control register - reg_pt_free_rep_pat</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-15">
+<h2>dphy_config_15<a class="headerlink" href="#dphy-config-15" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x3001a1bc</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_15.svg" src="../_images/dsi_dphy_config_15.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:30</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>29</p></td>
+<td><p>reg_csi_rst_n_pre</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Note: reg_csi_rst_n_pre should be released at least 2 us BEFORE releasing csi_reset_n</p></td>
+</tr>
+<tr class="row-even"><td><p>28</p></td>
+<td><p>reg_dsi_rst_n_pre</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Note: reg_dsi_rst_n_pre should be released at least 2 us BEFORE releasing dsi_reset_n</p></td>
+</tr>
+<tr class="row-odd"><td><p>27:25</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>24</p></td>
+<td><p>reg_mipi_ldo_fast</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>23:21</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>20</p></td>
+<td><p>reg_ten_dsi_ldo</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>19</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>18:16</p></td>
+<td><p>reg_dphy_ldo11_rfb_sw</p></td>
+<td><p>r/w</p></td>
+<td><p>3’d4</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15:13</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>12</p></td>
+<td><p>reg_dphy_short_ldo11</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>11:9</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>reg_dphy_pu_ldo11</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>enable LDO11 for both dsi and csi</p></td>
+</tr>
+<tr class="row-odd"><td><p>7:5</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>reg_dsi_pw_avdd1815</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>0: power switch on</p></td>
+</tr>
+<tr class="row-odd"><td><p>3:1</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>reg_dsi_dc_tp_out_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dphy-config-16">
+<h2>dphy_config_16<a class="headerlink" href="#dphy-config-16" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x3001a1c0</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dphy_config_16.svg" src="../_images/dsi_dphy_config_16.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:2</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>reg_dsi_lprx_clk_inv</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>reg_dsi_byte_clk_inv</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dummy-reg">
+<h2>dummy_reg<a class="headerlink" href="#dummy-reg" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x3001a1fc</p>
+<figure class="align-center">
+<img alt="../_images/dsi_dummy_reg.svg" src="../_images/dsi_dummy_reg.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>dummy_reg</p></td>
+<td><p>r/w</p></td>
+<td><p>32’h0</p></td>
+<td><p>Dummy registers</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

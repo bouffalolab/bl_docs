@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5. ADC &mdash; BL808 Reference Manual  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6. DAC" href="DAC.html" />
+    <link rel="prev" title="4. GPIO" href="GPIO.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL808 Reference Manual
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. System and Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. Reset and Clock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPIO.html">4. GPIO</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">5. ADC</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">5.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#features">5.2. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#functional-description">5.3. Functional Description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#adc-pins-and-internal-signals">5.3.1. ADC Pins and Internal Signals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adc-channels">5.3.2. ADC Channels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adc-clocks">5.3.3. ADC Clocks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adc-conversion-mode">5.3.4. ADC Conversion Mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adc-result">5.3.5. ADC Result</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adc-interrupt">5.3.6. ADC Interrupt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adc-fifo">5.3.7. ADC FIFO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adc-setup-process">5.3.8. ADC Setup Process</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vbat-measurement">5.3.9. VBAT Measurement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tsen-measurement">5.3.10. TSEN Measurement</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#register-description">5.4. Register description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#gpadc-config">5.4.1. gpadc_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpadc-dma-rdata">5.4.2. gpadc_dma_rdata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpadc-pir-train">5.4.3. gpadc_pir_train</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">6. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">7. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA2D.html">8. DMA2D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lz4d.html">9. LZ4D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBI.html">10. DBI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DPI.html">11. DPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DSI.html">12. DSI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cam.html">13. CAM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">14. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">15. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">16. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">17. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">18. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">19. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2s.html">20. I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PDM.html">21. PDM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AUDIO.html">22. AUDIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PSRAM.html">23. PSRAM Contorller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Emac.html">24. Emac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USB.html">25. USB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SDH.html">26. SDH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MJPEG.html">27. MJPEG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="JDEC.html">28. JDEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="VENC.html">29. VENC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NPUtoolchain.html">30. NPU toolchain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NPU.html">31. NPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IPC.html">32. IPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LowPower.html">33. LowPower</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SEC_ENG.html">34. SEC ENG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">35. Revision history</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL808 Reference Manual</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">5. </span>ADC</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="adc">
+<h1><span class="section-number">5. </span>ADC<a class="headerlink" href="#adc" title="Permalink to this headline"></a></h1>
+<section id="overview">
+<h2><span class="section-number">5.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
+<p>The chip integrates one 12-bit SAR ADC, which supports 12 external analog input signals and several internal analog signals. ADC can work in single conversion mode and multi-channel scanning mode, and the conversion result is 12/14/16-bit LeftJustified mode. ADC has a FIFO with a depth of 32, which supports multiple interrupts and DMA. In addition to measuring ordinary analog signals, ADC can also measure power supply voltage, and detect temperature by measuring the internal/external diode voltage.</p>
+</section>
+<section id="features">
+<h2><span class="section-number">5.2. </span>Features<a class="headerlink" href="#features" title="Permalink to this headline"></a></h2>
+<ul>
+<li><p>High performance</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Optional 12-bit/14-bit/16-bit conversion result for output</p></li>
+<li><p>Single channel continuous conversion mode up to 2M samples</p></li>
+<li><p>Other conversion modes up to 500K sample rate</p></li>
+<li><p>Optional reference voltage of 2.0V/3.2V</p></li>
+<li><p>Transfer of conversion result to memory through DMA</p></li>
+<li><p>Supports single-channel single conversion, single-channel continuous conversion, multi-channel single conversion, multi-channel continuous conversion</p></li>
+<li><p>Single-ended and differential input modes</p></li>
+<li><p>Jitter compensation</p></li>
+<li><p>User-defined offset value of conversion result</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Number of analog channels</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Twelve external analog channels</p></li>
+<li><p>Two internal DAC channels</p></li>
+<li><p>One VBAT/2 channel</p></li>
+<li><p>One TSEN channel</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="functional-description">
+<h2><span class="section-number">5.3. </span>Functional Description<a class="headerlink" href="#functional-description" title="Permalink to this headline"></a></h2>
+<p>The block diagram of ADC module is shown as follows.</p>
+<figure class="align-center" id="id1">
+<img alt="../_images/ADCBasicStruct.svg" src="../_images/ADCBasicStruct.svg" /><figcaption>
+<p><span class="caption-number">Fig. 5.1 </span><span class="caption-text">Block Diagram of ADC</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The ADC module consists of front-end input channel selector, programmable amplifier, ADC sampling module, data processing module, and FIFO.</p>
+<p>The input channel selector is used to select the channel to be sampled, including internal and external analog signals.</p>
+<p>The programmable amplifier is used to further process the input signal, and it is set based on the characteristics of the input signal (DC/AC) to get a more accurate conversion value.</p>
+<p>The ADC sampling module is the most important functional module, which gets the result of conversion from analog signal to digital signal by successive comparison.</p>
+<p>The result of the conversion is 12/14/16 bit, and the data processing module further processes the conversion result, including adding channel information, etc.</p>
+<p>The final data will be pushed to the back-end FIFO.</p>
+<section id="adc-pins-and-internal-signals">
+<h3><span class="section-number">5.3.1. </span>ADC Pins and Internal Signals<a class="headerlink" href="#adc-pins-and-internal-signals" title="Permalink to this headline"></a></h3>
+<table class="colwidths-given docutils align-center" id="id2" style="width: 80%">
+<caption><span class="caption-number">Table 5.1 </span><span class="caption-text">ADC internal signal</span><a class="headerlink" href="#id2" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Internal Signal</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>VBAT/2</p></td>
+<td><p>Input</p></td>
+<td><p>Voltage signal divided from the power supply pin</p></td>
+</tr>
+<tr class="row-odd"><td><p>TSEN</p></td>
+<td><p>Input</p></td>
+<td><p>Output voltage of internal temperature sensor</p></td>
+</tr>
+<tr class="row-even"><td><p>VREF</p></td>
+<td><p>Input</p></td>
+<td><p>Reference voltage of internal analog module</p></td>
+</tr>
+<tr class="row-odd"><td><p>DACOUTA</p></td>
+<td><p>Input</p></td>
+<td><p>DAC module output</p></td>
+</tr>
+<tr class="row-even"><td><p>DACOUTB</p></td>
+<td><p>Input</p></td>
+<td><p>DAC module output</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-center" id="id3" style="width: 80%">
+<caption><span class="caption-number">Table 5.2 </span><span class="caption-text">ADC external pin</span><a class="headerlink" href="#id3" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>External Pin</p></th>
+<th class="head"><p>Signal Type</p></th>
+<th class="head"><p>Signal Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>VDDA</p></td>
+<td><p>Input</p></td>
+<td><p>Positive supply voltage of analog module</p></td>
+</tr>
+<tr class="row-odd"><td><p>VSSA</p></td>
+<td><p>Input</p></td>
+<td><p>Analog module ground</p></td>
+</tr>
+<tr class="row-even"><td><p>ADC_CHX</p></td>
+<td><p>Input</p></td>
+<td><p>Analog input pins, 12 channels</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="adc-channels">
+<h3><span class="section-number">5.3.2. </span>ADC Channels<a class="headerlink" href="#adc-channels" title="Permalink to this headline"></a></h3>
+<p>The selectable channels of ADC sampling include the input signals of external analog pins and the selectable signals inside the chip:</p>
+<ul class="simple">
+<li><p>ADC CH0</p></li>
+<li><p>ADC CH1</p></li>
+<li><p>ADC CH2</p></li>
+<li><p>ADC CH3</p></li>
+<li><p>ADC CH4</p></li>
+<li><p>ADC CH5</p></li>
+<li><p>ADC CH6</p></li>
+<li><p>ADC CH7</p></li>
+<li><p>ADC CH8</p></li>
+<li><p>ADC CH9</p></li>
+<li><p>ADC CH10</p></li>
+<li><p>ADC CH11</p></li>
+<li><p>DAC OUTA</p></li>
+<li><p>DAC OUTB</p></li>
+<li><p>VBAT/2</p></li>
+<li><p>TSEN</p></li>
+<li><p>VREF</p></li>
+<li><p>GND</p></li>
+</ul>
+<p>It is worth noting that if VBAT/2 or TSEN is selected as the input signal to be sampled, gpadc_vbat_en or gpadc_ts_en shall be set. The ADC module supports single-ended input or differential input. For the former, GND shall be selected as the negative input channel.</p>
+</section>
+<section id="adc-clocks">
+<h3><span class="section-number">5.3.3. </span>ADC Clocks<a class="headerlink" href="#adc-clocks" title="Permalink to this headline"></a></h3>
+<p>The following figure illustrates the working clock source of the ADC module.</p>
+<figure class="align-center" id="id4">
+<img alt="../_images/ADCClock.svg" src="../_images/ADCClock.svg" /><figcaption>
+<p><span class="caption-number">Fig. 5.2 </span><span class="caption-text">ADC Clocks</span><a class="headerlink" href="#id4" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The clock source of ADC can be the 96M from PLL, XTAL or internal RC32M. The GLB module controls the setting of clock source selection and provides clock frequency division. By default, the clock source of ADC is 96M and the clock frequency division is 2. The clock reaching the ADC module is 32M.</p>
+<p>Inside the ADC module, clock frequency division (div=16 by default) is provided, so the default clock is 2M. Users can adjust the clock source and division factor of ADC according to the actual sampling needs.</p>
+<p>The gpadc_32m_clk_div frequency division register is 6 bits wide (max div=64). The frequency division formula is fout=fsource/(gpadc_32m_clk_div+1). The gpadc_clk_div_ratio frequency division register of 3 bits width is located inside the ADC module. Its frequency division values are defined as follows:</p>
+<ul class="simple">
+<li><p>3’b000: div=1</p></li>
+<li><p>3’b001: div=4</p></li>
+<li><p>3’b010: div=8</p></li>
+<li><p>3’b011: div=12</p></li>
+<li><p>3’b100: div=16</p></li>
+<li><p>3’b101: div=20</p></li>
+<li><p>3’b110: div=24</p></li>
+<li><p>3’b111: div=32</p></li>
+</ul>
+</section>
+<section id="adc-conversion-mode">
+<h3><span class="section-number">5.3.4. </span>ADC Conversion Mode<a class="headerlink" href="#adc-conversion-mode" title="Permalink to this headline"></a></h3>
+<p>ADC supports single channel conversion and scanning conversion modes.</p>
+<p>In single channel conversion mode, select the positive input channel via gpadc_pos_sel and the negative input channel via gpadc_neg_sel, set the gpadc_cont_conv_en control bit to 0 to indicate single channel conversion and then set the gpadc_conv_start control bit to start the conversion.</p>
+<p>In the scanning conversion mode, the gpadc_cont_conv_en control bit is set to 1. ADC performs conversion one by one according to the number of conversion channels set by the gpadc_scan_length control bit and the channel sequence set by gpadc_reg_scn_posX (X = 1, 2) and gpadc_reg_scn_negX (X = 1, 2) register sets. The conversion result is automatically pushed into the ADC FIFO. The channels set by the gpadc_reg_scn_posX (X = 1, 2) and gpadc_reg_scn_negX (X = 1, 2) register sets can be the same, which means that the user can sample a channel multiple times for conversion.</p>
+<p>The conversion result of ADC is usually pushed into FIFO. Users need to set the FIFO data receiving threshold interrupt according to the actual number of conversion channels, and this threshold interrupt is used as the ADC Conversion Complete Interrupt.</p>
+</section>
+<section id="adc-result">
+<h3><span class="section-number">5.3.5. </span>ADC Result<a class="headerlink" href="#adc-result" title="Permalink to this headline"></a></h3>
+<p>The register gpadc_raw_data stores the original result of ADC. In the single-ended mode, the valid bit of data is 12 bits, without sign bit. In the differential mode, the most significant bit (MSB) is the sign bit, and the remaining 11 bits represent the conversion result.</p>
+<p>The register gpadc_data_out stores the ADC result, which contains the ADC result, sign bit, and channel information. The data format is as follows:</p>
+<table class="docutils align-default" id="id5">
+<caption><span class="caption-number">Table 5.3 </span><span class="caption-text">Meaning of ADC Conversion Result</span><a class="headerlink" href="#id5" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 5%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 5%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 5%" />
+<col style="width: 5%" />
+<col style="width: 2%" />
+<col style="width: 2%" />
+<col style="width: 2%" />
+<col style="width: 2%" />
+<col style="width: 2%" />
+<col style="width: 2%" />
+<col style="width: 2%" />
+<col style="width: 2%" />
+<col style="width: 2%" />
+<col style="width: 2%" />
+<col style="width: 2%" />
+<col style="width: 2%" />
+<col style="width: 2%" />
+<col style="width: 2%" />
+<col style="width: 2%" />
+<col style="width: 2%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>BitS</p></th>
+<th class="head"><p>25</p></th>
+<th class="head"><p>24</p></th>
+<th class="head"><p>23</p></th>
+<th class="head"><p>22</p></th>
+<th class="head"><p>21</p></th>
+<th class="head"><p>20</p></th>
+<th class="head"><p>19</p></th>
+<th class="head"><p>18</p></th>
+<th class="head"><p>17</p></th>
+<th class="head"><p>16</p></th>
+<th class="head"><p>15</p></th>
+<th class="head"><p>14</p></th>
+<th class="head"><p>13</p></th>
+<th class="head"><p>12</p></th>
+<th class="head"><p>11</p></th>
+<th class="head"><p>10</p></th>
+<th class="head"><p>9</p></th>
+<th class="head"><p>8</p></th>
+<th class="head"><p>7</p></th>
+<th class="head"><p>6</p></th>
+<th class="head"><p>5</p></th>
+<th class="head"><p>4</p></th>
+<th class="head"><p>3</p></th>
+<th class="head"><p>2</p></th>
+<th class="head"><p>1</p></th>
+<th class="head"><p>0</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>meaning</p></td>
+<td colspan="5"><p>Positive channel number</p></td>
+<td colspan="5"><p>Negative channel number</p></td>
+<td colspan="16"><p>Conversion result</p></td>
+</tr>
+</tbody>
+</table>
+<p>In the above table, bit21–bit25 indicates the positive channel number, and bit16–bit20 indicates the negative channel number, while bit0–bit15 indicates the converted value.</p>
+<p>The gpadc_res_sel control bit can set the bits of the conversion result to 12 bits, 14 bits, and 16 bits, of which 14 bits and 16 bits are the result of multiple sampling. The optional setting values are as follows:</p>
+<ul class="simple">
+<li><p>3’b000    12bit 2MS/s, OSR=1</p></li>
+<li><p>3’b001    14bit 125kS/s, OSR=16</p></li>
+<li><p>3’b010    14bit 31.25kS/s, OSR=64</p></li>
+<li><p>3’b011    16bit 15.625KS/s, OSR=128</p></li>
+<li><p>3’b100    16bit 7.8125KS/s, OSR=256</p></li>
+</ul>
+<p>In the left-justified ADC conversion result, when 12 bits are selected, bit15–bit4 of the conversion result is valid; when 14 bits are selected, bit15–bit2 is valid; and when 16 bits are selected, bit15–bit0 is valid. Similarly, in the differential mode, the MSB is the sign bit. Namely, when 14 bits are selected, bit15 is the sign bit and bit14 is the MSB, while bit14–bit2 is the conversion result. In the single-ended mode, there is no sign bit. Namely, when 12 bits are selected, bit15–bit4 is the conversion result and bit15 is the MSB.</p>
+<p>In practice, ADC results are generally pushed into FIFO, which is especially important in the multi-channel scanning mode. Therefore, users usually obtain conversion results from ADC FIFO. The data format of ADC FIFO is the same as that in the register gpadc_data_out.</p>
+</section>
+<section id="adc-interrupt">
+<h3><span class="section-number">5.3.6. </span>ADC Interrupt<a class="headerlink" href="#adc-interrupt" title="Permalink to this headline"></a></h3>
+<ul class="simple">
+<li><p>ADC conversion completion interrupt</p>
+<ul>
+<li><p>When the ADC conversion is complete and the result is stored in the FIFO, the interrupt switch is set via gpadc_rdy_mask to select whether to trigger the ADC conversion completion interrupt.</p></li>
+</ul>
+</li>
+<li><p>ADC positive (negative) sampling over-range interrupt</p>
+<ul>
+<li><p>When the ADC is over-ranged for positive and negative sampling, set the interrupt switch via gpadc_pos_satur_mask, gpadc_neg_satur_mask to select whether to trigger an interrupt or not, and when an interrupt is generated, query the interrupt status via the gpadc_pos_satur and gpadc_neg_satur registers. The interrupt status can be cleared by setting gpadc_pos_satur_clr and gpadc_neg_satur_clr. This function can be used to determine if the input voltage is abnormal.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="adc-fifo">
+<h3><span class="section-number">5.3.7. </span>ADC FIFO<a class="headerlink" href="#adc-fifo" title="Permalink to this headline"></a></h3>
+<p>The ADC module has a FIFO with a depth of 32 and its data width is 26 bits. When the ADC completes conversion, the result will be automatically pushed into the FIFO. ADC FIFO has the following statuses and interrupt management functions:</p>
+<ul class="simple">
+<li><p>FIFO: full</p></li>
+<li><p>FIFO: non-empty</p></li>
+<li><p>FIFO Overrun interrupt</p></li>
+<li><p>FIFO Underrun interrupt</p></li>
+</ul>
+<p>When an interrupt is generated, the interrupt flag can be cleared by the corresponding clear bit.</p>
+<p>ADC FIFO enables users to obtain data through query, interrupt, and DMA modes.</p>
+<p><strong>Query mode</strong></p>
+<p>CPU polls the gpadc_rdy bit: When the control bit is set, it indicates that there are valid data in FIFO. CPU can get the amount of FIFO data through gpadc_fifo_data_count and read out these data from FIFO.</p>
+<p><strong>Interrupt mode</strong></p>
+<p>If gpadc_rdy_mask is set to 0 in CPU, ADC will generate an interrupt when data is pushed into FIFO. In the interrupt function, the user can get the amount of FIFO data through gpadc_fifo_data_count and read out these data from FIFO, and then set gpadc_rdy_clr to clear the interrupt.</p>
+<p><strong>DMA mode</strong></p>
+<p>If the user sets the gpadc_dma_en control bit, DMA can transfer the conversion data to the memory. In the DMA mode, after the data volume threshold is set for ADC FIFO to send DMA requests through gpadc_fifo_thl, when receiving a request, DMA will automatically transfer the specified number of results from FIFO to the corresponding memory according to the user defined parameters.</p>
+</section>
+<section id="adc-setup-process">
+<h3><span class="section-number">5.3.8. </span>ADC Setup Process<a class="headerlink" href="#adc-setup-process" title="Permalink to this headline"></a></h3>
+<p><strong>Set ADC clock</strong></p>
+<p>According to the required ADC conversion speed, determine the working clock of ADC, set the ADC clock source and frequency division of the GLB module, and determine the final working clock frequency of the ADC module based on the gpadc_clk_div_ratio.</p>
+<p><strong>Set GPIO according to the channel used</strong></p>
+<p>According to the analog pin used, determine the channel number used, and initialize the corresponding GPIO to analog function. But note that when setting GPIO as analog input, set it as floating input instead of pull-up or pull-down.</p>
+<p><strong>Set the channel to convert</strong></p>
+<p>According to the used analog channel and conversion mode, set the corresponding channel register. For single channel conversion, set the conversion channel information in the registers gpadc_pos_sel and gpadc_neg_sel. In the multi-channel scanning mode, set gpadc_scan_length, gpadc_reg_scn_posX, and gpadc_reg_scn_negX according to the number of channels to be scanned and the scanning sequence.</p>
+<p><strong>Set the data read method</strong></p>
+<p>Based on the data reading mode introduced by ADC FIFO, select the mode used and set the register. If DMA is used, configure one channel of DMA, and assist ADC FIFO in transferring data.</p>
+<p><strong>Start conversion</strong></p>
+<p>Finally, set gpadc_res_sel to select the precision of data conversion result, and then set gpadc_global_en=1 and gpadc_conv_start=1 to start ADC conversion. When conversion is completed, to convert again, it is necessary to set gpadc_conv_start to 0 first and then to 1 to trigger the conversion again.</p>
+</section>
+<section id="vbat-measurement">
+<h3><span class="section-number">5.3.9. </span>VBAT Measurement<a class="headerlink" href="#vbat-measurement" title="Permalink to this headline"></a></h3>
+<p>The VBAT/2 here measures the voltage of the chip VDD33, not the external lithium battery voltage. If you need to measure the voltage of power supply sources like lithium battery, you can divide the voltage and input it into the GPIO analog channel of ADC. Measuring the voltage of VDD33 can reduce the use of GPIO.</p>
+<p>The VBAT/2 voltage measured by the ADC module is divided, and the actual voltage input to the ADC module is half of that of VDD33, namely VBAT/2=VDD33/2. As the voltage is divided, to ensure a high accuracy, it is suggested to select 2.0 V reference voltage for ADC, and enable the single-ended mode. The positive input voltage is set to VBAT/2 and the negative input voltage is set to GND. Gpadc_vbat_en is set to 1. After conversion starts, the corresponding conversion result can be multiplied by 2 to get the voltage of VDD33.</p>
+</section>
+<section id="tsen-measurement">
+<h3><span class="section-number">5.3.10. </span>TSEN Measurement<a class="headerlink" href="#tsen-measurement" title="Permalink to this headline"></a></h3>
+<p>ADC can measure the voltage of internal or external diode. As the voltage difference of diode is related to temperature, the ambient temperature can be calculated from the measured voltage of diode. So it is called temperature sensor (TSEN).</p>
+<p>The measurement principle of TSEN is the curve fitted by the voltage difference (ΔV) with the change of temperature, where ΔV is produced by measuring two different currents on a diode. No matter an external or internal diode is measured, the final output value is related to temperature and can be expressed as Δ(ADC_out)=7.753T+X. As long as we know the voltage, we know the temperature T. X indicates an offset value, which can be used as a standard value. Before actual use, X shall be determined first. The chip manufacturer will measure Δ(ADC_out) at a standard temperature, such as 25°C room temperature, before the chip leaves the factory, to obtain X. In actual use, the user can get the temperature T according to the formula T=[Δ(ADC_out)X]/7.753.</p>
+<p>When TSEN is used, it is recommended to set ADC to the 16bits mode, reduce error through multiple sampling, select 2.0 V reference voltage to improve accuracy, and set gpadc_ts_en to 1 to enable the TSEN function.</p>
+<p>If internal diode is selected, gpadc_tsext_sel=0. If external diode is selected, gpadc_tsext_sel=1.</p>
+<p>The positive input channel is selected according to actual needs, namely TSEN channel for the internal diode or the analog GPIO channel for the external diode. The negative input channel is set to GND.</p>
+<p>After finishing the above settings, set gpadc_tsvbe_low=0 to start measurement, and get the measurement result V0. Then set gpadc_tsvbe_low=1 to start measurement, and get the measurement result V1, Δ(ADC_out)=V1-V0. The temperature T is calculated based on the formula T=[Δ(ADC_out)X]/7.753.</p>
+</section>
+</section>
+<section id="register-description">
+<h2><span class="section-number">5.4. </span>Register description<a class="headerlink" href="#register-description" title="Permalink to this headline"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 61%" />
+<col style="width: 39%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Name</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#gpadc-config">gpadc_config</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#gpadc-dma-rdata">gpadc_dma_rdata</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#gpadc-pir-train">gpadc_pir_train</a></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<section id="gpadc-config">
+<h3><span class="section-number">5.4.1. </span>gpadc_config<a class="headerlink" href="#gpadc-config" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x20002000</p>
+<figure class="align-center">
+<img alt="../_images/gpip_gpadc_config.svg" src="../_images/gpip_gpadc_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:24</p></td>
+<td><p>rsvd</p></td>
+<td><p>rsvd</p></td>
+<td><p>8’d0</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="5"><p>23:22</p></td>
+<td rowspan="5"><p>gpadc_fifo_thl</p></td>
+<td rowspan="5"><p>r/w</p></td>
+<td rowspan="5"><p>2’d0</p></td>
+<td rowspan="5"><p>fifo threshold</p>
+<p>2’b00: 1 data</p>
+<p>2’b01: 4 data</p>
+<p>2’b10: 8 data</p>
+<p>2’b11: 16 data</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>21:16</p></td>
+<td><p>gpadc_fifo_data_count</p></td>
+<td><p>r</p></td>
+<td><p>6’d0</p></td>
+<td><p>fifo data number</p></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>14</p></td>
+<td><p>gpadc_fifo_underrun_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>write 1 mask</p></td>
+</tr>
+<tr class="row-odd"><td><p>13</p></td>
+<td><p>gpadc_fifo_overrun_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>write 1 mask</p></td>
+</tr>
+<tr class="row-even"><td><p>12</p></td>
+<td><p>gpadc_rdy_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>write 1 mask</p></td>
+</tr>
+<tr class="row-odd"><td><p>11</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>10</p></td>
+<td><p>gpadc_fifo_underrun_clr</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Write 1 to clear flag</p></td>
+</tr>
+<tr class="row-odd"><td><p>9</p></td>
+<td><p>gpadc_fifo_overrun_clr</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Write 1 to clear flag</p></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>gpadc_rdy_clr</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Write 1 to clear flag</p></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>gpadc_fifo_underrun</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>FIFO underrun interrupt flag</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>gpadc_fifo_overrun</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>FIFO overrun interrupt flag</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>gpadc_rdy</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>Conversion data ready interrupt flag</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>gpadc_fifo_full</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>FIFO full flag</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>gpadc_fifo_ne</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>FIFO not empty flag</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>gpadc_fifo_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1’b0</p></td>
+<td><p>FIFO clear signal</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>gpadc_dma_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>GPADC DMA enbale</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="gpadc-dma-rdata">
+<h3><span class="section-number">5.4.2. </span>gpadc_dma_rdata<a class="headerlink" href="#gpadc-dma-rdata" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x20002004</p>
+<figure class="align-center">
+<img alt="../_images/gpip_gpadc_dma_rdata.svg" src="../_images/gpip_gpadc_dma_rdata.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:26</p></td>
+<td><p>rsvd</p></td>
+<td><p>rsvd</p></td>
+<td><p>6’d0</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>25:0</p></td>
+<td><p>gpadc_dma_rdata</p></td>
+<td><p>r</p></td>
+<td><p>26’d0</p></td>
+<td><p>GPADC finial conversion result stored in the FIFO</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="gpadc-pir-train">
+<h3><span class="section-number">5.4.3. </span>gpadc_pir_train<a class="headerlink" href="#gpadc-pir-train" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x20002020</p>
+<figure class="align-center">
+<img alt="../_images/gpip_gpadc_pir_train.svg" src="../_images/gpip_gpadc_pir_train.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:18</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>17</p></td>
+<td><p>pir_stop</p></td>
+<td><p>r</p></td>
+<td><p>0</p></td>
+<td><p>PIR Training End</p></td>
+</tr>
+<tr class="row-even"><td><p>16</p></td>
+<td><p>pir_train</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>PIR Training Mode</p></td>
+</tr>
+<tr class="row-odd"><td><p>15:13</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>12:8</p></td>
+<td><p>pir_cnt_v</p></td>
+<td><p>r</p></td>
+<td><p>0</p></td>
+<td><p>GPADC Record Extension Counter Value</p></td>
+</tr>
+<tr class="row-odd"><td><p>7:5</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>4:0</p></td>
+<td><p>pir_extend</p></td>
+<td><p>r/w</p></td>
+<td><p>5’d15</p></td>
+<td><p>GPADC Record Extension after PIR interrupt</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="GPIO.html" class="btn btn-neutral float-left" title="4. GPIO" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="DAC.html" class="btn btn-neutral float-right" title="6. DAC" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

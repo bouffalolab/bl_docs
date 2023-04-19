@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>14. IR &mdash; BL808 参考手册  文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="15. SPI" href="SPI.html" />
+    <link rel="prev" title="13. CAM" href="Cam.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL808 参考手册
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. 系统和存储器概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. 复位和时钟</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPIO.html">4. GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">5. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">6. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">7. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA2D.html">8. DMA2D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lz4d.html">9. LZ4D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBI.html">10. DBI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DPI.html">11. DPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DSI.html">12. DSI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cam.html">13. CAM</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">14. IR</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">14.1. 简介</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">14.2. 主要特征</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">14.3. 功能描述</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">14.3.1. 固定协议接收</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">14.3.2. 脉冲宽度接收</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">14.3.3. 普通发送模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">14.3.4. 脉冲宽度发送</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">14.3.5. 载波调制</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">14.3.6. 自由模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma">14.3.7. DMA模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">14.3.8. IR中断</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id11">14.4. 寄存器描述</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#irtx-config">14.4.1. irtx_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#irtx-int-sts">14.4.2. irtx_int_sts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#irtx-pulse-width">14.4.3. irtx_pulse_width</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#irtx-pw-0">14.4.4. irtx_pw_0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#irtx-pw-1">14.4.5. irtx_pw_1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#irrx-config">14.4.6. irrx_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#irrx-int-sts">14.4.7. irrx_int_sts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#irrx-pw-config">14.4.8. irrx_pw_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#irrx-data-count">14.4.9. irrx_data_count</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#irrx-data-word0">14.4.10. irrx_data_word0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#irrx-data-word1">14.4.11. irrx_data_word1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#irtx-fifo-config-0">14.4.12. irtx_fifo_config_0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#irtx-fifo-config-1">14.4.13. irtx_fifo_config_1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ir-fifo-wdata">14.4.14. ir_fifo_wdata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ir-fifo-rdata">14.4.15. ir_fifo_rdata</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">15. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">16. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">17. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">18. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">19. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2s.html">20. I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PDM.html">21. PDM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AUDIO.html">22. AUDIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PSRAM.html">23. PSRAM Contorller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Emac.html">24. Emac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USB.html">25. USB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SDH.html">26. SDH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MJPEG.html">27. MJPEG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="JDEC.html">28. JDEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="VENC.html">29. VENC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NPUtoolchain.html">30. NPU toolchain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NPU.html">31. NPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IPC.html">32. IPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LowPower.html">33. LowPower</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SEC_ENG.html">34. SEC ENG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">35. 版本信息</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL808 参考手册</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">14. </span>IR</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ir">
+<h1><span class="section-number">14. </span>IR<a class="headerlink" href="#ir" title="永久链接至标题"></a></h1>
+<section id="id1">
+<h2><span class="section-number">14.1. </span>简介<a class="headerlink" href="#id1" title="永久链接至标题"></a></h2>
+<p>红外遥控（Infrared remote，简称IR）是一种无线、非接触式控制技术，具有抗干扰能力强、信息传输可靠、功耗低、成本低等优点。红外遥控的发射电路是采用红外发光二极管来发出经过调制的红外光波；接收电路由红外接收二极管、三极管或硅光电池组成，它们将红外发射器发射的红外光转换为相应的电信号，再送至后置放大器。</p>
+</section>
+<section id="id2">
+<h2><span class="section-number">14.2. </span>主要特征<a class="headerlink" href="#id2" title="永久链接至标题"></a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>支持以固定协议NEC、RC-5接收数据</p></li>
+<li><p>支持以脉冲宽度计数方式接收任意格式数据</p></li>
+<li><p>强大的红外波形编辑能力，可发出符合各种协议的波形</p></li>
+<li><p>多达15个档位的功率设定，以适应不同的功耗要求</p></li>
+<li><p>接收最多支持64-bit数据位</p></li>
+<li><p>发送在非自由模式下最多支持128-bit数据位，自由模式下可连续发送任意长度数据</p></li>
+<li><p>4*4字节的发送FIFO，64*2字节的接收FIFO</p></li>
+<li><p>自由模式下发送FIFO宽度可调，支持8/16/24/32-bit</p></li>
+<li><p>载波频率与占空比可编程</p></li>
+<li><p>最高工作频率为32MHz</p></li>
+<li><p>发送支持DMA模式</p></li>
+<li><p>发送和接收结束中断</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="id3">
+<h2><span class="section-number">14.3. </span>功能描述<a class="headerlink" href="#id3" title="永久链接至标题"></a></h2>
+<section id="id4">
+<h3><span class="section-number">14.3.1. </span>固定协议接收<a class="headerlink" href="#id4" title="永久链接至标题"></a></h3>
+<p>IR接收支持两种固定的协议，分别为NEC协议和RC-5协议。</p>
+<ul class="simple">
+<li><p>NEC协议</p></li>
+</ul>
+<p>NEC协议的逻辑1与逻辑0波形如下图所示：</p>
+<figure class="align-center" id="id12">
+<img alt="../_images/IRNecLogical.svg" src="../_images/IRNecLogical.svg" /><figcaption>
+<p><span class="caption-number">图 14.1 </span><span class="caption-text">NEC逻辑波形</span><a class="headerlink" href="#id12" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>逻辑1周期为2.25ms，脉冲时间560us；逻辑0周期为1.12ms，脉冲时间560us。
+NEC协议的具体格式如下图所示：</p>
+<figure class="align-center" id="id13">
+<img alt="../_images/IRNec.svg" src="../_images/IRNec.svg" /><figcaption>
+<p><span class="caption-number">图 14.2 </span><span class="caption-text">NEC协议波形</span><a class="headerlink" href="#id13" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>头脉冲是9ms的载波脉冲和4.5ms的低电平，之后是8-bit的地址码及其反码，然后是8-bit的命令码及其反码，尾脉冲是560us载波与560us低电平。</p>
+<ul class="simple">
+<li><p>RC-5协议</p></li>
+</ul>
+<p>RC-5协议的逻辑1与逻辑0波形如下图所示：</p>
+<figure class="align-center" id="id14">
+<img alt="../_images/IRRc5Logical.svg" src="../_images/IRRc5Logical.svg" /><figcaption>
+<p><span class="caption-number">图 14.3 </span><span class="caption-text">RC5逻辑波形</span><a class="headerlink" href="#id14" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>逻辑1周期为1.778ms，先是889us的低电平后是889us的载波；逻辑0与逻辑1波形相反。
+RC-5协议的具体格式如下图所示：</p>
+<figure class="align-center" id="id15">
+<img alt="../_images/IRRc5.svg" src="../_images/IRRc5.svg" /><figcaption>
+<p><span class="caption-number">图 14.4 </span><span class="caption-text">RC5协议波形</span><a class="headerlink" href="#id15" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>前两位为开始位，固定为逻辑1，第三位是翻转位，当一个键值发出然后再按下时该位会取反。之后5位是地址码与6位命令码。
+需要注意的是，常见的红外一体接收头为了提高接收灵敏度，接收到高电平后输出的是低电平，所以在使用IR接收功能时要将接收翻转功能打开。</p>
+</section>
+<section id="id5">
+<h3><span class="section-number">14.3.2. </span>脉冲宽度接收<a class="headerlink" href="#id5" title="永久链接至标题"></a></h3>
+<p>对于NEC、RC-5协议以外的其他任意格式的数据，IR会以其内部工作时钟去依次计数每个高或者低电平的持续时间，然后将数据存入到深度为64，宽度为2字节的接收FIFO之中。</p>
+</section>
+<section id="id6">
+<h3><span class="section-number">14.3.3. </span>普通发送模式<a class="headerlink" href="#id6" title="永久链接至标题"></a></h3>
+<p>用户可根据具体协议分别对头脉冲、尾脉冲、逻辑0和逻辑1脉冲进行相应的配置。在设置时需要计算出所使用的协议内各种不同宽度脉冲的公共脉冲宽度单位，即最大公约数，填入寄存器IRTX_PULSE_WIDTH的低12位，各脉冲将其所对应的倍数填入寄存器IRTX_PW中。
+然后将要发送的逻辑值填入深度为4，宽度为4字节的发送FIFO之中。</p>
+</section>
+<section id="id7">
+<h3><span class="section-number">14.3.4. </span>脉冲宽度发送<a class="headerlink" href="#id7" title="永久链接至标题"></a></h3>
+<p>对于不适用于普通发送模式的协议，IR提供了脉冲宽度发送的方式。先计算出所使用的协议内各种不同宽度脉冲的公共脉冲宽度单位，即最大公约数，填入寄存器IRTX_PULSE_WIDTH的低12位。然后将从第一个高电平开始到最后一个电平为止的各个电平宽度所对应的倍数(每个倍数占8-bit)每四个组合成一个32-bit数，填入TX FIFO中。</p>
+</section>
+<section id="id8">
+<h3><span class="section-number">14.3.5. </span>载波调制<a class="headerlink" href="#id8" title="永久链接至标题"></a></h3>
+<p>通过设置寄存器IRTX_PULSE_WIDTH的高16位可以产生不同频率和占空比的载波，该寄存器的&lt;TXMPH1W&gt;位设置的是载波相位1的宽度，&lt;TXMPH0W&gt;位设置的是载波相位0的宽度。</p>
+</section>
+<section id="id9">
+<h3><span class="section-number">14.3.6. </span>自由模式<a class="headerlink" href="#id9" title="永久链接至标题"></a></h3>
+<p>自由模式下不限制发送的数据总长度，当TX FIFO中有数据时就会发送，可配合DMA使用。另外，自由模式下的TX FIFO宽度可配置，支持8/16/24/32-bit。</p>
+</section>
+<section id="dma">
+<h3><span class="section-number">14.3.7. </span>DMA模式<a class="headerlink" href="#dma" title="永久链接至标题"></a></h3>
+<p>IR TX支持DMA模式，使用该模式需要使能自由模式，并通过寄存器IRTX_FIFO_CONFIG_1中&lt;TFITH&gt;设置TX FIFO的阈值。
+当该模式启用后，如果IRTX_FIFO_CONFIG_1中&lt;TFICNT&gt;大于&lt;TFITH&gt;，则会触发DMA TX请求，配置好DMA后，DMA在收到该请求时，会按照设定从内存中将数据搬运到TX FIFO。</p>
+</section>
+<section id="id10">
+<h3><span class="section-number">14.3.8. </span>IR中断<a class="headerlink" href="#id10" title="永久链接至标题"></a></h3>
+<p>IR有单独的发送和接收结束中断，当一次发送动作结束时，会产生发送中断。当接收到一段数据时，它会等待电平持续长度达到设定的结束阈值时产生接收中断。
+可以通过寄存器IRTX_INT_STS查询发送中断状态和清除中断，通过寄存器IRRX_INT_STS查询接收中断状态和清除中断。</p>
+</section>
+</section>
+<section id="id11">
+<h2><span class="section-number">14.4. </span>寄存器描述<a class="headerlink" href="#id11" title="永久链接至标题"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 79%" />
+<col style="width: 21%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>名称</p></td>
+<td><p>描述</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#irtx-config">irtx_config</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#irtx-int-sts">irtx_int_sts</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#irtx-pulse-width">irtx_pulse_width</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#irtx-pw-0">irtx_pw_0</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#irtx-pw-1">irtx_pw_1</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#irrx-config">irrx_config</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#irrx-int-sts">irrx_int_sts</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#irrx-pw-config">irrx_pw_config</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#irrx-data-count">irrx_data_count</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#irrx-data-word0">irrx_data_word0</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#irrx-data-word1">irrx_data_word1</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#irtx-fifo-config-0">irtx_fifo_config_0</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#irtx-fifo-config-1">irtx_fifo_config_1</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ir-fifo-wdata">ir_fifo_wdata</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ir-fifo-rdata">ir_fifo_rdata</a></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<section id="irtx-config">
+<h3><span class="section-number">14.4.1. </span>irtx_config<a class="headerlink" href="#irtx-config" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x2000a600</p>
+<figure class="align-center">
+<img alt="../_images/ir_irtx_config.svg" src="../_images/ir_irtx_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:23</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><p>22:16</p></td>
+<td rowspan="2"><p>cr_irtx_data_num</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>7'd31</p></td>
+<td rowspan="2"><p>Bit count of Data phase (unit: bit / PW for normal / SWM)</p>
+<p>(Don't-care if cr_irtx_frm_en is enabled)</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="5"><p>15:14</p></td>
+<td rowspan="5"><p>cr_irtx_frm_frame_size</p></td>
+<td rowspan="5"><p>r/w</p></td>
+<td rowspan="5"><p>2'd0</p></td>
+<td rowspan="5"><p>IRTX freerun mode frame size (also the valid width for each FIFO entry)</p>
+<p>2'd0: 8-bit</p>
+<p>2'd1: 16-bit</p>
+<p>2'd2: 24-bit</p>
+<p>2'd3: 32-bit</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3"><p>13</p></td>
+<td rowspan="3"><p>cr_irtx_frm_cont_en</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b0</p></td>
+<td rowspan="3"><p>Enable signal of IRTX freerun continuous mode</p>
+<p>0: Disabled, each data frame is separated by an idle time (tail_ph0_w+1 + tail_ph1_w+1)*pw_unit</p>
+<p>1: Enabled, data continuously sent without interval (if FIFO data is valid)</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="2"><p>12</p></td>
+<td rowspan="2"><p>cr_irtx_frm_en</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>1'b0</p></td>
+<td rowspan="2"><p>Enable signal of IRTX freerun mode (Don't care if SWM is enabled)</p>
+<p>Note: HEAD/TAIL is disabled in freerun mode</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3"><p>11</p></td>
+<td rowspan="3"><p>cr_irtx_tail_hl_inv</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b0</p></td>
+<td rowspan="3"><p>Tail pulse H/L inverse signal (Don't care if SWM or FRM is enabled)</p>
+<p>0: Phase 0 is High (Active), phase 1 is Low (Idle) (H -&gt; L)</p>
+<p>1: Phase 0 is Low (Idle), phase 1 is High (Active) (L -&gt; H)</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>10</p></td>
+<td><p>cr_irtx_tail_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Enable signal of tail pulse (Don't care if SWM or FRM is enabled)</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><p>9</p></td>
+<td rowspan="3"><p>cr_irtx_head_hl_inv</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b0</p></td>
+<td rowspan="3"><p>Tail pulse H/L inverse signal (Don't care if SWM or FRM is enabled)</p>
+<p>0: Phase 0 is High (Active), phase 1 is Low (Idle) (H -&gt; L)</p>
+<p>1: Phase 0 is Low (Idle), phase 1 is High (Active) (L -&gt; H)</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>cr_irtx_head_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Enable signal of head pulse (Don't care if SWM or FRM is enabled)</p></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td rowspan="3"><p>6</p></td>
+<td rowspan="3"><p>cr_irtx_logic1_hl_inv</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b0</p></td>
+<td rowspan="3"><p>Logic 1 H/L inverse signal (Don't care if SWM is enabled)</p>
+<p>0: Phase 0 is High (Active), phase 1 is Low (Idle) (H -&gt; L)</p>
+<p>1: Phase 0 is Low (Idle), phase 1 is High (Active) (L -&gt; H)</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3"><p>5</p></td>
+<td rowspan="3"><p>cr_irtx_logic0_hl_inv</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b0</p></td>
+<td rowspan="3"><p>Logic 0 H/L inverse signal (Don't care if SWM is enabled)</p>
+<p>0: Phase 0 is High (Active), phase 1 is Low (Idle) (H -&gt; L)</p>
+<p>1: Phase 0 is Low (Idle), phase 1 is High (Active) (L -&gt; H)</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>cr_irtx_data_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Enable signal of data phase (Don't care if SWM or FRM is enabled)</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>cr_irtx_swm_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Enable signal of IRTX Software Mode (SWM)</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>cr_irtx_mod_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Enable signal of output modulation</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><p>1</p></td>
+<td rowspan="3"><p>cr_irtx_out_inv</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b0</p></td>
+<td rowspan="3"><p>Output inverse signal</p>
+<p>1'b0: Output stays at Low during idle state</p>
+<p>1'b1: Output stays at High during idle state</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="2"><p>0</p></td>
+<td rowspan="2"><p>cr_irtx_en</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>1'b0</p></td>
+<td rowspan="2"><p>Enable signal of IRTX function</p>
+<p>Asserting this bit will trigger the transaction, and should be de-asserted after finish</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</section>
+<section id="irtx-int-sts">
+<h3><span class="section-number">14.4.2. </span>irtx_int_sts<a class="headerlink" href="#irtx-int-sts" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x2000a604</p>
+<figure class="align-center">
+<img alt="../_images/ir_irtx_int_sts.svg" src="../_images/ir_irtx_int_sts.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:27</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>26</p></td>
+<td><p>cr_irtx_fer_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt enable of irtx_fer_int</p></td>
+</tr>
+<tr class="row-even"><td><p>25</p></td>
+<td><p>cr_irtx_frdy_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt enable of irtx_frdy_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>24</p></td>
+<td><p>cr_irtx_end_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt enable of irtx_end_int</p></td>
+</tr>
+<tr class="row-even"><td><p>23:19</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>18</p></td>
+<td><p>rsvd</p></td>
+<td><p>rsvd</p></td>
+<td><p>1'b0</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>17</p></td>
+<td><p>rsvd</p></td>
+<td><p>rsvd</p></td>
+<td><p>1'b0</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>16</p></td>
+<td><p>cr_irtx_end_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Interrupt clear of irtx_end_int</p></td>
+</tr>
+<tr class="row-even"><td><p>15:11</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>cr_irtx_fer_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of irtx_fer_int</p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>cr_irtx_frdy_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of irtx_frdy_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>cr_irtx_end_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of irtx_end_int</p></td>
+</tr>
+<tr class="row-even"><td><p>7:3</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>irtx_fer_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>IRTX FIFO error interrupt, auto-cleared when FIFO overflow/underflow error flag is cleared</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>irtx_frdy_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b1</p></td>
+<td><p>IRTX FIFO ready (tx_fifo_cnt &gt; tx_fifo_th) interrupt, auto-cleared when data is pushed</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>irtx_end_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>IRTX transfer end interrupt</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="irtx-pulse-width">
+<h3><span class="section-number">14.4.3. </span>irtx_pulse_width<a class="headerlink" href="#irtx-pulse-width" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x2000a610</p>
+<figure class="align-center">
+<img alt="../_images/ir_irtx_pulse_width.svg" src="../_images/ir_irtx_pulse_width.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:24</p></td>
+<td><p>cr_irtx_mod_ph1_w</p></td>
+<td><p>r/w</p></td>
+<td><p>8'd34</p></td>
+<td><p>Modulation phase 1 width</p></td>
+</tr>
+<tr class="row-odd"><td><p>23:16</p></td>
+<td><p>cr_irtx_mod_ph0_w</p></td>
+<td><p>r/w</p></td>
+<td><p>8'd17</p></td>
+<td><p>Modulation phase 0 width</p></td>
+</tr>
+<tr class="row-even"><td><p>15:12</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>11:0</p></td>
+<td><p>cr_irtx_pw_unit</p></td>
+<td><p>r/w</p></td>
+<td><p>12'd1124</p></td>
+<td><p>Pulse width unit</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="irtx-pw-0">
+<h3><span class="section-number">14.4.4. </span>irtx_pw_0<a class="headerlink" href="#irtx-pw-0" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x2000a614</p>
+<figure class="align-center">
+<img alt="../_images/ir_irtx_pw_0.svg" src="../_images/ir_irtx_pw_0.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:24</p></td>
+<td><p>cr_irtx_logic1_ph1_w</p></td>
+<td><p>r/w</p></td>
+<td><p>8'd2</p></td>
+<td><p>Pulse width of logic1 phase 1 (Don't care if SWM is enabled)</p></td>
+</tr>
+<tr class="row-odd"><td><p>23:16</p></td>
+<td><p>cr_irtx_logic1_ph0_w</p></td>
+<td><p>r/w</p></td>
+<td><p>8'd0</p></td>
+<td><p>Pulse width of logic1 phase 0 (Don't care if SWM is enabled)</p></td>
+</tr>
+<tr class="row-even"><td><p>15:8</p></td>
+<td><p>cr_irtx_logic0_ph1_w</p></td>
+<td><p>r/w</p></td>
+<td><p>8'd0</p></td>
+<td><p>Pulse width of logic0 phase 1 (Don't care if SWM is enabled)</p></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>cr_irtx_logic0_ph0_w</p></td>
+<td><p>r/w</p></td>
+<td><p>8'd0</p></td>
+<td><p>Pulse width of logic0 phase 0 (Don't care if SWM is enabled)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="irtx-pw-1">
+<h3><span class="section-number">14.4.5. </span>irtx_pw_1<a class="headerlink" href="#irtx-pw-1" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x2000a618</p>
+<figure class="align-center">
+<img alt="../_images/ir_irtx_pw_1.svg" src="../_images/ir_irtx_pw_1.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:24</p></td>
+<td><p>cr_irtx_tail_ph1_w</p></td>
+<td><p>r/w</p></td>
+<td><p>8'd0</p></td>
+<td><p>Pulse width of tail pulse phase 1 (Don't care if SWM is enabled)</p></td>
+</tr>
+<tr class="row-odd"><td><p>23:16</p></td>
+<td><p>cr_irtx_tail_ph0_w</p></td>
+<td><p>r/w</p></td>
+<td><p>8'd0</p></td>
+<td><p>Pulse width of tail pulse phase 0 (Don't care if SWM is enabled)</p></td>
+</tr>
+<tr class="row-even"><td><p>15:8</p></td>
+<td><p>cr_irtx_head_ph1_w</p></td>
+<td><p>r/w</p></td>
+<td><p>8'd7</p></td>
+<td><p>Pulse width of head pulse phase 1 (Don't care if SWM is enabled)</p></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>cr_irtx_head_ph0_w</p></td>
+<td><p>r/w</p></td>
+<td><p>8'd15</p></td>
+<td><p>Pulse width of head pulse phase 0 (Don't care if SWM is enabled)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="irrx-config">
+<h3><span class="section-number">14.4.6. </span>irrx_config<a class="headerlink" href="#irrx-config" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x2000a640</p>
+<figure class="align-center">
+<img alt="../_images/ir_irrx_config.svg" src="../_images/ir_irrx_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:12</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>11:8</p></td>
+<td><p>cr_irrx_deg_cnt</p></td>
+<td><p>r/w</p></td>
+<td><p>4'd0</p></td>
+<td><p>De-glitch function cycle count</p></td>
+</tr>
+<tr class="row-even"><td><p>7:5</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>cr_irrx_deg_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Enable signal of IRRX input de-glitch function</p></td>
+</tr>
+<tr class="row-even"><td rowspan="5"><p>3:2</p></td>
+<td rowspan="5"><p>cr_irrx_mode</p></td>
+<td rowspan="5"><p>r/w</p></td>
+<td rowspan="5"><p>2'd0</p></td>
+<td rowspan="5"><p>IRRX mode</p>
+<p>0: NEC</p>
+<p>1: RC5</p>
+<p>2: SW pulse-width detection mode (SWM)</p>
+<p>3: Reserved</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>cr_irrx_in_inv</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Input inverse signal</p></td>
+</tr>
+<tr class="row-even"><td rowspan="2"><p>0</p></td>
+<td rowspan="2"><p>cr_irrx_en</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>1'b0</p></td>
+<td rowspan="2"><p>Enable signal of IRRX function</p>
+<p>Asserting this bit will trigger the transaction, and should be de-asserted after finish</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</section>
+<section id="irrx-int-sts">
+<h3><span class="section-number">14.4.7. </span>irrx_int_sts<a class="headerlink" href="#irrx-int-sts" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x2000a644</p>
+<figure class="align-center">
+<img alt="../_images/ir_irrx_int_sts.svg" src="../_images/ir_irrx_int_sts.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:27</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>26</p></td>
+<td><p>cr_irrx_fer_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt enable of irrx_fer_int</p></td>
+</tr>
+<tr class="row-even"><td><p>25</p></td>
+<td><p>cr_irrx_frdy_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt enable of irrx_frdy_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>24</p></td>
+<td><p>cr_irrx_end_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt enable of irrx_end_int</p></td>
+</tr>
+<tr class="row-even"><td><p>23:19</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>18</p></td>
+<td><p>rsvd</p></td>
+<td><p>rsvd</p></td>
+<td><p>1'b0</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>17</p></td>
+<td><p>rsvd</p></td>
+<td><p>rsvd</p></td>
+<td><p>1'b0</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>16</p></td>
+<td><p>cr_irrx_end_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Interrupt clear of irrx_end_int</p></td>
+</tr>
+<tr class="row-even"><td><p>15:11</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>cr_irrx_fer_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of irrx_fer_int</p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>cr_irrx_frdy_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of irrx_frdy_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>cr_irrx_end_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of irrx_end_int</p></td>
+</tr>
+<tr class="row-even"><td><p>7:3</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>irrx_fer_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>IRRX FIFO error interrupt, auto-cleared when FIFO overflow/underflow error flag is cleared</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>irrx_frdy_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>IRRX FIFO ready (rx_fifo_cnt &gt; rx_fifo_th) interrupt, auto-cleared when data is popped</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>irrx_end_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>IRRX transfer end interrupt</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="irrx-pw-config">
+<h3><span class="section-number">14.4.8. </span>irrx_pw_config<a class="headerlink" href="#irrx-pw-config" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x2000a648</p>
+<figure class="align-center">
+<img alt="../_images/ir_irrx_pw_config.svg" src="../_images/ir_irrx_pw_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>cr_irrx_end_th</p></td>
+<td><p>r/w</p></td>
+<td><p>16'd8999</p></td>
+<td><p>Pulse width threshold to trigger END condition</p></td>
+</tr>
+<tr class="row-odd"><td><p>15:0</p></td>
+<td><p>cr_irrx_data_th</p></td>
+<td><p>r/w</p></td>
+<td><p>16'd3399</p></td>
+<td><p>Pulse width threshold for Logic0/1 detection (Don't care if SWM is enabled)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="irrx-data-count">
+<h3><span class="section-number">14.4.9. </span>irrx_data_count<a class="headerlink" href="#irrx-data-count" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x2000a650</p>
+<figure class="align-center">
+<img alt="../_images/ir_irrx_data_count.svg" src="../_images/ir_irrx_data_count.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:7</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>6:0</p></td>
+<td><p>sts_irrx_data_cnt</p></td>
+<td><p>r</p></td>
+<td><p>7'd0</p></td>
+<td><p>RX data bit count (pulse-width count for SWM)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="irrx-data-word0">
+<h3><span class="section-number">14.4.10. </span>irrx_data_word0<a class="headerlink" href="#irrx-data-word0" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x2000a654</p>
+<figure class="align-center">
+<img alt="../_images/ir_irrx_data_word0.svg" src="../_images/ir_irrx_data_word0.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>sts_irrx_data_word0</p></td>
+<td><p>r</p></td>
+<td><p>32'h0</p></td>
+<td><p>RX data word 0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="irrx-data-word1">
+<h3><span class="section-number">14.4.11. </span>irrx_data_word1<a class="headerlink" href="#irrx-data-word1" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x2000a658</p>
+<figure class="align-center">
+<img alt="../_images/ir_irrx_data_word1.svg" src="../_images/ir_irrx_data_word1.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>sts_irrx_data_word1</p></td>
+<td><p>r</p></td>
+<td><p>32'h0</p></td>
+<td><p>RX data word 1</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="irtx-fifo-config-0">
+<h3><span class="section-number">14.4.12. </span>irtx_fifo_config_0<a class="headerlink" href="#irtx-fifo-config-0" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x2000a680</p>
+<figure class="align-center">
+<img alt="../_images/ir_irtx_fifo_config_0.svg" src="../_images/ir_irtx_fifo_config_0.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>rx_fifo_underflow</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Underflow flag of RX FIFO, can be cleared by rx_fifo_clr</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>rx_fifo_overflow</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Overflow flag of RX FIFO, can be cleared by rx_fifo_clr</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>tx_fifo_underflow</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Underflow flag of TX FIFO, can be cleared by tx_fifo_clr</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>tx_fifo_overflow</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Overflow flag of TX FIFO, can be cleared by tx_fifo_clr</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>rx_fifo_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Clear signal of RX FIFO</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>tx_fifo_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Clear signal of TX FIFO</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>rsvd</p></td>
+<td><p>rsvd</p></td>
+<td><p>1'b0</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>irtx_dma_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Enable signal of dma_tx_req/ack interface</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="irtx-fifo-config-1">
+<h3><span class="section-number">14.4.13. </span>irtx_fifo_config_1<a class="headerlink" href="#irtx-fifo-config-1" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x2000a684</p>
+<figure class="align-center">
+<img alt="../_images/ir_irtx_fifo_config_1.svg" src="../_images/ir_irtx_fifo_config_1.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:30</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>29:24</p></td>
+<td><p>rx_fifo_th</p></td>
+<td><p>r/w</p></td>
+<td><p>6'd0</p></td>
+<td><p>RX FIFO threshold, irrx_frdy_int will not be asserted if rx_fifo_cnt is less than this value</p></td>
+</tr>
+<tr class="row-even"><td><p>23:18</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>17:16</p></td>
+<td><p>tx_fifo_th</p></td>
+<td><p>r/w</p></td>
+<td><p>2'd0</p></td>
+<td><p>TX FIFO threshold, irtx_frdy_int &amp; dma_tx_req will not be asserted if tx_fifo_cnt is less than this value</p></td>
+</tr>
+<tr class="row-even"><td><p>15</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>14:8</p></td>
+<td><p>rx_fifo_cnt</p></td>
+<td><p>r</p></td>
+<td><p>7'd0</p></td>
+<td><p>RX FIFO available count</p></td>
+</tr>
+<tr class="row-even"><td><p>7:3</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>2:0</p></td>
+<td><p>tx_fifo_cnt</p></td>
+<td><p>r</p></td>
+<td><p>3'd4</p></td>
+<td><p>TX FIFO available count</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ir-fifo-wdata">
+<h3><span class="section-number">14.4.14. </span>ir_fifo_wdata<a class="headerlink" href="#ir-fifo-wdata" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x2000a688</p>
+<figure class="align-center">
+<img alt="../_images/ir_ir_fifo_wdata.svg" src="../_images/ir_ir_fifo_wdata.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td rowspan="3"><p>31:0</p></td>
+<td rowspan="3"><p>tx_fifo_wdata</p></td>
+<td rowspan="3"><p>w</p></td>
+<td rowspan="3"><p>32'h0</p></td>
+<td rowspan="3"><p>IRTX  FIFO data</p>
+<p>Normal Mode: Each entry contains a 32-bit data word, LSB is sent first</p>
+<p>Software Mode: Each entry contains 4 pulse widths, [7:0] is the 1st pulse, [15:8] is the 2nd pulse, etc)</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+</tbody>
+</table>
+</section>
+<section id="ir-fifo-rdata">
+<h3><span class="section-number">14.4.15. </span>ir_fifo_rdata<a class="headerlink" href="#ir-fifo-rdata" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x2000a68c</p>
+<figure class="align-center">
+<img alt="../_images/ir_ir_fifo_rdata.svg" src="../_images/ir_ir_fifo_rdata.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15:0</p></td>
+<td><p>rx_fifo_rdata</p></td>
+<td><p>r</p></td>
+<td><p>16'h0</p></td>
+<td><p>IRRX FIFO pulse width data for Software Mode</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Cam.html" class="btn btn-neutral float-left" title="13. CAM" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="SPI.html" class="btn btn-neutral float-right" title="15. SPI" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2021.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

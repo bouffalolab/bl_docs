@@ -15,12 +15,10 @@ Features
 - Master mode
 
 - Multi-master mode and arbitration function
-
-- Flexible adjustment of clock frequency
-
-- Supports 10-bit address mode
-
+- Flexible control of the level duration of the start, end and data transmission phases in segments
+- Supports 7-bit address mode and 10-bit address mode
 - Supports DMA transfer mode
+- Supports multiple interrupt mechanisms
 
 Functional Description
 ==========
@@ -54,49 +52,69 @@ Waveform diagram:
 Data Transfer Format
 ----------------
 
-7-bit address mode:
+1. 7-bit address mode:
 
-The first 8 bits transferred are addressing bytes, including a 7-bit slave address and a 1-bit direction bit. Sending or receiving data by the master is controlled by the 8th bit in the first byte sent by the master. If it is 0, it means that the data is sent by the master, while "1" indicates that data is received by the master, followed by the slave sending out an acknowledgement (ACK) bit. Upon data transfer completed, the master sends out a STOP signal, with waveform shown below:
+The first 8 bits transferred are addressing bytes, including a 7-bit slave address and a 1-bit direction bit.
+Sending or receiving data by the master is controlled by the 8th bit in the first byte sent by the master.
+If it is 0, it means that the data is sent by the master, while "1" indicates that data is received by the master.
+After the direction bit is the answer bit (ACK), which is sent by the slave to answer (pull the signal low) and the host starts transmitting the specified length of data after receiving the answer.
+Upon data transfer completed, the master sends out a STOP signal, with waveform shown below:
 
-.. figure:: ../../picture/I2CMasterTxRx.svg
+.. figure:: ../../picture/I2CMasterTxSlaveRx.svg
    :align: center
 
-   I2C data transfer format
+   Master transmit and slave receive data formats
+
+.. figure:: ../../picture/I2CMasterRxSlaveTx.svg
+   :align: center
+
+   Master receive and slave transmit data formats
 
 **Master Transmit and Slave Receive Timing**
 
-.. figure:: ../../picture/I2CMasterTxSlaveRx.svg
+.. figure:: ../../picture/I2CMasterTxSlaveRxSequence.svg
    :align: center
 
    Timing of master transmitter and slave receiver
 
 **Master Receive and Slave Transmit Timing**
 
-.. figure:: ../../picture/I2CMasterRxSlaveTx.svg
+.. figure:: ../../picture/I2CMasterRxSlaveTxSequence.svg
    :align: center
 
    Timing of master receiver and slave transmitter
 
-10-bit address mode: The cr_i2c_10b_addr_en in the register i2c_config must be set to 1 before use.
+2. 10-bit address mode
 
-The 10-bit slave address consists of the two bytes after the START condition (S) or the repeated START condition (Sr). The first 7 bits of the first byte are 1111 0XX, where XX are the first two bits of MSB of the 10-bit address. The 8th bit of the first byte is the read/write bit that determines the transfer direction.
-Although there are 8 possible combinations of 1111 XXX, only the four types of 1111 0XX can be used for 10-bit addressing, and the remaining four types of 1111 1XX are used for future I2C expansion.
+The cr_i2c_10b_addr_en in the register i2c_config must be set to 1 before use.
 
-The aforementioned read-write formats for 7-bit addressing all suit 10-bit addressing, as follows:
-
-1. A master-transmitter sends data to a slave-receiver with a 10-bit slave address
+The 10-bit slave address consists of the two bytes after the START condition (S) or the repeated START condition (Sr).
+The first 7 bits of the first byte are 1111 0XX, where XX are the first two bits of MSB of the 10-bit address.
+The 8th bit of the first byte is the read/write bit that determines the transfer direction.
+The second byte is the remaining low 8 bits of the 10 bit address. The data transfer format is as follows.
 
 .. figure:: ../../picture/I2CMasterToSlave10BitAddress.svg
    :align: center
 
-The figure shows that the transfer direction is unchanged. When receiving the 10-bit address following the START condition, the slave compares the first byte (1111 0XX) of the slave address with its own address, and checks whether the eighth bit (read/write bit) is 0. It is possible that multiple devices all match and generate an acknowledgement (A1). Next, all the slaves start to match their own addresses with the 8 bits of the second byte (XXXX XXXX). At this time, only one slave matches and generates an acknowledgement (A2). The slave that is addressed by the master will remain in the addressed state until it receives a STOP condition or a repeated START condition, followed by a different slave address.
+   Master transmit and slave receive data format (10bit slave address)
 
-2. A master-receiver receives data from a slave-transmitter (10-bit slave address)
+When receiving the 10-bit address following the START condition, the slave compares the first byte (1111 0XX) of the slave address with its own address, and checks whether the eighth bit (read/write bit) is 0.
+If the value of XX in the first byte is the same as the top two bits of the slave's 10 bit address, the first byte match passes and the slave will give answer A. If there are multiple slave devices connected to the bus, more than one device may match and generate answer A.
+Next, all slaves start to match the second byte (XXXX XXXX), where only one slave will have the exact same lower eight bits of the 10 bit address as the second byte, and that slave will give answer A.
+The slave that is addressed by the master will remain addressed until it receives a termination condition or a repeat start condition.
 
 .. figure:: ../../picture/I2CSlaveToMaster10BitAddress.svg
    :align: center
 
-The transfer direction will change after the second read/write bit. Before the second acknowledgement A2, the process is the same as that of the master-transmitter addressing the slave-receiver. After the repeated START condition (Sr), the matched slave will remain in the addressed state. This slave will check whether the first 7 bits of the first byte after Sr are correct, and then test whether the 8th bit is 1 (read). If this also matches, the slave considers that it is addressed as a transmitter and generates an acknowledgement (A3). The slave-transmitter will remain in the addressed state until it receives the STOP condition (P) or the repeated START condition (Sr) followed by a different slave address. Then, under Sr, all the slaves will compare their addresses with 11110XX and test the eighth bit (read/write bit). However, they will not be addressed, because for 10-bit devices, the read/write bit is 1, or for 7-bit devices, the slave addresses of 1111 0XX do not match.
+   Master receive and slave transmit data format (10bit slave address)
+
+Before the second acknowledgement A, the process is the same as that of the master-transmitter addressing the slave-receiver.
+After the repeated START condition (Sr), the matched slave will remain in the addressed state.
+This slave will check whether the first 7 bits of the first byte after Sr are 1111 0XX, and then test whether the 8th bit is 1 (read).
+If this also matches, the slave considers that it is addressed as a transmitter and generates an acknowledgement (A).
+The slave-transmitter will remain in the addressed state until it receives the STOP condition (P) or the repeated START condition (Sr) followed by a different slave address.
+Then, under Sr, all the slaves will compare their addresses with 11110XX and test the eighth bit (read/write bit).
+However, they will not be addressed, because for 10-bit devices, the read/write bit is 1, or for 7-bit devices, the slave addresses of 1111 0XX do not match.
 
 Arbitration
 ------------
@@ -116,10 +134,16 @@ I2C Clock Setting
 ==================
 
 I2C clock can be derived from bclk (bus clock) and xclk, and frequency division can be done on this basis.
-The register i2c_prd_data can divide the clock of the data segment. The I2C module divides data transfer into 4 stages. Each stage is controlled by a single byte in the register, and the number of samples of each stage can be set. The 4 numbers jointly determine the division factor of i2c clock.
+The duration of the start condition, each bit of data and the end condition are set by registers i2c_prd_start, i2c_prd_data and i2c_prd_stop respectively.
+Each of these durations can be subdivided into 4 phases, and the number of samples in each phase is controlled by a separate byte in the register (the actual value is the register value plus 1). The 4 phase settings in the data section together determine the frequency division factor of the i2c clock.
+As shown in the figure below, suppose the I2C clock source is selected as 32M bclk and the register i2c_prd_data is set to 0x0f0f0f0f, then the second 0 in the figure is 0x0f+1=0x10, the second 1 is 0x0f+1=0x10, the second 2 is 0x0f+1=0x10, and the second 3 is 0x0f+1=0x10.
+Then the clock frequency of I2C is 32MHz/(0x10+0x10+0x10+0x10) = 500KHz.
+Similarly, the first 0, 1, 2 and 3 are set by register i2c_prd_start, which determines the duration of the start condition, and the third 0, 1, 2 and 3 are set by register i2c_prd_stop, which determines the duration of the end condition.
 
-For example, bclk is 32M now, and the default value of the register i2c_prd_data is 0x0f0f0f0f without configuration, so I2C's clock frequency is 32M/((15 + 1) * 4) = 500K.
-Similarly, registers i2c_prd_start and i2c_prd_stop will divide the clock of the start and stop bits, respectively.
+.. figure:: ../../picture/I2CClock.svg
+   :align: center
+
+   I2C clock setting
 
 I2C Configuration Flow
 ========================
@@ -166,14 +190,14 @@ When receiving data, I2C must read out the data (in word) from the register i2c_
 Data Length
 ---------
 
-The data length is subtracted by 1 and then written to cr_i2c_pkt_len in the register i2c_config.
+The cr_i2c_pkt_len in the i2c_config register sets the send data length (the value written to the register + 1 is the send data length), and the maximum send length is 256 bytes.
 
 Enable Signal
 ---------
 
 After the above items are configured, when cr_i2c_m\_en in the enable signal register i2c_config is set to 1, the I2C sending process will be started automatically.
 
-When the read/write flag bit is configured as 0, I2C sends data and the master's transmission flow is as follows:
+When the read/write flag bit is configured as 0, I2C sends data. Take sending 2 bytes as an example, the master's transmission flow is as follows:
 
 1. Start bit
 
@@ -187,7 +211,7 @@ When the read/write flag bit is configured as 0, I2C sends data and the master's
 
 6. Stop bit
 
-When the read/write flag bit is configured as 1, I2C receives data and the master's transmission flow is as follows:
+When the read/write flag bit is configured as 1, I2C receives data. Take receiving 2 bytes as an example, the master's transmission flow is as follows:
 
 1. Start bit
 
@@ -288,21 +312,22 @@ Interrupt
 
 I2C includes the following interrupts:
 
-- I2C_TRANS_END_INT: I2C end of transfer interrupt
-
-- I2C_TX_FIFO_READY_INT: The interrupt is triggered when I2C TX FIFO has free space for padding
-
-- I2C_RX_FIFO_READY_INT: The interrupt is triggered when I2C RX FIFO receives data
-
-- I2C_NACK_RECV_INT: The interrupt is triggered when I2C detects the NACK state
-
-- I2C_ARB_LOST_INT: I2C arbitration lost interrupt
-
-- I2C_FIFO_ERR_INT: I2C FIFO ERROR interrupt
+- I2C_TRANS_END_INT
+  * I2C transfer end interrupt, which is generated when I2C completes a transfer
+- I2C_TX_FIFO_READY_INT
+  * When tx_fifo_cnt in i2c_fifo_config_1 is greater than tx_fifo_th, a TX FIFO request interrupt will be generated, and the interrupt flag will be automatically cleared when the condition is not satisfied
+- I2C_RX_FIFO_READY_INT
+  * When rx_fifo_cnt in i2c_fifo_config_1 is greater than rx_fifo_th, an RX FIFO request interrupt will be generated, and the interrupt flag will be automatically cleared when the condition is not satisfied
+- I2C_NACK_RECV_INT
+  * When the I2C module detects a NACK state, a NACK interrupt is generated
+- I2C_ARB_LOST_INT
+  * I2C arbitration lost interrupt
+- I2C_FIFO_ERR_INT
+  * FIFO ERROR interrupt is generated when TX/RX FIFO overflows or underflows
 
 .. only:: html
 
-   .. include:: dma2d_register.rst
+   .. include:: i2c_register.rst
 
 .. raw:: latex
 

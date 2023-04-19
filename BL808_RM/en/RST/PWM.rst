@@ -11,9 +11,7 @@ Features
 
 - Two PWM signals are generated, each containing 4-channel PWM signal outputs, with 2 pairs of complementary PWM per channel
 
-- There are optional three clock sources (bus clock<bclk>, crystal oscillator clock<xtal_ck>, and slow clock<32k>), with 16-bit clock divider
-
-- Each PWM can be independently set to different cycles
+- There are optional three clock sources (bclk、xclk、f32k), with 16-bit clock divider, up to 65535 divisions
 
 - Each PWM channel has double threshold setting, allowing different duty ratios and phases, with more flexible pulse
 
@@ -27,19 +25,25 @@ Features
 
 - Up to 9 trigger sources for triggering ADC conversion
 
-- Interrupts will be generated when these events occur: counter overflow, threshold comparison and matching, brake signal generation, and PWM cycles reaching the set value.
+- Support 11 interrupts
 
 Functional Description
 ===========
 Clock and Frequency Divider
 -------------
-Each PWM counter has three optional clock sources:
+There are three options for PWM counter clock sources, which can be set through the reg_clk_sel field in the pwm_mc0_config0 register, and the clock source configuration is shown in the following table.
 
-1. bclk–bus clock of chip
+.. table:: Clock source
 
-2. XTAL–external crystal oscillator clock
-
-3. f32k–RTC clock of system
+    +-------------+------------------+
+    | reg_clk_sel | PWM clock source |
+    +=============+==================+
+    |      0      |    xclk          |
+    +-------------+------------------+
+    |      1      |    bclk          |
+    +-------------+------------------+
+    |    others   |    f32k          |
+    +-------------+------------------+
 
 Each counter has its own 16-bit frequency divider, which can divide the selected clock through APB. The PWM counter will take the divided clock as the counting cycle unit, and add one every time a counting cycle ends.
 
@@ -70,7 +74,29 @@ If the brake interrupt is enabled, the interrupt will be triggered when the exte
 
 Dead Zone
 ------
-Different dead time can be set for each PWM channel independently. When the value of dead time is not 0, the forward channel of PWM will delay the generation of jump level when it matches the threshold 1, and immediately change the level state when it matches the threshold 2. The complementary channel of PWM will change the level state immediately when it matches the threshold 1, and delay the generation of jump level when it matches the threshold 2. The length of dead zone is set by the register pwm_mcx_dead_time.
+Different dead time can be set for each PWM channel independently. When the value of dead time is not 0, the forward channel of PWM will delay the generation of jump level when it matches the ThresholdL, and immediately change the level state when it matches the ThresholdH. The complementary channel of PWM will change the level state immediately when it matches the ThresholdL, and delay the generation of jump level when it matches the ThresholdH. The length of dead zone is set by the register pwm_mc0_dead_time, the deadband length is calculated as shown in the following table.
+
+.. table:: Deadband length calculation formula
+
+
+    +-------------+------------------------------+
+    | pwm_chy_dtg |    Deadband length           |
+    +=============+==============================+
+    |   0xxxxxxx  |       pwm_chy_dtg[7:0]       |
+    +-------------+------------------------------+
+    |   10xxxxxx  | (64 + pwm_chy_dtg[5:0]) * 2  |
+    +-------------+------------------------------+
+    |   110xxxxx  |  (32 + pwm_chy_dtg[4:0]) * 8 |
+    +-------------+------------------------------+
+    |   111xxxxx  | (32 + pwm_chy_dtg[4:0]) * 16 |
+    +-------------+------------------------------+
+
+The output waveform after inserting the deadband for PWM is shown in the following figure.
+
+.. figure:: ../../picture/PWMDtgWave.svg
+   :align: center
+
+   PWM insertion deadband output waveform
 
 Cycle and Duty Ratio Calculation
 -----------------
@@ -78,12 +104,52 @@ The PWM cycle is determined the clock division factor and the clock duration cyc
 
 PWM Interrupt
 -------------
-For each PWM, the cycle count value can be set by the high 16 bits of the register pwm_mcx_period. When the number of PWM cycles reaches this value, the PWM interrupt will be generated.
+The PWM can generate a total of 10 types of interrupts, described as follows.
 
-When the PWM count value reaches the number of cycles or it matches the threshold, the PWM interrupt will be generated.
+- Channel 0 ThresholdL Interrupt
 
-A PWM interrupt will be generated when an external brake signal is generated.
+  * This interrupt is generated when the PWM count value is equal to the value of the field pwm_ch0_threL in the pwm_mc0_ch0_thre register.
 
+- Channel 0 ThresholdH Interrupt
+
+  * This interrupt is generated when the PWM count value is equal to the value of the field pwm_ch0_threH in the pwm_mc0_ch0_thre register.
+
+- Channel 1 ThresholdL Interrupt
+
+  * This interrupt is generated when the PWM count value is equal to the value of field pwm_ch1_threL in the pwm_mc0_ch1_thre register.
+
+- Channel 1 ThresholdH Interrupt
+
+  * This interrupt is generated when the PWM count value is equal to the value of the field pwm_ch1_threH in the pwm_mc0_ch1_thre register.
+
+- Channel 2 ThresholdL Interrupt
+
+  * This interrupt is generated when the PWM count value is equal to the value of field pwm_ch2_threL in the pwm_mc0_ch2_thre register.
+
+- Channel 2 Threshold ThresholdH Interrupt
+
+  * This interrupt is generated when the PWM count value is equal to the value of the field pwm_ch2_threH in the pwm_mc0_ch2_thre register.
+
+- Channel 3 ThresholdL Interrupt
+
+  * This interrupt is generated when the PWM count value is equal to the value of the field pwm_ch3_threL in the pwm_mc0_ch3_thre register.
+
+- Channel 3 ThresholdH Interrupt
+
+  * This interrupt is generated when the PWM count value is equal to the value of the field pwm_ch3_threH in the pwm_mc0_ch3_thre register.
+
+- End-of-cycle interrupt
+
+  * This interrupt is generated when the PWM count value is equal to the value of field pwm_period in register pwm_mc0_period, indicating the end of a PWM cycle.
+
+- Cycle Repeat Interrupt
+
+  * This interrupt is generated when the number of PWM cycles reaches the value set in the field pwm_int_period_cnt in the register pwm_mc0_period. This interrupt can be used in stepper motor application scenarios, where setting pwm_int_period_cnt allows the stepper motor to generate an interrupt after rotating a specific angle.
+
+- external brake Interrupt
+
+  * A PWM interrupt will be generated when an external brake signal is generated.
+  
 ADC Linkage
 ----------
 When the counter matches the threshold or the count value reaches the number of cycles, it will generate the signal that internally triggers ADC startup conversion. It should be noted that only PWM0 can trigger such conversion, while PWM1 cannot do that. The specific trigger source is set by the <pwm_adc_trg_src> bit in the register pwm_mcx_config0. This feature is commonly used in timing sampling. The following is an example.

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3. GLB &mdash; BL808 Reference Manual  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="4. GPIO" href="GPIO.html" />
+    <link rel="prev" title="2. Reset and Clock" href="ResetAndClock.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL808 Reference Manual
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. System and Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. Reset and Clock</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">3. GLB</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">3.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#functional-description">3.2. Functional Description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#clock-management">3.2.1. Clock Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reset-management">3.2.2. Reset Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bus-management">3.2.3. Bus Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#memory-management">3.2.4. Memory Management</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="GPIO.html">4. GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">5. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">6. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">7. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA2D.html">8. DMA2D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lz4d.html">9. LZ4D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBI.html">10. DBI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DPI.html">11. DPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DSI.html">12. DSI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cam.html">13. CAM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">14. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">15. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">16. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">17. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">18. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">19. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2s.html">20. I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PDM.html">21. PDM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AUDIO.html">22. AUDIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PSRAM.html">23. PSRAM Contorller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Emac.html">24. Emac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USB.html">25. USB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SDH.html">26. SDH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MJPEG.html">27. MJPEG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="JDEC.html">28. JDEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="VENC.html">29. VENC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NPUtoolchain.html">30. NPU toolchain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NPU.html">31. NPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IPC.html">32. IPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LowPower.html">33. LowPower</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SEC_ENG.html">34. SEC ENG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">35. Revision history</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL808 Reference Manual</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">3. </span>GLB</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="glb">
+<h1><span class="section-number">3. </span>GLB<a class="headerlink" href="#glb" title="Permalink to this headline"></a></h1>
+<section id="overview">
+<h2><span class="section-number">3.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
+</section>
+<section id="functional-description">
+<h2><span class="section-number">3.2. </span>Functional Description<a class="headerlink" href="#functional-description" title="Permalink to this headline"></a></h2>
+<section id="clock-management">
+<h3><span class="section-number">3.2.1. </span>Clock Management<a class="headerlink" href="#clock-management" title="Permalink to this headline"></a></h3>
+<p>It is mainly used to set the clocks of processors, buses, and peripherals, set the clock source and frequency division of the above modules, and achieve the clock gating of these modules, to save power for the system. For more details, see system clock sections.</p>
+</section>
+<section id="reset-management">
+<h3><span class="section-number">3.2.2. </span>Reset Management<a class="headerlink" href="#reset-management" title="Permalink to this headline"></a></h3>
+<p>It provides the separate reset function of each peripheral module and the chip reset function.</p>
+<p>Chip reset:</p>
+<ul class="simple">
+<li><p>CPU reset: Only CPU is reset. The program will roll back, and peripherals will not be reset</p></li>
+<li><p>System reset: All peripherals and CPUs will be reset, but the registers in the AON field will not be reset</p></li>
+<li><p>Power-on reset: The whole system including the registers in the AON field will be reset</p></li>
+</ul>
+<p>The application can select a proper reset mode as required.</p>
+</section>
+<section id="bus-management">
+<h3><span class="section-number">3.2.3. </span>Bus Management<a class="headerlink" href="#bus-management" title="Permalink to this headline"></a></h3>
+<p>It provides bus arbitration and bus error settings, so that users can set whether to interrupt and provide the error bus address information when a bus error occurs, facilitating program debugging by users.</p>
+</section>
+<section id="memory-management">
+<h3><span class="section-number">3.2.4. </span>Memory Management<a class="headerlink" href="#memory-management" title="Permalink to this headline"></a></h3>
+<p>It provides power management of each memory module in the low-power mode of the chip system, including two setting modes:</p>
+<ul class="simple">
+<li><p>Retention mode: The data in the memory can be saved, but it cannot be read or written before exiting the low-power mode</p></li>
+<li><p>Sleep mode: This mode is only used to reduce system power consumption, because it will cause memory data to lose</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ResetAndClock.html" class="btn btn-neutral float-left" title="2. Reset and Clock" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="GPIO.html" class="btn btn-neutral float-right" title="4. GPIO" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

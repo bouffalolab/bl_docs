@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>21. PDM &mdash; BL808 Reference Manual  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="22. AUDIO" href="AUDIO.html" />
+    <link rel="prev" title="20. I2S" href="I2s.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL808 Reference Manual
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. System and Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. Reset and Clock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPIO.html">4. GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">5. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">6. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">7. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA2D.html">8. DMA2D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lz4d.html">9. LZ4D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBI.html">10. DBI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DPI.html">11. DPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DSI.html">12. DSI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cam.html">13. CAM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">14. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">15. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">16. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">17. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">18. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">19. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2s.html">20. I2S</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">21. PDM</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">21.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#features">21.2. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#functional-description">21.3. Functional Description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pdm-interrupt">21.3.1. PDM Interrupt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fifo-format-control">21.3.2. FIFO Format Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#startup-of-fifo-and-dma-transfer">21.3.3. Startup of FIFO and DMA Transfer</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="AUDIO.html">22. AUDIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PSRAM.html">23. PSRAM Contorller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Emac.html">24. Emac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USB.html">25. USB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SDH.html">26. SDH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MJPEG.html">27. MJPEG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="JDEC.html">28. JDEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="VENC.html">29. VENC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NPUtoolchain.html">30. NPU toolchain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NPU.html">31. NPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IPC.html">32. IPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LowPower.html">33. LowPower</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SEC_ENG.html">34. SEC ENG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">35. Revision history</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL808 Reference Manual</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">21. </span>PDM</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pdm">
+<h1><span class="section-number">21. </span>PDM<a class="headerlink" href="#pdm" title="Permalink to this headline"></a></h1>
+<section id="overview">
+<h2><span class="section-number">21.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
+<p>A PDM audio processing module is built in the chip, supporting recording via the PDM interface microphone.</p>
+</section>
+<section id="features">
+<h2><span class="section-number">21.2. </span>Features<a class="headerlink" href="#features" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p>Three 20-bit ADCs are integrated to support three digital PDM inputs.</p>
+<ul>
+<li><p>Sampling rate: 8k–96k</p></li>
+<li><p>Signal to noise ratio (AW): 97 dB &#64; 0 dB gain</p></li>
+<li><p>Harmonic distortion + noise: -87dB &#64; 0dB gain</p></li>
+<li><p>Analog pre-amplifier gain: 0dB, 6–42 dB, 3dB per gear</p></li>
+</ul>
+</li>
+<li><p>Adjustable high-pass filter and independent digital volume control for ADC channel</p></li>
+<li><p>Supports digital PDM interface, with input GPIO multiplexed</p></li>
+<li><p>Independent digital volume control</p></li>
+<li><p>TX/RX FIFO of 32-bit width</p></li>
+<li><p>Supports DMA transfer mode</p></li>
+</ul>
+</section>
+<section id="functional-description">
+<h2><span class="section-number">21.3. </span>Functional Description<a class="headerlink" href="#functional-description" title="Permalink to this headline"></a></h2>
+<p>The block diagram of PDM module is shown as follows.</p>
+<p>PDM has three PDM digital interface demodulators. It passes through the decimation and HPF filters and then goes to the volume control module. Users can control mute/unmute, volume, and audio fade-in/fade-out effect through the volume control module. The recorded data is stored in the FIFO with a depth of 32, and the storage format in FIFO is controlled by the register RX_FIFO_CTRL[25:24]. PDM_RX_FIFO_CTRL[5] configures the resolution of sampling. PDM only supports PDM audio digital interface input.</p>
+<section id="pdm-interrupt">
+<h3><span class="section-number">21.3.1. </span>PDM Interrupt<a class="headerlink" href="#pdm-interrupt" title="Permalink to this headline"></a></h3>
+<p>PDM supports the following interrupt control modes:</p>
+<ul class="simple">
+<li><p>RX FIFO request interrupt</p></li>
+<li><p>RX FIFO underrun interrupt</p></li>
+<li><p>RX FIFO overrun interrupt</p></li>
+</ul>
+<p>A RX FIFO request interrupt is generated when RX_DRQ_CNT in RX_FIFO_CTRL is greater than RX_TRG_LEVEL. When the condition is not met, the interrupt flag is cleared automatically.</p>
+<p>When there is no data in RX FIFO, but the user enables RX FIFO modulation through RX_CH_EN in RX_FIFO_CTRL, the RX FIFO underrun interrupt is generated.</p>
+<p>When the user fills in data that exceeds the maximum depth of RX FIFO, it leads to RX FIFO overflow and cause a RX FIFO overrun interrupt.</p>
+</section>
+<section id="fifo-format-control">
+<h3><span class="section-number">21.3.2. </span>FIFO Format Control<a class="headerlink" href="#fifo-format-control" title="Permalink to this headline"></a></h3>
+<p>PDM_RX_FIFO_CTRL can control the format of the audio data to be stored in FIFO.</p>
+<p>The user sets the resolution of audio by configuring PDM_RX_FIFO_CTRL[5].</p>
+<p>When 16-bit resolution is selected, the FIFO controller supports the following four data storage formats, which are determined by FIFO_CTRL[25:24].</p>
+<blockquote>
+<div><ul>
+<li><p>Mode 0:</p>
+<blockquote>
+<div><p>DATA[31:0] = {FIFO[19:14],16’h0}</p>
+</div></blockquote>
+</li>
+<li><p>Mode 1:</p>
+<blockquote>
+<div><p>DATA[31:0] = {8{FIFO[19]},FIFO[19:4],8’h0}</p>
+</div></blockquote>
+</li>
+<li><p>Mode 2:</p>
+<blockquote>
+<div><p>DATA[31:0] = {12{FIFO[19]},FIFO[19:4],4’h0}</p>
+</div></blockquote>
+</li>
+<li><p>Mode 3:</p>
+<blockquote>
+<div><p>DATA[31:0] = {16{FIFO[19]},FIFO[19:4]}</p>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<p>During recording or playing, the conversion result of 32-bit data or the digital audio source to be demodulated is on the left, denoted as DATA[31:0]. The format of data to be stored in FIFO is shown on the right. When the actual resolution of the recording is 20-bit, if the 16-bit resolution is selected, the data with 20-bit resolution must be properly cut. Thus, the high 16 bits of the data with 20-bit resolution are selected as the final result FIFO[19:14] and stored in the position of the high 16 bits, while the low 16 bits are filled with 0. Modes 1, 2, and 3 are expressed in the same way as Mode 0. The 8{FIFO[19]} symbol indicates that the high 8 bits are padded with the value of bit[19].</p>
+<p>Therefore, when a 16-bit resolution is selected, PDM provides four modes to store the digital results of conversion/output.</p>
+<p>In the case of 20-bit resolution, the storage formats in the four modes are as follows:</p>
+<blockquote>
+<div><ul>
+<li><p>Mode 0:</p>
+<blockquote>
+<div><p>DATA[31:0] = {FIFO[19:0],12’h0}</p>
+</div></blockquote>
+</li>
+<li><p>Mode 1:</p>
+<blockquote>
+<div><p>DATA[31:0] = {8{FIFO[19]},FIFO[19:0],4’h0}</p>
+</div></blockquote>
+</li>
+<li><p>Mode 2:</p>
+<blockquote>
+<div><p>DATA[31:0] = {12{FIFO[19]},FIFO[19:0]}</p>
+</div></blockquote>
+</li>
+<li><p>Mode 3:</p>
+<blockquote>
+<div><p>DATA[31:0] = {16{FIFO[19]},FIFO[19:4]}</p>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<p>Distribution of MSB</p>
+<blockquote>
+<div><ul>
+<li><p>Mode 0:</p>
+<blockquote>
+<div><p>The MSB of data is 31 bits</p>
+</div></blockquote>
+</li>
+<li><p>Mode 1:</p>
+<blockquote>
+<div><p>The MSB of data is 23 bits</p>
+</div></blockquote>
+</li>
+<li><p>Mode 2:</p>
+<blockquote>
+<div><p>The MSB of data is 19 bits</p>
+</div></blockquote>
+</li>
+<li><p>Mode 3:</p>
+<blockquote>
+<div><p>The MSB of data is 15 bits</p>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</section>
+<section id="startup-of-fifo-and-dma-transfer">
+<h3><span class="section-number">21.3.3. </span>Startup of FIFO and DMA Transfer<a class="headerlink" href="#startup-of-fifo-and-dma-transfer" title="Permalink to this headline"></a></h3>
+<p>The data in FIFO of the PDM module can be transferred by DMA.</p>
+<p>The user can obtain the current amount of valid data in FIFO in real time through the register PDM_RX_FIFO_STATUS.</p>
+<p>The FIFO count threshold (8/16/32) for initiating DMA request is selected by configuring FIFO_CTRL[15:14], or can be determined by FIFO_CTRL[22:16].</p>
+<p>When the count value is greater than the set threshold, and the FIFO of the channel corresponding to PDM_RX_FIFO_CTRL[12:8] is enabled, a DMA transfer is initiated.</p>
+<p>When TX FIFO is started, if there is no valid data in TX FIFO, the tx underrun error will be triggered. Therefore, the software configuration sequence must be followed.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="I2s.html" class="btn btn-neutral float-left" title="20. I2S" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="AUDIO.html" class="btn btn-neutral float-right" title="22. AUDIO" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

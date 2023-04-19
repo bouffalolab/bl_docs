@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>10. DBI &mdash; BL808 Reference Manual  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="11. DPI" href="DPI.html" />
+    <link rel="prev" title="9. LZ4D" href="Lz4d.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL808 Reference Manual
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. System and Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. Reset and Clock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPIO.html">4. GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">5. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">6. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">7. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA2D.html">8. DMA2D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lz4d.html">9. LZ4D</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">10. DBI</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">10.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#features">10.2. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#functional-description">10.3. Functional Description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dbi-type-b">10.3.1. DBI Type B</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#write-timing">10.3.1.1. Write Timing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#read-timing">10.3.1.2. Read Timing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#output-rgb565">10.3.1.3. Output RGB565</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#output-rgb666">10.3.1.4. Output RGB666</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#output-rgb888">10.3.1.5. Output RGB888</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#dbi-type-c-3-line">10.3.2. DBI Type C 3-Line</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">10.3.2.1. Write Timing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">10.3.2.2. Read Timing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">10.3.2.3. Output RGB565</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">10.3.2.4. Output RGB666</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">10.3.2.5. Output RGB888</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#dbi-type-c-4-line">10.3.3. DBI Type C 4-Line</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id6">10.3.3.1. Write Timing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">10.3.3.2. Read Timing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">10.3.3.3. Output RGB565</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id9">10.3.3.4. Output RGB666</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id10">10.3.3.5. Output RGB888</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#input-pixel-format">10.3.4. Input Pixel Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#interrupt">10.3.5. Interrupt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma">10.3.6. DMA</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#register-description">10.4. Register description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dbi-config">10.4.1. dbi_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dbi-int-sts">10.4.2. dbi_int_sts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dbi-bus-busy">10.4.3. dbi_bus_busy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dbi-pix-cnt">10.4.4. dbi_pix_cnt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dbi-prd">10.4.5. dbi_prd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dbi-wdata">10.4.6. dbi_wdata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dbi-rdata">10.4.7. dbi_rdata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dbi-fifo-config-0">10.4.8. dbi_fifo_config_0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dbi-fifo-config-1">10.4.9. dbi_fifo_config_1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dbi-fifo-wdata">10.4.10. dbi_fifo_wdata</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="DPI.html">11. DPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DSI.html">12. DSI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cam.html">13. CAM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">14. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">15. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">16. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">17. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">18. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">19. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2s.html">20. I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PDM.html">21. PDM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AUDIO.html">22. AUDIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PSRAM.html">23. PSRAM Contorller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Emac.html">24. Emac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USB.html">25. USB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SDH.html">26. SDH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MJPEG.html">27. MJPEG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="JDEC.html">28. JDEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="VENC.html">29. VENC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NPUtoolchain.html">30. NPU toolchain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NPU.html">31. NPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IPC.html">32. IPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LowPower.html">33. LowPower</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SEC_ENG.html">34. SEC ENG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">35. Revision history</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL808 Reference Manual</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">10. </span>DBI</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="dbi">
+<h1><span class="section-number">10. </span>DBI<a class="headerlink" href="#dbi" title="Permalink to this headline"></a></h1>
+<section id="overview">
+<h2><span class="section-number">10.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
+<p>The Display Bus Interface (DBI), also known as MCU interface, is an interface protocol defined by MIPI Alliance for communicating with display screens. The data and control lines of the DBI protocol are multiplexed, and the driven display module must have GRAM.</p>
+<p>DBI is subdivided into MIPI DBI Type A, MIPI DBI Type B, and MIPI DBI Type C modes. The hardware interfaces and data sampling in different modes are different. For example, MIPI DBI Type A uses falling edge sampling (based on Motorola 6800 bus), while MIPI DBI Type B uses the rising edge sampling (based on Intel 8080 bus).</p>
+</section>
+<section id="features">
+<h2><span class="section-number">10.2. </span>Features<a class="headerlink" href="#features" title="Permalink to this headline"></a></h2>
+<ul>
+<li><p>Meets MIPI® Alliance standard</p></li>
+<li><p>Supports Type B and Type C modes</p></li>
+<li><p>Type B is an 8-bit data interface</p></li>
+<li><p>Type C supports 3Line and 4Line</p></li>
+<li><p>Supports 8 input pixel formats:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>RGBA8888</p></li>
+<li><p>BGRA8888</p></li>
+<li><p>ARGB8888</p></li>
+<li><p>ABGR8888</p></li>
+<li><p>RGB888</p></li>
+<li><p>BGR888</p></li>
+<li><p>RGB565</p></li>
+<li><p>BGR565</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Supported output pixel formats: RGB565, RGB666 and RGB888</p></li>
+<li><p>Multiple interrupt control</p></li>
+<li><p>Supports DMA transfer mode</p></li>
+</ul>
+</section>
+<section id="functional-description">
+<h2><span class="section-number">10.3. </span>Functional Description<a class="headerlink" href="#functional-description" title="Permalink to this headline"></a></h2>
+<p>The block diagram of DBI module is shown as follows.</p>
+<figure class="align-center" id="id11">
+<img alt="../_images/DBIBlock.svg" src="../_images/DBIBlock.svg" /><figcaption>
+<p><span class="caption-number">Fig. 10.1 </span><span class="caption-text">Block Diagram of DBI</span><a class="headerlink" href="#id11" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<section id="dbi-type-b">
+<h3><span class="section-number">10.3.1. </span>DBI Type B<a class="headerlink" href="#dbi-type-b" title="Permalink to this headline"></a></h3>
+<section id="write-timing">
+<h4><span class="section-number">10.3.1.1. </span>Write Timing<a class="headerlink" href="#write-timing" title="Permalink to this headline"></a></h4>
+<p>The DBI Type B mode has 8-bit parallel data lines, and the timing of MCU writing data to the display module is shown as follows:</p>
+<figure class="align-center" id="id12">
+<img alt="../_images/DBITypeBWrite.svg" src="../_images/DBITypeBWrite.svg" /><figcaption>
+<p><span class="caption-number">Fig. 10.2 </span><span class="caption-text">Write Timing</span><a class="headerlink" href="#id12" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<ul class="simple">
+<li><p>CSX: chip select signal. When the signal is Low, the display module will be selected; when it is High, the display module will ignore all other interface signals.</p></li>
+<li><p>RESX: external reset signal. When the signal is Low, the display module will be reset.</p></li>
+<li><p>D/CX: data/command signal. When the signal is 0, the DB[7:0] bit is a command; when the signal is 1, the DB[7:0] bit is the RAM data or command parameter.</p></li>
+<li><p>WRX: parallel data write strobe signal. The signal is driven from high to low in the write cycle and then pulled back to high. The display module reads the information transmitted by MCU at the rising edge of the signal. This is an asynchronous signal and can be terminated if not in use.</p></li>
+<li><p>RDX: parallel data read strobe signal. The signal is driven from high to low and then pulled back to high in the read cycle. MCU reads the information transmitted by the display module at the rising edge of the signal. This is an asynchronous signal and can be terminated if not in use.</p></li>
+<li><p>DB[7:0]: 8-bit data signal, used to transmit commands, command parameters or data</p></li>
+</ul>
+</section>
+<section id="read-timing">
+<h4><span class="section-number">10.3.1.2. </span>Read Timing<a class="headerlink" href="#read-timing" title="Permalink to this headline"></a></h4>
+<p>The timing of MCU reading data from the display module is shown as follows:</p>
+<figure class="align-center" id="id13">
+<img alt="../_images/DBITypeBRead.svg" src="../_images/DBITypeBRead.svg" /><figcaption>
+<p><span class="caption-number">Fig. 10.3 </span><span class="caption-text">Read Timing</span><a class="headerlink" href="#id13" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="output-rgb565">
+<h4><span class="section-number">10.3.1.3. </span>Output RGB565<a class="headerlink" href="#output-rgb565" title="Permalink to this headline"></a></h4>
+<p>The data output in RGB565 format is shown as follows:</p>
+<figure class="align-center" id="id14">
+<a class="reference internal image-reference" href="../_images/DBITypeBRGB565.svg"><img alt="../_images/DBITypeBRGB565.svg" src="../_images/DBITypeBRGB565.svg" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 10.4 </span><span class="caption-text">RGB565 Output</span><a class="headerlink" href="#id14" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="output-rgb666">
+<h4><span class="section-number">10.3.1.4. </span>Output RGB666<a class="headerlink" href="#output-rgb666" title="Permalink to this headline"></a></h4>
+<p>The data output in RGB666 format is shown as follows:</p>
+<figure class="align-center" id="id15">
+<a class="reference internal image-reference" href="../_images/DBITypeBRGB666.svg"><img alt="../_images/DBITypeBRGB666.svg" src="../_images/DBITypeBRGB666.svg" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 10.5 </span><span class="caption-text">RGB666 Output</span><a class="headerlink" href="#id15" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="output-rgb888">
+<h4><span class="section-number">10.3.1.5. </span>Output RGB888<a class="headerlink" href="#output-rgb888" title="Permalink to this headline"></a></h4>
+<p>The data output in RGB888 format is shown as follows:</p>
+<figure class="align-center" id="id16">
+<a class="reference internal image-reference" href="../_images/DBITypeBRGB888.svg"><img alt="../_images/DBITypeBRGB888.svg" src="../_images/DBITypeBRGB888.svg" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 10.6 </span><span class="caption-text">RGB888 Output</span><a class="headerlink" href="#id16" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="dbi-type-c-3-line">
+<h3><span class="section-number">10.3.2. </span>DBI Type C 3-Line<a class="headerlink" href="#dbi-type-c-3-line" title="Permalink to this headline"></a></h3>
+<section id="id1">
+<h4><span class="section-number">10.3.2.1. </span>Write Timing<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h4>
+<p>The DBI Type C mode has 3-line 9-bit serial interface, and the timing of MCU writing data to the display module is shown as follows:</p>
+<figure class="align-center" id="id17">
+<img alt="../_images/DBITypeC3Write.svg" src="../_images/DBITypeC3Write.svg" /><figcaption>
+<p><span class="caption-number">Fig. 10.7 </span><span class="caption-text">Write Timing</span><a class="headerlink" href="#id17" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<ul class="simple">
+<li><p>CSX: chip select signal. When the signal is Low, the display module will be selected; when it is High, the display module will ignore all other interface signals.</p></li>
+<li><p>SCL: serial clock line, which provides a clock signal for data transfer.</p></li>
+<li><p>SDA: serial data line. In a write operation, the serial data packet contains a D/CX (data/command) selection bit and a transfer byte. If the D/CX bit is Low, the transfer byte is a command. If the D/CX bit is High, that is the display data or command parameter.</p></li>
+</ul>
+</section>
+<section id="id2">
+<h4><span class="section-number">10.3.2.2. </span>Read Timing<a class="headerlink" href="#id2" title="Permalink to this headline"></a></h4>
+<p>The timing of MCU reading data from the display module is shown as follows:</p>
+<figure class="align-center" id="id18">
+<img alt="../_images/DBITypeC3Read.svg" src="../_images/DBITypeC3Read.svg" /><figcaption>
+<p><span class="caption-number">Fig. 10.8 </span><span class="caption-text">Read Timing</span><a class="headerlink" href="#id18" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id3">
+<h4><span class="section-number">10.3.2.3. </span>Output RGB565<a class="headerlink" href="#id3" title="Permalink to this headline"></a></h4>
+<p>The data output in RGB565 format is shown as follows:</p>
+<figure class="align-center" id="id19">
+<img alt="../_images/DBITypeC3RGB565.svg" src="../_images/DBITypeC3RGB565.svg" /><figcaption>
+<p><span class="caption-number">Fig. 10.9 </span><span class="caption-text">RGB565 Output</span><a class="headerlink" href="#id19" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id4">
+<h4><span class="section-number">10.3.2.4. </span>Output RGB666<a class="headerlink" href="#id4" title="Permalink to this headline"></a></h4>
+<p>The data output in RGB666 format is shown as follows:</p>
+<figure class="align-center" id="id20">
+<img alt="../_images/DBITypeC3RGB666.svg" src="../_images/DBITypeC3RGB666.svg" /><figcaption>
+<p><span class="caption-number">Fig. 10.10 </span><span class="caption-text">RGB666 Output</span><a class="headerlink" href="#id20" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id5">
+<h4><span class="section-number">10.3.2.5. </span>Output RGB888<a class="headerlink" href="#id5" title="Permalink to this headline"></a></h4>
+<p>The data output in RGB888 format is shown as follows:</p>
+<figure class="align-center" id="id21">
+<img alt="../_images/DBITypeC3RGB888.svg" src="../_images/DBITypeC3RGB888.svg" /><figcaption>
+<p><span class="caption-number">Fig. 10.11 </span><span class="caption-text">RGB888 Output</span><a class="headerlink" href="#id21" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="dbi-type-c-4-line">
+<h3><span class="section-number">10.3.3. </span>DBI Type C 4-Line<a class="headerlink" href="#dbi-type-c-4-line" title="Permalink to this headline"></a></h3>
+<section id="id6">
+<h4><span class="section-number">10.3.3.1. </span>Write Timing<a class="headerlink" href="#id6" title="Permalink to this headline"></a></h4>
+<p>The DBI Type C mode has 4-line 8-bit serial interface, and the timing of MCU writing data to the display module is shown as follows:</p>
+<figure class="align-center" id="id22">
+<img alt="../_images/DBITypeC4Write.svg" src="../_images/DBITypeC4Write.svg" /><figcaption>
+<p><span class="caption-number">Fig. 10.12 </span><span class="caption-text">Write Timing</span><a class="headerlink" href="#id22" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<ul class="simple">
+<li><p>CSX: chip select signal. When the signal is Low, the display module will be selected; when it is High, the display module will ignore all other interface signals.</p></li>
+<li><p>D/CX: data/command signal. If the signal is Low, the information transferred by SDA is a command. If the signal is High, that is the display data or command parameter.</p></li>
+<li><p>SCL: serial clock line, which provides a clock signal for data transfer.</p></li>
+<li><p>SDA: serial data line. used to transmit commands, command parameters or data.</p></li>
+</ul>
+</section>
+<section id="id7">
+<h4><span class="section-number">10.3.3.2. </span>Read Timing<a class="headerlink" href="#id7" title="Permalink to this headline"></a></h4>
+<p>The timing of MCU reading data from the display module is shown as follows:</p>
+<figure class="align-center" id="id23">
+<img alt="../_images/DBITypeC4Read.svg" src="../_images/DBITypeC4Read.svg" /><figcaption>
+<p><span class="caption-number">Fig. 10.13 </span><span class="caption-text">Read Timing</span><a class="headerlink" href="#id23" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id8">
+<h4><span class="section-number">10.3.3.3. </span>Output RGB565<a class="headerlink" href="#id8" title="Permalink to this headline"></a></h4>
+<p>The data output in RGB565 format is shown as follows:</p>
+<figure class="align-center" id="id24">
+<img alt="../_images/DBITypeC4RGB565.svg" src="../_images/DBITypeC4RGB565.svg" /><figcaption>
+<p><span class="caption-number">Fig. 10.14 </span><span class="caption-text">RGB565 Output</span><a class="headerlink" href="#id24" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id9">
+<h4><span class="section-number">10.3.3.4. </span>Output RGB666<a class="headerlink" href="#id9" title="Permalink to this headline"></a></h4>
+<p>The data output in RGB666 format is shown as follows:</p>
+<figure class="align-center" id="id25">
+<img alt="../_images/DBITypeC4RGB666.svg" src="../_images/DBITypeC4RGB666.svg" /><figcaption>
+<p><span class="caption-number">Fig. 10.15 </span><span class="caption-text">RGB666 Output</span><a class="headerlink" href="#id25" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id10">
+<h4><span class="section-number">10.3.3.5. </span>Output RGB888<a class="headerlink" href="#id10" title="Permalink to this headline"></a></h4>
+<p>The data output in RGB888 format is shown as follows:</p>
+<figure class="align-center" id="id26">
+<img alt="../_images/DBITypeC4RGB888.svg" src="../_images/DBITypeC4RGB888.svg" /><figcaption>
+<p><span class="caption-number">Fig. 10.16 </span><span class="caption-text">RGB888 Output</span><a class="headerlink" href="#id26" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="input-pixel-format">
+<h3><span class="section-number">10.3.4. </span>Input Pixel Format<a class="headerlink" href="#input-pixel-format" title="Permalink to this headline"></a></h3>
+<p>The DBI module supports 8 different input pixel formats, whose arrangement in the memory is shown as follows:</p>
+<figure class="align-center" id="id27">
+<img alt="../_images/DBIMemory.svg" src="../_images/DBIMemory.svg" /><figcaption>
+<p><span class="caption-number">Fig. 10.17 </span><span class="caption-text">Input Pixel Format</span><a class="headerlink" href="#id27" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="interrupt">
+<h3><span class="section-number">10.3.5. </span>Interrupt<a class="headerlink" href="#interrupt" title="Permalink to this headline"></a></h3>
+<p>DBI has the following interrupts:</p>
+<ul class="simple">
+<li><p>End of transfer interrupt</p></li>
+<li><p>TX FIFO request interrupt</p></li>
+<li><p>FIFO overflow error interrupt</p></li>
+</ul>
+<p>When a pixel count value is set, the end of transfer interrupt will be generated when the transferred pixel data reaches the count value, and both Type B and Type C will generate this interrupt.</p>
+<p>When TFICNT in DBI_FIFO_CONFIG_1 is greater than TFITH, the TX FIFO request interrupt will be generated, and the interrupt flag will be automatically cleared when the condition is not met.</p>
+<p>The FIFO overflow error interrupt will be generated in the case of Overflow or Underflow of TX.</p>
+</section>
+<section id="dma">
+<h3><span class="section-number">10.3.6. </span>DMA<a class="headerlink" href="#dma" title="Permalink to this headline"></a></h3>
+<p>DBI TX supports the DMA transfer mode, which requires to set the threshold of TX FIFO by configuring the &lt;TFITH&gt; bit in the register DBI_FIFO_CONFIG_1. When this mode is enabled, if TFICNT is greater than TFITH, the DMA TX request will be triggered. After DMA is configured, when receiving this request, DMA will transfer data from memory to TX FIFO as configured.</p>
+</section>
+</section>
+<section id="register-description">
+<h2><span class="section-number">10.4. </span>Register description<a class="headerlink" href="#register-description" title="Permalink to this headline"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 63%" />
+<col style="width: 37%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Name</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dbi-config">dbi_config</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dbi-int-sts">dbi_int_sts</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dbi-bus-busy">dbi_bus_busy</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dbi-pix-cnt">dbi_pix_cnt</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dbi-prd">dbi_prd</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dbi-wdata">dbi_wdata</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dbi-rdata">dbi_rdata</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dbi-fifo-config-0">dbi_fifo_config_0</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dbi-fifo-config-1">dbi_fifo_config_1</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dbi-fifo-wdata">dbi_fifo_wdata</a></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<section id="dbi-config">
+<h3><span class="section-number">10.4.1. </span>dbi_config<a class="headerlink" href="#dbi-config" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x3001b000</p>
+<figure class="align-center">
+<img alt="../_images/dbi_dbi_config.svg" src="../_images/dbi_dbi_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:29</p></td>
+<td><p>cr_dbi_tc_deg_cnt</p></td>
+<td><p>r/w</p></td>
+<td><p>3’d0</p></td>
+<td><p>De-glitch function cycle count</p></td>
+</tr>
+<tr class="row-odd"><td><p>28</p></td>
+<td><p>cr_dbi_tc_deg_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Enable signal of all input de-glitch function</p></td>
+</tr>
+<tr class="row-even"><td rowspan="3"><p>27</p></td>
+<td rowspan="3"><p>cr_dbi_tc_3w_mode</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>DBI Type C 3-wire mode enable</p>
+<p>1’b0: 4-wire mode is enabled</p>
+<p>1’b1: 3-wire mode is enabled</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>26:24</p></td>
+<td><p>rsvd</p></td>
+<td><p>rsvd</p></td>
+<td><p>3’h0</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td rowspan="2"><p>23:20</p></td>
+<td rowspan="2"><p>cr_dbi_dmy_cnt</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>4’d0</p></td>
+<td rowspan="2"><p>Dummy cycle count, unit: period defined by dbi_prd_d</p>
+<p>Effective only in Type C (Fixed to 1 dbi_prd_d  period in Type B)</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3"><p>19</p></td>
+<td rowspan="3"><p>cr_dbi_dmy_en</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>Enable signal of dummy cycle(s)</p>
+<p>1’b0: Disabled, no dummy cycle(s) between command phase and data phase</p>
+<p>1’b1: Enabled, dummy cycle(s) will be inserted between command phase and data phase</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3"><p>18</p></td>
+<td rowspan="3"><p>cr_dbi_cont_en</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b1</p></td>
+<td rowspan="3"><p>Enable signal of pixel data continuous transfer mode</p>
+<p>1’b0: Disabled, CS_n will de-assert between each pixel</p>
+<p>1’b1: Enabled, CS_n will stay asserted between each consecutive pixel</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>17</p></td>
+<td><p>cr_dbi_scl_ph</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>SCL clock phase inverse signal</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><p>16</p></td>
+<td rowspan="3"><p>cr_dbi_scl_pol</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b1</p></td>
+<td rowspan="3"><p>SCL clock polarity</p>
+<p>0: SCL output LOW at IDLE state</p>
+<p>1: SCL output HIGH at IDLE state</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>15:8</p></td>
+<td><p>cr_dbi_cmd</p></td>
+<td><p>r/w</p></td>
+<td><p>8’h2C</p></td>
+<td><p>DBI Command</p></td>
+</tr>
+<tr class="row-odd"><td><p>7:6</p></td>
+<td><p>cr_dbi_dat_bc</p></td>
+<td><p>r/w</p></td>
+<td><p>2’d0</p></td>
+<td><p>Data byte count of normal data (pixel data count is determined by cr_dbi_pix_cnt)</p></td>
+</tr>
+<tr class="row-even"><td rowspan="4"><p>5</p></td>
+<td rowspan="4"><p>cr_dbi_dat_tp</p></td>
+<td rowspan="4"><p>r/w</p></td>
+<td rowspan="4"><p>1’b0</p></td>
+<td rowspan="4"><p>Data type select</p>
+<p>1’b0: Normal data (parameter)</p>
+<p>1’b1: Pixel data</p>
+<p>Note: Read command supports normal data only</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3"><p>4</p></td>
+<td rowspan="3"><p>cr_dbi_dat_wr</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b1</p></td>
+<td rowspan="3"><p>Data phase Read/Write select</p>
+<p>1’b0: Read data</p>
+<p>1’b1: Write data</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3"><p>3</p></td>
+<td rowspan="3"><p>cr_dbi_dat_en</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b1</p></td>
+<td rowspan="3"><p>Data enable signal</p>
+<p>1’b0: Data phase disabled</p>
+<p>1’b1: Data phase enabled</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3"><p>2</p></td>
+<td rowspan="3"><p>cr_dbi_cmd_en</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b1</p></td>
+<td rowspan="3"><p>Command enable signal</p>
+<p>1’b0: No command phase</p>
+<p>1’b1: Command will be sent</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3"><p>1</p></td>
+<td rowspan="3"><p>cr_dbi_sel</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>Select signal of DBI Type B or C</p>
+<p>1’b0: DBI Type B</p>
+<p>1’b1: DBI Type C</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="2"><p>0</p></td>
+<td rowspan="2"><p>cr_dbi_en</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>1’b0</p></td>
+<td rowspan="2"><p>Enable signal of DBI function</p>
+<p>Asserting this bit will trigger the transaction, and should be de-asserted after finish</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</section>
+<section id="dbi-int-sts">
+<h3><span class="section-number">10.4.2. </span>dbi_int_sts<a class="headerlink" href="#dbi-int-sts" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x3001b004</p>
+<figure class="align-center">
+<img alt="../_images/dbi_dbi_int_sts.svg" src="../_images/dbi_dbi_int_sts.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:27</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>26</p></td>
+<td><p>cr_dbi_fer_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt enable of dbi_fer_int</p></td>
+</tr>
+<tr class="row-even"><td><p>25</p></td>
+<td><p>cr_dbi_txf_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt enable of dbi_txe_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>24</p></td>
+<td><p>cr_dbi_end_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt enable of dbi_end_int</p></td>
+</tr>
+<tr class="row-even"><td><p>23:19</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>18</p></td>
+<td><p>rsvd</p></td>
+<td><p>rsvd</p></td>
+<td><p>1’b0</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>17</p></td>
+<td><p>rsvd</p></td>
+<td><p>rsvd</p></td>
+<td><p>1’b0</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>16</p></td>
+<td><p>cr_dbi_end_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1’b0</p></td>
+<td><p>Interrupt clear of dbi_end_int</p></td>
+</tr>
+<tr class="row-even"><td><p>15:11</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>cr_dbi_fer_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt mask of dbi_fer_int</p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>cr_dbi_txf_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt mask of dbi_txe_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>cr_dbi_end_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt mask of dbi_end_int</p></td>
+</tr>
+<tr class="row-even"><td><p>7:3</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>dbi_fer_int</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>TX/RX FIFO error interrupt, auto-cleared when FIFO overflow/underflow error flag is cleared</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>dbi_txf_int</p></td>
+<td><p>r</p></td>
+<td><p>1’b1</p></td>
+<td><p>TX FIFO ready (tx_fifo_cnt &gt; tx_fifo_th) interrupt, auto-cleared when data is pushed</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>dbi_end_int</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>Transfer end interrupt, shared by both Type B and C mode</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dbi-bus-busy">
+<h3><span class="section-number">10.4.3. </span>dbi_bus_busy<a class="headerlink" href="#dbi-bus-busy" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x3001b008</p>
+<figure class="align-center">
+<img alt="../_images/dbi_dbi_bus_busy.svg" src="../_images/dbi_dbi_bus_busy.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:1</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>sts_dbi_bus_busy</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>Indicator of dbi bus busy</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dbi-pix-cnt">
+<h3><span class="section-number">10.4.4. </span>dbi_pix_cnt<a class="headerlink" href="#dbi-pix-cnt" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x3001b00c</p>
+<figure class="align-center">
+<img alt="../_images/dbi_dbi_pix_cnt.svg" src="../_images/dbi_dbi_pix_cnt.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td rowspan="3"><p>31</p></td>
+<td rowspan="3"><p>cr_dbi_pix_format</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>Pixel format</p>
+<p>1’b0: RGB565</p>
+<p>1’b1: RGB888/RGB666</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>30:24</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>23:0</p></td>
+<td><p>cr_dbi_pix_cnt</p></td>
+<td><p>r/w</p></td>
+<td><p>24’h0</p></td>
+<td><p>Pixel count</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dbi-prd">
+<h3><span class="section-number">10.4.5. </span>dbi_prd<a class="headerlink" href="#dbi-prd" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x3001b010</p>
+<figure class="align-center">
+<img alt="../_images/dbi_dbi_prd.svg" src="../_images/dbi_dbi_prd.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:24</p></td>
+<td><p>cr_dbi_prd_d_ph_1</p></td>
+<td><p>r/w</p></td>
+<td><p>8’d15</p></td>
+<td><p>Length of DATA phase 1 (please refer to “Timing” tab)</p></td>
+</tr>
+<tr class="row-odd"><td><p>23:16</p></td>
+<td><p>cr_dbi_prd_d_ph_0</p></td>
+<td><p>r/w</p></td>
+<td><p>8’d15</p></td>
+<td><p>Length of DATA phase 0 (please refer to “Timing” tab)</p></td>
+</tr>
+<tr class="row-even"><td><p>15:8</p></td>
+<td><p>cr_dbi_prd_i</p></td>
+<td><p>r/w</p></td>
+<td><p>8’d15</p></td>
+<td><p>Length of INTERVAL between pixel data (please refer to “Timing” tab)</p></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>cr_dbi_prd_s</p></td>
+<td><p>r/w</p></td>
+<td><p>8’d15</p></td>
+<td><p>Length of START/STOP condition (please refer to “Timing” tab)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dbi-wdata">
+<h3><span class="section-number">10.4.6. </span>dbi_wdata<a class="headerlink" href="#dbi-wdata" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x3001b018</p>
+<figure class="align-center">
+<img alt="../_images/dbi_dbi_wdata.svg" src="../_images/dbi_dbi_wdata.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>cr_dbi_wdata</p></td>
+<td><p>r/w</p></td>
+<td><p>32’h0</p></td>
+<td><p>Data to be written into display IC using write command</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dbi-rdata">
+<h3><span class="section-number">10.4.7. </span>dbi_rdata<a class="headerlink" href="#dbi-rdata" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x3001b01c</p>
+<figure class="align-center">
+<img alt="../_images/dbi_dbi_rdata.svg" src="../_images/dbi_dbi_rdata.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>sts_dbi_rdata</p></td>
+<td><p>r</p></td>
+<td><p>32’h0</p></td>
+<td><p>Data read from display IC using read command</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dbi-fifo-config-0">
+<h3><span class="section-number">10.4.8. </span>dbi_fifo_config_0<a class="headerlink" href="#dbi-fifo-config-0" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x3001b080</p>
+<figure class="align-center">
+<img alt="../_images/dbi_dbi_fifo_config_0.svg" src="../_images/dbi_dbi_fifo_config_0.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td rowspan="9"><p>31:29</p></td>
+<td rowspan="9"><p>fifo_format</p></td>
+<td rowspan="9"><p>r/w</p></td>
+<td rowspan="9"><p>3’d0</p></td>
+<td rowspan="9"><p>FIFO data format (see Tab ‘FIFO Format’ for details)</p>
+<p>3’d0: {8’h0, B[7:0], G[7:0], R[7:0]}</p>
+<p>3’d1: {8’h0, R[7:0], G[7:0], B[7:0]}</p>
+<p>3’d2: {B[7:0], G[7:0], R[7:0], 8’h0}</p>
+<p>3’d3: {R[7:0], G[7:0], B[7:0], 8’h0}</p>
+<p>3’d4: {R[7:0], B[7:0], G[7:0], R[7:0]}</p>
+<p>3’d5: {B[7:0], R[7:0], G[7:0], B[7:0]}</p>
+<p>3’d6: {2{B[7:3], G[7:2], R[7:3]}}</p>
+<p>3’d7: {2{R[7:3], G[7:2], B[7:3]}}</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>28:6</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>tx_fifo_underflow</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>Underflow flag of TX FIFO, can be cleared by tx_fifo_clr</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>tx_fifo_overflow</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>Overflow flag of TX FIFO, can be cleared by tx_fifo_clr</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>tx_fifo_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1’b0</p></td>
+<td><p>Clear signal of TX FIFO</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>dbi_dma_tx_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Enable signal of dma_tx_req/ack interface</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dbi-fifo-config-1">
+<h3><span class="section-number">10.4.9. </span>dbi_fifo_config_1<a class="headerlink" href="#dbi-fifo-config-1" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x3001b084</p>
+<figure class="align-center">
+<img alt="../_images/dbi_dbi_fifo_config_1.svg" src="../_images/dbi_dbi_fifo_config_1.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:19</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>18:16</p></td>
+<td><p>tx_fifo_th</p></td>
+<td><p>r/w</p></td>
+<td><p>3’d0</p></td>
+<td><p>TX FIFO threshold, dma_tx_req will not be asserted if tx_fifo_cnt is less than this value</p></td>
+</tr>
+<tr class="row-even"><td><p>15:4</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>3:0</p></td>
+<td><p>tx_fifo_cnt</p></td>
+<td><p>r</p></td>
+<td><p>4’d8</p></td>
+<td><p>TX FIFO available count</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dbi-fifo-wdata">
+<h3><span class="section-number">10.4.10. </span>dbi_fifo_wdata<a class="headerlink" href="#dbi-fifo-wdata" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x3001b088</p>
+<figure class="align-center">
+<img alt="../_images/dbi_dbi_fifo_wdata.svg" src="../_images/dbi_dbi_fifo_wdata.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>dbi_fifo_wdata</p></td>
+<td><p>w</p></td>
+<td><p>x</p></td>
+<td><p>Pixel data with 8 types of format (determined by fifo_format)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Lz4d.html" class="btn btn-neutral float-left" title="9. LZ4D" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="DPI.html" class="btn btn-neutral float-right" title="11. DPI" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

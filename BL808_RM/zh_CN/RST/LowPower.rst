@@ -217,10 +217,3 @@ PDS_IO 的 IE/PD/PU 可由 pds_gpio_i_set 寄存器控制，相同的组 GPIO �
 等到 PDS7 唤醒后, PDS_IO 状态仍会保持着，需要把 cr_pds_gpio_iso_mode 请 0 后, 才会离开 IO 保持状态。
 这种 IO 保持方式的优势是可以实现同一组 GPIO 保持不同的电平。
 
-.. only:: html
-
-   .. include:: HBN_register.rst
-
-.. raw:: latex
-
-   \input{../../zh_CN/content/HBN}

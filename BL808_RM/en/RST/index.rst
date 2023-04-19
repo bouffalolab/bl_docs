@@ -32,7 +32,6 @@ BL808 Reference Manual
    content/PSRAM
    content/Emac
    content/USB
-   content/ISO11898
    content/MJPEG
    content/JDEC
    content/VENC

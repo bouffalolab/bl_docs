@@ -20,56 +20,63 @@ There is one watchdog counter in the chip. Unpredictable software or hardware be
 
 Features
 =========
-- Multiple clock sources, up to 80M clock supported
-- Bit clock divider with a division factor of 1-256
-- Two 32-bit timers
-- Each timer has three alarm value settings, and the alarm when each set of alarm values overflows can be independently set.
-- Supports Free Run mode and Pre_load mode
+- 32-bit timer
+
+   * Multiple clock sources, up to 80M clock supported
+   * Bit clock divider with a division factor of 1-256
+   * Two 32-bit timers
+   * Each timer has three alarm value settings, and the alarm when each set of alarm values overflows can be independently set.
+   * Supports Free Run mode and Pre_load mode
+   * Supports measuring the pulse width of external GPIO
+
+- Watchdog timer
+
 - With 16-bit watchdog timer
 - Supports write password protection to prevent system error caused by wrong settings
 - Supports two watchdog overflow modes: interrupt or reset
-- Supports measuring the pulse width of external GPIO
 
 Functional Description
 ==========================
 
-There are 5 types of watchdog timer clocks:
+There are 5 watchdog timer clock sources, which can be selected via cs_wdt in the TCCR register:
 
-- Bclk--bus clock
-- 32K–32K clock
-- 1K–1K clock
-- Xtal–external crystal oscillator
-- GPIO–external GPIO
+- BCLK--bus clock
+- 32K--32K clock
+- 1K--1K clock
+- XTAL--external crystal oscillator
+- GPIO--external GPIO
 
-It is configured by cs_wdt in the register TCCR.
+There are 5 types of timer clock sources, which can be selected via cs_2 and cs_3 in register TCCR:
 
-There are 5 types of timer clock sources:
+- BCLK--bus clock
+- 32K--32K clock
+- 1K--1K clock(32K frequency division)
+- XTAL--external crystal oscillator
+- GPIO--external GPIO
 
-- Bclk--bus clock
-- 32K–32K clock
-- 1K–1K clock(32K frequency division)
-- Xtal–external crystal oscillator
-- GPIO–external GPIO
-
-It is configured by cs_2 and cs_3 in the register TCCR.
-
-Each counter has its own 8-bit frequency divider, which can divide the clock by 1-256. Specifically, when it is set to 0, it means no frequency division. When it is set to 1, it will divide the clock by 2, and so on. The maximum division factor is 256, and the counter will take the divided clock as the counting cycle unit.
-
-It is configured by tcdr2, tcdr3, and wcdr in the register TCDR.
+Each counter has its own 8-bit frequency divider, which can divide the clock by 1-256.
+Specifically, when it is set to 0, it means no frequency division. When it is set to 1, it will divide the clock by 2, and so on.
+The maximum division factor is 256, and the counter will take the divided clock as the counting cycle unit.
 
 Working Principle of General Purpose Timer
 --------------------
 Each general purpose timer contains three comparators, one counter, and one PreLoad register. When the clock source is set and the timer is started, the counter starts to count up cumulatively. When the value of counter is equal to that of the comparator, the comparison flag is set and a comparison interrupt can be generated.
 
-You can configure the value of TMR2 comparator 0 by setting tclr2_0, that of TMR2 comparator 1 by setting tclr2_1, and that of TMR2 comparator 2 by setting tclr2_2 in the register TICR2. The tplvr2 in the register TPLVR2 sets the TMR2 preload value.
+You can configure the value of channel 0 comparator 0 by setting tclr2_0, that of channel 0 comparator 1 by setting tclr2_1, and that of channel 0 comparator 2 by setting tclr2_2 in the register TICR2. The tplvr2 in the register TPLVR2 sets the channel 0 preload value.
 
-You can configure the value of TMR3 comparator 0 by setting tclr3_0, that of TMR3 comparator 1 by setting tclr3_1, and that of TMR3 comparator 2 by setting tclr3_2 in the register TICR3. The tplvr3 in the register TPLVR3 sets the TMR3 preload value.
+You can configure the value of channel 1 comparator 0 by setting tclr3_0, that of channel 1 comparator 1 by setting tclr3_1, and that of channel 1 comparator 2 by setting tclr3_2 in the register TICR3. The tplvr3 in the register TPLVR3 sets the channel 1 preload value.
 
-The counter's initial value depends on the timing mode. In the FreeRun mode, this initial value is 0, and then the counter counts up cumulatively. After reaching the maximum value, it starts counting again from 0.
+The timer supports two counting modes, PreLoad mode and FreeRun mode, which are selected by register TCMR.
+The timer2_mode in register TCMR sets the counting mode of timer0, and the timer3_mode in register TCMR sets the counting mode of timer1.
 
-In the PreLoad mode, this initial value is the value of the PreLoad register, and then counts up cumulatively. When the PreLoad condition is met, the counter's value is set to the value of the PreLoad register, and then the counter starts counting up cumulatively again. In the counting process of the timer's counter, once the counter's value is consistent with one comparison value of three comparators, the comparison flag of the comparator will be set, and the corresponding comparison interrupt can be generated.
+PreLoad mode
+^^^^^^^^^^^^^
+The initial value of the counter in PreLoad mode is the value of the TPLVR register (Preload Register), from which the count is accumulated upwards.
+Register TPLVR2 sets the preload value of timer0, and register TPLVR3 configures the preload value of timer1.
+The tplcr2 in register TPLCR2 configures the PreLoad trigger condition of timer0, and the tplcr3 in register TPLCR3 configures the PreLoad trigger condition of timer1.
+When the PreLoad trigger condition is met, the counter value will be reset to the value of PreLoad register, and then the counter will start to count up again.
 
-You can configure the counting mode of TMR2 by setting timer2_mode and that of TMR3 by setting timer3_mode in the register TCMR.
+During the counter counting of the timer, once the counter value matches with one of the three comparators, the comparison flag of that comparator will be set and the corresponding comparison interrupt can be generated.
 
 If the value of the PreLoad register is 10, and the values of comparators 0, 1, and 2 are 13, 16, and 19 respectively, the working sequence of the timer in the PreLoad mode is as follows:
 
@@ -78,23 +85,57 @@ If the value of the PreLoad register is 10, and the values of comparators 0, 1, 
 
    Working sequence of timer in preLoad mode
 
-In FreeRun mode, the working timing of the timer is basically the same as that of PreLoad, except that the counter will accumulate from 0 to the maximum value, and the mechanism of comparison flag and comparison interrupt generated during this period is the same as that of FreeRun mode.
+FreeRun mode
+^^^^^^^^^^^
+FreeRun mode is the counter accumulation mode. In FreeRun mode, the initial value of the counter is 0. After starting the timer, the counter starts to accumulate from 0, and when the maximum value of the counter is reached, it starts to count from 0 again.
 
-TMR2 can use the internal clock source to calculate the pulse width of the external gpio.
-This function is enabled by setting timer2_gpio_en in the register GPIO. By setting the timer2_gpio_inv bit, it is judged whether the high level or low level of the external gpio is obtained. If the bit is 0, it means high level; if the bit is 1, it means Low level; in addition, the external gpio function needs to be set to the gpio_tmr_clk function. By configuring the gpio_tmr_clk_sel[13:12] bits in the register dig_clk_cfg2 in the GLB module; at the same time, you need to configure a bit in the register dig_clk_cfg2[11:8] to 0, which needs to be used in conjunction with gpio_tmr_clk_sel. details as follows:
+During the counter counting of the timer, once the counter value agrees with one of the three comparators. The comparison flag of that comparator will be set and the corresponding comparison interrupt can be generated.
 
-- If gpio_tmr_clk_sel[13:12] is configured as 0, then chip_clk_out_0_en in register dig_clk_cfg2 is set to 0
-- If gpio_tmr_clk_sel[13:12] is configured as 1, then chip_clk_out_1_en in register dig_clk_cfg2 is set to 0
-- If gpio_tmr_clk_sel[13:12] is configured as 2, then chip_clk_out_2_en in register dig_clk_cfg2 is set to 0
-- If gpio_tmr_clk_sel[13:12] is configured as 3, then chip_clk_out_3_en in register dig_clk_cfg2 is set to 0
+In FreeRun mode, the timer works in the same timing as PreLoad, except that the counter will accumulate from 0 to the maximum value, and the mechanism of comparison flags and comparison interrupts generated during the period is the same as PreLoad mode.
 
-After the configuration is complete, enable the timer. When the gpio_lat_ok in the register GPIO is set to 1, the values ​​of the register GPIO_LAT2 and the register GPIO_LAT1 are obtained.
+Measuring External GPIO Pulse Width
+^^^^^^^^^^^^^^^^^^^^
+The timer supports calculating the pulse width of external GPIOs using the internal clock source.
+
+To configure, proceed as follows.
+
+1. Configure the external GPIO to function as gpio_tmr_clk. This is achieved by configuring register dig_clk_cfg2 in the GLB module.
+
+   Register dig_clk_cfg2[13:12] bits for gpio_tmr_clk_sel: Selects the GPIO clock mode.
+   A bit in register dig_clk_cfg2[11:8] is configured to 0 to indicate clock input mode.
+   These two registers need to be used together and are configured as follows, and so on according to the GPIOs used.
+
+.. table:: gpio_tmr_clk function configuration
+
+
+    +-------------+----------------------------------+----------------------------------------+
+    |    GPIO     | dig_clk_cfg2[13:12]              | dig_clk_cfg2[11:8]                     |
+    +=============+==================================+========================================+
+    |    GPIO0    | gpio_tmr_clk = 0                 | chip_clk_out_0_en = 0                  |
+    +-------------+----------------------------------+----------------------------------------+
+    |    GPIO1    | gpio_tmr_clk = 1                 | chip_clk_out_1_en = 0                  |
+    +-------------+----------------------------------+----------------------------------------+
+    |    GPIO2    | gpio_tmr_clk = 2                 | chip_clk_out_2_en = 0                  |
+    +-------------+----------------------------------+----------------------------------------+
+    |    GPIO3    | gpio_tmr_clk = 3                 | chip_clk_out_3_en = 0                  |
+    +-------------+----------------------------------+----------------------------------------+
+    |    GPIO4    | gpio_tmr_clk = 0                 | chip_clk_out_0_en = 0                  |
+    +-------------+----------------------------------+----------------------------------------+
+
+2. The timer2_gpio_inv / timer3_gpio_inv bits in the GPIO register configure whether the external pulse width needs to be measured high or low.   If this bit is 0, it means high level; if this bit is 1, it means low level. 3.
+
+3. configure timer2_gpio_en in GPIO register to enable GPIO measurement function
+
+4. Configure the timer clock source and operation mode, and enable timer
+
+5. When gpio_lat_ok in GPIO register is set to 1, get the value of GPIO_LAT2 and GPIO_LAT1 register and calculate the width.
+
 The calculation method of the pulse width of the external gpio: (GPIO_LAT2-GPIO_LAT1)\* the width of 1 cycle of the internal clock source of the timer.
 
 For example: the internal clock source of the timer is 80M, the frequency of the external gpio is 2M, and the duty ratio is 1:1. Write 1 to the timer2_gpio_inv bit to calculate the width of the low level of the external gpio.
-After the above configuration is completed, the difference between the register GPIO_LAT2 and the register GPIO_LAT1 is 20, then the low level width of the external gpio is: 20 \*(1 / 80000000) = 1 / 4000000;
-Write 0 to the timer2_gpio_inv bit, which means to calculate the width of the high level of the external gpio.
-After the above configuration is completed, the difference between the register GPIO_LAT2 and the register GPIO_LAT1 is 20, then the high level width of the external gpio is: 20 \*(1 / 80000000) = 1 / 4000000;
+
+- Write 1 to the timer2_gpio_inv bit, which means to calculate the width of the low level of the external gpio. After the above configuration is completed, the difference between the register GPIO_LAT2 and the register GPIO_LAT1 is 20, then the low level width of the external gpio is: 20 \*(1 / 80000000) = 1 / 4000000
+- Write 0 to the timer2_gpio_inv bit, which means to calculate the width of the high level of the external gpio.After the above configuration is completed, the difference between the register GPIO_LAT2 and the register GPIO_LAT1 is 20, then the high level width of the external gpio is: 20 \*(1 / 80000000) = 1 / 4000000;
 
 Working Principle of Watchdog Timer
 ----------------------

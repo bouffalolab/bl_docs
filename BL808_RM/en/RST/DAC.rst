@@ -4,19 +4,16 @@ DAC
 
 Overview
 ===========
-The chip integrates a 10bits digital-to-analog converter (DAC) with FIFO depth of 1, and supports two DAC modulation outputs. DAC can be used for playing audio and modulating transmitter voltage.
+The DAC module is a 10-bit voltage output digital-to-analog converter that works with a DMA controller. The built-in DAC module of the chip has two output channels, and each channel has an independent converter, which can perform digital-to-analog conversion independently of each other. 
 
 Features
 =========
-- Modulation accuracy of 10bits
-
-- Optional input clocks of 32k, 16k, 8k or 512k
-
-- Allows DMA to transfer memory to DAC modulation registers
-
-- Supports dual-channel playback and DMA transfer mode
-
-- Output pins of DAC are fixed as GPIO4 for ChannelA and GPIO11 for ChannelB
+- DAC modulation accuracy is 10-bits
+- DAC input clock can be selected as 32MHz, xclk or audio pll
+- Each channel has DMA function and supports 10 data transfer formats
+- Support DAC dual-channel simultaneous conversion
+- The output pin of DAC is fixed as ChannelA is GPIO11, ChannelB is GPIO4
+- Supports internal and external input reference voltages
 
 Functional Description
 =============================
@@ -27,11 +24,93 @@ The block diagram of DAC is shown as follows.
 
    Block Diagram of DAC
 
-- Supports up to two modulated outputs
+The DAC module contains two DAC analog-to-digital conversion circuits and the power circuit related to the modulated analog signal. The user can select whether the reference voltage of the DAC is external or internal through Ref_Sel, and select the output voltage range through Rng_Sel. 
 
-- Supports dual-channel playback and DMA data transfer
+When the DAC is in operation, the DAC modulation registers (gpdac_a_data, gpdac_b_data in the register dac_cfg3) can be directly written by the CPU, or transferred to the gpdac_dma_wdata register by the DMA.
 
-- Supports the DMA data interface with a length of 32bit, in which the high 16 bits will be modulated on the pin of ChannelA and the low 16 bits will be modulated on the pin of ChannelB
+DAC channel enable
+---------------
+Taking channel A as an example, the configuration process is as follows:
+
+1. Set the corresponding gpdac_en bit in register gpdac_config to 1 to enable the DAC
+2. Set the corresponding gpdac_a_en bit in register dac_cfg1 to 1 to enable DAC A channel conversion
+3. Set the corresponding gpdac_ioa_en bit in the register dac_cfg1 to 1, and enable channel A conversion result to GPIO port
+
+DAC data format
+------------------
+When using DMA to convert data, there are a total of 10 data transmission formats, which can be configured by setting the corresponding gpdac_dma_format bit value in the register gpdac_dma_config.
+The data transmission format stored in the gpdac_dma_wdata register (with a width of 32-bit), the corresponding relationship is as follows:
+
+.. table:: Data transfer format
+
+
+    +--------------------------------+-------------------------------------------------------------------------------------------------------+
+    | Value of gpdac_dma_format      | gpdac_dma_wdata(Corresponding to the data transmission format of A and B channels)                    |
+    +================================+=======================================================================================================+
+    | 0                              | [9:0]: {A0}, {A1}, {A2}，，，                                                                            |
+    +--------------------------------+-------------------------------------------------------------------------------------------------------+
+    | 1                              | [25:16][9:0]: {B0,A0}, {B1,A1}, {B2,A2}，，，                                                            |
+    +--------------------------------+-------------------------------------------------------------------------------------------------------+
+    | 2                              | [25:16][9:0]: {A1,A0}, {A3,A2}, {A5,A4}，，，                                                            |
+    +--------------------------------+-------------------------------------------------------------------------------------------------------+
+    | 4                              | [15:6]: {A0}, {A1}, {A2}，，，                                                                           |
+    +--------------------------------+-------------------------------------------------------------------------------------------------------+
+    | 5                              | [31:22][15:6]: {B0,A0}, {B1,A1}, {B2,A2}，，，                                                           |
+    +--------------------------------+-------------------------------------------------------------------------------------------------------+
+    | 6                              | [31:22][15:6]: {A1,A0}, {A3,A2}, {A5,A4}，，，                                                           |
+    +--------------------------------+-------------------------------------------------------------------------------------------------------+
+    | 8                              | [31:24][23:16][15:8][7:0]: {A3,A2,A1,A0}, {A7,A6,A5,A4}，，，                                            |
+    +--------------------------------+-------------------------------------------------------------------------------------------------------+
+    | 9                              | [31:24][23:16][15:8][7:0]: {B1,B0,A1,A0}, {B3,B2,A3,A2}，，，                                            |
+    +--------------------------------+-------------------------------------------------------------------------------------------------------+
+    | 10                             | [31:24][23:16][15:8][7:0]: {B1,A1,B0,A0}, {B3,A3,B2,A2}，，，                                            |
+    +--------------------------------+-------------------------------------------------------------------------------------------------------+
+    | 11                             | [15:8][7:0]: {B0,A0}, {B1,A1}, {B2,A2}，，，                                                             |
+    +--------------------------------+-------------------------------------------------------------------------------------------------------+
+
+DAC output voltage
+--------------------
+The user can choose to use the external reference voltage or the internal reference voltage by setting the corresponding gpdac_ref_sel bit value in the dac_cfg0 register.
+
+If the internal reference voltage is selected, the configuration and output voltage are shown in the table below. If external reference voltage is selected, connect the external voltage to fixed GPIO12.
+
+.. table:: Internal reference voltage output voltage
+
+
+    +-------------+---------------+------------------+
+    | gpdac_a_rng | gpdac_ref_sel | Output range (V) |
+    +=============+===============+==================+
+    | 00          | 0             | 0.2-1            |
+    +-------------+---------------+------------------+
+    | 01/10       | 0             | 0.225-1.425      |
+    +-------------+---------------+------------------+
+    | 11          | 0             | 0.2-1.8          |
+    +-------------+---------------+------------------+
+
+DAC conversion
+--------------
+
+CPU mode 
+***********
+Using the CPU handling data for conversion, take the simultaneous conversion of channel A and channel B as an example, the configuration process is as follows:
+
+1. Set the DAC clock: write 1 to the corresponding bit value of dig_clk_src_sel in the register dig_clk_cfg0, that is, select xclk as the DAC clock source
+2. Set the clock frequency division factor: the user sets the value of the dig_512k_div bit corresponding to the register dig_clk_cfg0 and the gpdac_mode bit corresponding to the register gpdac_config according to the needs
+3. Initialize the GPIO pins of A and B channels
+4. Initialize and enable DAC A channel and B channel
+5. Write the data to be converted into the corresponding gpdac_a_data and gpdac_b_data bits in the register dac_cfg3 to complete the data conversion
+
+DMA mode 
+***********
+Each DAC channel has DMA capability. Taking channel A as an example for data conversion using DMA, the configuration process is as follows:
+
+1. Set the DAC clock: write 1 to the corresponding bit value of dig_clk_src_sel in the register dig_clk_cfg0, that is, select xclk as the DAC clock source
+2. Set the clock frequency division factor: the user sets the value of the dig_512k_div bit corresponding to the register dig_clk_cfg0 and the gpdac_mode bit corresponding to the register gpdac_config according to the needs
+3. Initialize the GPIO pin of channel A as analog multiplexing
+4. Initialize and enable DAC A channel
+5. Initialize and enable the DMA channel: set the DMA transfer data width, source address, destination address and data transfer length, etc.
+6. Enable DAC DMA mode: write 1 to the corresponding gpdac_dma_tx_en bit value in register gpdac_dma_config
+7. Write the data to be converted into the register gpdac_dma_wdata, and act on the A or B channel according to different data formats to complete the data conversion
 
 .. only:: html
 

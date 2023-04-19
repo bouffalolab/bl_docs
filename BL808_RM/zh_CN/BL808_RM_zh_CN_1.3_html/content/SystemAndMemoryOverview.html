@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1. 系统和存储器概述 &mdash; BL808 参考手册  文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="2. 复位和时钟" href="ResetAndClock.html" />
+    <link rel="prev" title="BL808 参考手册" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL808 参考手册
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. 系统和存储器概述</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">1.1. 系统架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">1.2. 处理器</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#m0">1.2.1. M0处理器介绍</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id4">1.2.1.1. 主要功能特点</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">1.2.1.2. 扩展功能</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">1.2.1.3. 实现标准</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#d0">1.2.2. D0处理器介绍</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id7">1.2.2.1. 主要功能特点</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">1.2.2.2. 扩展功能</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id9">1.2.2.3. 实现标准</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#lp">1.2.3. LP处理器介绍</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id10">1.2.3.1. 主要功能特点</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id11">1.2.3.2. 实现标准</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id12">1.3. 启动</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id13">1.4. 内存</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id14">1.5. 地址映射</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id15">1.6. 中断源</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. 复位和时钟</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPIO.html">4. GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">5. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">6. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">7. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA2D.html">8. DMA2D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lz4d.html">9. LZ4D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBI.html">10. DBI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DPI.html">11. DPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DSI.html">12. DSI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cam.html">13. CAM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">14. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">15. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">16. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">17. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">18. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">19. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2s.html">20. I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PDM.html">21. PDM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AUDIO.html">22. AUDIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PSRAM.html">23. PSRAM Contorller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Emac.html">24. Emac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USB.html">25. USB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SDH.html">26. SDH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MJPEG.html">27. MJPEG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="JDEC.html">28. JDEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="VENC.html">29. VENC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NPUtoolchain.html">30. NPU toolchain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NPU.html">31. NPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IPC.html">32. IPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LowPower.html">33. LowPower</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SEC_ENG.html">34. SEC ENG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">35. 版本信息</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL808 参考手册</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">1. </span>系统和存储器概述</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1><span class="section-number">1. </span>系统和存储器概述<a class="headerlink" href="#id1" title="永久链接至标题"></a></h1>
+<section id="id2">
+<h2><span class="section-number">1.1. </span>系统架构<a class="headerlink" href="#id2" title="永久链接至标题"></a></h2>
+<p>BL808 系列芯片主要包含无线和多媒体两个子系统。</p>
+<p>无线子系统包含一颗 RISC-V 32-bit 高性能CPU,集成 Wi-Fi BT/Zigbee 无线子系统，
+可以实现多种无线连接和数据传输，提供多样化的连接与传输体验。</p>
+<p>多媒体子系统包含一颗 RISC-V 64-bit 超高性能CPU，集成DVP/CSI/
+H264/NPU等视频处理模块，
+可以广泛应用于视频监控/智能音箱等多种AI领域。</p>
+<p>BL808 系统架构如下图所示：</p>
+<figure class="align-center" id="id16">
+<a class="reference internal image-reference" href="../_images/SystemArch.svg"><img alt="../_images/SystemArch.svg" src="../_images/SystemArch.svg" /></a>
+<figcaption>
+<p><span class="caption-number">图 1.1 </span><span class="caption-text">系统框图</span><a class="headerlink" href="#id16" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>无线子系统有以下部分组成：</p>
+<ul class="simple">
+<li><p>处理器</p>
+<ul>
+<li><p>集成了一颗 RISC-V 高性能 CPU(M0)和一颗 RISC-V 低功耗 CPU(LP)</p></li>
+<li><p>支持多种无线连接和数据传输，提供多样化的连接与传输体验</p></li>
+</ul>
+</li>
+<li><p>总线接口：AXI 总线和 AHB 总线</p>
+<ul>
+<li><p>CPU主要通过AXI总线访问存储器</p></li>
+<li><p>CPU主要通过AHB总线访问外设</p></li>
+<li><p>具备低功耗，高性能等特性</p></li>
+</ul>
+</li>
+<li><p>外设</p>
+<ul>
+<li><p>包含 UART/SPI/I2C/PWM/SDH/EMAC/USB 等常见外设，支持与周边设备进行连接、控制和存储</p></li>
+<li><p>集成 Audio 模块，支持音频数据、模拟麦克风和数字麦克风的输入，方便用户开发音频相关应用</p></li>
+<li><p>适用于低功耗应用场景，例如：在智能音箱的低功耗应用场景时，关掉其它 CPU 和外设，LP 用于 VAD 的唤醒检测</p></li>
+</ul>
+</li>
+</ul>
+<p>多媒体子系统有以下部分组成：</p>
+<ul class="simple">
+<li><p>处理器</p>
+<ul>
+<li><p>集成了一颗 RISC-V 超高性能 CPU(D0)</p></li>
+<li><p>适用于视频监控，智能门铃，智能猫眼，智能音箱等多种应用领域</p></li>
+<li><p>NPU 模块用于神经网络算子的加速，适用于多种AI场景</p></li>
+</ul>
+</li>
+<li><p>外设</p>
+<ul>
+<li><p>包含 UART/SPI/I2C 等常规外设，方便系统功能开发</p></li>
+<li><p>CSI 和 DVP 接口连接CMOS Sensor，用于图像和视频的获取，内置 Codec 模块完成视频编码，
+配合OSD，Scaler，2DDMA等模块可以将视频数据流导入到Display模块显示</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id3">
+<h2><span class="section-number">1.2. </span>处理器<a class="headerlink" href="#id3" title="永久链接至标题"></a></h2>
+<p>BL808 芯片内部包含 3 个 RISC-V 处理器，分别命名为M0，D0，LP。
+M0主要处理网络数据流和外设访问等功能，
+D0主要功能是多媒体数据的计算和处理，配合多媒体相关外设，实现音视频数据的获取，存储和计算，
+LP主要是负责低功耗模式下相关功能，实现系统低功耗。</p>
+<section id="m0">
+<h3><span class="section-number">1.2.1. </span>M0处理器介绍<a class="headerlink" href="#m0" title="永久链接至标题"></a></h3>
+<section id="id4">
+<h4><span class="section-number">1.2.1.1. </span>主要功能特点<a class="headerlink" href="#id4" title="永久链接至标题"></a></h4>
+<p>M0 是一颗 32-bit RISC-V CPU，它采用5级流水线结构：取指、译码、执行、内存访问、写回。是一款高性能嵌入式微处理处理器。其主要特征如下：</p>
+<ul class="simple">
+<li><p>32 位 RISC 处理器；</p></li>
+<li><p>支持 RISC-V RV32IMAFCP 指令集；</p></li>
+<li><p>支持 RISC-V 32/16 位混编指令集；</p></li>
+<li><p>支持 RISC-V 机器模式和用户模式；</p></li>
+<li><p>32 个 32 位整型通用寄存器， 32 个 32 位/64 位浮点通用寄存器；</p></li>
+<li><p>整型 5 级/浮点 7 级，单发射，顺序执行流水线；</p></li>
+<li><p>支持 AXI4.0 主设备接口以及 AHB5.0 外设接口；</p></li>
+<li><p>32K 指令 cache，两路组相连结构；</p></li>
+<li><p>16K 数据 cache，两路组相连结构；</p></li>
+<li><p>支持非对齐内存访问；</p></li>
+<li><p>双周期硬件乘法器，基4硬件除法器；</p></li>
+<li><p>支持 BHT(8K) 和 BTB；</p></li>
+<li><p>支持扩展增强指令集；</p></li>
+<li><p>支持MCU 特性扩展技术，包括中断处理加速技术、 MCU 扩展特性；</p></li>
+<li><p>兼容 RISC-V CLIC 中断标准，支持中断嵌套，外部中断源数量 96 个，有 4 个 bits 可以用于配置中断优先级；</p></li>
+<li><p>兼容 RISC-V PMP 内存保护标准， 8 个区域可配置；</p></li>
+<li><p>支持性能监测单元(HPM)；</p></li>
+<li><p>支持 RISC-V Debug 协议标准；</p></li>
+</ul>
+</section>
+<section id="id5">
+<h4><span class="section-number">1.2.1.2. </span>扩展功能<a class="headerlink" href="#id5" title="永久链接至标题"></a></h4>
+<ul class="simple">
+<li><p>扩展实现了位操作指令，算术运算指令，内存访问增强指令</p></li>
+<li><p>扩展实现了 CACHE 操作指令，同步指令等方便软件人员编程</p></li>
+<li><p>扩展实现了中断投机压栈技术和矢量中断咬尾技术，加速中断响应，中断响应延时为 20 个处理器时钟周期</p></li>
+<li><p>扩展实现了如 NMI，深浅睡眠低功耗模式，低功耗唤醒事件，锁定等 MCU 领域常见的应用需求</p></li>
+<li><p>支持非对齐内存访问，并可软件开关，方便软件人员编程和调试</p></li>
+</ul>
+</section>
+<section id="id6">
+<h4><span class="section-number">1.2.1.3. </span>实现标准<a class="headerlink" href="#id6" title="永久链接至标题"></a></h4>
+<p>M0 兼容RISC-V 标准，具体版本为：</p>
+<ul class="simple">
+<li><p>The RISC-V Instruction Set Manual, Volume I: RISC-V User-Level ISA, Version 2.2</p></li>
+<li><p>The RISC-V Instruction Set Manual, Volume II: RISC-V Privileged Architecture, Version1.10</p></li>
+<li><p>RISC-V Core-Local Interrupt Controller (CLIC) Version 0.8</p></li>
+<li><p>RISC-V External Debug Support Version 0.13.2</p></li>
+<li><p>RISC-V “P” Extension Proposal Version 0.9</p></li>
+</ul>
+</section>
+</section>
+<section id="d0">
+<h3><span class="section-number">1.2.2. </span>D0处理器介绍<a class="headerlink" href="#d0" title="永久链接至标题"></a></h3>
+<section id="id7">
+<h4><span class="section-number">1.2.2.1. </span>主要功能特点<a class="headerlink" href="#id7" title="永久链接至标题"></a></h4>
+<p>D0 是一颗 64-bit RISC-V CPU，它采用 5 级流水线结构。是一款超高性能嵌入式微处理处理器。可用于安防监控，智能语音处理，智能视频处理等领域。其主要特征如下：</p>
+<ul class="simple">
+<li><p>64 位 RISC 处理器；</p></li>
+<li><p>支持 RISC-V RV64IMAFCV 指令架构；</p></li>
+<li><p>5 级单发按序执行流水线；</p></li>
+<li><p>一级哈佛结构的指令和数据缓存，大小均为32KB，缓存行为 64B；</p></li>
+<li><p>Sv39 内存管理单元，实现虚实地址转换与内存管理；</p></li>
+<li><p>jTLB 支持 128 个 entry；</p></li>
+<li><p>支持 AXI4.0 128 比特 Master 接口；</p></li>
+<li><p>支持核内中断 CLINT 和中断控制器 PLIC；</p></li>
+<li><p>外部中断源数量 80 个，有 3 个 Bits 可以用于配置中断优先级；</p></li>
+<li><p>支持 BHT（8K) 和 BTB；</p></li>
+<li><p>兼容 RISC-V PMP 内存保护标准， 8个区域可配置；</p></li>
+<li><p>支持性能监测单元(HPM)；</p></li>
+</ul>
+<p>矢量计算单元的主要特征点如下：</p>
+<ul class="simple">
+<li><p>遵循 RISC-V V 矢量扩展标准（revision 0.7.1）；</p></li>
+<li><p>支持配置矢量执行单元(128bits)；</p></li>
+<li><p>支持 INT8/INT16/INT32/FP16/FP32 矢量运算；</p></li>
+<li><p>支持 segment load、 store 指令；</p></li>
+</ul>
+</section>
+<section id="id8">
+<h4><span class="section-number">1.2.2.2. </span>扩展功能<a class="headerlink" href="#id8" title="永久链接至标题"></a></h4>
+<ul class="simple">
+<li><p>扩展实现了位操作指令，算术运算指令，内存访问增强指令</p></li>
+<li><p>扩展实现了 CACHE 操作指令，同步指令等方便软件人员编程</p></li>
+<li><p>支持非对齐内存访问，并可软件开关，方便软件人员编程和调试</p></li>
+</ul>
+</section>
+<section id="id9">
+<h4><span class="section-number">1.2.2.3. </span>实现标准<a class="headerlink" href="#id9" title="永久链接至标题"></a></h4>
+<p>D0 兼容 RISC-V 标准，具体版本为：</p>
+<ul class="simple">
+<li><p>The RISC-V Instruction Set Manual, Volume I: RISC-V User-Level ISA, Version 2.2</p></li>
+<li><p>The RISC-V Instruction Set Manual, Volume II: RISC-V Privileged Architecture, Version1.10</p></li>
+<li><p>RISC-V “V” Vector Extension, Version 0.7.1-20190610-Workshop-Release.</p></li>
+<li><p>RISC-V External Debug Support Version 0.13.2</p></li>
+</ul>
+</section>
+</section>
+<section id="lp">
+<h3><span class="section-number">1.2.3. </span>LP处理器介绍<a class="headerlink" href="#lp" title="永久链接至标题"></a></h3>
+<section id="id10">
+<h4><span class="section-number">1.2.3.1. </span>主要功能特点<a class="headerlink" href="#id10" title="永久链接至标题"></a></h4>
+<p>LP 是一颗 32-bit RISC-V CPU，它采用2级流水线结构，即指令提取级，指令译码、执行与回写级。它具有极低功耗、极低成本、高代码密度等特点，其主要特征如下：</p>
+<ul class="simple">
+<li><p>32 位 RISC 处理器；</p></li>
+<li><p>支持 RISC-V RV32EMC 指令集；</p></li>
+<li><p>支持 RISC-V 32/16 位混编指令集；</p></li>
+<li><p>16 个 32 位整型通用寄存器;</p></li>
+<li><p>两级顺序执行流水线；</p></li>
+<li><p>支持 RISC-V 机器模式和用户模式；</p></li>
+<li><p>兼容 RISC-V CLIC 中断标准，支持中断嵌套，外部中断源32个。</p></li>
+<li><p>支持 AHB-Lite 总线协议，支持指令总线，系统总线；</p></li>
+<li><p>无内部 cache</p></li>
+<li><p>无 PMP</p></li>
+<li><p>支持 2 线调试接口</p></li>
+</ul>
+</section>
+<section id="id11">
+<h4><span class="section-number">1.2.3.2. </span>实现标准<a class="headerlink" href="#id11" title="永久链接至标题"></a></h4>
+<p>LP 兼容RISC-V 标准，具体版本为：</p>
+<ul class="simple">
+<li><p>The RISC-V Instruction Set Manual, Volume I: RISC-V User-Level ISA, Version 2.2</p></li>
+<li><p>The RISC-V Instruction Set Manual, Volume II: RISC-V Privileged Architecture, Version1.10</p></li>
+<li><p>RISC-V Core-Local Interrupt Controller (CLIC) Version 0.8</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="id12">
+<h2><span class="section-number">1.3. </span>启动<a class="headerlink" href="#id12" title="永久链接至标题"></a></h2>
+<p>系统支持从Flash/UART/USB启动，各个启动模式说明如下：</p>
+<table class="colwidths-given docutils align-center" id="id17" style="width: 100%">
+<caption><span class="caption-number">表 1.1 </span><span class="caption-text">启动模式</span><a class="headerlink" href="#id17" title="永久链接至表格"></a></caption>
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 8%" />
+<col style="width: 79%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>启动引脚</p></td>
+<td><p>电平</p></td>
+<td><p>描述</p></td>
+</tr>
+<tr class="row-even"><td rowspan="2"><p>GPIO39</p></td>
+<td><p>1</p></td>
+<td><p>从 UART(GPIO20/21)/USB启动，该模式主要用于 Flash 下载或者下载镜像到 RAM 执行</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>从 Flash 启动应用镜像</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id13">
+<h2><span class="section-number">1.4. </span>内存<a class="headerlink" href="#id13" title="永久链接至标题"></a></h2>
+<p>BL808 存储器包括：片上零延迟SRAM存储器，只读存储器，一次写入存储器，
+嵌入式闪存（可选），嵌入式pSRAM（可选）。</p>
+</section>
+<section id="id14">
+<h2><span class="section-number">1.5. </span>地址映射<a class="headerlink" href="#id14" title="永久链接至标题"></a></h2>
+<table class="colwidths-given docutils align-center" id="id18" style="width: 100%">
+<caption><span class="caption-number">表 1.2 </span><span class="caption-text">内存地址映射</span><a class="headerlink" href="#id18" title="永久链接至表格"></a></caption>
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 15%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head" rowspan="2"><p>模块</p></th>
+<th class="head" rowspan="2"><p>大小</p></th>
+<th class="head" colspan="2"><p>开始地址（M0）</p></th>
+<th class="head" colspan="2"><p>开始地址（D0）</p></th>
+</tr>
+<tr class="row-even"><th class="head"><p>Cache</p></th>
+<th class="head"><p>Non-cache</p></th>
+<th class="head"><p>Cache</p></th>
+<th class="head"><p>Non-cache</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-odd"><td><p>OCRAM(MCU)</p></td>
+<td><p>64KB</p></td>
+<td><p>0x62020000</p></td>
+<td><p>0x22020000</p></td>
+<td><p>-</p></td>
+<td><p>0x22020000</p></td>
+</tr>
+<tr class="row-even"><td><p>WRAM(MCU)</p></td>
+<td><p>160KB</p></td>
+<td><p>0x62030000</p></td>
+<td><p>0x22030000</p></td>
+<td><p>-</p></td>
+<td><p>0x22030000</p></td>
+</tr>
+<tr class="row-odd"><td><p>DRAM(MM)</p></td>
+<td><p>512KB</p></td>
+<td><p>-</p></td>
+<td><p>0x3EF80000</p></td>
+<td><p>0x3EF80000</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>VRAM(MM)</p></td>
+<td><p>32KB</p></td>
+<td><p>-</p></td>
+<td><p>0x3F000000</p></td>
+<td><p>0x3F000000</p></td>
+<td><p>-</p></td>
+</tr>
+</tbody>
+</table>
+<p>OCRAM 和 WRAM 既可以通过 AHB 总线访问，也可以通过 AXI 访问，当 CPU 使用 0x62020000 地址访问 OCRAM 时，会经过内部 Cache 并通过 AXI 转 AHB 实现对 OCRAM 的访问，
+当 CPU 使用 0x22020000 地址访问 OCRAM 时，不会经过内部 Cache 并且直接通过 AHB 总线访问 OCRAM 。</p>
+<table class="colwidths-given docutils align-center" id="id19" style="width: 100%">
+<caption><span class="caption-number">表 1.3 </span><span class="caption-text">地址映射</span><a class="headerlink" href="#id19" title="永久链接至表格"></a></caption>
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 8%" />
+<col style="width: 51%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>模块</p></th>
+<th class="head"><p>目标</p></th>
+<th class="head"><p>开始地址</p></th>
+<th class="head"><p>大小</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>pSRAM</p></td>
+<td><p>pSRAM</p></td>
+<td><p>0x50000000</p></td>
+<td><p>64MB</p></td>
+<td><p>pSRAM 存储器地址空间，实际大小取决于芯片型号</p></td>
+</tr>
+<tr class="row-odd"><td><p>XRAM</p></td>
+<td><p>XRAM</p></td>
+<td><p>0x40000000</p></td>
+<td><p>16KB</p></td>
+<td><p>XRAM 存储器地址空间</p></td>
+</tr>
+<tr class="row-even"><td><p>FLASH</p></td>
+<td><p>FlashA</p></td>
+<td><p>0x58000000</p></td>
+<td><p>64MB</p></td>
+<td><p>应用程序地址空间，实际大小取决于芯片型号</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="8"><p>MMPERI</p></td>
+<td><p>TIMER1</p></td>
+<td><p>0x30009000</p></td>
+<td><p>4KB</p></td>
+<td><p>TIMER1 控制寄存器</p></td>
+</tr>
+<tr class="row-even"><td><p>SPI1</p></td>
+<td><p>0x30008000</p></td>
+<td><p>4KB</p></td>
+<td><p>SPI1 控制寄存器</p></td>
+</tr>
+<tr class="row-odd"><td><p>MM_GLB</p></td>
+<td><p>0x30007000</p></td>
+<td><p>4KB</p></td>
+<td><p>Multimedia 侧全局寄存器</p></td>
+</tr>
+<tr class="row-even"><td><p>DMA2D</p></td>
+<td><p>0x30006000</p></td>
+<td><p>4KB</p></td>
+<td><p>DMA2D 控制寄存器</p></td>
+</tr>
+<tr class="row-odd"><td><p>I2C3</p></td>
+<td><p>0x30004000</p></td>
+<td><p>4KB</p></td>
+<td><p>I2C3 控制寄存器</p></td>
+</tr>
+<tr class="row-even"><td><p>I2C2</p></td>
+<td><p>0x30003000</p></td>
+<td><p>4KB</p></td>
+<td><p>I2C2 控制寄存器</p></td>
+</tr>
+<tr class="row-odd"><td><p>UART3</p></td>
+<td><p>0x30002000</p></td>
+<td><p>4KB</p></td>
+<td><p>UART3 控制寄存器</p></td>
+</tr>
+<tr class="row-even"><td><p>DMA2</p></td>
+<td><p>0x30001000</p></td>
+<td><p>4KB</p></td>
+<td><p>DMA2 控制寄存器</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="9"><p>MCUPERI</p></td>
+<td><p>DMA1</p></td>
+<td><p>0x20071000</p></td>
+<td><p>4KB</p></td>
+<td><p>DMA1 控制寄存器</p></td>
+</tr>
+<tr class="row-even"><td><p>EMAC</p></td>
+<td><p>0x20070000</p></td>
+<td><p>4KB</p></td>
+<td><p>EMAC 控制寄存器</p></td>
+</tr>
+<tr class="row-odd"><td><p>AUDIO</p></td>
+<td><p>0x20055000</p></td>
+<td><p>4KB</p></td>
+<td><p>Audio 控制寄存器</p></td>
+</tr>
+<tr class="row-even"><td><p>USB</p></td>
+<td><p>0x20072000</p></td>
+<td><p>4KB</p></td>
+<td><p>USB 控制寄存器</p></td>
+</tr>
+<tr class="row-odd"><td><p>HBN</p></td>
+<td><p>0x2000F000</p></td>
+<td><p>4KB</p></td>
+<td><p>深度睡眠控制（休眠）寄存器</p></td>
+</tr>
+<tr class="row-even"><td><p>PDS</p></td>
+<td><p>0x2000E000</p></td>
+<td><p>4KB</p></td>
+<td><p>睡眠控制（掉电睡眠）寄存器</p></td>
+</tr>
+<tr class="row-odd"><td><p>DMA0</p></td>
+<td><p>0x2000C000</p></td>
+<td><p>4KB</p></td>
+<td><p>DMA0 控制寄存器</p></td>
+</tr>
+<tr class="row-even"><td><p>I2S</p></td>
+<td><p>0x2000AB00</p></td>
+<td><p>256B</p></td>
+<td><p>I2S 控制寄存器</p></td>
+</tr>
+<tr class="row-odd"><td><p>UART2</p></td>
+<td><p>0x2000AA00</p></td>
+<td><p>256B</p></td>
+<td><p>UART2 控制寄存器</p></td>
+</tr>
+<tr class="row-even"><td rowspan="13"><p>MCUPERI</p></td>
+<td><p>I2C1</p></td>
+<td><p>0x2000A900</p></td>
+<td><p>256B</p></td>
+<td><p>I2C1 控制寄存器</p></td>
+</tr>
+<tr class="row-odd"><td><p>IR</p></td>
+<td><p>0x2000A600</p></td>
+<td><p>256B</p></td>
+<td><p>IR 控制寄存器</p></td>
+</tr>
+<tr class="row-even"><td><p>TIMER0</p></td>
+<td><p>0x2000A500</p></td>
+<td><p>256B</p></td>
+<td><p>TIMER0 控制寄存器</p></td>
+</tr>
+<tr class="row-odd"><td><p>PWM</p></td>
+<td><p>0x2000A400</p></td>
+<td><p>256B</p></td>
+<td><p>PWM 控制寄存器</p></td>
+</tr>
+<tr class="row-even"><td><p>I2C0</p></td>
+<td><p>0x2000A300</p></td>
+<td><p>256B</p></td>
+<td><p>I2C0 控制寄存器</p></td>
+</tr>
+<tr class="row-odd"><td><p>SPI0</p></td>
+<td><p>0x2000A200</p></td>
+<td><p>256B</p></td>
+<td><p>SPI0 控制寄存器</p></td>
+</tr>
+<tr class="row-even"><td><p>UART1</p></td>
+<td><p>0x2000A100</p></td>
+<td><p>256B</p></td>
+<td><p>UART1 控制寄存器</p></td>
+</tr>
+<tr class="row-odd"><td><p>UART0</p></td>
+<td><p>0x2000A000</p></td>
+<td><p>256B</p></td>
+<td><p>UART0 控制寄存器</p></td>
+</tr>
+<tr class="row-even"><td><p>eFuse</p></td>
+<td><p>0x20056000</p></td>
+<td><p>4KB</p></td>
+<td><p>eFuse 存储器控制寄存器</p></td>
+</tr>
+<tr class="row-odd"><td><p>TZ</p></td>
+<td><p>0x20005000</p></td>
+<td><p>4KB</p></td>
+<td><p>安全 Zone 分区</p></td>
+</tr>
+<tr class="row-even"><td><p>SEC_ENG</p></td>
+<td><p>0x20004000</p></td>
+<td><p>4KB</p></td>
+<td><p>安全引擎控制寄存器</p></td>
+</tr>
+<tr class="row-odd"><td><p>GPIP</p></td>
+<td><p>0x20002000</p></td>
+<td><p>1KB</p></td>
+<td><p>通用DAC / ADC / ACOMP接口控制寄存器</p></td>
+</tr>
+<tr class="row-even"><td><p>GLB</p></td>
+<td><p>0x20000000</p></td>
+<td><p>4KB</p></td>
+<td><p>全局控制寄存器</p></td>
+</tr>
+<tr class="row-odd"><td><p>ROM</p></td>
+<td><p>ROM</p></td>
+<td><p>0x90000000</p></td>
+<td><p>128KB</p></td>
+<td><p>Bootrom区域地址空间</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-center" id="id20" style="width: 100%">
+<caption><span class="caption-number">表 1.4 </span><span class="caption-text">DRAM/VRAM 地址空间</span><a class="headerlink" href="#id20" title="永久链接至表格"></a></caption>
+<colgroup>
+<col style="width: 7%" />
+<col style="width: 13%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head" colspan="2" rowspan="2"><p>DRAM/VRAM</p></th>
+<th class="head" colspan="8"><p>Configure(reg_h2pf_sram_rel，reg_vram_sram_sel，reg_ispl_sram_rel，reg_blai_sram_rel)</p></th>
+</tr>
+<tr class="row-even"><th class="head"><p>0，0，0，0</p></th>
+<th class="head"><p>0，0，0，1</p></th>
+<th class="head"><p>1，0，0，0</p></th>
+<th class="head"><p>3，0，0，0</p></th>
+<th class="head"><p>0，0，1，0</p></th>
+<th class="head"><p>0，1，0，0</p></th>
+<th class="head"><p>2，0，0，1</p></th>
+<th class="head"><p>3，1，1，1</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-odd"><td rowspan="8"><p>DRAM</p></td>
+<td><p>0x3EF80000 - 0x3EF8FFFF</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>64K</p></td>
+</tr>
+<tr class="row-even"><td><p>0x3EF90000 - 0x3EF9FFFF</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>64K</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x3EFA0000 - 0x3EFAFFFF</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>64K</p></td>
+</tr>
+<tr class="row-even"><td><p>0x3EFB0000 - 0x3EFBFFFF</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>64K</p></td>
+<td><p>64K</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x3EFC0000 - 0x3EFCFFFF</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>64K</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>64K</p></td>
+<td><p>64K</p></td>
+</tr>
+<tr class="row-even"><td><p>0x3EFD0000 - 0x3EFDFFFF</p></td>
+<td><p>-</p></td>
+<td><p>64K</p></td>
+<td><p>-</p></td>
+<td><p>64K</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>64K</p></td>
+<td><p>64K</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x3EFE0000 - 0x3EFEFFFF</p></td>
+<td><p>-</p></td>
+<td><p>64K</p></td>
+<td><p>64K</p></td>
+<td><p>64K</p></td>
+<td><p>64K</p></td>
+<td><p>64K</p></td>
+<td><p>64K</p></td>
+<td><p>64K</p></td>
+</tr>
+<tr class="row-even"><td><p>0x3EFF0000 - 0x3EFFFFFF</p></td>
+<td><p>64K</p></td>
+<td><p>64K</p></td>
+<td><p>64K</p></td>
+<td><p>64K</p></td>
+<td><p>64K</p></td>
+<td><p>64K</p></td>
+<td><p>64K</p></td>
+<td><p>64K</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><p>VRAM</p></td>
+<td><p>0x3F000000 - 0x3F007FFF</p></td>
+<td><p>32K</p></td>
+<td><p>32K</p></td>
+<td><p>32K</p></td>
+<td><p>32K</p></td>
+<td><p>32K</p></td>
+<td><p>32K</p></td>
+<td><p>32K</p></td>
+<td><p>32K</p></td>
+</tr>
+<tr class="row-even"><td><p>0x3F008000 - 0x3F017FFF</p></td>
+<td><p>64K</p></td>
+<td><p>64K</p></td>
+<td><p>64K</p></td>
+<td><p>64K</p></td>
+<td><p>64K</p></td>
+<td><p>-</p></td>
+<td><p>64K</p></td>
+<td><p>-</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id15">
+<h2><span class="section-number">1.6. </span>中断源<a class="headerlink" href="#id15" title="永久链接至标题"></a></h2>
+<p>CPU_M0和CPU_LP一共包含23个中断源，中断源与对应的中断号如下表所示：</p>
+<table class="colwidths-given docutils align-center" id="id21" style="width: 100%">
+<caption><span class="caption-number">表 1.5 </span><span class="caption-text">中断分配</span><a class="headerlink" href="#id21" title="永久链接至表格"></a></caption>
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 20%" />
+<col style="width: 25%" />
+<col style="width: 45%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td colspan="2"><p>中断源</p></td>
+<td><p>中断号</p></td>
+<td><p>描述</p></td>
+</tr>
+<tr class="row-even"><td rowspan="2"><p>DMA</p></td>
+<td><p>DMA0_ALL</p></td>
+<td><p>IRQ_NUM_BASE+15</p></td>
+<td><p>DMA0 ALL Interrupt</p></td>
+</tr>
+<tr class="row-odd"><td><p>DMA1_ALL</p></td>
+<td><p>IRQ_NUM_BASE+16</p></td>
+<td><p>DMA1 ALL Interrupt</p></td>
+</tr>
+<tr class="row-even"><td rowspan="2"><p>IR</p></td>
+<td><p>IRTX</p></td>
+<td><p>IRQ_NUM_BASE+19</p></td>
+<td><p>IR TX Interrupt</p></td>
+</tr>
+<tr class="row-odd"><td><p>IRRX</p></td>
+<td><p>IRQ_NUM_BASE+20</p></td>
+<td><p>IR RX Interrupt</p></td>
+</tr>
+<tr class="row-even"><td><p>USB</p></td>
+<td><p>USB</p></td>
+<td><p>IRQ_NUM_BASE+21</p></td>
+<td><p>USB  Interrupt</p></td>
+</tr>
+<tr class="row-odd"><td><p>EMAC</p></td>
+<td><p>EMAC</p></td>
+<td><p>IRQ_NUM_BASE+24</p></td>
+<td><p>EMAC  Interrupt</p></td>
+</tr>
+<tr class="row-even"><td><p>ADC</p></td>
+<td><p>GPADC_DMA</p></td>
+<td><p>IRQ_NUM_BASE+25</p></td>
+<td><p>GPADC_DMA Interrupt</p></td>
+</tr>
+<tr class="row-odd"><td><p>SPI</p></td>
+<td><p>SPI0</p></td>
+<td><p>IRQ_NUM_BASE+27</p></td>
+<td><p>SPI Interrupt</p></td>
+</tr>
+<tr class="row-even"><td rowspan="3"><p>UART</p></td>
+<td><p>UART0</p></td>
+<td><p>IRQ_NUM_BASE+28</p></td>
+<td><p>UART0 Interrupt</p></td>
+</tr>
+<tr class="row-odd"><td><p>UART1</p></td>
+<td><p>IRQ_NUM_BASE+29</p></td>
+<td><p>UART1 Interrupt</p></td>
+</tr>
+<tr class="row-even"><td><p>UART2</p></td>
+<td><p>IRQ_NUM_BASE+30</p></td>
+<td><p>UART2 Interrupt</p></td>
+</tr>
+<tr class="row-odd"><td><p>GPIO</p></td>
+<td><p>GPIO_DMA</p></td>
+<td><p>IRQ_NUM_BASE+31</p></td>
+<td><p>GPIO DMA Interrupt</p></td>
+</tr>
+<tr class="row-even"><td rowspan="2"><p>I2C</p></td>
+<td><p>I2C0</p></td>
+<td><p>IRQ_NUM_BASE+32</p></td>
+<td><p>I2C0 Interrupt</p></td>
+</tr>
+<tr class="row-odd"><td><p>I2C1</p></td>
+<td><p>IRQ_NUM_BASE+39</p></td>
+<td><p>I2C1 Interrupt</p></td>
+</tr>
+<tr class="row-even"><td><p>PWM</p></td>
+<td><p>PWM</p></td>
+<td><p>IRQ_NUM_BASE+33</p></td>
+<td><p>PWM Interrupt</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><p>TIMER0</p></td>
+<td><p>TIMER0_CH0</p></td>
+<td><p>IRQ_NUM_BASE+36</p></td>
+<td><p>Timer0 Channel 0 Interrupt</p></td>
+</tr>
+<tr class="row-even"><td><p>TIMER0_CH1</p></td>
+<td><p>IRQ_NUM_BASE+37</p></td>
+<td><p>Timer0 Channel 1 Interrupt</p></td>
+</tr>
+<tr class="row-odd"><td><p>TIMER0_WDT</p></td>
+<td><p>IRQ_NUM_BASE+38</p></td>
+<td><p>Timer0 Watch Dog Interrupt</p></td>
+</tr>
+<tr class="row-even"><td><p>I2S</p></td>
+<td><p>I2S</p></td>
+<td><p>IRQ_NUM_BASE+40</p></td>
+<td><p>I2S Interrupt</p></td>
+</tr>
+<tr class="row-odd"><td><p>GPIO</p></td>
+<td><p>GPIO_INT0</p></td>
+<td><p>IRQ_NUM_BASE+44</p></td>
+<td><p>GPIO Interrupt</p></td>
+</tr>
+<tr class="row-even"><td><p>PDS</p></td>
+<td><p>PDS_WAKEUP</p></td>
+<td><p>IRQ_NUM_BASE+50</p></td>
+<td><p>PDS Wakeup Interrupt</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><p>HBN</p></td>
+<td><p>HBN_OUT0</p></td>
+<td><p>IRQ_NUM_BASE+51</p></td>
+<td><p>Hibernate out 0 Interrupt</p></td>
+</tr>
+<tr class="row-even"><td><p>HBN_OUT1</p></td>
+<td><p>IRQ_NUM_BASE+52</p></td>
+<td><p>Hibernate out 1 Interrupt</p></td>
+</tr>
+</tbody>
+</table>
+<p>CPU_D0一共包含21个中断源，
+中断源与对应的中断号如下表所示：</p>
+<table class="colwidths-given docutils align-center" id="id22" style="width: 100%">
+<caption><span class="caption-number">表 1.6 </span><span class="caption-text">中断分配</span><a class="headerlink" href="#id22" title="永久链接至表格"></a></caption>
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 20%" />
+<col style="width: 25%" />
+<col style="width: 45%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td colspan="2"><p>中断源</p></td>
+<td><p>中断号</p></td>
+<td><p>描述</p></td>
+</tr>
+<tr class="row-even"><td><p>UART</p></td>
+<td><p>UART3</p></td>
+<td><p>IRQ_NUM_BASE+4</p></td>
+<td><p>UART3 Interrupt</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><p>I2C</p></td>
+<td><p>I2C2</p></td>
+<td><p>IRQ_NUM_BASE+5</p></td>
+<td><p>I2C2 Interrupt</p></td>
+</tr>
+<tr class="row-even"><td><p>I2C3</p></td>
+<td><p>IRQ_NUM_BASE+6</p></td>
+<td><p>I2C3 Interrupt</p></td>
+</tr>
+<tr class="row-odd"><td><p>SPI</p></td>
+<td><p>SPI1</p></td>
+<td><p>IRQ_NUM_BASE+7</p></td>
+<td><p>SPI1 Interrupt</p></td>
+</tr>
+<tr class="row-even"><td rowspan="8"><p>DMA2</p></td>
+<td><p>DMA2_INT0</p></td>
+<td><p>IRQ_NUM_BASE+24</p></td>
+<td><p>DMA INT0 Interrupt</p></td>
+</tr>
+<tr class="row-odd"><td><p>DMA2_INT1</p></td>
+<td><p>IRQ_NUM_BASE+25</p></td>
+<td><p>DMA INT1 Interrupt</p></td>
+</tr>
+<tr class="row-even"><td><p>DMA2_INT2</p></td>
+<td><p>IRQ_NUM_BASE+26</p></td>
+<td><p>DMA INT2 Interrupt</p></td>
+</tr>
+<tr class="row-odd"><td><p>DMA2_INT3</p></td>
+<td><p>IRQ_NUM_BASE+27</p></td>
+<td><p>DMA INT3 Interrupt</p></td>
+</tr>
+<tr class="row-even"><td><p>DMA2_INT4</p></td>
+<td><p>IRQ_NUM_BASE+28</p></td>
+<td><p>DMA INT4 Interrupt</p></td>
+</tr>
+<tr class="row-odd"><td><p>DMA2_INT5</p></td>
+<td><p>IRQ_NUM_BASE+29</p></td>
+<td><p>DMA INT5 Interrupt</p></td>
+</tr>
+<tr class="row-even"><td><p>DMA2_INT6</p></td>
+<td><p>IRQ_NUM_BASE+30</p></td>
+<td><p>DMA INT6 Interrupt</p></td>
+</tr>
+<tr class="row-odd"><td><p>DMA2_INT7</p></td>
+<td><p>IRQ_NUM_BASE+31</p></td>
+<td><p>DMA INT7 Interrupt</p></td>
+</tr>
+<tr class="row-even"><td><p>EMAC</p></td>
+<td><p>EMAC2</p></td>
+<td><p>IRQ_NUM_BASE+36</p></td>
+<td><p>EMAC2 Interrupt</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><p>DMA2D</p></td>
+<td><p>DMA2D_INT0</p></td>
+<td><p>IRQ_NUM_BASE+45</p></td>
+<td><p>DMA2D INT0 Interrupt</p></td>
+</tr>
+<tr class="row-even"><td><p>DMA2D_INT1</p></td>
+<td><p>IRQ_NUM_BASE+46</p></td>
+<td><p>DMA2D INT1 Interrupt</p></td>
+</tr>
+<tr class="row-odd"><td><p>PWM</p></td>
+<td><p>PWM</p></td>
+<td><p>IRQ_NUM_BASE+48</p></td>
+<td><p>PWM1 Interrupt</p></td>
+</tr>
+<tr class="row-even"><td rowspan="3"><p>TIMER1</p></td>
+<td><p>TIMER0_CH0</p></td>
+<td><p>IRQ_NUM_BASE+61</p></td>
+<td><p>Timer1 Channel 0 Interrupt</p></td>
+</tr>
+<tr class="row-odd"><td><p>TIMER0_CH1</p></td>
+<td><p>IRQ_NUM_BASE+62</p></td>
+<td><p>Timer1 Channel 1 Interrupt</p></td>
+</tr>
+<tr class="row-even"><td><p>TIMER0_WDT</p></td>
+<td><p>IRQ_NUM_BASE+63</p></td>
+<td><p>Timer1 Watch Dog Interrupt</p></td>
+</tr>
+<tr class="row-odd"><td><p>AUDIO</p></td>
+<td><p>AUDIO</p></td>
+<td><p>IRQ_NUM_BASE+64</p></td>
+<td><p>Audio Interrupt</p></td>
+</tr>
+<tr class="row-even"><td><p>PDS</p></td>
+<td><p>PDS</p></td>
+<td><p>IRQ_NUM_BASE+66</p></td>
+<td><p>PDS Interrupt</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">注解</p>
+<p>其中IRQ_NUM_BASE为16，中断号0-15为RISC-V 保留中断。</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="BL808 参考手册" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="ResetAndClock.html" class="btn btn-neutral float-right" title="2. 复位和时钟" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2021.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

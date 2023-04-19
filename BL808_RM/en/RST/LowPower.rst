@@ -214,10 +214,3 @@ PDS_IO refers to other 32 GPIOs except AON_IO, and they are divided into 3 group
 
 2. Software IO retention: When cr_pds_gpio_iso_mode is 1, if cr_pds_gpio_kee_en\[0\], \[1\], and \[2\] is 1 in the PDS7 mode, GPIO0–8, GPIO16–23, and GPIO24–38 enter the GPIO retention state respectively. After PDS7 is woke up, the PDS_IO state will still be retained, so you need to clear cr_pds_gpio_iso_mode to 0 before existing IO retention. The advantage of this IO retention is that the same group of GPIOs can hold different levels.
 
-.. only:: html
-
-   .. include:: HBN_register.rst
-
-.. raw:: latex
-
-   \input{../../en/content/HBN}

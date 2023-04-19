@@ -33,7 +33,7 @@ Features
 
 - Supports DMA transfer mode
 
-- Supports baud rate of 10 Mbps and above
+- Supports baud rate of 10 Mbps and below
 
 - Supports the LIN bus protocol
 
@@ -70,19 +70,32 @@ Basic Architecture
 
    UART Architecture
 
-Clock Source
+The UART has 3 clock sources: XCLK, 160MHz CLK and BCLK. The frequency divider in the clock is used to divide the frequency of the clock source and then generate the clock signal to drive the UART module.
+
+The UART controller is divided into two functional blocks: transmitter and receiver.
+
+Transmitter
 -------------
-UART's clock sources include XCLK, 160 Mhz CLK, and BCLK. The frequency divider in the clock is used to divide the clock source and then generate the clock signal to drive UART, as shown below:
+The transmitter contains a 32-byte TX FIFO to store the data to be sent. When the transmission enable bit is set, the data stored in FIFO will be output from the TX pin. Software can transfer data into TX FIFO through DMA or APB bus. Software can check the status of transmitter by querying the remaining free space count value of TX FIFO through tx_fifo_cnt in the register uart_fifo_config_1.
 
-.. figure:: ../../picture/UARTClk.svg
-   :align: center
+FreeRun mode of transmitter:
 
-   UART clock
+- If the FreeRun mode is disabled, transmission will be terminated and an interrupt will be generated when the sent bytes reach the specified length. Before next transmission, you need to re-disable and enable the TxE bit.
+
+- If the FreeRun mode is enabled, the transmitter will send when there is data in the TX FIFO, and will not stop working because the sent bytes reach the specified length.
+
+Receiver
+-------------
+The receiver contains a 32-byte RX FIFO to store the received data. Software can check the status of receiver by querying the available data count value of RX FIFO through rx_fifo_cnt in the register uart_fifo_config_1. 
+The low 8 bits of the register URX_RTO_TIMER are used to set a receiving timeout threshold, which will trigger an interrupt when the receiver fails to receive data beyond the threshold. 
+The cr_urx_deg_en and cr_urx_deg_cnt in the register urx_config are used to enable the deburring function and set the threshold, which control the filtering part before sampling by UART.
+UART will filter out the burrs whose width is lower than the threshold in the waveform and then send it to sampling.
 
 Baud Rate Setting
 -------------
-The user can set the register UART_BIT_PRD to generate the required baud rate. The high 16 bits cr_urx_bit_prd and low 16 bits cr_utx_bit_prd of this register correspond to RX and TX respectively. That is, the baud rates of RX and TX can be set separately. The 16 bits value is calculated by the following formula:
-baud rate = UART clock/(16-bit width factor + 1), that is, 16-bit width factor = UART clock/baud rate-1. This factor means the count value obtained by counting the bit width of the current baud rate with UART clock. Since the maximum 16-bit width factor is 65535, the minimum baud rate supported by UART is UART clock/65536.
+.. math:: Baudrate = \frac{UART\_clk}{uart\_prd + 1}
+
+The user can set the baud rate of RX and TX separately. Take TX as an example: the value of uart_prd is the value of the lower 16 bits cr_utx_bit_prd of the register UART_BIT_PRD. Since the maximum value of the 16-bit bit width coefficient is 65535, the minimum baud rate supported by UART is : UART_clk/65536.
 
 Before sampling the data, UART will filter the data to remove the burrs in the waveform. Then, the data will be sampled at the intermediate value of the 16-bit width factor, so that the sampling time can be adjusted based on baud rates, to ensure that the intermediate value is always sampled, providing much higher flexibility and accuracy. The sampling process is shown as follows:
 
@@ -93,6 +106,11 @@ Before sampling the data, UART will filter the data to remove the burrs in the w
 
 Filtering
 -------------
+.. figure:: ../../picture/UARTDeg.svg
+   :align: center
+
+   UART Filter Waveform
+
 When this function is enabled by configuring cr_urx_deg_en and the threshold is set by configuring cr_urx_deg_cnt in the register urx_config, UART will filter out the data that cannot meet the width threshold. 
 As shown in the figure below, when the data width is 4, setting cr_urx_deg_cnt to 4 can meet this condition. "Input" is the initial data and "output" is the filtered data.
 
@@ -108,48 +126,34 @@ Filtering logic process:
 
 - Note: user-defined condition for deg_cnt: "tgl" is at a high level and "reached" is at a low level. In other cases, "deg_cnt" will be cleared to 0.
 
-.. figure:: ../../picture/UARTDeg.svg
-   :align: center
-
-   UART Filter Waveform
 
 
-Transmitter
--------------
-The transmitter contains a 32-byte TX FIFO to store the data to be sent. When the transmission enable (TxE) bit is set, the data stored in FIFO will be output from the TX pin. Software can transfer data into TX FIFO through DMA or APB bus. Software can check the status of transmitter by querying the remaining free space count value of TX FIFO through tx_fifo_cnt in the register uart_fifo_config_1.
-
-FreeRun mode of transmitter:
-
-- If the FreeRun mode is disabled, transmission will be terminated and an interrupt will be generated when the sent bytes reach the specified length. Before next transmission, you need to re-disable and enable the TxE bit.
-
-- If the FreeRun mode is enabled, the transmitter will send when there is data in the TX FIFO, and will not stop working because the sent bytes reach the specified length.
-
-Receiver
--------------
-The receiver contains a 32-byte RX FIFO to store the received data. Software can check the status of receiver by querying the available data count value of RX FIFO through rx_fifo_cnt in the register uart_fifo_config_1. The low 8 bits of the register URX_RTO_TIMER are used to set a receiving timeout threshold, which will trigger an interrupt when the receiver fails to receive data beyond the threshold. The cr_urx_deg_en and cr_urx_deg_cnt in the register urx_config are used to enable the deburring function and set the threshold, which control the filtering part before sampling by UART. UART will filter out the burrs whose width is lower than the threshold in the waveform and then send it to sampling.
 
 Automatic Baud Rate Detection
 -----------------
-UART supports automatic baud rate detection, which includes the general mode and fixed character mode. The two modes will be enabled every time cr_urx_abr_en in the register urx_config is set.
+The UART module supports automatic baud rate detection, which is divided into two modes, a generic mode and a fixed character (square wave) mode.
+The cr_urx_abr_en in the urx_config register enables auto baud rate detection, and when it is turned on, both detection modes are enabled.
 
 **Common mode**
 
 For any character data received, UART will count the number of clocks in the start bit width, which will then be written into the low 16 bits sts_urx_abr_prd_start in the register STS_URX_ABR_PRD and used to calculate the baud rate. So the correct baud rate can be obtained when the first received data bit is 1, such as '0x01' under LSBFIRST.
 
-**Fixed character mode**
+**Fixed character (square wave) mode**
 
-In this mode, after UART counts the clocks in the start bit width, it will continue to count the clocks of the subsequent data bits and compare them with that of the start bit. If the fluctuation is within the allowable error range, the detection is passed, and otherwise, count values will be discarded. The allowable error can be set by configuring the cr_urx_abr_pw_tol bit in the register urx_abr_pw_tol, and the unit is the clock source of UART.
+In this mode, after the UART module counts the number of clocks in the bit width, it will continue to count the number of clocks in the subsequent data bits and compare it with the start bit. The check is passed, otherwise the count value is discarded. The allowable error can be set by setting the cr_urx_abr_pw_tol bit in the register urx_abr_pw_tol, and the unit is the clock source of the UART.
 
-Thus, only when the fixed characters '0x55'/'0xD5' under LSBFIRST or the '0xAA'/'0xAB' under MSBFIRST are received, UART will write the clock count value in the start bit width into the high 16 bits sts_urx_abr_prd_0x55 in the register STS_URX_ABR_PRD, as shown below:
+Therefore, only when the fixed character '0x55'/'0xD5' under LSB-FIRST or '0xAA'/'0xAB' under MSB-FIRST is received, the UART module will write the clock count value in the starting bit width into the high 16-bit sts_urx_abr_prd_0x55 of the register STS_URX_ABR_PRD. As shown below:
 
 .. figure:: ../../picture/UARTAbr.svg
    :align: center
 
    Waveform of UART in fixed character mode
 
-For an unknown baud rate, UART uses UART_CLK to count the width of the start bit and gets a count value of 1000, and the width of the second bit is 1001. If the width fluctuates for not more than four UART_CLK from the previous bit, UART will continue to count the third bit and get a count value of 1005. If the difference between the start bit and the third bit exceeds 4, the detection fails and the data will be discarded. UART compares the width of the first six data bits with that of the start bit in turn.
+As shown above, assuming the maximum allowable error set is 4, for a received data with unknown baud rate, the UART uses UART_CLK to count the bit width of the starting bit as 1000, the bit width of the second bit as 1001, which is not more than 4 UART_CLK up or down from the previous bit width, then the UART will continue to count the third bit. The third bit is 1005, the difference with the starting bit is more than 4, the detection is not passed and the data is discarded. UART compares the first 6 bit widths of the data bits with the starting bit in turn.
 
-Formula for calculating the detected baud rate: baud rate = source clock/(16-bit detection value + 1)
+Formula for calculating the detected baud rate:
+
+.. math:: Baudrate = \frac{UART\_clk}{Count + 1}
 
 Hardware Flow Control
 -------------
@@ -169,15 +173,21 @@ When the chip detects that CTS goes high, TX will stop sending data, and continu
 
 Two ways for hardware flow control of the transmitter:
 
-- The cr_urx_rts_sw_mode in the register uart_sw_mode is 0: RTS goes high when cr_urx_en in the register urx_config is not turned on or the RX FIFO is almost full (one byte left).
+- Hardware control (the cr_urx_rts_sw_mode in the register uart_sw_mode is 0): RTS goes high when cr_urx_en in the register urx_config is not turned on or the RX FIFO is almost full (one byte left).
 
-- The cr_urx_rts_sw_mode in the register uart_sw_mode is 1: The level of RTS can be changed by configuring cr_urx_rts_sw_val in the register URX_SW_MODE.
+- Software control(the cr_urx_rts_sw_mode in the register uart_sw_mode is 1): The level of RTS can be changed by configuring cr_urx_rts_sw_val in the register uart_sw_mode.
 
-DMA Transfer Mode
+DMA Transfer
 -------------
-UART supports the DMA transfer mode. To enable this mode, you must set the thresholds of TX FIFO and RX FIFO through tx_fifo_th and rx_fifo_th in the register uart_fifo_config_1. When this mode is enabled, if tx_fifo_cnt in the uart_fifo_config_1 is greater than tx_fifo_th, the DMA TX request will be triggered. After DMA is configured, when receiving this request, DMA will transfer data from memory to TX FIFO as configured. If the rx_fifo_cnt in uart_fifo_config_1 is larger than rx_fifo_th, the DMA RX request will be triggered. After DMA is configured, when receiving this request, DMA will transfer the data in RX FIFO to the memory as configured. In the transmission mode, to ensure correct data transfer by the DMA TX Channel, the Channel configuration must meet the condition that transferWidth multiplied by burstSize is less than or equal to the preset tx_fifo_th plus 1.
+UART supports DMA transfer. Using DMA transfer, the TX and RX FIFO thresholds need to be set respectively by tx_fifo_th and rx_fifo_th in register uart_fifo_config_1.
+When this mode is enabled, if tx_fifo_cnt in uart_fifo_config_1 is greater than tx_fifo_th, a DMA TX request will be triggered.
+After the DMA is configured, when the DMA receives the request, it will move the data from the memory to the TX FIFO according to the settings.
+If the rx_fifo_cnt in uart_fifo_config_1 is greater than rx_fifo_th, the DMA RX request will be triggered.
+After the DMA is configured, when the DMA receives the request, it will transfer the data of the RX FIFO to the memory according to the settings.
 
-In the transmission mode, to ensure complete data transfer by the DMA RX Channel, the Channel configuration must meet the condition that transferWidth multiplied by burstSize is equal to the preset tx_fifo_th plus 1.
+In order to ensure the correctness of the data transferred by the chip DMA TX Channel, the following conditions need to be met in the Channel configuration: (transferWidth * burstSize) ≤ (tx_fifo_th + 1).
+
+In order to ensure the integrity of the data transferred by the chip DMA RX Channel, the following conditions need to be met in the Channel configuration: (transferWidth * burstSize) = (rx_fifo_th + 1).
 
 Support for LIN Bus
 -------------
@@ -185,23 +195,26 @@ The protocol for the Local Interconnect Network (LIN) is based on the Volcano-Li
 LIN is a complementary protocol to CAN and SAE J1850, suitable for applications that have low requirement for time or require no precise fault tolerance (as LIN is not as reliable as CAN).
 LIN aims to be easy to use as a low-cost alternative to CAN. The vehicle parts where LIN can be used include window regulator, rearview mirror, wiper, and rain sensor.
 
-UART supports the LIN bus mode, and a typical LIN data transfer is shown as follows.
+UART supports the LIN bus mode.The LIN bus is under the master-slave mode, and data is always initiated by the master node. The frame (header) sent by the master node contains synchronization interval field, synchronization byte field, and identifier field.
+A typical LIN data transfer is shown as follows.
 
 .. figure:: ../../picture/UARTLinFrame.svg
    :align: center
 
    A typical LIN frame
 
-The LIN bus is under the master-slave mode, and data is always initiated by the master node. The frame (header) sent by the master node contains synchronization interval field, synchronization byte field, and identifier field.
-
-The synchronization interval field indicates the start of the message, with at least 13 dominant bits (including the start bit). The synchronization interval ends with an "interval separator", which contains at least one recessive bit.
+1. LIN Break Field
 
 .. figure:: ../../picture/UARTLinBreak.svg
    :align: center
 
    Break Field of LIN
 
+The synchronization interval field indicates the start of the message, with at least 13 dominant bits (including the start bit). The synchronization interval ends with an "interval separator", which contains at least one recessive bit.
+
 The length of the Break in the LIN frame can be set by cr_utx_bit_cnt_b in utx_config.
+
+2. LIN Sync Field
 
 A synchronization byte field is sent to determine the time between two falling edges, to determine the transmission rate used by the master node. The bit pattern is 0x55 (01010101, maximum number of falling edges).
 
@@ -209,6 +222,8 @@ A synchronization byte field is sent to determine the time between two falling e
    :align: center
 
    Sync Field of LIN
+
+3. LIN ID Field
 
 The identifier field contains a 6-bit identifier and two parity check bits. The 6-bit identifier contains information about the sender and receiver, and the number of bytes required in the response. The parity check bit is calculated as follows: The check bit P0 is the result of logical OR operation among ID0, ID1, ID2, and ID4. The check bit P1 is the result of inversion after logical OR operation among ID1, ID3, ID4, and ID5.
 
@@ -223,7 +238,11 @@ UART supports the LIN transfer mode. To enable this mode, you need to configure 
 
 RS485 mode
 -------------
-UART supports the RS485 mode. After the cr_utx_rs485_en in the register UTX_RS485_CFG is set, UART can work in the RS485 mode. Then, UART can be connected to the RS485 bus through an external RS485 transceiver. In this mode, the RTS pin in the module performs the Dir function of transceiver. When UART has data to send, it will automatically control the RTS pin at a high level, so that the transceiver can send data to the bus. Contrarily, when UART has no data to send, it will automatically control the RTS at a low level, to keep the transceiver in the RX state.
+UART supports the RS485 mode. After the cr_utx_rs485_en in the register UTX_RS485_CFG is set, UART can work in the RS485 mode.
+Then, UART can be connected to the RS485 bus through an external RS485 transceiver.
+In this mode, the RTS pin in the module performs the Dir function of transceiver.
+When UART has data to send, it will automatically control the RTS pin at a high level, so that the transceiver can send data to the bus.
+Contrarily, when UART has no data to send, it will automatically control the RTS at a low level, to keep the transceiver in the RX state.
 
 UART supports the RS485 transfer mode. To enable this mode, you need to set cr_utx_rs485_pol and cr_utx_rs485_en in the register UTX_RS485_CFG.
 
@@ -261,9 +280,14 @@ You can set a transfer length for TX and RX respectively by configuring the high
 While this interrupt is generated, TX stops working. To continue to use TX, you must re-initialize this module. Then, RX resumes to work.
 If the preset transfer length of TX is less than the data volume actually sent by TX, the other side can only receive the data equal to the transfer length, and the remaining data will be stored in TX FIFO. After this module is re-initialized, the data in TX FIFO can be sent out.
 
-For example, if the TX/RX transfer length is 64 bytes, when the chip sends 63 bytes, no interrupt will be generated; when it sends 1 byte again, a TX end interrupt will be generated as the number of transferred bytes reaches the preset transfer length of TX. After that, no data can be sent out again and all the data is stored in TX FIFO.
-When the other side sends 63 bytes to the chip, no interrupt will be generated; but when it sends 1 byte again, a RX end interrupt will be generated as the number of bytes received by the chip reaches the preset transfer length of RX. Then, if it sends 64 bytes to the chip again, UART can receive data and the FIFO data is not empty.
-When transferlen=15 is set, if TX sends 16-byte data, RX will receive 15-byte data only. The extra one byte is stored in TX FIFO, and the value of TX FIFO COUNT is 1 by default. After TX/RX is disabled and enabled again, the remaining data in TX FIFO will be sent out.
+For TX, if the data continuously filled into the TX FIFO is greater than the set transmission length value, only the data of the set length value will be transmitted on the TX pin, and the excess data will be kept in the TX FIFO, and the TX will be re-enabled. After the function, the remaining data in the TX FIFO will be sent out.
+
+For example: set the TX transmission length value to 64, enable the TX function, first fill 63 bytes into the TX FIFO, these 63 bytes will be transmitted on the pins, but no TX transmission completion interrupt is generated, and then the TX FIFO is sent to the TX FIFO. Fill in 1 byte, at this time, the transmission length reaches the transmission length value set by TX, a transmission completion interrupt will be generated, and the TX function will stop.
+Continue to fill 1 byte into the TX FIFO, you will find that there is no data transmission on the pin, the byte is still retained in the TX FIFO, and the TX function is turned off and re-enabled, and the byte is sent out on the pin.
+
+For RX, if the data length sent by the other party exceeds the set transmission length, RX can continue to receive data after the RX transmission completion interrupt is generated.
+
+For example: set the RX transmission length value to 16, the other party sends 32 bytes of data, RX will generate an RX transmission completion interrupt when it receives 16 bytes of data, and continue to receive the remaining 16 bytes of data, all saved in the RX FIFO.
 
 TX/RX FIFO request interrupt
 ------------------
@@ -273,14 +297,20 @@ A RX FIFO request interrupt will be generated when rx_fifo_cnt in uart_fifo_conf
 
 TX/RX supports multiple rounds of transmission/receiving, instead of reaching the value set by tx_fifo_th/rx_fifo_th at a time.
 
-For example, you can set tx_fifo_th/rx_fifo_th to 16 by configuring tx_fifo_th/rx_fifo_th in the register uart_fifo_config_1; enable the free run mode by setting cr_utx_frm_en in the register utx_config; enable the TX/RX FIFO interrupts by setting cr_utx_frdy_mask/cr_urx_frdy_mask in the register uart_int_mask to 0; enable TX/RX by setting cr_utx_en/cr_urx_en in the register utx_config/urx_config. TX FIFO interrupt: TX will always generate FIFO interrupts. After the chip sends 128 bytes, cr_utx_frdy_mask is set to 1 to mask this interrupt. To enable the TX FIFO interrupt again, you need to set cr_utx_frdy_mask to 0. RX FIFO interrupt: When the other side sends 15 bytes, no interrupt is generated and the value of rx_fifo_cnt is 15. When one byte is sent again, an interrupt will be generated as the preset value of rx_fifo_th is met. After a TX interrupt is generated, if the other side sends data again, the chip can receive the data.
+E.g:
+
+1. Set tx_fifo_th/rx_fifo_th in register uart_fifo_config_1 to 16.
+2. Set cr_utx_frm_en in register utx_config to enable free run mode.
+3. Set cr_utx_frdy_mask/cr_urx_frdy_mask in register uart_int_mask to 0, and enable FIFO interrupt of TX/RX.
+4. Set cr_utx_en/cr_urx_en in register utx_config/urx_config to enable TX/RX.
+5. TX FIFO interrupt: TX will always enter the FIFO interrupt, when the chip sends 128 bytes, set cr_utx_frdy_mask to 1 to shield the interrupt. If you want to enter the TX FIFO interrupt again, set cr_utx_frdy_mask to 0.
+6. RX FIFO interrupt: the other party first sends 15 bytes, no interrupt is generated, at this time, the value of rx_fifo_cnt is 15, and an interrupt is generated when 1 byte is sent again to reach the value set by rx_fifo_th. After the transmission is interrupted, the other party sends the data again, and the chip can receive the data.
 
 RX timeout interrupt
 ---------------------
-The RX timeout interrupt will be triggered when the receiver fails to receive data beyond the timeout threshold. The timeout threshold is measured by Bit.
+The RX timeout interrupt generation condition is: after receiving data last time, the receiver will start timing, and the interrupt will be triggered when the timing value exceeds the timeout threshold and the next data has not been received. The time-out threshold value is in the unit of communication bit.
 
-When the other side sends data to the chip, a timeout interrupt will be generated after the preset timeout threshold is reached.
-For example, you can enable the timeout interrupt by setting the cr_urx_rto_mask bit in the register uart_int_mask to 0, and data is received during the timeout interrupt. Through the printed RX buffer and the print log, you can confirm the timeout interrupt state and that correct data is received.
+When the other party sends data to the chip, a timeout interrupt will be generated after the set timeout period is reached.
 
 RX parity check error interrupt
 -----------------
