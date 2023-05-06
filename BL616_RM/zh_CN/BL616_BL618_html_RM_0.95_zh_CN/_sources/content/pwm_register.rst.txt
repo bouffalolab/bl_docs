@@ -1,0 +1,687 @@
+
+寄存器描述
+====================
+
++----------------------+---------------------------------+
+| 名称                 | 描述                            |
++----------------------+---------------------------------+
+| `pwm_int_config`_    | PWM interrupt config register   |
++----------------------+---------------------------------+
+| `pwm_mc0_config0`_   | PWM config0 register            |
++----------------------+---------------------------------+
+| `pwm_mc0_config1`_   | PWM config1 register            |
++----------------------+---------------------------------+
+| `pwm_mc0_period`_    | PWM period register             |
++----------------------+---------------------------------+
+| `pwm_mc0_dead_time`_ | PWM dead time register          |
++----------------------+---------------------------------+
+| `pwm_mc0_ch0_thre`_  | PWM channel0 threshold register |
++----------------------+---------------------------------+
+| `pwm_mc0_ch1_thre`_  | PWM channel1 threshold register |
++----------------------+---------------------------------+
+| `pwm_mc0_ch2_thre`_  | PWM channel2 threshold register |
++----------------------+---------------------------------+
+| `pwm_mc0_ch3_thre`_  | PWM channel3 threshold register |
++----------------------+---------------------------------+
+| `pwm_mc0_int_sts`_   | PWM interrupt status register   |
++----------------------+---------------------------------+
+| `pwm_mc0_int_mask`_  | PWM interrupt mask register     |
++----------------------+---------------------------------+
+| `pwm_mc0_int_clear`_ | PWM interrupt clear register    |
++----------------------+---------------------------------+
+| `pwm_mc0_int_en`_    | PWM interrupt enable register   |
++----------------------+---------------------------------+
+
+pwm_int_config
+----------------
+ 
+**地址：**  0x2000a400
+ 
+.. figure:: ../../picture/pwm_pwm_int_config.svg
+   :align: center
+
+.. table::
+    :widths: 10, 15,10,10,55
+    :width: 100%
+    :align: center
+     
+    +----------+------------------------------+--------+-------------+------------------------------------------------------------------------------+
+    | 位       | 名称                         |权限    | 复位值      | 描述                                                                         |
+    +==========+==============================+========+=============+==============================================================================+
+    | 31:9     | RSVD                         |        |             |                                                                              |
+    +----------+------------------------------+--------+-------------+------------------------------------------------------------------------------+
+    | 8        | pwm0_int_clr                 | w1c    | 1'b0        | PWM 0 interrupt clear (clear pwm_mc0_int_sts[10:0] all)                      |
+    +----------+------------------------------+--------+-------------+------------------------------------------------------------------------------+
+    | 7:1      | RSVD                         |        |             |                                                                              |
+    +----------+------------------------------+--------+-------------+------------------------------------------------------------------------------+
+    | 0        | pwm0_int_sts                 | r      | 1'b0        | PWM 0 interrupt status (Check pwm_mc0_int_sts for detailed interrupt status) |
+    +----------+------------------------------+--------+-------------+------------------------------------------------------------------------------+
+
+pwm_mc0_config0
+-----------------
+ 
+**地址：**  0x2000a440
+ 
+.. figure:: ../../picture/pwm_pwm_mc0_config0.svg
+   :align: center
+
+.. table::
+    :widths: 10, 15,10,10,55
+    :width: 100%
+    :align: center
+     
+    +----------+------------------------------+--------+-------------+--------------------------------------------------------------------------------------+
+    | 位       | 名称                         |权限    | 复位值      | 描述                                                                                 |
+    +==========+==============================+========+=============+======================================================================================+
+    | 31:30    | reg_clk_sel                  | r/w    | 2'd0        | PWM clock source select                                                              |
+    +          +                              +        +             +                                                                                      +
+    |          |                              |        |             | 2'd0: xclk                                                                           |
+    +          +                              +        +             +                                                                                      +
+    |          |                              |        |             | 2'd1: bclk                                                                           |
+    +          +                              +        +             +                                                                                      +
+    |          |                              |        |             | others: f32k_clk                                                                     |
+    +----------+------------------------------+--------+-------------+--------------------------------------------------------------------------------------+
+    | 29       | pwm_sts_stop                 | r      | 1'b0        | PWM stop status                                                                      |
+    +          +                              +        +             +                                                                                      +
+    |          |                              |        |             | 0: PWM run status                                                                    |
+    +          +                              +        +             +                                                                                      +
+    |          |                              |        |             | 1: PWM stop status                                                                   |
+    +----------+------------------------------+--------+-------------+--------------------------------------------------------------------------------------+
+    | 28       | pwm_stop_mode                | r/w    | 1'b1        | PWM stop mode,                                                                       |
+    +          +                              +        +             +                                                                                      +
+    |          |                              |        |             | 0: abrupt                                                                            |
+    +          +                              +        +             +                                                                                      +
+    |          |                              |        |             | 1: graceful                                                                          |
+    +----------+------------------------------+--------+-------------+--------------------------------------------------------------------------------------+
+    | 27       | pwm_stop_en                  | r/w    | 1'b0        | PWM stop enable                                                                      |
+    +          +                              +        +             +                                                                                      +
+    |          |                              |        |             | 0: start PWM                                                                         |
+    +          +                              +        +             +                                                                                      +
+    |          |                              |        |             | 1: stop PWM                                                                          |
+    +----------+------------------------------+--------+-------------+--------------------------------------------------------------------------------------+
+    | 26:25    | RSVD                         |        |             |                                                                                      |
+    +----------+------------------------------+--------+-------------+--------------------------------------------------------------------------------------+
+    | 24       | pwm_sw_break_en              | r/w    | 1'b0        | PWM break enable                                                                     |
+    +          +                              +        +             +                                                                                      +
+    |          |                              |        |             | 0: Disabled, normal operation                                                        |
+    +          +                              +        +             +                                                                                      +
+    |          |                              |        |             | 1: Enabled, PWM output will be determined by CxPBS/CxNBS                             |
+    +----------+------------------------------+--------+-------------+--------------------------------------------------------------------------------------+
+    | 23:20    | pwm_adc_trg_src              | r/w    | 4'hF        | Select signal of ADC triggering source                                               |
+    +          +                              +        +             +                                                                                      +
+    |          |                              |        |             | 4'd0: pwm_ch0l_int (Channel 0 ThresholdL reached)                                    |
+    +          +                              +        +             +                                                                                      +
+    |          |                              |        |             | 4'd1: pwm_ch0h_int (Channel 0 ThresholdH reached)                                    |
+    +          +                              +        +             +                                                                                      +
+    |          |                              |        |             | 4'd2: pwm_ch1l_int (Channel 1 ThresholdL reached)                                    |
+    +          +                              +        +             +                                                                                      +
+    |          |                              |        |             | 4'd3: pwm_ch1h_int (Channel 1 ThresholdH reached)                                    |
+    +          +                              +        +             +                                                                                      +
+    |          |                              |        |             | 4'd4: pwm_ch2l_int (Channel 2 ThresholdL reached)                                    |
+    +          +                              +        +             +                                                                                      +
+    |          |                              |        |             | 4'd5: pwm_ch2h_int (Channel 2 ThresholdH reached)                                    |
+    +          +                              +        +             +                                                                                      +
+    |          |                              |        |             | 4'd6: pwm_ch3l_int (Channel 3 ThresholdL reached)                                    |
+    +          +                              +        +             +                                                                                      +
+    |          |                              |        |             | 4'd7: pwm_ch3h_int (Channel 3 ThresholdH reached)                                    |
+    +          +                              +        +             +                                                                                      +
+    |          |                              |        |             | 4'd8: pwm_prde_int (Period End reached)                                              |
+    +          +                              +        +             +                                                                                      +
+    |          |                              |        |             | Others: Disabled                                                                     |
+    +----------+------------------------------+--------+-------------+--------------------------------------------------------------------------------------+
+    | 19       | pwm_stop_on_rept             | r/w    | 1'b0        | PWM stopped when rept_int is asserted                                                |
+    +          +                              +        +             +                                                                                      +
+    |          |                              |        |             | 0: Disabled, PWM keeps running when rept_int is asserted                             |
+    +          +                              +        +             +                                                                                      +
+    |          |                              |        |             | 1: Enabled, PWM stops when rept_int is asserted. Clear rept_int to restore operation |
+    +----------+------------------------------+--------+-------------+--------------------------------------------------------------------------------------+
+    | 18:16    | RSVD                         |        |             |                                                                                      |
+    +----------+------------------------------+--------+-------------+--------------------------------------------------------------------------------------+
+    | 15:0     | pwm_clk_div                  | r/w    | 16'b0       | PWM clock division                                                                   |
+    +          +                              +        +             +                                                                                      +
+    |          |                              |        |             | 0: 1 divisor                                                                         |
+    +          +                              +        +             +                                                                                      +
+    |          |                              |        |             | 1: 1 divisor                                                                         |
+    +          +                              +        +             +                                                                                      +
+    |          |                              |        |             | 2: 2 divisor                                                                         |
+    +          +                              +        +             +                                                                                      +
+    |          |                              |        |             | ......                                                                               |
+    +          +                              +        +             +                                                                                      +
+    |          |                              |        |             | 65535: 65535 divisor                                                                 |
+    +----------+------------------------------+--------+-------------+--------------------------------------------------------------------------------------+
+
+pwm_mc0_config1
+-----------------
+ 
+**地址：**  0x2000a444
+ 
+.. figure:: ../../picture/pwm_pwm_mc0_config1.svg
+   :align: center
+
+.. table::
+    :widths: 10, 15,10,10,55
+    :width: 100%
+    :align: center
+     
+    +----------+------------------------------+--------+-------------+-------------------------------------------------------------------------------------------------+
+    | 位       | 名称                         |权限    | 复位值      | 描述                                                                                            |
+    +==========+==============================+========+=============+=================================================================================================+
+    | 31       | pwm_ch3_nbs                  | r/w    | 1'b0        | PWM channel 3 negative break state                                                              |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 0: PWM channel 3 negative output logic 0 in break state                                         |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 1: PWM channel 3 negativeitive output logic 1 in break state                                    |
+    +----------+------------------------------+--------+-------------+-------------------------------------------------------------------------------------------------+
+    | 30       | pwm_ch3_pbs                  | r/w    | 1'b0        | PWM channel 3 positive break state                                                              |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 0: PWM channel 3 positive output logic 0 in break state                                         |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 1: PWM channel 3 positive output logic 1 in break state                                         |
+    +----------+------------------------------+--------+-------------+-------------------------------------------------------------------------------------------------+
+    | 29       | pwm_ch2_nbs                  | r/w    | 1'b0        | PWM channel 2 negative break state                                                              |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 0: PWM channel 2 negative output logic 0 in break state                                         |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 1: PWM channel 2 negativeitive output logic 1 in break state                                    |
+    +----------+------------------------------+--------+-------------+-------------------------------------------------------------------------------------------------+
+    | 28       | pwm_ch2_pbs                  | r/w    | 1'b0        | PWM channel 2 positive break state                                                              |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 0: PWM channel 2 positive output logic 0 in break state                                         |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 1: PWM channel 2 positive output logic 1 in break state                                         |
+    +----------+------------------------------+--------+-------------+-------------------------------------------------------------------------------------------------+
+    | 27       | pwm_ch1_nbs                  | r/w    | 1'b0        | PWM channel 1 negative break state                                                              |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 0: PWM channel 1 negative output logic 0 in break state                                         |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 1: PWM channel 1 negativeitive output logic 1 in break state                                    |
+    +----------+------------------------------+--------+-------------+-------------------------------------------------------------------------------------------------+
+    | 26       | pwm_ch1_pbs                  | r/w    | 1'b0        | PWM channel 1 positive break state                                                              |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 0: PWM channel 1 positive output logic 0 in break state                                         |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 1: PWM channel 1 positive output logic 1 in break state                                         |
+    +----------+------------------------------+--------+-------------+-------------------------------------------------------------------------------------------------+
+    | 25       | pwm_ch0_nbs                  | r/w    | 1'b0        | PWM channel 0 negative break state                                                              |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 0: PWM channel 0 negative output logic 0 in break state                                         |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 1: PWM channel 0 negativeitive output logic 1 in break state                                    |
+    +----------+------------------------------+--------+-------------+-------------------------------------------------------------------------------------------------+
+    | 24       | pwm_ch0_pbs                  | r/w    | 1'b0        | PWM channel 0 positive break state                                                              |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 0: PWM channel 0 positive output logic 0 in break state                                         |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 1: PWM channel 0 positive output logic 1 in break state                                         |
+    +----------+------------------------------+--------+-------------+-------------------------------------------------------------------------------------------------+
+    | 23       | pwm_ch3_npl                  | r/w    | 1'b1        | PWM channel 3 negative polarity                                                                 |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 0: PWM channel 3 negative output high level in logic 0 state, output low level in logic 1 state |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 1: PWM channel 3 negative output low level in logic 0 state, output high level in logic 1 state |
+    +----------+------------------------------+--------+-------------+-------------------------------------------------------------------------------------------------+
+    | 22       | pwm_ch3_ppl                  | r/w    | 1'b1        | PWM channel 3 positive polarity                                                                 |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 0: PWM channel 3 positive output high level in logic 0 state, output low level in logic 1 state |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 1: PWM channel 3 positive output low level in logic 0 state, output high level in logic 1 state |
+    +----------+------------------------------+--------+-------------+-------------------------------------------------------------------------------------------------+
+    | 21       | pwm_ch2_npl                  | r/w    | 1'b1        | PWM channel 2 negative polarity                                                                 |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 0: PWM channel 2 negative output high level in logic 0 state, output low level in logic 1 state |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 1: PWM channel 2 negative output low level in logic 0 state, output high level in logic 1 state |
+    +----------+------------------------------+--------+-------------+-------------------------------------------------------------------------------------------------+
+    | 20       | pwm_ch2_ppl                  | r/w    | 1'b1        | PWM channel 2 positive polarity                                                                 |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 0: PWM channel 2 positive output high level in logic 0 state, output low level in logic 1 state |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 1: PWM channel 2 positive output low level in logic 0 state, output high level in logic 1 state |
+    +----------+------------------------------+--------+-------------+-------------------------------------------------------------------------------------------------+
+    | 19       | pwm_ch1_npl                  | r/w    | 1'b1        | PWM channel 1 negative polarity                                                                 |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 0: PWM channel 1 negative output high level in logic 0 state, output low level in logic 1 state |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 1: PWM channel 1 negative output low level in logic 0 state, output high level in logic 1 state |
+    +----------+------------------------------+--------+-------------+-------------------------------------------------------------------------------------------------+
+    | 18       | pwm_ch1_ppl                  | r/w    | 1'b1        | PWM channel 1 positive polarity                                                                 |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 0: PWM channel 1 positive output high level in logic 0 state, output low level in logic 1 state |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 1: PWM channel 1 positive output low level in logic 0 state, output high level in logic 1 state |
+    +----------+------------------------------+--------+-------------+-------------------------------------------------------------------------------------------------+
+    | 17       | pwm_ch0_npl                  | r/w    | 1'b1        | PWM channel 0 negative polarity                                                                 |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 0: PWM channel 0 negative output high level in logic 0 state, output low level in logic 1 state |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 1: PWM channel 0 negative output low level in logic 0 state, output high level in logic 1 state |
+    +----------+------------------------------+--------+-------------+-------------------------------------------------------------------------------------------------+
+    | 16       | pwm_ch0_ppl                  | r/w    | 1'b1        | PWM channel 0 positive polarity                                                                 |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 0: PWM channel 0 positive output high level in logic 0 state, output low level in logic 1 state |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 1: PWM channel 0 positive output low level in logic 0 state, output high level in logic 1 state |
+    +----------+------------------------------+--------+-------------+-------------------------------------------------------------------------------------------------+
+    | 15       | pwm_ch3_nsi                  | r/w    | 1'b1        | PWM channel 3 negative set idle state                                                           |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 0: PWM channel 3 negative logic 0 state                                                         |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 1: PWM channel 3 negative logic 1 state                                                         |
+    +----------+------------------------------+--------+-------------+-------------------------------------------------------------------------------------------------+
+    | 14       | pwm_ch3_nen                  | r/w    | 1'b0        | PWM channel 3 negative enable pwm out                                                           |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 0: disable, PWM output is determined by pwm_ch3_nsi and pwm_ch3_npl                             |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 1: enable, PWM output is determined by counter and pwm_mc0_ch3_thre                             |
+    +----------+------------------------------+--------+-------------+-------------------------------------------------------------------------------------------------+
+    | 13       | pwm_ch3_psi                  | r/w    | 1'b0        | PWM channel 3 positive set idle state                                                           |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 0: PWM channel 3 positive output logic 0 in idle state                                          |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 1: PWM channel 3 positive output logic 1 in idle state                                          |
+    +----------+------------------------------+--------+-------------+-------------------------------------------------------------------------------------------------+
+    | 12       | pwm_ch3_pen                  | r/w    | 1'b0        | PWM channel 3 positive enable pwm out                                                           |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 0: disable, PWM output is determined by pwm_ch3_psi and pwm_ch3_ppl                             |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 1: enable, PWM output is determined by counter and pwm_mc0_ch3_thre                             |
+    +----------+------------------------------+--------+-------------+-------------------------------------------------------------------------------------------------+
+    | 11       | pwm_ch2_nsi                  | r/w    | 1'b1        | PWM channel 2 negative set idle state                                                           |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 0: PWM channel 2 negative logic 0 state                                                         |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 1: PWM channel 2 negative logic 1 state                                                         |
+    +----------+------------------------------+--------+-------------+-------------------------------------------------------------------------------------------------+
+    | 10       | pwm_ch2_nen                  | r/w    | 1'b0        | PWM channel 2 negative enable pwm out                                                           |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 0: disable, PWM output is determined by pwm_ch2_nsi and pwm_ch2_npl                             |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 1: enable, PWM output is determined by counter and pwm_mc0_ch2_thre                             |
+    +----------+------------------------------+--------+-------------+-------------------------------------------------------------------------------------------------+
+    | 9        | pwm_ch2_psi                  | r/w    | 1'b0        | PWM channel 2 positive set idle state                                                           |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 0: PWM channel 2 positive output logic 0 in idle state                                          |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 1: PWM channel 2 positive output logic 1 in idle state                                          |
+    +----------+------------------------------+--------+-------------+-------------------------------------------------------------------------------------------------+
+    | 8        | pwm_ch2_pen                  | r/w    | 1'b0        | PWM channel 2 positive enable pwm out                                                           |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 0: disable, PWM output is determined by pwm_ch2_psi and pwm_ch2_ppl                             |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 1: enable, PWM output is determined by counter and pwm_mc0_ch2_thre                             |
+    +----------+------------------------------+--------+-------------+-------------------------------------------------------------------------------------------------+
+    | 7        | pwm_ch1_nsi                  | r/w    | 1'b1        | PWM channel 1 negative set idle state                                                           |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 0: PWM channel 1 negative logic 0 state                                                         |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 1: PWM channel 1 negative logic 1 state                                                         |
+    +----------+------------------------------+--------+-------------+-------------------------------------------------------------------------------------------------+
+    | 6        | pwm_ch1_nen                  | r/w    | 1'b0        | PWM channel 1 negative enable pwm out                                                           |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 0: disable, PWM output is determined by pwm_ch1_nsi and pwm_ch1_npl                             |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 1: enable, PWM output is determined by counter and pwm_mc0_ch1_thre                             |
+    +----------+------------------------------+--------+-------------+-------------------------------------------------------------------------------------------------+
+    | 5        | pwm_ch1_psi                  | r/w    | 1'b0        | PWM channel 1 positive set idle state                                                           |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 0: PWM channel 1 positive output logic 0 in idle state                                          |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 1: PWM channel 1 positive output logic 1 in idle state                                          |
+    +----------+------------------------------+--------+-------------+-------------------------------------------------------------------------------------------------+
+    | 4        | pwm_ch1_pen                  | r/w    | 1'b0        | PWM channel 1 positive enable pwm out                                                           |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 0: disable, PWM output is determined by pwm_ch1_psi and pwm_ch1_ppl                             |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 1: enable, PWM output is determined by counter and pwm_mc0_ch1_thre                             |
+    +----------+------------------------------+--------+-------------+-------------------------------------------------------------------------------------------------+
+    | 3        | pwm_ch0_nsi                  | r/w    | 1'b1        | PWM channel 0 negative set idle state                                                           |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 0: PWM channel 0 negative logic 0 state                                                         |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 1: PWM channel 0 negative logic 1 state                                                         |
+    +----------+------------------------------+--------+-------------+-------------------------------------------------------------------------------------------------+
+    | 2        | pwm_ch0_nen                  | r/w    | 1'b0        | PWM channel 0 negative enable pwm out                                                           |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 0: disable, PWM output is determined by pwm_ch0_nsi and pwm_ch0_npl                             |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 1: enable, PWM output is determined by counter and pwm_mc0_ch0_thre                             |
+    +----------+------------------------------+--------+-------------+-------------------------------------------------------------------------------------------------+
+    | 1        | pwm_ch0_psi                  | r/w    | 1'b0        | PWM channel 0 positive set idle state                                                           |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 0: PWM channel 0 positive output logic 0 in idle state                                          |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 1: PWM channel 0 positive output logic 1 in idle state                                          |
+    +----------+------------------------------+--------+-------------+-------------------------------------------------------------------------------------------------+
+    | 0        | pwm_ch0_pen                  | r/w    | 1'b0        | PWM channel 0 positive enable pwm out                                                           |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 0: disable, PWM output is determined by pwm_ch0_psi and pwm_ch0_ppl                             |
+    +          +                              +        +             +                                                                                                 +
+    |          |                              |        |             | 1: enable, PWM output is determined by counter and pwm_mc0_ch0_thre                             |
+    +----------+------------------------------+--------+-------------+-------------------------------------------------------------------------------------------------+
+
+pwm_mc0_period
+----------------
+ 
+**地址：**  0x2000a448
+ 
+.. figure:: ../../picture/pwm_pwm_mc0_period.svg
+   :align: center
+
+.. table::
+    :widths: 10, 15,10,10,55
+    :width: 100%
+    :align: center
+     
+    +----------+------------------------------+--------+-------------+----------------------------------------+
+    | 位       | 名称                         |权限    | 复位值      | 描述                                   |
+    +==========+==============================+========+=============+========================================+
+    | 31:16    | pwm_int_period_cnt           | r/w    | 16'd0       | PWM interrupt period counter threshold |
+    +----------+------------------------------+--------+-------------+----------------------------------------+
+    | 15:0     | pwm_period                   | r/w    | 16'd0       | PWM period setting                     |
+    +----------+------------------------------+--------+-------------+----------------------------------------+
+
+pwm_mc0_dead_time
+-------------------
+ 
+**地址：**  0x2000a44c
+ 
+.. figure:: ../../picture/pwm_pwm_mc0_dead_time.svg
+   :align: center
+
+.. table::
+    :widths: 10, 15,10,10,55
+    :width: 100%
+    :align: center
+     
+    +----------+------------------------------+--------+-------------+-----------------------------------------------------------------+
+    | 位       | 名称                         |权限    | 复位值      | 描述                                                            |
+    +==========+==============================+========+=============+=================================================================+
+    | 31:24    | pwm_ch3_dtg                  | r/w    | 8'h0        | PWM Channel 3 dead time generator (DTG)                         |
+    +          +                              +        +             +                                                                 +
+    |          |                              |        |             | DTG[7:5]=0xx => DT = DTG[7:0]*1 (unit: divided PWM clock)       |
+    +          +                              +        +             +                                                                 +
+    |          |                              |        |             | DTG[7:5]=10x => DT = (64+DTG[5:0])*2 (unit: divided PWM clock)  |
+    +          +                              +        +             +                                                                 +
+    |          |                              |        |             | DTG[7:5]=110 => DT = (32+DTG[4:0])*8 (unit: divided PWM clock)  |
+    +          +                              +        +             +                                                                 +
+    |          |                              |        |             | DTG[7:5]=111 => DT = (32+DTG[4:0])*16 (unit: divided PWM clock) |
+    +----------+------------------------------+--------+-------------+-----------------------------------------------------------------+
+    | 23:16    | pwm_ch2_dtg                  | r/w    | 8'h0        | PWM Channel 2 dead time generator (DTG)                         |
+    +          +                              +        +             +                                                                 +
+    |          |                              |        |             | DTG[7:5]=0xx => DT = DTG[7:0]*1 (unit: divided PWM clock)       |
+    +          +                              +        +             +                                                                 +
+    |          |                              |        |             | DTG[7:5]=10x => DT = (64+DTG[5:0])*2 (unit: divided PWM clock)  |
+    +          +                              +        +             +                                                                 +
+    |          |                              |        |             | DTG[7:5]=110 => DT = (32+DTG[4:0])*8 (unit: divided PWM clock)  |
+    +          +                              +        +             +                                                                 +
+    |          |                              |        |             | DTG[7:5]=111 => DT = (32+DTG[4:0])*16 (unit: divided PWM clock) |
+    +----------+------------------------------+--------+-------------+-----------------------------------------------------------------+
+    | 15:8     | pwm_ch1_dtg                  | r/w    | 8'h0        | PWM Channel 1 dead time generator (DTG)                         |
+    +          +                              +        +             +                                                                 +
+    |          |                              |        |             | DTG[7:5]=0xx => DT = DTG[7:0]*1 (unit: divided PWM clock)       |
+    +          +                              +        +             +                                                                 +
+    |          |                              |        |             | DTG[7:5]=10x => DT = (64+DTG[5:0])*2 (unit: divided PWM clock)  |
+    +          +                              +        +             +                                                                 +
+    |          |                              |        |             | DTG[7:5]=110 => DT = (32+DTG[4:0])*8 (unit: divided PWM clock)  |
+    +          +                              +        +             +                                                                 +
+    |          |                              |        |             | DTG[7:5]=111 => DT = (32+DTG[4:0])*16 (unit: divided PWM clock) |
+    +----------+------------------------------+--------+-------------+-----------------------------------------------------------------+
+    | 7:0      | pwm_ch0_dtg                  | r/w    | 8'h0        | PWM Channel 0 dead time generator (DTG)                         |
+    +          +                              +        +             +                                                                 +
+    |          |                              |        |             | DTG[7:5]=0xx => DT = DTG[7:0]*1 (unit: divided PWM clock)       |
+    +          +                              +        +             +                                                                 +
+    |          |                              |        |             | DTG[7:5]=10x => DT = (64+DTG[5:0])*2 (unit: divided PWM clock)  |
+    +          +                              +        +             +                                                                 +
+    |          |                              |        |             | DTG[7:5]=110 => DT = (32+DTG[4:0])*8 (unit: divided PWM clock)  |
+    +          +                              +        +             +                                                                 +
+    |          |                              |        |             | DTG[7:5]=111 => DT = (32+DTG[4:0])*16 (unit: divided PWM clock) |
+    +----------+------------------------------+--------+-------------+-----------------------------------------------------------------+
+
+pwm_mc0_ch0_thre
+------------------
+ 
+**地址：**  0x2000a450
+ 
+.. figure:: ../../picture/pwm_pwm_mc0_ch0_thre.svg
+   :align: center
+
+.. table::
+    :widths: 10, 15,10,10,55
+    :width: 100%
+    :align: center
+     
+    +----------+------------------------------+--------+-------------+---------------------------------------------------------+
+    | 位       | 名称                         |权限    | 复位值      | 描述                                                    |
+    +==========+==============================+========+=============+=========================================================+
+    | 31:16    | pwm_ch0_threH                | r/w    | 16'd0       | PWM HIGH counter threshold, can't be smaller that threL |
+    +----------+------------------------------+--------+-------------+---------------------------------------------------------+
+    | 15:0     | pwm_ch0_threL                | r/w    | 16'd0       | PWM LOW counter threshold, can't be larger that threH   |
+    +----------+------------------------------+--------+-------------+---------------------------------------------------------+
+
+pwm_mc0_ch1_thre
+------------------
+ 
+**地址：**  0x2000a454
+ 
+.. figure:: ../../picture/pwm_pwm_mc0_ch1_thre.svg
+   :align: center
+
+.. table::
+    :widths: 10, 15,10,10,55
+    :width: 100%
+    :align: center
+     
+    +----------+------------------------------+--------+-------------+---------------------------------------------------------+
+    | 位       | 名称                         |权限    | 复位值      | 描述                                                    |
+    +==========+==============================+========+=============+=========================================================+
+    | 31:16    | pwm_ch1_threH                | r/w    | 16'd0       | PWM HIGH counter threshold, can't be smaller that threL |
+    +----------+------------------------------+--------+-------------+---------------------------------------------------------+
+    | 15:0     | pwm_ch1_threL                | r/w    | 16'd0       | PWM LOW counter threshold, can't be larger that threH   |
+    +----------+------------------------------+--------+-------------+---------------------------------------------------------+
+
+pwm_mc0_ch2_thre
+------------------
+ 
+**地址：**  0x2000a458
+ 
+.. figure:: ../../picture/pwm_pwm_mc0_ch2_thre.svg
+   :align: center
+
+.. table::
+    :widths: 10, 15,10,10,55
+    :width: 100%
+    :align: center
+     
+    +----------+------------------------------+--------+-------------+---------------------------------------------------------+
+    | 位       | 名称                         |权限    | 复位值      | 描述                                                    |
+    +==========+==============================+========+=============+=========================================================+
+    | 31:16    | pwm_ch2_threH                | r/w    | 16'd0       | PWM HIGH counter threshold, can't be smaller that threL |
+    +----------+------------------------------+--------+-------------+---------------------------------------------------------+
+    | 15:0     | pwm_ch2_threL                | r/w    | 16'd0       | PWM LOW counter threshold, can't be larger that threH   |
+    +----------+------------------------------+--------+-------------+---------------------------------------------------------+
+
+pwm_mc0_ch3_thre
+------------------
+ 
+**地址：**  0x2000a45c
+ 
+.. figure:: ../../picture/pwm_pwm_mc0_ch3_thre.svg
+   :align: center
+
+.. table::
+    :widths: 10, 15,10,10,55
+    :width: 100%
+    :align: center
+     
+    +----------+------------------------------+--------+-------------+---------------------------------------------------------+
+    | 位       | 名称                         |权限    | 复位值      | 描述                                                    |
+    +==========+==============================+========+=============+=========================================================+
+    | 31:16    | pwm_ch3_threH                | r/w    | 16'd0       | PWM HIGH counter threshold, can't be smaller that threL |
+    +----------+------------------------------+--------+-------------+---------------------------------------------------------+
+    | 15:0     | pwm_ch3_threL                | r/w    | 16'd0       | PWM LOW counter threshold, can't be larger that threH   |
+    +----------+------------------------------+--------+-------------+---------------------------------------------------------+
+
+pwm_mc0_int_sts
+-----------------
+ 
+**地址：**  0x2000a460
+ 
+.. figure:: ../../picture/pwm_pwm_mc0_int_sts.svg
+   :align: center
+
+.. table::
+    :widths: 10, 15,10,10,55
+    :width: 100%
+    :align: center
+     
+    +----------+------------------------------+--------+-------------+-------------------------------------------+
+    | 位       | 名称                         |权限    | 复位值      | 描述                                      |
+    +==========+==============================+========+=============+===========================================+
+    | 31:11    | RSVD                         |        |             |                                           |
+    +----------+------------------------------+--------+-------------+-------------------------------------------+
+    | 10       | pwm_rept_int                 | r      | 1'b0        | PWM repeat count interrupt status         |
+    +----------+------------------------------+--------+-------------+-------------------------------------------+
+    | 9        | RSVD                         |        |             |                                           |
+    +----------+------------------------------+--------+-------------+-------------------------------------------+
+    | 8        | pwm_prde_int                 | r      | 1'b0        | PWM period end interrupt status           |
+    +----------+------------------------------+--------+-------------+-------------------------------------------+
+    | 7        | pwm_ch3h_int                 | r      | 1'b0        | PWM Channel 3 ThresholdH interrupt status |
+    +----------+------------------------------+--------+-------------+-------------------------------------------+
+    | 6        | pwm_ch3l_int                 | r      | 1'b0        | PWM Channel 3 ThresholdL interrupt status |
+    +----------+------------------------------+--------+-------------+-------------------------------------------+
+    | 5        | pwm_ch2h_int                 | r      | 1'b0        | PWM Channel 2 ThresholdH interrupt status |
+    +----------+------------------------------+--------+-------------+-------------------------------------------+
+    | 4        | pwm_ch2l_int                 | r      | 1'b0        | PWM Channel 2 ThresholdL interrupt status |
+    +----------+------------------------------+--------+-------------+-------------------------------------------+
+    | 3        | pwm_ch1h_int                 | r      | 1'b0        | PWM Channel 1 ThresholdH interrupt status |
+    +----------+------------------------------+--------+-------------+-------------------------------------------+
+    | 2        | pwm_ch1l_int                 | r      | 1'b0        | PWM Channel 1 ThresholdL interrupt status |
+    +----------+------------------------------+--------+-------------+-------------------------------------------+
+    | 1        | pwm_ch0h_int                 | r      | 1'b0        | PWM Channel 0 ThresholdH interrupt status |
+    +----------+------------------------------+--------+-------------+-------------------------------------------+
+    | 0        | pwm_ch0l_int                 | r      | 1'b0        | PWM Channel 0 ThresholdL interrupt status |
+    +----------+------------------------------+--------+-------------+-------------------------------------------+
+
+pwm_mc0_int_mask
+------------------
+ 
+**地址：**  0x2000a464
+ 
+.. figure:: ../../picture/pwm_pwm_mc0_int_mask.svg
+   :align: center
+
+.. table::
+    :widths: 10, 15,10,10,55
+    :width: 100%
+    :align: center
+     
+    +----------+------------------------------+--------+-------------+--------------------------------+
+    | 位       | 名称                         |权限    | 复位值      | 描述                           |
+    +==========+==============================+========+=============+================================+
+    | 31:11    | RSVD                         |        |             |                                |
+    +----------+------------------------------+--------+-------------+--------------------------------+
+    | 10       | cr_pwm_rept_mask             | r/w    | 1'b1        | Interrupt mask of pwm_rept_int |
+    +----------+------------------------------+--------+-------------+--------------------------------+
+    | 9        | RSVD                         |        |             |                                |
+    +----------+------------------------------+--------+-------------+--------------------------------+
+    | 8        | cr_pwm_prde_mask             | r/w    | 1'b1        | Interrupt mask of pwm_prde_int |
+    +----------+------------------------------+--------+-------------+--------------------------------+
+    | 7        | cr_pwm_ch3h_mask             | r/w    | 1'b1        | Interrupt mask of pwm_ch3h_int |
+    +----------+------------------------------+--------+-------------+--------------------------------+
+    | 6        | cr_pwm_ch3l_mask             | r/w    | 1'b1        | Interrupt mask of pwm_ch3l_int |
+    +----------+------------------------------+--------+-------------+--------------------------------+
+    | 5        | cr_pwm_ch2h_mask             | r/w    | 1'b1        | Interrupt mask of pwm_ch2h_int |
+    +----------+------------------------------+--------+-------------+--------------------------------+
+    | 4        | cr_pwm_ch2l_mask             | r/w    | 1'b1        | Interrupt mask of pwm_ch2l_int |
+    +----------+------------------------------+--------+-------------+--------------------------------+
+    | 3        | cr_pwm_ch1h_mask             | r/w    | 1'b1        | Interrupt mask of pwm_ch1h_int |
+    +----------+------------------------------+--------+-------------+--------------------------------+
+    | 2        | cr_pwm_ch1l_mask             | r/w    | 1'b1        | Interrupt mask of pwm_ch1l_int |
+    +----------+------------------------------+--------+-------------+--------------------------------+
+    | 1        | cr_pwm_ch0h_mask             | r/w    | 1'b1        | Interrupt mask of pwm_ch0h_int |
+    +----------+------------------------------+--------+-------------+--------------------------------+
+    | 0        | cr_pwm_ch0l_mask             | r/w    | 1'b1        | Interrupt mask of pwm_ch0l_int |
+    +----------+------------------------------+--------+-------------+--------------------------------+
+
+pwm_mc0_int_clear
+-------------------
+ 
+**地址：**  0x2000a468
+ 
+.. figure:: ../../picture/pwm_pwm_mc0_int_clear.svg
+   :align: center
+
+.. table::
+    :widths: 10, 15,10,10,55
+    :width: 100%
+    :align: center
+     
+    +----------+------------------------------+--------+-------------+---------------------------------+
+    | 位       | 名称                         |权限    | 复位值      | 描述                            |
+    +==========+==============================+========+=============+=================================+
+    | 31:11    | RSVD                         |        |             |                                 |
+    +----------+------------------------------+--------+-------------+---------------------------------+
+    | 10       | cr_pwm_rept_clr              | w1c    | 1'b0        | Interrupt clear of pwm_rept_int |
+    +----------+------------------------------+--------+-------------+---------------------------------+
+    | 9        | RSVD                         |        |             |                                 |
+    +----------+------------------------------+--------+-------------+---------------------------------+
+    | 8        | cr_pwm_prde_clr              | w1c    | 1'b0        | Interrupt clear of pwm_prde_int |
+    +----------+------------------------------+--------+-------------+---------------------------------+
+    | 7        | cr_pwm_ch3h_clr              | w1c    | 1'b0        | Interrupt clear of pwm_ch3h_int |
+    +----------+------------------------------+--------+-------------+---------------------------------+
+    | 6        | cr_pwm_ch3l_clr              | w1c    | 1'b0        | Interrupt clear of pwm_ch3l_int |
+    +----------+------------------------------+--------+-------------+---------------------------------+
+    | 5        | cr_pwm_ch2h_clr              | w1c    | 1'b0        | Interrupt clear of pwm_ch2h_int |
+    +----------+------------------------------+--------+-------------+---------------------------------+
+    | 4        | cr_pwm_ch2l_clr              | w1c    | 1'b0        | Interrupt clear of pwm_ch2l_int |
+    +----------+------------------------------+--------+-------------+---------------------------------+
+    | 3        | cr_pwm_ch1h_clr              | w1c    | 1'b0        | Interrupt clear of pwm_ch1h_int |
+    +----------+------------------------------+--------+-------------+---------------------------------+
+    | 2        | cr_pwm_ch1l_clr              | w1c    | 1'b0        | Interrupt clear of pwm_ch1l_int |
+    +----------+------------------------------+--------+-------------+---------------------------------+
+    | 1        | cr_pwm_ch0h_clr              | w1c    | 1'b0        | Interrupt clear of pwm_ch0h_int |
+    +----------+------------------------------+--------+-------------+---------------------------------+
+    | 0        | cr_pwm_ch0l_clr              | w1c    | 1'b0        | Interrupt clear of pwm_ch0l_int |
+    +----------+------------------------------+--------+-------------+---------------------------------+
+
+pwm_mc0_int_en
+----------------
+ 
+**地址：**  0x2000a46c
+ 
+.. figure:: ../../picture/pwm_pwm_mc0_int_en.svg
+   :align: center
+
+.. table::
+    :widths: 10, 15,10,10,55
+    :width: 100%
+    :align: center
+     
+    +----------+------------------------------+--------+-------------+----------------------------------+
+    | 位       | 名称                         |权限    | 复位值      | 描述                             |
+    +==========+==============================+========+=============+==================================+
+    | 31:11    | RSVD                         |        |             |                                  |
+    +----------+------------------------------+--------+-------------+----------------------------------+
+    | 10       | cr_pwm_rept_en               | r/w    | 1'b1        | Interrupt enable of pwm_rept_int |
+    +----------+------------------------------+--------+-------------+----------------------------------+
+    | 9        | RSVD                         |        |             |                                  |
+    +----------+------------------------------+--------+-------------+----------------------------------+
+    | 8        | cr_pwm_prde_en               | r/w    | 1'b1        | Interrupt enable of pwm_prde_int |
+    +----------+------------------------------+--------+-------------+----------------------------------+
+    | 7        | cr_pwm_ch3h_en               | r/w    | 1'b1        | Interrupt enable of pwm_ch3h_int |
+    +----------+------------------------------+--------+-------------+----------------------------------+
+    | 6        | cr_pwm_ch3l_en               | r/w    | 1'b1        | Interrupt enable of pwm_ch3l_int |
+    +----------+------------------------------+--------+-------------+----------------------------------+
+    | 5        | cr_pwm_ch2h_en               | r/w    | 1'b1        | Interrupt enable of pwm_ch2h_int |
+    +----------+------------------------------+--------+-------------+----------------------------------+
+    | 4        | cr_pwm_ch2l_en               | r/w    | 1'b1        | Interrupt enable of pwm_ch2l_int |
+    +----------+------------------------------+--------+-------------+----------------------------------+
+    | 3        | cr_pwm_ch1h_en               | r/w    | 1'b1        | Interrupt enable of pwm_ch1h_int |
+    +----------+------------------------------+--------+-------------+----------------------------------+
+    | 2        | cr_pwm_ch1l_en               | r/w    | 1'b1        | Interrupt enable of pwm_ch1l_int |
+    +----------+------------------------------+--------+-------------+----------------------------------+
+    | 1        | cr_pwm_ch0h_en               | r/w    | 1'b1        | Interrupt enable of pwm_ch0h_int |
+    +----------+------------------------------+--------+-------------+----------------------------------+
+    | 0        | cr_pwm_ch0l_en               | r/w    | 1'b1        | Interrupt enable of pwm_ch0l_int |
+    +----------+------------------------------+--------+-------------+----------------------------------+
+

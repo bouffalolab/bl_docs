@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>19. CAM &mdash; BL616/BL618 参考手册  文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="20. MJPEG" href="MJPEG.html" />
+    <link rel="prev" title="18. USB" href="USB.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL616/BL618 参考手册
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. 系统和存储器概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. 复位和时钟</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPIO.html">4. GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">5. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">6. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">7. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">8. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">9. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">10. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">11. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">12. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">13. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2S.html">14. I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AudioDAC.html">15. AudioDAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AudioADC.html">16. AudioADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EMAC.html">17. EMAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USB.html">18. USB</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">19. CAM</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">19.1. 简介</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">19.2. 主要特征</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">19.3. 功能描述</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dvp-digital-video-port">19.3.1. DVP(Digital Video Port)信号与配置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ycbcr">19.3.2. YCbCr格式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">19.3.3. 视频模式/照片模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rgb888rgb565-rgba8888">19.3.4. RGB888转RGB565/RGBA8888输出</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">19.3.5. 图像矩形裁剪</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">19.3.6. 帧取舍功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">19.3.7. 行帧同步信号完整性检测</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">19.3.8. 缓存图像信息</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">19.3.9. 支持多种中断信息(可独立开关配置)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id10">19.4. 寄存器描述</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cam-dvp2axi-configue">19.4.1. cam_dvp2axi_configue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cam-dvp2axi-addr-start">19.4.2. cam_dvp2axi_addr_start</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cam-dvp2axi-mem-bcnt">19.4.3. cam_dvp2axi_mem_bcnt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cam-dvp-status-and-error">19.4.4. cam_dvp_status_and_error</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cam-dvp2axi-frame-bcnt">19.4.5. cam_dvp2axi_frame_bcnt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cam-dvp-frame-fifo-pop">19.4.6. cam_dvp_frame_fifo_pop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cam-dvp2axi-frame-vld">19.4.7. cam_dvp2axi_frame_vld</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cam-dvp2axi-frame-period">19.4.8. cam_dvp2axi_frame_period</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cam-dvp2axi-misc">19.4.9. cam_dvp2axi_misc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cam-dvp2axi-hsync-crop">19.4.10. cam_dvp2axi_hsync_crop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cam-dvp2axi-vsync-crop">19.4.11. cam_dvp2axi_vsync_crop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cam-dvp2axi-fram-exm">19.4.12. cam_dvp2axi_fram_exm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cam-frame-start-addr0">19.4.13. cam_frame_start_addr0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cam-frame-start-addr1">19.4.14. cam_frame_start_addr1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cam-frame-start-addr2">19.4.15. cam_frame_start_addr2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cam-frame-start-addr3">19.4.16. cam_frame_start_addr3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cam-frame-id-sts01">19.4.17. cam_frame_id_sts01</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cam-frame-id-sts23">19.4.18. cam_frame_id_sts23</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cam-dvp-debug">19.4.19. cam_dvp_debug</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="MJPEG.html">20. MJPEG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBI.html">21. DBI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SDH.html">22. SDH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SDIO.html">23. SDIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LowPower.html">24. LowPower</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SEC_ENG.html">25. SEC ENG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">26. 版本信息</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL616/BL618 参考手册</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">19. </span>CAM</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cam">
+<h1><span class="section-number">19. </span>CAM<a class="headerlink" href="#cam" title="永久链接至标题"></a></h1>
+<section id="id1">
+<h2><span class="section-number">19.1. </span>简介<a class="headerlink" href="#id1" title="永久链接至标题"></a></h2>
+<p>CAM(Camera)模块负责将并行接口(DVP)转换成AHB接口，把图像传感器生成的像素数据写入系统内存中，作为后续影像传输或压缩使用。CAM模块拥有灵活的输出格式配置，可以满足多种多样的图像处理需求。</p>
+<figure class="align-center" id="id11">
+<img alt="../_images/CamArch.svg" src="../_images/CamArch.svg" /><figcaption>
+<p><span class="caption-number">图 19.1 </span><span class="caption-text">Cam框图</span><a class="headerlink" href="#id11" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id2">
+<h2><span class="section-number">19.2. </span>主要特征<a class="headerlink" href="#id2" title="永久链接至标题"></a></h2>
+<ul class="simple">
+<li><p>并行接口8-bitDVP信号，高速数据传输(80M)，可配置DVP信号有效水平与逻辑组合</p></li>
+<li><p>支持8-bit/16-bit/24-bit输入像素位宽</p></li>
+<li><p>支持将RGB888输入格式转为RGB565或RGBA8888输出</p></li>
+<li><p>支持视频模式和照片模式</p></li>
+<li><p>可配置丢弃模式，包括：</p>
+<ul>
+<li><p>丢弃奇数位数据</p></li>
+<li><p>丢弃偶数位数据</p></li>
+<li><p>丢弃奇数行的奇数位数据</p></li>
+<li><p>丢弃奇数行的偶数位数据</p></li>
+</ul>
+</li>
+<li><p>可配置的图像传感器行帧同步信号选择和极性选择</p></li>
+<li><p>支持图像矩形裁剪</p></li>
+<li><p>以1~32为周期的帧取舍功能</p></li>
+<li><p>支持行帧同步信号的完整性检测</p></li>
+<li><p>AHB总线通信接口</p></li>
+<li><p>512字节缓存FIFO以应对总线偶而忙碌的状态</p></li>
+<li><p>连续缓存多达4组图像信息</p></li>
+<li><p>多种应用中断，有利于弹性使用与出错提示</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2><span class="section-number">19.3. </span>功能描述<a class="headerlink" href="#id3" title="永久链接至标题"></a></h2>
+<section id="dvp-digital-video-port">
+<h3><span class="section-number">19.3.1. </span>DVP(Digital Video Port)信号与配置<a class="headerlink" href="#dvp-digital-video-port" title="永久链接至标题"></a></h3>
+<p>DVP（Digital Video Port）是并行接口，主要有时钟，帧同步，行同步与8-bit数据管脚，时钟的极限限制在80MHz，所以一般用于5MP以下分辨率Sensor。芯片内可独立配置帧同步与行同步的有效电平，并在有效数据上提供四种模式:</p>
+<ol class="upperalpha simple">
+<li><p>帧同步与行同步同时有效(“&amp;”逻辑)</p></li>
+<li><p>帧同步或行同步择一有效(“|”逻辑)</p></li>
+<li><p>帧同步有效</p></li>
+<li><p>行同步有效</p></li>
+</ol>
+</section>
+<section id="ycbcr">
+<h3><span class="section-number">19.3.2. </span>YCbCr格式<a class="headerlink" href="#ycbcr" title="永久链接至标题"></a></h3>
+<p>亮度信号被称为Y，色度信号是由两个互相独立的信号组成。视颜色系统和格式不同，两种色度信号经常被称为U、V或Pb、Pr或Cb、Cr。这是由不同的编码格式产生的，但实际上它们的概念基本相同。</p>
+<p>由于人类视网膜上识别亮度的视网膜杆细胞要多于识别色度的视网膜锥细胞，人眼对亮度的敏感程度要高于对色度的敏感程度。所以可以将色度信息丢弃一部分而不被人眼所察觉。</p>
+<p>色度信号分辨率最高的格式是4:4:4，即每4点Y采样对应了4点Cb和4点Cr采样。而4:2:2是每4点Y采样对应了2点Cb和2点Cr采样，在这种格式中，色度信号的扫描线数量和亮度信号一样多，但是每条扫描线上的色度采样点却只有亮度信号的一半。与上面提到的格式不同，4:2:0并不是每4点Y采样对应2点Cb和0点Cr采样，而是每4点Y采样对应1点Cb和1点Cr采样。4:0:0是丢弃所有的色度信息，即灰度图。</p>
+</section>
+<section id="id4">
+<h3><span class="section-number">19.3.3. </span>视频模式/照片模式<a class="headerlink" href="#id4" title="永久链接至标题"></a></h3>
+<p>照片模式下当软件给的固定大小的存储器被写满时，CAM会停止，需要软件进行POP操作将空间空出后才会继续写入。</p>
+<p>视频模式下会在软件给的固定大小的存储器上不停地复写，也就是将内存当作ring buffer的概念，无需软件进行POP操作，使用上要确保图像被实时取出或是跟着MJPEG模块做连动。</p>
+</section>
+<section id="rgb888rgb565-rgba8888">
+<h3><span class="section-number">19.3.4. </span>RGB888转RGB565/RGBA8888输出<a class="headerlink" href="#rgb888rgb565-rgba8888" title="永久链接至标题"></a></h3>
+<p>对于输入格式为RGB888的图像数据，可以选择转为RGB565或RGBA8888写入到内存中。如果转为RGB565格式，则R、G、B的排列顺序可以通过寄存器MISC的位FORMAT_565进行控制，不同的值对应的排列顺序如下所示：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>0：byte2[7:3]，byte1[7:2]，byte0[7:3]</p></li>
+<li><p>1：byte1[7:3]，byte2[7:2]，byte0[7:3]</p></li>
+<li><p>2：byte2[7:3]，byte0[7:2]，byte1[7:3]</p></li>
+<li><p>3：byte0[7:3]，byte2[7:2]，byte1[7:3]</p></li>
+<li><p>4：byte1[7:3]，byte0[7:2]，byte2[7:3]</p></li>
+<li><p>5：byte0[7:3]，byte1[7:2]，byte2[7:3]</p></li>
+</ul>
+</div></blockquote>
+<p>如果转为RGBA8888格式，则A的值与寄存器MISC的位ALPHA中填入的值一致。</p>
+</section>
+<section id="id5">
+<h3><span class="section-number">19.3.5. </span>图像矩形裁剪<a class="headerlink" href="#id5" title="永久链接至标题"></a></h3>
+<p>通过寄存器HSYNC_CONTROL和VSYNC_CONTROL的高16位和低16位分别设置行同步信号和帧同步信号裁剪的起始和结束位置，就可以将指定位置和大小的矩形窗口内的图像裁剪下来，超出矩形部分的数据会被丢弃。其中行同步信号起始和结束设置的是像素序号,帧同步信号起始和结束设置的是行号，裁剪后的图像包含起始点而不包含结束点。</p>
+</section>
+<section id="id6">
+<h3><span class="section-number">19.3.6. </span>帧取舍功能<a class="headerlink" href="#id6" title="永久链接至标题"></a></h3>
+<p>可以通过寄存器FRAME_PERIOD设置一个帧周期n，n的取值范围是0~31，对应的实际值是n+1，然后通过寄存器FRAME_VLD设置在一个帧周期中保留哪几帧图像。需要保留的在对应的bit位置写1，需要舍弃的在对应的bit位置写0。比如n设为5，FRAME_VLD的值设为0x13，则每6帧图像中，第1、2、5帧图像会写入内存中，而第3、4、6帧图像会被舍弃，以6帧为周期进行循环。</p>
+</section>
+<section id="id7">
+<h3><span class="section-number">19.3.7. </span>行帧同步信号完整性检测<a class="headerlink" href="#id7" title="永久链接至标题"></a></h3>
+<p>通过寄存器FRAME_SIZE_CONTROL的低16位和高16位可以分别设置行同步信号比较值和帧同步信号比较值，可以对信号的完整性进行检测。其中行同步信号设置的是每行的总像素数，帧同步信号设置的是总行数。当一帧图像的行或帧同步信号计数值与比较值不相等时，会有对应的中断产生。</p>
+</section>
+<section id="id8">
+<h3><span class="section-number">19.3.8. </span>缓存图像信息<a class="headerlink" href="#id8" title="永久链接至标题"></a></h3>
+<p>模块内部包含4组FIFO记录图像地址和图像ID。每当此模块完整写入一帧到内存，便会将此帧图像的起始地址和图像ID纪录于此FIFO中，但要注意的是当发生内存剩余不足，或是4组FIFO满存的状况时，模块会自动丢掉接下来图像的讯息，在图像信息取出的部分，可通过pop操作将最旧的图像信息空出，此时FIFO会自动推进，保证FIFO内部图像信息的时序，如下图 :</p>
+<figure class="align-center" id="id12">
+<img alt="../_images/CamFrameFIFO.svg" src="../_images/CamFrameFIFO.svg" /><figcaption>
+<p><span class="caption-number">图 19.2 </span><span class="caption-text">FIFO框架</span><a class="headerlink" href="#id12" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id9">
+<h3><span class="section-number">19.3.9. </span>支持多种中断信息(可独立开关配置)<a class="headerlink" href="#id9" title="永久链接至标题"></a></h3>
+<ul class="simple">
+<li><p>Normal 中断
+* 可设定一个计数值n，每当写入n张图像后就会触发一次中断</p></li>
+<li><p>Memory 中断
+* 当内存剩余空间不足一帧大小，已经使用的内存被复写时，触发中断，如下图所示：</p></li>
+</ul>
+<figure class="align-center" id="id13">
+<img alt="../_images/CamMem.svg" src="../_images/CamMem.svg" /><figcaption>
+<p><span class="caption-number">图 19.3 </span><span class="caption-text">内存</span><a class="headerlink" href="#id13" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<ul class="simple">
+<li><p>Frame 中断
+* 当未处理的图像超过4组，无法再存储更多的图像信息时，触发中断</p></li>
+<li><p>FIFO 中断
+* 当总线来不及写入内存，导致FIFO溢出时，触发中断</p></li>
+<li><p>Hsync 中断
+* 当一帧图像中某行的像素点数与设置值不相等（行同步信号完整性检测不通过）时，触发中断</p></li>
+<li><p>Vsync 中断
+* 当一帧图像的总行数与设置值不相等（帧同步信号完整性检测不通过）时，发出中断</p></li>
+</ul>
+</section>
+</section>
+<section id="id10">
+<h2><span class="section-number">19.4. </span>寄存器描述<a class="headerlink" href="#id10" title="永久链接至标题"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>名称</p></td>
+<td><p>描述</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#cam-dvp2axi-configue">cam_dvp2axi_configue</a></p></td>
+<td><p>Camera configure</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cam-dvp2axi-addr-start">cam_dvp2axi_addr_start</a></p></td>
+<td><p>Start of write address</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#cam-dvp2axi-mem-bcnt">cam_dvp2axi_mem_bcnt</a></p></td>
+<td><p>Burst count of memory</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cam-dvp-status-and-error">cam_dvp_status_and_error</a></p></td>
+<td><p>Interrupt and bus status</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#cam-dvp2axi-frame-bcnt">cam_dvp2axi_frame_bcnt</a></p></td>
+<td><p>Byte count of frame</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cam-dvp-frame-fifo-pop">cam_dvp_frame_fifo_pop</a></p></td>
+<td><p>Interrupt clear and pop</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#cam-dvp2axi-frame-vld">cam_dvp2axi_frame_vld</a></p></td>
+<td><p>Frame valid in period</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cam-dvp2axi-frame-period">cam_dvp2axi_frame_period</a></p></td>
+<td><p>Frame period</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#cam-dvp2axi-misc">cam_dvp2axi_misc</a></p></td>
+<td><p>RGB565 and RGBA8888 setting</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cam-dvp2axi-hsync-crop">cam_dvp2axi_hsync_crop</a></p></td>
+<td><p>Hsync crop</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#cam-dvp2axi-vsync-crop">cam_dvp2axi_vsync_crop</a></p></td>
+<td><p>Vsync crop</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cam-dvp2axi-fram-exm">cam_dvp2axi_fram_exm</a></p></td>
+<td><p>Total valid count</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#cam-frame-start-addr0">cam_frame_start_addr0</a></p></td>
+<td><p>Start address of frame0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cam-frame-start-addr1">cam_frame_start_addr1</a></p></td>
+<td><p>Start address of frame1</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#cam-frame-start-addr2">cam_frame_start_addr2</a></p></td>
+<td><p>Start address of frame2</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cam-frame-start-addr3">cam_frame_start_addr3</a></p></td>
+<td><p>Start address of frame3</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#cam-frame-id-sts01">cam_frame_id_sts01</a></p></td>
+<td><p>ID of frame 0/1</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cam-frame-id-sts23">cam_frame_id_sts23</a></p></td>
+<td><p>ID of frame 2/3</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#cam-dvp-debug">cam_dvp_debug</a></p></td>
+<td><p>ID latch timing</p></td>
+</tr>
+</tbody>
+</table>
+<section id="cam-dvp2axi-configue">
+<h3><span class="section-number">19.4.1. </span>cam_dvp2axi_configue<a class="headerlink" href="#cam-dvp2axi-configue" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x20057000</p>
+<figure class="align-center">
+<img alt="../_images/cam_cam_dvp2axi_configue.svg" src="../_images/cam_cam_dvp2axi_configue.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:24</p></td>
+<td><p>reg_dvp_wait_cycle</p></td>
+<td><p>r/w</p></td>
+<td><p>8'h40</p></td>
+<td><p>Cycles in FSM Wait mode</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><p>23</p></td>
+<td rowspan="3"><p>reg_v_subsample_pol</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b0</p></td>
+<td rowspan="3"><p>DVP2BUS vertical sub-sampling polarity</p>
+<p>1'b0: Odd lines are masked</p>
+<p>1'b1: Even lines are masked</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>22</p></td>
+<td><p>reg_v_subsample_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>DVP2BUS vertical sub-sampling enable</p></td>
+</tr>
+<tr class="row-odd"><td><p>21</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>20</p></td>
+<td><p>reg_dvp_pix_clk_cg</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>DVP pix clk gate</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><p>19</p></td>
+<td rowspan="3"><p>reg_dvp_data_bsel</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b0</p></td>
+<td rowspan="3"><p>Byte select signal for DVP 8-bit mode, don't care if reg_dvp_data_8bit is disabled</p>
+<p>1'b0: Select the lower byte of pix_data</p>
+<p>1'b1: Select the upper byte of pix_data</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="7"><p>18:16</p></td>
+<td rowspan="7"><p>reg_dvp_data_mode</p></td>
+<td rowspan="7"><p>r/w</p></td>
+<td rowspan="7"><p>3'b0</p></td>
+<td rowspan="7"><p>DVP 8-bit mode enable</p>
+<p>3'd0: DVP pix_data is 16-bit wide</p>
+<p>3'd1: DVP pix_data is 24-bit mode</p>
+<p>3'd2: DVP pix_data is 24-comp-16-bit mode</p>
+<p>3'd3: DVP pix_data is 24-exp-32-bit mode</p>
+<p>3'd4: DVP pix_data is 8-bit wide</p>
+<p>Others - Reserved</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>reg_qos_sw</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>AXI Qos software mode value</p></td>
+</tr>
+<tr class="row-even"><td><p>14</p></td>
+<td><p>reg_qos_sw_mode</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>AXI QoS software mode enable</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><p>13</p></td>
+<td rowspan="3"><p>reg_drop_even</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b0</p></td>
+<td rowspan="3"><p>Only effect when reg_drop_en=1 :</p>
+<p>1'b1 : Drop all even bytes</p>
+<p>1'b0 : Drop all odd bytes</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>12</p></td>
+<td><p>reg_drop_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Drop mode Enable</p></td>
+</tr>
+<tr class="row-odd"><td><p>11</p></td>
+<td><p>reg_hw_mode_fwrap</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>DVP2BUS HW mode with frame start address wrap to reg_addr_start</p></td>
+</tr>
+<tr class="row-even"><td rowspan="5"><p>10:8</p></td>
+<td rowspan="5"><p>reg_dvp_mode</p></td>
+<td rowspan="5"><p>r/w</p></td>
+<td rowspan="5"><p>3'd0</p></td>
+<td rowspan="5"><p>Image senosr mode selection:</p>
+<p>3'd0-Vsync&amp;Hsync</p>
+<p>3'd1-Vsync|Hsync</p>
+<p>3'd2-Vsync</p>
+<p>3'd3-Hsync</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td rowspan="3"><p>6:4</p></td>
+<td rowspan="3"><p>reg_xlen</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>3'd3</p></td>
+<td rowspan="3"><p>burst length setting</p>
+<p>3'd0 - Single / 3'd1 - INCR4 / 3'd2 - INCR8</p>
+<p>3'd3 - INCR16 / 3'd5 - INCR32 / 3'd6 - INCR64</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>reg_line_vld_pol</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Image sensor line valid polarity, 1'b0 - Activel low, 1'b1 - Active high</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>reg_fram_vld_pol</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Image sensor frame valid polarity, 1'b0 - Activel low, 1'b1 - Active high</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>reg_sw_mode</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>DVP2BUS SW manual mode (don't care if reg_swap_mode is enabled)</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>reg_dvp_enable</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>module enable</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cam-dvp2axi-addr-start">
+<h3><span class="section-number">19.4.2. </span>cam_dvp2axi_addr_start<a class="headerlink" href="#cam-dvp2axi-addr-start" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x20057004</p>
+<figure class="align-center">
+<img alt="../_images/cam_cam_dvp2axi_addr_start.svg" src="../_images/cam_cam_dvp2axi_addr_start.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>reg_addr_start</p></td>
+<td><p>r/w</p></td>
+<td><p>32'h80000000</p></td>
+<td><p>AXI start address</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cam-dvp2axi-mem-bcnt">
+<h3><span class="section-number">19.4.3. </span>cam_dvp2axi_mem_bcnt<a class="headerlink" href="#cam-dvp2axi-mem-bcnt" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x20057008</p>
+<figure class="align-center">
+<img alt="../_images/cam_cam_dvp2axi_mem_bcnt.svg" src="../_images/cam_cam_dvp2axi_mem_bcnt.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>reg_mem_burst_cnt</p></td>
+<td><p>r/w</p></td>
+<td><p>32'hC000</p></td>
+<td><p>AXI burst cnt before wrap to &quot;reg_addr_start&quot;</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cam-dvp-status-and-error">
+<h3><span class="section-number">19.4.4. </span>cam_dvp_status_and_error<a class="headerlink" href="#cam-dvp-status-and-error" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x2005700c</p>
+<figure class="align-center">
+<img alt="../_images/cam_cam_dvp_status_and_error.svg" src="../_images/cam_cam_dvp_status_and_error.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:30</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>29</p></td>
+<td><p>st_dvp_idle</p></td>
+<td><p>r</p></td>
+<td><p>1'b1</p></td>
+<td><p>DVP2BUS asynchronous fifo idle status</p></td>
+</tr>
+<tr class="row-even"><td><p>28</p></td>
+<td><p>axi_idle</p></td>
+<td><p>r</p></td>
+<td><p>1'b1</p></td>
+<td><p>DVP2BUS AHB idle status</p></td>
+</tr>
+<tr class="row-odd"><td><p>27</p></td>
+<td><p>st_bus_flsh</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>DVP in flush state</p></td>
+</tr>
+<tr class="row-even"><td><p>26</p></td>
+<td><p>st_bus_wait</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>DVP in wait state</p></td>
+</tr>
+<tr class="row-odd"><td><p>25</p></td>
+<td><p>st_bus_func</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>DVP in functional state</p></td>
+</tr>
+<tr class="row-even"><td><p>24</p></td>
+<td><p>st_bus_idle</p></td>
+<td><p>r</p></td>
+<td><p>1'b1</p></td>
+<td><p>DVP in idle state</p></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>22</p></td>
+<td><p>sts_vcnt_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Vsync valid line count non-match interrupt status</p></td>
+</tr>
+<tr class="row-odd"><td><p>21</p></td>
+<td><p>sts_hcnt_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Hsync valid pixel count non-match interrupt status</p></td>
+</tr>
+<tr class="row-even"><td><p>20:16</p></td>
+<td><p>frame_valid_cnt</p></td>
+<td><p>r</p></td>
+<td><p>5'd0</p></td>
+<td><p>Frame counts in memory before read out in SW mode</p></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>sts_fifo_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>FIFO OverWrite interrupt status</p></td>
+</tr>
+<tr class="row-even"><td><p>14</p></td>
+<td><p>sts_frame_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Frame OverWrite interrupt status</p></td>
+</tr>
+<tr class="row-odd"><td><p>13</p></td>
+<td><p>sts_mem_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Memory OverWrite interrupt status</p></td>
+</tr>
+<tr class="row-even"><td><p>12</p></td>
+<td><p>sts_normal_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Normal Write interrupt status</p></td>
+</tr>
+<tr class="row-odd"><td><p>11</p></td>
+<td><p>reg_int_fifo_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>FIFO OverWrite interrupt enable</p></td>
+</tr>
+<tr class="row-even"><td><p>10</p></td>
+<td><p>reg_int_frame_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Frame OverWrite interrupt enable</p></td>
+</tr>
+<tr class="row-odd"><td><p>9</p></td>
+<td><p>reg_int_mem_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Memory OverWrite interrupt enable</p></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>reg_int_normal_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Normal Write interrupt enable</p></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>reg_int_vcnt_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Vsync valid line count match interrupt enable</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>reg_int_hcnt_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Hsync valid pixel count match interrupt enable</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>4:0</p></td>
+<td><p>reg_frame_cnt_trgr_int</p></td>
+<td><p>r/w</p></td>
+<td><p>5'd0</p></td>
+<td><p>Frame to issue interrupt at SW Mode</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cam-dvp2axi-frame-bcnt">
+<h3><span class="section-number">19.4.5. </span>cam_dvp2axi_frame_bcnt<a class="headerlink" href="#cam-dvp2axi-frame-bcnt" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x20057010</p>
+<figure class="align-center">
+<img alt="../_images/cam_cam_dvp2axi_frame_bcnt.svg" src="../_images/cam_cam_dvp2axi_frame_bcnt.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>reg_frame_byte_cnt</p></td>
+<td><p>r/w</p></td>
+<td><p>32'h7e90</p></td>
+<td><p>Single Frame byte cnt(Need pre-calculation)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cam-dvp-frame-fifo-pop">
+<h3><span class="section-number">19.4.6. </span>cam_dvp_frame_fifo_pop<a class="headerlink" href="#cam-dvp-frame-fifo-pop" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x20057014</p>
+<figure class="align-center">
+<img alt="../_images/cam_cam_dvp_frame_fifo_pop.svg" src="../_images/cam_cam_dvp_frame_fifo_pop.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:10</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>9</p></td>
+<td><p>reg_int_vcnt_clr</p></td>
+<td><p>w1p</p></td>
+<td><p>1'd0</p></td>
+<td><p>Interrupt clear</p></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>reg_int_hcnt_clr</p></td>
+<td><p>w1p</p></td>
+<td><p>1'd0</p></td>
+<td><p>Interrupt clear</p></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>reg_int_fifo_clr</p></td>
+<td><p>w1p</p></td>
+<td><p>1'd0</p></td>
+<td><p>Interrupt clear</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>reg_int_frame_clr</p></td>
+<td><p>w1p</p></td>
+<td><p>1'd0</p></td>
+<td><p>Interrupt clear</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>reg_int_mem_clr</p></td>
+<td><p>w1p</p></td>
+<td><p>1'd0</p></td>
+<td><p>Interrupt clear</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>reg_int_normal_clr</p></td>
+<td><p>w1p</p></td>
+<td><p>1'd0</p></td>
+<td><p>Interrupt clear</p></td>
+</tr>
+<tr class="row-odd"><td><p>3:1</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>rfifo_pop</p></td>
+<td><p>w1p</p></td>
+<td><p>1'b0</p></td>
+<td><p>Write this bit will trigger fifo pop</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cam-dvp2axi-frame-vld">
+<h3><span class="section-number">19.4.7. </span>cam_dvp2axi_frame_vld<a class="headerlink" href="#cam-dvp2axi-frame-vld" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x20057018</p>
+<figure class="align-center">
+<img alt="../_images/cam_cam_dvp2axi_frame_vld.svg" src="../_images/cam_cam_dvp2axi_frame_vld.svg" /></figure>
+</section>
+<section id="cam-dvp2axi-frame-period">
+<h3><span class="section-number">19.4.8. </span>cam_dvp2axi_frame_period<a class="headerlink" href="#cam-dvp2axi-frame-period" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x2005701c</p>
+<figure class="align-center">
+<img alt="../_images/cam_cam_dvp2axi_frame_period.svg" src="../_images/cam_cam_dvp2axi_frame_period.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:5</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>4:0</p></td>
+<td><p>reg_frame_period</p></td>
+<td><p>r/w</p></td>
+<td><p>5'h0</p></td>
+<td><p>Frame period cnt. (EX. Set this register 0, the period is 1)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cam-dvp2axi-misc">
+<h3><span class="section-number">19.4.9. </span>cam_dvp2axi_misc<a class="headerlink" href="#cam-dvp2axi-misc" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x20057020</p>
+<figure class="align-center">
+<img alt="../_images/cam_cam_dvp2axi_misc.svg" src="../_images/cam_cam_dvp2axi_misc.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:11</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="7"><p>10:8</p></td>
+<td rowspan="7"><p>reg_format_565</p></td>
+<td rowspan="7"><p>r/w</p></td>
+<td rowspan="7"><p>3'd0</p></td>
+<td rowspan="7"><p>Only work when reg_dvp_data_mode=2 (24-comp-16-bit mode)</p>
+<p>3'd0: B2(5)B1(6)B0(5)</p>
+<p>3'd1: B1(5)B2(6)B0(5)</p>
+<p>3'd2: B2(5)B0(6)B1(5)</p>
+<p>3'd3: B0(5)B2(6)B1(5)</p>
+<p>3'd4: B1(5)B0(6)B2(5)</p>
+<p>3'd5: B0(5)B1(6)B2(5)</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="2"><p>7:0</p></td>
+<td rowspan="2"><p>reg_alpha</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>8'h0</p></td>
+<td rowspan="2"><p>Only work when &quot;reg_dvp_data_mode==2'd3(DVP pix_data is 24-exp-32-bit mode)&quot;</p>
+<p>The value of [31:24]</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</section>
+<section id="cam-dvp2axi-hsync-crop">
+<h3><span class="section-number">19.4.10. </span>cam_dvp2axi_hsync_crop<a class="headerlink" href="#cam-dvp2axi-hsync-crop" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x20057030</p>
+<figure class="align-center">
+<img alt="../_images/cam_cam_dvp2axi_hsync_crop.svg" src="../_images/cam_cam_dvp2axi_hsync_crop.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>reg_hsync_act_start</p></td>
+<td><p>r/w</p></td>
+<td><p>16'h0</p></td>
+<td><p>Valid hsync start cnt</p></td>
+</tr>
+<tr class="row-odd"><td><p>15:0</p></td>
+<td><p>reg_hsync_act_end</p></td>
+<td><p>r/w</p></td>
+<td><p>16'hFFFF</p></td>
+<td><p>Valid hsync end cnt</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cam-dvp2axi-vsync-crop">
+<h3><span class="section-number">19.4.11. </span>cam_dvp2axi_vsync_crop<a class="headerlink" href="#cam-dvp2axi-vsync-crop" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x20057034</p>
+<figure class="align-center">
+<img alt="../_images/cam_cam_dvp2axi_vsync_crop.svg" src="../_images/cam_cam_dvp2axi_vsync_crop.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>reg_vsync_act_start</p></td>
+<td><p>r/w</p></td>
+<td><p>16'h0</p></td>
+<td><p>Valid vsync start cnt</p></td>
+</tr>
+<tr class="row-odd"><td><p>15:0</p></td>
+<td><p>reg_vsync_act_end</p></td>
+<td><p>r/w</p></td>
+<td><p>16'hFFFF</p></td>
+<td><p>Valid vsync end cnt</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cam-dvp2axi-fram-exm">
+<h3><span class="section-number">19.4.12. </span>cam_dvp2axi_fram_exm<a class="headerlink" href="#cam-dvp2axi-fram-exm" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x20057038</p>
+<figure class="align-center">
+<img alt="../_images/cam_cam_dvp2axi_fram_exm.svg" src="../_images/cam_cam_dvp2axi_fram_exm.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>reg_total_vcnt</p></td>
+<td><p>r/w</p></td>
+<td><p>16'h0</p></td>
+<td><p>Total valid line count in a frame</p></td>
+</tr>
+<tr class="row-odd"><td><p>15:0</p></td>
+<td><p>reg_total_hcnt</p></td>
+<td><p>r/w</p></td>
+<td><p>16'h0</p></td>
+<td><p>Total valid pix count in a line</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cam-frame-start-addr0">
+<h3><span class="section-number">19.4.13. </span>cam_frame_start_addr0<a class="headerlink" href="#cam-frame-start-addr0" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x20057040</p>
+<figure class="align-center">
+<img alt="../_images/cam_cam_frame_start_addr0.svg" src="../_images/cam_cam_frame_start_addr0.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>frame_start_addr_0</p></td>
+<td><p>r</p></td>
+<td><p>32'd0</p></td>
+<td><p>DVP2BUS PIC 0 Start address</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cam-frame-start-addr1">
+<h3><span class="section-number">19.4.14. </span>cam_frame_start_addr1<a class="headerlink" href="#cam-frame-start-addr1" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x20057048</p>
+<figure class="align-center">
+<img alt="../_images/cam_cam_frame_start_addr1.svg" src="../_images/cam_cam_frame_start_addr1.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>frame_start_addr_1</p></td>
+<td><p>r</p></td>
+<td><p>32'd0</p></td>
+<td><p>DVP2BUS PIC 1 Start address</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cam-frame-start-addr2">
+<h3><span class="section-number">19.4.15. </span>cam_frame_start_addr2<a class="headerlink" href="#cam-frame-start-addr2" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x20057050</p>
+<figure class="align-center">
+<img alt="../_images/cam_cam_frame_start_addr2.svg" src="../_images/cam_cam_frame_start_addr2.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>frame_start_addr_2</p></td>
+<td><p>r</p></td>
+<td><p>32'd0</p></td>
+<td><p>DVP2BUS PIC 2 Start address</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cam-frame-start-addr3">
+<h3><span class="section-number">19.4.16. </span>cam_frame_start_addr3<a class="headerlink" href="#cam-frame-start-addr3" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x20057058</p>
+<figure class="align-center">
+<img alt="../_images/cam_cam_frame_start_addr3.svg" src="../_images/cam_cam_frame_start_addr3.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>frame_start_addr_3</p></td>
+<td><p>r</p></td>
+<td><p>32'd0</p></td>
+<td><p>DVP2BUS PIC 3 Start address</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cam-frame-id-sts01">
+<h3><span class="section-number">19.4.17. </span>cam_frame_id_sts01<a class="headerlink" href="#cam-frame-id-sts01" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x20057060</p>
+<figure class="align-center">
+<img alt="../_images/cam_cam_frame_id_sts01.svg" src="../_images/cam_cam_frame_id_sts01.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>frame_id_1</p></td>
+<td><p>r</p></td>
+<td><p>16'd0</p></td>
+<td><p>DVP2BUS PIC 1 ID</p></td>
+</tr>
+<tr class="row-odd"><td><p>15:0</p></td>
+<td><p>frame_id_0</p></td>
+<td><p>r</p></td>
+<td><p>16'd0</p></td>
+<td><p>DVP2BUS PIC 0 ID</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cam-frame-id-sts23">
+<h3><span class="section-number">19.4.18. </span>cam_frame_id_sts23<a class="headerlink" href="#cam-frame-id-sts23" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x20057064</p>
+<figure class="align-center">
+<img alt="../_images/cam_cam_frame_id_sts23.svg" src="../_images/cam_cam_frame_id_sts23.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>frame_id_3</p></td>
+<td><p>r</p></td>
+<td><p>16'd0</p></td>
+<td><p>DVP2BUS PIC 3 ID</p></td>
+</tr>
+<tr class="row-odd"><td><p>15:0</p></td>
+<td><p>frame_id_2</p></td>
+<td><p>r</p></td>
+<td><p>16'd0</p></td>
+<td><p>DVP2BUS PIC 2 ID</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cam-dvp-debug">
+<h3><span class="section-number">19.4.19. </span>cam_dvp_debug<a class="headerlink" href="#cam-dvp-debug" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x200570f0</p>
+<figure class="align-center">
+<img alt="../_images/cam_cam_dvp_debug.svg" src="../_images/cam_cam_dvp_debug.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:12</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>11:8</p></td>
+<td><p>reg_id_latch_line</p></td>
+<td><p>r/w</p></td>
+<td><p>4'd5</p></td>
+<td><p>ID latch timing (line count)</p></td>
+</tr>
+<tr class="row-even"><td><p>7:32</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>31:0</p></td>
+<td><p>RESERVED</p></td>
+<td><p>rsvd</p></td>
+<td><p>32'hf0f0f0f0</p></td>
+<td><p>RESERVED</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="USB.html" class="btn btn-neutral float-left" title="18. USB" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="MJPEG.html" class="btn btn-neutral float-right" title="20. MJPEG" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2022.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

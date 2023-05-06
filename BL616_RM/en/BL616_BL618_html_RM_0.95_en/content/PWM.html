@@ -1,0 +1,1646 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>12. PWM &mdash; BL616/BL618 Reference Manual  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="13. TIMER" href="TIMER.html" />
+    <link rel="prev" title="11. I2C" href="I2C.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL616/BL618 Reference Manual
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. System and Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. Reset and Clock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPIO.html">4. GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">5. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">6. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">7. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">8. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">9. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">10. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">11. I2C</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">12. PWM</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">12.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#features">12.2. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#functional-description">12.3. Functional Description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#clock-and-frequency-divider">12.3.1. Clock and Frequency Divider</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#active-level">12.3.2. Active Level</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#principle-of-pulse-generation">12.3.3. Principle of Pulse Generation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#brake">12.3.4. Brake</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dead-zone">12.3.5. Dead Zone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cycle-and-duty-ratio-calculation">12.3.6. Cycle and Duty Ratio Calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pwm-interrupt">12.3.7. PWM Interrupt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adc-linkage">12.3.8. ADC Linkage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#register-description">12.4. Register description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pwm-int-config">12.4.1. pwm_int_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pwm0-clkdiv">12.4.2. pwm0_clkdiv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pwm-mc0-config1">12.4.3. pwm_mc0_config1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pwm-mc0-period">12.4.4. pwm_mc0_period</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pwm-mc0-dead-time">12.4.5. pwm_mc0_dead_time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pwm-mc0-ch0-thre">12.4.6. pwm_mc0_ch0_thre</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pwm-mc0-ch1-thre">12.4.7. pwm_mc0_ch1_thre</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pwm-mc0-ch2-thre">12.4.8. pwm_mc0_ch2_thre</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pwm-mc0-ch3-thre">12.4.9. pwm_mc0_ch3_thre</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pwm-mc0-int-sts">12.4.10. pwm_mc0_int_sts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pwm-mc0-int-mask">12.4.11. pwm_mc0_int_mask</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pwm-mc0-int-clear">12.4.12. pwm_mc0_int_clear</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pwm-mc0-int-en">12.4.13. pwm_mc0_int_en</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">13. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2S.html">14. I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AudioDAC.html">15. AudioDAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AudioADC.html">16. AudioADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EMAC.html">17. Emac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USB.html">18. USB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cam.html">19. CAM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MJPEG.html">20. MJPEG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBI.html">21. DBI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SDH.html">22. SDH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SDIO.html">23. SDIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LowPower.html">24. LowPower</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SEC_ENG.html">25. SEC ENG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">26. Revision history</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL616/BL618 Reference Manual</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">12. </span>PWM</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pwm">
+<h1><span class="section-number">12. </span>PWM<a class="headerlink" href="#pwm" title="Permalink to this headline"></a></h1>
+<section id="overview">
+<h2><span class="section-number">12.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
+<p>Pulse Width Modulation (PWM), an efficient technique that uses the digital signal of microprocessor to control the analog circuit, is widely used in fields like measurement, communication, and power control and conversion.</p>
+</section>
+<section id="features">
+<h2><span class="section-number">12.2. </span>Features<a class="headerlink" href="#features" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p>One PWM signals are generated, each containing 4-channel PWM signal outputs, with 2 pairs of complementary PWM per channel</p></li>
+<li><p>There are optional three clock sources (bclk、xclk、f32k), with 16-bit clock divider, up to 65535 divisions</p></li>
+<li><p>Each PWM channel has double threshold setting, allowing different duty ratios and phases, with more flexible pulse</p></li>
+<li><p>Each PWM channel has independent dead time setting</p></li>
+<li><p>Different active levels can be set for each PWM output pin</p></li>
+<li><p>Each PWM has an independent linked switch to connect/disconnect with the internal counter, and you can set the default output level when disconnected</p></li>
+<li><p>The software and external brake signals can set the PWM output level to a preset state</p></li>
+<li><p>Up to 9 trigger sources for triggering ADC conversion</p></li>
+<li><p>Support 10 interrupts</p></li>
+</ul>
+</section>
+<section id="functional-description">
+<h2><span class="section-number">12.3. </span>Functional Description<a class="headerlink" href="#functional-description" title="Permalink to this headline"></a></h2>
+<section id="clock-and-frequency-divider">
+<h3><span class="section-number">12.3.1. </span>Clock and Frequency Divider<a class="headerlink" href="#clock-and-frequency-divider" title="Permalink to this headline"></a></h3>
+<p>There are three options for PWM counter clock sources, which can be set through the reg_clk_sel field in the pwm_mc0_config0 register, and the clock source configuration is shown in the following table.</p>
+<table class="colwidths-given docutils align-center" id="id1" style="width: 100%">
+<caption><span class="caption-number">Table 12.1 </span><span class="caption-text">Clock source</span><a class="headerlink" href="#id1" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>reg_clk_sel</p></th>
+<th class="head"><p>PWM clock source</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>xclk</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>bclk</p></td>
+</tr>
+<tr class="row-even"><td><p>others</p></td>
+<td><p>f32k</p></td>
+</tr>
+</tbody>
+</table>
+<p>Each counter has its own 16-bit frequency divider, which can divide the selected clock through APB. The PWM counter will take the divided clock as the counting cycle unit, and add one every time a counting cycle ends.</p>
+</section>
+<section id="active-level">
+<h3><span class="section-number">12.3.2. </span>Active Level<a class="headerlink" href="#active-level" title="Permalink to this headline"></a></h3>
+<p>Different application scenarios require different active level states, some being active at low level and others being active at high level. The active level of each PWM output can be set independently.</p>
+<p>When the &lt;pwm_chy_ppl&gt; bit in the register pwm_mcx_config1 is set to 1, it means that the forward channel of channel y (y = 0, 1, 2, 3) of pwm is set to be active at high level. That is, when the PWM module outputs logical ‘1’, its corresponding pin outputs high level, and when it outputs logical ‘0’, that outputs low level. When &lt;pwm_chy_ppl&gt; is set to 0, it means that the same is set to be active at low level. That is, when the PWM module outputs logical ‘1’, its corresponding pin outputs low level, and when it outputs logical ‘0’, that outputs high level. The setting bit of the complementary channel is &lt;pwm_chy_npl&gt;, and its setting rule is the same as that of the forward channel.</p>
+</section>
+<section id="principle-of-pulse-generation">
+<h3><span class="section-number">12.3.3. </span>Principle of Pulse Generation<a class="headerlink" href="#principle-of-pulse-generation" title="Permalink to this headline"></a></h3>
+<p>When the &lt;pwm_chy_pen&gt; bit in the register pwm_mcx_config1 is set to 0, it means that the forward channel of channel y (y = 0, 1, 2, 3) of pwm is set to a determined logic state, and then the state is determined by the &lt;pwm_chy_psi&gt; bit. When &lt;pwm_chy_psi&gt; is 0, the corresponding forward channel pin outputs logical ‘0’, and when the same is 1, that outputs logical ‘1’. The actual output level must be jointly determined with &lt;pwm_chy_ppl&gt;. The setting bit of the complementary channel is &lt;pwm_chy_nen&gt;, and its setting rule is the same as that of the forward channel.</p>
+<p>When the &lt;pwm_chy_pen&gt; (&lt;pwm_chy_nen&gt;) bit in the register pwm_mcx_config1 is set to 1, the forward (complementary) channel output of channel y (y = 0, 1, 2, 3) of pwm is determined by comparing the internal counter with the two thresholds. If the counter value is between the two thresholds, the forward channel outputs logical ‘1’, while the complementary one outputs logical ‘0’. If the counter value is beyond the two thresholds, the forward channel outputs logical ‘0’, while the complementary one outputs logical ‘1’. The waveform is shown as follows.</p>
+<figure class="align-center" id="id2">
+<img alt="../_images/PWMWave.svg" src="../_images/PWMWave.svg" /><figcaption>
+<p><span class="caption-number">Fig. 12.1 </span><span class="caption-text">Waveform of PWM in different configurations</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="brake">
+<h3><span class="section-number">12.3.4. </span>Brake<a class="headerlink" href="#brake" title="Permalink to this headline"></a></h3>
+<p>When the bit &lt;pwm_sw_break_en&gt; of pwm_mc0_config0 is 1, the brake signal is generated, and the level of the PWM output will be modified to the preset state. The preset state is set by the bits &lt;pwm_chy_pbs&gt; and &lt;pwm_chy_nbs&gt; (y=0,1,2,3) in the pwm_mc0_config1 register. When this bit is set to 1, after the brake signal is generated, the PWM output logic 1, when this bit is set to 0, this PWM output logic 0 after the brake signal is generated. When &lt;pwm_sw_break_en&gt; is 0, it exits the braking state, and the PWM resumes the previous operating mode. The brake signal does not trigger an interrupt.</p>
+</section>
+<section id="dead-zone">
+<h3><span class="section-number">12.3.5. </span>Dead Zone<a class="headerlink" href="#dead-zone" title="Permalink to this headline"></a></h3>
+<p>Different dead time can be set for each PWM channel independently. When the value of dead time is not 0, the forward channel of PWM will delay the generation of jump level when it matches the ThresholdL, and immediately change the level state when it matches the ThresholdH. The complementary channel of PWM will change the level state immediately when it matches the ThresholdL, and delay the generation of jump level when it matches the ThresholdH. The length of dead zone is set by the register pwm_mc0_dead_time, the deadband length is calculated as shown in the following table.</p>
+<table class="colwidths-given docutils align-center" id="id3" style="width: 100%">
+<caption><span class="caption-number">Table 12.2 </span><span class="caption-text">Deadband length calculation formula</span><a class="headerlink" href="#id3" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>pwm_chy_dtg</p></th>
+<th class="head"><p>Deadband length</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0xxxxxxx</p></td>
+<td><p>pwm_chy_dtg[7:0]</p></td>
+</tr>
+<tr class="row-odd"><td><p>10xxxxxx</p></td>
+<td><p>(64 + pwm_chy_dtg[5:0]) * 2</p></td>
+</tr>
+<tr class="row-even"><td><p>110xxxxx</p></td>
+<td><p>(32 + pwm_chy_dtg[4:0]) * 8</p></td>
+</tr>
+<tr class="row-odd"><td><p>111xxxxx</p></td>
+<td><p>(32 + pwm_chy_dtg[4:0]) * 16</p></td>
+</tr>
+</tbody>
+</table>
+<p>The output waveform after inserting the deadband for PWM is shown in the following figure.</p>
+<figure class="align-center" id="id4">
+<img alt="../_images/PWMDtgWave.svg" src="../_images/PWMDtgWave.svg" /><figcaption>
+<p><span class="caption-number">Fig. 12.2 </span><span class="caption-text">PWM insertion deadband output waveform</span><a class="headerlink" href="#id4" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="cycle-and-duty-ratio-calculation">
+<h3><span class="section-number">12.3.6. </span>Cycle and Duty Ratio Calculation<a class="headerlink" href="#cycle-and-duty-ratio-calculation" title="Permalink to this headline"></a></h3>
+<p>The period of the PWM is determined by two parts, the clock division factor and the clock duration period. The clock division factor is set by the domain pwm_clk_div in register pwm_mc0_config0, which is used to divide the source clock of the PWM. The value of the domain is the frequency division factor, it should be noted that the domain is 0 or 1 means 1 division, the maximum is 65535 means 65535 division.</p>
+<p>The clock duration period is set by the domain pwm_period in the register pwm_mc0_period, which is used to set how many divided clock periods a PWM cycle consists of.</p>
+<p>PWM period = PWM source clock / pwm_clk_div / pwm_period</p>
+</section>
+<section id="pwm-interrupt">
+<h3><span class="section-number">12.3.7. </span>PWM Interrupt<a class="headerlink" href="#pwm-interrupt" title="Permalink to this headline"></a></h3>
+<p>The PWM can generate a total of 10 types of interrupts, described as follows.</p>
+<ul class="simple">
+<li><p>Channel 0 ThresholdL Interrupt</p>
+<ul>
+<li><p>This interrupt is generated when the PWM count value is equal to the value of the field pwm_ch0_threL in the pwm_mc0_ch0_thre register.</p></li>
+</ul>
+</li>
+<li><p>Channel 0 ThresholdH Interrupt</p>
+<ul>
+<li><p>This interrupt is generated when the PWM count value is equal to the value of the field pwm_ch0_threH in the pwm_mc0_ch0_thre register.</p></li>
+</ul>
+</li>
+<li><p>Channel 1 ThresholdL Interrupt</p>
+<ul>
+<li><p>This interrupt is generated when the PWM count value is equal to the value of field pwm_ch1_threL in the pwm_mc0_ch1_thre register.</p></li>
+</ul>
+</li>
+<li><p>Channel 1 ThresholdH Interrupt</p>
+<ul>
+<li><p>This interrupt is generated when the PWM count value is equal to the value of the field pwm_ch1_threH in the pwm_mc0_ch1_thre register.</p></li>
+</ul>
+</li>
+<li><p>Channel 2 ThresholdL Interrupt</p>
+<ul>
+<li><p>This interrupt is generated when the PWM count value is equal to the value of field pwm_ch2_threL in the pwm_mc0_ch2_thre register.</p></li>
+</ul>
+</li>
+<li><p>Channel 2 Threshold ThresholdH Interrupt</p>
+<ul>
+<li><p>This interrupt is generated when the PWM count value is equal to the value of the field pwm_ch2_threH in the pwm_mc0_ch2_thre register.</p></li>
+</ul>
+</li>
+<li><p>Channel 3 ThresholdL Interrupt</p>
+<ul>
+<li><p>This interrupt is generated when the PWM count value is equal to the value of the field pwm_ch3_threL in the pwm_mc0_ch3_thre register.</p></li>
+</ul>
+</li>
+<li><p>Channel 3 ThresholdH Interrupt</p>
+<ul>
+<li><p>This interrupt is generated when the PWM count value is equal to the value of the field pwm_ch3_threH in the pwm_mc0_ch3_thre register.</p></li>
+</ul>
+</li>
+<li><p>End-of-cycle interrupt</p>
+<ul>
+<li><p>This interrupt is generated when the PWM count value is equal to the value of field pwm_period in register pwm_mc0_period, indicating the end of a PWM cycle.</p></li>
+</ul>
+</li>
+<li><p>Cycle Repeat Interrupt</p>
+<ul>
+<li><p>This interrupt is generated when the number of PWM cycles reaches the value set in the field pwm_int_period_cnt in the register pwm_mc0_period. This interrupt can be used in stepper motor application scenarios, where setting pwm_int_period_cnt allows the stepper motor to generate an interrupt after rotating a specific angle.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="adc-linkage">
+<h3><span class="section-number">12.3.8. </span>ADC Linkage<a class="headerlink" href="#adc-linkage" title="Permalink to this headline"></a></h3>
+<p>When the counter matches the threshold or the count value reaches the number of cycles, it will generate the signal that internally triggers ADC startup conversion. It should be noted that only PWM0 can trigger such conversion, while PWM1 cannot do that. The specific trigger source is set by the &lt;pwm_adc_trg_src&gt; bit in the register pwm_mcx_config0. This feature is commonly used in timing sampling. The following is an example.</p>
+<p>Application scenario: In BLDC application, there is such a requirement that the current flowing through the coil shall be detected while the motor speed is controlled by PWM. In a PWM cycle, after PWM controls the power device to turn on, the current becomes stable after a certain period of time. Then, it is necessary to sample the current value, which means that there is a strict phase difference between the time point of triggering ADC conversion and PWM. For example, if the channel 0 of PWM is used to drive one of the phases of the motor, and a 10 KHz square wave with a duty ratio of 20% needs to be generated, and ADC sampling needs to be performed at the middle time point of the high level of the square wave, then the PWM cycle is 100us. When the clock source is 1 MHz, the cycle count value is 100, and the two thresholds of channel 1 can be set to 0 and 20 respectively. At this time, the counter is between 0 and 20, and PWM outputs a high level, and otherwise it outputs a low level. When the threshold L of channel 2 is set to 10 and the pwm_adc_trg_src in the register pwm_mc0_config0 is set to 4, pwm_ch2l_int can trigger ADC conversion. When the counter counts to 10, ADC will start sampling conversion at the middle time point of the high level generated by channel 1. This ensures that each sampling can meet the exact time requirement without CPU intervention, thus improving the performance.</p>
+</section>
+</section>
+<section id="register-description">
+<h2><span class="section-number">12.4. </span>Register description<a class="headerlink" href="#register-description" title="Permalink to this headline"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 40%" />
+<col style="width: 60%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Name</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pwm-int-config">pwm_int_config</a></p></td>
+<td><p>PWM interrupt config register</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pwm0-clkdiv">pwm0_clkdiv</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a href="#id5"><span class="problematic" id="id6">`pwm0_thre1`_</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a href="#id7"><span class="problematic" id="id8">`pwm0_thre2`_</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a href="#id9"><span class="problematic" id="id10">`pwm0_period`_</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a href="#id11"><span class="problematic" id="id12">`pwm0_config`_</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a href="#id13"><span class="problematic" id="id14">`pwm0_interrupt`_</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a href="#id15"><span class="problematic" id="id16">`pwm_mc0_config0`_</span></a></p></td>
+<td><p>PWM config0 register</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pwm-mc0-config1">pwm_mc0_config1</a></p></td>
+<td><p>PWM config1 register</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pwm-mc0-period">pwm_mc0_period</a></p></td>
+<td><p>PWM period register</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pwm-mc0-dead-time">pwm_mc0_dead_time</a></p></td>
+<td><p>PWM dead time register</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pwm-mc0-ch0-thre">pwm_mc0_ch0_thre</a></p></td>
+<td><p>PWM channel0 threshold register</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pwm-mc0-ch1-thre">pwm_mc0_ch1_thre</a></p></td>
+<td><p>PWM channel1 threshold register</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pwm-mc0-ch2-thre">pwm_mc0_ch2_thre</a></p></td>
+<td><p>PWM channel2 threshold register</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pwm-mc0-ch3-thre">pwm_mc0_ch3_thre</a></p></td>
+<td><p>PWM channel3 threshold register</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pwm-mc0-int-sts">pwm_mc0_int_sts</a></p></td>
+<td><p>PWM interrupt status register</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pwm-mc0-int-mask">pwm_mc0_int_mask</a></p></td>
+<td><p>PWM interrupt mask register</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pwm-mc0-int-clear">pwm_mc0_int_clear</a></p></td>
+<td><p>PWM interrupt clear register</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pwm-mc0-int-en">pwm_mc0_int_en</a></p></td>
+<td><p>PWM interrupt enable register</p></td>
+</tr>
+</tbody>
+</table>
+<section id="pwm-int-config">
+<h3><span class="section-number">12.4.1. </span>pwm_int_config<a class="headerlink" href="#pwm-int-config" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000a400</p>
+<figure class="align-center">
+<img alt="../_images/pwm_pwm_int_config.svg" src="../_images/pwm_pwm_int_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:9</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>pwm0_int_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1’b0</p></td>
+<td><p>PWM 0 interrupt clear (clear pwm_mc0_int_sts[10:0] all)</p></td>
+</tr>
+<tr class="row-even"><td><p>7:1</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>pwm0_int_sts</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>PWM 0 interrupt status (Check pwm_mc0_int_sts for detailed interrupt status)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="pwm0-clkdiv">
+<h3><span class="section-number">12.4.2. </span>pwm0_clkdiv<a class="headerlink" href="#pwm0-clkdiv" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000a420</p>
+<hr class="docutils" />
+<p><strong>Address：</strong>  0x2000a420</p>
+<hr class="docutils" />
+<p><strong>Address：</strong>  0x2000a420</p>
+<hr class="docutils" />
+<p><strong>Address：</strong>  0x2000a420</p>
+<hr class="docutils" />
+<p><strong>Address：</strong>  0x2000a420</p>
+<hr class="docutils" />
+<p><strong>Address：</strong>  0x2000a420</p>
+<hr class="docutils" />
+<p><strong>Address：</strong>  0x2000a420</p>
+<figure class="align-center">
+<img alt="../_images/pwm_pwm_mc0_config0.svg" src="../_images/pwm_pwm_mc0_config0.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td rowspan="4"><p>31:30</p></td>
+<td rowspan="4"><p>reg_clk_sel</p></td>
+<td rowspan="4"><p>r/w</p></td>
+<td rowspan="4"><p>2’d0</p></td>
+<td rowspan="4"><p>PWM clock source select</p>
+<p>2’d0: xclk</p>
+<p>2’d1: bclk</p>
+<p>others: f32k_clk</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3"><p>29</p></td>
+<td rowspan="3"><p>pwm_sts_stop</p></td>
+<td rowspan="3"><p>r</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>PWM stop status</p>
+<p>0: PWM run status</p>
+<p>1: PWM stop status</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3"><p>28</p></td>
+<td rowspan="3"><p>pwm_stop_mode</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b1</p></td>
+<td rowspan="3"><p>PWM stop mode,</p>
+<p>0: abrupt</p>
+<p>1: graceful</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3"><p>27</p></td>
+<td rowspan="3"><p>pwm_stop_en</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>PWM stop enable</p>
+<p>0: start PWM</p>
+<p>1: stop PWM</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>26:25</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td rowspan="3"><p>24</p></td>
+<td rowspan="3"><p>pwm_sw_break_en</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>PWM break enable</p>
+<p>0: Disabled, normal operation</p>
+<p>1: Enabled, PWM output will be determined by CxPBS/CxNBS</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="11"><p>23:20</p></td>
+<td rowspan="11"><p>pwm_adc_trg_src</p></td>
+<td rowspan="11"><p>r/w</p></td>
+<td rowspan="11"><p>4’hF</p></td>
+<td rowspan="11"><p>Select signal of ADC triggering source</p>
+<p>4’d0: pwm_ch0l_int (Channel 0 ThresholdL reached)</p>
+<p>4’d1: pwm_ch0h_int (Channel 0 ThresholdH reached)</p>
+<p>4’d2: pwm_ch1l_int (Channel 1 ThresholdL reached)</p>
+<p>4’d3: pwm_ch1h_int (Channel 1 ThresholdH reached)</p>
+<p>4’d4: pwm_ch2l_int (Channel 2 ThresholdL reached)</p>
+<p>4’d5: pwm_ch2h_int (Channel 2 ThresholdH reached)</p>
+<p>4’d6: pwm_ch3l_int (Channel 3 ThresholdL reached)</p>
+<p>4’d7: pwm_ch3h_int (Channel 3 ThresholdH reached)</p>
+<p>4’d8: pwm_prde_int (Period End reached)</p>
+<p>Others: Disabled</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3"><p>19</p></td>
+<td rowspan="3"><p>pwm_stop_on_rept</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>PWM stopped when rept_int is asserted</p>
+<p>0: Disabled, PWM keeps running when rept_int is asserted</p>
+<p>1: Enabled, PWM stops when rept_int is asserted. Clear rept_int to restore operation</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>18:16</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td rowspan="6"><p>15:0</p></td>
+<td rowspan="6"><p>pwm_clk_div</p></td>
+<td rowspan="6"><p>r/w</p></td>
+<td rowspan="6"><p>16’b0</p></td>
+<td rowspan="6"><p>PWM clock division</p>
+<p>0: 1 divisor</p>
+<p>1: 1 divisor</p>
+<p>2: 2 divisor</p>
+<p>65535: 65535 divisor</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</section>
+<section id="pwm-mc0-config1">
+<h3><span class="section-number">12.4.3. </span>pwm_mc0_config1<a class="headerlink" href="#pwm-mc0-config1" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000a444</p>
+<figure class="align-center">
+<img alt="../_images/pwm_pwm_mc0_config1.svg" src="../_images/pwm_pwm_mc0_config1.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td rowspan="3"><p>31</p></td>
+<td rowspan="3"><p>pwm_ch3_nbs</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>PWM channel 3 negative break state</p>
+<p>0: PWM channel 3 negative output logic 0 in break state</p>
+<p>1: PWM channel 3 negativeitive output logic 1 in break state</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3"><p>30</p></td>
+<td rowspan="3"><p>pwm_ch3_pbs</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>PWM channel 3 positive break state</p>
+<p>0: PWM channel 3 positive output logic 0 in break state</p>
+<p>1: PWM channel 3 positive output logic 1 in break state</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3"><p>29</p></td>
+<td rowspan="3"><p>pwm_ch2_nbs</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>PWM channel 2 negative break state</p>
+<p>0: PWM channel 2 negative output logic 0 in break state</p>
+<p>1: PWM channel 2 negativeitive output logic 1 in break state</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3"><p>28</p></td>
+<td rowspan="3"><p>pwm_ch2_pbs</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>PWM channel 2 positive break state</p>
+<p>0: PWM channel 2 positive output logic 0 in break state</p>
+<p>1: PWM channel 2 positive output logic 1 in break state</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3"><p>27</p></td>
+<td rowspan="3"><p>pwm_ch1_nbs</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>PWM channel 1 negative break state</p>
+<p>0: PWM channel 1 negative output logic 0 in break state</p>
+<p>1: PWM channel 1 negativeitive output logic 1 in break state</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3"><p>26</p></td>
+<td rowspan="3"><p>pwm_ch1_pbs</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>PWM channel 1 positive break state</p>
+<p>0: PWM channel 1 positive output logic 0 in break state</p>
+<p>1: PWM channel 1 positive output logic 1 in break state</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3"><p>25</p></td>
+<td rowspan="3"><p>pwm_ch0_nbs</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>PWM channel 0 negative break state</p>
+<p>0: PWM channel 0 negative output logic 0 in break state</p>
+<p>1: PWM channel 0 negativeitive output logic 1 in break state</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3"><p>24</p></td>
+<td rowspan="3"><p>pwm_ch0_pbs</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>PWM channel 0 positive break state</p>
+<p>0: PWM channel 0 positive output logic 0 in break state</p>
+<p>1: PWM channel 0 positive output logic 1 in break state</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3"><p>23</p></td>
+<td rowspan="3"><p>pwm_ch3_npl</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b1</p></td>
+<td rowspan="3"><p>PWM channel 3 negative polarity</p>
+<p>0: PWM channel 3 negative output high level in logic 0 state, output low level in logic 1 state</p>
+<p>1: PWM channel 3 negative output low level in logic 0 state, output high level in logic 1 state</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3"><p>22</p></td>
+<td rowspan="3"><p>pwm_ch3_ppl</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b1</p></td>
+<td rowspan="3"><p>PWM channel 3 positive polarity</p>
+<p>0: PWM channel 3 positive output high level in logic 0 state, output low level in logic 1 state</p>
+<p>1: PWM channel 3 positive output low level in logic 0 state, output high level in logic 1 state</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3"><p>21</p></td>
+<td rowspan="3"><p>pwm_ch2_npl</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b1</p></td>
+<td rowspan="3"><p>PWM channel 2 negative polarity</p>
+<p>0: PWM channel 2 negative output high level in logic 0 state, output low level in logic 1 state</p>
+<p>1: PWM channel 2 negative output low level in logic 0 state, output high level in logic 1 state</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3"><p>20</p></td>
+<td rowspan="3"><p>pwm_ch2_ppl</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b1</p></td>
+<td rowspan="3"><p>PWM channel 2 positive polarity</p>
+<p>0: PWM channel 2 positive output high level in logic 0 state, output low level in logic 1 state</p>
+<p>1: PWM channel 2 positive output low level in logic 0 state, output high level in logic 1 state</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3"><p>19</p></td>
+<td rowspan="3"><p>pwm_ch1_npl</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b1</p></td>
+<td rowspan="3"><p>PWM channel 1 negative polarity</p>
+<p>0: PWM channel 1 negative output high level in logic 0 state, output low level in logic 1 state</p>
+<p>1: PWM channel 1 negative output low level in logic 0 state, output high level in logic 1 state</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3"><p>18</p></td>
+<td rowspan="3"><p>pwm_ch1_ppl</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b1</p></td>
+<td rowspan="3"><p>PWM channel 1 positive polarity</p>
+<p>0: PWM channel 1 positive output high level in logic 0 state, output low level in logic 1 state</p>
+<p>1: PWM channel 1 positive output low level in logic 0 state, output high level in logic 1 state</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3"><p>17</p></td>
+<td rowspan="3"><p>pwm_ch0_npl</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b1</p></td>
+<td rowspan="3"><p>PWM channel 0 negative polarity</p>
+<p>0: PWM channel 0 negative output high level in logic 0 state, output low level in logic 1 state</p>
+<p>1: PWM channel 0 negative output low level in logic 0 state, output high level in logic 1 state</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3"><p>16</p></td>
+<td rowspan="3"><p>pwm_ch0_ppl</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b1</p></td>
+<td rowspan="3"><p>PWM channel 0 positive polarity</p>
+<p>0: PWM channel 0 positive output high level in logic 0 state, output low level in logic 1 state</p>
+<p>1: PWM channel 0 positive output low level in logic 0 state, output high level in logic 1 state</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3"><p>15</p></td>
+<td rowspan="3"><p>pwm_ch3_nsi</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b1</p></td>
+<td rowspan="3"><p>PWM channel 3 negative set idle state</p>
+<p>0: PWM channel 3 negative logic 0 state</p>
+<p>1: PWM channel 3 negative logic 1 state</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3"><p>14</p></td>
+<td rowspan="3"><p>pwm_ch3_nen</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>PWM channel 3 negative enable pwm out</p>
+<p>0: disable, PWM output is determined by pwm_ch3_nsi and pwm_ch3_npl</p>
+<p>1: enable, PWM output is determined by counter and pwm_mc0_ch3_thre</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3"><p>13</p></td>
+<td rowspan="3"><p>pwm_ch3_psi</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>PWM channel 3 positive set idle state</p>
+<p>0: PWM channel 3 positive output logic 0 in idle state</p>
+<p>1: PWM channel 3 positive output logic 1 in idle state</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3"><p>12</p></td>
+<td rowspan="3"><p>pwm_ch3_pen</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>PWM channel 3 positive enable pwm out</p>
+<p>0: disable, PWM output is determined by pwm_ch3_psi and pwm_ch3_ppl</p>
+<p>1: enable, PWM output is determined by counter and pwm_mc0_ch3_thre</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3"><p>11</p></td>
+<td rowspan="3"><p>pwm_ch2_nsi</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b1</p></td>
+<td rowspan="3"><p>PWM channel 2 negative set idle state</p>
+<p>0: PWM channel 2 negative logic 0 state</p>
+<p>1: PWM channel 2 negative logic 1 state</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3"><p>10</p></td>
+<td rowspan="3"><p>pwm_ch2_nen</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>PWM channel 2 negative enable pwm out</p>
+<p>0: disable, PWM output is determined by pwm_ch2_nsi and pwm_ch2_npl</p>
+<p>1: enable, PWM output is determined by counter and pwm_mc0_ch2_thre</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3"><p>9</p></td>
+<td rowspan="3"><p>pwm_ch2_psi</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>PWM channel 2 positive set idle state</p>
+<p>0: PWM channel 2 positive output logic 0 in idle state</p>
+<p>1: PWM channel 2 positive output logic 1 in idle state</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3"><p>8</p></td>
+<td rowspan="3"><p>pwm_ch2_pen</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>PWM channel 2 positive enable pwm out</p>
+<p>0: disable, PWM output is determined by pwm_ch2_psi and pwm_ch2_ppl</p>
+<p>1: enable, PWM output is determined by counter and pwm_mc0_ch2_thre</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3"><p>7</p></td>
+<td rowspan="3"><p>pwm_ch1_nsi</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b1</p></td>
+<td rowspan="3"><p>PWM channel 1 negative set idle state</p>
+<p>0: PWM channel 1 negative logic 0 state</p>
+<p>1: PWM channel 1 negative logic 1 state</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3"><p>6</p></td>
+<td rowspan="3"><p>pwm_ch1_nen</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>PWM channel 1 negative enable pwm out</p>
+<p>0: disable, PWM output is determined by pwm_ch1_nsi and pwm_ch1_npl</p>
+<p>1: enable, PWM output is determined by counter and pwm_mc0_ch1_thre</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3"><p>5</p></td>
+<td rowspan="3"><p>pwm_ch1_psi</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>PWM channel 1 positive set idle state</p>
+<p>0: PWM channel 1 positive output logic 0 in idle state</p>
+<p>1: PWM channel 1 positive output logic 1 in idle state</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3"><p>4</p></td>
+<td rowspan="3"><p>pwm_ch1_pen</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>PWM channel 1 positive enable pwm out</p>
+<p>0: disable, PWM output is determined by pwm_ch1_psi and pwm_ch1_ppl</p>
+<p>1: enable, PWM output is determined by counter and pwm_mc0_ch1_thre</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3"><p>3</p></td>
+<td rowspan="3"><p>pwm_ch0_nsi</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b1</p></td>
+<td rowspan="3"><p>PWM channel 0 negative set idle state</p>
+<p>0: PWM channel 0 negative logic 0 state</p>
+<p>1: PWM channel 0 negative logic 1 state</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3"><p>2</p></td>
+<td rowspan="3"><p>pwm_ch0_nen</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>PWM channel 0 negative enable pwm out</p>
+<p>0: disable, PWM output is determined by pwm_ch0_nsi and pwm_ch0_npl</p>
+<p>1: enable, PWM output is determined by counter and pwm_mc0_ch0_thre</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3"><p>1</p></td>
+<td rowspan="3"><p>pwm_ch0_psi</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>PWM channel 0 positive set idle state</p>
+<p>0: PWM channel 0 positive output logic 0 in idle state</p>
+<p>1: PWM channel 0 positive output logic 1 in idle state</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3"><p>0</p></td>
+<td rowspan="3"><p>pwm_ch0_pen</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>PWM channel 0 positive enable pwm out</p>
+<p>0: disable, PWM output is determined by pwm_ch0_psi and pwm_ch0_ppl</p>
+<p>1: enable, PWM output is determined by counter and pwm_mc0_ch0_thre</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</section>
+<section id="pwm-mc0-period">
+<h3><span class="section-number">12.4.4. </span>pwm_mc0_period<a class="headerlink" href="#pwm-mc0-period" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000a448</p>
+<figure class="align-center">
+<img alt="../_images/pwm_pwm_mc0_period.svg" src="../_images/pwm_pwm_mc0_period.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>pwm_int_period_cnt</p></td>
+<td><p>r/w</p></td>
+<td><p>16’d0</p></td>
+<td><p>PWM interrupt period counter threshold</p></td>
+</tr>
+<tr class="row-odd"><td><p>15:0</p></td>
+<td><p>pwm_period</p></td>
+<td><p>r/w</p></td>
+<td><p>16’d0</p></td>
+<td><p>PWM period setting</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="pwm-mc0-dead-time">
+<h3><span class="section-number">12.4.5. </span>pwm_mc0_dead_time<a class="headerlink" href="#pwm-mc0-dead-time" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000a44c</p>
+<figure class="align-center">
+<img alt="../_images/pwm_pwm_mc0_dead_time.svg" src="../_images/pwm_pwm_mc0_dead_time.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td rowspan="5"><p>31:24</p></td>
+<td rowspan="5"><p>pwm_ch3_dtg</p></td>
+<td rowspan="5"><p>r/w</p></td>
+<td rowspan="5"><p>8’h0</p></td>
+<td rowspan="5"><p>PWM Channel 3 dead time generator (DTG)</p>
+<p>DTG[7:5]=0xx =&gt; DT = DTG[7:0]*1 (unit: divided PWM clock)</p>
+<p>DTG[7:5]=10x =&gt; DT = (64+DTG[5:0])*2 (unit: divided PWM clock)</p>
+<p>DTG[7:5]=110 =&gt; DT = (32+DTG[4:0])*8 (unit: divided PWM clock)</p>
+<p>DTG[7:5]=111 =&gt; DT = (32+DTG[4:0])*16 (unit: divided PWM clock)</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="5"><p>23:16</p></td>
+<td rowspan="5"><p>pwm_ch2_dtg</p></td>
+<td rowspan="5"><p>r/w</p></td>
+<td rowspan="5"><p>8’h0</p></td>
+<td rowspan="5"><p>PWM Channel 2 dead time generator (DTG)</p>
+<p>DTG[7:5]=0xx =&gt; DT = DTG[7:0]*1 (unit: divided PWM clock)</p>
+<p>DTG[7:5]=10x =&gt; DT = (64+DTG[5:0])*2 (unit: divided PWM clock)</p>
+<p>DTG[7:5]=110 =&gt; DT = (32+DTG[4:0])*8 (unit: divided PWM clock)</p>
+<p>DTG[7:5]=111 =&gt; DT = (32+DTG[4:0])*16 (unit: divided PWM clock)</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="5"><p>15:8</p></td>
+<td rowspan="5"><p>pwm_ch1_dtg</p></td>
+<td rowspan="5"><p>r/w</p></td>
+<td rowspan="5"><p>8’h0</p></td>
+<td rowspan="5"><p>PWM Channel 1 dead time generator (DTG)</p>
+<p>DTG[7:5]=0xx =&gt; DT = DTG[7:0]*1 (unit: divided PWM clock)</p>
+<p>DTG[7:5]=10x =&gt; DT = (64+DTG[5:0])*2 (unit: divided PWM clock)</p>
+<p>DTG[7:5]=110 =&gt; DT = (32+DTG[4:0])*8 (unit: divided PWM clock)</p>
+<p>DTG[7:5]=111 =&gt; DT = (32+DTG[4:0])*16 (unit: divided PWM clock)</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="5"><p>7:0</p></td>
+<td rowspan="5"><p>pwm_ch0_dtg</p></td>
+<td rowspan="5"><p>r/w</p></td>
+<td rowspan="5"><p>8’h0</p></td>
+<td rowspan="5"><p>PWM Channel 0 dead time generator (DTG)</p>
+<p>DTG[7:5]=0xx =&gt; DT = DTG[7:0]*1 (unit: divided PWM clock)</p>
+<p>DTG[7:5]=10x =&gt; DT = (64+DTG[5:0])*2 (unit: divided PWM clock)</p>
+<p>DTG[7:5]=110 =&gt; DT = (32+DTG[4:0])*8 (unit: divided PWM clock)</p>
+<p>DTG[7:5]=111 =&gt; DT = (32+DTG[4:0])*16 (unit: divided PWM clock)</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</section>
+<section id="pwm-mc0-ch0-thre">
+<h3><span class="section-number">12.4.6. </span>pwm_mc0_ch0_thre<a class="headerlink" href="#pwm-mc0-ch0-thre" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000a450</p>
+<figure class="align-center">
+<img alt="../_images/pwm_pwm_mc0_ch0_thre.svg" src="../_images/pwm_pwm_mc0_ch0_thre.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>pwm_ch0_threH</p></td>
+<td><p>r/w</p></td>
+<td><p>16’d0</p></td>
+<td><p>PWM HIGH counter threshold, can’t be smaller that threL</p></td>
+</tr>
+<tr class="row-odd"><td><p>15:0</p></td>
+<td><p>pwm_ch0_threL</p></td>
+<td><p>r/w</p></td>
+<td><p>16’d0</p></td>
+<td><p>PWM LOW counter threshold, can’t be larger that threH</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="pwm-mc0-ch1-thre">
+<h3><span class="section-number">12.4.7. </span>pwm_mc0_ch1_thre<a class="headerlink" href="#pwm-mc0-ch1-thre" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000a454</p>
+<figure class="align-center">
+<img alt="../_images/pwm_pwm_mc0_ch1_thre.svg" src="../_images/pwm_pwm_mc0_ch1_thre.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>pwm_ch1_threH</p></td>
+<td><p>r/w</p></td>
+<td><p>16’d0</p></td>
+<td><p>PWM HIGH counter threshold, can’t be smaller that threL</p></td>
+</tr>
+<tr class="row-odd"><td><p>15:0</p></td>
+<td><p>pwm_ch1_threL</p></td>
+<td><p>r/w</p></td>
+<td><p>16’d0</p></td>
+<td><p>PWM LOW counter threshold, can’t be larger that threH</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="pwm-mc0-ch2-thre">
+<h3><span class="section-number">12.4.8. </span>pwm_mc0_ch2_thre<a class="headerlink" href="#pwm-mc0-ch2-thre" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000a458</p>
+<figure class="align-center">
+<img alt="../_images/pwm_pwm_mc0_ch2_thre.svg" src="../_images/pwm_pwm_mc0_ch2_thre.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>pwm_ch2_threH</p></td>
+<td><p>r/w</p></td>
+<td><p>16’d0</p></td>
+<td><p>PWM HIGH counter threshold, can’t be smaller that threL</p></td>
+</tr>
+<tr class="row-odd"><td><p>15:0</p></td>
+<td><p>pwm_ch2_threL</p></td>
+<td><p>r/w</p></td>
+<td><p>16’d0</p></td>
+<td><p>PWM LOW counter threshold, can’t be larger that threH</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="pwm-mc0-ch3-thre">
+<h3><span class="section-number">12.4.9. </span>pwm_mc0_ch3_thre<a class="headerlink" href="#pwm-mc0-ch3-thre" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000a45c</p>
+<figure class="align-center">
+<img alt="../_images/pwm_pwm_mc0_ch3_thre.svg" src="../_images/pwm_pwm_mc0_ch3_thre.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>pwm_ch3_threH</p></td>
+<td><p>r/w</p></td>
+<td><p>16’d0</p></td>
+<td><p>PWM HIGH counter threshold, can’t be smaller that threL</p></td>
+</tr>
+<tr class="row-odd"><td><p>15:0</p></td>
+<td><p>pwm_ch3_threL</p></td>
+<td><p>r/w</p></td>
+<td><p>16’d0</p></td>
+<td><p>PWM LOW counter threshold, can’t be larger that threH</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="pwm-mc0-int-sts">
+<h3><span class="section-number">12.4.10. </span>pwm_mc0_int_sts<a class="headerlink" href="#pwm-mc0-int-sts" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000a460</p>
+<figure class="align-center">
+<img alt="../_images/pwm_pwm_mc0_int_sts.svg" src="../_images/pwm_pwm_mc0_int_sts.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:11</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>pwm_rept_int</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>PWM repeat count interrupt status</p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>pwm_prde_int</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>PWM period end interrupt status</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>pwm_ch3h_int</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>PWM Channel 3 ThresholdH interrupt status</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>pwm_ch3l_int</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>PWM Channel 3 ThresholdL interrupt status</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>pwm_ch2h_int</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>PWM Channel 2 ThresholdH interrupt status</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>pwm_ch2l_int</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>PWM Channel 2 ThresholdL interrupt status</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>pwm_ch1h_int</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>PWM Channel 1 ThresholdH interrupt status</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>pwm_ch1l_int</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>PWM Channel 1 ThresholdL interrupt status</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>pwm_ch0h_int</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>PWM Channel 0 ThresholdH interrupt status</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>pwm_ch0l_int</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>PWM Channel 0 ThresholdL interrupt status</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="pwm-mc0-int-mask">
+<h3><span class="section-number">12.4.11. </span>pwm_mc0_int_mask<a class="headerlink" href="#pwm-mc0-int-mask" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000a464</p>
+<figure class="align-center">
+<img alt="../_images/pwm_pwm_mc0_int_mask.svg" src="../_images/pwm_pwm_mc0_int_mask.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:11</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>cr_pwm_rept_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt mask of pwm_rept_int</p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>cr_pwm_prde_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt mask of pwm_prde_int</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>cr_pwm_ch3h_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt mask of pwm_ch3h_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>cr_pwm_ch3l_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt mask of pwm_ch3l_int</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>cr_pwm_ch2h_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt mask of pwm_ch2h_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>cr_pwm_ch2l_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt mask of pwm_ch2l_int</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>cr_pwm_ch1h_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt mask of pwm_ch1h_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>cr_pwm_ch1l_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt mask of pwm_ch1l_int</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>cr_pwm_ch0h_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt mask of pwm_ch0h_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>cr_pwm_ch0l_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt mask of pwm_ch0l_int</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="pwm-mc0-int-clear">
+<h3><span class="section-number">12.4.12. </span>pwm_mc0_int_clear<a class="headerlink" href="#pwm-mc0-int-clear" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000a468</p>
+<figure class="align-center">
+<img alt="../_images/pwm_pwm_mc0_int_clear.svg" src="../_images/pwm_pwm_mc0_int_clear.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:11</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>cr_pwm_rept_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1’b0</p></td>
+<td><p>Interrupt clear of pwm_rept_int</p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>cr_pwm_prde_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1’b0</p></td>
+<td><p>Interrupt clear of pwm_prde_int</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>cr_pwm_ch3h_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1’b0</p></td>
+<td><p>Interrupt clear of pwm_ch3h_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>cr_pwm_ch3l_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1’b0</p></td>
+<td><p>Interrupt clear of pwm_ch3l_int</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>cr_pwm_ch2h_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1’b0</p></td>
+<td><p>Interrupt clear of pwm_ch2h_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>cr_pwm_ch2l_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1’b0</p></td>
+<td><p>Interrupt clear of pwm_ch2l_int</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>cr_pwm_ch1h_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1’b0</p></td>
+<td><p>Interrupt clear of pwm_ch1h_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>cr_pwm_ch1l_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1’b0</p></td>
+<td><p>Interrupt clear of pwm_ch1l_int</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>cr_pwm_ch0h_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1’b0</p></td>
+<td><p>Interrupt clear of pwm_ch0h_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>cr_pwm_ch0l_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1’b0</p></td>
+<td><p>Interrupt clear of pwm_ch0l_int</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="pwm-mc0-int-en">
+<h3><span class="section-number">12.4.13. </span>pwm_mc0_int_en<a class="headerlink" href="#pwm-mc0-int-en" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000a46c</p>
+<figure class="align-center">
+<img alt="../_images/pwm_pwm_mc0_int_en.svg" src="../_images/pwm_pwm_mc0_int_en.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:11</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>cr_pwm_rept_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt enable of pwm_rept_int</p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>cr_pwm_prde_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt enable of pwm_prde_int</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>cr_pwm_ch3h_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt enable of pwm_ch3h_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>cr_pwm_ch3l_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt enable of pwm_ch3l_int</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>cr_pwm_ch2h_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt enable of pwm_ch2h_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>cr_pwm_ch2l_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt enable of pwm_ch2l_int</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>cr_pwm_ch1h_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt enable of pwm_ch1h_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>cr_pwm_ch1l_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt enable of pwm_ch1l_int</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>cr_pwm_ch0h_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt enable of pwm_ch0h_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>cr_pwm_ch0l_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt enable of pwm_ch0l_int</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="I2C.html" class="btn btn-neutral float-left" title="11. I2C" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="TIMER.html" class="btn btn-neutral float-right" title="13. TIMER" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

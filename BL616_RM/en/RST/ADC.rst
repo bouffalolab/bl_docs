@@ -4,24 +4,22 @@ ADC
 
 Overview
 ===========
-The chip integrates one 12-bit SAR ADC, which supports 12 external analog input signals and several internal analog signals.
-ADC can work in 4 mode, and the conversion result is 12/14/16-bit LeftJustified mode.
-ADC has a FIFO with a depth of 32, which supports multiple interrupts and DMA. In addition to measuring ordinary analog signals, ADC can also measure power supply voltage, and detect temperature by measuring the internal/external diode voltage.
+The chip integrates one 12-bit SAR ADC, which supports 12 external analog input signals and several internal analog signals. ADC can work in single conversion mode and multi-channel scanning mode, and the conversion result is 12/14/16-bit LeftJustified mode. ADC has a FIFO with a depth of 32, which supports multiple interrupts and DMA. In addition to measuring ordinary analog signals, ADC can also measure power supply voltage, and detect temperature by measuring the internal/external diode voltage.
 
 Features
 ===========
 
 - High performance
 
-    + Optional 12-bit/14-bit/16-bit conversion result for output
-    + Single channel continuous conversion mode up to 2M sampling rate
-    + Other conversion modes with a maximum sampling rate of 500K
-    + Optional reference voltage of 2.0V/3.2V
-    + Transfer of conversion result to memory through DMA
-    + Support single-channel single conversion, single-channel continuous conversion, multi-channel single conversion, multi-channel continuous conversion
-    + Single-ended and differential input modes
-    + Jitter compensation
-    + User-defined offset value of conversion result
+    + Selectable 12-bit, 14-bit, 16-bit conversion result output
+    + Single-channel continuous conversion mode up to 2M sample rate
+    + Other conversion modes up to 500K sample rate
+    + Support 2.0V, 3.2V optional reference voltage
+    + DMA support for transferring conversion results to memory
+    + Single-channel single conversion, single-channel continuous conversion, multi-channel single conversion, multi-channel continuous conversion
+    + Supports both single-ended and differential input modes
+    + Support jitter compensation
+    + Support user-set conversion result offset value
 
 - Number of analog channels
 
@@ -46,9 +44,9 @@ The input channel selector is used to select the channel to be sampled, includin
 
 The programmable amplifier is used to further process the input signal, and it is set based on the characteristics of the input signal (DC/AC) to get a more accurate conversion value.
 
-The ADC sampling module is the most important functional module, which gets the result of conversion (12/14/16 bit) from analog signal to digital signal by successive comparison.
+The ADC sampling module is the most important functional module, which gets the result of conversion from analog signal to digital signal by successive comparison.
 
-The data processing module further processes the conversion result, including adding channel information.
+The result of the conversion is 12/14/16 bit, and the data processing module further processes the conversion result, including adding channel information, etc.
 
 The final data will be pushed to the back-end FIFO.
 
@@ -141,8 +139,6 @@ The ADC supports single-channel conversion and scan conversion. In single-channe
 
 In the scanning conversion mode, the gpadc_cont_conv_en control bit is set to 1. ADC performs conversion one by one according to the number of conversion channels set by the gpadc_scan_length control bit and the channel sequence set by gpadc_reg_scn_posX (X = 1, 2) and gpadc_reg_scn_negX (X = 1, 2) register sets. The conversion result is automatically pushed into the ADC FIFO. The channels set by the gpadc_reg_scn_posX (X = 1, 2) and gpadc_reg_scn_negX (X = 1, 2) register sets can be the same, which means that the user can sample a channel multiple times for conversion.
 
-The conversion result of ADC is usually pushed into FIFO. Users need to set the FIFO data receiving threshold interrupt according to the actual number of conversion channels, and this threshold interrupt is used as the ADC Conversion Complete Interrupt.
-
 ADC Result
 -------------
 The register gpadc_raw_data stores the original result of ADC. In the single-ended mode, the valid bit of data is 12 bits, without sign bit. In the differential mode, the most significant bit (MSB) is the sign bit, and the remaining 11 bits represent the conversion result.
@@ -159,7 +155,7 @@ The register gpadc_data_out stores the ADC result, which contains the ADC result
 
 In the above table, bit21–bit25 indicates the positive channel number, and bit16–bit20 indicates the negative channel number, while bit0–bit15 indicates the converted value.
 
-The gpadc_res_sel control bit can set the bits of the conversion result to 12 bits, 14 bits, and 16 bits, of which 14 bits and 16 bits are the result of multiple sampling. The optional setting values are as follows:
+The gpadc_res_sel control bit can set the bits of the conversion result to 12 bits, 14 bits, and 16 bits, of which 14 bits and 16 bits are the result of multiple sampling. The values and the number of samples that can be set are as follows (2M sampling clock as an example, non-single-channel continuous conversion mode requires a lower clock):
 
 - 3'b000    12bit 2MS/s, OSR=1 
 - 3'b001    14bit 125kS/s, OSR=16
@@ -174,12 +170,10 @@ In practice, ADC results are generally pushed into FIFO, which is especially imp
 ADC Interrupt
 -------------
 - ADC conversion completion interrupt
-- ADC positive sampling over-range interrupt
-- ADC negative sampling over-range interrupt
+  * When the ADC conversion is completed and the result is stored in the FIFO, set the interrupt switch via gpadc_rdy_mask to select whether to trigger the ADC conversion completion interrupt.
 
-When ADC conversion is completed and the result is stored into FIFO, set the interrupt switch via gpadc_rdy_mask to select whether to trigger the ADC conversion completion interrupt or not.
-
-The ADC module will generate interrupts upon positive or negative sampling over-range, and such interrupts can be masked by gpadc_pos_satur_mask and gpadc_neg_satur_mask. When interrupts are generated, the interrupt status can be queried through the registers gpadc_pos_satur and gpadc_neg_satur. Interrupts can be cleared through gpadc_pos_satur_clr and gpadc_neg_satur_clr. This function can be used to check whether the input voltage is abnormal.
+- ADC positive (negative) sampling over-range interrupt
+  * When the ADC is in positive sampling over-range and negative sampling over-range, set the interrupt switch via gpadc_pos_satur_mask, gpadc_neg_satur_mask to select whether to trigger the interrupt or not, when the interrupt is generated, you can query the interrupt via gpadc_pos_satur and gpadc_neg_satur registers. The interrupt status can be cleared by setting gpadc_pos_satur_clr and gpadc_neg_satur_clr. This function can be used to determine if the input voltage is abnormal.
 
 ADC FIFO
 -------------
@@ -233,7 +227,7 @@ VBAT Measurement
 ------------------
 The VBAT/2 here measures the voltage of the chip VDD33, not the external lithium battery voltage. If you need to measure the voltage of power supply sources like lithium battery, you can divide the voltage and input it into the GPIO analog channel of ADC. Measuring the voltage of VDD33 can reduce the use of GPIO.
 
-The VBAT/2 voltage measured by the ADC module is divided, and the actual voltage input to the ADC module is half of that of VDD33, namely VBAT/2=VDD33/2. As the voltage is divided, to ensure a high accuracy, it is suggested to select 2.0 V reference voltage for ADC, and enable the single-ended mode. The positive input voltage is set to VBAT/2 and the negative input voltage is set to GND. Gpadc_vbat_en is set to 1. After conversion starts, the corresponding conversion result can be multiplied by 2 to get the voltage of VDD33.
+The VBAT/2 voltage measured by the ADC module is divided, and the actual voltage input to the ADC module is half of that of VDD33, namely VBAT/2=VDD33/2. As the voltage is divided, to ensure a high accuracy, it is suggested to select 2.0 V reference voltage for ADC, and enable the single-ended mode. The positive input voltage is set to VBAT/2 and the negative input voltage is set to GND. gpadc_vbat_en is set to 1. After conversion starts, the corresponding conversion result can be multiplied by 2 to get the voltage of VDD33.
 
 TSEN Measurement
 ------------------
@@ -241,7 +235,11 @@ ADC can measure the voltage of internal or external diode. As the voltage differ
 
 The measurement principle of TSEN is the curve fitted by the voltage difference (ΔV) with the change of temperature, where ΔV is produced by measuring two different currents on a diode. No matter an external or internal diode is measured, the final output value is related to temperature and can be expressed as Δ(ADC_out)=7.753T+X. As long as we know the voltage, we know the temperature T. X indicates an offset value, which can be used as a standard value. Before actual use, X shall be determined first. The chip manufacturer will measure Δ(ADC_out) at a standard temperature, such as 25°C room temperature, before the chip leaves the factory, to obtain X. In actual use, the user can get the temperature T according to the formula T=[Δ(ADC_out)X]/7.753.
 
-When TSEN is used, it is recommended to set ADC to the 16bits mode, reduce error through multiple sampling, select 1.8 V reference voltage to improve accuracy, and set gpadc_ts_en to 1 to enable the TSEN function. If internal diode is selected, gpadc_tsext_sel=0. If external diode is selected, gpadc_tsext_sel=1. The positive input channel is selected according to actual needs, namely TSEN channel for the internal diode or the analog GPIO channel for the external diode. The negative input channel is set to GND. After finishing the above settings, set gpadc_tsvbe_low=0 to start measurement, and get the measurement result V0. Then set gpadc_tsvbe_low=1 to start measurement, and get the measurement result V1, Δ(ADC_out)=V1V0. The temperature T is calculated based on the formula T=[Δ(ADC_out)X]/7.753.
+When TSEN is used, it is recommended to set ADC to the 16bits mode, reduce error through multiple sampling, select 2.0 V reference voltage to improve accuracy, and set gpadc_ts_en to 1 to enable the TSEN function.
+
+If internal diode is selected, gpadc_tsext_sel=0. If external diode is selected, gpadc_tsext_sel=1. The positive input channel is selected according to actual needs, namely TSEN channel for the internal diode or the analog GPIO channel for the external diode. The negative input channel is set to GND.
+
+After finishing the above settings, set gpadc_tsvbe_low=0 to start measurement, and get the measurement result V0. Then set gpadc_tsvbe_low=1 to start measurement, and get the measurement result V1, Δ(ADC_out)=V1V0. The temperature T is calculated based on the formula T=[Δ(ADC_out)X]/7.753.
 
 .. only:: html
 

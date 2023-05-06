@@ -20,6 +20,13 @@ BL616/BL618 包含 2 组 I2C 控制器主机，可灵活配置 slaveAddr、subAd
 
 功能描述
 ==========
+基本架构
+-------------
+.. figure:: ../../picture/I2CFramework.svg
+   :align: center
+
+   I2C基本架构图
+
 引脚列表：
 
 .. table:: I2C引脚
@@ -308,12 +315,23 @@ DMA接收流程
 
 I2C包括如下几种中断：
 
- - I2C_TRANS_END_INT: I2C传输结束中断，当I2C完成一次传输时产生该中断；
- - I2C_TX_FIFO_READY_INT: 当 i2c_fifo_config_1 中的 tx_fifo_cnt 大于 tx_fifo_th 时，产生 TX FIFO 请求中断，当条件不满足时该中断标志会自动清除；
- - I2C_RX_FIFO_READY_INT: 当 i2c_fifo_config_1 中的 rx_fifo_cnt 大于 rx_fifo_th 时，产生 RX FIFO请求中断，当条件不满足时该中断标志会自动清除；
- - I2C_NACK_RECV_INT: 当 I2C 模块检测到NACK状态时，产生NACK中断；
- - I2C_ARB_LOST_INT: I2C 仲裁丢失中断；
- - I2C_FIFO_ERR_INT: 当 TX/RX FIFO 发生 overflow 或 underflow 时，产生 FIFO ERROR 中断。
+- I2C_TRANS_END_INT
+  * I2C传输结束中断，当I2C完成一次传输时产生该中断
+
+- I2C_TX_FIFO_READY_INT
+  * 当 i2c_fifo_config_1 中的 tx_fifo_cnt 大于 tx_fifo_th 时，产生 TX FIFO 请求中断，当条件不满足时该中断标志会自动清除
+
+- I2C_RX_FIFO_READY_INT
+  * 当 i2c_fifo_config_1 中的 rx_fifo_cnt 大于 rx_fifo_th 时，产生 RX FIFO请求中断，当条件不满足时该中断标志会自动清除
+
+- I2C_NACK_RECV_INT
+  * 当 I2C 模块检测到NACK状态时，产生NACK中断
+
+- I2C_ARB_LOST_INT
+  * I2C 仲裁丢失中断
+
+- I2C_FIFO_ERR_INT
+  * 当 TX/RX FIFO 发生 overflow 或 underflow 时，产生 FIFO ERROR 中断
 
 .. only:: html
 

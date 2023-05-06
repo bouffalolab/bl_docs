@@ -4,15 +4,15 @@ DAC
 
 Overview
 =====
-The DAC module is a 12-bit voltage output digital-to-analog converter that works with a DMA controller. The DAC has two output channels, each with a converter, and each channel can be converted independently. Can be used for audio playback, transmitter voltage modulation and other applications.
+The DAC module is a 12-bit voltage output digital-to-analog converter that works with a DMA controller. The built-in DAC module of the chip has two output channels, and each channel has an independent converter, which can perform digital-to-analog conversion independently of each other. In addition, the converter of this DAC can also be used as the analog output channel of AudioDAC. Can be used for audio playback, transmitter voltage modulation and other applications.
 
 Features
 =========
 - DAC modulation accuracy is 12-bits
-- DAC input clock can be selected as 32MHz or xclk
+- The digital-to-analog converter of the DAC can be used as the analog output channel of the Audio DAC module
+- DAC input clock can be selected as 32MHz, xclk or from AudioDAC module
 - Each channel has DMA function and supports 10 data transfer formats
-- DAC dual channels convert individually or simultaneously
-- Support two-channel playback DMA transfer mode
+- Support DAC dual-channel simultaneous conversion
 - The output pin of DAC is fixed as ChannelA is GPIO3, ChannelB is GPIO2
 - Supports internal and external input reference voltages
 
@@ -25,19 +25,24 @@ The block diagram of DAC is shown as follows.
 
    Block Diagram of DAC
 
-The DAC module includes two DAC modulation circuits and power supply circuits related to modulating analog signals. The user can select the reference voltage of the DAC through Ref_Sel to be external/internal, and Rng_Sel to select the output voltage range. The modulation data of the DAC can be directly written to the DAC modulation register (gpdac_a_data, gpdac_b_data in the register dac_cfg3) by the CPU, or transferred to the gpdac_dma_wdata register by the DMA.
+The DAC module contains two DAC analog-to-digital conversion circuits and the power circuit related to the modulated analog signal. The user can select whether the reference voltage of the DAC is external or internal through Ref_Sel, and select the output voltage range through Rng_Sel. The clock and data of the DAC digital-to-analog converter can come from its own digital control circuit (independent mode), or from the output of the AudioDAC in analog mode (combined mode).
+
+When the DAC works in independent mode, the DAC modulation registers (gpdac_a_data, gpdac_b_data in the register dac_cfg3) can be directly written by the CPU, or transferred to the gpdac_dma_wdata register by the DMA.
+
+When the DAC is in joint mode, its own FIFO, data format, clock configuration and other digital circuit configurations will be bypassed and no longer take effect, and the clock and data of the digital-to-analog converter will be taken over by the AudioDAC module.
 
 DAC channel enable
 ---------------
-Taking enabling channel A as an example, the configuration process is as follows:
+Taking channel A as an example in independent mode, the configuration process is as follows:
 
-1. Set the gpdac_en bit in register gpdac_config to 1 to enable the DAC
-2. Enable DAC A channel conversion by setting the gpdac_a_en bit in register dac_cfg1 to 1
-3. Set the gpdac_ioa_en bit in register dac_cfg1 to 1 to enable the conversion result of channel A to the GPIO port
+1. Set the corresponding gpdac_en bit in register gpdac_config to 1 to enable the DAC
+2. Write 0 to the corresponding gpdac_ana_clk_sel and gpdac_dat_cha_sel bits in register dac_cfg0 to work in standalone mode
+3. Set the corresponding gpdac_a_en bit in register dac_cfg1 to 1 to enable DAC A channel conversion
+4. Set the corresponding gpdac_ioa_en bit in the register dac_cfg1 to 1, and enable channel A conversion result to GPIO port
 
 DAC data format
 ------------------
-When using DMA to convert data, there are a total of 10 data transmission formats, which can be configured by setting the corresponding gpdac_dma_format bit value in the register gpdac_dma_config
+When using DMA to convert data, there are a total of 10 data transmission formats, which can be configured by setting the corresponding gpdac_dma_format bit value in the register gpdac_dma_config.
 The data transmission format stored in the gpdac_dma_wdata register (with a width of 32-bit), the corresponding relationship is as follows:
 
 .. table:: Data transfer format
@@ -87,27 +92,38 @@ If the internal reference voltage is selected, the configuration and output volt
 DAC conversion
 --------------
 
-CPU mode
-*********
-Use the CPU method to perform data conversion, taking the simultaneous conversion of channel A and channel B as an example, the configuration process is as follows:
+CPU mode in independent mode
+***********
+In the independent mode, the CPU is used to carry the data for conversion. Taking the simultaneous conversion of channel A and channel B as an example, the configuration process is as follows:
 
-1. Set the DAC clock: write the value of the corresponding dig_clk_src_sel bit in the register dig_clk_cfg0 to 1, that is, select xclk as the DAC clock source
-2. Set the clock frequency division factor: the user sets the value of the dig_512k_div bit corresponding to the register dig_clk_cfg0 and the gpdac_mode bit corresponding to the register gpdac_config according to the requirements
-3. Initialize the GPIO pins of the A and B channels
-4. Initialize and enable DAC channel A and channel B
-5. Write the data to be converted into the corresponding gpdac_a_data and gpdac_b_data bits in register dac_cfg3 to complete the data conversion
+1. Set the DAC clock: write 1 to the corresponding bit value of dig_clk_src_sel in the register dig_clk_cfg0, that is, select xclk as the DAC clock source
+2. Write 0 to the corresponding gpdac_ana_clk_sel, gpdac_dat_chb_sel and gpdac_dat_cha_sel bits in register dac_cfg0, the data and clock come from itself, and work in independent mode.
+3. Set the clock frequency division factor: the user sets the value of the dig_512k_div bit corresponding to the register dig_clk_cfg0 and the gpdac_mode bit corresponding to the register gpdac_config according to the needs
+4. Initialize the GPIO pins of A and B channels
+5. Initialize and enable DAC A channel and B channel
+6. Write the data to be converted into the corresponding gpdac_a_data and gpdac_b_data bits in the register dac_cfg3 to complete the data conversion
 
-DMA method
-*********
-Each DAC channel has DMA capability. Taking channel A using DMA for data conversion as an example, the configuration process is as follows:
+DMA mode in independent mode
+***********
+Each DAC channel has DMA capability. Taking channel A as an example for data conversion using DMA, the configuration process is as follows:
 
-1. Set the DAC clock: write the value of the corresponding dig_clk_src_sel bit in the register dig_clk_cfg0 to 1, that is, select xclk as the DAC clock source
-2. Set the clock frequency division factor: the user sets the value of the dig_512k_div bit corresponding to the register dig_clk_cfg0 and the gpdac_mode bit corresponding to the register gpdac_config according to the requirements
-3. Initialize the GPIO pins of the A channel
-4. Initialize and enable the DAC A channel
-5. Initialize and enable the DMA channel: set the DMA transfer data width, source address, destination address and data transfer length, etc.
-6. Enable DAC DMA mode: write 1 to the corresponding bit value of gpdac_dma_tx_en in register gpdac_dma_config
-7. Write the data to be converted into the register gpdac_dma_wdata, and act on the A or B channel according to different data formats to complete the data conversion
+1. Set the DAC clock: write 1 to the corresponding bit value of dig_clk_src_sel in the register dig_clk_cfg0, that is, select xclk as the DAC clock source
+2. Write 0 to the corresponding gpdac_ana_clk_sel and gpdac_dat_cha_sel bits in the register dac_cfg0, the data and clock come from itself, and work in independent mode.
+3. Set the clock frequency division factor: the user sets the value of the dig_512k_div bit corresponding to the register dig_clk_cfg0 and the gpdac_mode bit corresponding to the register gpdac_config according to the needs
+4. Initialize the GPIO pin of channel A as analog multiplexing
+5. Initialize and enable DAC A channel
+6. Initialize and enable the DMA channel: set the DMA transfer data width, source address, destination address and data transfer length, etc.
+7. Enable DAC DMA mode: write 1 to the corresponding gpdac_dma_tx_en bit value in register gpdac_dma_config
+8. Write the data to be converted into the register gpdac_dma_wdata, and act on the A or B channel according to different data formats to complete the data conversion
+
+Combined mode as analog output of AudioDAC
+***********
+When the DAC digital-to-analog converter is used as the analog signal output of AudioDAC, it can directly output audio analog signal to play music. Taking dual-channel differential mode as an example, the configuration process is as follows:
+
+1. Write 1 to the corresponding gpdac_ana_clk_sel, gpdac_dat_chb_sel and gpdac_dat_cha_sel bits in the register dac_cfg0, the data and clock come from AudioDAC, and work in the combined mode.
+2. Initialize and enable the A and B channels, and configure the corresponding pins as analog alternate functions.
+3. Initialize the AudioDAC module and set it to GPDAC output mode, see AudioDAC chapter for details.
+4. Start AudioDAC, start playing audio data, and DAC will start converting synchronously.
 
 .. only:: html
 

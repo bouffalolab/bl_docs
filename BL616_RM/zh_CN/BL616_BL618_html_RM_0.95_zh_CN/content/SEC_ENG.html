@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>25. SEC ENG &mdash; BL616/BL618 参考手册  文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="26. 版本信息" href="version.html" />
+    <link rel="prev" title="24. LowPower" href="LowPower.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL616/BL618 参考手册
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. 系统和存储器概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. 复位和时钟</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPIO.html">4. GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">5. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">6. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">7. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">8. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">9. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">10. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">11. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">12. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">13. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2S.html">14. I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AudioDAC.html">15. AudioDAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AudioADC.html">16. AudioADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EMAC.html">17. EMAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USB.html">18. USB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cam.html">19. CAM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MJPEG.html">20. MJPEG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBI.html">21. DBI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SDH.html">22. SDH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SDIO.html">23. SDIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LowPower.html">24. LowPower</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">25. SEC ENG</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">25.1. 简介</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">25.2. 主要特征</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">25.3. 功能描述</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#aes">25.3.1. AES 加速器</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id4">25.3.1.1. 密钥</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">25.3.1.2. 链接模式</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">25.3.1.3. 明文、密文</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">25.3.1.4. 初始化向量</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">25.3.1.5. 加解密配置流程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#sha">25.3.2. SHA 加速器</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id9">25.3.2.1. SHA 模式</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id10">25.3.2.2. 明文、密文</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id11">25.3.2.3. 配置流程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#trng">25.3.3. TRNG</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id12">25.3.3.1. 配置流程</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">26. 版本信息</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL616/BL618 参考手册</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">25. </span>SEC ENG</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="sec-eng">
+<h1><span class="section-number">25. </span>SEC ENG<a class="headerlink" href="#sec-eng" title="永久链接至标题"></a></h1>
+<section id="id1">
+<h2><span class="section-number">25.1. </span>简介<a class="headerlink" href="#id1" title="永久链接至标题"></a></h2>
+<p>SEC ENG 内置了多种运算模块，包括 AES、SHA、CRC、GMAC、PKA、TRNG。</p>
+</section>
+<section id="id2">
+<h2><span class="section-number">25.2. </span>主要特征<a class="headerlink" href="#id2" title="永久链接至标题"></a></h2>
+<ul>
+<li><p>AES</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>支持 128 位、192位和256位密钥长度</p></li>
+<li><p>支持多种链接模式的加密和解密（ECB/CBC/CTR/XTS）</p></li>
+<li><p>独有的 AES LINK 功能</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>SHA</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>支持SHA1/SHA224/SHA256/SHA384/SHA512</p></li>
+<li><p>独有的 SHA LINK 功能</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>支持MD5，CRC-16，CRC-32</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2><span class="section-number">25.3. </span>功能描述<a class="headerlink" href="#id3" title="永久链接至标题"></a></h2>
+<section id="aes">
+<h3><span class="section-number">25.3.1. </span>AES 加速器<a class="headerlink" href="#aes" title="永久链接至标题"></a></h3>
+<section id="id4">
+<h4><span class="section-number">25.3.1.1. </span>密钥<a class="headerlink" href="#id4" title="永久链接至标题"></a></h4>
+<p>通过配置寄存器se_aes_0_ctrl中的se_aes_0_mode和se_aes_0_dec_en 可以选择加密模式和解密模式时需要的密钥长度。</p>
+<figure class="align-center" id="id13">
+<img alt="../_images/SecEngAesMode.svg" src="../_images/SecEngAesMode.svg" /><figcaption>
+<p><span class="caption-number">图 25.1 </span><span class="caption-text">AES运算模式图</span><a class="headerlink" href="#id13" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>通过配置寄存器 se_aes_0_ctrl 中的 aes_0_hw_key_en 选择是否开启硬件密钥，如果使用的是软件密钥，则还需要配置寄存器se_aes_0_key_0~se_aes_0_key_7用于存放密钥，每个寄存器存放4个字节的密钥。</p>
+</section>
+<section id="id5">
+<h4><span class="section-number">25.3.1.2. </span>链接模式<a class="headerlink" href="#id5" title="永久链接至标题"></a></h4>
+<p>通过配置寄存器se_aes_0_ctrl中的se_aes_0_block_mode可以选择不同的链接模式，目前支持ECB、CBC、CTR、XTS模式。</p>
+</section>
+<section id="id6">
+<h4><span class="section-number">25.3.1.3. </span>明文、密文<a class="headerlink" href="#id6" title="永久链接至标题"></a></h4>
+<ul class="simple">
+<li><p>明文或者密文需要是 16 的倍数</p></li>
+<li><p>寄存器se_aes_0_msa 存放加密时输入的明文地址或者解密时输入的密文地址</p></li>
+<li><p>寄存器se_aes_0_mda 存放加密时输出的密文地址或者解密时输出的明文地址</p></li>
+<li><p>寄存器se_aes_0_ctrl中的 se_aes_0_msg_len 用来设定密文或者明文长度（以 16字节为单位）</p></li>
+</ul>
+</section>
+<section id="id7">
+<h4><span class="section-number">25.3.1.4. </span>初始化向量<a class="headerlink" href="#id7" title="永久链接至标题"></a></h4>
+<p>寄存器se_aes_0_iv_0~se_aes_0_iv_3存放初始化向量 IV，通过配置 se_aes_0_ctrl 中的 aes_0_iv_sel 选择是否使用新的 iv，第一次配置 iv 时需要清0，后续一直使用此 iv 或者自动更新 iv 则需要置1。</p>
+</section>
+<section id="id8">
+<h4><span class="section-number">25.3.1.5. </span>加解密配置流程<a class="headerlink" href="#id8" title="永久链接至标题"></a></h4>
+<ul class="simple">
+<li><p>配置寄存器se_aes_0_ctrl中的 se_aes_0_en 使能 AES</p></li>
+<li><p>配置寄存器se_aes_0_endian，其中包括se_aes_0_dout_endian、se_aes_0_din_endian、se_aes_0_key_endian、se_aes_0_iv_endian、se_aes_0_twk_endian，若值为0表示little-endian，值为1表示big-endian</p></li>
+<li><p>配置寄存器se_aes_0_ctrl中的se_aes_0_block_mode 选择链接模式</p></li>
+<li><p>配置寄存器se_aes_0_ctrl中的se_aes_0_mode 选择密钥长度</p></li>
+<li><p>使用软件密钥则配置寄存器se_aes_0_key_0~se_aes_0_key_7 存放密钥，使用硬件密钥则置位寄存器 se_aes_0_ctrl 中的 aes_0_hw_key_en</p></li>
+<li><p>配置寄存器se_aes_0_iv_0~se_aes_0_iv_3设置IV，MSB时填写顺序为se_aes_0_iv_0~se_aes_0_iv_3，LSB时填写顺序为se_aes_0_iv_3~se_aes_0_iv_0</p></li>
+<li><p>配置寄存器se_aes_0_ctrl中的se_aes_0_dec_en 选择加密或者解密模式</p></li>
+<li><p>配置寄存器se_aes_0_msa设置待处理数据的源地址</p></li>
+<li><p>配置寄存器se_aes_0_mda设置处理结果存放的目的地址</p></li>
+<li><p>配置寄存器se_aes_0_ctrl中的se_aes_0_msg_len设置待处理数据的长度，以16字节为单位</p></li>
+<li><p>配置寄存器se_aes_0_ctrl中的se_aes_0_trig_1t触发AES运行</p></li>
+</ul>
+<p>结果会输出到 se_aes_0_mda 指定的目标地址。</p>
+</section>
+</section>
+<section id="sha">
+<h3><span class="section-number">25.3.2. </span>SHA 加速器<a class="headerlink" href="#sha" title="永久链接至标题"></a></h3>
+<section id="id9">
+<h4><span class="section-number">25.3.2.1. </span>SHA 模式<a class="headerlink" href="#id9" title="永久链接至标题"></a></h4>
+<ul class="simple">
+<li><p>寄存器se_sha_0_ctrl中的se_sha_0_mode用于选择SHA的具体模式: 0:SHA-256 1:SHA-224 2:SHA-1 3:SHA-1 4:SHA-512 5:SHA-384 6:SHA-512/224 7:SHA-512/256</p></li>
+<li><p>寄存器se_sha_0_ctrl中的se_sha_0_mode_ext由于选择扩展模式，如果不使用扩展模式应设为0：0:SHA 1:MD5 2:CRC-16 3:CRC-32</p></li>
+</ul>
+</section>
+<section id="id10">
+<h4><span class="section-number">25.3.2.2. </span>明文、密文<a class="headerlink" href="#id10" title="永久链接至标题"></a></h4>
+<ul class="simple">
+<li><p>寄存器se_sha_0_msa存放明文地址。</p></li>
+<li><p>寄存器se_sha_0_hash_l_0~se_sha_0_hash_l_7存放密文。</p></li>
+</ul>
+</section>
+<section id="id11">
+<h4><span class="section-number">25.3.2.3. </span>配置流程<a class="headerlink" href="#id11" title="永久链接至标题"></a></h4>
+<blockquote>
+<div><ul class="simple">
+<li><p>配置寄存器se_sha_0_ctrl中的se_sha_0_mode选择SHA的具体模式</p></li>
+<li><p>配置寄存器se_sha_0_ctrl中的se_sha_0_en使能SHA</p></li>
+<li><p>配置寄存器se_sha_0_ctrl中的se_sha_0_hash_sel，0表示开始新的HASH计算，1表示沿用上一次的结果进行HASH计算</p></li>
+<li><p>配置寄存器se_sha_0_msa 设置输入数据的地址</p></li>
+<li><p>配置寄存器se_sha_0_ctrl中的se_sha_0_msg_len待处理数据的长度，SHA-1、SHA-224、SHA-256以512-bit为单位，SHA-512、SHA-384、SHA-512/224、SHA-512/256以1024-bit为单位</p></li>
+<li><p>配置寄存器se_sha_0_ctrl中的se_sha_0_trig_1t触发SHA运行</p></li>
+<li><p>结果输出存储在se_sha_0_hash_l_0~se_sha_0_hash_l_7中（默认MSB），MSB:se_sha_0_hash_l_0~se_sha_0_hash_l_7，LSB:se_sha_0_hash_l_7~se_sha_0_hash_l_0</p></li>
+</ul>
+</div></blockquote>
+</section>
+</section>
+<section id="trng">
+<h3><span class="section-number">25.3.3. </span>TRNG<a class="headerlink" href="#trng" title="永久链接至标题"></a></h3>
+<p>SEC ENG 内置一个TRNG(真随机数发生器)，其生成的随机数可作为加密等操作的基础。</p>
+<ul class="simple">
+<li><p>真随机数：真正的随机数是使用物理现象产生的：比如掷钱币、骰子、转轮、使用电子元件的噪音、核裂变等等，这样的随机数发生器叫做物理性随机数发生器，它们的缺点是技术要求比较高。</p></li>
+<li><p>伪随机数：真正意义上的随机数（或者随机事件）在某次产生过程中是按照实验过程中表现的分布概率随机产生的，其结果是不可预测的，是不可见的。而计算机中的随机函数是按照一定算法模拟产生的，其结果是确定的，是可见的。我们可以认为这个可预见的结果其出现的概率是100%。所以用计算机随机函数所产生的“随机数”并不随机，是伪随机数。</p></li>
+</ul>
+<section id="id12">
+<h4><span class="section-number">25.3.3.1. </span>配置流程<a class="headerlink" href="#id12" title="永久链接至标题"></a></h4>
+<ul class="simple">
+<li><p>配置寄存器se_trng_0_ctrl_0中的se_trng_0_en使能TRNG</p></li>
+<li><p>配置寄存器se_trng_0_ctrl_0中的se_trng_0_trig_1t触发TRNG运行</p></li>
+<li><p>结果输出存储在se_trng_0_dout_0~se_trng_0_dout_7中</p></li>
+</ul>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="LowPower.html" class="btn btn-neutral float-left" title="24. LowPower" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="version.html" class="btn btn-neutral float-right" title="26. 版本信息" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2022.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

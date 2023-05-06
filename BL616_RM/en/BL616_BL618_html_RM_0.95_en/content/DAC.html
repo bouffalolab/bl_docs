@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>6. DAC &mdash; BL616/BL618 Reference Manual  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="7. DMA" href="DMA.html" />
+    <link rel="prev" title="5. ADC" href="ADC.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL616/BL618 Reference Manual
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. System and Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. Reset and Clock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPIO.html">4. GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">5. ADC</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">6. DAC</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">6.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#features">6.2. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#functional-description">6.3. Functional Description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dac-channel-enable">6.3.1. DAC channel enable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dac-data-format">6.3.2. DAC data format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dac-output-voltage">6.3.3. DAC output voltage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dac-conversion">6.3.4. DAC conversion</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cpu-mode-in-independent-mode">6.3.4.1. CPU mode in independent mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dma-mode-in-independent-mode">6.3.4.2. DMA mode in independent mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#combined-mode-as-analog-output-of-audiodac">6.3.4.3. Combined mode as analog output of AudioDAC</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#register-description">6.4. Register description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#gpdac-config">6.4.1. gpdac_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpdac-dma-config">6.4.2. gpdac_dma_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpdac-dma-wdata">6.4.3. gpdac_dma_wdata</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">7. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">8. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">9. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">10. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">11. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">12. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">13. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2S.html">14. I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AudioDAC.html">15. AudioDAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AudioADC.html">16. AudioADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EMAC.html">17. Emac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USB.html">18. USB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cam.html">19. CAM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MJPEG.html">20. MJPEG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBI.html">21. DBI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SDH.html">22. SDH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SDIO.html">23. SDIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LowPower.html">24. LowPower</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SEC_ENG.html">25. SEC ENG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">26. Revision history</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL616/BL618 Reference Manual</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">6. </span>DAC</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="dac">
+<h1><span class="section-number">6. </span>DAC<a class="headerlink" href="#dac" title="Permalink to this headline"></a></h1>
+<section id="overview">
+<h2><span class="section-number">6.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
+<p>The DAC module is a 12-bit voltage output digital-to-analog converter that works with a DMA controller. The built-in DAC module of the chip has two output channels, and each channel has an independent converter, which can perform digital-to-analog conversion independently of each other. In addition, the converter of this DAC can also be used as the analog output channel of AudioDAC. Can be used for audio playback, transmitter voltage modulation and other applications.</p>
+</section>
+<section id="features">
+<h2><span class="section-number">6.2. </span>Features<a class="headerlink" href="#features" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p>DAC modulation accuracy is 12-bits</p></li>
+<li><p>The digital-to-analog converter of the DAC can be used as the analog output channel of the Audio DAC module</p></li>
+<li><p>DAC input clock can be selected as 32MHz, xclk or from AudioDAC module</p></li>
+<li><p>Each channel has DMA function and supports 10 data transfer formats</p></li>
+<li><p>Support DAC dual-channel simultaneous conversion</p></li>
+<li><p>The output pin of DAC is fixed as ChannelA is GPIO3, ChannelB is GPIO2</p></li>
+<li><p>Supports internal and external input reference voltages</p></li>
+</ul>
+</section>
+<section id="functional-description">
+<h2><span class="section-number">6.3. </span>Functional Description<a class="headerlink" href="#functional-description" title="Permalink to this headline"></a></h2>
+<p>The block diagram of DAC is shown as follows.</p>
+<figure class="align-center" id="id1">
+<img alt="../_images/gpdac.svg" src="../_images/gpdac.svg" /><figcaption>
+<p><span class="caption-number">Fig. 6.1 </span><span class="caption-text">Block Diagram of DAC</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The DAC module contains two DAC analog-to-digital conversion circuits and the power circuit related to the modulated analog signal. The user can select whether the reference voltage of the DAC is external or internal through Ref_Sel, and select the output voltage range through Rng_Sel. The clock and data of the DAC digital-to-analog converter can come from its own digital control circuit (independent mode), or from the output of the AudioDAC in analog mode (combined mode).</p>
+<p>When the DAC works in independent mode, the DAC modulation registers (gpdac_a_data, gpdac_b_data in the register dac_cfg3) can be directly written by the CPU, or transferred to the gpdac_dma_wdata register by the DMA.</p>
+<p>When the DAC is in joint mode, its own FIFO, data format, clock configuration and other digital circuit configurations will be bypassed and no longer take effect, and the clock and data of the digital-to-analog converter will be taken over by the AudioDAC module.</p>
+<section id="dac-channel-enable">
+<h3><span class="section-number">6.3.1. </span>DAC channel enable<a class="headerlink" href="#dac-channel-enable" title="Permalink to this headline"></a></h3>
+<p>Taking channel A as an example in independent mode, the configuration process is as follows:</p>
+<ol class="arabic simple">
+<li><p>Set the corresponding gpdac_en bit in register gpdac_config to 1 to enable the DAC</p></li>
+<li><p>Write 0 to the corresponding gpdac_ana_clk_sel and gpdac_dat_cha_sel bits in register dac_cfg0 to work in standalone mode</p></li>
+<li><p>Set the corresponding gpdac_a_en bit in register dac_cfg1 to 1 to enable DAC A channel conversion</p></li>
+<li><p>Set the corresponding gpdac_ioa_en bit in the register dac_cfg1 to 1, and enable channel A conversion result to GPIO port</p></li>
+</ol>
+</section>
+<section id="dac-data-format">
+<h3><span class="section-number">6.3.2. </span>DAC data format<a class="headerlink" href="#dac-data-format" title="Permalink to this headline"></a></h3>
+<p>When using DMA to convert data, there are a total of 10 data transmission formats, which can be configured by setting the corresponding gpdac_dma_format bit value in the register gpdac_dma_config.
+The data transmission format stored in the gpdac_dma_wdata register (with a width of 32-bit), the corresponding relationship is as follows:</p>
+<table class="colwidths-given docutils align-center" id="id2" style="width: 100%">
+<caption><span class="caption-number">Table 6.1 </span><span class="caption-text">Data transfer format</span><a class="headerlink" href="#id2" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 40%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Value of gpdac_dma_format</p></th>
+<th class="head"><p>gpdac_dma_wdata(Corresponding to the data transmission format of A and B channels)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>[11:0]: {A0}, {A1}, {A2}···</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>[27:16][11:0]: {B0,A0}, {B1,A1}, {B2,A2}···</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>[27:16][11:0]: {A1,A0}, {A3,A2}, {A5,A4}···</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>[15:4]: {A0}, {A1}, {A2}···</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>[31:20][15:4]: {B0,A0}, {B1,A1}, {B2,A2}···</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>[31:20][15:4]: {A1,A0}, {A3,A2}, {A5,A4}···</p></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>[31:24][23:16][15:8][7:0]: {A3,A2,A1,A0}, {A7,A6,A5,A4}···</p></td>
+</tr>
+<tr class="row-odd"><td><p>9</p></td>
+<td><p>[31:24][23:16][15:8][7:0]: {B1,B0,A1,A0}, {B3,B2,A3,A2}···</p></td>
+</tr>
+<tr class="row-even"><td><p>10</p></td>
+<td><p>[31:24][23:16][15:8][7:0]: {B1,A1,B0,A0}, {B3,A3,B2,A2}···</p></td>
+</tr>
+<tr class="row-odd"><td><p>11</p></td>
+<td><p>[15:8][7:0]: {B0,A0}, {B1,A1}, {B2,A2}···</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dac-output-voltage">
+<h3><span class="section-number">6.3.3. </span>DAC output voltage<a class="headerlink" href="#dac-output-voltage" title="Permalink to this headline"></a></h3>
+<p>The user can choose to use the external reference voltage or the internal reference voltage by setting the corresponding gpdac_ref_sel bit value in the dac_cfg0 register.</p>
+<p>If the internal reference voltage is selected, the configuration and output voltage are shown in the table below. If external reference voltage is selected, connect the external voltage to fixed GPIO28.</p>
+<table class="colwidths-given docutils align-center" id="id3" style="width: 100%">
+<caption><span class="caption-number">Table 6.2 </span><span class="caption-text">Internal reference voltage output voltage</span><a class="headerlink" href="#id3" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 30%" />
+<col style="width: 40%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>gpdac_a_rng</p></th>
+<th class="head"><p>gpdac_ref_sel</p></th>
+<th class="head"><p>Output range (V)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>00</p></td>
+<td><p>0</p></td>
+<td><p>0.2-1</p></td>
+</tr>
+<tr class="row-odd"><td><p>01/10</p></td>
+<td><p>0</p></td>
+<td><p>0.225-1.425</p></td>
+</tr>
+<tr class="row-even"><td><p>11</p></td>
+<td><p>0</p></td>
+<td><p>0.2-1.8</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dac-conversion">
+<h3><span class="section-number">6.3.4. </span>DAC conversion<a class="headerlink" href="#dac-conversion" title="Permalink to this headline"></a></h3>
+<section id="cpu-mode-in-independent-mode">
+<h4><span class="section-number">6.3.4.1. </span>CPU mode in independent mode<a class="headerlink" href="#cpu-mode-in-independent-mode" title="Permalink to this headline"></a></h4>
+<p>In the independent mode, the CPU is used to carry the data for conversion. Taking the simultaneous conversion of channel A and channel B as an example, the configuration process is as follows:</p>
+<ol class="arabic simple">
+<li><p>Set the DAC clock: write 1 to the corresponding bit value of dig_clk_src_sel in the register dig_clk_cfg0, that is, select xclk as the DAC clock source</p></li>
+<li><p>Write 0 to the corresponding gpdac_ana_clk_sel, gpdac_dat_chb_sel and gpdac_dat_cha_sel bits in register dac_cfg0, the data and clock come from itself, and work in independent mode.</p></li>
+<li><p>Set the clock frequency division factor: the user sets the value of the dig_512k_div bit corresponding to the register dig_clk_cfg0 and the gpdac_mode bit corresponding to the register gpdac_config according to the needs</p></li>
+<li><p>Initialize the GPIO pins of A and B channels</p></li>
+<li><p>Initialize and enable DAC A channel and B channel</p></li>
+<li><p>Write the data to be converted into the corresponding gpdac_a_data and gpdac_b_data bits in the register dac_cfg3 to complete the data conversion</p></li>
+</ol>
+</section>
+<section id="dma-mode-in-independent-mode">
+<h4><span class="section-number">6.3.4.2. </span>DMA mode in independent mode<a class="headerlink" href="#dma-mode-in-independent-mode" title="Permalink to this headline"></a></h4>
+<p>Each DAC channel has DMA capability. Taking channel A as an example for data conversion using DMA, the configuration process is as follows:</p>
+<ol class="arabic simple">
+<li><p>Set the DAC clock: write 1 to the corresponding bit value of dig_clk_src_sel in the register dig_clk_cfg0, that is, select xclk as the DAC clock source</p></li>
+<li><p>Write 0 to the corresponding gpdac_ana_clk_sel and gpdac_dat_cha_sel bits in the register dac_cfg0, the data and clock come from itself, and work in independent mode.</p></li>
+<li><p>Set the clock frequency division factor: the user sets the value of the dig_512k_div bit corresponding to the register dig_clk_cfg0 and the gpdac_mode bit corresponding to the register gpdac_config according to the needs</p></li>
+<li><p>Initialize the GPIO pin of channel A as analog multiplexing</p></li>
+<li><p>Initialize and enable DAC A channel</p></li>
+<li><p>Initialize and enable the DMA channel: set the DMA transfer data width, source address, destination address and data transfer length, etc.</p></li>
+<li><p>Enable DAC DMA mode: write 1 to the corresponding gpdac_dma_tx_en bit value in register gpdac_dma_config</p></li>
+<li><p>Write the data to be converted into the register gpdac_dma_wdata, and act on the A or B channel according to different data formats to complete the data conversion</p></li>
+</ol>
+</section>
+<section id="combined-mode-as-analog-output-of-audiodac">
+<h4><span class="section-number">6.3.4.3. </span>Combined mode as analog output of AudioDAC<a class="headerlink" href="#combined-mode-as-analog-output-of-audiodac" title="Permalink to this headline"></a></h4>
+<p>When the DAC digital-to-analog converter is used as the analog signal output of AudioDAC, it can directly output audio analog signal to play music. Taking dual-channel differential mode as an example, the configuration process is as follows:</p>
+<ol class="arabic simple">
+<li><p>Write 1 to the corresponding gpdac_ana_clk_sel, gpdac_dat_chb_sel and gpdac_dat_cha_sel bits in the register dac_cfg0, the data and clock come from AudioDAC, and work in the combined mode.</p></li>
+<li><p>Initialize and enable the A and B channels, and configure the corresponding pins as analog alternate functions.</p></li>
+<li><p>Initialize the AudioDAC module and set it to GPDAC output mode, see AudioDAC chapter for details.</p></li>
+<li><p>Start AudioDAC, start playing audio data, and DAC will start converting synchronously.</p></li>
+</ol>
+</section>
+</section>
+</section>
+<section id="register-description">
+<h2><span class="section-number">6.4. </span>Register description<a class="headerlink" href="#register-description" title="Permalink to this headline"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 62%" />
+<col style="width: 38%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Name</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#gpdac-config">gpdac_config</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#gpdac-dma-config">gpdac_dma_config</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#gpdac-dma-wdata">gpdac_dma_wdata</a></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<section id="gpdac-config">
+<h3><span class="section-number">6.4.1. </span>gpdac_config<a class="headerlink" href="#gpdac-config" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x20002040</p>
+<figure class="align-center">
+<img alt="../_images/gpip_gpdac_config.svg" src="../_images/gpip_gpdac_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:24</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="7"><p>23:20</p></td>
+<td rowspan="7"><p>gpdac_ch_b_sel</p></td>
+<td rowspan="7"><p>r/w</p></td>
+<td rowspan="7"><p>0</p></td>
+<td rowspan="7"><p>Channel B Source Select</p>
+<p>0: Reg</p>
+<p>1: DMA</p>
+<p>2: DMA + Filter</p>
+<p>3: Sin Gen</p>
+<p>4: A (The same as channel A)</p>
+<p>5: ~A (Inverse of channel A)</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="5"><p>19:16</p></td>
+<td rowspan="5"><p>gpdac_ch_a_sel</p></td>
+<td rowspan="5"><p>r/w</p></td>
+<td rowspan="5"><p>0</p></td>
+<td rowspan="5"><p>Channel A Source Select</p>
+<p>0: Reg</p>
+<p>1: DMA</p>
+<p>2: DMA + Filter</p>
+<p>3: Sin Gen</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>15:11</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>10:8</p></td>
+<td><p>gpdac_mode</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>0:32k, 1:16k, 3:8k,  4:512k(for DMA only)</p></td>
+</tr>
+<tr class="row-odd"><td><p>7:1</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>gpdac_en</p></td>
+<td><p>r/w</p></td>
+<td><p>0</p></td>
+<td><p>GPDAC enable</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="gpdac-dma-config">
+<h3><span class="section-number">6.4.2. </span>gpdac_dma_config<a class="headerlink" href="#gpdac-dma-config" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x20002044</p>
+<figure class="align-center">
+<img alt="../_images/gpip_gpdac_dma_config.svg" src="../_images/gpip_gpdac_dma_config.svg" /></figure>
+</section>
+<section id="gpdac-dma-wdata">
+<h3><span class="section-number">6.4.3. </span>gpdac_dma_wdata<a class="headerlink" href="#gpdac-dma-wdata" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x20002048</p>
+<figure class="align-center">
+<img alt="../_images/gpip_gpdac_dma_wdata.svg" src="../_images/gpip_gpdac_dma_wdata.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>gpdac_dma_wdata</p></td>
+<td><p>w</p></td>
+<td><p>x</p></td>
+<td><p>GPDAC DMA TX data</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ADC.html" class="btn btn-neutral float-left" title="5. ADC" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="DMA.html" class="btn btn-neutral float-right" title="7. DMA" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

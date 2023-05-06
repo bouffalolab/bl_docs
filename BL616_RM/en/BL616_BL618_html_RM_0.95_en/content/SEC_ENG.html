@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>25. SEC ENG &mdash; BL616/BL618 Reference Manual  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="26. Revision history" href="version.html" />
+    <link rel="prev" title="24. LowPower" href="LowPower.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL616/BL618 Reference Manual
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. System and Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. Reset and Clock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPIO.html">4. GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">5. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">6. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">7. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">8. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">9. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">10. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">11. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">12. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">13. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2S.html">14. I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AudioDAC.html">15. AudioDAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AudioADC.html">16. AudioADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EMAC.html">17. Emac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USB.html">18. USB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cam.html">19. CAM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MJPEG.html">20. MJPEG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBI.html">21. DBI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SDH.html">22. SDH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SDIO.html">23. SDIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LowPower.html">24. LowPower</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">25. SEC ENG</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">25.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#features">25.2. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#functional-description">25.3. Functional Description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#aes-accelerator">25.3.1. AES Accelerator</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#key">25.3.1.1. key</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#link-mode">25.3.1.2. link mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#plaintext-ciphertext">25.3.1.3. Plaintext, ciphertext</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#initialization-vector">25.3.1.4. initialization vector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#encryption-and-decryption-configuration-process">25.3.1.5. Encryption and decryption configuration process</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#sha-accelerator">25.3.2. SHA Accelerator</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sha-mode">25.3.2.1. SHA mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#plaintext-and-ciphertext">25.3.2.2. Plaintext and ciphertext</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#operation-flow">25.3.2.3. Operation flow</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#random-number-generator-rng">25.3.3. Random Number Generator (RNG)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#usage-process">25.3.3.1. Usage process</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">26. Revision history</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL616/BL618 Reference Manual</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">25. </span>SEC ENG</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="sec-eng">
+<h1><span class="section-number">25. </span>SEC ENG<a class="headerlink" href="#sec-eng" title="Permalink to this headline"></a></h1>
+<section id="overview">
+<h2><span class="section-number">25.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
+<p>SEC ENG has a variety of built-in computing modules, including AES, SHA, CRC, GMAC, PKA, and TRNG.</p>
+</section>
+<section id="features">
+<h2><span class="section-number">25.2. </span>Features<a class="headerlink" href="#features" title="Permalink to this headline"></a></h2>
+<ul>
+<li><p>AES</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Supports 128-bit, 192-bit and 256-bit key lengths</p></li>
+<li><p>Support encryption and decryption of multiple link modes (ECB/CBC/CTR/XTS)</p></li>
+<li><p>Exclusive AES LINK function</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>SHA</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Support SHA1/SHA224/SHA256/SHA384/SHA512</p></li>
+<li><p>Exclusive SHA LINK function</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Support MD5, CRC-16, CRC-32</p></li>
+</ul>
+</section>
+<section id="functional-description">
+<h2><span class="section-number">25.3. </span>Functional Description<a class="headerlink" href="#functional-description" title="Permalink to this headline"></a></h2>
+<section id="aes-accelerator">
+<h3><span class="section-number">25.3.1. </span>AES Accelerator<a class="headerlink" href="#aes-accelerator" title="Permalink to this headline"></a></h3>
+<section id="key">
+<h4><span class="section-number">25.3.1.1. </span>key<a class="headerlink" href="#key" title="Permalink to this headline"></a></h4>
+<p>The key length required for encryption mode and decryption mode can be selected by configuring se_aes_0_mode and se_aes_0_dec_en in the register se_aes_0_ctrl.</p>
+<figure class="align-center" id="id1">
+<img alt="../_images/SecEngAesMode.svg" src="../_images/SecEngAesMode.svg" /><figcaption>
+<p><span class="caption-number">Fig. 25.1 </span><span class="caption-text">AES operation mode diagram</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Select whether to enable the hardware key through aes_0_hw_key_en in the register se_aes_0_ctrl. If you use a software key, you also need to configure the registers se_aes_0_key_0~se_aes_0_key_7 to store the key, and each register stores a 4-byte key.</p>
+</section>
+<section id="link-mode">
+<h4><span class="section-number">25.3.1.2. </span>link mode<a class="headerlink" href="#link-mode" title="Permalink to this headline"></a></h4>
+<p>Different link modes can be selected through se_aes_0_block_mode in the register se_aes_0_ctrl. Currently, ECB, CBC, CTR, and XTS modes are supported.</p>
+</section>
+<section id="plaintext-ciphertext">
+<h4><span class="section-number">25.3.1.3. </span>Plaintext, ciphertext<a class="headerlink" href="#plaintext-ciphertext" title="Permalink to this headline"></a></h4>
+<ul class="simple">
+<li><p>Plaintext or ciphertext needs to be a multiple of 16</p></li>
+<li><p>The register se_aes_0_msa stores the plaintext address entered during encryption or the ciphertext address entered during decryption</p></li>
+<li><p>The register se_aes_0_mda stores the ciphertext address output during encryption or the plaintext address output during decryption</p></li>
+<li><p>se_aes_0_msg_len in the register se_aes_0_ctrl is used to set the length of ciphertext or plaintext (in units of 16 bytes)</p></li>
+</ul>
+</section>
+<section id="initialization-vector">
+<h4><span class="section-number">25.3.1.4. </span>initialization vector<a class="headerlink" href="#initialization-vector" title="Permalink to this headline"></a></h4>
+<p>The registers se_aes_0_iv_0~se_aes_0_iv_3 store the initialization vector IV. You can choose whether to use a new iv by configuring aes_0_iv_sel in se_aes_0_ctrl. You need to clear 0 when configuring iv for the first time, and you need to set 1 if you continue to use this iv or automatically update iv.</p>
+</section>
+<section id="encryption-and-decryption-configuration-process">
+<h4><span class="section-number">25.3.1.5. </span>Encryption and decryption configuration process<a class="headerlink" href="#encryption-and-decryption-configuration-process" title="Permalink to this headline"></a></h4>
+<ul class="simple">
+<li><p>Enable AES with se_aes_0_en in the configuration register se_aes_0_ctrl</p></li>
+<li><p>Configuration register se_aes_0_endian, including se_aes_0_dout_endian, se_aes_0_din_endian, se_aes_0_key_endian, se_aes_0_iv_endian, se_aes_0_twk_endian, if the value is 0, it means little-endian, if the value is 1, it means big-endian</p></li>
+<li><p>se_aes_0_block_mode in the configuration register se_aes_0_ctrl selects the link mode</p></li>
+<li><p>se_aes_0_mode in the configuration register se_aes_0_ctrl to select the key length</p></li>
+<li><p>To use software key, configure registers se_aes_0_key_0~se_aes_0_key_7 to store the key. To use a hardware key, set aes_0_hw_key_en in register se_aes_0_ctrl</p></li>
+<li><p>Configure registers se_aes_0_iv_0~se_aes_0_iv_3 to set IV, the filling order for MSB is se_aes_0_iv_0~se_aes_0_iv_3, and the filling order for LSB is se_aes_0_iv_3~se_aes_0_iv_0</p></li>
+<li><p>se_aes_0_dec_en in the configuration register se_aes_0_ctrl selects the encryption or decryption mode</p></li>
+<li><p>The configuration register se_aes_0_msa sets the source address of the data to be processed</p></li>
+<li><p>The configuration register se_aes_0_mda sets the destination address where the processing result is stored</p></li>
+<li><p>se_aes_0_msg_len in the configuration register se_aes_0_ctrl sets the length of the data to be processed, in units of 16 bytes</p></li>
+<li><p>se_aes_0_trig_1t in the configuration register se_aes_0_ctrl triggers AES to run</p></li>
+</ul>
+<p>The result is output to the destination address specified by se_aes_0_mda.</p>
+</section>
+</section>
+<section id="sha-accelerator">
+<h3><span class="section-number">25.3.2. </span>SHA Accelerator<a class="headerlink" href="#sha-accelerator" title="Permalink to this headline"></a></h3>
+<section id="sha-mode">
+<h4><span class="section-number">25.3.2.1. </span>SHA mode<a class="headerlink" href="#sha-mode" title="Permalink to this headline"></a></h4>
+<p>The se_sha_0_mode in the register se_sha_0_ctrl:   0:SHA-256 1:SHA-224 2:SHA-1 3:SHA-1 4:SHA-512 5:SHA-384 6:SHA-512/224 7:SHA-512/256</p>
+<p>The se_sha_0_mode_ext in the register se_sha_0_ctrl: hash mode extention; 0:SHA 1:MD5 2:CRC-16 3:CRC-32</p>
+</section>
+<section id="plaintext-and-ciphertext">
+<h4><span class="section-number">25.3.2.2. </span>Plaintext and ciphertext<a class="headerlink" href="#plaintext-and-ciphertext" title="Permalink to this headline"></a></h4>
+<ul class="simple">
+<li><p>The register se_sha_0_msa stores the plaintext address.</p></li>
+<li><p>The register se_sha_0_hash_l_0~se_sha_0_hash_l_7 stores the ciphertext.</p></li>
+</ul>
+</section>
+<section id="operation-flow">
+<h4><span class="section-number">25.3.2.3. </span>Operation flow<a class="headerlink" href="#operation-flow" title="Permalink to this headline"></a></h4>
+<ul class="simple">
+<li><p>Configure se_sha_0_mode in the register se_sha_0_ctrl to set the specific mode of SHA</p></li>
+<li><p>Enable SHA by configuring se_sha_0_en in the register se_sha_0_ctrl</p></li>
+<li><p>Configure se_sha_0_hash_sel in the register se_sha_0_ctrl; 0 means starting a new HASH calculation, and 1 means using the last result for HASH calculation</p></li>
+<li><p>Configure the register se_sha_0_msa to set the source address of the data to be processed</p></li>
+<li><p>Configure se_sha_0_msg_len in the register se_sha_0_ctrl to set the length of the data to be processed (512 bits for SHA1, SHA224 and SHA256, while 1024 bits for SHA512, SHA384, SHA512/224, and SHA512/256)</p></li>
+<li><p>Configure se_sha_0_trig_1t in the register se_sha_0_ctrl to trigger SHA</p></li>
+<li><p>The output result is stored in se_sha_0_hash_l_0~se_sha_0_hash_l_7, MSB:se_sha_0_hash_l_0~se_sha_0_hash_l_7, LSB:se_sha_0_hash_l_7~se_sha_0_hash_l_0</p></li>
+</ul>
+</section>
+</section>
+<section id="random-number-generator-rng">
+<h3><span class="section-number">25.3.3. </span>Random Number Generator (RNG)<a class="headerlink" href="#random-number-generator-rng" title="Permalink to this headline"></a></h3>
+<p>The random numbers generated by the built-in true RNG can be used as the basis for encryption and other operations.</p>
+<ul class="simple">
+<li><p>True random numbers: They are generated through physical phenomena, such as coin tossup, dicing, wheel rotation, noise from using electronic components, and nuclear fission. Such RNGs are called physical RNGs, and their weaknesses are high technical requirements.</p></li>
+<li><p>Pseudo-random numbers: Truly random numbers (or random events) are randomly generated in a generation process according to the distribution probability shown in the experimental process, and the result is unpredictable and invisible. The random function in the computer is simulated according to a specified algorithm, and its result is deterministic and visible. We may consider that the probability of this foreseeable result is 100%. Hence the “random number” generated by computer random function is not truly random, but pseudo-random.</p></li>
+</ul>
+<section id="usage-process">
+<h4><span class="section-number">25.3.3.1. </span>Usage process<a class="headerlink" href="#usage-process" title="Permalink to this headline"></a></h4>
+<ul class="simple">
+<li><p>Enable TRNG by configuring se_trng_0_en in the register se_trng_0_ctrl_0</p></li>
+<li><p>Configure se_trng_0_trig_1t in the register se_trng_0_ctrl_0 to trigger TRNG</p></li>
+<li><p>The output result is stored in se_trng_0_dout_0~se_trng_0_dout_7</p></li>
+</ul>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="LowPower.html" class="btn btn-neutral float-left" title="24. LowPower" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="version.html" class="btn btn-neutral float-right" title="26. Revision history" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

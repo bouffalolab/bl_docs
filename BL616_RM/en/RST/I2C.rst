@@ -311,12 +311,18 @@ Interrupt
 
 I2C includes the following interrupts:
 
-- I2C_TRANS_END_INT: I2C transfer end interrupt, which is generated when I2C completes a transfer
-- I2C_TX_FIFO_READY_INT: When tx_fifo_cnt in i2c_fifo_config_1 is greater than tx_fifo_th, a TX FIFO request interrupt will be generated, and the interrupt flag will be automatically cleared when the condition is not satisfied
-- I2C_RX_FIFO_READY_INT: When rx_fifo_cnt in i2c_fifo_config_1 is greater than rx_fifo_th, an RX FIFO request interrupt will be generated, and the interrupt flag will be automatically cleared when the condition is not satisfied
-- I2C_NACK_RECV_INT: When the I2C module detects a NACK state, a NACK interrupt is generated
-- I2C_ARB_LOST_INT: I2C arbitration lost interrupt
-- I2C_FIFO_ERR_INT: FIFO ERROR interrupt is generated when TX/RX FIFO overflows or underflows
+- I2C_TRANS_END_INT
+  * I2C transfer end interrupt, which is generated when I2C completes a transfer
+- I2C_TX_FIFO_READY_INT
+  * When tx_fifo_cnt in i2c_fifo_config_1 is greater than tx_fifo_th, a TX FIFO request interrupt will be generated, and the interrupt flag will be automatically cleared when the condition is not satisfied
+- I2C_RX_FIFO_READY_INT
+  * When rx_fifo_cnt in i2c_fifo_config_1 is greater than rx_fifo_th, an RX FIFO request interrupt will be generated, and the interrupt flag will be automatically cleared when the condition is not satisfied
+- I2C_NACK_RECV_INT
+  * When the I2C module detects a NACK state, a NACK interrupt is generated
+- I2C_ARB_LOST_INT
+  * I2C arbitration lost interrupt
+- I2C_FIFO_ERR_INT
+  * FIFO ERROR interrupt is generated when TX/RX FIFO overflows or underflows
 
 .. only:: html
 

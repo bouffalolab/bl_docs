@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>11. I2C &mdash; BL616/BL618 Reference Manual  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="12. PWM" href="PWM.html" />
+    <link rel="prev" title="10. UART" href="UART.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL616/BL618 Reference Manual
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. System and Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. Reset and Clock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPIO.html">4. GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">5. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">6. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">7. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">8. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">9. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">10. UART</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">11. I2C</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">11.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#features">11.2. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#functional-description">11.3. Functional Description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#start-and-stop-conditions">11.3.1. Start and stop conditions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data-transfer-format">11.3.2. Data Transfer Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#arbitration">11.3.3. Arbitration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#i2c-clock-setting">11.4. I2C Clock Setting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#i2c-configuration-flow">11.5. I2C Configuration Flow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#configuration-items">11.5.1. Configuration Items</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#read-write-flag-bit">11.5.2. Read/Write Flag Bit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#slave-address">11.5.3. Slave Address</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#slave-register-address">11.5.4. Slave Register Address</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#slave-register-address-length">11.5.5. Slave Register Address Length</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data">11.5.6. Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data-length">11.5.7. Data Length</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#enable-signal">11.5.8. Enable Signal</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#fifo-management">11.6. FIFO Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#use-with-dma">11.7. Use with DMA</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dma-sending-flow">11.7.1. DMA Sending Flow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma-receiving-flow">11.7.2. DMA Receiving Flow</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#interrupt">11.8. Interrupt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#register-description">11.9. Register description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#i2c-config">11.9.1. i2c_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#i2c-int-sts">11.9.2. i2c_int_sts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#i2c-sub-addr">11.9.3. i2c_sub_addr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#i2c-bus-busy">11.9.4. i2c_bus_busy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#i2c-prd-start">11.9.5. i2c_prd_start</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#i2c-prd-stop">11.9.6. i2c_prd_stop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#i2c-prd-data">11.9.7. i2c_prd_data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#i2c-fifo-config-0">11.9.8. i2c_fifo_config_0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#i2c-fifo-config-1">11.9.9. i2c_fifo_config_1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#i2c-fifo-wdata">11.9.10. i2c_fifo_wdata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#i2c-fifo-rdata">11.9.11. i2c_fifo_rdata</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">12. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">13. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2S.html">14. I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AudioDAC.html">15. AudioDAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AudioADC.html">16. AudioADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EMAC.html">17. Emac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USB.html">18. USB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cam.html">19. CAM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MJPEG.html">20. MJPEG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBI.html">21. DBI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SDH.html">22. SDH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SDIO.html">23. SDIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LowPower.html">24. LowPower</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SEC_ENG.html">25. SEC ENG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">26. Revision history</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL616/BL618 Reference Manual</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">11. </span>I2C</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="i2c">
+<h1><span class="section-number">11. </span>I2C<a class="headerlink" href="#i2c" title="Permalink to this headline"></a></h1>
+<section id="overview">
+<h2><span class="section-number">11.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
+<p>Inter-Integrated Circuit (I2C) is a serial communication bus, which uses a multi-slave and multi-master architecture and is connected to low-speed peripherals.
+Each device has a unique address identifier and can be used as a transmitter or receiver. The address of each device connected to the bus can be set by software through a unique address and the existing master or slave relation. The master can work as a master transmitter or a master receiver.
+If two or more masters are initialized at the same time, data can be prevented from being damaged through conflict detection and arbitration during transmission.</p>
+<p>BL616/BL618 has two I2C controller masters, whose slaveAddr, subAddr, and data to be transferred can be flexibly configured, to facilitate communication with slaves. With the FIFO of 2-word depth and interrupt function, it can be used with DMA to improve efficiency and supports flexible adjustment of clock frequency.</p>
+</section>
+<section id="features">
+<h2><span class="section-number">11.2. </span>Features<a class="headerlink" href="#features" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p>Master mode</p></li>
+<li><p>Multi-master mode and arbitration function</p></li>
+<li><p>Flexible control of the level duration of the start, end and data transmission phases in segments</p></li>
+<li><p>Supports 7-bit address mode and 10-bit address mode</p></li>
+<li><p>Supports DMA transfer mode</p></li>
+<li><p>Supports multiple interrupt mechanisms</p></li>
+</ul>
+</section>
+<section id="functional-description">
+<h2><span class="section-number">11.3. </span>Functional Description<a class="headerlink" href="#functional-description" title="Permalink to this headline"></a></h2>
+<table class="colwidths-given docutils align-center" id="id1" style="width: 80%">
+<caption><span class="caption-number">Table 11.1 </span><span class="caption-text">I2C pin list</span><a class="headerlink" href="#id1" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 30%" />
+<col style="width: 40%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>I2Cx_SCL</p></td>
+<td><p>Input/output</p></td>
+<td><p>I2C serial clock signal</p></td>
+</tr>
+<tr class="row-odd"><td><p>I2Cx_SDA</p></td>
+<td><p>Input/output</p></td>
+<td><p>I2C serial data signal</p></td>
+</tr>
+</tbody>
+</table>
+<section id="start-and-stop-conditions">
+<h3><span class="section-number">11.3.1. </span>Start and stop conditions<a class="headerlink" href="#start-and-stop-conditions" title="Permalink to this headline"></a></h3>
+<p>All transmissions start with a START condition and end with a STOP condition.
+The START and STOP conditions are generally generated by the master. The bus is considered to be busy after the START condition and to be idle for a certain period of time after the STOP condition.</p>
+<p>START condition: SDA produces a high-to-low level transition when SCL is high;</p>
+<p>STOP condition: SDA produces a low-to-high level transition when SCL is high.</p>
+<p>Waveform diagram:</p>
+<figure class="align-center" id="id2">
+<img alt="../_images/I2CStopStart.svg" src="../_images/I2CStopStart.svg" /><figcaption>
+<p><span class="caption-number">Fig. 11.1 </span><span class="caption-text">Start and stop conditions of I2C</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="data-transfer-format">
+<h3><span class="section-number">11.3.2. </span>Data Transfer Format<a class="headerlink" href="#data-transfer-format" title="Permalink to this headline"></a></h3>
+<ol class="arabic simple">
+<li><p>7-bit address mode:</p></li>
+</ol>
+<p>The first 8 bits transferred are addressing bytes, including a 7-bit slave address and a 1-bit direction bit.
+Sending or receiving data by the master is controlled by the 8th bit in the first byte sent by the master.
+If it is 0, it means that the data is sent by the master, while “1” indicates that data is received by the master.
+After the direction bit is the answer bit (ACK), which is sent by the slave to answer (pull the signal low) and the host starts transmitting the specified length of data after receiving the answer.
+Upon data transfer completed, the master sends out a STOP signal, with waveform shown below:</p>
+<figure class="align-center" id="id3">
+<img alt="../_images/I2CMasterTxSlaveRx.svg" src="../_images/I2CMasterTxSlaveRx.svg" /><figcaption>
+<p><span class="caption-number">Fig. 11.2 </span><span class="caption-text">Master transmit and slave receive data formats</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id4">
+<img alt="../_images/I2CMasterRxSlaveTx.svg" src="../_images/I2CMasterRxSlaveTx.svg" /><figcaption>
+<p><span class="caption-number">Fig. 11.3 </span><span class="caption-text">Master receive and slave transmit data formats</span><a class="headerlink" href="#id4" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p><strong>Master Transmit and Slave Receive Timing</strong></p>
+<figure class="align-center" id="id5">
+<img alt="../_images/I2CMasterTxSlaveRxSequence.svg" src="../_images/I2CMasterTxSlaveRxSequence.svg" /><figcaption>
+<p><span class="caption-number">Fig. 11.4 </span><span class="caption-text">Timing of master transmitter and slave receiver</span><a class="headerlink" href="#id5" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p><strong>Master Receive and Slave Transmit Timing</strong></p>
+<figure class="align-center" id="id6">
+<img alt="../_images/I2CMasterRxSlaveTxSequence.svg" src="../_images/I2CMasterRxSlaveTxSequence.svg" /><figcaption>
+<p><span class="caption-number">Fig. 11.5 </span><span class="caption-text">Timing of master receiver and slave transmitter</span><a class="headerlink" href="#id6" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<ol class="arabic simple" start="2">
+<li><p>10-bit address mode</p></li>
+</ol>
+<p>The cr_i2c_10b_addr_en in the register i2c_config must be set to 1 before use.</p>
+<p>The 10-bit slave address consists of the two bytes after the START condition (S) or the repeated START condition (Sr).
+The first 7 bits of the first byte are 1111 0XX, where XX are the first two bits of MSB of the 10-bit address.
+The 8th bit of the first byte is the read/write bit that determines the transfer direction.
+The second byte is the remaining low 8 bits of the 10 bit address. The data transfer format is as follows.</p>
+<figure class="align-center" id="id7">
+<img alt="../_images/I2CMasterToSlave10BitAddress.svg" src="../_images/I2CMasterToSlave10BitAddress.svg" /><figcaption>
+<p><span class="caption-number">Fig. 11.6 </span><span class="caption-text">Master transmit and slave receive data format (10bit slave address)</span><a class="headerlink" href="#id7" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>When receiving the 10-bit address following the START condition, the slave compares the first byte (1111 0XX) of the slave address with its own address, and checks whether the eighth bit (read/write bit) is 0.
+If the value of XX in the first byte is the same as the top two bits of the slave’s 10 bit address, the first byte match passes and the slave will give answer A. If there are multiple slave devices connected to the bus, more than one device may match and generate answer A.
+Next, all slaves start to match the second byte (XXXX XXXX), where only one slave will have the exact same lower eight bits of the 10 bit address as the second byte, and that slave will give answer A.
+The slave that is addressed by the master will remain addressed until it receives a termination condition or a repeat start condition.</p>
+<figure class="align-center" id="id8">
+<img alt="../_images/I2CSlaveToMaster10BitAddress.svg" src="../_images/I2CSlaveToMaster10BitAddress.svg" /><figcaption>
+<p><span class="caption-number">Fig. 11.7 </span><span class="caption-text">Master receive and slave transmit data format (10bit slave address)</span><a class="headerlink" href="#id8" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Before the second acknowledgement A, the process is the same as that of the master-transmitter addressing the slave-receiver.
+After the repeated START condition (Sr), the matched slave will remain in the addressed state.
+This slave will check whether the first 7 bits of the first byte after Sr are 1111 0XX, and then test whether the 8th bit is 1 (read).
+If this also matches, the slave considers that it is addressed as a transmitter and generates an acknowledgement (A).
+The slave-transmitter will remain in the addressed state until it receives the STOP condition (P) or the repeated START condition (Sr) followed by a different slave address.
+Then, under Sr, all the slaves will compare their addresses with 11110XX and test the eighth bit (read/write bit).
+However, they will not be addressed, because for 10-bit devices, the read/write bit is 1, or for 7-bit devices, the slave addresses of 1111 0XX do not match.</p>
+</section>
+<section id="arbitration">
+<h3><span class="section-number">11.3.3. </span>Arbitration<a class="headerlink" href="#arbitration" title="Permalink to this headline"></a></h3>
+<p>When there are multiple masters on I2C bus, it may happen that multiple masters start data transfer at the same time. At this time, the arbitration mechanism will decide which master has the right to transfer data, while other masters have to give up the control of the bus and wait until the bus is idle before transferring data again.</p>
+<p>During data transfer, all masters must check whether the SDA is consistent with the data they want to send when SCL stays high. When the SDA level is different from the expected one, it means that other masters are transferring data at the same time. The masters with different SDA levels will lose the arbitration and other masters will complete the data transfer.</p>
+<p>The waveform of two masters transferring data and initiating the arbitration mechanism at the same time is as follows:</p>
+<figure class="align-center" id="id9">
+<img alt="../_images/I2CTxRxTogether.svg" src="../_images/I2CTxRxTogether.svg" /><figcaption>
+<p><span class="caption-number">Fig. 11.8 </span><span class="caption-text">Waveform of simultaneous data transfer</span><a class="headerlink" href="#id9" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="i2c-clock-setting">
+<h2><span class="section-number">11.4. </span>I2C Clock Setting<a class="headerlink" href="#i2c-clock-setting" title="Permalink to this headline"></a></h2>
+<p>I2C clock can be derived from bclk (bus clock) and xclk, and frequency division can be done on this basis.
+The duration of the start condition, each bit of data and the end condition are set by registers i2c_prd_start, i2c_prd_data and i2c_prd_stop respectively.
+Each of these durations can be subdivided into 4 phases, and the number of samples in each phase is controlled by a separate byte in the register (the actual value is the register value plus 1). The 4 phase settings in the data section together determine the frequency division factor of the i2c clock.
+As shown in the figure below, suppose the I2C clock source is selected as 80M bclk and the register i2c_prd_data is set to 0x09070b09, then the second 0 in the figure is 0x09+1=0x0a, the second 1 is 0x07+1=0x08, the second 2 is 0x0b+1=0x0c, and the second 3 is 0x09+1=0x0a.
+Then the clock frequency of I2C is 80MHz/(0x0a+0x08+0x0c+0x0a) = 2MHz.
+Similarly, the first 0, 1, 2 and 3 are set by register i2c_prd_start, which determines the duration of the start condition, and the third 0, 1, 2 and 3 are set by register i2c_prd_stop, which determines the duration of the end condition.</p>
+<figure class="align-center" id="id10">
+<img alt="../_images/I2CClock.svg" src="../_images/I2CClock.svg" /><figcaption>
+<p><span class="caption-number">Fig. 11.9 </span><span class="caption-text">I2C clock setting</span><a class="headerlink" href="#id10" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="i2c-configuration-flow">
+<h2><span class="section-number">11.5. </span>I2C Configuration Flow<a class="headerlink" href="#i2c-configuration-flow" title="Permalink to this headline"></a></h2>
+<section id="configuration-items">
+<h3><span class="section-number">11.5.1. </span>Configuration Items<a class="headerlink" href="#configuration-items" title="Permalink to this headline"></a></h3>
+<ul class="simple">
+<li><p>Read/write flag bit</p></li>
+<li><p>Slave address</p></li>
+<li><p>Slave register address</p></li>
+<li><p>Slave register address length</p></li>
+<li><p>Data (TX: configure the sent data; RX: store the received data)</p></li>
+<li><p>Data length</p></li>
+<li><p>Enable signal</p></li>
+</ul>
+</section>
+<section id="read-write-flag-bit">
+<h3><span class="section-number">11.5.2. </span>Read/Write Flag Bit<a class="headerlink" href="#read-write-flag-bit" title="Permalink to this headline"></a></h3>
+<p>I2C supports TX and RX working statuses. The cr_i2c_pkt_dir in the register i2c_config represents the TX/RX status, “0” for TX status and “1” for RX status.</p>
+</section>
+<section id="slave-address">
+<h3><span class="section-number">11.5.3. </span>Slave Address<a class="headerlink" href="#slave-address" title="Permalink to this headline"></a></h3>
+<p>Each slave connected to I2C will have a unique device address, which is usually 7 bits long. This address will be written into the cr_i2c_slv_addr in the register i2c_config. I2C will automatically shift to the left by 1 bit before sending the address, and the TX/RX direction bit will be added to the LSB.</p>
+</section>
+<section id="slave-register-address">
+<h3><span class="section-number">11.5.4. </span>Slave Register Address<a class="headerlink" href="#slave-register-address" title="Permalink to this headline"></a></h3>
+<p>The slave register address represents the register address where I2C needs to read and write a slave register. The slave register address is written to the register i2c_sub_addr, and the cr_i2c_sub_addr_en in the register i2c_config must be set to 1.
+If cr_i2c_sub_addr_en in the register i2c_config is set to 0, the I2C master will skip the slave register address field when sending.</p>
+</section>
+<section id="slave-register-address-length">
+<h3><span class="section-number">11.5.5. </span>Slave Register Address Length<a class="headerlink" href="#slave-register-address-length" title="Permalink to this headline"></a></h3>
+<p>The slave register address length is subtracted by 1 and then written to cr_i2c_sub_addr_bc in the register i2c_config.</p>
+</section>
+<section id="data">
+<h3><span class="section-number">11.5.6. </span>Data<a class="headerlink" href="#data" title="Permalink to this headline"></a></h3>
+<p>It refers to the data that needs to be sent to or received from the slave.
+When sending data, I2C must write the data (in word) into the register i2c_fifo_wdata.
+When receiving data, I2C must read out the data (in word) from the register i2c_fifo_rdata.</p>
+</section>
+<section id="data-length">
+<h3><span class="section-number">11.5.7. </span>Data Length<a class="headerlink" href="#data-length" title="Permalink to this headline"></a></h3>
+<p>The cr_i2c_pkt_len in the i2c_config register sets the send data length (the value written to the register + 1 is the send data length), and the maximum send length is 256 bytes.</p>
+</section>
+<section id="enable-signal">
+<h3><span class="section-number">11.5.8. </span>Enable Signal<a class="headerlink" href="#enable-signal" title="Permalink to this headline"></a></h3>
+<p>After the above items are configured, when cr_i2c_m_en in the enable signal register i2c_config is set to 1, the I2C sending process will be started automatically.</p>
+<p>When the read/write flag bit is configured as 0, I2C sends data. Take sending 2 bytes as an example, the master’s transmission flow is as follows:</p>
+<ol class="arabic simple">
+<li><p>Start bit</p></li>
+<li><p>(The slave address shifts to the left by 1 bit + 0) + ACK</p></li>
+<li><p>Slave register address + ACK</p></li>
+<li><p>1-byte data + ACK</p></li>
+<li><p>1-byte data + ACK</p></li>
+<li><p>Stop bit</p></li>
+</ol>
+<p>When the read/write flag bit is configured as 1, I2C receives data. Take receiving 2 bytes as an example, the master’s transmission flow is as follows:</p>
+<ol class="arabic simple">
+<li><p>Start bit</p></li>
+<li><p>(The slave address shifts to the left by 1 bit + 0) + ACK</p></li>
+<li><p>Slave register address + ACK</p></li>
+<li><p>Start bit</p></li>
+<li><p>(The slave address shifts to the left by 1 bit + 1) + ACK</p></li>
+<li><p>1-byte data + ACK</p></li>
+<li><p>1-byte data + ACK</p></li>
+<li><p>Stop bit</p></li>
+</ol>
+</section>
+</section>
+<section id="fifo-management">
+<h2><span class="section-number">11.6. </span>FIFO Management<a class="headerlink" href="#fifo-management" title="Permalink to this headline"></a></h2>
+<p>I2C FIFO has a 2-word depth, and I2C includes RX FIFO and TX FIFO.
+The rx_fifo_cnt in the register i2c_fifo_config_1 represents how much data (in word) in RX FIFO needs to be read.
+The tx_fifo_cnt in the register i2c_fifo_config_1 represents how much free space (in word) in TX FIFO for writing.</p>
+<p>I2C FIFO status:</p>
+<ul class="simple">
+<li><p>RX FIFO underflow: When the data in RX FIFO is completely read out or empty, if I2C continues to read data from RX FIFO, the rx_fifo_underflow in the register i2c_fifo_config_0 will be set to 1;</p></li>
+<li><p>RX FIFO overflow: When I2C receives data until the two words of RX FIFO are filled, without reading RX FIFO, if I2C receives data again, the rx_fifo_overflow in the register i2c_fifo_config_0 will be set to 1;</p></li>
+<li><p>TX FIFO underflow: When the data size filled into TX FIFO does not meet the configured I2C data length: cr_i2c_pkt_len in i2c_config, and no new data is filled into TX FIFO, the tx_fifo_underflow in the register i2c_fifo_config_0 will be set to 1;</p></li>
+<li><p>TX FIFO overflow: After the two words of TX FIFO are filled, before the data in TX FIFO is sent out, if data is filled into TX FIFO again, the tx_fifo_overflow in the register i2c_fifo_config_0 will be set to 1.</p></li>
+</ul>
+</section>
+<section id="use-with-dma">
+<h2><span class="section-number">11.7. </span>Use with DMA<a class="headerlink" href="#use-with-dma" title="Permalink to this headline"></a></h2>
+<p>I2C can send and receive data through DMA. Setting i2c_dma_tx_en in the register i2c_fifo_config_0 to 1 will enable the DMA TX mode. After the channel for I2C is allocated, DMA will transfer data from memory to the i2c_fifo_wdata register.
+Setting i2c_dma_rx_en in the register i2c_fifo_config_0 to 1 will enable the DMA RX mode. After the channel for I2C is allocated, DMA will transfer the data in the register i2c_fifo_rdata to memory.
+When I2C is used with DMA, DMA will automatically transfer data, so it is unnecessary for CPU to write data into I2C TX FIFO or read data from I2C RX FIFO.</p>
+<section id="dma-sending-flow">
+<h3><span class="section-number">11.7.1. </span>DMA Sending Flow<a class="headerlink" href="#dma-sending-flow" title="Permalink to this headline"></a></h3>
+<ol class="arabic simple">
+<li><p>Set read/write flag bit to 0</p></li>
+<li><p>Set slave address</p></li>
+<li><p>Set slave register address</p></li>
+<li><p>Set slave register address length</p></li>
+<li><p>Data Length</p></li>
+<li><p>Set enable signal register to 1</p></li>
+<li><p>Configure DMA transfer size</p></li>
+<li><p>Configure the transfer width of DMA source address</p></li>
+<li><p>Configure the transfer width of DMA destination address (when I2C is used with DMA, the transfer width of destination address must be set to 32 bits, which is word-aligned)</p></li>
+<li><p>Configure the DMA source address as the memory address for storing sent data</p></li>
+<li><p>Configure the DMA destination address to I2C TX FIFO address, i2c_fifo_wdata</p></li>
+<li><p>Enable DMA</p></li>
+</ol>
+</section>
+<section id="dma-receiving-flow">
+<h3><span class="section-number">11.7.2. </span>DMA Receiving Flow<a class="headerlink" href="#dma-receiving-flow" title="Permalink to this headline"></a></h3>
+<ol class="arabic simple">
+<li><p>Set read/write flag bit to 1</p></li>
+<li><p>Set slave address</p></li>
+<li><p>Set slave register address</p></li>
+<li><p>Set slave register address length</p></li>
+<li><p>Data Length</p></li>
+<li><p>Set enable signal register to 1</p></li>
+<li><p>Configure DMA transfer size</p></li>
+<li><p>Configure the transfer width of DMA source address (when I2C is used with DMA, the transfer width of source address must be set to 32 bits, which is word-aligned)</p></li>
+<li><p>Configure the transfer width of DMA destination address</p></li>
+<li><p>Configure the DMA source address to I2C RX FIFO address, i2c_fifo_rdata</p></li>
+<li><p>Configure the DMA destination address as the memory address for storing received data</p></li>
+<li><p>Enable DMA</p></li>
+</ol>
+</section>
+</section>
+<section id="interrupt">
+<h2><span class="section-number">11.8. </span>Interrupt<a class="headerlink" href="#interrupt" title="Permalink to this headline"></a></h2>
+<p>I2C includes the following interrupts:</p>
+<ul class="simple">
+<li><p>I2C_TRANS_END_INT
+* I2C transfer end interrupt, which is generated when I2C completes a transfer</p></li>
+<li><p>I2C_TX_FIFO_READY_INT
+* When tx_fifo_cnt in i2c_fifo_config_1 is greater than tx_fifo_th, a TX FIFO request interrupt will be generated, and the interrupt flag will be automatically cleared when the condition is not satisfied</p></li>
+<li><p>I2C_RX_FIFO_READY_INT
+* When rx_fifo_cnt in i2c_fifo_config_1 is greater than rx_fifo_th, an RX FIFO request interrupt will be generated, and the interrupt flag will be automatically cleared when the condition is not satisfied</p></li>
+<li><p>I2C_NACK_RECV_INT
+* When the I2C module detects a NACK state, a NACK interrupt is generated</p></li>
+<li><p>I2C_ARB_LOST_INT
+* I2C arbitration lost interrupt</p></li>
+<li><p>I2C_FIFO_ERR_INT
+* FIFO ERROR interrupt is generated when TX/RX FIFO overflows or underflows</p></li>
+</ul>
+</section>
+<section id="register-description">
+<h2><span class="section-number">11.9. </span>Register description<a class="headerlink" href="#register-description" title="Permalink to this headline"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 38%" />
+<col style="width: 62%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Name</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#i2c-config">i2c_config</a></p></td>
+<td><p>Master configure</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#i2c-int-sts">i2c_int_sts</a></p></td>
+<td><p>Interrupt configure and status</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#i2c-sub-addr">i2c_sub_addr</a></p></td>
+<td><p>Sub-address setting</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#i2c-bus-busy">i2c_bus_busy</a></p></td>
+<td><p>Bus busy status</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#i2c-prd-start">i2c_prd_start</a></p></td>
+<td><p>Start period setting</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#i2c-prd-stop">i2c_prd_stop</a></p></td>
+<td><p>Stop period setting</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#i2c-prd-data">i2c_prd_data</a></p></td>
+<td><p>Data period setting</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#i2c-fifo-config-0">i2c_fifo_config_0</a></p></td>
+<td><p>FIFO status and DMA mode</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#i2c-fifo-config-1">i2c_fifo_config_1</a></p></td>
+<td><p>FIFO threshold and available count</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#i2c-fifo-wdata">i2c_fifo_wdata</a></p></td>
+<td><p>TX FIFO</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#i2c-fifo-rdata">i2c_fifo_rdata</a></p></td>
+<td><p>RX FIFO</p></td>
+</tr>
+</tbody>
+</table>
+<section id="i2c-config">
+<h3><span class="section-number">11.9.1. </span>i2c_config<a class="headerlink" href="#i2c-config" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x40018000</p>
+<figure class="align-center">
+<img alt="../_images/i2c_i2c_config.svg" src="../_images/i2c_i2c_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:28</p></td>
+<td><p>cr_i2c_deg_cnt</p></td>
+<td><p>r/w</p></td>
+<td><p>4’d0</p></td>
+<td><p>De-glitch function cycle count</p></td>
+</tr>
+<tr class="row-odd"><td><p>27:20</p></td>
+<td><p>cr_i2c_pkt_len</p></td>
+<td><p>r/w</p></td>
+<td><p>8’d0</p></td>
+<td><p>Packet length (unit: byte)</p></td>
+</tr>
+<tr class="row-even"><td><p>19:18</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>17:8</p></td>
+<td><p>cr_i2c_slv_addr</p></td>
+<td><p>r/w</p></td>
+<td><p>10’h0</p></td>
+<td><p>Slave address for I2C transaction (target address)</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>cr_i2c_10b_addr_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Slave address 10-bit mode enable</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><p>6:5</p></td>
+<td rowspan="2"><p>cr_i2c_sub_addr_bc</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>2’d0</p></td>
+<td rowspan="2"><p>Sub-address field byte count</p>
+<p>2’d0: 1-byte, 2’d1: 2-byte, 2’d2: 3-byte, 2’d3: 4-byte</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>cr_i2c_sub_addr_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Enable signal of I2C sub-address field</p></td>
+</tr>
+<tr class="row-even"><td rowspan="2"><p>3</p></td>
+<td rowspan="2"><p>cr_i2c_scl_sync_en</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>1’b1</p></td>
+<td rowspan="2"><p>Enable signal of I2C SCL synchronization, should be enabled to support Multi-Master and Clock-Stretching</p>
+<p>(Normally should not be turned-off)</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>cr_i2c_deg_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Enable signal of I2C input de-glitch function (for all input pins)</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><p>1</p></td>
+<td rowspan="2"><p>cr_i2c_pkt_dir</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>1’b1</p></td>
+<td rowspan="2"><p>Transfer direction of the packet</p>
+<p>1’b0: Write; 1’b1: Read</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="2"><p>0</p></td>
+<td rowspan="2"><p>cr_i2c_m_en</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>1’b0</p></td>
+<td rowspan="2"><p>Enable signal of I2C Master function</p>
+<p>Asserting this bit will trigger the transaction, and should be de-asserted after finish</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+</tbody>
+</table>
+</section>
+<section id="i2c-int-sts">
+<h3><span class="section-number">11.9.2. </span>i2c_int_sts<a class="headerlink" href="#i2c-int-sts" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x40018004</p>
+<figure class="align-center">
+<img alt="../_images/i2c_i2c_int_sts.svg" src="../_images/i2c_i2c_int_sts.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:30</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>29</p></td>
+<td><p>cr_i2c_fer_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt enable of i2c_fer_int</p></td>
+</tr>
+<tr class="row-even"><td><p>28</p></td>
+<td><p>cr_i2c_arb_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt enable of i2c_arb_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>27</p></td>
+<td><p>cr_i2c_nak_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt enable of i2c_nak_int</p></td>
+</tr>
+<tr class="row-even"><td><p>26</p></td>
+<td><p>cr_i2c_rxf_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt enable of i2c_rxf_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>25</p></td>
+<td><p>cr_i2c_txf_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt enable of i2c_txf_int</p></td>
+</tr>
+<tr class="row-even"><td><p>24</p></td>
+<td><p>cr_i2c_end_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt enable of i2c_end_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>23:22</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>21</p></td>
+<td><p>rsvd</p></td>
+<td><p>rsvd</p></td>
+<td><p>1’b0</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>20</p></td>
+<td><p>cr_i2c_arb_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1’b0</p></td>
+<td><p>Interrupt clear of i2c_arb_int</p></td>
+</tr>
+<tr class="row-even"><td><p>19</p></td>
+<td><p>cr_i2c_nak_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1’b0</p></td>
+<td><p>Interrupt clear of i2c_nak_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>18</p></td>
+<td><p>rsvd</p></td>
+<td><p>rsvd</p></td>
+<td><p>1’b0</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>17</p></td>
+<td><p>rsvd</p></td>
+<td><p>rsvd</p></td>
+<td><p>1’b0</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>16</p></td>
+<td><p>cr_i2c_end_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1’b0</p></td>
+<td><p>Interrupt clear of i2c_end_int</p></td>
+</tr>
+<tr class="row-even"><td><p>15:14</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>13</p></td>
+<td><p>cr_i2c_fer_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt mask of i2c_fer_int</p></td>
+</tr>
+<tr class="row-even"><td><p>12</p></td>
+<td><p>cr_i2c_arb_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt mask of i2c_arb_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>11</p></td>
+<td><p>cr_i2c_nak_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt mask of i2c_nak_int</p></td>
+</tr>
+<tr class="row-even"><td><p>10</p></td>
+<td><p>cr_i2c_rxf_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt mask of i2c_rxf_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>9</p></td>
+<td><p>cr_i2c_txf_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt mask of i2c_txf_int</p></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>cr_i2c_end_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt mask of i2c_end_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>7:6</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>i2c_fer_int</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>I2C TX/RX FIFO error interrupt, auto-cleared when FIFO overflow/underflow error flag is cleared</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>i2c_arb_int</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>I2C arbitration lost interrupt</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>i2c_nak_int</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>I2C NACK-received interrupt</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>i2c_rxf_int</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>I2C RX FIFO ready (rx_fifo_cnt &gt; rx_fifo_th) interrupt, auto-cleared when data is popped</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>i2c_txf_int</p></td>
+<td><p>r</p></td>
+<td><p>1’b1</p></td>
+<td><p>I2C TX FIFO ready (tx_fifo_cnt &gt; tx_fifo_th) interrupt, auto-cleared when data is pushed</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>i2c_end_int</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>I2C transfer end interrupt</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="i2c-sub-addr">
+<h3><span class="section-number">11.9.3. </span>i2c_sub_addr<a class="headerlink" href="#i2c-sub-addr" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x40018008</p>
+<figure class="align-center">
+<img alt="../_images/i2c_i2c_sub_addr.svg" src="../_images/i2c_i2c_sub_addr.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:24</p></td>
+<td><p>cr_i2c_sub_addr_b3</p></td>
+<td><p>r/w</p></td>
+<td><p>8’d0</p></td>
+<td><p>I2C sub-address field - byte[3]</p></td>
+</tr>
+<tr class="row-odd"><td><p>23:16</p></td>
+<td><p>cr_i2c_sub_addr_b2</p></td>
+<td><p>r/w</p></td>
+<td><p>8’d0</p></td>
+<td><p>I2C sub-address field - byte[2]</p></td>
+</tr>
+<tr class="row-even"><td><p>15:8</p></td>
+<td><p>cr_i2c_sub_addr_b1</p></td>
+<td><p>r/w</p></td>
+<td><p>8’d0</p></td>
+<td><p>I2C sub-address field - byte[1]</p></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>cr_i2c_sub_addr_b0</p></td>
+<td><p>r/w</p></td>
+<td><p>8’d0</p></td>
+<td><p>I2C sub-address field - byte[0] (sub-address starts from this byte)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="i2c-bus-busy">
+<h3><span class="section-number">11.9.4. </span>i2c_bus_busy<a class="headerlink" href="#i2c-bus-busy" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x4001800c</p>
+<figure class="align-center">
+<img alt="../_images/i2c_i2c_bus_busy.svg" src="../_images/i2c_i2c_bus_busy.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:2</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>cr_i2c_bus_busy_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1’b0</p></td>
+<td><p>Clear signal of bus_busy status, not for normal usage (in case I2C bus hangs)</p></td>
+</tr>
+<tr class="row-even"><td rowspan="3"><p>0</p></td>
+<td rowspan="3"><p>sts_i2c_bus_busy</p></td>
+<td rowspan="3"><p>r</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>Indicator of I2C bus busy</p>
+<p>0: Idle</p>
+<p>1: Busy</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+</tbody>
+</table>
+</section>
+<section id="i2c-prd-start">
+<h3><span class="section-number">11.9.5. </span>i2c_prd_start<a class="headerlink" href="#i2c-prd-start" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x40018010</p>
+<figure class="align-center">
+<img alt="../_images/i2c_i2c_prd_start.svg" src="../_images/i2c_i2c_prd_start.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:24</p></td>
+<td><p>cr_i2c_prd_s_ph_3</p></td>
+<td><p>r/w</p></td>
+<td><p>8’d15</p></td>
+<td><p>Length of START condition phase 3 (unit: I2C source clock period)</p></td>
+</tr>
+<tr class="row-odd"><td><p>23:16</p></td>
+<td><p>cr_i2c_prd_s_ph_2</p></td>
+<td><p>r/w</p></td>
+<td><p>8’d15</p></td>
+<td><p>Length of START condition phase 2 (unit: I2C source clock period)</p></td>
+</tr>
+<tr class="row-even"><td><p>15:8</p></td>
+<td><p>cr_i2c_prd_s_ph_1</p></td>
+<td><p>r/w</p></td>
+<td><p>8’d15</p></td>
+<td><p>Length of START condition phase 1 (unit: I2C source clock period)</p></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>cr_i2c_prd_s_ph_0</p></td>
+<td><p>r/w</p></td>
+<td><p>8’d15</p></td>
+<td><p>Length of START condition phase 0 (unit: I2C source clock period)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="i2c-prd-stop">
+<h3><span class="section-number">11.9.6. </span>i2c_prd_stop<a class="headerlink" href="#i2c-prd-stop" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x40018014</p>
+<figure class="align-center">
+<img alt="../_images/i2c_i2c_prd_stop.svg" src="../_images/i2c_i2c_prd_stop.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:24</p></td>
+<td><p>cr_i2c_prd_p_ph_3</p></td>
+<td><p>r/w</p></td>
+<td><p>8’d15</p></td>
+<td><p>Length of STOP condition phase 3 (unit: I2C source clock period)</p></td>
+</tr>
+<tr class="row-odd"><td><p>23:16</p></td>
+<td><p>cr_i2c_prd_p_ph_2</p></td>
+<td><p>r/w</p></td>
+<td><p>8’d15</p></td>
+<td><p>Length of STOP condition phase 2 (unit: I2C source clock period)</p></td>
+</tr>
+<tr class="row-even"><td><p>15:8</p></td>
+<td><p>cr_i2c_prd_p_ph_1</p></td>
+<td><p>r/w</p></td>
+<td><p>8’d15</p></td>
+<td><p>Length of STOP condition phase 1 (unit: I2C source clock period)</p></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>cr_i2c_prd_p_ph_0</p></td>
+<td><p>r/w</p></td>
+<td><p>8’d15</p></td>
+<td><p>Length of STOP condition phase 0 (unit: I2C source clock period)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="i2c-prd-data">
+<h3><span class="section-number">11.9.7. </span>i2c_prd_data<a class="headerlink" href="#i2c-prd-data" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x40018018</p>
+<figure class="align-center">
+<img alt="../_images/i2c_i2c_prd_data.svg" src="../_images/i2c_i2c_prd_data.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:24</p></td>
+<td><p>cr_i2c_prd_d_ph_3</p></td>
+<td><p>r/w</p></td>
+<td><p>8’d15</p></td>
+<td><p>Length of DATA phase 3 (unit: I2C source clock period)</p></td>
+</tr>
+<tr class="row-odd"><td><p>23:16</p></td>
+<td><p>cr_i2c_prd_d_ph_2</p></td>
+<td><p>r/w</p></td>
+<td><p>8’d15</p></td>
+<td><p>Length of DATA phase 2 (unit: I2C source clock period)</p></td>
+</tr>
+<tr class="row-even"><td rowspan="2"><p>15:8</p></td>
+<td rowspan="2"><p>cr_i2c_prd_d_ph_1</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>8’d15</p></td>
+<td rowspan="2"><p>Length of DATA phase 1 (unit: I2C source clock period)</p>
+<p>Note: This value should not be set to 8’d0, adjust source clock rate instead if higher I2C clock rate is required</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>7:0</p></td>
+<td><p>cr_i2c_prd_d_ph_0</p></td>
+<td><p>r/w</p></td>
+<td><p>8’d15</p></td>
+<td><p>Length of DATA phase 0 (unit: I2C source clock period)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="i2c-fifo-config-0">
+<h3><span class="section-number">11.9.8. </span>i2c_fifo_config_0<a class="headerlink" href="#i2c-fifo-config-0" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x40018080</p>
+<figure class="align-center">
+<img alt="../_images/i2c_i2c_fifo_config_0.svg" src="../_images/i2c_i2c_fifo_config_0.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>rx_fifo_underflow</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>Underflow flag of RX FIFO, can be cleared by rx_fifo_clr</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>rx_fifo_overflow</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>Overflow flag of RX FIFO, can be cleared by rx_fifo_clr</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>tx_fifo_underflow</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>Underflow flag of TX FIFO, can be cleared by tx_fifo_clr</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>tx_fifo_overflow</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>Overflow flag of TX FIFO, can be cleared by tx_fifo_clr</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>rx_fifo_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1’b0</p></td>
+<td><p>Clear signal of RX FIFO, RX FIFO will be empty when write 1 to this bit</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>tx_fifo_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1’b0</p></td>
+<td><p>Clear signal of TX FIFO, TX FIFO will be empty when write 1 to this bit</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>i2c_dma_rx_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Enable signal of dma_rx_req/ack interface</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>i2c_dma_tx_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Enable signal of dma_tx_req/ack interface</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="i2c-fifo-config-1">
+<h3><span class="section-number">11.9.9. </span>i2c_fifo_config_1<a class="headerlink" href="#i2c-fifo-config-1" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x40018084</p>
+<figure class="align-center">
+<img alt="../_images/i2c_i2c_fifo_config_1.svg" src="../_images/i2c_i2c_fifo_config_1.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:25</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>24</p></td>
+<td><p>rx_fifo_th</p></td>
+<td><p>r/w</p></td>
+<td><p>1’d0</p></td>
+<td><p>RX FIFO threshold, dma_rx_req will not be asserted if rx_fifo_cnt is less than this value</p></td>
+</tr>
+<tr class="row-even"><td><p>23:17</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>16</p></td>
+<td><p>tx_fifo_th</p></td>
+<td><p>r/w</p></td>
+<td><p>1’d0</p></td>
+<td><p>TX FIFO threshold, dma_tx_req will not be asserted if tx_fifo_cnt is less than this value</p></td>
+</tr>
+<tr class="row-even"><td><p>15:10</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>9:8</p></td>
+<td><p>rx_fifo_cnt</p></td>
+<td><p>r</p></td>
+<td><p>2’d0</p></td>
+<td><p>RX FIFO available count, means count of data received in RX FIFO</p></td>
+</tr>
+<tr class="row-even"><td><p>7:2</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>1:0</p></td>
+<td><p>tx_fifo_cnt</p></td>
+<td><p>r</p></td>
+<td><p>2’d2</p></td>
+<td><p>TX FIFO available count, means empty space remained in TX FIFO</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="i2c-fifo-wdata">
+<h3><span class="section-number">11.9.10. </span>i2c_fifo_wdata<a class="headerlink" href="#i2c-fifo-wdata" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x40018088</p>
+<figure class="align-center">
+<img alt="../_images/i2c_i2c_fifo_wdata.svg" src="../_images/i2c_i2c_fifo_wdata.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>i2c_fifo_wdata</p></td>
+<td><p>w</p></td>
+<td><p>x</p></td>
+<td><p>TX FIFO, size is 4*2 = 8-byte</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="i2c-fifo-rdata">
+<h3><span class="section-number">11.9.11. </span>i2c_fifo_rdata<a class="headerlink" href="#i2c-fifo-rdata" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x4001808c</p>
+<figure class="align-center">
+<img alt="../_images/i2c_i2c_fifo_rdata.svg" src="../_images/i2c_i2c_fifo_rdata.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>i2c_fifo_rdata</p></td>
+<td><p>r</p></td>
+<td><p>32’h0</p></td>
+<td><p>RX FIFO, size is 4*2 = 8-byte</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="UART.html" class="btn btn-neutral float-left" title="10. UART" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="PWM.html" class="btn btn-neutral float-right" title="12. PWM" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

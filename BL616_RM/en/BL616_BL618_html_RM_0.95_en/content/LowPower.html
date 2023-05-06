@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>24. LowPower &mdash; BL616/BL618 Reference Manual  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="25. SEC ENG" href="SEC_ENG.html" />
+    <link rel="prev" title="23. SDIO" href="SDIO.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL616/BL618 Reference Manual
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. System and Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. Reset and Clock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPIO.html">4. GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">5. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">6. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">7. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">8. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">9. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">10. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">11. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">12. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">13. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2S.html">14. I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AudioDAC.html">15. AudioDAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AudioADC.html">16. AudioADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EMAC.html">17. Emac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USB.html">18. USB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cam.html">19. CAM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MJPEG.html">20. MJPEG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBI.html">21. DBI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SDH.html">22. SDH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SDIO.html">23. SDIO</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">24. LowPower</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">24.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#features">24.2. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#functional-description">24.3. Functional Description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#power-domain">24.3.1. Power Domain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wake-up-source">24.3.2. Wake-up Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#power-modes">24.3.3. Power Modes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#io-retention">24.3.4. IO Retention</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="SEC_ENG.html">25. SEC ENG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">26. Revision history</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL616/BL618 Reference Manual</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">24. </span>LowPower</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="lowpower">
+<h1><span class="section-number">24. </span>LowPower<a class="headerlink" href="#lowpower" title="Permalink to this headline"></a></h1>
+<section id="overview">
+<h2><span class="section-number">24.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
+<p>Low power consumption is an important indicator of IoT applications. The chip’s CPU supports the working mode, idle power saving mode, and sleep mode. You can select a proper mode according to the current application scenario to reduce the chip’s power consumption and prolong the battery life.</p>
+<figure class="align-center" id="id1">
+<img alt="../_images/LPPwrSt.png" src="../_images/LPPwrSt.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 24.1 </span><span class="caption-text">Low power modes</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="features">
+<h2><span class="section-number">24.2. </span>Features<a class="headerlink" href="#features" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p>Clock control: clock control of peripherals in GLB, small-scale power saving, and fast response speed</p></li>
+<li><p>Sleep control (PDS): 5 levels (PDS 1/2/3/7/15), large-scale power saving, moderate response speed</p></li>
+<li><p>Deep sleep control (HBN): 4 levels (HBN 0/1/2/3), global power saving, and long response time</p></li>
+</ul>
+</section>
+<section id="functional-description">
+<h2><span class="section-number">24.3. </span>Functional Description<a class="headerlink" href="#functional-description" title="Permalink to this headline"></a></h2>
+<section id="power-domain">
+<h3><span class="section-number">24.3.1. </span>Power Domain<a class="headerlink" href="#power-domain" title="Permalink to this headline"></a></h3>
+<p>There are 8 power domains in the xxx chip, with main functions as follows:</p>
+<ul class="simple">
+<li><p>PD_AON</p>
+<ul>
+<li><p>HBN state machine, which can control the power/isolation unit/reset/clock of PD_AON_HBNRTC/PD_AON_HBNCORE/PD_CORE</p></li>
+<li><p>AON_PIN (GPIO16/17/18/19) pin wakeup function</p></li>
+<li><p>Reserve 4 readable and writable registers to save data in PDS/HBN0/HBN1/HBN2 modes</p></li>
+<li><p>BOR (Brown Out Reset) function</p></li>
+<li><p>LDO11_AON/RT/SOC output voltage selection unit</p></li>
+<li><p>Root, F32K, and Uart clock source selection</p></li>
+<li><p>HBN_OUT0_PIR (Acomp0/Acomp1/bor/pir) wakeup mask, enable register, and interrupt status register</p></li>
+</ul>
+</li>
+<li><p>PD_AON_HBNRTC</p>
+<ul>
+<li><p>Select the control unit of RTC Counter clock source</p></li>
+<li><p>RTC can be used for wakeup or LED flashing</p></li>
+<li><p>RC32K and Xtal32X control functions</p></li>
+</ul>
+</li>
+<li><p>PD_AON_HBNCORE</p>
+<ul>
+<li><p>Partial power control register</p></li>
+<li><p>Reserve HBN_RAM, which can be used to store programs and data, so that data will not disappear in PDS/HBN0 modes</p></li>
+<li><p>In HBN mode, it has the function of controlling AON_PIN and keeping other IO</p></li>
+<li><p>PIR digital control: PIR is a Passive Infra-Red (PIR) sensor, a peripheral in HBN area, which can be used as HBN wakeup source</p></li>
+<li><p>Reserve LDO11SOC, LDO15RF, DCDC0, DCDC1 and DCDC2 control registers</p></li>
+<li><p>Reserve XTAL, TSEN, Acomp0/1 and GPADC control registers</p></li>
+<li><p>Reserve 4 readable and writable registers to save data in PDS/HBN0 modes</p></li>
+</ul>
+</li>
+<li><p>PD_CORE</p>
+<ul>
+<li><p>The PDS state machine controls the power, isolation unit, reset, clock, and memory of PD_CORE_MISC/PD_USB/PD_CPU/PD_WB</p></li>
+<li><p>Reserve PDS_RAM, so that data will not disappear in PDS mode</p></li>
+<li><p>WIFI/BLE timer control</p></li>
+<li><p>160KB WRAM Retention/Sleep</p></li>
+<li><p>Control the PDS interrupt and wakeup function</p></li>
+<li><p>Reserve the control of GPIO0~15/20~36</p></li>
+<li><p>Reserve the control of RC32M</p></li>
+<li><p>PDS_Timer timer</p></li>
+</ul>
+</li>
+<li><p>PD_CORE_MISC</p>
+<ul>
+<li><p>PD_CORE_MISC_DIG and PD_CORE_MISC_ANA are collectively referred to PD_CORE_MISC</p></li>
+<li><p>Peripheral (including I2C/SDIO/UART/FLASH/SPI/ADC/DAC/GPIO/PWM)</p></li>
+<li><p>Chip GLB register</p></li>
+</ul>
+</li>
+<li><p>PD_USB</p>
+<ul>
+<li><p>USB controller</p></li>
+</ul>
+</li>
+<li><p>PD_CPU</p>
+<ul>
+<li><p>NP_CPU and cache unit</p></li>
+<li><p>ROM, TCM</p></li>
+</ul>
+</li>
+<li><p>PD_WB</p>
+<ul>
+<li><p>WIFI PHY/MAC</p></li>
+<li><p>BLE PHY/MAC</p></li>
+<li><p>RF Controller</p></li>
+</ul>
+</li>
+</ul>
+<p>Each power domain is controlled by 8 different power modes as shown below:</p>
+<table class="colwidths-given docutils align-center" id="id2" style="width: 100%">
+<caption><span class="caption-number">Table 24.1 </span><span class="caption-text">Power mode</span><a class="headerlink" href="#id2" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 5%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 13%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 12%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head" rowspan="2"><p>NO.</p></th>
+<th class="head" rowspan="2"><p>Scenario</p></th>
+<th class="head" colspan="8"><p>Power Domain</p></th>
+</tr>
+<tr class="row-even"><th class="head"><p>PD_AON</p></th>
+<th class="head"><p>PD_AON_HBNRTC</p></th>
+<th class="head"><p>PD_AON_HBNCORE</p></th>
+<th class="head"><p>PD_CORE</p></th>
+<th class="head"><p>PD_CORE_MISC</p></th>
+<th class="head"><p>PD_USB</p></th>
+<th class="head"><p>PD_CPU</p></th>
+<th class="head"><p>PD_WB</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Normal</p></td>
+<td><p>ON</p></td>
+<td><p>ON</p></td>
+<td><p>ON</p></td>
+<td><p>ON</p></td>
+<td><p>ON</p></td>
+<td><p>ON</p></td>
+<td><p>ON</p></td>
+<td><p>ON</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>PDS1</p></td>
+<td><p>ON</p></td>
+<td><p>ON</p></td>
+<td><p>ON</p></td>
+<td><p>ON</p></td>
+<td><p>ON</p></td>
+<td><p>ON</p></td>
+<td><p>ON</p></td>
+<td><p>OFF</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>PDS2</p></td>
+<td><p>ON</p></td>
+<td><p>ON</p></td>
+<td><p>ON</p></td>
+<td><p>ON</p></td>
+<td><p>ON</p></td>
+<td><p>ON</p></td>
+<td><p>OFF</p></td>
+<td><p>ON</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>PDS3</p></td>
+<td><p>ON</p></td>
+<td><p>ON</p></td>
+<td><p>ON</p></td>
+<td><p>ON</p></td>
+<td><p>ON</p></td>
+<td><p>ON</p></td>
+<td><p>OFF</p></td>
+<td><p>OFF</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>PDS7</p></td>
+<td><p>ON</p></td>
+<td><p>ON</p></td>
+<td><p>ON</p></td>
+<td><p>ON</p></td>
+<td><p>ON</p></td>
+<td><p>OFF</p></td>
+<td><p>OFF</p></td>
+<td><p>OFF</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>PDS15</p></td>
+<td><p>ON</p></td>
+<td><p>ON</p></td>
+<td><p>ON</p></td>
+<td><p>ON</p></td>
+<td><p>OFF</p></td>
+<td><p>OFF</p></td>
+<td><p>OFF</p></td>
+<td><p>OFF</p></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>HBN0</p></td>
+<td><p>ON</p></td>
+<td><p>ON</p></td>
+<td><p>ON</p></td>
+<td><p>OFF</p></td>
+<td><p>OFF</p></td>
+<td><p>OFF</p></td>
+<td><p>OFF</p></td>
+<td><p>OFF</p></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>HBN1</p></td>
+<td><p>ON</p></td>
+<td><p>ON</p></td>
+<td><p>OFF</p></td>
+<td><p>OFF</p></td>
+<td><p>OFF</p></td>
+<td><p>OFF</p></td>
+<td><p>OFF</p></td>
+<td><p>OFF</p></td>
+</tr>
+<tr class="row-odd"><td><p>9</p></td>
+<td><p>HBN2</p></td>
+<td><p>ON</p></td>
+<td><p>OFF</p></td>
+<td><p>OFF</p></td>
+<td><p>OFF</p></td>
+<td><p>OFF</p></td>
+<td><p>OFF</p></td>
+<td><p>OFF</p></td>
+<td><p>OFF</p></td>
+</tr>
+<tr class="row-even"><td><p>10</p></td>
+<td><p>HBN3</p></td>
+<td><p>OFF</p></td>
+<td><p>OFF</p></td>
+<td><p>OFF</p></td>
+<td><p>OFF</p></td>
+<td><p>OFF</p></td>
+<td><p>OFF</p></td>
+<td><p>OFF</p></td>
+<td><p>OFF</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="wake-up-source">
+<h3><span class="section-number">24.3.2. </span>Wake-up Source<a class="headerlink" href="#wake-up-source" title="Permalink to this headline"></a></h3>
+<p>The chip supports multiple wakeup sources, which can wake up the chip from different power modes.</p>
+<p>The wake-up sources for different power modes are shown in the following table:</p>
+<table class="colwidths-given docutils align-center" id="id3" style="width: 100%">
+<caption><span class="caption-number">Table 24.2 </span><span class="caption-text">Wakeup source</span><a class="headerlink" href="#id3" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 70%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Power mode</p></th>
+<th class="head"><p>Wakeup source</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>PDS0</p></td>
+<td><p>AON_PIN/BOR/RTC/Pir/Acomp0/Acomp1/PDS_Timer/GPIO/IRRX/DM/USB/WIFI</p></td>
+</tr>
+<tr class="row-odd"><td><p>PDS1</p></td>
+<td><p>AON_PIN/BOR/RTC/Pir/Acomp0/Acomp1/PDS_Timer/GPIO/IRRX/DM/USB</p></td>
+</tr>
+<tr class="row-even"><td><p>PDS2</p></td>
+<td><p>AON_PIN/BOR/RTC/Pir/Acomp0/Acomp1/PDS_Timer/GPIO/IRRX/DM/USB/WIFI</p></td>
+</tr>
+<tr class="row-odd"><td><p>PDS3</p></td>
+<td><p>AON_PIN/BOR/RTC/Pir/Acomp0/Acomp1/PDS_Timer/GPIO/IRRX/DM/USB</p></td>
+</tr>
+<tr class="row-even"><td><p>PDS7</p></td>
+<td><p>AON_PIN/BOR/RTC/Pir/Acomp0/Acomp1/PDS_Timer/GPIO/IRRX/DM</p></td>
+</tr>
+<tr class="row-odd"><td><p>PDS15</p></td>
+<td><p>AON_PIN/BOR/RTC/Pir/Acomp0/Acomp1/PDS_Timer</p></td>
+</tr>
+<tr class="row-even"><td><p>HBN0</p></td>
+<td><p>AON_PIN/BOR/RTC/Pir/Acomp0/Acomp1</p></td>
+</tr>
+<tr class="row-odd"><td><p>HBN1</p></td>
+<td><p>AON_PIN/RTC</p></td>
+</tr>
+<tr class="row-even"><td><p>HBN2</p></td>
+<td><p>AON_PIN</p></td>
+</tr>
+<tr class="row-odd"><td><p>HBN3</p></td>
+<td><p>Reapply power to VDDIO2</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="power-modes">
+<h3><span class="section-number">24.3.3. </span>Power Modes<a class="headerlink" href="#power-modes" title="Permalink to this headline"></a></h3>
+<p><strong>Operating mode</strong></p>
+<p>The chip provides independent clock control between CPU and peripherals. The GLB and clock sections detail the clock control of each module. The software can perform clock control over CPUs or peripherals that are not in use according to the current application scenario.
+The clock control provides real-time response, so there is no need to worry about the response time in this working mode.</p>
+<p><strong>Power-down sleep mode</strong></p>
+<p>The power-down mode consumes less power than the working mode. In the PDS mode, the clocks other than RTC will be controlled and switched to the internal low-speed clocks, and the external crystal oscillator and PLL will be turned off to save more power, so there will be a time delay when entering and exiting this low-power mode. After the power-down sleep mode is enabled, the data in the OCRAM area can automatically switch to the “retention” state and remain, and automatically exit this state after wake-up.</p>
+<ol class="arabic simple">
+<li><p>Enter Idle Power Saving Mode</p></li>
+</ol>
+<p>The software can make this module enter the power-down mode through PDS configuration, waiting for processing. After entering the wait for interrupt (WFI) mode, PDS will trigger the clock control module to perform the gate clock operation, and notify the analog circuit to turn off the PLL and external crystal oscillator</p>
+<ol class="arabic simple" start="2">
+<li><p>Exit Idle Power Saving Mode</p></li>
+</ol>
+<p>There are two ways to exit the idle power saving mode. One is that a specific interrupt or event stops the idle state. The other is that the time in PDS_TIM set by the software is met. Both will trigger PDS to exit the power-down mode. Considering that it takes about 1 ms to turn on the crystal oscillator, PDS allows software to turn on the crystal oscillator in advance, to wake up PDS faster.
+When PDS is ready to wake up, it will notify CPU to exit the WFI mode through interrupt.</p>
+<p><strong>HBN</strong></p>
+<p>In the sleep mode, most of the chip logic is powered off (Vcore) while the AON power is kept ON, and the internal circuit will not wake up until an external event is received.
+This mode can achieve ultimate power saving, but it takes the longest response time compared with the first two modes, so it suits the case where the chip does not need to work for a long time, to prolong the battery life.
+As most circuits will be powered off in this mode, the corresponding register values and memory data will disappear. Therefore, there is a 4 KB HBN_RAM reserved in HBN that will not be powered off in sleep state. The data or state that the software needs to save can be copied to this memory before the chip enters the sleep mode. When recovering from the sleep mode, the chip can access data directly from RAM, which can usually be used as a record of state or a quick data recovery.</p>
+</section>
+<section id="io-retention">
+<h3><span class="section-number">24.3.4. </span>IO Retention<a class="headerlink" href="#io-retention" title="Permalink to this headline"></a></h3>
+<p>IO retention includes AON_IO retention and PDS_IO retention. In the PDS 1/2/3/7 mode, for the chip’s MISC domain is still powered, GPIO can be controlled by the glb register. After the glb register is powered off, AON_CTRL and PDS can control the IE/PD/PU of AON_IO and PDS_IO.</p>
+<p><strong>AON_IO</strong></p>
+<p>AON_IO refers to GPIO16/17/18/19 . GPIO16/17 can be used as XTAL32K input and output.</p>
+<p>When reg_en_aon_ctrl_gpio is 1, reg_en_aon_ctrl_gpio[3:0] controls whether GPIO16/17/18/19 are controlled by AON_HW. When reg_en_aon_ctrl_gpio is 1, the pull-up enable of AON_IO is controlled by reg_aon_gpio_pu, the pull-down enable is controlled by reg_aon_gpio_pd, IE/SMT is controlled by reg_aon_gpio_ie_smt, and OE is controlled by reg_aon_gpio_oe.</p>
+<p>1. Hardware IO retention
+HBN can control the IE/PD/PU/OE/O of AON_IO to achieve IO retention.
+When reg_en_aon_ctrl_gpio is 1, the pull-up enable of AON_IO is controlled by reg_aon_pad_pu, the pull-down enable is controlled by reg_aon_pad_pd, OE is controlled by reg_aon_pad_oe, and IE/SMT is controlled by reg_aon_pad_ie_smt.
+For example, when reg_en_aon_ctrl_gpio is 0 and reg_aon_pad_pu is 1, the pull-up function cannot be implemented; when reg_aon_gpio_ie_smt is 1 and reg_aon_pad_pu is 1, the pull-up function can be implemented.</p>
+<p>2. Software IO keep
+After setting reg_aon_gpio_iso_mode to 1, when entering HBN mode, AON PAD can keep OEO, but PUPD cannot keep it; after HBN wakes up, AON PAD state will still keep, you need to set reg_aon_gpio_iso_mode to 0 before leaving IO On hold.
+For example, GPIO16 keeps a high level in HBN mode, it needs to be configured as a normal IO function first, then use the glb register to configure it to output a high level, and finally configure reg_aon_gpio_iso_mode to 1, then enter the HBN mode.</p>
+<p><strong>PDS_IO</strong></p>
+<p>PDS_IO refers to other GPIOs except AON_IO, a total of 30 GPIOs, divided into 2 groups:</p>
+<ul class="simple">
+<li><p>GPIO0~15</p></li>
+<li><p>GPIO20~33</p></li>
+</ul>
+<p>Note that GPIO16~19 can be controlled by PDS to achieve software IO retention, but cannot achieve hardware IO retention.</p>
+<p>1. Hardware IO retention
+The IE/PD/PU of PDS_IO can be controlled by the pds_gpio_i_set register, the same group of GPIOs must maintain the same level.
+For example, if GPIO0 is configured as a pull-up, then GPIO8 is also configured as a pull-up.</p>
+<p>2. Software IO keep
+When cr_pds_gpio_iso_mode is 1, after entering PDS7 mode, if cr_pds_gpio_kee_en[0], [1], [2] are 1, GPIO0~15, GPIO20~33 (excluding GPIO21/22/28/29), GPIO16~19 respectively enter the GPIO hold state. After the PDS wakes up, the PDS_IO state will still be maintained. You need to set cr_pds_gpio_iso_mode to 0 before leaving the IO hold state.
+The advantage of this IO retention method is that the same group of GPIOs can be kept at different levels.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="SDIO.html" class="btn btn-neutral float-left" title="23. SDIO" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="SEC_ENG.html" class="btn btn-neutral float-right" title="25. SEC ENG" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

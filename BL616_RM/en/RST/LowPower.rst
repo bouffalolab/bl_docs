@@ -236,18 +236,3 @@ For example, if GPIO0 is configured as a pull-up, then GPIO8 is also configured 
 When cr_pds_gpio_iso_mode is 1, after entering PDS7 mode, if cr_pds_gpio_kee_en[0], [1], [2] are 1, GPIO0~15, GPIO20~33 (excluding GPIO21/22/28/29), GPIO16~19 respectively enter the GPIO hold state. After the PDS wakes up, the PDS_IO state will still be maintained. You need to set cr_pds_gpio_iso_mode to 0 before leaving the IO hold state.
 The advantage of this IO retention method is that the same group of GPIOs can be kept at different levels.
 
-.. only:: html
-
-   .. include:: pds_register.rst
-
-.. raw:: latex
-
-   \input{../../en/content/pds}
-
-.. only:: html
-
-   .. include:: HBN_register.rst
-
-.. raw:: latex
-
-   \input{../../en/content/HBN}

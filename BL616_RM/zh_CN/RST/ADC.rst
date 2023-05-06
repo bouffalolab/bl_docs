@@ -181,12 +181,12 @@ ADC 中断
 -------------
 
 - ADC 转换完成中断
-- ADC 正极采样超量程中断
-- ADC 负极采样超量程中断
 
-当 ADC 转换完成并将结果存入 FIFO 时，通过 gpadc_rdy_mask 设置中断开关，选择是否触发 ADC 转换完成中断。
-当 ADC 在正极采样超量程和负极采样超量程时，通过gpadc_pos_satur_mask，gpadc_neg_satur_mask 设置中断开关，选择是否触发中断，
-当中断产生时，可通过gpadc_pos_satur 和gpadc_neg_satur寄存器查询中断状态，通过设置gpadc_pos_satur_clr和gpadc_neg_satur_clr来清除中断。该功能可以用来判断输入电压是否异常。
+  * 当 ADC 转换完成并将结果存入 FIFO 时，通过 gpadc_rdy_mask 设置中断开关，选择是否触发 ADC 转换完成中断。
+
+- ADC 正（负）极采样超量程中断
+
+  * 当 ADC 在正极采样超量程和负极采样超量程时，通过gpadc_pos_satur_mask，gpadc_neg_satur_mask 设置中断开关，选择是否触发中断，当中断产生时，可通过gpadc_pos_satur 和gpadc_neg_satur寄存器查询中断状态，通过设置gpadc_pos_satur_clr和gpadc_neg_satur_clr来清除中断。该功能可以用来判断输入电压是否异常。
 
 ADC FIFO
 -------------
@@ -214,8 +214,7 @@ FIFO 数据个数并从 FIFO 读出这些数据，然后设置 gpadc_rdy_clr 清
 
 **DMA模式**
 
-用户设定 gpadc_dma_en 控制位，可以配合 DMA 完成转换数据到内存的搬运，在使用 DMA 模式时，通过 gpadc_fifo_thl 设置 ADC FIFO 发送
-DMA 请求的数据个数阈值，DMA 在收到请求时，会自动根据用户设定的参数，从FIFO搬运指定个数的结果到对应的内存。
+用户设定 gpadc_dma_en 控制位，可以配合 DMA 完成转换数据到内存的搬运，在使用 DMA 模式时，通过 gpadc_fifo_thl 设置 ADC FIFO 发送DMA 请求的数据个数阈值，DMA 在收到请求时，会自动根据用户设定的参数，从FIFO搬运指定个数的结果到对应的内存。
 
 
 ADC设置流程
@@ -227,8 +226,7 @@ ADC设置流程
 
 **根据使用的通道设置GPIO**
 
-根据使用的模拟引脚，确定使用的通道号，初始化对应的GPIO为模拟功能，需要注意的是，在设定GPIO为模拟输入的时候，不要设置GPIO的上拉
-或者下拉，需要设置为浮空输入。
+根据使用的模拟引脚，确定使用的通道号，初始化对应的GPIO为模拟功能，需要注意的是，在设定GPIO为模拟输入的时候，不要设置GPIO的上拉或者下拉，需要设置为浮空输入。
 
 **设定要转换的通道**
 

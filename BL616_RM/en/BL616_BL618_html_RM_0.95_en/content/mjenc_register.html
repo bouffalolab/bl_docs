@@ -1,0 +1,1950 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register description &mdash; BL616/BL618 Reference Manual  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL616/BL618 Reference Manual
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. System and Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. Reset and Clock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPIO.html">4. GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">5. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">6. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">7. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">8. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">9. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">10. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">11. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">12. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">13. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2S.html">14. I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AudioDAC.html">15. AudioDAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AudioADC.html">16. AudioADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EMAC.html">17. Emac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USB.html">18. USB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cam.html">19. CAM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MJPEG.html">20. MJPEG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBI.html">21. DBI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SDH.html">22. SDH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SDIO.html">23. SDIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LowPower.html">24. LowPower</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SEC_ENG.html">25. SEC ENG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">26. Revision history</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL616/BL618 Reference Manual</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Register description</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="register-description">
+<h1>Register description<a class="headerlink" href="#register-description" title="Permalink to this headline"></a></h1>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 52%" />
+<col style="width: 48%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Name</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mjpeg-control-1">mjpeg_control_1</a></p></td>
+<td><p>MJPEG configure</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mjpeg-control-2">mjpeg_control_2</a></p></td>
+<td><p>MJPEG software mode</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mjpeg-yy-frame-addr">mjpeg_yy_frame_addr</a></p></td>
+<td><p>Memory start address of Y</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mjpeg-uv-frame-addr">mjpeg_uv_frame_addr</a></p></td>
+<td><p>Memory start address of UV</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mjpeg-yuv-mem">mjpeg_yuv_mem</a></p></td>
+<td><p>Number of Y/UV block line</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#jpeg-frame-addr">jpeg_frame_addr</a></p></td>
+<td><p>Memory start address of JPEG</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#jpeg-store-memory">jpeg_store_memory</a></p></td>
+<td><p>Burst count of memory</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mjpeg-control-3">mjpeg_control_3</a></p></td>
+<td><p>Interrupt and bus status</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mjpeg-frame-fifo-pop">mjpeg_frame_fifo_pop</a></p></td>
+<td><p>Interrupt clear and pop</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mjpeg-frame-size">mjpeg_frame_size</a></p></td>
+<td><p>Total block count</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mjpeg-header-byte">mjpeg_header_byte</a></p></td>
+<td><p>YUV order and auto fill</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mjpeg-swap-mode">mjpeg_swap_mode</a></p></td>
+<td><p>Swap mode</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mjpeg-swap-bit-cnt">mjpeg_swap_bit_cnt</a></p></td>
+<td><p>Remain bit count</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mjpeg-yuv-mem-sw">mjpeg_yuv_mem_sw</a></p></td>
+<td><p>Number of kick block line</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mjpeg-y-frame-read-status-1">mjpeg_Y_frame_read_status_1</a></p></td>
+<td><p>Y read status1</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mjpeg-y-frame-read-status-2">mjpeg_Y_frame_read_status_2</a></p></td>
+<td><p>Y read status2</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mjpeg-y-frame-write-status">mjpeg_Y_frame_write_status</a></p></td>
+<td><p>Y write status</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mjpeg-uv-frame-read-status-1">mjpeg_UV_frame_read_status_1</a></p></td>
+<td><p>UV read status1</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mjpeg-uv-frame-read-status-2">mjpeg_UV_frame_read_status_2</a></p></td>
+<td><p>UV read status2</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mjpeg-uv-frame-write-status">mjpeg_UV_frame_write_status</a></p></td>
+<td><p>UV write status</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mjpeg-frame-w-hblk-status">mjpeg_frame_w_hblk_status</a></p></td>
+<td><p>Vertical block write status</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mjpeg-start-addr0">mjpeg_start_addr0</a></p></td>
+<td><p>Start address of frame0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mjpeg-bit-cnt0">mjpeg_bit_cnt0</a></p></td>
+<td><p>Bit count of frame0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mjpeg-start-addr1">mjpeg_start_addr1</a></p></td>
+<td><p>Start address of frame1</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mjpeg-bit-cnt1">mjpeg_bit_cnt1</a></p></td>
+<td><p>Bit count of frame1</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mjpeg-start-addr2">mjpeg_start_addr2</a></p></td>
+<td><p>Start address of frame2</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mjpeg-bit-cnt2">mjpeg_bit_cnt2</a></p></td>
+<td><p>Bit count of frame2</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mjpeg-start-addr3">mjpeg_start_addr3</a></p></td>
+<td><p>Start address of frame3</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mjpeg-bit-cnt3">mjpeg_bit_cnt3</a></p></td>
+<td><p>Bit count of frame3</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mjpeg-q-enc">mjpeg_q_enc</a></p></td>
+<td><p>Quantize SRAM setting</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mjpeg-frame-id-10">mjpeg_frame_id_10</a></p></td>
+<td><p>ID of frame 0/1</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mjpeg-frame-id-32">mjpeg_frame_id_32</a></p></td>
+<td><p>ID of frame 2/3</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mjpeg-debug">mjpeg_debug</a></p></td>
+<td><p>ID latch timing</p></td>
+</tr>
+</tbody>
+</table>
+<section id="mjpeg-control-1">
+<h2>mjpeg_control_1<a class="headerlink" href="#mjpeg-control-1" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x30021000</p>
+<figure class="align-center">
+<img alt="../_images/mjenc_mjpeg_control_1.svg" src="../_images/mjenc_mjpeg_control_1.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:30</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><p>29:24</p></td>
+<td rowspan="2"><p>reg_mjpeg_hw_frame</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>6’d0</p></td>
+<td rowspan="2"><p>Non-SW mode frame cnt</p>
+<p>0 - Non auto stop</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>23:14</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td rowspan="5"><p>13:12</p></td>
+<td rowspan="5"><p>reg_yuv_mode</p></td>
+<td rowspan="5"><p>r/w</p></td>
+<td rowspan="5"><p>2’d0</p></td>
+<td rowspan="5"><p>YUV format setting</p>
+<p>2’d0 : YUV420 Planar</p>
+<p>2’d1 : YUV400 grey scale</p>
+<p>2’d2 : YUV422 Planar</p>
+<p>2’d3 : INTV422</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>11</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td rowspan="6"><p>10:8</p></td>
+<td rowspan="6"><p>reg_w_xlen</p></td>
+<td rowspan="6"><p>r/w</p></td>
+<td rowspan="6"><p>3’d3</p></td>
+<td rowspan="6"><p>AXI burst length setting</p>
+<p>3’d0: Single</p>
+<p>3’d1: INCR4</p>
+<p>3’d2: INCR8</p>
+<p>3’d3: INCR16</p>
+<p>Others: RSVD</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="2"><p>7</p></td>
+<td rowspan="2"><p>reg_read_fwrap</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>1’b1</p></td>
+<td rowspan="2"><p>Only effect in non SW mode</p>
+<p>This bit determine whether YUV frame read start &#64; start address</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>reg_reflect_dmy</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>UV dummy with relect</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>reg_last_hf_hblk_dmy</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>MJPEG last half vertical block with dummy data 8’h80</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>reg_last_hf_wblk_dmy</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>MJPEG last half horizational block with dummy data 8’h80</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><p>3</p></td>
+<td rowspan="2"><p>reg_hw_mode_swen</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>1’b0</p></td>
+<td rowspan="2"><p>Only word In hardware mode.</p>
+<p>SW enable immediately to skip waiting first frame done</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="2"><p>2</p></td>
+<td rowspan="2"><p>reg_order_u_even</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>1’b1</p></td>
+<td rowspan="2"><p>1’b0: U is odd byte of UV frame / V is even byte of UV frame</p>
+<p>1’b1: U is even byte of UV frame / V is odd byte of UV frame</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>reg_mjpeg_bit_order</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>MJPEG bitstream byte order adjustment</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>reg_mjpeg_enable</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>MJPEG enable</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="mjpeg-control-2">
+<h2>mjpeg_control_2<a class="headerlink" href="#mjpeg-control-2" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x30021004</p>
+<figure class="align-center">
+<img alt="../_images/mjenc_mjpeg_control_2.svg" src="../_images/mjenc_mjpeg_control_2.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>reg_mjpeg_wait_cycle</p></td>
+<td><p>r/w</p></td>
+<td><p>16’h100</p></td>
+<td><p>Cycle count in wait state</p></td>
+</tr>
+<tr class="row-odd"><td><p>15:13</p></td>
+<td><p>reg_uv_dvp2axi_sel</p></td>
+<td><p>r/w</p></td>
+<td><p>3’d1</p></td>
+<td><p>DVP2AXI selection for UV frame(Don’t care if using SW mode)</p></td>
+</tr>
+<tr class="row-even"><td><p>12:10</p></td>
+<td><p>reg_yy_dvp2axi_sel</p></td>
+<td><p>r/w</p></td>
+<td><p>3’d0</p></td>
+<td><p>DVP2AXI selection for Y frame(Don’t care if using SW mode)</p></td>
+</tr>
+<tr class="row-odd"><td><p>9</p></td>
+<td><p>reg_mjpeg_sw_run</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>MJPEG SW mode run (should enable reg_mjpeg_sw_mode before reg_mjpeg_sw_run)</p></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>reg_mjpeg_sw_mode</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>MJPEG SW mode enable (should enable reg_mjpeg_sw_mode before reg_mjpeg_sw_run)</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><p>7</p></td>
+<td rowspan="3"><p>reg_sw_kick_mode</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>MJPEG SW mode hblk kick mode</p>
+<p>1’b0: SW frame mode</p>
+<p>1’b1: SW kick mode</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>reg_sw_kick</p></td>
+<td><p>w1p</p></td>
+<td><p>1’b0</p></td>
+<td><p>MJPEG SW mode hblk kick</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>4:0</p></td>
+<td><p>reg_sw_frame</p></td>
+<td><p>r/w</p></td>
+<td><p>5’d0</p></td>
+<td><p>MJPEG SW mode frame count</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="mjpeg-yy-frame-addr">
+<h2>mjpeg_yy_frame_addr<a class="headerlink" href="#mjpeg-yy-frame-addr" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x30021008</p>
+<figure class="align-center">
+<img alt="../_images/mjenc_mjpeg_yy_frame_addr.svg" src="../_images/mjenc_mjpeg_yy_frame_addr.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>reg_yy_addr_start</p></td>
+<td><p>r/w</p></td>
+<td><p>32’h80000000</p></td>
+<td><p>Memory start address of Y frame</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="mjpeg-uv-frame-addr">
+<h2>mjpeg_uv_frame_addr<a class="headerlink" href="#mjpeg-uv-frame-addr" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x3002100c</p>
+<figure class="align-center">
+<img alt="../_images/mjenc_mjpeg_uv_frame_addr.svg" src="../_images/mjenc_mjpeg_uv_frame_addr.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>reg_uv_addr_start</p></td>
+<td><p>r/w</p></td>
+<td><p>32’h80000000</p></td>
+<td><p>Memory start address of UV frame</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="mjpeg-yuv-mem">
+<h2>mjpeg_yuv_mem<a class="headerlink" href="#mjpeg-yuv-mem" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x30021010</p>
+<figure class="align-center">
+<img alt="../_images/mjenc_mjpeg_yuv_mem.svg" src="../_images/mjenc_mjpeg_yuv_mem.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:29</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>28:16</p></td>
+<td><p>reg_uv_mem_hblk</p></td>
+<td><p>r/w</p></td>
+<td><p>13’h2</p></td>
+<td><p>Memory to  store block line for UV frame</p></td>
+</tr>
+<tr class="row-even"><td><p>15:13</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>12:0</p></td>
+<td><p>reg_yy_mem_hblk</p></td>
+<td><p>r/w</p></td>
+<td><p>13’h2</p></td>
+<td><p>Memory to  store block line for Y frame</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="jpeg-frame-addr">
+<h2>jpeg_frame_addr<a class="headerlink" href="#jpeg-frame-addr" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x30021014</p>
+<figure class="align-center">
+<img alt="../_images/mjenc_jpeg_frame_addr.svg" src="../_images/mjenc_jpeg_frame_addr.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>reg_w_addr_start</p></td>
+<td><p>r/w</p></td>
+<td><p>32’h80400000</p></td>
+<td><p>Memory start address of JPEG frame</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="jpeg-store-memory">
+<h2>jpeg_store_memory<a class="headerlink" href="#jpeg-store-memory" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x30021018</p>
+<figure class="align-center">
+<img alt="../_images/mjenc_jpeg_store_memory.svg" src="../_images/mjenc_jpeg_store_memory.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>reg_w_burst_cnt</p></td>
+<td><p>r/w</p></td>
+<td><p>32’h4000</p></td>
+<td><p>Memory to store jpeg image burst count</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="mjpeg-control-3">
+<h2>mjpeg_control_3<a class="headerlink" href="#mjpeg-control-3" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x3002101c</p>
+<figure class="align-center">
+<img alt="../_images/mjenc_mjpeg_control_3.svg" src="../_images/mjenc_mjpeg_control_3.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>30</p></td>
+<td><p>sts_swap_int</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>Swap memory block interrupt status</p></td>
+</tr>
+<tr class="row-even"><td><p>29</p></td>
+<td><p>reg_int_swap_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Swap memory block interrupt enable</p></td>
+</tr>
+<tr class="row-odd"><td><p>28:24</p></td>
+<td><p>frame_valid_cnt</p></td>
+<td><p>r</p></td>
+<td><p>5’d0</p></td>
+<td><p>Frame count valid in status</p></td>
+</tr>
+<tr class="row-even"><td><p>23</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>22</p></td>
+<td><p>sts_idle_int</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>Normal Write interrupt status</p></td>
+</tr>
+<tr class="row-even"><td><p>21</p></td>
+<td><p>reg_int_idle_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Back idle interrupt enable</p></td>
+</tr>
+<tr class="row-odd"><td><p>20:16</p></td>
+<td><p>reg_frame_cnt_trgr_int</p></td>
+<td><p>r/w</p></td>
+<td><p>5’d0</p></td>
+<td><p>Frame threshold to issue interrupt</p></td>
+</tr>
+<tr class="row-even"><td><p>15</p></td>
+<td><p>axi_write_idle</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>AXI write bus idle state</p></td>
+</tr>
+<tr class="row-odd"><td><p>14</p></td>
+<td><p>axi_read_idle</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>AXI read bus idle state</p></td>
+</tr>
+<tr class="row-even"><td><p>13</p></td>
+<td><p>mjpeg_manf</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>MJPEG in SW run state</p></td>
+</tr>
+<tr class="row-odd"><td><p>12</p></td>
+<td><p>mjpeg_mans</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>MJPEG in SW set state</p></td>
+</tr>
+<tr class="row-even"><td><p>11</p></td>
+<td><p>mjpeg_flsh</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>MJPEG in flush state</p></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>mjpeg_wait</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>MJPEG in wait state</p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>mjpeg_func</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>MJPEG in HW function state</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>mjpeg_idle</p></td>
+<td><p>r</p></td>
+<td><p>1’b1</p></td>
+<td><p>MJPEG in idle state</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>sts_frame_int</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>Frame OverWrite interrupt status</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>sts_mem_int</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>Memory OverWrite interrupt status</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>sts_cam_int</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>CAM OverWrite interrupt status (fatal)</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>sts_normal_int</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>Normal Write interrupt status</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>reg_int_frame_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Frame OverWrite interrupt enable</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>reg_int_mem_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>JPEG frame memory OverWrite interrupt enable</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>reg_int_cam_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>YUV frame memory OverWrite interrupt enable (fatal)</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>reg_int_normal_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Normal Write interrupt enable</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="mjpeg-frame-fifo-pop">
+<h2>mjpeg_frame_fifo_pop<a class="headerlink" href="#mjpeg-frame-fifo-pop" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x30021020</p>
+<figure class="align-center">
+<img alt="../_images/mjenc_mjpeg_frame_fifo_pop.svg" src="../_images/mjenc_mjpeg_frame_fifo_pop.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:14</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>13</p></td>
+<td><p>reg_int_swap_clr</p></td>
+<td><p>w1p</p></td>
+<td><p>1’b0</p></td>
+<td><p>Wrire this bit with 1’b1 to trigger swap interrupt clear</p></td>
+</tr>
+<tr class="row-even"><td><p>12</p></td>
+<td><p>reg_int_idle_clr</p></td>
+<td><p>w1p</p></td>
+<td><p>1’b0</p></td>
+<td><p>Wrire this bit with 1’b1 to trigger back idle interrupt clear</p></td>
+</tr>
+<tr class="row-odd"><td><p>11</p></td>
+<td><p>reg_int_frame_clr</p></td>
+<td><p>w1p</p></td>
+<td><p>1’b0</p></td>
+<td><p>Wrire this bit with 1’b1 to trigger frame overwrite interrupt clear</p></td>
+</tr>
+<tr class="row-even"><td><p>10</p></td>
+<td><p>reg_int_mem_clr</p></td>
+<td><p>w1p</p></td>
+<td><p>1’b0</p></td>
+<td><p>Wrire this bit with 1’b1 to trigger memory overwrite interrupt clear</p></td>
+</tr>
+<tr class="row-odd"><td><p>9</p></td>
+<td><p>reg_int_cam_clr</p></td>
+<td><p>w1p</p></td>
+<td><p>1’b0</p></td>
+<td><p>Wrire this bit with 1’b1 to trigger YUV overwrite interrupt clear</p></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>reg_int_normal_clr</p></td>
+<td><p>w1p</p></td>
+<td><p>1’b0</p></td>
+<td><p>Wrire this bit with 1’b1 to trigger normal interrupt clear</p></td>
+</tr>
+<tr class="row-odd"><td><p>7:2</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>reg_w_swap_clr</p></td>
+<td><p>w1p</p></td>
+<td><p>1’b0</p></td>
+<td><p>Free current read memory block</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>rfifo_pop</p></td>
+<td><p>w1p</p></td>
+<td><p>1’b0</p></td>
+<td><p>Write this bit with 1’b1 to trigger JPEG frame fifo pop</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="mjpeg-frame-size">
+<h2>mjpeg_frame_size<a class="headerlink" href="#mjpeg-frame-size" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x30021024</p>
+<figure class="align-center">
+<img alt="../_images/mjenc_mjpeg_frame_size.svg" src="../_images/mjenc_mjpeg_frame_size.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:28</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>27:16</p></td>
+<td><p>reg_frame_hblk</p></td>
+<td><p>r/w</p></td>
+<td><p>12’d20</p></td>
+<td><p>Frame total vertical block count</p></td>
+</tr>
+<tr class="row-even"><td><p>15:12</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>11:0</p></td>
+<td><p>reg_frame_wblk</p></td>
+<td><p>r/w</p></td>
+<td><p>12’d15</p></td>
+<td><p>Frame total horizational block count</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="mjpeg-header-byte">
+<h2>mjpeg_header_byte<a class="headerlink" href="#mjpeg-header-byte" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x30021028</p>
+<figure class="align-center">
+<img alt="../_images/mjenc_mjpeg_header_byte.svg" src="../_images/mjenc_mjpeg_header_byte.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:30</p></td>
+<td><p>reg_v0_order</p></td>
+<td><p>r/w</p></td>
+<td><p>2’d3</p></td>
+<td><p>V order in Interleave mode</p></td>
+</tr>
+<tr class="row-odd"><td><p>29:28</p></td>
+<td><p>reg_y1_order</p></td>
+<td><p>r/w</p></td>
+<td><p>2’d2</p></td>
+<td><p>Y1 order in Interleave mode</p></td>
+</tr>
+<tr class="row-even"><td><p>27:26</p></td>
+<td><p>reg_u0_order</p></td>
+<td><p>r/w</p></td>
+<td><p>2’d1</p></td>
+<td><p>U order in Interleave mode</p></td>
+</tr>
+<tr class="row-odd"><td><p>25:24</p></td>
+<td><p>reg_y0_order</p></td>
+<td><p>r/w</p></td>
+<td><p>2’d0</p></td>
+<td><p>Y0 order in Interleave mode</p></td>
+</tr>
+<tr class="row-even"><td><p>23:17</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>16</p></td>
+<td><p>reg_tail_exp</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Auto fill tail 0xFF and 0xD9</p></td>
+</tr>
+<tr class="row-even"><td><p>15:12</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>11:0</p></td>
+<td><p>reg_head_byte</p></td>
+<td><p>r/w</p></td>
+<td><p>12’h0</p></td>
+<td><p>Preserve head memory space for each frame</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="mjpeg-swap-mode">
+<h2>mjpeg_swap_mode<a class="headerlink" href="#mjpeg-swap-mode" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x30021030</p>
+<figure class="align-center">
+<img alt="../_images/mjenc_mjpeg_swap_mode.svg" src="../_images/mjenc_mjpeg_swap_mode.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:13</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>12</p></td>
+<td><p>sts_swap_fend</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>Current read memory block is frame end</p></td>
+</tr>
+<tr class="row-even"><td><p>11</p></td>
+<td><p>sts_swap_fstart</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>Current read memory block is frame start</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><p>10</p></td>
+<td rowspan="3"><p>sts_read_swap_idx</p></td>
+<td rowspan="3"><p>r</p></td>
+<td rowspan="3"><p>1’b0</p></td>
+<td rowspan="3"><p>Current read memory block index</p>
+<p>0: memory block0</p>
+<p>1: memory block1</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>sts_swap1_full</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>Memory block1 is full</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>sts_swap0_full</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>Memory block0 is full</p></td>
+</tr>
+<tr class="row-even"><td><p>7:1</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>reg_w_swap_mode</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Enable write swap mode</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="mjpeg-swap-bit-cnt">
+<h2>mjpeg_swap_bit_cnt<a class="headerlink" href="#mjpeg-swap-bit-cnt" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x30021034</p>
+<figure class="align-center">
+<img alt="../_images/mjenc_mjpeg_swap_bit_cnt.svg" src="../_images/mjenc_mjpeg_swap_bit_cnt.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td rowspan="2"><p>31:0</p></td>
+<td rowspan="2"><p>frame_swap_end_bit_cnt</p></td>
+<td rowspan="2"><p>r</p></td>
+<td rowspan="2"><p>32’d0</p></td>
+<td rowspan="2"><p>In swap mode frame remain bit count in last block</p>
+<p>Only valid when “sts_swap_fend==1”</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</section>
+<section id="mjpeg-yuv-mem-sw">
+<h2>mjpeg_yuv_mem_sw<a class="headerlink" href="#mjpeg-yuv-mem-sw" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x30021038</p>
+<figure class="align-center">
+<img alt="../_images/mjenc_mjpeg_yuv_mem_sw.svg" src="../_images/mjenc_mjpeg_yuv_mem_sw.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:13</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>12:0</p></td>
+<td><p>reg_sw_kick_hblk</p></td>
+<td><p>r/w</p></td>
+<td><p>13’h2</p></td>
+<td><p>Memory to store block line for frame on SW kick</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="mjpeg-y-frame-read-status-1">
+<h2>mjpeg_Y_frame_read_status_1<a class="headerlink" href="#mjpeg-y-frame-read-status-1" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x30021040</p>
+<figure class="align-center">
+<img alt="../_images/mjenc_mjpeg_Y_frame_read_status_1.svg" src="../_images/mjenc_mjpeg_Y_frame_read_status_1.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:29</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>28:16</p></td>
+<td><p>yy_frm_hblk_r</p></td>
+<td><p>r</p></td>
+<td><p>13’d0</p></td>
+<td><p>Y frame veritical block read status</p></td>
+</tr>
+<tr class="row-even"><td><p>15:13</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>12:0</p></td>
+<td><p>yy_mem_hblk_r</p></td>
+<td><p>r</p></td>
+<td><p>13’d0</p></td>
+<td><p>Y memory veritical block read status</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="mjpeg-y-frame-read-status-2">
+<h2>mjpeg_Y_frame_read_status_2<a class="headerlink" href="#mjpeg-y-frame-read-status-2" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x30021044</p>
+<figure class="align-center">
+<img alt="../_images/mjenc_mjpeg_Y_frame_read_status_2.svg" src="../_images/mjenc_mjpeg_Y_frame_read_status_2.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:24</p></td>
+<td><p>yy_frm_cnt_r</p></td>
+<td><p>r</p></td>
+<td><p>8’d0</p></td>
+<td><p>Y frame read count</p></td>
+</tr>
+<tr class="row-odd"><td><p>23:16</p></td>
+<td><p>yy_mem_rnd_r</p></td>
+<td><p>r</p></td>
+<td><p>8’d0</p></td>
+<td><p>Y memory read round</p></td>
+</tr>
+<tr class="row-even"><td><p>15:13</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>12:0</p></td>
+<td><p>yy_wblk_r</p></td>
+<td><p>r</p></td>
+<td><p>13’d0</p></td>
+<td><p>Y frame horizational block read status</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="mjpeg-y-frame-write-status">
+<h2>mjpeg_Y_frame_write_status<a class="headerlink" href="#mjpeg-y-frame-write-status" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x30021048</p>
+<figure class="align-center">
+<img alt="../_images/mjenc_mjpeg_Y_frame_write_status.svg" src="../_images/mjenc_mjpeg_Y_frame_write_status.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:24</p></td>
+<td><p>yy_frm_cnt_w</p></td>
+<td><p>r</p></td>
+<td><p>8’d0</p></td>
+<td><p>Y frame write count</p></td>
+</tr>
+<tr class="row-odd"><td><p>23:16</p></td>
+<td><p>yy_mem_rnd_w</p></td>
+<td><p>r</p></td>
+<td><p>8’d0</p></td>
+<td><p>Y memory write round</p></td>
+</tr>
+<tr class="row-even"><td><p>15:13</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>12:0</p></td>
+<td><p>yy_mem_hblk_w</p></td>
+<td><p>r</p></td>
+<td><p>13’d0</p></td>
+<td><p>Y memory veritical block write status</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="mjpeg-uv-frame-read-status-1">
+<h2>mjpeg_UV_frame_read_status_1<a class="headerlink" href="#mjpeg-uv-frame-read-status-1" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x3002104c</p>
+<figure class="align-center">
+<img alt="../_images/mjenc_mjpeg_UV_frame_read_status_1.svg" src="../_images/mjenc_mjpeg_UV_frame_read_status_1.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:29</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>28:16</p></td>
+<td><p>uv_frm_hblk_r</p></td>
+<td><p>r</p></td>
+<td><p>13’d0</p></td>
+<td><p>UV frame veritical block read status</p></td>
+</tr>
+<tr class="row-even"><td><p>15:13</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>12:0</p></td>
+<td><p>uv_mem_hblk_r</p></td>
+<td><p>r</p></td>
+<td><p>13’d0</p></td>
+<td><p>UV memory veritical block read status</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="mjpeg-uv-frame-read-status-2">
+<h2>mjpeg_UV_frame_read_status_2<a class="headerlink" href="#mjpeg-uv-frame-read-status-2" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x30021050</p>
+<figure class="align-center">
+<img alt="../_images/mjenc_mjpeg_UV_frame_read_status_2.svg" src="../_images/mjenc_mjpeg_UV_frame_read_status_2.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:24</p></td>
+<td><p>uv_frm_cnt_r</p></td>
+<td><p>r</p></td>
+<td><p>8’d0</p></td>
+<td><p>UV frame read count</p></td>
+</tr>
+<tr class="row-odd"><td><p>23:16</p></td>
+<td><p>uv_mem_rnd_r</p></td>
+<td><p>r</p></td>
+<td><p>8’d0</p></td>
+<td><p>UV memory read round</p></td>
+</tr>
+<tr class="row-even"><td><p>15:13</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>12:0</p></td>
+<td><p>uv_wblk_r</p></td>
+<td><p>r</p></td>
+<td><p>13’d0</p></td>
+<td><p>UV frame horizational block read status</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="mjpeg-uv-frame-write-status">
+<h2>mjpeg_UV_frame_write_status<a class="headerlink" href="#mjpeg-uv-frame-write-status" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x30021054</p>
+<figure class="align-center">
+<img alt="../_images/mjenc_mjpeg_UV_frame_write_status.svg" src="../_images/mjenc_mjpeg_UV_frame_write_status.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:24</p></td>
+<td><p>uv_frm_cnt_w</p></td>
+<td><p>r</p></td>
+<td><p>8’d0</p></td>
+<td><p>UV frame write count</p></td>
+</tr>
+<tr class="row-odd"><td><p>23:16</p></td>
+<td><p>uv_mem_rnd_w</p></td>
+<td><p>r</p></td>
+<td><p>8’d0</p></td>
+<td><p>UV memory write round</p></td>
+</tr>
+<tr class="row-even"><td><p>15:13</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>12:0</p></td>
+<td><p>uv_mem_hblk_w</p></td>
+<td><p>r</p></td>
+<td><p>13’d0</p></td>
+<td><p>UV memory veritical block write status</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="mjpeg-frame-w-hblk-status">
+<h2>mjpeg_frame_w_hblk_status<a class="headerlink" href="#mjpeg-frame-w-hblk-status" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x30021058</p>
+<figure class="align-center">
+<img alt="../_images/mjenc_mjpeg_frame_w_hblk_status.svg" src="../_images/mjenc_mjpeg_frame_w_hblk_status.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:29</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>28:16</p></td>
+<td><p>uv_frm_hblk_w</p></td>
+<td><p>r</p></td>
+<td><p>13’d0</p></td>
+<td><p>UV frame vertical block write status</p></td>
+</tr>
+<tr class="row-even"><td><p>15:13</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>12:0</p></td>
+<td><p>yy_frm_hblk_w</p></td>
+<td><p>r</p></td>
+<td><p>13’d0</p></td>
+<td><p>YY frame vertical block write status</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="mjpeg-start-addr0">
+<h2>mjpeg_start_addr0<a class="headerlink" href="#mjpeg-start-addr0" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x30021080</p>
+<figure class="align-center">
+<img alt="../_images/mjenc_mjpeg_start_addr0.svg" src="../_images/mjenc_mjpeg_start_addr0.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>frame_start_addr_0</p></td>
+<td><p>r</p></td>
+<td><p>32’d0</p></td>
+<td><p>MJPEG FRAME0 Start address</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="mjpeg-bit-cnt0">
+<h2>mjpeg_bit_cnt0<a class="headerlink" href="#mjpeg-bit-cnt0" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x30021084</p>
+<figure class="align-center">
+<img alt="../_images/mjenc_mjpeg_bit_cnt0.svg" src="../_images/mjenc_mjpeg_bit_cnt0.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>frame_bit_cnt_0</p></td>
+<td><p>r</p></td>
+<td><p>32’d0</p></td>
+<td><p>MJPEG FRAME0 total bit count</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="mjpeg-start-addr1">
+<h2>mjpeg_start_addr1<a class="headerlink" href="#mjpeg-start-addr1" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x30021088</p>
+<figure class="align-center">
+<img alt="../_images/mjenc_mjpeg_start_addr1.svg" src="../_images/mjenc_mjpeg_start_addr1.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>frame_start_addr_1</p></td>
+<td><p>r</p></td>
+<td><p>32’d0</p></td>
+<td><p>MJPEG FRAME1 Start address</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="mjpeg-bit-cnt1">
+<h2>mjpeg_bit_cnt1<a class="headerlink" href="#mjpeg-bit-cnt1" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x3002108c</p>
+<figure class="align-center">
+<img alt="../_images/mjenc_mjpeg_bit_cnt1.svg" src="../_images/mjenc_mjpeg_bit_cnt1.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>frame_bit_cnt_1</p></td>
+<td><p>r</p></td>
+<td><p>32’d0</p></td>
+<td><p>MJPEG FRAME1 total bit count</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="mjpeg-start-addr2">
+<h2>mjpeg_start_addr2<a class="headerlink" href="#mjpeg-start-addr2" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x30021090</p>
+<figure class="align-center">
+<img alt="../_images/mjenc_mjpeg_start_addr2.svg" src="../_images/mjenc_mjpeg_start_addr2.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>frame_start_addr_2</p></td>
+<td><p>r</p></td>
+<td><p>32’d0</p></td>
+<td><p>MJPEG FRAME2 Start address</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="mjpeg-bit-cnt2">
+<h2>mjpeg_bit_cnt2<a class="headerlink" href="#mjpeg-bit-cnt2" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x30021094</p>
+<figure class="align-center">
+<img alt="../_images/mjenc_mjpeg_bit_cnt2.svg" src="../_images/mjenc_mjpeg_bit_cnt2.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>frame_bit_cnt_2</p></td>
+<td><p>r</p></td>
+<td><p>32’d0</p></td>
+<td><p>MJPEG FRAME2 total bit count</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="mjpeg-start-addr3">
+<h2>mjpeg_start_addr3<a class="headerlink" href="#mjpeg-start-addr3" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x30021098</p>
+<figure class="align-center">
+<img alt="../_images/mjenc_mjpeg_start_addr3.svg" src="../_images/mjenc_mjpeg_start_addr3.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>frame_start_addr_3</p></td>
+<td><p>r</p></td>
+<td><p>32’d0</p></td>
+<td><p>MJPEG FRAME3 Start address</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="mjpeg-bit-cnt3">
+<h2>mjpeg_bit_cnt3<a class="headerlink" href="#mjpeg-bit-cnt3" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x3002109c</p>
+<figure class="align-center">
+<img alt="../_images/mjenc_mjpeg_bit_cnt3.svg" src="../_images/mjenc_mjpeg_bit_cnt3.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>frame_bit_cnt_3</p></td>
+<td><p>r</p></td>
+<td><p>32’d0</p></td>
+<td><p>MJPEG FRAME3 total bit count</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="mjpeg-q-enc">
+<h2>mjpeg_q_enc<a class="headerlink" href="#mjpeg-q-enc" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x30021100</p>
+<figure class="align-center">
+<img alt="../_images/mjenc_mjpeg_q_enc.svg" src="../_images/mjenc_mjpeg_q_enc.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:26</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>25</p></td>
+<td><p>sts_q_sram_enc</p></td>
+<td><p>r</p></td>
+<td><p>1’d0</p></td>
+<td><p>Current Quantize SRAM  selection for Encode</p></td>
+</tr>
+<tr class="row-even"><td><p>24</p></td>
+<td><p>reg_q_sram_sw</p></td>
+<td><p>w1p</p></td>
+<td><p>1’d0</p></td>
+<td><p>Quantize SRAM Switch</p></td>
+</tr>
+<tr class="row-odd"><td><p>23:4</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>frame_q_sram_3</p></td>
+<td><p>r</p></td>
+<td><p>1’d0</p></td>
+<td><p>MJPEG FRAME3 Quantize SRAM selection</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>frame_q_sram_2</p></td>
+<td><p>r</p></td>
+<td><p>1’d0</p></td>
+<td><p>MJPEG FRAME2 Quantize SRAM selection</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>frame_q_sram_1</p></td>
+<td><p>r</p></td>
+<td><p>1’d0</p></td>
+<td><p>MJPEG FRAME1 Quantize SRAM selection</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>frame_q_sram_0</p></td>
+<td><p>r</p></td>
+<td><p>1’d0</p></td>
+<td><p>MJPEG FRAME0 Quantize SRAM selection</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="mjpeg-frame-id-10">
+<h2>mjpeg_frame_id_10<a class="headerlink" href="#mjpeg-frame-id-10" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x30021110</p>
+<figure class="align-center">
+<img alt="../_images/mjenc_mjpeg_frame_id_10.svg" src="../_images/mjenc_mjpeg_frame_id_10.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>frame_id_1</p></td>
+<td><p>r</p></td>
+<td><p>16’d0</p></td>
+<td><p>JPEG PIC 1 ID</p></td>
+</tr>
+<tr class="row-odd"><td><p>15:0</p></td>
+<td><p>frame_id_0</p></td>
+<td><p>r</p></td>
+<td><p>16’d0</p></td>
+<td><p>JPEG PIC 0 ID</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="mjpeg-frame-id-32">
+<h2>mjpeg_frame_id_32<a class="headerlink" href="#mjpeg-frame-id-32" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x30021114</p>
+<figure class="align-center">
+<img alt="../_images/mjenc_mjpeg_frame_id_32.svg" src="../_images/mjenc_mjpeg_frame_id_32.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>frame_id_3</p></td>
+<td><p>r</p></td>
+<td><p>16’d0</p></td>
+<td><p>JPEG PIC 3 ID</p></td>
+</tr>
+<tr class="row-odd"><td><p>15:0</p></td>
+<td><p>frame_id_2</p></td>
+<td><p>r</p></td>
+<td><p>16’d0</p></td>
+<td><p>JPEG PIC 2 ID</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="mjpeg-debug">
+<h2>mjpeg_debug<a class="headerlink" href="#mjpeg-debug" title="Permalink to this headline"></a></h2>
+<p><strong>Address：</strong>  0x300211f0</p>
+<figure class="align-center">
+<img alt="../_images/mjenc_mjpeg_debug.svg" src="../_images/mjenc_mjpeg_debug.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:12</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>11:8</p></td>
+<td><p>reg_id_latch_hblk</p></td>
+<td><p>r/w</p></td>
+<td><p>4’d1</p></td>
+<td><p>ID latch timing (hblk count)</p></td>
+</tr>
+<tr class="row-even"><td><p>7:4</p></td>
+<td><p>reg_mjpeg_dbg_sel</p></td>
+<td><p>r/w</p></td>
+<td><p>4’d0</p></td>
+<td><p>MJPEG debgu flag selection</p></td>
+</tr>
+<tr class="row-odd"><td><p>3:1</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>reg_mjpeg_dbg_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>MJPEG debgu flag enable</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

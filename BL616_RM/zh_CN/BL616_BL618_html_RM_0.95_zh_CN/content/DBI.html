@@ -1,0 +1,1748 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>21. DBI &mdash; BL616/BL618 参考手册  文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="22. SDH" href="SDH.html" />
+    <link rel="prev" title="20. MJPEG" href="MJPEG.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL616/BL618 参考手册
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. 系统和存储器概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. 复位和时钟</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPIO.html">4. GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">5. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">6. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">7. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">8. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">9. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">10. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">11. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">12. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">13. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2S.html">14. I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AudioDAC.html">15. AudioDAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AudioADC.html">16. AudioADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EMAC.html">17. EMAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USB.html">18. USB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cam.html">19. CAM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MJPEG.html">20. MJPEG</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">21. DBI</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">21.1. 简介</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">21.2. 主要特征</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">21.3. 功能描述</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dbi-type-b">21.3.1. DBI Type B</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id4">21.3.1.1. 写时序</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">21.3.1.2. 读时序</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rgb565">21.3.1.3. 输出RGB565</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rgb666">21.3.1.4. 输出RGB666</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rgb888">21.3.1.5. 输出RGB888</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#dbi-type-c-3-line">21.3.2. DBI Type C 3-Line</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id6">21.3.2.1. 写时序</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">21.3.2.2. 读时序</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">21.3.2.3. 输出RGB565</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id9">21.3.2.4. 输出RGB666</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id10">21.3.2.5. 输出RGB888</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#dbi-type-c-4-line">21.3.3. DBI Type C 4-Line</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id11">21.3.3.1. 写时序</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id12">21.3.3.2. 读时序</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id13">21.3.3.3. 输出RGB565</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id14">21.3.3.4. 输出RGB666</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id15">21.3.3.5. 输出RGB888</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#qspi">21.3.4. QSPI</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id16">21.3.4.1. 写时序</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id17">21.3.4.2. 读时序</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id18">21.3.4.3. 1线命令、1线地址、1线数据模式</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id19">21.3.4.4. 1线命令、1线地址、4线数据模式</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id20">21.3.4.5. 1线命令、4线地址、4线数据模式</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id21">21.3.5. 输入像素格式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cs">21.3.6. CS信号拉高释放条件配置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id22">21.3.7. 中断</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dma">21.3.8. DMA</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id23">21.4. 寄存器描述</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dbi-config">21.4.1. dbi_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#qspi-config">21.4.2. qspi_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dbi-pix-cnt">21.4.3. dbi_pix_cnt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dbi-prd">21.4.4. dbi_prd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dbi-cmd">21.4.5. dbi_cmd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dbi-qspi-adr">21.4.6. dbi_qspi_adr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dbi-rdata-0">21.4.7. dbi_rdata_0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dbi-rdata-1">21.4.8. dbi_rdata_1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dbi-int-sts">21.4.9. dbi_int_sts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dbi-yuv-rgb-config-0">21.4.10. dbi_yuv_rgb_config_0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dbi-yuv-rgb-config-1">21.4.11. dbi_yuv_rgb_config_1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dbi-yuv-rgb-config-2">21.4.12. dbi_yuv_rgb_config_2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dbi-yuv-rgb-config-3">21.4.13. dbi_yuv_rgb_config_3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dbi-yuv-rgb-config-4">21.4.14. dbi_yuv_rgb_config_4</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dbi-yuv-rgb-config-5">21.4.15. dbi_yuv_rgb_config_5</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dbi-fifo-config-0">21.4.16. dbi_fifo_config_0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dbi-fifo-config-1">21.4.17. dbi_fifo_config_1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dbi-fifo-wdata">21.4.18. dbi_fifo_wdata</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="SDH.html">22. SDH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SDIO.html">23. SDIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LowPower.html">24. LowPower</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SEC_ENG.html">25. SEC ENG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">26. 版本信息</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL616/BL618 参考手册</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">21. </span>DBI</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="dbi">
+<h1><span class="section-number">21. </span>DBI<a class="headerlink" href="#dbi" title="永久链接至标题"></a></h1>
+<section id="id1">
+<h2><span class="section-number">21.1. </span>简介<a class="headerlink" href="#id1" title="永久链接至标题"></a></h2>
+<p>DBI是显示总线接口(Display Bus Interface)的简称，也被称为MCU接口，是MIPI联盟定义的用于与显示屏通信的接口协议。DBI协议的数据线和控制线是复用的，驱动的显示模块需要带有GRAM。
+DBI又可以细分为MIPI DBI Type A、MIPI DBI Type B和MIPI DBI Type C三种不同的模式，不同模式下的硬件接口以及数据采样都有所不同。如MIPI DBI Type A是下降沿采样(基于Motorola 6800总线)，而MIPI DBI Type B是上升沿采样(基于Intel 8080总线)。
+该模块另外还集成了QSPI(Quad Serial Peripheral Interface)显示接口，QSPI有四根数据线，是对SPI接口的扩展，极大提高了传输效率。</p>
+</section>
+<section id="id2">
+<h2><span class="section-number">21.2. </span>主要特征<a class="headerlink" href="#id2" title="永久链接至标题"></a></h2>
+<blockquote>
+<div><ul>
+<li><p>符合 MIPI® 联盟标准</p></li>
+<li><p>支持Type B和Type C模式：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Type B为8位数据接口</p></li>
+<li><p>Type C支持3-Line和4-Line</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>额外支持QSPI模式，QSPI模式下特征如下：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>一次传输包含一字节命令阶段、一到三字节可调的地址阶段、可选的数据阶段</p></li>
+<li><p>命令、地址和数据读写分别都支持1线/4线模式，可以任意组合</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>除QSPI模式外，一次传输都支持可选的命令与数据阶段，QSPI接口有另外的地址阶段</p></li>
+<li><p>数据阶段可设置为以字节为单位的normal模式和以像素为单位的pixel模式：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>数据阶段normal模式用于传输配置数据，单次最多可写入256个字节，最多可读出8个字节</p></li>
+<li><p>数据阶段pixel模式用于传输像素数据，数据量以像素为单位，单次最多可以写2的24次方个像素，不可读</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>输入像素格式支持RGB和YUV444，其中RGB支持以下八种内存排列方式：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>RGBA8888</p></li>
+<li><p>BGRA8888</p></li>
+<li><p>ARGB8888</p></li>
+<li><p>ABGR8888</p></li>
+<li><p>RGB888</p></li>
+<li><p>BGR888</p></li>
+<li><p>RGB565</p></li>
+<li><p>BGR565</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>YUV444支持以下六种内存排列方式：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>YUVN8888</p></li>
+<li><p>VUYN8888</p></li>
+<li><p>NYUV8888</p></li>
+<li><p>NVUY8888</p></li>
+<li><p>YUV888</p></li>
+<li><p>VUY888</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>YUV444格式到RGB565/666/888格式的硬件转码</p></li>
+<li><p>输出像素格式支持RGB565、RGB666和RGB888</p></li>
+<li><p>CS信号拉高释放条件可配置</p></li>
+<li><p>多种中断控制</p></li>
+<li><p>支持DMA传输模式</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="id3">
+<h2><span class="section-number">21.3. </span>功能描述<a class="headerlink" href="#id3" title="永久链接至标题"></a></h2>
+<p>DBI模块基本框图如图所示。</p>
+<figure class="align-center" id="id24">
+<img alt="../_images/DBIBlock.svg" src="../_images/DBIBlock.svg" /><figcaption>
+<p><span class="caption-number">图 21.1 </span><span class="caption-text">DBI基本框图</span><a class="headerlink" href="#id24" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<section id="dbi-type-b">
+<h3><span class="section-number">21.3.1. </span>DBI Type B<a class="headerlink" href="#dbi-type-b" title="永久链接至标题"></a></h3>
+<section id="id4">
+<h4><span class="section-number">21.3.1.1. </span>写时序<a class="headerlink" href="#id4" title="永久链接至标题"></a></h4>
+<p>DBI Type B模式拥有8位并行数据线，MCU向显示模块写入数据的时序如下图所示：</p>
+<figure class="align-center" id="id25">
+<img alt="../_images/DBITypeBWrite.svg" src="../_images/DBITypeBWrite.svg" /><figcaption>
+<p><span class="caption-number">图 21.2 </span><span class="caption-text">写时序</span><a class="headerlink" href="#id25" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>其中：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>CSX：片选信号。当该信号为低时显示模块被选中，为高时显示模块将忽略其他所有的接口信号；</p></li>
+<li><p>RESX：外部复位信号。当该信号为低时显示模块被复位；</p></li>
+<li><p>D/CX：数据/命令选择信号。当该信号为0时，DB[7:0]位为命令；当该信号为1时，DB[7:0]位为RAM数据或命令参数；</p></li>
+<li><p>WRX：并行数据写入选通信号。该信号在写入周期内从高到低驱动，然后拉回到高。显示模块在该信号的上升沿读取MCU传输的信息。该信号是一种非同步信号，可在不使用时终止；</p></li>
+<li><p>RDX：并行数据读取选通信号。该信号从高到低被驱动，然后在读取周期中被拉回到高。MCU在该信号的上升沿读取显示模块传输的信息。该信号是一种非同步信号，可在不使用时终止；</p></li>
+<li><p>DB[7:0]：8位数据信号。用于传输命令、命令参数或数据。</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="id5">
+<h4><span class="section-number">21.3.1.2. </span>读时序<a class="headerlink" href="#id5" title="永久链接至标题"></a></h4>
+<p>MCU从显示模块读取数据的时序如下图所示：</p>
+<figure class="align-center" id="id26">
+<img alt="../_images/DBITypeBRead.svg" src="../_images/DBITypeBRead.svg" /><figcaption>
+<p><span class="caption-number">图 21.3 </span><span class="caption-text">读时序</span><a class="headerlink" href="#id26" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="rgb565">
+<h4><span class="section-number">21.3.1.3. </span>输出RGB565<a class="headerlink" href="#rgb565" title="永久链接至标题"></a></h4>
+<p>RGB565格式数据输出如下图所示：</p>
+<figure class="align-center" id="id27">
+<a class="reference internal image-reference" href="../_images/DBITypeBRGB565.svg"><img alt="../_images/DBITypeBRGB565.svg" src="../_images/DBITypeBRGB565.svg" /></a>
+<figcaption>
+<p><span class="caption-number">图 21.4 </span><span class="caption-text">RGB565输出</span><a class="headerlink" href="#id27" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="rgb666">
+<h4><span class="section-number">21.3.1.4. </span>输出RGB666<a class="headerlink" href="#rgb666" title="永久链接至标题"></a></h4>
+<p>RGB666格式数据输出如下图所示：</p>
+<figure class="align-center" id="id28">
+<a class="reference internal image-reference" href="../_images/DBITypeBRGB666.svg"><img alt="../_images/DBITypeBRGB666.svg" src="../_images/DBITypeBRGB666.svg" /></a>
+<figcaption>
+<p><span class="caption-number">图 21.5 </span><span class="caption-text">RGB666输出</span><a class="headerlink" href="#id28" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="rgb888">
+<h4><span class="section-number">21.3.1.5. </span>输出RGB888<a class="headerlink" href="#rgb888" title="永久链接至标题"></a></h4>
+<p>RGB888格式数据输出如下图所示：</p>
+<figure class="align-center" id="id29">
+<a class="reference internal image-reference" href="../_images/DBITypeBRGB888.svg"><img alt="../_images/DBITypeBRGB888.svg" src="../_images/DBITypeBRGB888.svg" /></a>
+<figcaption>
+<p><span class="caption-number">图 21.6 </span><span class="caption-text">RGB888输出</span><a class="headerlink" href="#id29" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="dbi-type-c-3-line">
+<h3><span class="section-number">21.3.2. </span>DBI Type C 3-Line<a class="headerlink" href="#dbi-type-c-3-line" title="永久链接至标题"></a></h3>
+<section id="id6">
+<h4><span class="section-number">21.3.2.1. </span>写时序<a class="headerlink" href="#id6" title="永久链接至标题"></a></h4>
+<p>DBI Type C模式是3线9位串行接口，MCU向显示模块写入数据的时序如下图所示：</p>
+<figure class="align-center" id="id30">
+<img alt="../_images/DBITypeC3Write.svg" src="../_images/DBITypeC3Write.svg" /><figcaption>
+<p><span class="caption-number">图 21.7 </span><span class="caption-text">写时序</span><a class="headerlink" href="#id30" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>其中：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>CSX：片选信号。当该信号为低时显示模块被选中，为高时显示模块将忽略其他所有的接口信号；</p></li>
+<li><p>SCL：串行时钟输入信号。用于为数据传输提供时钟信号。</p></li>
+<li><p>SDA：串行数据输入/输出信号。在写操作中，串行数据包包含一个D/CX(数据/命令)选择位和一个传输字节。如果D/CX位为低，则传输字节为命令；如果D/CX位为高，则传输字节为显示数据或命令参数。</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="id7">
+<h4><span class="section-number">21.3.2.2. </span>读时序<a class="headerlink" href="#id7" title="永久链接至标题"></a></h4>
+<p>MCU从显示模块读取数据的时序如下图所示：</p>
+<figure class="align-center" id="id31">
+<img alt="../_images/DBITypeC3Read.svg" src="../_images/DBITypeC3Read.svg" /><figcaption>
+<p><span class="caption-number">图 21.8 </span><span class="caption-text">读时序</span><a class="headerlink" href="#id31" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id8">
+<h4><span class="section-number">21.3.2.3. </span>输出RGB565<a class="headerlink" href="#id8" title="永久链接至标题"></a></h4>
+<p>RGB565格式数据输出如下图所示：</p>
+<figure class="align-center" id="id32">
+<img alt="../_images/DBITypeC3RGB565.svg" src="../_images/DBITypeC3RGB565.svg" /><figcaption>
+<p><span class="caption-number">图 21.9 </span><span class="caption-text">RGB565输出</span><a class="headerlink" href="#id32" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id9">
+<h4><span class="section-number">21.3.2.4. </span>输出RGB666<a class="headerlink" href="#id9" title="永久链接至标题"></a></h4>
+<p>RGB666格式数据输出如下图所示：</p>
+<figure class="align-center" id="id33">
+<img alt="../_images/DBITypeC3RGB666.svg" src="../_images/DBITypeC3RGB666.svg" /><figcaption>
+<p><span class="caption-number">图 21.10 </span><span class="caption-text">RGB666输出</span><a class="headerlink" href="#id33" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id10">
+<h4><span class="section-number">21.3.2.5. </span>输出RGB888<a class="headerlink" href="#id10" title="永久链接至标题"></a></h4>
+<p>RGB888格式数据输出如下图所示：</p>
+<figure class="align-center" id="id34">
+<img alt="../_images/DBITypeC3RGB888.svg" src="../_images/DBITypeC3RGB888.svg" /><figcaption>
+<p><span class="caption-number">图 21.11 </span><span class="caption-text">RGB888输出</span><a class="headerlink" href="#id34" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="dbi-type-c-4-line">
+<h3><span class="section-number">21.3.3. </span>DBI Type C 4-Line<a class="headerlink" href="#dbi-type-c-4-line" title="永久链接至标题"></a></h3>
+<section id="id11">
+<h4><span class="section-number">21.3.3.1. </span>写时序<a class="headerlink" href="#id11" title="永久链接至标题"></a></h4>
+<p>DBI Type C模式是4线8位串行接口，MCU向显示模块写入数据的时序如下图所示：</p>
+<figure class="align-center" id="id35">
+<img alt="../_images/DBITypeC4Write.svg" src="../_images/DBITypeC4Write.svg" /><figcaption>
+<p><span class="caption-number">图 21.12 </span><span class="caption-text">写时序</span><a class="headerlink" href="#id35" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>其中：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>CSX：片选信号。当该信号为低时显示模块被选中，为高时显示模块将忽略其他所有的接口信号；</p></li>
+<li><p>D/CX：数据/命令选择信号。如果该信号为低，则SDA传输的信息为命令；如果该信号为高，则SDA传输的信息为显示数据或命令参数。</p></li>
+<li><p>SCL：串行时钟输入信号。用于为数据传输提供时钟信号。</p></li>
+<li><p>SDA：串行数据输入/输出信号。用于传输命令、命令参数或数据。</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="id12">
+<h4><span class="section-number">21.3.3.2. </span>读时序<a class="headerlink" href="#id12" title="永久链接至标题"></a></h4>
+<p>MCU从显示模块读取数据的时序如下图所示：</p>
+<figure class="align-center" id="id36">
+<img alt="../_images/DBITypeC4Read.svg" src="../_images/DBITypeC4Read.svg" /><figcaption>
+<p><span class="caption-number">图 21.13 </span><span class="caption-text">读时序</span><a class="headerlink" href="#id36" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id13">
+<h4><span class="section-number">21.3.3.3. </span>输出RGB565<a class="headerlink" href="#id13" title="永久链接至标题"></a></h4>
+<p>RGB565格式数据输出如下图所示：</p>
+<figure class="align-center" id="id37">
+<img alt="../_images/DBITypeC4RGB565.svg" src="../_images/DBITypeC4RGB565.svg" /><figcaption>
+<p><span class="caption-number">图 21.14 </span><span class="caption-text">RGB565输出</span><a class="headerlink" href="#id37" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id14">
+<h4><span class="section-number">21.3.3.4. </span>输出RGB666<a class="headerlink" href="#id14" title="永久链接至标题"></a></h4>
+<p>RGB666格式数据输出如下图所示：</p>
+<figure class="align-center" id="id38">
+<img alt="../_images/DBITypeC4RGB666.svg" src="../_images/DBITypeC4RGB666.svg" /><figcaption>
+<p><span class="caption-number">图 21.15 </span><span class="caption-text">RGB666输出</span><a class="headerlink" href="#id38" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id15">
+<h4><span class="section-number">21.3.3.5. </span>输出RGB888<a class="headerlink" href="#id15" title="永久链接至标题"></a></h4>
+<p>RGB888格式数据输出如下图所示：</p>
+<figure class="align-center" id="id39">
+<img alt="../_images/DBITypeC4RGB888.svg" src="../_images/DBITypeC4RGB888.svg" /><figcaption>
+<p><span class="caption-number">图 21.16 </span><span class="caption-text">RGB888输出</span><a class="headerlink" href="#id39" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="qspi">
+<h3><span class="section-number">21.3.4. </span>QSPI<a class="headerlink" href="#qspi" title="永久链接至标题"></a></h3>
+<section id="id16">
+<h4><span class="section-number">21.3.4.1. </span>写时序<a class="headerlink" href="#id16" title="永久链接至标题"></a></h4>
+<p>以1线命令、1线3字节长度地址、1线数据模式为例，MCU向显示模块写入数据的时序如下图所示：</p>
+<figure class="align-center" id="id40">
+<img alt="../_images/DBIQspiWrite.svg" src="../_images/DBIQspiWrite.svg" /><figcaption>
+<p><span class="caption-number">图 21.17 </span><span class="caption-text">写时序</span><a class="headerlink" href="#id40" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>其中：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>CSX：片选信号。当该信号为低时显示模块被选中，为高时显示模块将忽略其他所有的接口信号；</p></li>
+<li><p>CLK：时钟输入信号。用于为数据传输提供时钟信号。</p></li>
+<li><p>SDA0：数据线0，用于传输命令、地址或数据。</p></li>
+<li><p>SDA1：数据线1，用于传输命令、地址或数据。</p></li>
+<li><p>SDA2：数据线2，用于传输命令、地址或数据。</p></li>
+<li><p>SDA3：数据线3，用于传输命令、地址或数据。</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="id17">
+<h4><span class="section-number">21.3.4.2. </span>读时序<a class="headerlink" href="#id17" title="永久链接至标题"></a></h4>
+<p>以1线命令、1线3字节长度地址、1线数据模式为例，MCU从显示模块读取数据的时序如下图所示：</p>
+<figure class="align-center" id="id41">
+<img alt="../_images/DBIQspiRead.svg" src="../_images/DBIQspiRead.svg" /><figcaption>
+<p><span class="caption-number">图 21.18 </span><span class="caption-text">读时序</span><a class="headerlink" href="#id41" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id18">
+<h4><span class="section-number">21.3.4.3. </span>1线命令、1线地址、1线数据模式<a class="headerlink" href="#id18" title="永久链接至标题"></a></h4>
+<p>以命令为0x02，地址为3字节0x002C00/0x003C00为例，1线命令、1线地址、1线数据模式下RGB565格式数据输出如下图所示：</p>
+<figure class="align-center" id="id42">
+<img alt="../_images/DBIQspi111RGB565.svg" src="../_images/DBIQspi111RGB565.svg" /><figcaption>
+<p><span class="caption-number">图 21.19 </span><span class="caption-text">RGB565输出</span><a class="headerlink" href="#id42" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>RGB666格式数据输出如下图所示：</p>
+<figure class="align-center" id="id43">
+<img alt="../_images/DBIQspi111RGB666.svg" src="../_images/DBIQspi111RGB666.svg" /><figcaption>
+<p><span class="caption-number">图 21.20 </span><span class="caption-text">RGB666输出</span><a class="headerlink" href="#id43" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>RGB888格式数据输出如下图所示：</p>
+<figure class="align-center" id="id44">
+<img alt="../_images/DBIQspi111RGB888.svg" src="../_images/DBIQspi111RGB888.svg" /><figcaption>
+<p><span class="caption-number">图 21.21 </span><span class="caption-text">RGB888输出</span><a class="headerlink" href="#id44" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id19">
+<h4><span class="section-number">21.3.4.4. </span>1线命令、1线地址、4线数据模式<a class="headerlink" href="#id19" title="永久链接至标题"></a></h4>
+<p>以命令为0x32，地址为3字节0x002C00/0x003C00为例，1线命令、1线地址、4线数据模式下RGB565格式数据输出如下图所示：</p>
+<figure class="align-center" id="id45">
+<img alt="../_images/DBIQspi114RGB565.svg" src="../_images/DBIQspi114RGB565.svg" /><figcaption>
+<p><span class="caption-number">图 21.22 </span><span class="caption-text">RGB565输出</span><a class="headerlink" href="#id45" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>RGB666格式数据输出如下图所示：</p>
+<figure class="align-center" id="id46">
+<img alt="../_images/DBIQspi114RGB666.svg" src="../_images/DBIQspi114RGB666.svg" /><figcaption>
+<p><span class="caption-number">图 21.23 </span><span class="caption-text">RGB666输出</span><a class="headerlink" href="#id46" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>RGB888格式数据输出如下图所示：</p>
+<figure class="align-center" id="id47">
+<img alt="../_images/DBIQspi114RGB888.svg" src="../_images/DBIQspi114RGB888.svg" /><figcaption>
+<p><span class="caption-number">图 21.24 </span><span class="caption-text">RGB888输出</span><a class="headerlink" href="#id47" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id20">
+<h4><span class="section-number">21.3.4.5. </span>1线命令、4线地址、4线数据模式<a class="headerlink" href="#id20" title="永久链接至标题"></a></h4>
+<p>以命令为0x12，地址为3字节0x002C00/0x003C00为例，1线命令、4线地址、4线数据模式下RGB565格式数据输出如下图所示：</p>
+<figure class="align-center" id="id48">
+<img alt="../_images/DBIQspi144RGB565.svg" src="../_images/DBIQspi144RGB565.svg" /><figcaption>
+<p><span class="caption-number">图 21.25 </span><span class="caption-text">RGB565输出</span><a class="headerlink" href="#id48" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>RGB666格式数据输出如下图所示：</p>
+<figure class="align-center" id="id49">
+<img alt="../_images/DBIQspi144RGB666.svg" src="../_images/DBIQspi144RGB666.svg" /><figcaption>
+<p><span class="caption-number">图 21.26 </span><span class="caption-text">RGB666输出</span><a class="headerlink" href="#id49" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>RGB888格式数据输出如下图所示：</p>
+<figure class="align-center" id="id50">
+<img alt="../_images/DBIQspi144RGB888.svg" src="../_images/DBIQspi144RGB888.svg" /><figcaption>
+<p><span class="caption-number">图 21.27 </span><span class="caption-text">RGB888输出</span><a class="headerlink" href="#id50" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="id21">
+<h3><span class="section-number">21.3.5. </span>输入像素格式<a class="headerlink" href="#id21" title="永久链接至标题"></a></h3>
+<p>DBI模块支持8种不同的输入像素RGB格式和6种YUV444格式，各种RGB格式在内存中的排布如下图所示：</p>
+<figure class="align-center" id="id51">
+<img alt="../_images/DBIMemory.svg" src="../_images/DBIMemory.svg" /><figcaption>
+<p><span class="caption-number">图 21.28 </span><span class="caption-text">输入像素RGB格式</span><a class="headerlink" href="#id51" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>对于YUV444格式的内存排布，只需用Y替换R，用U替换G，用V替换B即可。</p>
+</section>
+<section id="cs">
+<h3><span class="section-number">21.3.6. </span>CS信号拉高释放条件配置<a class="headerlink" href="#cs" title="永久链接至标题"></a></h3>
+<p>在Type B和Type C模式下，可以通过寄存器CONFIG的位CONT_EN配置CS信号的拉高释放条件。如果不使能该功能，CS信号会在每个像素传输完成后释放一次，即每两个像素之间CS信号都会拉高。
+如果使能该功能，在一次传输过程中，CS信号都不会释放，只有当该次传输全部完成后CS信号才会拉高释放。</p>
+<p>在QSPI模式下，可以通过寄存器CONFIG的位CS_STRETCH配置CS信号的拉高释放条件。如果不使能该功能，在一次传输过程中，当FIFO为空（即FIFO中的数据全部发出且没有新的数据填入）时，CS信号会被拉高释放。
+如果使能该功能，在一次传输过程中，当FIFO为空（即FIFO中的数据全部发出且没有新的数据填入）时，CS信号会维持在低电平，等待新的数据填入。</p>
+</section>
+<section id="id22">
+<h3><span class="section-number">21.3.7. </span>中断<a class="headerlink" href="#id22" title="永久链接至标题"></a></h3>
+<p>DBI具有以下几种中断：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>传输结束中断</p></li>
+<li><p>TX FIFO请求中断</p></li>
+<li><p>FIFO溢出错误中断</p></li>
+</ul>
+</div></blockquote>
+<p>通过设置一个像素计数值，传输结束中断会在传输的像素数据达到计数值时产生，Type B和Type C都会产生该中断；</p>
+<p>当DBI_FIFO_CONFIG_1中TFICNT大于TFITH时,产生TX FIFO请求中断，当条件不满足时该中断标志会自动清除；</p>
+<p>FIFO溢出错误中断会在TX发生Overflow或者Underflow时产生。</p>
+</section>
+<section id="dma">
+<h3><span class="section-number">21.3.8. </span>DMA<a class="headerlink" href="#dma" title="永久链接至标题"></a></h3>
+<p>DBI TX支持DMA传输模式，使用该模式需要通过寄存器DBI_FIFO_CONFIG_1的位&lt;TFITH&gt;设置TX FIFO的阈值。
+当该模式启用后，如果TFICNT大于TFITH，则会触发DMA TX请求，配置好DMA后，DMA在收到该请求时，会按照设定从内存中将数据搬运到TX FIFO。</p>
+</section>
+</section>
+<section id="id23">
+<h2><span class="section-number">21.4. </span>寄存器描述<a class="headerlink" href="#id23" title="永久链接至标题"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 41%" />
+<col style="width: 59%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>名称</p></td>
+<td><p>描述</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dbi-config">dbi_config</a></p></td>
+<td><p>DBI configure</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qspi-config">qspi_config</a></p></td>
+<td><p>QSPI configure</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dbi-pix-cnt">dbi_pix_cnt</a></p></td>
+<td><p>Pixel format and count</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dbi-prd">dbi_prd</a></p></td>
+<td><p>DBI period</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dbi-cmd">dbi_cmd</a></p></td>
+<td><p>DBI command</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dbi-qspi-adr">dbi_qspi_adr</a></p></td>
+<td><p>QSPI address</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dbi-rdata-0">dbi_rdata_0</a></p></td>
+<td><p>Read data 0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dbi-rdata-1">dbi_rdata_1</a></p></td>
+<td><p>Read data 1</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dbi-int-sts">dbi_int_sts</a></p></td>
+<td><p>Interrupt status and setting</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dbi-yuv-rgb-config-0">dbi_yuv_rgb_config_0</a></p></td>
+<td><p>YUV2RGB configure0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dbi-yuv-rgb-config-1">dbi_yuv_rgb_config_1</a></p></td>
+<td><p>YUV2RGB configure1</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dbi-yuv-rgb-config-2">dbi_yuv_rgb_config_2</a></p></td>
+<td><p>YUV2RGB configure2</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dbi-yuv-rgb-config-3">dbi_yuv_rgb_config_3</a></p></td>
+<td><p>YUV2RGB configure3</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dbi-yuv-rgb-config-4">dbi_yuv_rgb_config_4</a></p></td>
+<td><p>YUV2RGB configure4</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dbi-yuv-rgb-config-5">dbi_yuv_rgb_config_5</a></p></td>
+<td><p>YUV2RGB configure5</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dbi-fifo-config-0">dbi_fifo_config_0</a></p></td>
+<td><p>FIFO format and DMA mode</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dbi-fifo-config-1">dbi_fifo_config_1</a></p></td>
+<td><p>FIFO threshold and available count</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dbi-fifo-wdata">dbi_fifo_wdata</a></p></td>
+<td><p>TX FIFO</p></td>
+</tr>
+</tbody>
+</table>
+<section id="dbi-config">
+<h3><span class="section-number">21.4.1. </span>dbi_config<a class="headerlink" href="#dbi-config" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x2000a800</p>
+<figure class="align-center">
+<img alt="../_images/dbi_dbi_config.svg" src="../_images/dbi_dbi_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31</p></td>
+<td><p>sts_dbi_bus_busy</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Indicator of dbi bus busy</p></td>
+</tr>
+<tr class="row-odd"><td><p>30:25</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td rowspan="3"><p>24</p></td>
+<td rowspan="3"><p>cr_dbi_cs_stretch</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b0</p></td>
+<td rowspan="3"><p>Enable signal of CS-low stretch mode</p>
+<p>1'b0: Disabled, if FIFO is empty during a pixel data transfer, CS will de-assert before FIFO is filled again and new transfer starts</p>
+<p>1'b1: Enabled, if FIFO is empty during a pixel data transfer, CS will stay asserted while waiting for FIFO to be filled again</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="2"><p>23:20</p></td>
+<td rowspan="2"><p>cr_dbi_dmy_cnt</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>4'd0</p></td>
+<td rowspan="2"><p>Dummy cycle count, unit: period defined by dbi_prd_d</p>
+<p>Effective only in Type C (Fixed to 1 dbi_prd_d  period in Type B)</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="4"><p>19</p></td>
+<td rowspan="4"><p>cr_dbi_dmy_en</p></td>
+<td rowspan="4"><p>r/w</p></td>
+<td rowspan="4"><p>1'b0</p></td>
+<td rowspan="4"><p>Enable signal of dummy cycle(s)</p>
+<p>1'b0: Disabled, no dummy cycle(s) between command phase and data phase</p>
+<p>1'b1: Enabled, dummy cycle(s) will be inserted between command phase and data phase</p>
+<p>Note: Don't-care if QSPI mode is selected (no dummy cycle)</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="4"><p>18</p></td>
+<td rowspan="4"><p>cr_dbi_cont_en</p></td>
+<td rowspan="4"><p>r/w</p></td>
+<td rowspan="4"><p>1'b1</p></td>
+<td rowspan="4"><p>Enable signal of pixel data continuous transfer mode</p>
+<p>1'b0: Disabled, CS_n will de-assert between each pixel</p>
+<p>1'b1: Enabled, CS_n will stay asserted between each consecutive pixel</p>
+<p>Note: Don't-care if QSPI mode is selected (always in continuous mode)</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>17</p></td>
+<td><p>cr_dbi_scl_ph</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>SCL clock phase inverse signal</p></td>
+</tr>
+<tr class="row-even"><td rowspan="3"><p>16</p></td>
+<td rowspan="3"><p>cr_dbi_scl_pol</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b1</p></td>
+<td rowspan="3"><p>SCL clock polarity</p>
+<p>0: SCL output LOW at IDLE state</p>
+<p>1: SCL output HIGH at IDLE state</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="2"><p>15:8</p></td>
+<td rowspan="2"><p>cr_dbi_dat_bc</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>8'd0</p></td>
+<td rowspan="2"><p>Data byte count of normal data (pixel data count is determined by cr_dbi_pix_cnt)</p>
+<p>Note: Normal read data can only be up to 8-byte (8'd7). No limit for normal write data (can be up to 256-byte using FIFO)</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="4"><p>7</p></td>
+<td rowspan="4"><p>cr_dbi_dat_tp</p></td>
+<td rowspan="4"><p>r/w</p></td>
+<td rowspan="4"><p>1'b0</p></td>
+<td rowspan="4"><p>Data type select</p>
+<p>1'b0: Normal data (parameter)</p>
+<p>1'b1: Pixel data</p>
+<p>Note: Read command supports normal data only</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3"><p>6</p></td>
+<td rowspan="3"><p>cr_dbi_dat_wr</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b1</p></td>
+<td rowspan="3"><p>Data phase Read/Write select</p>
+<p>1'b0: Read data</p>
+<p>1'b1: Write data</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3"><p>5</p></td>
+<td rowspan="3"><p>cr_dbi_dat_en</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b1</p></td>
+<td rowspan="3"><p>Data enable signal</p>
+<p>1'b0: Data phase disabled</p>
+<p>1'b1: Data phase enabled</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="4"><p>4</p></td>
+<td rowspan="4"><p>cr_dbi_cmd_en</p></td>
+<td rowspan="4"><p>r/w</p></td>
+<td rowspan="4"><p>1'b1</p></td>
+<td rowspan="4"><p>Command enable signal</p>
+<p>1'b0: No command phase</p>
+<p>1'b1: Command will be sent</p>
+<p>Note: Don't-care if QSPI mode is selected (Command always enabled)</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td rowspan="5"><p>2:1</p></td>
+<td rowspan="5"><p>cr_dbi_sel</p></td>
+<td rowspan="5"><p>r/w</p></td>
+<td rowspan="5"><p>2'd0</p></td>
+<td rowspan="5"><p>DBI mode select</p>
+<p>2'd0: DBI Type B</p>
+<p>2'd1: DBI Type C, 4-wire mode</p>
+<p>2'd2: DBI Type C, 3-wire mode</p>
+<p>2'd3: QSPI mode</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="2"><p>0</p></td>
+<td rowspan="2"><p>cr_dbi_en</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>1'b0</p></td>
+<td rowspan="2"><p>Enable signal of DBI function</p>
+<p>Asserting this bit will trigger the transaction, and should be de-asserted after finish</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+</tbody>
+</table>
+</section>
+<section id="qspi-config">
+<h3><span class="section-number">21.4.2. </span>qspi_config<a class="headerlink" href="#qspi-config" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x2000a804</p>
+<figure class="align-center">
+<img alt="../_images/dbi_qspi_config.svg" src="../_images/dbi_qspi_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:6</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>5:4</p></td>
+<td><p>cr_qspi_adr_bc</p></td>
+<td><p>r/w</p></td>
+<td><p>2'd2</p></td>
+<td><p>QSPI Address byte count</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><p>2</p></td>
+<td rowspan="3"><p>cr_qspi_dat_4b</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b1</p></td>
+<td rowspan="3"><p>QSPI Data 4-bit (quad) mode</p>
+<p>1'b0: Data sent/received in 1-bit mode</p>
+<p>1'b1: Data sent/received in 4-bit mode</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3"><p>1</p></td>
+<td rowspan="3"><p>cr_qspi_adr_4b</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b1</p></td>
+<td rowspan="3"><p>QSPI Address (display command) 4-bit (quad) mode</p>
+<p>1'b0: Address sent in 1-bit mode</p>
+<p>1'b1: Address sent in 4-bit mode</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3"><p>0</p></td>
+<td rowspan="3"><p>cr_qspi_cmd_4b</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b0</p></td>
+<td rowspan="3"><p>QSPI Command 4-bit (quad) mode</p>
+<p>1'b0: Command sent in 1-bit mode</p>
+<p>1'b1: Command sent in 4-bit mode</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</section>
+<section id="dbi-pix-cnt">
+<h3><span class="section-number">21.4.3. </span>dbi_pix_cnt<a class="headerlink" href="#dbi-pix-cnt" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x2000a808</p>
+<figure class="align-center">
+<img alt="../_images/dbi_dbi_pix_cnt.svg" src="../_images/dbi_dbi_pix_cnt.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td rowspan="3"><p>31</p></td>
+<td rowspan="3"><p>cr_dbi_pix_format</p></td>
+<td rowspan="3"><p>r/w</p></td>
+<td rowspan="3"><p>1'b0</p></td>
+<td rowspan="3"><p>Pixel format</p>
+<p>1'b0: RGB565</p>
+<p>1'b1: RGB888/RGB666</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>30:24</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td rowspan="2"><p>23:0</p></td>
+<td rowspan="2"><p>cr_dbi_pix_cnt</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>24'h0</p></td>
+<td rowspan="2"><p>Pixel count</p>
+<p>Note: Should be a multiple of 2 if RGB565 is selected and a multiple of 4 if RGB888/RGB666 mode is selected</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</section>
+<section id="dbi-prd">
+<h3><span class="section-number">21.4.4. </span>dbi_prd<a class="headerlink" href="#dbi-prd" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x2000a80c</p>
+<figure class="align-center">
+<img alt="../_images/dbi_dbi_prd.svg" src="../_images/dbi_dbi_prd.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:24</p></td>
+<td><p>cr_dbi_prd_d_ph_1</p></td>
+<td><p>r/w</p></td>
+<td><p>8'd15</p></td>
+<td><p>Length of DATA phase 1 (please refer to &quot;Timing&quot; tab)</p></td>
+</tr>
+<tr class="row-odd"><td><p>23:16</p></td>
+<td><p>cr_dbi_prd_d_ph_0</p></td>
+<td><p>r/w</p></td>
+<td><p>8'd15</p></td>
+<td><p>Length of DATA phase 0 (please refer to &quot;Timing&quot; tab)</p></td>
+</tr>
+<tr class="row-even"><td><p>15:8</p></td>
+<td><p>cr_dbi_prd_i</p></td>
+<td><p>r/w</p></td>
+<td><p>8'd15</p></td>
+<td><p>Length of INTERVAL between pixel data (please refer to &quot;Timing&quot; tab)</p></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>cr_dbi_prd_s</p></td>
+<td><p>r/w</p></td>
+<td><p>8'd15</p></td>
+<td><p>Length of START/STOP condition (please refer to &quot;Timing&quot; tab)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dbi-cmd">
+<h3><span class="section-number">21.4.5. </span>dbi_cmd<a class="headerlink" href="#dbi-cmd" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x2000a810</p>
+<figure class="align-center">
+<img alt="../_images/dbi_dbi_cmd.svg" src="../_images/dbi_dbi_cmd.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7:0</p></td>
+<td><p>cr_dbi_cmd</p></td>
+<td><p>r/w</p></td>
+<td><p>8'h2C</p></td>
+<td><p>DBI Command</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dbi-qspi-adr">
+<h3><span class="section-number">21.4.6. </span>dbi_qspi_adr<a class="headerlink" href="#dbi-qspi-adr" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x2000a814</p>
+<figure class="align-center">
+<img alt="../_images/dbi_dbi_qspi_adr.svg" src="../_images/dbi_dbi_qspi_adr.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td rowspan="2"><p>31:0</p></td>
+<td rowspan="2"><p>cr_qspi_adr</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>32'h00002C00</p></td>
+<td rowspan="2"><p>QSPI Address (display command)</p>
+<p>Note: LSB is sent first</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</section>
+<section id="dbi-rdata-0">
+<h3><span class="section-number">21.4.7. </span>dbi_rdata_0<a class="headerlink" href="#dbi-rdata-0" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x2000a818</p>
+<figure class="align-center">
+<img alt="../_images/dbi_dbi_rdata_0.svg" src="../_images/dbi_dbi_rdata_0.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>sts_dbi_rdata_0</p></td>
+<td><p>r</p></td>
+<td><p>32'h0</p></td>
+<td><p>Data read from display IC using read command</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dbi-rdata-1">
+<h3><span class="section-number">21.4.8. </span>dbi_rdata_1<a class="headerlink" href="#dbi-rdata-1" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x2000a81c</p>
+<figure class="align-center">
+<img alt="../_images/dbi_dbi_rdata_1.svg" src="../_images/dbi_dbi_rdata_1.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>sts_dbi_rdata_1</p></td>
+<td><p>r</p></td>
+<td><p>32'h0</p></td>
+<td><p>Data read from display IC using read command</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dbi-int-sts">
+<h3><span class="section-number">21.4.9. </span>dbi_int_sts<a class="headerlink" href="#dbi-int-sts" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x2000a830</p>
+<figure class="align-center">
+<img alt="../_images/dbi_dbi_int_sts.svg" src="../_images/dbi_dbi_int_sts.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:27</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>26</p></td>
+<td><p>cr_dbi_fer_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt enable of dbi_fer_int</p></td>
+</tr>
+<tr class="row-even"><td><p>25</p></td>
+<td><p>cr_dbi_txf_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt enable of dbi_txe_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>24</p></td>
+<td><p>cr_dbi_end_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt enable of dbi_end_int</p></td>
+</tr>
+<tr class="row-even"><td><p>23:19</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>18</p></td>
+<td><p>rsvd</p></td>
+<td><p>rsvd</p></td>
+<td><p>1'b0</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>17</p></td>
+<td><p>rsvd</p></td>
+<td><p>rsvd</p></td>
+<td><p>1'b0</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>16</p></td>
+<td><p>cr_dbi_end_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Interrupt clear of dbi_end_int</p></td>
+</tr>
+<tr class="row-even"><td><p>15:11</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>cr_dbi_fer_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of dbi_fer_int</p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>cr_dbi_txf_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of dbi_txe_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>cr_dbi_end_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Interrupt mask of dbi_end_int</p></td>
+</tr>
+<tr class="row-even"><td><p>7:3</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>dbi_fer_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>TX/RX FIFO error interrupt, auto-cleared when FIFO overflow/underflow error flag is cleared</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>dbi_txf_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b1</p></td>
+<td><p>TX FIFO ready (tx_fifo_cnt &gt; tx_fifo_th) interrupt, auto-cleared when data is pushed</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>dbi_end_int</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Transfer end interrupt, shared by both Type B and C mode</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dbi-yuv-rgb-config-0">
+<h3><span class="section-number">21.4.10. </span>dbi_yuv_rgb_config_0<a class="headerlink" href="#dbi-yuv-rgb-config-0" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x2000a860</p>
+<figure class="align-center">
+<img alt="../_images/dbi_dbi_yuv_rgb_config_0.svg" src="../_images/dbi_dbi_yuv_rgb_config_0.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31</p></td>
+<td><p>cr_y2r_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b1</p></td>
+<td><p>Display module YUV2RGB enable signal</p></td>
+</tr>
+<tr class="row-odd"><td><p>30:29</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>28:20</p></td>
+<td><p>cr_y2r_pre_2</p></td>
+<td><p>r/w</p></td>
+<td><p>9'd0</p></td>
+<td><p>Display module YUV2RGB &quot;pre_offset_2&quot; parameter</p></td>
+</tr>
+<tr class="row-odd"><td><p>19</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>18:10</p></td>
+<td><p>cr_y2r_pre_1</p></td>
+<td><p>r/w</p></td>
+<td><p>9'd0</p></td>
+<td><p>Display module YUV2RGB &quot;pre_offset_1&quot; parameter</p></td>
+</tr>
+<tr class="row-odd"><td><p>9</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>8:0</p></td>
+<td><p>cr_y2r_pre_0</p></td>
+<td><p>r/w</p></td>
+<td><p>9'd0</p></td>
+<td><p>Display module YUV2RGB &quot;pre_offset_0&quot; parameter</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dbi-yuv-rgb-config-1">
+<h3><span class="section-number">21.4.11. </span>dbi_yuv_rgb_config_1<a class="headerlink" href="#dbi-yuv-rgb-config-1" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x2000a864</p>
+<figure class="align-center">
+<img alt="../_images/dbi_dbi_yuv_rgb_config_1.svg" src="../_images/dbi_dbi_yuv_rgb_config_1.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:29</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>28:20</p></td>
+<td><p>cr_y2r_pos_2</p></td>
+<td><p>r/w</p></td>
+<td><p>9'd0</p></td>
+<td><p>Display module YUV2RGB &quot;post_offset_2&quot; parameter</p></td>
+</tr>
+<tr class="row-even"><td><p>19</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>18:10</p></td>
+<td><p>cr_y2r_pos_1</p></td>
+<td><p>r/w</p></td>
+<td><p>9'd0</p></td>
+<td><p>Display module YUV2RGB &quot;post_offset_1&quot; parameter</p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>8:0</p></td>
+<td><p>cr_y2r_pos_0</p></td>
+<td><p>r/w</p></td>
+<td><p>9'd0</p></td>
+<td><p>Display module YUV2RGB &quot;post_offset_0&quot; parameter</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dbi-yuv-rgb-config-2">
+<h3><span class="section-number">21.4.12. </span>dbi_yuv_rgb_config_2<a class="headerlink" href="#dbi-yuv-rgb-config-2" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x2000a868</p>
+<figure class="align-center">
+<img alt="../_images/dbi_dbi_yuv_rgb_config_2.svg" src="../_images/dbi_dbi_yuv_rgb_config_2.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:24</p></td>
+<td><p>cr_y2r_mtx_02_l</p></td>
+<td><p>r/w</p></td>
+<td><p>8'h0</p></td>
+<td><p>Display module YUV2RGB &quot;matrix_02&quot; parameter lower bits</p></td>
+</tr>
+<tr class="row-odd"><td><p>23:12</p></td>
+<td><p>cr_y2r_mtx_01</p></td>
+<td><p>r/w</p></td>
+<td><p>12'h0</p></td>
+<td><p>Display module YUV2RGB &quot;matrix_01&quot; parameter</p></td>
+</tr>
+<tr class="row-even"><td><p>11:0</p></td>
+<td><p>cr_y2r_mtx_00</p></td>
+<td><p>r/w</p></td>
+<td><p>12'h0</p></td>
+<td><p>Display module YUV2RGB &quot;matrix_00&quot; parameter</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dbi-yuv-rgb-config-3">
+<h3><span class="section-number">21.4.13. </span>dbi_yuv_rgb_config_3<a class="headerlink" href="#dbi-yuv-rgb-config-3" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x2000a86c</p>
+<figure class="align-center">
+<img alt="../_images/dbi_dbi_yuv_rgb_config_3.svg" src="../_images/dbi_dbi_yuv_rgb_config_3.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:28</p></td>
+<td><p>cr_y2r_mtx_12_l</p></td>
+<td><p>r/w</p></td>
+<td><p>4'h0</p></td>
+<td><p>Display module YUV2RGB &quot;matrix_12&quot; parameter lower bits</p></td>
+</tr>
+<tr class="row-odd"><td><p>27:16</p></td>
+<td><p>cr_y2r_mtx_11</p></td>
+<td><p>r/w</p></td>
+<td><p>12'h0</p></td>
+<td><p>Display module YUV2RGB &quot;matrix_11&quot; parameter</p></td>
+</tr>
+<tr class="row-even"><td><p>15:4</p></td>
+<td><p>cr_y2r_mtx_10</p></td>
+<td><p>r/w</p></td>
+<td><p>12'h0</p></td>
+<td><p>Display module YUV2RGB &quot;matrix_10&quot; parameter</p></td>
+</tr>
+<tr class="row-odd"><td><p>3:0</p></td>
+<td><p>cr_y2r_mtx_02_u</p></td>
+<td><p>r/w</p></td>
+<td><p>4'h0</p></td>
+<td><p>Display module YUV2RGB &quot;matrix_02&quot; parameter upper bits</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dbi-yuv-rgb-config-4">
+<h3><span class="section-number">21.4.14. </span>dbi_yuv_rgb_config_4<a class="headerlink" href="#dbi-yuv-rgb-config-4" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x2000a870</p>
+<figure class="align-center">
+<img alt="../_images/dbi_dbi_yuv_rgb_config_4.svg" src="../_images/dbi_dbi_yuv_rgb_config_4.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:20</p></td>
+<td><p>cr_y2r_mtx_21</p></td>
+<td><p>r/w</p></td>
+<td><p>12'h0</p></td>
+<td><p>Display module YUV2RGB &quot;matrix_21&quot; parameter</p></td>
+</tr>
+<tr class="row-odd"><td><p>19:8</p></td>
+<td><p>cr_y2r_mtx_20</p></td>
+<td><p>r/w</p></td>
+<td><p>12'h0</p></td>
+<td><p>Display module YUV2RGB &quot;matrix_20&quot; parameter</p></td>
+</tr>
+<tr class="row-even"><td><p>7:0</p></td>
+<td><p>cr_y2r_mtx_12_u</p></td>
+<td><p>r/w</p></td>
+<td><p>8'h0</p></td>
+<td><p>Display module YUV2RGB &quot;matrix_12&quot; parameter upper bits</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dbi-yuv-rgb-config-5">
+<h3><span class="section-number">21.4.15. </span>dbi_yuv_rgb_config_5<a class="headerlink" href="#dbi-yuv-rgb-config-5" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x2000a874</p>
+<figure class="align-center">
+<img alt="../_images/dbi_dbi_yuv_rgb_config_5.svg" src="../_images/dbi_dbi_yuv_rgb_config_5.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:12</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>11:0</p></td>
+<td><p>cr_y2r_mtx_22</p></td>
+<td><p>r/w</p></td>
+<td><p>12'h0</p></td>
+<td><p>Display module YUV2RGB &quot;matrix_22&quot; parameter</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dbi-fifo-config-0">
+<h3><span class="section-number">21.4.16. </span>dbi_fifo_config_0<a class="headerlink" href="#dbi-fifo-config-0" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x2000a880</p>
+<figure class="align-center">
+<img alt="../_images/dbi_dbi_fifo_config_0.svg" src="../_images/dbi_dbi_fifo_config_0.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td rowspan="10"><p>31:29</p></td>
+<td rowspan="10"><p>fifo_format</p></td>
+<td rowspan="10"><p>r/w</p></td>
+<td rowspan="10"><p>3'd0</p></td>
+<td rowspan="10"><p>FIFO pixel data format (see Tab 'FIFO Format' for details)</p>
+<p>3'd0: {8'h0, B[7:0], G[7:0], R[7:0]}</p>
+<p>3'd1: {8'h0, R[7:0], G[7:0], B[7:0]}</p>
+<p>3'd2: {B[7:0], G[7:0], R[7:0], 8'h0}</p>
+<p>3'd3: {R[7:0], G[7:0], B[7:0], 8'h0}</p>
+<p>3'd4: {R_n[7:0], B[7:0], G[7:0], R[7:0]}</p>
+<p>3'd5: {B_n[7:0], R[7:0], G[7:0], B[7:0]}</p>
+<p>3'd6: {2{B[7:3], G[7:2], R[7:3]}}</p>
+<p>3'd7: {2{R[7:3], G[7:2], B[7:3]}}</p>
+<p>Note: FIFO data format does not affect normal data, which is fixed to LSB sent first {Byte3[7:0], Byte2[7:0], Byte1[7:0], Byte0[7:0]}</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="4"><p>28</p></td>
+<td rowspan="4"><p>fifo_yuv_mode</p></td>
+<td rowspan="4"><p>r/w</p></td>
+<td rowspan="4"><p>1'b0</p></td>
+<td rowspan="4"><p>FIFO data YUV mode</p>
+<p>R &lt;-&gt; Y</p>
+<p>G &lt;-&gt; U/Cb</p>
+<p>B &lt;-&gt; V/Cr</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>27:6</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>tx_fifo_underflow</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Underflow flag of TX FIFO, can be cleared by tx_fifo_clr</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>tx_fifo_overflow</p></td>
+<td><p>r</p></td>
+<td><p>1'b0</p></td>
+<td><p>Overflow flag of TX FIFO, can be cleared by tx_fifo_clr</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>tx_fifo_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1'b0</p></td>
+<td><p>Clear signal of TX FIFO</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>dbi_dma_tx_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1'b0</p></td>
+<td><p>Enable signal of dma_tx_req/ack interface</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dbi-fifo-config-1">
+<h3><span class="section-number">21.4.17. </span>dbi_fifo_config_1<a class="headerlink" href="#dbi-fifo-config-1" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x2000a884</p>
+<figure class="align-center">
+<img alt="../_images/dbi_dbi_fifo_config_1.svg" src="../_images/dbi_dbi_fifo_config_1.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:19</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>18:16</p></td>
+<td><p>tx_fifo_th</p></td>
+<td><p>r/w</p></td>
+<td><p>3'd0</p></td>
+<td><p>TX FIFO threshold, dma_tx_req will not be asserted if tx_fifo_cnt is less than this value</p></td>
+</tr>
+<tr class="row-even"><td><p>15:4</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>3:0</p></td>
+<td><p>tx_fifo_cnt</p></td>
+<td><p>r</p></td>
+<td><p>4'd8</p></td>
+<td><p>TX FIFO available count</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dbi-fifo-wdata">
+<h3><span class="section-number">21.4.18. </span>dbi_fifo_wdata<a class="headerlink" href="#dbi-fifo-wdata" title="永久链接至标题"></a></h3>
+<p><strong>地址：</strong>  0x2000a888</p>
+<figure class="align-center">
+<img alt="../_images/dbi_dbi_fifo_wdata.svg" src="../_images/dbi_dbi_fifo_wdata.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>位</p></th>
+<th class="head"><p>名称</p></th>
+<th class="head"><p>权限</p></th>
+<th class="head"><p>复位值</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>dbi_fifo_wdata</p></td>
+<td><p>w</p></td>
+<td><p>x</p></td>
+<td><p>Pixel data with 8 types of format (determined by fifo_format)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="MJPEG.html" class="btn btn-neutral float-left" title="20. MJPEG" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="SDH.html" class="btn btn-neutral float-right" title="22. SDH" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2022.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

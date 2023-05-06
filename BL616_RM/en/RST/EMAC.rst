@@ -249,3 +249,10 @@ Receive Data Frame
 
 - For BDs whose data has been received, the E bit in its control field will be cleared by hardware and BDs will not be used for RX again. Only after you take out the data and set the E bit, can this BD be used for RX again
 
+.. only:: html
+
+   .. include:: emac_register.rst
+
+.. raw:: latex
+
+   \input{../../en/content/emac}

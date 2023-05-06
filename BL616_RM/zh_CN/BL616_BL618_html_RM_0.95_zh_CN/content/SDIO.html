@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>23. SDIO &mdash; BL616/BL618 参考手册  文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="24. LowPower" href="LowPower.html" />
+    <link rel="prev" title="22. SDH" href="SDH.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL616/BL618 参考手册
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. 系统和存储器概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. 复位和时钟</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPIO.html">4. GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">5. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">6. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">7. DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IR.html">8. IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">9. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">10. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">11. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">12. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">13. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2S.html">14. I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AudioDAC.html">15. AudioDAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AudioADC.html">16. AudioADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EMAC.html">17. EMAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USB.html">18. USB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cam.html">19. CAM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MJPEG.html">20. MJPEG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBI.html">21. DBI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SDH.html">22. SDH</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">23. SDIO</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">23.1. 简介</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">23.2. 主要特征</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">23.3. 功能描述</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">23.3.1. SDIO信号定义</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id5">23.3.1.1. SDIO卡类型</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">23.3.1.2. SDIO卡模式</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">23.3.1.3. 信号引脚</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">23.3.2. SDIO卡初始化</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#i-o">23.3.2.1. I/O卡初始化差异</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#io-send-op-cond-cmd5">23.3.2.2. IO_SEND_OP_COND命令（CMD5）</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#io-send-op-cond-r4">23.3.2.3. IO_SEND_OP_COND响应（R4）</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id9">23.3.2.4. 组合卡的特殊初始化注意事项</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#sd">23.3.3. 与SD内存规范的差异</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id10">23.3.3.1. SDIO命令列表</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id11">23.3.3.2. 不支持的SD内存命令</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#r6">23.3.3.3. 改进的R6响应</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id12">23.3.3.4. SDIO复位</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id13">23.3.3.5. 总线宽度</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id14">23.3.3.6. 卡检测电阻</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id15">23.3.3.7. 数据传输块大小</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id16">23.3.3.8. 数据传输中止</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id17">23.3.4. 新的I/O读或写命令</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#io-rw-direct-cmd52">23.3.4.1. IO_RW_DIRECT命令（CMD52）</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#io-rw-direct-r5">23.3.4.2. IO_RW_DIRECT响应（R5）</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#io-rw-extended-cmd53">23.3.4.3. IO_RW_EXTENDED命令（CMD53）</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id18">23.3.5. SDIO卡内部操作</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id19">23.3.5.1. 概述</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id20">23.3.5.2. 寄存器访问时间</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id21">23.3.5.3. 中断</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id22">23.3.5.4. 挂起/恢复</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id23">23.3.5.5. 读等待</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cmd52">23.3.5.6. 数据传输中的CMD52</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id24">23.3.5.7. 固定内部映射</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#i-o-cia">23.3.5.8. 公共I/O区（CIA）</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cccr">23.3.5.9. 卡通用控制寄存器（CCCR）</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fbr">23.3.5.10. 功能基础寄存器（FBR）</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cis">23.3.5.11. 卡信息结构（CIS）</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id25">23.3.5.12. 多功能SDIO卡</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cmd53">23.3.5.13. 使用CMD53设置块大小</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id26">23.3.5.14. 总线状态图</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#i-o-csa">23.3.6. 嵌入式I/O代码存储区（CSA）</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#csa">23.3.6.1. CSA访问</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id27">23.3.6.2. CSA数据格式</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id28">23.3.7. SDIO中断</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#spisd-1">23.3.7.1. SPI和SD 1位模式中断</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sd-4">23.3.7.2. SD 4位模式中断</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id29">23.3.7.3. 中断清除时间</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id30">23.3.8. SDIO挂起/恢复操作</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id31">23.3.9. SDIO读取等待操作</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="LowPower.html">24. LowPower</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SEC_ENG.html">25. SEC ENG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">26. 版本信息</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL616/BL618 参考手册</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">23. </span>SDIO</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="sdio">
+<h1><span class="section-number">23. </span>SDIO<a class="headerlink" href="#sdio" title="永久链接至标题"></a></h1>
+<section id="id1">
+<h2><span class="section-number">23.1. </span>简介<a class="headerlink" href="#id1" title="永久链接至标题"></a></h2>
+<p>安全数字输入输出（Secure Digital Input and Output, SDIO）是在SD存储卡接口基础上发展起来的一种外设接口。
+SDIO卡兼容SD存储卡，目的是提供高速数据I/O与低功耗的移动电子设备。</p>
+</section>
+<section id="id2">
+<h2><span class="section-number">23.2. </span>主要特征<a class="headerlink" href="#id2" title="永久链接至标题"></a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>针对便携式和固定式应用</p></li>
+<li><p>最小或不需要修改SD物理总线</p></li>
+<li><p>内存驱动软件的最小更改</p></li>
+<li><p>可用于特殊应用的扩展物理形状因子</p></li>
+<li><p>即插即用</p></li>
+<li><p>多功能支持，包括多个I/O、组合I/O和内存</p></li>
+<li><p>一张卡最多支持7个I/O功能和1个内存</p></li>
+<li><p>允许卡中断主机</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="id3">
+<h2><span class="section-number">23.3. </span>功能描述<a class="headerlink" href="#id3" title="永久链接至标题"></a></h2>
+<section id="id4">
+<h3><span class="section-number">23.3.1. </span>SDIO信号定义<a class="headerlink" href="#id4" title="永久链接至标题"></a></h3>
+<section id="id5">
+<h4><span class="section-number">23.3.1.1. </span>SDIO卡类型<a class="headerlink" href="#id5" title="永久链接至标题"></a></h4>
+<p>SDIO卡分为两种类型，全速SDIO卡和低速SDIO卡。在0~25MHz的全时钟范围内，全速卡支持SPI、1位SD和4位SD传输模式。
+全速SDIO卡的数据传输速率超过100Mb/秒（10MB/秒）。低速SDIO卡只需要SPI和1位SD传输模式，支持0~400KHz的全时钟范围。
+低速卡的预期用途是用最少的硬件支持低速I/O能力，低速卡支持调制解调器、条码扫描器、GPS接收器等功能。</p>
+</section>
+<section id="id6">
+<h4><span class="section-number">23.3.1.2. </span>SDIO卡模式<a class="headerlink" href="#id6" title="永久链接至标题"></a></h4>
+<p>有3种为SD存储卡定义的信号模式，也适用于SDIO卡：
+SPI模式：在这种模式下，引脚8被用作中断引脚，所有其他引脚和信令协议都与SD物理规范相同。
+1位SD数据传输模式：在这种模式下，数据只在DAT[0]引脚上传输。引脚8被用作中断引脚，所有其他引脚和信令协议都与SD内存规范相同。
+4位SD数据传输模式：在这种模式下，数据在所有4个数据引脚DAT[3:0]上传输。此模式下中断引脚不可独占使用，因为它被用作数据传输线。
+因此，如果需要中断功能，则需要特殊的定时来提供中断。4位SD模式提供最快的数据传输可能，最高可达100Mb/秒。</p>
+</section>
+<section id="id7">
+<h4><span class="section-number">23.3.1.3. </span>信号引脚<a class="headerlink" href="#id7" title="永久链接至标题"></a></h4>
+<figure class="align-center" id="id32">
+<img alt="../_images/SDIOPin.svg" src="../_images/SDIOPin.svg" /><figcaption>
+<p><span class="caption-number">图 23.1 </span><span class="caption-text">2个4位SDIO卡信号连接示意图</span><a class="headerlink" href="#id32" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="id8">
+<h3><span class="section-number">23.3.2. </span>SDIO卡初始化<a class="headerlink" href="#id8" title="永久链接至标题"></a></h3>
+<section id="i-o">
+<h4><span class="section-number">23.3.2.1. </span>I/O卡初始化差异<a class="headerlink" href="#i-o" title="永久链接至标题"></a></h4>
+<p>SDIO规范的一个要求是，当插入SDIO卡时，不应导致非I/O感知主机失败。为了防止在非I/O感知的主机中操作I/O功能，需要更改SD卡识别模式流程图。
+添加了一个新的命令（IO_SEND_OP_COND，CMD5）来替换ACMD41，通过I/O感知主机进行SDIO初始化。
+复位或上电后，卡上的所有I/O功能都被禁用，当CS为低时，除CMD5或CMD0外，卡的I/O部分不会执行任何操作。如果有SD内存安装在卡上，该内存应正常响应所有正常的强制内存命令。
+仅I/O卡不得响应ACMD41，因此最初显示为MMC卡。仅I/O卡也不得响应用于初始化MMC卡的CMD1，并显示为非响应卡。然后主机放弃并禁用该卡。
+因此，非感知主机不接收来自仅I/O卡的响应，并强制其进入非活动状态。下图显示了具有非I/O感知主机的I/O卡的操作，实线为实际路径，而虚线未执行：</p>
+<figure class="align-center" id="id33">
+<img alt="../_images/SDIOInit.svg" src="../_images/SDIOInit.svg" /><figcaption>
+<p><span class="caption-number">图 23.2 </span><span class="caption-text">SDIO对非I/O感知初始化的响应</span><a class="headerlink" href="#id33" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="io-send-op-cond-cmd5">
+<h4><span class="section-number">23.3.2.2. </span>IO_SEND_OP_COND命令（CMD5）<a class="headerlink" href="#io-send-op-cond-cmd5" title="永久链接至标题"></a></h4>
+<p>IO_SEND_OP_COND命令（CMD5）对SDIO卡的功能类似于对SD存储卡的ACMD41的操作，用于查询I/O卡所需要的电压范围。CMD5的正常响应是SD或SPI格式的R4。
+CMD5的格式如下图所示：</p>
+<figure class="align-center" id="id34">
+<img alt="../_images/SDIOCMD5.svg" src="../_images/SDIOCMD5.svg" /><figcaption>
+<p><span class="caption-number">图 23.3 </span><span class="caption-text">IO_SEND_OP_COND命令</span><a class="headerlink" href="#id34" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>其中：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>S：起始位。总是0；</p></li>
+<li><p>D：方向。总是1，表示从主机到卡的传输；</p></li>
+<li><p>Command Index：使用值000101b来标识CMD5命令；</p></li>
+<li><p>Stuff Bits：不使用，应设置为0；</p></li>
+<li><p>I/O OCR：操作条件寄存器。VDD支持的最小值和最大值；</p></li>
+<li><p>CRC7：7位CRC数据；</p></li>
+<li><p>E：结束位。总是1。</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="io-send-op-cond-r4">
+<h4><span class="section-number">23.3.2.3. </span>IO_SEND_OP_COND响应（R4）<a class="headerlink" href="#io-send-op-cond-r4" title="永久链接至标题"></a></h4>
+<p>接收到CMD5的SDIO卡应响应一个唯一的SDIO响应R4。R4在SD和SPI模式下的格式分别如下图所示：</p>
+<figure class="align-center" id="id35">
+<img alt="../_images/SDIOR4SD.svg" src="../_images/SDIOR4SD.svg" /><figcaption>
+<p><span class="caption-number">图 23.4 </span><span class="caption-text">SD模式下的响应R4</span><a class="headerlink" href="#id35" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id36">
+<img alt="../_images/SDIOR4SPI.svg" src="../_images/SDIOR4SPI.svg" /><figcaption>
+<p><span class="caption-number">图 23.5 </span><span class="caption-text">SPI模式下的响应R4</span><a class="headerlink" href="#id36" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>其中：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>S：起始位。总是0；</p></li>
+<li><p>D：方向。总是0，表示从卡到主机的传输；</p></li>
+<li><p>Reserved：为将来使用而保留的位。这些位应设置为1；</p></li>
+<li><p>C：如果卡在初始化完后准备好了操作，则设置为1；</p></li>
+<li><p>Stuff Bits：不使用，应设置为0；</p></li>
+<li><p>I/O OCR：操作条件寄存器。VDD支持的最小值和最大值；</p></li>
+<li><p>E：结束位。总是1。</p></li>
+<li><p>Memory Present：如果卡还包含SD内存，则设置为1。如果卡仅为I/O，则设置为0；</p></li>
+<li><p>Number of I/O Functions：指示此卡支持的I/O功能总数，范围是0~7。需要注意的是，此计数不包括功能0的所有I/O卡上的公共区域。I/O功能应从功能1开始按顺序执行；</p></li>
+<li><p>Modified R1：SD物理规范中描述的SPI R1响应字节针对I/O的改进如下；</p></li>
+</ul>
+</div></blockquote>
+<figure class="align-center" id="id37">
+<img alt="../_images/SDIOR1.svg" src="../_images/SDIOR1.svg" /><figcaption>
+<p><span class="caption-number">图 23.6 </span><span class="caption-text">改进的R1响应</span><a class="headerlink" href="#id37" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id9">
+<h4><span class="section-number">23.3.2.4. </span>组合卡的特殊初始化注意事项<a class="headerlink" href="#id9" title="永久链接至标题"></a></h4>
+<p>主机在初始化组合卡时必须注意一些特殊情况（SDIO加上同一卡上的SD内存）。
+这是因为组合卡的实现实际上可以在同一个包中使用两个单独的控制器（内存和I/O），并共享相同的总线线路。
+主机必须检测并正确配置组合卡的两个部分（控制器），以防止SDIO和SD内存控制器之间发生冲突。
+这些问题是由于两个控制器对复位（硬或软）的响应不同而引起的。另一个问题是内存控制器中存在的RCA（相对卡地址）的值。
+上述注意事项仅适用于SD 1位和SD 4位模式。在SPI模式下，卡选择/取消选择使用硬件CS线而不是RCA完成。</p>
+</section>
+</section>
+<section id="sd">
+<h3><span class="section-number">23.3.3. </span>与SD内存规范的差异<a class="headerlink" href="#sd" title="永久链接至标题"></a></h3>
+<section id="id10">
+<h4><span class="section-number">23.3.3.1. </span>SDIO命令列表<a class="headerlink" href="#id10" title="永久链接至标题"></a></h4>
+<p>使用SD总线接口时SD内存和SDIO卡接受的命令列表如下图所示：</p>
+<figure class="align-center" id="id38">
+<img alt="../_images/SDIOSDCmdList.svg" src="../_images/SDIOSDCmdList.svg" /><figcaption>
+<p><span class="caption-number">图 23.7 </span><span class="caption-text">SD模式命令列表</span><a class="headerlink" href="#id38" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>使用SPI总线接口时SD内存和SDIO卡接受的命令列表如下图所示：</p>
+<figure class="align-center" id="id39">
+<img alt="../_images/SDIOSPICmdList.svg" src="../_images/SDIOSPICmdList.svg" /><figcaption>
+<p><span class="caption-number">图 23.8 </span><span class="caption-text">SPI模式命令列表</span><a class="headerlink" href="#id39" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id11">
+<h4><span class="section-number">23.3.3.2. </span>不支持的SD内存命令<a class="headerlink" href="#id11" title="永久链接至标题"></a></h4>
+<p>SDIO专用卡或组合卡的I/O部分不支持SD存储卡所需的几个命令。其中一些命令在SDIO卡中没有用处，例如Erase命令，因此在SDIO中不受支持。
+此外，有几个用于SD存储卡的命令在与卡的SDIO部分一起使用时具有不同的命令。下表列出了这些SD内存命令和等效的SDIO命令：</p>
+<figure class="align-center" id="id40">
+<img alt="../_images/SDIOUnsupported.svg" src="../_images/SDIOUnsupported.svg" /><figcaption>
+<p><span class="caption-number">图 23.9 </span><span class="caption-text">不支持的SD内存命令</span><a class="headerlink" href="#id40" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="r6">
+<h4><span class="section-number">23.3.3.3. </span>改进的R6响应<a class="headerlink" href="#r6" title="永久链接至标题"></a></h4>
+<p>存储卡对CMD3的正常响应为R6，如下表所示：</p>
+<figure class="align-center" id="id41">
+<img alt="../_images/SDIOR6.svg" src="../_images/SDIOR6.svg" /><figcaption>
+<p><span class="caption-number">图 23.10 </span><span class="caption-text">CMD3的R6响应</span><a class="headerlink" href="#id41" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>当CMD3被发送到仅I/O卡时，卡状态位（8~23）会发生更改。在这种情况下，16位响应应为下表所示的仅SDIO值：</p>
+<figure class="align-center" id="id42">
+<img alt="../_images/SDIOR6Status.svg" src="../_images/SDIOR6Status.svg" /><figcaption>
+<p><span class="caption-number">图 23.11 </span><span class="caption-text">SDIO R6状态位</span><a class="headerlink" href="#id42" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id12">
+<h4><span class="section-number">23.3.3.4. </span>SDIO复位<a class="headerlink" href="#id12" title="永久链接至标题"></a></h4>
+<p>为了复位SDIO卡或组合卡的SDIO部分中的所有功能，定义了一种不同于用于SD内存的方法。复位命令（CMD0）只用于内存或组合卡的内存部分。
+要复位仅I/O卡或组合卡的I/O部分，请使用CMD52将1写入CCCR中的RES位（寄存器6的位3）。
+要注意的是，在SD模式下，CMD0仅用于指示进入SPI模式，CMD0不会复位仅I/O卡或组合卡的I/O部分。</p>
+</section>
+<section id="id13">
+<h4><span class="section-number">23.3.3.5. </span>总线宽度<a class="headerlink" href="#id13" title="永久链接至标题"></a></h4>
+<p>对于SD存储卡，SD模式的总线宽度使用ACMD6设置。SDIO卡使用CMD52写入CCCR来选择总线宽度。
+对于组合卡，两种选择方法都存在。这种情况下主机应在开始任何数据传输之前，通过使用具有相同宽度设置的ACMD6和写入CCCR的CMD52，在两个位置设置总线宽度。</p>
+</section>
+<section id="id14">
+<h4><span class="section-number">23.3.3.6. </span>卡检测电阻<a class="headerlink" href="#id14" title="永久链接至标题"></a></h4>
+<p>SD内存和I/O卡使用DAT[3]上的上拉电阻来检测卡插入。SD存储器和SDIO之间启用/禁用此电阻的步骤不同。
+SD内存使用ACMD42控制该电阻，而SDIO使用CMD52写入CCCR。如果是组合卡，两个控制方式都存在，并应由主机管理。
+对于组合卡，仅当内存和I/O控制寄存器都启用电阻时，电阻才启用。也就是说，通电后，主机应使用ACMD42对内存控制器或对SDIO控制器的CCCR写入禁用电阻，因为电阻启用是两个启用中的逻辑与。
+通电后，两个位置默认为电阻启用。请注意，在I/O复位后，I/O电阻启用不会改变。</p>
+</section>
+<section id="id15">
+<h4><span class="section-number">23.3.3.7. </span>数据传输块大小<a class="headerlink" href="#id15" title="永久链接至标题"></a></h4>
+<p>SDIO卡可以多字节（1到512字节）或可选块格式传输数据，而SD存储卡固定在块传输模式下。SD物理规范将数据传输的块大小限制为2的次方（即512、1024、2048），除非使用部分读写。
+SDIO规范允许从1字节到2048字节的任何块大小，以适应I/O功能的各种自然块大小。值得注意的是，SDIO卡功能可在CIS中定义小于上述最大值的最大块大小或字节数。</p>
+</section>
+<section id="id16">
+<h4><span class="section-number">23.3.3.8. </span>数据传输中止<a class="headerlink" href="#id16" title="永久链接至标题"></a></h4>
+<p>与SD存储卡通信的主机使用CMD12中止从/向该卡读取或写入数据的传输。对于SDIO卡，CMD12中止由对CCCR中ASx位的写入代替。
+通常，中止用于停止无限块传输（块计数=0）。如果要传输的块的数量是确定的，建议主机发出具有正确块计数的块命令，而不是使用无限计数并在正确的时间中止数据。</p>
+</section>
+</section>
+<section id="id17">
+<h3><span class="section-number">23.3.4. </span>新的I/O读或写命令<a class="headerlink" href="#id17" title="永久链接至标题"></a></h3>
+<p>增加了两条额外的数据传输指令以支持I/O。IO_RW_DIRECT是一个类似于MMC“快速I/O”命令的直接I/O命令，IO_RW_EXTENDED允许使用字节或块地址进行快速访问。这两个命令都属于类9（I/O命令）。</p>
+<section id="io-rw-direct-cmd52">
+<h4><span class="section-number">23.3.4.1. </span>IO_RW_DIRECT命令（CMD52）<a class="headerlink" href="#io-rw-direct-cmd52" title="永久链接至标题"></a></h4>
+<p>IO_RW_DIRECT是在任何I/O功能，包括公共I/O区（CIA）中访问128K寄存器空间内的单个寄存器的最简单方法。此命令读取或写入1个字节仅使用1个命令/响应对。
+通常用于初始化寄存器或监视I/O功能的状态值。此命令是读取或写入单个I/O寄存器的最快方法，因为它只需要单个命令/响应对。该命令结构如下图所示：</p>
+<figure class="align-center" id="id43">
+<img alt="../_images/SDIOCMD52.svg" src="../_images/SDIOCMD52.svg" /><figcaption>
+<p><span class="caption-number">图 23.12 </span><span class="caption-text">IO_RW_DIRECT命令</span><a class="headerlink" href="#id43" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>其中：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>S：起始位。总是0；</p></li>
+<li><p>D：方向。总是1，表示从主机到卡的传输；</p></li>
+<li><p>Command Index：使用值110100b来标识IO_RW_DIRECT命令；</p></li>
+<li><p>R/W Flag：该位确定I/O操作的方向。如果该位为0，则该命令应在功能号指定的地址和主机的寄存器地址从SDIO卡读取数据。数据字节在响应R5中返回。如果该位设置为1，则命令应将写入数据字段中的字节写入由功能号和寄存器地址寻址的I/O位置。如果原始标志为0，则应读取寄存器中写入的数据，并在响应中返回该值；</p></li>
+<li><p>RAW Flag：写入后读取标志。如果该位设置为1且R/W标志设置为1，则命令应在写入后读取寄存器的值。这对于允许写入控制寄存器和读取同一地址的状态非常有用。如果清除该位，R5响应中返回的值应与命令中的写入数据相同。如果设置了该位，R5响应的数据字段应包含写入操作后从寻址寄存器读取的值；</p></li>
+<li><p>Function Number：希望读取或写入的I/O卡中的功能编号。功能0选择公共I/O区域（CIA）；</p></li>
+<li><p>Register Address：这是所选功能中要读取或写入的数据字节的地址。有17位地址可用，因此寄存器位于该功能的前128K（131072）地址内；</p></li>
+<li><p>Write Data/Stuff Bits：对于直接写入命令（R/W=1），这是写入所选地址的字节。对于直接读取（R/W=0），不使用此字段，应将其设置为0；</p></li>
+<li><p>CRC7：7位CRC数据；</p></li>
+<li><p>E：结束位。总是1。</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="io-rw-direct-r5">
+<h4><span class="section-number">23.3.4.2. </span>IO_RW_DIRECT响应（R5）<a class="headerlink" href="#io-rw-direct-r5" title="永久链接至标题"></a></h4>
+<p>SDIO卡对CMD52的响应应采用两种格式之一。如果卡和主机之间的通信处于1位或4位SD模式，则响应应为48位响应（R5）。如果操作是读取命令，则正在读取的数据将作为8位值返回。此外，还返回15位状态信息。如下图所示：</p>
+<figure class="align-center" id="id44">
+<img alt="../_images/SDIOR5SD.svg" src="../_images/SDIOR5SD.svg" /><figcaption>
+<p><span class="caption-number">图 23.13 </span><span class="caption-text">SD模式下的IO_RW_DIRECT响应</span><a class="headerlink" href="#id44" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>其中：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>S：起始位。总是0；</p></li>
+<li><p>D：方向。总是0，表示从卡到主机的传输；</p></li>
+<li><p>Command Index：使用值110100b来标识IO_RW_DIRECT命令；</p></li>
+<li><p>Stuff Bits：不使用，应设置为0；</p></li>
+<li><p>Response Flags：指示SDIO卡状态的8位标志数据；</p></li>
+<li><p>Read or Write Data：对于设置了原始标志（RAW=1）的I/O写入（R/W=1），该字段应包含写入命令中包含的数据后从寻址寄存器读取的值。注意，在这种情况下，根据硬件的设计，读回数据可能与写入寄存器的数据不同。对于原始位为0的I/O写入，SDIO功能不应进行写后读取操作，且该字段中的数据应与写入命令中的数据字节相同。对于I/O读取（R/W=0），从该I/O位置读取的实际值将在该字段中返回。</p></li>
+<li><p>CRC7：7位CRC数据；</p></li>
+<li><p>E：结束位。总是1。</p></li>
+</ul>
+</div></blockquote>
+<p>如果通信使用SPI模式，响应应为16位R5响应。如果操作是读取命令，则正在读取的数据将作为8位值返回。此外，在SPI R1响应字节中返回8位状态信息。如下图所示：</p>
+<figure class="align-center" id="id45">
+<img alt="../_images/SDIOR5SPI.svg" src="../_images/SDIOR5SPI.svg" /><figcaption>
+<p><span class="caption-number">图 23.14 </span><span class="caption-text">SPI模式下的IO_RW_DIRECT响应</span><a class="headerlink" href="#id45" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>注：读/写（R/W）数据与SD R5响应所述的读/写数据相同。SPI模式中的参数错误状态对应于超出范围和SD模式响应中的错误。对于CMD53，还应使用数据错误标记指示超出范围和错误。</p>
+</section>
+<section id="io-rw-extended-cmd53">
+<h4><span class="section-number">23.3.4.3. </span>IO_RW_EXTENDED命令（CMD53）<a class="headerlink" href="#io-rw-extended-cmd53" title="永久链接至标题"></a></h4>
+<p>为了用一个命令读写多个I/O寄存器，定义了一个新命令IO_RW_EXTENDED。此命令包含在命令类9（I/O命令）中。
+此命令允许使用单个命令读取或写入大量I/O寄存器。因为这是一个数据传输命令，所以它提供了可能的最高传输速率。IO_RW_EXTENDED命令如下图所示：</p>
+<figure class="align-center" id="id46">
+<img alt="../_images/SDIOCMD53.svg" src="../_images/SDIOCMD53.svg" /><figcaption>
+<p><span class="caption-number">图 23.15 </span><span class="caption-text">IO_RW_EXTENDED命令</span><a class="headerlink" href="#id46" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+<p>其中：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>S：起始位。总是0；</p></li>
+<li><p>D：方向。总是1，表示从主机到卡的传输；</p></li>
+<li><p>Command Index：使用值110101b来标识IO_RW_EXTENDED命令；</p></li>
+<li><p>R/W Flag：该位确定I/O操作的方向。如果该位为0，则该命令将从SDIO卡中以功能号和寄存器地址指定的地址向主机读取数据。读取的数据应在DAT[x]行上返回。如果该位设置为1，则命令应将DAT[x]行中的字节写入由功能号和寄存器地址寻址的I/O位置；</p></li>
+<li><p>Function Number：希望读取或写入的I/O卡中的功能编号。功能0选择公共I/O区域（CIA）；</p></li>
+<li><p>Block Mode：（可选）如果该位设置为1，则表示读取或写入操作应在块基础上执行，而不是在正常字节基础上执行。如果设置了该位，字节/块计数值应包含要读取/写入的块数。通过将块大小写入FBR中的I/O块大小寄存器来设置功能1-7的块大小。功能0的块大小通过写入CCCR中的FN0块大小寄存器来设置。块I/O模式的卡和主机支持是可选的。主机可以通过读取CCCR中的卡支持MBIO位（SMB）来确定卡是否支持块I/O。块模式=1时使用的块大小和块模式=0时使用的每个命令的最大字节数可以从元组TPLFE_MAX_BLK_SIZE中的CIS中按功能读取；</p></li>
+<li><p>OP code：定义读/写操作。0表示对固定地址的多字节读/写，1表示对递增地址的多字节读/写；</p></li>
+<li><p>Register Address：要读取或写入的I/O寄存器的起始地址。范围为0~0x1FFF；</p></li>
+<li><p>Byte/Block Count：如果命令以字节（块模式=0）操作，则此字段包含要读取或写入的字节数。0x000的值将导致512字节被读取或写入；</p></li>
+<li><p>CRC7：7位CRC数据；</p></li>
+<li><p>E：结束位。总是1。</p></li>
+</ul>
+</div></blockquote>
+</section>
+</section>
+<section id="id18">
+<h3><span class="section-number">23.3.5. </span>SDIO卡内部操作<a class="headerlink" href="#id18" title="永久链接至标题"></a></h3>
+<p>I/O访问与内存的不同之处在于，寄存器可以单独或直接写入和读取，而无需FAT文件结构或块的概念（尽管支持块访问）。
+这些寄存器允许访问I/O数据、控制I/O功能、报告状态或向主机传输I/O数据。SD内存依赖于固定块长度的概念，命令读取/写入这些固定大小块的倍数。
+I/O可能有固定的块长度，也可能没有固定的块长度，读取大小可能不同于写入大小。因此，I/O操作可能基于长度（字节计数）或块大小。</p>
+<section id="id19">
+<h4><span class="section-number">23.3.5.1. </span>概述<a class="headerlink" href="#id19" title="永久链接至标题"></a></h4>
+<p>每个SDIO卡可能有1到7个功能，以及内置的一个存储功能。功能是一个自包含的I/O设备。I/O功能可能相同，也可能完全不同。所有I/O功能都组织为寄存器集合。
+每个I/O功能最多可能有131072（2^17）个寄存器。这些寄存器及其各个位可以是只读（RO）、只写（WO）或读/写（R/W）。这些寄存器在卡中可以是8、16或32位宽。
+所有寻址都基于字节访问。这些寄存器可以一次写入和/或读取一个，乘法到同一地址或乘法到递增地址。单个R/W访问通常用于初始化I/O功能或读取单个状态或数据值。
+对固定地址的多次读取用于从卡中的数据FIFO寄存器读取或写入数据。读到递增地址用于向卡内的RAM区域读写数据集合。下图显示了SDIO卡的CIA和可选CSA空间的映射：</p>
+<figure class="align-center" id="id47">
+<img alt="../_images/SDIOInternalMap.svg" src="../_images/SDIOInternalMap.svg" /><figcaption>
+<p><span class="caption-number">图 23.16 </span><span class="caption-text">SDIO内部映射</span><a class="headerlink" href="#id47" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id20">
+<h4><span class="section-number">23.3.5.2. </span>寄存器访问时间<a class="headerlink" href="#id20" title="永久链接至标题"></a></h4>
+<p>仅SDIO卡和组合卡SDIO部分中的所有寄存器应在1秒内完成读写数据传输。此超时值与请求数据在DAT[x]线上传输到主机或从主机传输的时间有关，而不是与命令和响应之间的时间有关。
+该等待时间由卡向主机发出信号，使用busy进行写入或延迟开始位进行读取操作。主机可以使用1秒作为无响应位置的超时值。</p>
+</section>
+<section id="id21">
+<h4><span class="section-number">23.3.5.3. </span>中断<a class="headerlink" href="#id21" title="永久链接至标题"></a></h4>
+<p>所有SDIO主机都应支持硬件中断。如果主机不支持中断，则可能难以使用期望对中断条件做出快速响应的SDIO卡。SDIO或组合卡中的每个功能都可以根据需要实现中断。
+SDIO功能上使用的中断类型通常称为“电平敏感”。电平敏感是指任何功能可在任何时候发出中断信号，但一旦该功能发出中断信号，在主机移除中断原因或命令这样做之前，不得释放（停止信号）中断。
+由于只有一条中断线，它可能被多个中断源共享。该功能应继续发出中断信号，直到主机响应并清除中断。由于多个中断可能同时处于活动状态，因此主机有责任确定中断源并根据需要进行处理。
+这是通过使用两位（中断启用和中断挂起）在SDIO功能上完成的。每个可能产生中断的功能都有一个中断启用位。此外，SDIO卡有一个主中断启用，用于控制所有功能。
+如果功能的启用和卡的主启用都已设置，则仅向SD总线发送中断信号。第二个中断位称为中断挂起。该只读位告诉主机哪些功能可能发出中断信号。每个可以生成中断的功能都有一个中断挂起位。这些位位于CCCR区域中。</p>
+</section>
+<section id="id22">
+<h4><span class="section-number">23.3.5.4. </span>挂起/恢复<a class="headerlink" href="#id22" title="永久链接至标题"></a></h4>
+<p>在多功能SDIO或组合卡中，有多个设备（I/O和内存）共享对SD总线的访问。为了允许在多个设备之间共享对主机的访问，SDIO和组合卡可以实现挂起/恢复的可选概念。
+如果卡支持挂起/恢复，主机可能会暂时停止对一个功能或内存的数据传输操作（挂起），以便释放总线，以便向不同的功能或内存进行更高优先级的传输。完成此高优先级传输后，原始传输将在停止的位置重新开始（恢复）。
+支持挂起/恢复是每个卡的可选功能。如果执行挂起/恢复，则组合卡的内存（如果有）和除0（CIA）之外的所有I/O功能应支持挂起/恢复。主机可以挂起多个事务，并按所需的任何顺序恢复它们。I/O功能0不支持挂起/恢复。
+支持挂起/恢复的任何卡还应支持读取等待和直接命令（SRW和SDC=1）。注意，挂起/恢复仅针对SD 1和4位模式定义，它不适用于SPI传输。</p>
+</section>
+<section id="id23">
+<h4><span class="section-number">23.3.5.5. </span>读等待<a class="headerlink" href="#id23" title="永久链接至标题"></a></h4>
+<p>根据SD物理规范构建的主机设备应控制SDCLK，以便在主机无法接受更多数据时，停止执行多重读取命令的卡的读取数据块输出。在主机停止SDCLK期间，无法发出CMD52。此限制会导致一个问题，即按照SD物理规范构建的主机设备无法在多个读取周期内执行I/O命令。
+为了消除此限制，SDIO规范添加了读取等待控件，以使主机能够在多个读取周期中发出CMD52。读取等待使用DAT[2]线允许主机向卡发送信号，以暂时停止卡发送读取数据。此功能对于SDIO或组合卡是可选的。
+但是，如果SDIO或组合支持读取等待，则所有功能和任何内存都应支持读取等待。支持挂起/恢复的任何卡也应支持读取等待。注意，读取等待仅针对SD 1和4位模式定义，它不适用于SPI传输。</p>
+</section>
+<section id="cmd52">
+<h4><span class="section-number">23.3.5.6. </span>数据传输中的CMD52<a class="headerlink" href="#cmd52" title="永久链接至标题"></a></h4>
+<p>如果卡支持直接命令，则可以在数据传输期间接受CMD52。对于SD和SPI模式，如果在数据传输过程中发生错误，SDIO卡应接受CMD52，以允许I/O中止和复位，而不管SDC值的该位值如何。</p>
+</section>
+<section id="id24">
+<h4><span class="section-number">23.3.5.7. </span>固定内部映射<a class="headerlink" href="#id24" title="永久链接至标题"></a></h4>
+<p>SDIO卡具有固定的内部寄存器空间和功能唯一区域。固定区域包含有关卡的信息以及固定位置的某些强制和可选寄存器。固定位置允许任何主机获取有关卡的信息，并以常见方式执行简单操作，如启用。
+功能唯一区域是每个功能区域，由标准SDIO功能的应用规范或非标准功能的供应商定义。</p>
+</section>
+<section id="i-o-cia">
+<h4><span class="section-number">23.3.5.8. </span>公共I/O区（CIA）<a class="headerlink" href="#i-o-cia" title="永久链接至标题"></a></h4>
+<p>公共I/O区（CIA）应在所有SDIO卡上实施。主机通过对功能0的I/O读写访问CIA。CIA内的寄存器用于启用/禁用I/O功能的操作、控制中断的产生以及可选地加载软件以支持I/O功能。
+CIA中的寄存器还提供有关功能能力和要求的信息。CIA支持三种不同的寄存器结构。他们是：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>卡通用控制寄存器（CCCR）</p></li>
+<li><p>功能基础寄存器（FBR）</p></li>
+<li><p>卡信息结构（CIS）</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="cccr">
+<h4><span class="section-number">23.3.5.9. </span>卡通用控制寄存器（CCCR）<a class="headerlink" href="#cccr" title="永久链接至标题"></a></h4>
+<p>卡通用控制寄存器允许快速主机检查和控制I/O卡在每个卡（主卡）和每个功能的基础上的启用和中断。CCCR中的位混合为读/写和只读。如果SDIO卡上未提供7种可能功能中的任何一种，则与未使用功能相对应的位应全部为只读，并读取为0。
+所有保留供将来使用的位（RFU）应为只读，并返回值0。通电或复位后，所有可写位均设置为0。当I/O功能被禁用时，即使在初始化之后也可以访问CCCR。这允许主机在初始化后启用功能。</p>
+</section>
+<section id="fbr">
+<h4><span class="section-number">23.3.5.10. </span>功能基础寄存器（FBR）<a class="headerlink" href="#fbr" title="永久链接至标题"></a></h4>
+<p>除CCCR外，每个受支持的I/O功能都有一个256字节的区域，用于让主机快速确定每个功能的能力和要求，为每个功能启用电源选择，并启用软件加载。该区域的地址从0x00n00到0x00nFF，其中n是功能号（0x1到0x7）。</p>
+</section>
+<section id="cis">
+<h4><span class="section-number">23.3.5.11. </span>卡信息结构（CIS）<a class="headerlink" href="#cis" title="永久链接至标题"></a></h4>
+<p>卡信息结构提供有关卡和单个功能的更完整信息。CIS是用于读取卡中所有I/O功能信息的公共区域。该设计基于PCMCIA标准化的PC Card16设计。支持I/O的所有卡应具有通用CIS和每个功能的CIS。
+通过读取0x1000~0x17FFF区域来访问CIS，该区域作为公共CIS和每个功能的存储区域服务于卡。公共区域和每个功能都有一个指针，指向该内存空间中CIS的开始。</p>
+</section>
+<section id="id25">
+<h4><span class="section-number">23.3.5.12. </span>多功能SDIO卡<a class="headerlink" href="#id25" title="永久链接至标题"></a></h4>
+<p>多功能SDIO卡为卡上的每个功能配备一套单独的配置寄存器。多功能SDIO卡使用卡上所有功能共用的CIS和卡上每个功能专用的单独功能专用CIS的组合。通用CIS描述了卡上所有功能的通用功能。
+每个功能特定CIS描述SDIO卡上特定功能的细节特征。功能从1开始按顺序编号。
+CMD5响应表示功能总数，其中包括“虚拟”功能。主机应根据CMD5响应遍历CIS条目。
+R5响应的错误状态标志为“E R X”类型，可指示前一个命令中的错误。由于主机软件需要一种方法来确定检测到错误的功能，因此多功能SDIO卡只能在向同一功能发出的后续命令中返回R5错误状态标志。</p>
+</section>
+<section id="cmd53">
+<h4><span class="section-number">23.3.5.13. </span>使用CMD53设置块大小<a class="headerlink" href="#cmd53" title="永久链接至标题"></a></h4>
+<p>主机通过写入FBR中的16位功能I/O块大小寄存器，为函数的多个块传输设置块大小。主机不得使用块模式设置为1的CMD53写入此寄存器。如果卡在执行CMD53之前检测到无效的块大小，且块模式设置为1，则卡应在当前响应中指示超出范围错误，并且不应执行数据传输。这也将停止中断周期。</p>
+</section>
+<section id="id26">
+<h4><span class="section-number">23.3.5.14. </span>总线状态图<a class="headerlink" href="#id26" title="永久链接至标题"></a></h4>
+<p>下图是SDIO卡的总线状态图，它显示了总线状态及其与SDIO命令和挂起/恢复的关系：</p>
+<figure class="align-center" id="id48">
+<img alt="../_images/SDIOBus.svg" src="../_images/SDIOBus.svg" /><figcaption>
+<p><span class="caption-number">图 23.17 </span><span class="caption-text">总线状态机状态图</span><a class="headerlink" href="#id48" title="永久链接至图片"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="i-o-csa">
+<h3><span class="section-number">23.3.6. </span>嵌入式I/O代码存储区（CSA）<a class="headerlink" href="#i-o-csa" title="永久链接至标题"></a></h3>
+<p>为了支持SDIO卡的“即插即用”概念，卡中包含的每个功能可能需要包含一块内存，用于存储驱动程序和/或应用程序。此外，由于同一SDIO卡可在多个不同的主机平台上使用，因此每个功能可能需要多个不同版本的代码。
+一种选择是将这些程序存储在组合卡的标准SD内存部分。或者，用于加载代码的标准访问装置包含在可选代码存储区域（CSA）中。CSA是一个单独的16MB内存区域，可使用FBR寄存器中包含的CSA地址指针和CSA窗口寄存器进行访问。</p>
+<section id="csa">
+<h4><span class="section-number">23.3.6.1. </span>CSA访问<a class="headerlink" href="#csa" title="永久链接至标题"></a></h4>
+<p>为了让主机访问功能的CSA，它首先应确定该功能是否支持CSA。主机读取地址0x00n00处的FBR寄存器，其中n是功能号（0x1到0x7）。如果位6=1，则函数支持CSA，主机通过写入位7=1启用访问。
+下一步是主机加载24位地址以开始读取或写入。这是通过将24位（A23-0）写入寄存器0x00n0C到0x00n0E来实现的，其中n是功能号（0x1到0x7）。写入起始地址后，可以通过访问寄存器0x00n0F（CSA数据窗口寄存器）读取或写入数据。
+如果需要读取或写入超过1个字节，则可以使用0（固定地址）的操作码执行扩展I/O命令（字节或块）。每次访问窗口寄存器时，地址指针应自动递增，以便访问CSA内的顺序地址。一旦操作完成，下一个操作的地址应保存在24位地址寄存器中，以便主机读取。</p>
+</section>
+<section id="id27">
+<h4><span class="section-number">23.3.6.2. </span>CSA数据格式<a class="headerlink" href="#id27" title="永久链接至标题"></a></h4>
+<p>存储在CSA中的数据应使用FAT12/FAT16格式进行结构化。使用CSA存储不同主机类型的程序或数据需要SDIO卡制造商以主机可以识别的文件格式加载程序和数据。
+这方面的一个例子是使用保存在特定子目录中的特定文件名，该文件名由特定主机操作系统识别和执行。这些格式是特定的，有时是不同主机实现和操作系统的专有格式。</p>
+</section>
+</section>
+<section id="id28">
+<h3><span class="section-number">23.3.7. </span>SDIO中断<a class="headerlink" href="#id28" title="永久链接至标题"></a></h3>
+<p>为了允许SDIO卡中断主机，在SD接口的引脚上添加了中断功能。在4位SD模式下操作时用作DAT[1]的引脚8用于向主机发送卡中断信号。对于卡中的每个卡或功能，中断的使用是可选的。
+SDIO中断是“电平敏感”的，也就是说，中断线应保持激活（低），直到主机识别并对其进行操作，或者由于中断周期结束而取消断言。一旦主机为中断提供服务，它将通过一些功能独特的I/O操作被清除。所有主机应在数据线DAT[3:0]上提供上拉电阻。</p>
+<section id="spisd-1">
+<h4><span class="section-number">23.3.7.1. </span>SPI和SD 1位模式中断<a class="headerlink" href="#spisd-1" title="永久链接至标题"></a></h4>
+<p>在SPI和1位SD模式下，引脚8专用于中断功能。因此，在SPI和SD 1位模式中，中断没有时间限制。SPI或1位SD模式下的卡通过断言引脚8为低，随时向主机发送中断信号。主机使用电平敏感输入检测此挂起中断。主机负责清除中断。
+如果SDIO卡在SPI模式下运行，如果未选择该卡，则可能不会断言该卡的中断。（CS=0）。只有当卡在未选择时（CCCR中的SCSI位=1）能够中断，并且该功能已打开（ECSI位=1）时，才会出现此要求的例外情况。在这种情况下，无论CS线路的状态如何，卡都可以断言中断。</p>
+</section>
+<section id="sd-4">
+<h4><span class="section-number">23.3.7.2. </span>SD 4位模式中断<a class="headerlink" href="#sd-4" title="永久链接至标题"></a></h4>
+<p>由于引脚8在4位SD模式下的IRQ和DAT[1]使用之间共享，因此中断只能由卡发送，并在特定时间内由主机识别。引脚8上的低电平被识别为中断的时间被定义为中断周期。
+在中断期间，SDIO主机只能将引脚8（DAT[1]/IRQ）上的电平采样到中断检测器中。在所有其他时间，主机中断控制器应忽略引脚8上的电平。注意，中断周期适用于内存和I/O操作。
+对于单块和多块数据传输的操作，中断周期的定义是不同的。</p>
+</section>
+<section id="id29">
+<h4><span class="section-number">23.3.7.3. </span>中断清除时间<a class="headerlink" href="#id29" title="永久链接至标题"></a></h4>
+<p>由于SDIO卡使用电平敏感中断，主机应通过对某个功能唯一区域的I/O读取或写入来清除未决中断。在某些主机实现中，向卡发送CMD52由主机适配器硬件处理，而主机CPU可以执行其他操作。如果中断清除的时间不受控制，此情况可能允许已处理的中断重新中断主机。
+为防止出现这种情况，任何实现中断的SDIO卡在写入清除中断的功能唯一区后，应遵循从DAT[1]行中删除中断所需的时间。中断的清除可由功能唯一方法中的I/O写入或功能唯一I/O读取引起。使用I/O读取清除中断的一个例子是，数据寄存器的读取可自动清除数据就绪中断。</p>
+</section>
+</section>
+<section id="id30">
+<h3><span class="section-number">23.3.8. </span>SDIO挂起/恢复操作<a class="headerlink" href="#id30" title="永久链接至标题"></a></h3>
+<p>用于在SD总线上执行挂起/恢复操作的步骤为：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>主机确定当前使用DAT[3:0]行的功能。</p></li>
+<li><p>主机请求较低优先级或较慢的事务挂起。</p></li>
+<li><p>主机检查事务挂起是否完成。</p></li>
+<li><p>主机开始更高优先级的事务。</p></li>
+<li><p>主机等待高优先级事务的完成。</p></li>
+<li><p>主机恢复挂起的事务。</p></li>
+</ul>
+</div></blockquote>
+<p>如果当前事务可以接受挂起，并且卡在读取等待期间收到挂起命令，则应接受挂起请求。</p>
+</section>
+<section id="id31">
+<h3><span class="section-number">23.3.9. </span>SDIO读取等待操作<a class="headerlink" href="#id31" title="永久链接至标题"></a></h3>
+<p>可选的读取等待（RW）操作仅针对SD 1位和4位模式定义。读取等待操作允许主机向正在执行多次读取（CMD53）操作的卡发送信号，以临时暂停数据传输，同时允许主机向SDIO卡内的任何功能发送命令。为了确定卡是否支持读取等待协议，主机应测试CCCR卡容量字节中的SRW容量位。读取等待的计时基于中断周期。
+如果卡不支持读等待协议，则主机必须在读多命令的中间停顿（不中止）数据的唯一手段是控制SDCLK。读等待支持对于支持挂起/恢复的卡是强制性的。</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="SDH.html" class="btn btn-neutral float-left" title="22. SDH" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="LowPower.html" class="btn btn-neutral float-right" title="24. LowPower" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2022.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

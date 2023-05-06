@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>8. IR &mdash; BL616/BL618 Reference Manual  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="9. SPI" href="SPI.html" />
+    <link rel="prev" title="7. DMA" href="DMA.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BL616/BL618 Reference Manual
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SystemAndMemoryOverview.html">1. System and Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResetAndClock.html">2. Reset and Clock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GLB.html">3. GLB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPIO.html">4. GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ADC.html">5. ADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DAC.html">6. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DMA.html">7. DMA</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">8. IR</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">8.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#features">8.2. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#functional-description">8.3. Functional Description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#fixed-protocol-based-receiving">8.3.1. Fixed Protocol Based Receiving</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pulse-width-receiving">8.3.2. Pulse width receiving</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ir-interrupt">8.3.3. IR Interrupt</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#register-description">8.4. Register description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#irrx-config">8.4.1. irrx_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#irrx-int-sts">8.4.2. irrx_int_sts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#irrx-pw-config">8.4.3. irrx_pw_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#irrx-data-count">8.4.4. irrx_data_count</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#irrx-data-word0">8.4.5. irrx_data_word0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#irrx-data-word1">8.4.6. irrx_data_word1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ir-fifo-config-0">8.4.7. ir_fifo_config_0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ir-fifo-config-1">8.4.8. ir_fifo_config_1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ir-fifo-rdata">8.4.9. ir_fifo_rdata</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="SPI.html">9. SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UART.html">10. UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2C.html">11. I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PWM.html">12. PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TIMER.html">13. TIMER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="I2S.html">14. I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AudioDAC.html">15. AudioDAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AudioADC.html">16. AudioADC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EMAC.html">17. Emac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USB.html">18. USB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cam.html">19. CAM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MJPEG.html">20. MJPEG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBI.html">21. DBI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SDH.html">22. SDH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SDIO.html">23. SDIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LowPower.html">24. LowPower</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SEC_ENG.html">25. SEC ENG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">26. Revision history</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BL616/BL618 Reference Manual</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">8. </span>IR</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ir">
+<h1><span class="section-number">8. </span>IR<a class="headerlink" href="#ir" title="Permalink to this headline"></a></h1>
+<section id="overview">
+<h2><span class="section-number">8.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
+<p>Infrared Remote Control (IR) is a wireless and non-contact control technique that features strong anti-interference, reliable information transmission, low power consumption, and low cost. The IR radiating circuit uses the IR LED to emit the modulated infrared waves. The receiving circuit consists of infrared receiving diodes, triodes or silicon photocells, which convert the infrared light emitted by the infrared transmitter into corresponding electrical signals, and then send them to the post amplifier.</p>
+</section>
+<section id="features">
+<h2><span class="section-number">8.2. </span>Features<a class="headerlink" href="#features" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p>Receives data through the fixed NEC and RC5 protocols</p></li>
+<li><p>Receives data in any format by pulse width counting</p></li>
+<li><p>64*2 bytes receive FIFO</p></li>
+<li><p>End of receiving interrupts</p></li>
+</ul>
+</section>
+<section id="functional-description">
+<h2><span class="section-number">8.3. </span>Functional Description<a class="headerlink" href="#functional-description" title="Permalink to this headline"></a></h2>
+<section id="fixed-protocol-based-receiving">
+<h3><span class="section-number">8.3.1. </span>Fixed Protocol Based Receiving<a class="headerlink" href="#fixed-protocol-based-receiving" title="Permalink to this headline"></a></h3>
+<p>IR receiving supports the fixed NEC and RC5 protocols.</p>
+<ul class="simple">
+<li><p>NEC Protocol</p></li>
+</ul>
+<p>Logical ‘1’ and logical ‘0’ waveforms of the NEC protocol are shown as follows:</p>
+<figure class="align-center" id="id1">
+<img alt="../_images/IRNecLogical.svg" src="../_images/IRNecLogical.svg" /><figcaption>
+<p><span class="caption-number">Fig. 8.1 </span><span class="caption-text">NEC Logic Waveform</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Logical ‘1’ is 2.25 ms and the pulse time is 560 us. Logical ‘0’ is 1.12 ms and the pulse time is 560 us.
+The format of the NEC protocol is shown as follows:</p>
+<figure class="align-center" id="id2">
+<img alt="../_images/IRNec.svg" src="../_images/IRNec.svg" /><figcaption>
+<p><span class="caption-number">Fig. 8.2 </span><span class="caption-text">NEC Protocol Waveform</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The head pulse is a 9 ms high-level pulse and a 4.5 ms low-level pulse, followed by an 8-bit address code and its radix-minus-one complement (diminished radix complement), then an 8-bit command code and its radix complement, and the tail pulse is a 560 us high-level pulse and a 560 us low-level pulse.</p>
+<ul class="simple">
+<li><p>RC5 Protocol</p></li>
+</ul>
+<p>Logical ‘1’ and logical ‘0’ waveforms of the RC5 protocol are shown as follows:</p>
+<figure class="align-center" id="id3">
+<img alt="../_images/IRRc5Logical.svg" src="../_images/IRRc5Logical.svg" /><figcaption>
+<p><span class="caption-number">Fig. 8.3 </span><span class="caption-text">RC5 Logic Waveform</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The logical ‘1’ is 1.778 ms, first the 889 us low level and then the 889 us high level. Logical ‘0’ is opposite to the logical 1 waveform.
+The format of the RC5 protocol is shown as follows:</p>
+<figure class="align-center" id="id4">
+<img alt="../_images/IRRc5.svg" src="../_images/IRRc5.svg" /><figcaption>
+<p><span class="caption-number">Fig. 8.4 </span><span class="caption-text">RC5 Protocol Waveform</span><a class="headerlink" href="#id4" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The first two bits are the Start bits, both logical ‘1’. The third bit is the toggle bit, which toggles each time a key is released and pressed again. The next 5 bits are address bits and the next 6 bits are command bits.</p>
+<p>It is worth noting that to improve the receiving sensitivity, the common infrared integrated receiver outputs a low level after receiving a high level, so you need to enable the receiving toggle function when using the IR receiving function.</p>
+</section>
+<section id="pulse-width-receiving">
+<h3><span class="section-number">8.3.2. </span>Pulse width receiving<a class="headerlink" href="#pulse-width-receiving" title="Permalink to this headline"></a></h3>
+<p>For data in any format other than the NEC and RC5 protocols, IR will count the duration of each high or low level in turn by its clock, and then store the data into the RX FIFO with a depth of 64 and a width of 2 bytes.</p>
+</section>
+<section id="ir-interrupt">
+<h3><span class="section-number">8.3.3. </span>IR Interrupt<a class="headerlink" href="#ir-interrupt" title="Permalink to this headline"></a></h3>
+<p>IR has a separate receiving end interrupt. During the receiving process, it will use the internal working clock to count the time that each level is maintained. Once the count reaches the set end threshold, a receiving end interrupt will be generated.
+The receive interrupt status and clear interrupt can be queried through the register IRRX_INT_STS.</p>
+</section>
+</section>
+<section id="register-description">
+<h2><span class="section-number">8.4. </span>Register description<a class="headerlink" href="#register-description" title="Permalink to this headline"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 37%" />
+<col style="width: 63%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Name</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#irrx-config">irrx_config</a></p></td>
+<td><p>RX configure</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#irrx-int-sts">irrx_int_sts</a></p></td>
+<td><p>RX interrupt status</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#irrx-pw-config">irrx_pw_config</a></p></td>
+<td><p>RX pulse width threshold</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#irrx-data-count">irrx_data_count</a></p></td>
+<td><p>RX data bit count</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#irrx-data-word0">irrx_data_word0</a></p></td>
+<td><p>RX low 32-bit data</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#irrx-data-word1">irrx_data_word1</a></p></td>
+<td><p>RX high 32-bit data</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ir-fifo-config-0">ir_fifo_config_0</a></p></td>
+<td><p>FIFO status</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ir-fifo-config-1">ir_fifo_config_1</a></p></td>
+<td><p>FIFO threshold and available count</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ir-fifo-rdata">ir_fifo_rdata</a></p></td>
+<td><p>RX FIFO</p></td>
+</tr>
+</tbody>
+</table>
+<section id="irrx-config">
+<h3><span class="section-number">8.4.1. </span>irrx_config<a class="headerlink" href="#irrx-config" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000a640</p>
+<figure class="align-center">
+<img alt="../_images/ir_irrx_config.svg" src="../_images/ir_irrx_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:12</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>11:8</p></td>
+<td><p>cr_irrx_deg_cnt</p></td>
+<td><p>r/w</p></td>
+<td><p>4’d0</p></td>
+<td><p>De-glitch function cycle count</p></td>
+</tr>
+<tr class="row-even"><td><p>7:5</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>cr_irrx_deg_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b0</p></td>
+<td><p>Enable signal of IRRX input de-glitch function</p></td>
+</tr>
+<tr class="row-even"><td rowspan="5"><p>3:2</p></td>
+<td rowspan="5"><p>cr_irrx_mode</p></td>
+<td rowspan="5"><p>r/w</p></td>
+<td rowspan="5"><p>2’d0</p></td>
+<td rowspan="5"><p>IRRX mode</p>
+<p>0: NEC</p>
+<p>1: RC5</p>
+<p>2: SW pulse-width detection mode (SWM)</p>
+<p>3: Reserved</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>cr_irrx_in_inv</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Input inverse signal</p></td>
+</tr>
+<tr class="row-even"><td rowspan="2"><p>0</p></td>
+<td rowspan="2"><p>cr_irrx_en</p></td>
+<td rowspan="2"><p>r/w</p></td>
+<td rowspan="2"><p>1’b0</p></td>
+<td rowspan="2"><p>Enable signal of IRRX function</p>
+<p>Asserting this bit will trigger the transaction, and should be de-asserted after finish</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</section>
+<section id="irrx-int-sts">
+<h3><span class="section-number">8.4.2. </span>irrx_int_sts<a class="headerlink" href="#irrx-int-sts" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000a644</p>
+<figure class="align-center">
+<img alt="../_images/ir_irrx_int_sts.svg" src="../_images/ir_irrx_int_sts.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:27</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>26</p></td>
+<td><p>cr_irrx_fer_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt enable of irrx_fer_int</p></td>
+</tr>
+<tr class="row-even"><td><p>25</p></td>
+<td><p>cr_irrx_frdy_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt enable of irrx_frdy_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>24</p></td>
+<td><p>cr_irrx_end_en</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt enable of irrx_end_int</p></td>
+</tr>
+<tr class="row-even"><td><p>23:19</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>18</p></td>
+<td><p>rsvd</p></td>
+<td><p>rsvd</p></td>
+<td><p>1’b0</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>17</p></td>
+<td><p>rsvd</p></td>
+<td><p>rsvd</p></td>
+<td><p>1’b0</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>16</p></td>
+<td><p>cr_irrx_end_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1’b0</p></td>
+<td><p>Interrupt clear of irrx_end_int</p></td>
+</tr>
+<tr class="row-even"><td><p>15:11</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>cr_irrx_fer_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt mask of irrx_fer_int</p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>cr_irrx_frdy_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt mask of irrx_frdy_int</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>cr_irrx_end_mask</p></td>
+<td><p>r/w</p></td>
+<td><p>1’b1</p></td>
+<td><p>Interrupt mask of irrx_end_int</p></td>
+</tr>
+<tr class="row-even"><td><p>7:3</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>irrx_fer_int</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>IRRX FIFO error interrupt, auto-cleared when FIFO overflow/underflow error flag is cleared</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>irrx_frdy_int</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>IRRX FIFO ready (rx_fifo_cnt &gt; rx_fifo_th) interrupt, auto-cleared when data is popped</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>irrx_end_int</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>IRRX transfer end interrupt</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="irrx-pw-config">
+<h3><span class="section-number">8.4.3. </span>irrx_pw_config<a class="headerlink" href="#irrx-pw-config" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000a648</p>
+<figure class="align-center">
+<img alt="../_images/ir_irrx_pw_config.svg" src="../_images/ir_irrx_pw_config.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>cr_irrx_end_th</p></td>
+<td><p>r/w</p></td>
+<td><p>16’d8999</p></td>
+<td><p>Pulse width threshold to trigger END condition</p></td>
+</tr>
+<tr class="row-odd"><td><p>15:0</p></td>
+<td><p>cr_irrx_data_th</p></td>
+<td><p>r/w</p></td>
+<td><p>16’d3399</p></td>
+<td><p>Pulse width threshold for Logic0/1 detection (Don’t care if SWM is enabled)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="irrx-data-count">
+<h3><span class="section-number">8.4.4. </span>irrx_data_count<a class="headerlink" href="#irrx-data-count" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000a650</p>
+<figure class="align-center">
+<img alt="../_images/ir_irrx_data_count.svg" src="../_images/ir_irrx_data_count.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:7</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>6:0</p></td>
+<td><p>sts_irrx_data_cnt</p></td>
+<td><p>r</p></td>
+<td><p>7’d0</p></td>
+<td><p>RX data bit count (pulse-width count for SWM)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="irrx-data-word0">
+<h3><span class="section-number">8.4.5. </span>irrx_data_word0<a class="headerlink" href="#irrx-data-word0" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000a654</p>
+<figure class="align-center">
+<img alt="../_images/ir_irrx_data_word0.svg" src="../_images/ir_irrx_data_word0.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>sts_irrx_data_word0</p></td>
+<td><p>r</p></td>
+<td><p>32’h0</p></td>
+<td><p>RX data word 0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="irrx-data-word1">
+<h3><span class="section-number">8.4.6. </span>irrx_data_word1<a class="headerlink" href="#irrx-data-word1" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000a658</p>
+<figure class="align-center">
+<img alt="../_images/ir_irrx_data_word1.svg" src="../_images/ir_irrx_data_word1.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>sts_irrx_data_word1</p></td>
+<td><p>r</p></td>
+<td><p>32’h0</p></td>
+<td><p>RX data word 1</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ir-fifo-config-0">
+<h3><span class="section-number">8.4.7. </span>ir_fifo_config_0<a class="headerlink" href="#ir-fifo-config-0" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000a680</p>
+<figure class="align-center">
+<img alt="../_images/ir_ir_fifo_config_0.svg" src="../_images/ir_ir_fifo_config_0.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:8</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>rx_fifo_underflow</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>Underflow flag of RX FIFO, can be cleared by rx_fifo_clr</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>rx_fifo_overflow</p></td>
+<td><p>r</p></td>
+<td><p>1’b0</p></td>
+<td><p>Overflow flag of RX FIFO, can be cleared by rx_fifo_clr</p></td>
+</tr>
+<tr class="row-odd"><td><p>5:4</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>rx_fifo_clr</p></td>
+<td><p>w1c</p></td>
+<td><p>1’b0</p></td>
+<td><p>Clear signal of RX FIFO</p></td>
+</tr>
+<tr class="row-odd"><td><p>2:0</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ir-fifo-config-1">
+<h3><span class="section-number">8.4.8. </span>ir_fifo_config_1<a class="headerlink" href="#ir-fifo-config-1" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000a684</p>
+<figure class="align-center">
+<img alt="../_images/ir_ir_fifo_config_1.svg" src="../_images/ir_ir_fifo_config_1.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:30</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>29:24</p></td>
+<td><p>rx_fifo_th</p></td>
+<td><p>r/w</p></td>
+<td><p>6’d0</p></td>
+<td><p>RX FIFO threshold, irrx_frdy_int will not be asserted if rx_fifo_cnt is less than this value</p></td>
+</tr>
+<tr class="row-even"><td><p>23:15</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>14:8</p></td>
+<td><p>rx_fifo_cnt</p></td>
+<td><p>r</p></td>
+<td><p>7’d0</p></td>
+<td><p>RX FIFO available count</p></td>
+</tr>
+<tr class="row-even"><td><p>7:32</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><p>31:0</p></td>
+<td rowspan="3"><p>tx_fifo_wdata</p></td>
+<td rowspan="3"><p>w</p></td>
+<td rowspan="3"><p>32’h0</p></td>
+<td rowspan="3"><p>IRTX  FIFO data</p>
+<p>Normal Mode: Each entry contains a 32-bit data word, LSB is sent first</p>
+<p>Software Mode: Each entry contains 4 pulse widths, [7:0] is the 1st pulse, [15:8] is the 2nd pulse, etc)</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</section>
+<section id="ir-fifo-rdata">
+<h3><span class="section-number">8.4.9. </span>ir_fifo_rdata<a class="headerlink" href="#ir-fifo-rdata" title="Permalink to this headline"></a></h3>
+<p><strong>Address：</strong>  0x2000a68c</p>
+<figure class="align-center">
+<img alt="../_images/ir_ir_fifo_rdata.svg" src="../_images/ir_ir_fifo_rdata.svg" /></figure>
+<table class="colwidths-given docutils align-center" style="width: 100%">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Reset</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><p>RSVD</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15:0</p></td>
+<td><p>rx_fifo_rdata</p></td>
+<td><p>r</p></td>
+<td><p>16’h0</p></td>
+<td><p>IRRX FIFO pulse width data for Software Mode</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="DMA.html" class="btn btn-neutral float-left" title="7. DMA" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="SPI.html" class="btn btn-neutral float-right" title="9. SPI" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
