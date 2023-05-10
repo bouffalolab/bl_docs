@@ -2,7 +2,7 @@
 Audio characteristic
 =========================
 
-.. table:: Analog-to-Digital performance
+.. table:: AUADC performance
 
     +------------------------+------------------------------------------+-----------------------------------------------------------+-----------+--------+--------+-------+
     | At 25°C, VDDIO= 3.3 V, f\ :sub:`S`\ = 48kHz, 16-bit audio data (unless otherwise noted)                                                                             |
@@ -36,14 +36,14 @@ Audio characteristic
     | Input resistance                                                  | Analogue gain 6dB~42dB                                    | 160K      |        | 480    | kΩ    |
     +------------------------+------------------------------------------+-----------------------------------------------------------+-----------+--------+--------+-------+
 
-.. table:: AUPWM performance
+.. table:: AUDAC performance
 
     +------------------------+------------------------------------------+-----------------------------------------------------------+-----------+--------+--------+-------+
-    | At 25°C, VDDIO= 3.3 V, f\ :sub:`S`\ = 48kHz, @AUPWM_P/N with RC filter( R=1KΩ，C=470pF) (unless otherwise noted)                                                    |
+    | At 25°C, VDDIO= 3.3 V, f\ :sub:`S`\ = 48kHz, @AUDAC_P/N with RC filter( R=1KΩ，C=470pF) (unless otherwise noted)                                                    |
     +------------------------+------------------------------------------+-----------------------------------------------------------+-----------+--------+--------+-------+
     |  Parameter                                                        | Conditions                                                |  Min.     | Typ    | Max.   | Unit  |
     +========================+==========================================+===========================================================+===========+========+========+=======+
-    | AUDIO PWM              | Input signal full-scale level            | Differential output，0 dB line-out gain                   |           | 1.8    |        | Vrms  |
+    | AUDIO DAC              | Input signal full-scale level            | Differential output，0 dB line-out gain                   |           | 1.8    |        | Vrms  |
     +------------------------+------------------------------------------+-----------------------------------------------------------+-----------+--------+--------+-------+
     | SNR                    | Signal-to-noise ratio, A-Weighted        | f\ :sub:`S`\ = 48 kHz,                                    |           | 95     |        | dB    |
     +                        +                                          +                                                           +           +        +        +       +

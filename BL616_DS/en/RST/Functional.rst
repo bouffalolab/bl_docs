@@ -30,8 +30,7 @@ The DMA controller has 4 dedicated channels to manage data transfers between per
 
 The DMA also supports the LLI (Linked List Item) feature, which consists of a series of linked lists that predefine multiple transfers, and then the hardware automatically completes all transfers based on the size and address of each LLI.
 
-Peripherals supported by DMA include UART、I2C、SPI、Audio(Audio ADC and Audio DAC)、GPIO、I2S、DBI、
-GPADC、GPDAC.
+Peripherals supported by DMA include UART、I2C、SPI、Audio(Audio ADC and Audio DAC)、GPIO、I2S、DBI、GPADC、GPDAC.
 
 Memory Map
 ============
@@ -90,8 +89,6 @@ OCRAM and WRAM can be accessed either through the AHB bus or through AXI. When t
     +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
     |               | I2S           | 0x2000AB00            | 256B  | I2S Control Register                                                                                      |
     +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
-    |               | ISO 17987     | 0x2000AA00            | 256B  | ISO 17987 Control Register                                                                                |
-    +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
     |               | I2C1          | 0x2000A900            | 256B  | I2C1 Control Register                                                                                     |
     +               +---------------+-----------------------+-------+-----------------------------------------------------------------------------------------------------------+
     |               | Display       | 0x2000A800            | 256B  | Display Control Register                                                                                  |
@@ -135,7 +132,7 @@ Boot
 =========
 BL616/BL618 supports multiple boot options: UART,USB,SDU and Flash.
 
-.. table:: Boot mode 
+.. table:: Boot mode has_header
 
     +---------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     |    Boot pin   |  Level        |   Description                                                                                                                                                             |
@@ -156,30 +153,17 @@ Clock
 Clock control unit generates clocks to the core MCU and the peripheral SOC devices. The root clock source can be XTAL, PLL or RC oscillator.
 Dynamic power-saved by proper configurations such as sel, div, en, etc.
 
-.. figure:: ../../picture/SystemClock.svg
+.. figure:: ../../picture/clock_tree.svg
    :align: center
+   :scale: 60%
 
-   System Clock Architecture
+   Clock Architecture
    
-.. figure:: ../../picture/MoudleClock.svg
-   :align: center
-
-   Moudle Clock Architecture
-   
-.. figure:: ../../picture/PeripheralClock.svg
-   :align: center
-   :scale: 95%
-
-   Peripheral Clock Architecture
-
-
 Peripheral
 ==================
 
-Peripherals include GPIO, UART, SPI, I2C, PWM, Timer, IR(RX), Display(DBI/QSPI), ISO 17987, 
-I2S, Audio(Audio ADC+Audio DAC), SDU, DVP, MJPEG,
-SD/MMC(SDH), Ethernet MAC, GPDAC, GPADC, ACOMP, 
-USB2.0.
+Peripherals include GPIO, UART, SPI, I2C, PWM, Timer, IR(RX), Display(DBI/QSPI),
+I2S, Audio(Audio ADC+Audio DAC), SDU, DVP, MJPEG, SD/MMC(SDH), Ethernet MAC, GPDAC, GPADC, ACOMP, USB2.0.
 
 GPIO
 ------
@@ -332,4 +316,64 @@ The chip has a built-in infrared remote control with the following features:
 - Receive supports up to 64-bit data bits
 - Receive FIFO depth of 128 bytes
 - Support receive end interrupt
+
+Audio ADC
+---------
+- The chip has an integrated 1-channel audio ADC (not to be used simultaneously with the high precision ADC) with the following features:
+
+  * Sampling rate:8k~96k
+  * Signal-to-noise ratio (A-W): 96dB @ 6dB gain, 48K sampling rate
+  * Harmonic distortion + noise: -90dB @ 6dB gain, 48K sample rate
+  * Analogue preamp gain: 6 to 42 dB, 3dB steps 
+  * Analogue fully differential input or single-ended input
+
+- Adjustable high-pass filter and digital volume control
+- PDM interface support (1 way DMIC supported)
+- Input signal multiplexing GPIO
+- Transmit FIFO width of 32-bit, depth of 8
+- Support for DMA transfer mode
+
+Audio DAC
+-------------
+- Chip with integrated 1-channel audio DAC with the following features.
+
+  * Sampling rate:8k~48k
+  * Signal to noise ratio (A-W): 95dB @ 48K sample rate
+  * Harmonic distortion + noise: -80dB @ 48K sample rate
+
+- Adjustable digital volume control
+- Supports differential complementary outputs
+- Output signal multiplexing GPIO
+- Transmit FIFO width of 32-bit, depth of 16
+- Support for DMA transfer mode
+
+GPADC
+-----------
+The chip has a built-in 12bits successive approximation analog-to-digital converter (ADC) with the following features.
+
+- The maximum sampling rate of single-channel continuous conversion mode can reach 2M, and the maximum sampling rate of other conversion modes is 500K
+- Supports 12 external analog channels
+- Support single-channel single conversion, single-channel continuous conversion, multi-channel single conversion, multi-channel continuous conversion
+- Supports 2.0V, 3.2V selectable internal reference voltages and 12/14/16bits (via oversampling) left-aligned conversion results
+- 32-byte deep FIFO, multiple interrupt support, DMA support
+- ADC can be used to measure supply voltages in addition to common analog signal measurements
+- Can be used for temperature detection by measuring internal/external diode voltages
+
+
+High precision ADC
+---------------
+- The chip has a built-in 1-channel high precision ADC (not to be used simultaneously with audio CODEC) with the following features.
+
+  * Supports fully differential input, 4 channels
+  * Effective resolution (ER): 19.5 bit
+  * Programmable gain amplifier: 6dB to 42dB (2 to 128x), 3dB steps
+  * Programmable data rates: 20SPS, 100SPS, 200SPS, 400SPS, 1000SPS, 2000SPS
+  * Supports high accuracy/low latency dual set digital filters
+  * Supports 50Hz/60Hz simultaneous frequency suppression
+  * Supports software global chopping, ER=20.7bit, below 1uV detuning voltage
+
+- Multiplexed GPIO input signals
+- Transmit FIFO width of 32-bit, depth of 8
+- Supports polling, interrupt and DMA transfer modes
+
 

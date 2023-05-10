@@ -43,7 +43,7 @@
 回流焊接曲线(Reflow Profile)
 ==============================
 
-.. figure:: ../../picture/ClassificationProfile.*
+.. figure:: ../../picture/ClassificationProfile.svg
    :align: center
 
    Classification Profile (Not to scale)
